@@ -28,3 +28,15 @@ export interface CommandPaletteItem {
   path: string;
   category: 'navigation' | 'action';
 }
+
+export interface GlossaryTermProps {
+  term: string;
+  definition: string;
+  className?: string;
+}
+
+export interface MockIDEProps {
+  filename: string;
+  code: string;
+  className?: string;
+}
