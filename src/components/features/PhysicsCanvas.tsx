@@ -71,12 +71,12 @@ export const PhysicsCanvas: React.FC<PhysicsCanvasProps> = ({ className = '' }) 
     runnerRef.current = runner;
     Runner.run(runner, engine);
 
-    // 5. Walls & Boundaries
+    // 5. Boundaries (Ground, left, right walls, ceiling)
     const wallOptions: Matter.IChamferableBodyDefinition = {
       isStatic: true,
       render: { fillStyle: 'transparent' },
       friction: 0.2,
-      restitution: 0.4,
+      restitution: 0.35,
     };
     const wallThickness = 100;
 
@@ -111,11 +111,11 @@ export const PhysicsCanvas: React.FC<PhysicsCanvasProps> = ({ className = '' }) 
 
     Composite.add(engine.world, [ground, leftWall, rightWall, ceiling]);
 
-    // 6. Spawn Tech Stack Bodies
+    // 6. Spawn Rectangular Tech Stack Bodies with Crisp Chamfer
     const bodies = TECH_ITEMS.map((item, index) => {
-      // Calculate responsive pill dimensions based on text length
-      const pillWidth = Math.max(90, item.name.length * 9.5 + 24);
-      const pillHeight = 38;
+      // Calculate responsive rectangular dimensions based on text length
+      const blockWidth = Math.max(88, item.name.length * 9.5 + 24);
+      const blockHeight = 36;
 
       // Stagger spawn positions across the top
       const x = Math.min(
@@ -124,10 +124,10 @@ export const PhysicsCanvas: React.FC<PhysicsCanvasProps> = ({ className = '' }) 
       );
       const y = -30 - index * 45;
 
-      const body = Bodies.rectangle(x, y, pillWidth, pillHeight, {
-        chamfer: { radius: 18 },
-        restitution: 0.65,
-        friction: 0.15,
+      const body = Bodies.rectangle(x, y, blockWidth, blockHeight, {
+        chamfer: { radius: 3 }, // Crisp modern minimalist rectangle
+        restitution: 0.55,
+        friction: 0.2,
         frictionAir: 0.012,
         density: 0.002,
         render: {
@@ -136,9 +136,9 @@ export const PhysicsCanvas: React.FC<PhysicsCanvasProps> = ({ className = '' }) 
       });
 
       // Attach custom payload for rendering text
-      (body as unknown as { customData: typeof item; pillWidth: number; pillHeight: number }).customData = item;
-      (body as unknown as { customData: typeof item; pillWidth: number; pillHeight: number }).pillWidth = pillWidth;
-      (body as unknown as { customData: typeof item; pillWidth: number; pillHeight: number }).pillHeight = pillHeight;
+      (body as unknown as { customData: typeof item; blockWidth: number; blockHeight: number }).customData = item;
+      (body as unknown as { customData: typeof item; blockWidth: number; blockHeight: number }).blockWidth = blockWidth;
+      (body as unknown as { customData: typeof item; blockWidth: number; blockHeight: number }).blockHeight = blockHeight;
 
       return body;
     });
@@ -164,21 +164,21 @@ export const PhysicsCanvas: React.FC<PhysicsCanvasProps> = ({ className = '' }) 
     Composite.add(engine.world, mouseConstraint);
     render.mouse = mouse;
 
-    // 8. Custom Canvas Renderer to draw styled text & border on each body
+    // 8. Custom Canvas Renderer to draw styled text & sharp border on each body
     Events.on(render, 'afterRender', () => {
       const ctx = render.context;
       if (!ctx) return;
 
       bodies.forEach((body) => {
         const { position, angle } = body;
-        const data = (body as unknown as { customData: typeof TECH_ITEMS[0]; pillWidth: number; pillHeight: number });
+        const data = (body as unknown as { customData: typeof TECH_ITEMS[0]; blockWidth: number; blockHeight: number });
         if (!data || !data.customData) return;
 
         ctx.save();
         ctx.translate(position.x, position.y);
         ctx.rotate(angle);
 
-        // Draw sleek text
+        // Draw crisp modern typography
         ctx.font = '600 12px "Inter", -apple-system, sans-serif';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
@@ -230,18 +230,18 @@ export const PhysicsCanvas: React.FC<PhysicsCanvasProps> = ({ className = '' }) 
   }, [resetKey]);
 
   return (
-    <div className={`relative w-full h-[420px] sm:h-[480px] rounded-2xl border border-slate-200/90 bg-gradient-to-b from-slate-50/50 to-white overflow-hidden shadow-inner select-none ${className}`}>
-      {/* Top Banner & Reset Control */}
+    <div className={`relative w-full h-[420px] sm:h-[480px] rounded-xl border border-slate-200 bg-gradient-to-b from-slate-50/50 to-white overflow-hidden shadow-sm select-none ${className}`}>
+      {/* Top Banner & Reset Control with Minimalist Rectangles */}
       <div className="absolute top-3 inset-x-3 z-10 flex items-center justify-between pointer-events-none">
-        <div className="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-white/90 border border-slate-200/80 shadow-sm text-[11px] font-mono text-slate-600 backdrop-blur-sm pointer-events-auto">
-          <Hand className="w-3 h-3 text-electric animate-bounce" />
+        <div className="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-md bg-white/95 border border-slate-200 shadow-sm text-[11px] font-mono text-slate-600 backdrop-blur-sm pointer-events-auto">
+          <Hand className="w-3 h-3 text-electric" />
           <span>Click & throw blocks</span>
         </div>
 
         <button
           type="button"
           onClick={() => setResetKey((prev) => prev + 1)}
-          className="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-white/90 hover:bg-white border border-slate-200/80 shadow-sm text-[11px] font-mono text-slate-600 hover:text-electric transition-colors backdrop-blur-sm pointer-events-auto active:scale-95"
+          className="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-md bg-white/95 hover:bg-white border border-slate-200 shadow-sm text-[11px] font-mono text-slate-600 hover:text-electric transition-colors backdrop-blur-sm pointer-events-auto active:scale-95"
           title="Reset physics gravity simulation"
         >
           <RotateCcw className="w-3 h-3" />

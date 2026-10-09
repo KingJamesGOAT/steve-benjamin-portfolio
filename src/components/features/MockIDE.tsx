@@ -21,11 +21,11 @@ export const MockIDE: React.FC<MockIDEProps> = ({ filename, code, className = ''
     >
       {/* Dark macOS / VS Code Header */}
       <div className="relative bg-slate-900/95 border-b border-slate-800/80 px-4 py-2.5 flex items-center justify-between select-none">
-        {/* macOS Window Controls (Red, Yellow, Green) */}
+        {/* Sleek Minimalist Window Control Micro-Rectangles */}
         <div className="flex items-center space-x-1.5 z-10">
-          <span className="w-3 h-3 rounded-full bg-[#FF5F56] border border-[#E0443E]/50 inline-block transition-transform hover:scale-110" />
-          <span className="w-3 h-3 rounded-full bg-[#FFBD2E] border border-[#DEA123]/50 inline-block transition-transform hover:scale-110" />
-          <span className="w-3 h-3 rounded-full bg-[#27C93F] border border-[#1AAB29]/50 inline-block transition-transform hover:scale-110" />
+          <span className="w-2.5 h-2.5 rounded-[2px] bg-[#FF5F56] border border-[#E0443E]/50 inline-block transition-transform hover:scale-110" />
+          <span className="w-2.5 h-2.5 rounded-[2px] bg-[#FFBD2E] border border-[#DEA123]/50 inline-block transition-transform hover:scale-110" />
+          <span className="w-2.5 h-2.5 rounded-[2px] bg-[#27C93F] border border-[#1AAB29]/50 inline-block transition-transform hover:scale-110" />
         </div>
 
         {/* Centered Filename */}

@@ -30,7 +30,7 @@ export const About: React.FC = () => {
       {/* Profile Header */}
       <section className="space-y-4 pb-8 border-b border-slate-200/80">
         <div className="flex flex-wrap items-center justify-between gap-4">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full text-xs font-mono font-medium bg-slate-100 text-slate-700 border border-slate-200">
+          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-md text-xs font-mono font-medium bg-slate-100 text-slate-700 border border-slate-200">
             <MapPin className="w-3.5 h-3.5 text-electric" />
             <span>{t('about.location')}</span>
           </div>

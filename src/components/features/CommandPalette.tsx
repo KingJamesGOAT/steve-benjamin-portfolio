@@ -1,8 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Home, FolderGit2, GraduationCap, User, ArrowRight, X } from 'lucide-react';
+import {
+  Search,
+  Home,
+  FolderGit2,
+  GraduationCap,
+  User,
+  ArrowRight,
+  X,
+  ExternalLink,
+} from 'lucide-react';
 import type { CommandPaletteItem } from '../../types';
 
 interface CommandPaletteProps {
@@ -13,46 +22,85 @@ interface CommandPaletteProps {
 export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const location = useLocation();
   const [query, setQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const items: (CommandPaletteItem & { icon: React.ReactNode })[] = [
+  const items: (CommandPaletteItem & { icon: React.ReactNode; isRoute?: boolean })[] = [
+    // Main Section Anchors
     {
       id: 'home',
       titleKey: 'nav.home',
-      subtitleKey: 'pages.home.title',
-      path: '/',
+      subtitleKey: 'home.tagline',
+      path: '#home',
       category: 'navigation',
       icon: <Home className="w-4 h-4 text-slate-500" />,
     },
     {
       id: 'projects',
       titleKey: 'nav.projects',
-      subtitleKey: 'pages.projects.title',
-      path: '/projects',
+      subtitleKey: 'projects.title',
+      path: '#projects',
       category: 'navigation',
       icon: <FolderGit2 className="w-4 h-4 text-slate-500" />,
     },
     {
-      id: 'bachelorPitch',
-      titleKey: 'nav.bachelorPitch',
-      subtitleKey: 'pages.bachelorPitch.title',
-      path: '/bachelor-pitch',
-      category: 'navigation',
-      icon: <GraduationCap className="w-4 h-4 text-electric" />,
-    },
-    {
       id: 'about',
       titleKey: 'nav.about',
-      subtitleKey: 'pages.about.title',
-      path: '/about',
+      subtitleKey: 'about.title',
+      path: '#about',
       category: 'navigation',
       icon: <User className="w-4 h-4 text-slate-500" />,
     },
+    {
+      id: 'bachelorPitch',
+      titleKey: 'nav.bachelorPitch',
+      subtitleKey: 'bachelorPitch.title',
+      path: '#bachelor-pitch',
+      category: 'navigation',
+      icon: <GraduationCap className="w-4 h-4 text-electric" />,
+    },
+    // Project Detail Routes
+    {
+      id: 'project-crypto',
+      titleKey: 'projects.crypto.title',
+      subtitleKey: 'projects.crypto.tag',
+      path: '/projects/crypto-trade-hub',
+      category: 'action',
+      isRoute: true,
+      icon: <ExternalLink className="w-4 h-4 text-emerald-600" />,
+    },
+    {
+      id: 'project-donnons',
+      titleKey: 'projects.donnons.title',
+      subtitleKey: 'projects.donnons.tag',
+      path: '/projects/donnons-ch',
+      category: 'action',
+      isRoute: true,
+      icon: <ExternalLink className="w-4 h-4 text-rose-500" />,
+    },
+    {
+      id: 'project-catholic',
+      titleKey: 'projects.catholicRoute.title',
+      subtitleKey: 'projects.catholicRoute.tag',
+      path: '/projects/catholic-route',
+      category: 'action',
+      isRoute: true,
+      icon: <ExternalLink className="w-4 h-4 text-blue-500" />,
+    },
+    {
+      id: 'project-marriage',
+      titleKey: 'projects.marriage.title',
+      subtitleKey: 'projects.marriage.tag',
+      path: '/projects/marriage-platform',
+      category: 'action',
+      isRoute: true,
+      icon: <ExternalLink className="w-4 h-4 text-amber-500" />,
+    },
   ];
 
-  // Filter items based on query
+  // Filter items based on search query
   const filteredItems = items.filter((item) => {
     const title = t(item.titleKey).toLowerCase();
     const q = query.toLowerCase().trim();
@@ -84,7 +132,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
       } else if (e.key === 'Enter') {
         e.preventDefault();
         if (filteredItems[selectedIndex]) {
-          handleSelect(filteredItems[selectedIndex].path);
+          handleSelect(filteredItems[selectedIndex]);
         }
       }
     };
@@ -93,9 +141,23 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, filteredItems, selectedIndex]);
 
-  const handleSelect = (path: string) => {
-    navigate(path);
+  const handleSelect = (item: (typeof items)[0]) => {
     onClose();
+
+    if (item.isRoute) {
+      navigate(item.path);
+    } else {
+      const targetId = item.path.replace('#', '');
+      if (location.pathname === '/' || location.pathname === '') {
+        const el = document.getElementById(targetId);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+          window.history.pushState(null, '', `#${targetId}`);
+        }
+      } else {
+        navigate(`/#${targetId}`);
+      }
+    }
   };
 
   return (
@@ -112,12 +174,12 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
             className="fixed inset-0 bg-slate-900/30 backdrop-blur-md"
           />
 
-          {/* Modal Container */}
+          {/* Modal Container with Sharp Minimalist FinTech Styling */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.97, y: -10 }}
+            initial={{ opacity: 0, scale: 0.98, y: -8 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.97, y: -10 }}
-            transition={{ duration: 0.18, ease: 'easeOut' }}
+            exit={{ opacity: 0, scale: 0.98, y: -8 }}
+            transition={{ duration: 0.16, ease: 'easeOut' }}
             className="relative w-full max-w-lg overflow-hidden rounded-xl bg-white border border-slate-200 shadow-2xl z-10"
           >
             {/* Search Input Box */}
@@ -136,26 +198,32 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
               />
               {query ? (
                 <button
+                  type="button"
                   onClick={() => setQuery('')}
                   className="p-1 text-slate-400 hover:text-fintech-primary transition-colors"
                 >
                   <X className="w-4 h-4" />
                 </button>
               ) : (
-                <kbd className="hidden sm:inline-block px-2 py-0.5 text-[10px] font-mono font-medium text-slate-400 bg-slate-100 border border-slate-200 rounded">
-                  ESC
-                </kbd>
+                <div className="hidden sm:flex items-center space-x-1">
+                  <kbd className="px-2 py-0.5 text-[10px] font-mono font-medium text-slate-500 bg-slate-100 border border-slate-200 rounded">
+                    Ctrl K
+                  </kbd>
+                  <kbd className="px-2 py-0.5 text-[10px] font-mono font-medium text-slate-400 bg-slate-100 border border-slate-200 rounded">
+                    ESC
+                  </kbd>
+                </div>
               )}
             </div>
 
             {/* List of Navigation Links */}
             <div className="max-h-80 overflow-y-auto p-2">
-              <div className="px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+              <div className="px-3 py-1.5 text-[11px] font-mono font-semibold uppercase tracking-wider text-slate-400">
                 {t('cmdPalette.quickNavigation')}
               </div>
 
               {filteredItems.length === 0 ? (
-                <div className="py-8 text-center text-xs text-slate-400">
+                <div className="py-8 text-center text-xs text-slate-400 font-mono">
                   {t('cmdPalette.noResults')} "{query}"
                 </div>
               ) : (
@@ -166,7 +234,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
                       <li key={item.id}>
                         <button
                           type="button"
-                          onClick={() => handleSelect(item.path)}
+                          onClick={() => handleSelect(item)}
                           onMouseEnter={() => setSelectedIndex(index)}
                           className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-medium transition-all ${
                             isSelected
@@ -197,10 +265,10 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
               )}
             </div>
 
-            {/* Subtle Footer hint */}
+            {/* Minimalist Clinical Footer Hint */}
             <div className="border-t border-slate-100 bg-slate-50/70 px-4 py-2 flex items-center justify-between text-[11px] text-slate-400 font-mono">
               <span>{t('cmdPalette.hint')}</span>
-              <span className="hidden sm:inline">↵ to select</span>
+              <span className="hidden sm:inline">Enter to select</span>
             </div>
           </motion.div>
         </div>

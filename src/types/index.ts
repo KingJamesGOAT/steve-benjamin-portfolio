@@ -4,6 +4,7 @@ export interface NavItem {
   key: string;
   labelKey: string;
   path: string;
+  isAnchor?: boolean;
 }
 
 export interface ProjectSnippet {
@@ -39,4 +40,25 @@ export interface MockIDEProps {
   filename: string;
   code: string;
   className?: string;
+}
+
+export interface ProjectData {
+  id: string;
+  slug: string;
+  titleKey: string;
+  tagKey: string;
+  descriptionKey: string;
+  techStack: string[];
+  filename: string;
+  code: string;
+  statusBadgeKey?: string;
+  statsKey?: string;
+  statsValueKey?: string;
+  features: string[];
+  specs: {
+    mandate: string;
+    role: string;
+    architecture: string;
+    evaluation?: string;
+  };
 }

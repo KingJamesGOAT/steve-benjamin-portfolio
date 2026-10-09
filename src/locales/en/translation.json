@@ -5,17 +5,18 @@
     "home": "Home",
     "about": "About",
     "projects": "Projects",
-    "bachelorPitch": "Bachelor Pitch 2027",
+    "bachelorPitch": "Bachelor Pitch",
     "search": "Search",
-    "cmdK": "⌘K"
+    "cmdK": "Ctrl K"
   },
   "footer": {
     "rights": "© 2026 Steve Benjamin — Bussigny, Switzerland",
     "tagline": "Light FinTech Architecture • React 18 & Vite"
   },
   "cmdPalette": {
-    "placeholder": "Type a command or search page...",
+    "placeholder": "Type a command or search section...",
     "quickNavigation": "Quick Navigation",
+    "projectRoutes": "Project Deep Dives",
     "noResults": "No results found for",
     "close": "Close",
     "hint": "Navigate with arrows or click to jump"
@@ -108,6 +109,7 @@
     "title": "Selected Works & Architecture",
     "subtitle": "Production-grade frontend and full-stack software built with hardware-grade precision, live data streaming, and FinTech design aesthetics.",
     "viewCode": "Interactive Source Simulation",
+    "viewDeepDive": "View Deep Dive",
     "crypto": {
       "tag": "FinTech / Live WebSockets",
       "title": "Crypto Trade Hub",
@@ -140,6 +142,17 @@
       "feature2": "Confidential Routing & URL Privacy",
       "feature3": "Tailored Minimalist Typography"
     }
+  },
+  "projectDetail": {
+    "backToProjects": "Back to Projects",
+    "architectureOverview": "Technical Architecture",
+    "keyHighlights": "System Highlights",
+    "simulatedCode": "Simulated Implementation",
+    "specifications": "Technical Specifications",
+    "stack": "Technology Stack",
+    "mandate": "Client / Context",
+    "role": "Role & Engineering Scope",
+    "evaluation": "Evaluation / Outcome"
   },
   "about": {
     "badge": "Engineering Background",
@@ -197,24 +210,6 @@
       "runningDesc": "Long-distance road and trail running for cardiovascular resilience, mental clarity, and systematic endurance under pressure.",
       "musicTitle": "Music Production & Piano",
       "musicDesc": "Pianist and music producer composing within FL Studio. Balancing digital audio workstation (DAW) synthesis with acoustic keyboard harmony."
-    }
-  },
-  "pages": {
-    "home": {
-      "title": "Home",
-      "placeholder": "Home Page Placeholder"
-    },
-    "about": {
-      "title": "About",
-      "placeholder": "About Page Placeholder"
-    },
-    "projects": {
-      "title": "Projects",
-      "placeholder": "Projects Page Placeholder"
-    },
-    "bachelorPitch": {
-      "title": "Bachelor Pitch",
-      "placeholder": "Bachelor Pitch Page Placeholder"
     }
   }
 }

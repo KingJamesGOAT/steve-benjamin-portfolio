@@ -61,7 +61,7 @@ export const Projects: React.FC = () => {
     <div className="space-y-16 sm:space-y-24">
       {/* Page Header */}
       <section className="space-y-3">
-        <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full text-xs font-mono font-medium bg-electric-light text-electric border border-electric/20">
+        <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-md text-xs font-mono font-medium bg-electric-light text-electric border border-electric/20">
           <Sparkles className="w-3.5 h-3.5" />
           <span>{t('projects.badge')}</span>
         </div>
@@ -81,8 +81,8 @@ export const Projects: React.FC = () => {
               <span className="inline-flex items-center px-2.5 py-0.5 rounded text-[11px] font-mono font-medium bg-slate-100 text-slate-700 border border-slate-200">
                 {t('projects.crypto.tag')}
               </span>
-              <span className="inline-flex items-center space-x-1.5 text-[11px] font-mono text-emerald-600 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="inline-flex items-center space-x-1.5 text-[11px] font-mono text-emerald-600 bg-emerald-50 px-2.5 py-0.5 rounded-md border border-emerald-200">
+                <span className="w-1.5 h-1.5 rounded-[1px] bg-emerald-500 animate-pulse" />
                 <span>{t('projects.crypto.status')}</span>
               </span>
             </div>
@@ -140,7 +140,7 @@ export const Projects: React.FC = () => {
               <span className="inline-flex items-center px-2.5 py-0.5 rounded text-[11px] font-mono font-medium bg-rose-50 text-rose-700 border border-rose-200">
                 {t('projects.donnons.tag')}
               </span>
-              <span className="inline-flex items-center space-x-1.5 text-[11px] font-mono text-rose-600 bg-rose-50 px-2.5 py-0.5 rounded-full border border-rose-200">
+              <span className="inline-flex items-center space-x-1.5 text-[11px] font-mono text-rose-600 bg-rose-50 px-2.5 py-0.5 rounded-md border border-rose-200">
                 <HeartHandshake className="w-3 h-3 text-rose-500" />
                 <span>HUG</span>
               </span>
@@ -209,15 +209,15 @@ export const Projects: React.FC = () => {
 
             <ul className="space-y-2 pt-2 text-xs text-slate-600 font-medium">
               <li className="flex items-center space-x-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-electric inline-block" />
+                <span className="w-1.5 h-1.5 rounded-[1px] bg-electric inline-block" />
                 <span>{t('projects.catholicRoute.feature1')}</span>
               </li>
               <li className="flex items-center space-x-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-electric inline-block" />
+                <span className="w-1.5 h-1.5 rounded-[1px] bg-electric inline-block" />
                 <span>{t('projects.catholicRoute.feature2')}</span>
               </li>
               <li className="flex items-center space-x-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-electric inline-block" />
+                <span className="w-1.5 h-1.5 rounded-[1px] bg-electric inline-block" />
                 <span>{t('projects.catholicRoute.feature3')}</span>
               </li>
             </ul>
@@ -251,15 +251,15 @@ export const Projects: React.FC = () => {
 
             <ul className="space-y-2 pt-2 text-xs text-slate-600 font-medium">
               <li className="flex items-center space-x-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-amber-500 inline-block" />
+                <span className="w-1.5 h-1.5 rounded-[1px] bg-amber-500 inline-block" />
                 <span>{t('projects.marriage.feature1')}</span>
               </li>
               <li className="flex items-center space-x-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-amber-500 inline-block" />
+                <span className="w-1.5 h-1.5 rounded-[1px] bg-amber-500 inline-block" />
                 <span>{t('projects.marriage.feature2')}</span>
               </li>
               <li className="flex items-center space-x-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-amber-500 inline-block" />
+                <span className="w-1.5 h-1.5 rounded-[1px] bg-amber-500 inline-block" />
                 <span>{t('projects.marriage.feature3')}</span>
               </li>
             </ul>

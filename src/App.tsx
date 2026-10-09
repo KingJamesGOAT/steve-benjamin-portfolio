@@ -1,9 +1,8 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import MainLayout from './components/layout/MainLayout';
 import Home from './pages/Home';
-import About from './pages/About';
-import Projects from './pages/Projects';
+import ProjectDetail from './pages/ProjectDetail';
 import BachelorPitch from './pages/BachelorPitch';
 
 export const App: React.FC = () => {
@@ -11,9 +10,11 @@ export const App: React.FC = () => {
     <MainLayout>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/projects" element={<Projects />} />
+        <Route path="/projects/:projectId" element={<ProjectDetail />} />
         <Route path="/bachelor-pitch" element={<BachelorPitch />} />
+        {/* Redirects to single-page anchors */}
+        <Route path="/projects" element={<Navigate to="/#projects" replace />} />
+        <Route path="/about" element={<Navigate to="/#about" replace />} />
         {/* Fallback route */}
         <Route path="*" element={<Home />} />
       </Routes>

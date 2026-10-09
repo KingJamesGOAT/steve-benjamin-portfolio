@@ -5,17 +5,18 @@
     "home": "Accueil",
     "about": "À propos",
     "projects": "Projets",
-    "bachelorPitch": "Pitch Bachelor 2027",
+    "bachelorPitch": "Pitch Bachelor",
     "search": "Rechercher",
-    "cmdK": "⌘K"
+    "cmdK": "Ctrl K"
   },
   "footer": {
     "rights": "© 2026 Steve Benjamin — Bussigny, Suisse",
     "tagline": "Architecture FinTech Light • React 18 & Vite"
   },
   "cmdPalette": {
-    "placeholder": "Tapez une commande ou cherchez une page...",
+    "placeholder": "Tapez une commande ou cherchez une section...",
     "quickNavigation": "Navigation Rapide",
+    "projectRoutes": "Détails des Projets",
     "noResults": "Aucun résultat trouvé pour",
     "close": "Fermer",
     "hint": "Naviguez avec les flèches ou cliquez pour ouvrir"
@@ -108,6 +109,7 @@
     "title": "Projets & Architectures Sélectionnés",
     "subtitle": "Systèmes frontend et full-stack de niveau production, construits avec une rigueur matérielle, des flux de données en temps réel et une esthétique FinTech épurée.",
     "viewCode": "Simulation de code source interactive",
+    "viewDeepDive": "Voir l'étude de cas détaillée",
     "crypto": {
       "tag": "FinTech / Flux WebSockets en direct",
       "title": "Crypto Trade Hub",
@@ -140,6 +142,17 @@
       "feature2": "Routage confidentiel & URLs privées",
       "feature3": "Typographie éditoriale épurée"
     }
+  },
+  "projectDetail": {
+    "backToProjects": "Retour aux Projets",
+    "architectureOverview": "Architecture Technique",
+    "keyHighlights": "Points Clés du Système",
+    "simulatedCode": "Implémentation Simulée",
+    "specifications": "Spécifications Techniques",
+    "stack": "Stack Technologique",
+    "mandate": "Commanditaire / Contexte",
+    "role": "Rôle & Périmètre Technique",
+    "evaluation": "Évaluation / Résultat"
   },
   "about": {
     "badge": "Parcours Ingénierie",
@@ -197,24 +210,6 @@
       "runningDesc": "Course de fond et trail pour développer l'endurance cardiovasculaire, la discipline mentale et la concentration dans l'effort prolongé.",
       "musicTitle": "Production Musicale & Piano",
       "musicDesc": "Pianist et compositeur sur FL Studio. Exploration de textures sonores alliant harmonies acoustiques et synthèse sonore assistée par ordinateur."
-    }
-  },
-  "pages": {
-    "home": {
-      "title": "Accueil",
-      "placeholder": "Espace réservé - Page d'accueil"
-    },
-    "about": {
-      "title": "À propos",
-      "placeholder": "Espace réservé - À propos"
-    },
-    "projects": {
-      "title": "Projets",
-      "placeholder": "Espace réservé - Projets"
-    },
-    "bachelorPitch": {
-      "title": "Pitch Bachelor",
-      "placeholder": "Espace réservé - Pitch Bachelor"
     }
   }
 }

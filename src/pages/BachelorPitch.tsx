@@ -20,9 +20,9 @@ export const BachelorPitch: React.FC = () => {
   return (
     <div className="space-y-16 sm:space-y-24 max-w-5xl mx-auto">
       {/* Corporate FinTech Executive Hero */}
-      <section className="relative overflow-hidden rounded-3xl border border-slate-200 bg-gradient-to-b from-slate-50/80 via-white to-white p-8 sm:p-12 shadow-sm">
+      <section className="relative overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-b from-slate-50/80 via-white to-white p-8 sm:p-12 shadow-sm">
         <div className="relative z-10 space-y-6 max-w-3xl">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full text-xs font-mono font-medium bg-electric-light text-electric border border-electric/30">
+          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-md text-xs font-mono font-medium bg-electric-light text-electric border border-electric/30">
             <ShieldCheck className="w-3.5 h-3.5" />
             <span>{t('bachelorPitch.badge')}</span>
           </div>
@@ -35,12 +35,12 @@ export const BachelorPitch: React.FC = () => {
             {t('bachelorPitch.subtitle')}
           </p>
 
-          {/* Primary CTA & Trust Badges */}
+          {/* Primary Rectangular CTA & CV Action */}
           <div className="pt-2 space-y-4">
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
               <a
                 href="mailto:sbstevebenjamin@gmail.com?subject=2027%20Bachelor%20Project%20Mandate%20-%20Steve%20Benjamin"
-                className="inline-flex items-center space-x-2.5 px-6 py-3.5 rounded-xl bg-electric hover:bg-electric-hover text-white text-sm font-semibold shadow-lg shadow-electric/25 transition-all hover:scale-[1.01] active:scale-[0.99]"
+                className="inline-flex items-center space-x-2.5 px-6 py-3.5 rounded-md bg-electric hover:bg-electric-hover text-white text-xs font-semibold shadow-md shadow-electric/20 transition-all hover:scale-[1.01] active:scale-[0.99]"
               >
                 <span>{t('bachelorPitch.cta')}</span>
                 <ArrowRight className="w-4 h-4" />
@@ -50,7 +50,7 @@ export const BachelorPitch: React.FC = () => {
                 href={`${import.meta.env.BASE_URL}CV_Steve_Benjamin.pdf`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center space-x-2 px-5 py-3.5 rounded-xl border border-slate-200 bg-white hover:border-electric hover:text-electric text-slate-700 text-sm font-semibold transition-colors"
+                className="inline-flex items-center space-x-2 px-5 py-3.5 rounded-md border border-slate-200 bg-white hover:border-electric hover:text-electric text-slate-700 text-xs font-semibold transition-colors shadow-sm"
               >
                 <span>CV_Steve_Benjamin.pdf</span>
               </a>
@@ -78,8 +78,8 @@ export const BachelorPitch: React.FC = () => {
           </div>
         </div>
 
-        {/* Subtle background decorative grid */}
-        <div className="absolute right-0 top-0 -mt-8 -mr-8 w-96 h-96 bg-electric/5 rounded-full blur-3xl pointer-events-none" />
+        {/* Subtle background decorative gradient */}
+        <div className="absolute right-0 top-0 -mt-8 -mr-8 w-96 h-96 bg-electric/5 rounded-2xl blur-3xl pointer-events-none" />
       </section>
 
       {/* 3 Core Proposals Section */}
@@ -99,7 +99,7 @@ export const BachelorPitch: React.FC = () => {
 
         <div className="grid grid-cols-1 gap-8">
           {/* Proposal 1: UX/UI Optimization for Trading Terminals */}
-          <div className="rounded-2xl border border-slate-200 bg-white p-7 sm:p-9 shadow-sm hover:shadow-md transition-shadow space-y-6">
+          <div className="rounded-xl border border-slate-200 bg-white p-7 sm:p-9 shadow-sm hover:shadow-md transition-shadow space-y-6">
             <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-4">
               <span className="px-3 py-1 rounded-md text-xs font-mono font-semibold bg-blue-50 text-electric border border-blue-200">
                 {t('bachelorPitch.proposal1.tag')}
@@ -114,7 +114,7 @@ export const BachelorPitch: React.FC = () => {
               </h3>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
-                <div className="space-y-2 bg-slate-50 p-4 rounded-xl border border-slate-200/70">
+                <div className="space-y-2 bg-slate-50 p-4 rounded-lg border border-slate-200/70">
                   <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-slate-500">
                     The Industry Bottleneck
                   </span>
@@ -123,7 +123,7 @@ export const BachelorPitch: React.FC = () => {
                   </p>
                 </div>
 
-                <div className="space-y-2 bg-electric-light/30 p-4 rounded-xl border border-electric/20">
+                <div className="space-y-2 bg-electric-light/30 p-4 rounded-lg border border-electric/20">
                   <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-electric">
                     Proposed Architecture
                   </span>
@@ -135,7 +135,7 @@ export const BachelorPitch: React.FC = () => {
             </div>
 
             {/* Glossary Term Integrations */}
-            <div className="p-4 rounded-xl bg-slate-50 border border-slate-100 space-y-2">
+            <div className="p-4 rounded-lg bg-slate-50 border border-slate-100 space-y-2">
               <span className="text-xs font-mono font-semibold text-slate-500 uppercase tracking-wider">
                 Technical Focus & Key Concepts:
               </span>
@@ -161,7 +161,7 @@ export const BachelorPitch: React.FC = () => {
           </div>
 
           {/* Proposal 2: Financial Data Visualization */}
-          <div className="rounded-2xl border border-slate-200 bg-white p-7 sm:p-9 shadow-sm hover:shadow-md transition-shadow space-y-6">
+          <div className="rounded-xl border border-slate-200 bg-white p-7 sm:p-9 shadow-sm hover:shadow-md transition-shadow space-y-6">
             <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-4">
               <span className="px-3 py-1 rounded-md text-xs font-mono font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
                 {t('bachelorPitch.proposal2.tag')}
@@ -176,7 +176,7 @@ export const BachelorPitch: React.FC = () => {
               </h3>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
-                <div className="space-y-2 bg-slate-50 p-4 rounded-xl border border-slate-200/70">
+                <div className="space-y-2 bg-slate-50 p-4 rounded-lg border border-slate-200/70">
                   <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-slate-500">
                     The Industry Bottleneck
                   </span>
@@ -185,7 +185,7 @@ export const BachelorPitch: React.FC = () => {
                   </p>
                 </div>
 
-                <div className="space-y-2 bg-emerald-50/50 p-4 rounded-xl border border-emerald-200/70">
+                <div className="space-y-2 bg-emerald-50/50 p-4 rounded-lg border border-emerald-200/70">
                   <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-emerald-700">
                     Proposed Architecture
                   </span>
@@ -213,7 +213,7 @@ export const BachelorPitch: React.FC = () => {
           </div>
 
           {/* Proposal 3: Agentic AI Integration for Automated Market Analysis */}
-          <div className="rounded-2xl border border-slate-200 bg-white p-7 sm:p-9 shadow-sm hover:shadow-md transition-shadow space-y-6">
+          <div className="rounded-xl border border-slate-200 bg-white p-7 sm:p-9 shadow-sm hover:shadow-md transition-shadow space-y-6">
             <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-4">
               <span className="px-3 py-1 rounded-md text-xs font-mono font-semibold bg-purple-50 text-purple-700 border border-purple-200">
                 {t('bachelorPitch.proposal3.tag')}
@@ -228,7 +228,7 @@ export const BachelorPitch: React.FC = () => {
               </h3>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
-                <div className="space-y-2 bg-slate-50 p-4 rounded-xl border border-slate-200/70">
+                <div className="space-y-2 bg-slate-50 p-4 rounded-lg border border-slate-200/70">
                   <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-slate-500">
                     The Industry Bottleneck
                   </span>
@@ -237,7 +237,7 @@ export const BachelorPitch: React.FC = () => {
                   </p>
                 </div>
 
-                <div className="space-y-2 bg-purple-50/50 p-4 rounded-xl border border-purple-200/70">
+                <div className="space-y-2 bg-purple-50/50 p-4 rounded-lg border border-purple-200/70">
                   <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-purple-700">
                     Proposed Architecture
                   </span>
@@ -262,7 +262,7 @@ export const BachelorPitch: React.FC = () => {
       </section>
 
       {/* Corporate Contact & Academic Details Card */}
-      <section className="rounded-2xl border border-slate-200 bg-slate-50 p-6 sm:p-8 space-y-6">
+      <section className="rounded-xl border border-slate-200 bg-slate-50 p-6 sm:p-8 space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <h3 className="text-lg font-bold text-fintech-primary">
@@ -275,7 +275,7 @@ export const BachelorPitch: React.FC = () => {
 
           <a
             href="mailto:sbstevebenjamin@gmail.com?subject=HEIG-VD%20Bachelor%20Project%202027"
-            className="inline-flex items-center space-x-2 px-4 py-2.5 rounded-lg bg-fintech-primary text-white text-xs font-mono font-semibold hover:bg-slate-800 transition-colors shadow-sm self-start sm:self-auto"
+            className="inline-flex items-center space-x-2 px-4 py-2.5 rounded-md bg-fintech-primary text-white text-xs font-mono font-semibold hover:bg-slate-800 transition-colors shadow-sm self-start sm:self-auto"
           >
             <Mail className="w-4 h-4 text-electric" />
             <span>sbstevebenjamin@gmail.com</span>
