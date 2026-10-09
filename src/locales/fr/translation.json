@@ -20,6 +20,102 @@
     "close": "Fermer",
     "hint": "Naviguez avec les flèches ou cliquez pour ouvrir"
   },
+  "projects": {
+    "badge": "Portfolio & Systèmes",
+    "title": "Projets & Architectures Sélectionnés",
+    "subtitle": "Systèmes frontend et full-stack de niveau production, construits avec une rigueur matérielle, des flux de données en temps réel et une esthétique FinTech épurée.",
+    "viewCode": "Simulation de code source interactive",
+    "crypto": {
+      "tag": "FinTech / Flux WebSockets en direct",
+      "title": "Crypto Trade Hub",
+      "description": "Terminal de bot de trading en direct et simulateur de portefeuille conçu avec React, TypeScript et Tailwind CSS. Connecté aux flux WebSockets Binance en temps réel, calcul de PnL dynamique et historique d'exécution dans un terminal interactif.",
+      "status": "STREAM EN DIRECT",
+      "pnlLabel": "PnL Simulé",
+      "pnlValue": "+18.4%"
+    },
+    "donnons": {
+      "tag": "Mandat Santé / Note Académique 6.0/6.0",
+      "title": "Donnons.ch (Sixième Sens)",
+      "description": "Plateforme officielle de coordination pour le don de sang mandatée par les Hôpitaux Universitaires de Genève (HUG). Conçue avec une esthétique soignée 'faite main', alliant une interface Vue.js réactive à un backend Laravel robuste pour faciliter les collectes mobiles.",
+      "status": "MANDAT OFFICIEL HUG",
+      "gradeLabel": "Évaluation Académique",
+      "gradeValue": "Note 6.0 / 6.0"
+    },
+    "catholicRoute": {
+      "tag": "Architecture Interactive UX / UI",
+      "title": "Catholic Route",
+      "description": "Plateforme pédagogique axée sur des interactions UX/UI haut de gamme. Intègre une palette de commande instantanée (Ctrl+K), une navigation réactive et des infobulles contextuelles pour les termes historiques et théologiques complexes.",
+      "feature1": "Infobulles animées Framer Motion",
+      "feature2": "Recherche clavier instantanée (Ctrl+K)",
+      "feature3": "Mise en page modulaire et réactive"
+    },
+    "marriage": {
+      "tag": "Application Web Privée / 2026",
+      "title": "Plateforme Événementielle Privée (2026)",
+      "description": "Application web événementielle sur mesure offrant une expérience utilisateur soignée. Gestion d'invitations et de RSVP en temps réel, préférences culinaires et politique stricte de confidentialité des URLs.",
+      "feature1": "Moteur d'état RSVP dynamique",
+      "feature2": "Routage confidentiel & URLs privées",
+      "feature3": "Typographie éditoriale épurée"
+    }
+  },
+  "about": {
+    "badge": "Parcours Ingénierie",
+    "title": "Steve Benjamin",
+    "location": "Bussigny, Vaud, Suisse",
+    "summary": "Ingénieur des Médias (HEIG-VD) avec un bagage initial en électronique (CFC, CPNV). Alliant la rigueur du matériel à l'agilité du développement web moderne.",
+    "section1": {
+      "badge": "01 / La Fondation",
+      "title": "La Passerelle : De l'Électronique à l'Ingénierie des Médias",
+      "p1": "Mon parcours a débuté dans l'ingénierie matérielle, couronné par un",
+      "cfcTerm": "CFC",
+      "cfcDef": "Certificat Fédéral de Capacité — Diplôme fédéral suisse de formation professionnelle en électronique.",
+      "p1Cont": "en électronique au",
+      "cpnvTerm": "CPNV",
+      "cpnvDef": "Centre Professionnel du Nord Vaudois — École technique et professionnelle en Suisse.",
+      "p1End": ". Travailler sur des microcontrôleurs et le traitement du signal m'a inculqué le respect absolu des contraintes de mémoire, des timings déterministes et de la tolérance zéro défaut.",
+      "p2": "En poursuivant avec un Bachelor en Ingénierie des Médias à la",
+      "heigvdTerm": "HEIG-VD",
+      "heigvdDef": "Haute École d'Ingénierie et de Gestion du Canton de Vaud — Haute école spécialisée suisse.",
+      "p2End": ", j'ai transposé cette rigueur au monde du logiciel. Dans les tableaux de bord FinTech et les terminaux de trading, la latence et la prévisibilité d'état sont tout aussi cruciales que sur un circuit imprimé."
+    },
+    "section2": {
+      "badge": "02 / Impact & Engagement",
+      "title": "Leadership & Engagement Humain",
+      "glgbTitle": "Responsable de Groupe de Jeunes (GLGB)",
+      "glgbDesc": "Leader au sein du",
+      "glgbTerm": "GLGB",
+      "glgbDef": "Organisation de jeunesse dédiée à la coordination d'événements, au mentorat et à la communication de vision.",
+      "glgbEnd": ", assurant l'orchestration de rassemblements communautaires, la coordination d'équipes et la gestion logistique.",
+      "ficfTitle": "Bénévole Humanitaire de Terrain (FICF)",
+      "ficfDesc": "Bénévole pour la",
+      "ficfTerm": "FICF",
+      "ficfDef": "Fondation Internationale pour la Coopération et la Fraternité — Organisation humanitaire organisant des missions médicales internationales.",
+      "ficfEnd": ", participant activement à des camps médicaux bénévoles en Inde et assurant des traductions orales et écrites multilingues (anglais, français et dialectes locaux)."
+    },
+    "section3": {
+      "badge": "03 / Communication",
+      "title": "Compétences Linguistiques",
+      "subtitle": "Aisance en environnement professionnel international, technique et multiculturel.",
+      "en": "Anglais",
+      "enLevel": "Langue maternelle / Bilingue",
+      "fr": "Français",
+      "frLevel": "Langue maternelle / Bilingue",
+      "de": "Allemand",
+      "deLevel": "Niveau B2 professionnel",
+      "ta": "Tamoul",
+      "taLevel": "Niveau B2 conversationnel & culturel"
+    },
+    "section4": {
+      "badge": "04 / Discipline & Équilibre",
+      "title": "Centres d'Intérêt & Passions",
+      "bballTitle": "Basketball de Compétition",
+      "bballDesc": "Passionné par le jeu de jambes et la balance corporelle. Adepte des chaussures de performance à semelle plate, assurant une adhérence au sol et une stabilité latérale optimales.",
+      "runningTitle": "Course à Pied",
+      "runningDesc": "Course de fond et trail pour développer l'endurance cardiovasculaire, la discipline mentale et la concentration dans l'effort prolongé.",
+      "musicTitle": "Production Musicale & Piano",
+      "musicDesc": "Pianiste et compositeur sur FL Studio. Exploration de textures sonores alliant harmonies acoustiques et synthèse sonore assistée par ordinateur."
+    }
+  },
   "pages": {
     "home": {
       "title": "Accueil",
