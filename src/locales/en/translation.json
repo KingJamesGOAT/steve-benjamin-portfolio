@@ -20,6 +20,89 @@
     "close": "Close",
     "hint": "Navigate with arrows or click to jump"
   },
+  "home": {
+    "badge": "Full-Stack Software & Media Engineering",
+    "title": "Steve Benjamin",
+    "tagline": "Bridging the precision of hardware electronics with modern full-stack web engineering.",
+    "subtitle": "Crafting high-performance web systems and FinTech dashboards. Combining Swiss vocational electronics discipline with cutting-edge reactive software architecture.",
+    "ctaProjects": "Explore Selected Works",
+    "ctaPitch": "2027 Bachelor Thesis Pitch",
+    "ctaCV": "Download Resume (PDF)",
+    "physicsBadge": "Interactive Physics Sandbox",
+    "physicsHint": "Drag, fling, and collide the technology stack blocks using Matter.js 2D physics",
+    "stats": {
+      "duality": {
+        "value": "CFC + BSc",
+        "label": "Hardware to Web",
+        "desc": "Electronics CFC & Media Engineering"
+      },
+      "grade": {
+        "value": "6.0 / 6.0",
+        "label": "HUG Production Mandate",
+        "desc": "Maximum academic grade"
+      },
+      "pitch": {
+        "value": "2027",
+        "label": "Bachelor Project",
+        "desc": "FinTech Thesis Mandate"
+      }
+    }
+  },
+  "bachelorPitch": {
+    "badge": "Corporate FinTech Mandate / 2027",
+    "title": "Bachelor Thesis Proposals 2027",
+    "subtitle": "Targeting CTOs & Engineering Leads at SwissBorg, UBS, Yuh, and Revolut. Bringing hardware-grade execution discipline and modern frontend architecture to mission-critical financial platforms.",
+    "cta": "Hire me for your 2027 Bachelor Project",
+    "ctaSubtitle": "16-week dedicated academic engineering mandate through HEIG-VD (Bussigny / Vaud, Switzerland)",
+    "trustBadges": {
+      "rigor": "Swiss Engineering Standards",
+      "latency": "Low-Latency Reactive Architecture",
+      "precision": "Zero-Defect Hardware Discipline"
+    },
+    "sectionTitle": "3 Core Research & Engineering Proposals",
+    "sectionSubtitle": "Directly addressable technical challenges in modern trading terminals, financial analytics, and autonomous market intelligence.",
+    "proposal1": {
+      "tag": "Proposal 01 / Trading Terminals",
+      "title": "UX/UI Optimization for High-Frequency Trading Terminals",
+      "problem": "Trading dashboards face high cognitive load, frame stuttering, and render bottlenecking under continuous real-time market data feeds.",
+      "solution": "Architecting zero-overhead virtualized DOM rendering and WebGL-accelerated state pipelines to maintain deterministic 60+ FPS performance under intense order book flow.",
+      "wsTerm": "WebSockets",
+      "wsDef": "Full-duplex bidirectional TCP protocol enabling sub-millisecond market feed streaming.",
+      "domTerm": "DOM Virtualization",
+      "domDef": "Technique rendering strictly the visible viewport elements to ensure smooth frame rates under massive data updates.",
+      "deliverables": "Sub-millisecond state updates, customizable modular trading layouts, and zero-stutter order execution feedback."
+    },
+    "proposal2": {
+      "tag": "Proposal 02 / Quantitative Analytics",
+      "title": "Financial Data Visualization & Complex Asset Telemetry",
+      "problem": "Multi-asset portfolios, liquidity depth, and risk attribution curves require interactive visual synthesis without memory leakage.",
+      "solution": "Leveraging",
+      "d3Term": "D3.js",
+      "d3Def": "JavaScript data visualization library producing interactive charts utilizing SVG, Canvas, and HTML5.",
+      "and": "and",
+      "maplibreTerm": "MapLibre",
+      "maplibreDef": "Open-source GPU-accelerated mapping and geospatial rendering engine.",
+      "solutionEnd": "to build dense, interactive financial charts, heatmaps, and geospatial banking transaction flows.",
+      "deliverables": "GPU-accelerated candlestick rendering, real-time risk heatmaps, and interactive asset correlation matrices."
+    },
+    "proposal3": {
+      "tag": "Proposal 03 / Next-Gen AI Workflows",
+      "title": "Agentic AI Integration for Automated Market Analysis",
+      "problem": "Financial analysts spend hours collating disclosures, macroeconomic feeds, and cross-market signals across fragmented portals.",
+      "solution": "Integrating",
+      "agenticAITerm": "Agentic AI",
+      "agenticAIDef": "Autonomous systems capable of reasoning, planning multi-step actions, invoking tools, and executing complex workflows without human intervention.",
+      "solutionEnd": "workflows with deterministic financial APIs to orchestrate autonomous market monitoring, cross-asset sentiment extraction, and actionable insight synthesis.",
+      "deliverables": "Autonomous multi-agent research pipelines, audited financial report synthesis, and structured anomaly detection alerts."
+    },
+    "contact": {
+      "title": "Initiate Thesis Collaboration",
+      "desc": "Open for technical interviews and thesis proposal discussions for the 2027 academic mandate.",
+      "email": "Contact via Email",
+      "institution": "HEIG-VD (Haute École d'Ingénierie et de Gestion du Canton de Vaud)",
+      "location": "Bussigny, Switzerland"
+    }
+  },
   "projects": {
     "badge": "Portfolio & Systems",
     "title": "Selected Works & Architecture",

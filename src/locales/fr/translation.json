@@ -20,6 +20,89 @@
     "close": "Fermer",
     "hint": "Naviguez avec les flèches ou cliquez pour ouvrir"
   },
+  "home": {
+    "badge": "Ingénierie Logicielle & Ingénierie des Médias",
+    "title": "Steve Benjamin",
+    "tagline": "Allier la précision de l'électronique matérielle au développement web moderne.",
+    "subtitle": "Conception de systèmes web haute performance et d'interfaces FinTech. Conjuguant la rigueur de la formation technique suisse en électronique à des architectures logicielles réactives de pointe.",
+    "ctaProjects": "Découvrir les Projets",
+    "ctaPitch": "Pitch Bachelor 2027",
+    "ctaCV": "Télécharger le CV (PDF)",
+    "physicsBadge": "Bac à Sable Physique Interactif",
+    "physicsHint": "Déplacez, lancez et heurtez les blocs de technologies avec le moteur physique 2D Matter.js",
+    "stats": {
+      "duality": {
+        "value": "CFC + BSc",
+        "label": "Du Hardware au Web",
+        "desc": "CFC Électronique & Ingénierie des Médias"
+      },
+      "grade": {
+        "value": "6.0 / 6.0",
+        "label": "Mandat de Production HUG",
+        "desc": "Note académique maximale"
+      },
+      "pitch": {
+        "value": "2027",
+        "label": "Projet de Bachelor",
+        "desc": "Mandat de Travail de Bachelor FinTech"
+      }
+    }
+  },
+  "bachelorPitch": {
+    "badge": "Mandat FinTech Entreprise / 2027",
+    "title": "Propositions de Travail de Bachelor 2027",
+    "subtitle": "À l'attention des CTOs et Responsables Ingénierie chez SwissBorg, UBS, Yuh et Revolut. Alliant la rigueur du matériel et les architectures frontend de pointe pour vos plateformes financières critiques.",
+    "cta": "Engagez-moi pour votre Projet de Bachelor 2027",
+    "ctaSubtitle": "Mandat académique dédié de 16 semaines via la HEIG-VD (Bussigny / Vaud, Suisse)",
+    "trustBadges": {
+      "rigor": "Standards d'Ingénierie Suisses",
+      "latency": "Architecture Réactive Faible Latence",
+      "precision": "Discipline Hardware Zéro Défaut"
+    },
+    "sectionTitle": "3 Propositions Clés de Recherche & Ingénierie",
+    "sectionSubtitle": "Répondre directement aux défis techniques des terminaux de trading modernes, de l'analytique financière et de l'intelligence de marché autonome.",
+    "proposal1": {
+      "tag": "Proposition 01 / Terminaux de Trading",
+      "title": "Optimisation UX/UI pour Terminaux de Trading Haute Fréquence",
+      "problem": "Les dashboards de trading souffrent d'une charge cognitive élevée, de saccades d'affichage et de goulots d'étranglement sous le flux continu de données temps réel.",
+      "solution": "Concevoir un rendu virtualisé DOM sans surcharge et des pipelines d'état accélérés par WebGL afin de maintenir un affichage déterministe à 60+ FPS lors de flux intenses du carnet d'ordres.",
+      "wsTerm": "WebSockets",
+      "wsDef": "Protocole bidirectionnel TCP full-duplex permettant la diffusion en continu des flux de marché en moins d'une milliseconde.",
+      "domTerm": "Virtualisation du DOM",
+      "domDef": "Technique affichant strictement les éléments visibles du viewport pour garantir une fréquence d'images fluide sous de fortes charges de mise à jour.",
+      "deliverables": "Mises à jour d'état sub-milliseconde, agencements de trading modulaires et feedback d'exécution d'ordre sans latence perceptible."
+    },
+    "proposal2": {
+      "tag": "Proposition 02 / Analyse Quantitative",
+      "title": "Visualisation de Données Financières & Télémétrie d'Actifs Complexes",
+      "problem": "Les portefeuilles multi-actifs, la profondeur de liquidité et les courbes d'attribution du risque nécessitent une synthèse visuelle interactive sans fuite de mémoire.",
+      "solution": "Exploiter",
+      "d3Term": "D3.js",
+      "d3Def": "Bibliothèque JavaScript produisant des visualisations de données dynamiques et interactives avec SVG, Canvas et HTML5.",
+      "and": "et",
+      "maplibreTerm": "MapLibre",
+      "maplibreDef": "Moteur de rendu cartographique et géospatial open-source accéléré par GPU.",
+      "solutionEnd": "pour construire des graphiques financiers denses, des cartes thermiques et des flux de transactions bancaires géospatiaux.",
+      "deliverables": "Rendu de chandeliers japonais accéléré par GPU, heatmaps de risque en temps réel et matrices de corrélation d'actifs interactives."
+    },
+    "proposal3": {
+      "tag": "Proposition 03 / Workflows IA Nouvelle Génération",
+      "title": "Intégration d'IA Agentique pour l'Analyse Automatisée des Marchés",
+      "problem": "Les analystes financiers passent des heures à agréger manuellement publications financières, flux macroéconomiques et signaux de marché dispersés.",
+      "solution": "Intégrer des workflows d'",
+      "agenticAITerm": "IA Agentique",
+      "agenticAIDef": "Systèmes autonomes capables de raisonner, planifier des actions en plusieurs étapes, invoquer des outils et exécuter des objectifs complexes sans intervention humaine.",
+      "solutionEnd": "avec des APIs financières déterministes pour orchestrer la surveillance autonome des marchés, l'analyse de sentiment et la synthèse d'opportunités d'investissement.",
+      "deliverables": "Pipelines de recherche multi-agents autonomes, synthèse de rapports financiers audités et alertes structurées de détection d'anomalies."
+    },
+    "contact": {
+      "title": "Initier une Collaboration de Bachelor",
+      "desc": "Disponible pour des entretiens techniques et pour échanger sur le cadrage d'un projet de Bachelor pour 2027.",
+      "email": "Contact par E-mail",
+      "institution": "HEIG-VD (Haute École d'Ingénierie et de Gestion du Canton de Vaud)",
+      "location": "Bussigny, Suisse"
+    }
+  },
   "projects": {
     "badge": "Portfolio & Systèmes",
     "title": "Projets & Architectures Sélectionnés",
@@ -113,7 +196,7 @@
       "runningTitle": "Course à Pied",
       "runningDesc": "Course de fond et trail pour développer l'endurance cardiovasculaire, la discipline mentale et la concentration dans l'effort prolongé.",
       "musicTitle": "Production Musicale & Piano",
-      "musicDesc": "Pianiste et compositeur sur FL Studio. Exploration de textures sonores alliant harmonies acoustiques et synthèse sonore assistée par ordinateur."
+      "musicDesc": "Pianist et compositeur sur FL Studio. Exploration de textures sonores alliant harmonies acoustiques et synthèse sonore assistée par ordinateur."
     }
   },
   "pages": {
