@@ -1,0 +1,26 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "projects": "Projets",
+    "bachelorPitch": "Pitch Bachelor 2027"
+  },
+  "pages": {
+    "home": {
+      "title": "Accueil",
+      "placeholder": "Espace réservé - Page d'accueil"
+    },
+    "about": {
+      "title": "À propos",
+      "placeholder": "Espace réservé - À propos"
+    },
+    "projects": {
+      "title": "Projets",
+      "placeholder": "Espace réservé - Projets"
+    },
+    "bachelorPitch": {
+      "title": "Pitch Bachelor",
+      "placeholder": "Espace réservé - Pitch Bachelor"
+    }
+  }
+}

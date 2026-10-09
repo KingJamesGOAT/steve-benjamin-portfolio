@@ -1,0 +1,26 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "bachelorPitch": "Bachelor Pitch 2027"
+  },
+  "pages": {
+    "home": {
+      "title": "Home",
+      "placeholder": "Home Page Placeholder"
+    },
+    "about": {
+      "title": "About",
+      "placeholder": "About Page Placeholder"
+    },
+    "projects": {
+      "title": "Projects",
+      "placeholder": "Projects Page Placeholder"
+    },
+    "bachelorPitch": {
+      "title": "Bachelor Pitch",
+      "placeholder": "Bachelor Pitch Page Placeholder"
+    }
+  }
+}
