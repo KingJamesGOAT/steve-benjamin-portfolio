@@ -20,3 +20,11 @@ export interface ThesisProposal {
   title: string;
   description: string;
 }
+
+export interface CommandPaletteItem {
+  id: string;
+  titleKey: string;
+  subtitleKey?: string;
+  path: string;
+  category: 'navigation' | 'action';
+}

@@ -1,9 +1,24 @@
 {
   "nav": {
+    "name": "Steve Benjamin",
+    "role": "Ingénierie des Médias",
     "home": "Accueil",
     "about": "À propos",
     "projects": "Projets",
-    "bachelorPitch": "Pitch Bachelor 2027"
+    "bachelorPitch": "Pitch Bachelor 2027",
+    "search": "Rechercher",
+    "cmdK": "⌘K"
+  },
+  "footer": {
+    "rights": "© 2026 Steve Benjamin — Bussigny, Suisse",
+    "tagline": "Architecture FinTech Light • React 18 & Vite"
+  },
+  "cmdPalette": {
+    "placeholder": "Tapez une commande ou cherchez une page...",
+    "quickNavigation": "Navigation Rapide",
+    "noResults": "Aucun résultat trouvé pour",
+    "close": "Fermer",
+    "hint": "Naviguez avec les flèches ou cliquez pour ouvrir"
   },
   "pages": {
     "home": {
