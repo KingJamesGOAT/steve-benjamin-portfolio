@@ -55,7 +55,7 @@ export default {
         'electric-glow': '0 0 20px -3px rgba(0, 82, 255, 0.25)',
       },
       borderRadius: {
-        'fintech': '10px',
+        'fintech': '0px',
       },
     },
   },

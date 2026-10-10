@@ -15,7 +15,7 @@ export default function LiveTerminal() {
   }, [tradeData]);
 
   return (
-    <div className="bg-slate-900 text-green-400 font-mono p-4 rounded-lg">
+    <div className="bg-slate-900 text-green-400 font-mono p-4 rounded-none">
       <div className="flex justify-between items-center mb-2">
         <span>Terminal status: {isConnected ? 'LIVE' : 'OFFLINE'}</span>
       </div>
@@ -70,7 +70,7 @@ export const DictionaryHover = ({ term, definition }) => {
             initial={{ opacity: 0, y: 5 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 5 }}
-            className="absolute bottom-full mb-2 w-64 p-3 bg-white shadow-xl rounded-md text-sm text-slate-800 z-50"
+            className="absolute bottom-full mb-2 w-64 p-3 bg-white shadow-xl rounded-none text-sm text-slate-800 z-50"
           >
             {definition}
           </motion.div>

@@ -11,7 +11,7 @@ export const Projects: React.FC = () => {
     <div className="space-y-16 sm:space-y-24">
       {/* Page Header */}
       <section className="space-y-3">
-        <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-sm text-xs font-mono font-medium bg-electric-light text-electric border border-electric/20">
+        <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-none text-xs font-mono font-medium bg-electric-light text-electric border border-electric/20">
           <span className="w-1.5 h-1.5 bg-electric rounded-none inline-block" />
           <span>{t('projects.badge')}</span>
         </div>
@@ -24,13 +24,13 @@ export const Projects: React.FC = () => {
       </section>
 
       {/* Primary Project 1: Crypto Trade Hub with Live Simulation */}
-      <section className="rounded-sm border border-slate-200 bg-white p-6 sm:p-8 shadow-sm space-y-6">
+      <section className="rounded-none border border-slate-200 bg-white p-6 sm:p-8 shadow-sm space-y-6">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center space-x-3">
-            <span className="inline-flex items-center px-2.5 py-0.5 rounded-sm text-[11px] font-mono font-medium bg-slate-100 text-slate-700 border border-slate-200">
+            <span className="inline-flex items-center px-2.5 py-0.5 rounded-none text-[11px] font-mono font-medium bg-slate-100 text-slate-700 border border-slate-200">
               {t('projects.crypto.tag')}
             </span>
-            <span className="inline-flex items-center space-x-1.5 text-[11px] font-mono text-emerald-600 bg-emerald-50 px-2.5 py-0.5 rounded-sm border border-emerald-200">
+            <span className="inline-flex items-center space-x-1.5 text-[11px] font-mono text-emerald-600 bg-emerald-50 px-2.5 py-0.5 rounded-none border border-emerald-200">
               <span className="w-1.5 h-1.5 rounded-none bg-emerald-500" />
               <span>{t('projects.crypto.status')}</span>
             </span>
@@ -38,7 +38,7 @@ export const Projects: React.FC = () => {
 
           <Link
             to="/projects/crypto-trade-hub"
-            className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-sm bg-electric hover:bg-electric-hover text-white text-xs font-semibold shadow-sm transition-colors"
+            className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-none bg-electric hover:bg-electric-hover text-white text-xs font-semibold shadow-sm transition-colors"
           >
             <span>{t('projects.viewDeepDive')}</span>
             <ExternalLink className="w-3.5 h-3.5" />
@@ -52,7 +52,7 @@ export const Projects: React.FC = () => {
         </div>
 
         {/* Live Simulation Embed */}
-        <div className="border border-slate-800 rounded-sm overflow-hidden bg-slate-950">
+        <div className="border border-slate-800 rounded-none overflow-hidden bg-slate-950">
           <CryptoWidgetSim />
         </div>
 
@@ -62,7 +62,7 @@ export const Projects: React.FC = () => {
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-            <div className="p-3.5 rounded-sm bg-slate-50 border border-slate-200 space-y-1">
+            <div className="p-3.5 rounded-none bg-slate-50 border border-slate-200 space-y-1">
               <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500">
                 {t('projects.crypto.pnlLabel')}
               </span>
@@ -72,7 +72,7 @@ export const Projects: React.FC = () => {
               <p className="text-[11px] font-mono text-slate-500">Autonomous Kelly Sizing</p>
             </div>
 
-            <div className="p-3.5 rounded-sm bg-slate-50 border border-slate-200 space-y-1">
+            <div className="p-3.5 rounded-none bg-slate-50 border border-slate-200 space-y-1">
               <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500">
                 Execution Core
               </span>
@@ -82,7 +82,7 @@ export const Projects: React.FC = () => {
               <p className="text-[11px] font-mono text-slate-500">Momentum Breakout Engine</p>
             </div>
 
-            <div className="p-3.5 rounded-sm bg-slate-50 border border-slate-200 space-y-1">
+            <div className="p-3.5 rounded-none bg-slate-50 border border-slate-200 space-y-1">
               <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500">
                 AI Intelligence
               </span>
@@ -96,13 +96,13 @@ export const Projects: React.FC = () => {
       </section>
 
       {/* Primary Project 2: Donnons.ch */}
-      <section className="rounded-sm border border-slate-200 bg-white p-6 sm:p-8 shadow-sm space-y-6">
+      <section className="rounded-none border border-slate-200 bg-white p-6 sm:p-8 shadow-sm space-y-6">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center space-x-3">
-            <span className="inline-flex items-center px-2.5 py-0.5 rounded-sm text-[11px] font-mono font-medium bg-rose-50 text-rose-700 border border-rose-200">
+            <span className="inline-flex items-center px-2.5 py-0.5 rounded-none text-[11px] font-mono font-medium bg-rose-50 text-rose-700 border border-rose-200">
               {t('projects.donnons.tag')}
             </span>
-            <span className="inline-flex items-center space-x-1.5 text-[11px] font-mono text-rose-600 bg-rose-50 px-2.5 py-0.5 rounded-sm border border-rose-200">
+            <span className="inline-flex items-center space-x-1.5 text-[11px] font-mono text-rose-600 bg-rose-50 px-2.5 py-0.5 rounded-none border border-rose-200">
               <span className="w-1.5 h-1.5 rounded-none bg-rose-500" />
               <span>HUG Mandate</span>
             </span>
@@ -110,7 +110,7 @@ export const Projects: React.FC = () => {
 
           <Link
             to="/projects/donnons-ch"
-            className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-sm bg-electric hover:bg-electric-hover text-white text-xs font-semibold shadow-sm transition-colors"
+            className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-none bg-electric hover:bg-electric-hover text-white text-xs font-semibold shadow-sm transition-colors"
           >
             <span>{t('projects.viewDeepDive')}</span>
             <ExternalLink className="w-3.5 h-3.5" />
@@ -127,7 +127,7 @@ export const Projects: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-          <div className="p-3.5 rounded-sm bg-slate-50 border border-slate-200 space-y-1">
+          <div className="p-3.5 rounded-none bg-slate-50 border border-slate-200 space-y-1">
             <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500">
               {t('projects.donnons.gradeLabel')}
             </span>
@@ -137,7 +137,7 @@ export const Projects: React.FC = () => {
             <p className="text-[11px] font-mono text-slate-500">Maximum Academic Distinction</p>
           </div>
 
-          <div className="p-3.5 rounded-sm bg-slate-50 border border-slate-200 space-y-1">
+          <div className="p-3.5 rounded-none bg-slate-50 border border-slate-200 space-y-1">
             <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500">
               Client / Mandate
             </span>
@@ -147,7 +147,7 @@ export const Projects: React.FC = () => {
             <p className="text-[11px] font-mono text-slate-500">HUG Blood Transfusion Center</p>
           </div>
 
-          <div className="p-3.5 rounded-sm bg-slate-50 border border-slate-200 space-y-1">
+          <div className="p-3.5 rounded-none bg-slate-50 border border-slate-200 space-y-1">
             <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500">
               Architecture Stack
             </span>
@@ -162,9 +162,9 @@ export const Projects: React.FC = () => {
       {/* Smaller Showcase Grid: Catholic Route & Marriage Website */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
         {/* Showcase: Catholic Route */}
-        <section className="rounded-sm border border-slate-200 bg-white p-6 sm:p-7 shadow-sm flex flex-col justify-between space-y-6">
+        <section className="rounded-none border border-slate-200 bg-white p-6 sm:p-7 shadow-sm flex flex-col justify-between space-y-6">
           <div className="space-y-4">
-            <span className="inline-flex items-center px-2.5 py-0.5 rounded-sm text-[11px] font-mono font-medium bg-blue-50 text-blue-700 border border-blue-200">
+            <span className="inline-flex items-center px-2.5 py-0.5 rounded-none text-[11px] font-mono font-medium bg-blue-50 text-blue-700 border border-blue-200">
               {t('projects.catholicRoute.tag')}
             </span>
             <h3 className="text-xl font-bold tracking-tight text-fintech-primary">
@@ -203,9 +203,9 @@ export const Projects: React.FC = () => {
         </section>
 
         {/* Showcase: Marriage Website */}
-        <section className="rounded-sm border border-slate-200 bg-white p-6 sm:p-7 shadow-sm flex flex-col justify-between space-y-6">
+        <section className="rounded-none border border-slate-200 bg-white p-6 sm:p-7 shadow-sm flex flex-col justify-between space-y-6">
           <div className="space-y-4">
-            <span className="inline-flex items-center px-2.5 py-0.5 rounded-sm text-[11px] font-mono font-medium bg-amber-50 text-amber-800 border border-amber-200">
+            <span className="inline-flex items-center px-2.5 py-0.5 rounded-none text-[11px] font-mono font-medium bg-amber-50 text-amber-800 border border-amber-200">
               {t('projects.marriage.tag')}
             </span>
             <h3 className="text-xl font-bold tracking-tight text-fintech-primary">

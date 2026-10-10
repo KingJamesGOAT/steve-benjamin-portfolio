@@ -24,9 +24,9 @@
   "home": {
     "badge": "Ingénierie Logicielle & Ingénierie des Médias",
     "title": "Steve Benjamin",
-    "tagline": "Allier la précision de l'électronique matérielle au développement web moderne.",
-    "subtitle": "Conception de systèmes web haute performance et d'interfaces FinTech. Conjuguant la rigueur de la formation technique suisse en électronique à des architectures logicielles réactives de pointe.",
-    "ctaProjects": "Découvrir les Projets",
+    "subtitle": "Ingénieur des Médias et Architecte Frontend",
+    "description": "Allier la précision de l'électronique matérielle au développement web moderne. Mettre en valeur une méthodologie rigoureuse, la gestion budgétaire et l'analyse technique à travers des études de cas documentées.",
+    "ctaCaseStudies": "Voir les Études de Cas",
     "ctaPitch": "Pitch Bachelor 2027",
     "ctaCV": "Télécharger le CV (PDF)",
     "physicsBadge": "Bac à Sable Physique Interactif",

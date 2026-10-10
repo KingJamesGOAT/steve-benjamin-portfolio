@@ -64,7 +64,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
                 key={link.targetId}
                 type="button"
                 onClick={() => handleNavClick(link.targetId)}
-                className="px-3 py-1.5 text-xs sm:text-sm font-medium rounded-sm text-fintech-secondary hover:text-fintech-primary hover:bg-slate-50 transition-colors"
+                className="px-3 py-1.5 text-xs sm:text-sm font-medium rounded-none text-fintech-secondary hover:text-fintech-primary hover:bg-slate-50 transition-colors"
               >
                 {link.label}
               </button>
@@ -78,11 +78,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
             <button
               onClick={onOpenCommandPalette}
               type="button"
-              className="hidden md:inline-flex items-center space-x-2 px-2.5 py-1 text-xs text-fintech-muted border border-slate-200 rounded-sm hover:border-electric hover:text-electric transition-colors bg-surface-subtle"
+              className="hidden md:inline-flex items-center space-x-2 px-2.5 py-1 text-xs text-fintech-muted border border-slate-200 rounded-none hover:border-electric hover:text-electric transition-colors bg-surface-subtle"
               title={t('cmdPalette.placeholder')}
             >
               <Search className="w-3.5 h-3.5" />
-              <span className="font-mono text-[11px] bg-white px-1.5 py-0.5 rounded-sm border border-slate-200 text-fintech-secondary font-medium">
+              <span className="font-mono text-[11px] bg-white px-1.5 py-0.5 rounded-none border border-slate-200 text-fintech-secondary font-medium">
                 Ctrl K
               </span>
             </button>
@@ -92,7 +92,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
           <button
             onClick={toggleLanguage}
             type="button"
-            className="inline-flex items-center space-x-1 px-2.5 py-1 text-xs font-mono font-medium rounded-sm border border-slate-200 text-fintech-secondary hover:text-electric hover:border-electric transition-colors bg-white hover:bg-slate-50"
+            className="inline-flex items-center space-x-1 px-2.5 py-1 text-xs font-mono font-medium rounded-none border border-slate-200 text-fintech-secondary hover:text-electric hover:border-electric transition-colors bg-white hover:bg-slate-50"
             title="Toggle EN / FR"
             aria-label="Toggle language"
           >

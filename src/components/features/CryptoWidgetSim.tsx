@@ -212,13 +212,13 @@ export const CryptoWidgetSim: React.FC = () => {
   const areaString = `0,${svgHeight} ${pointsString} ${svgWidth},${svgHeight}`;
 
   return (
-    <div className="bg-slate-950 border border-slate-800 text-slate-200 rounded-sm font-sans shadow-md overflow-hidden select-none">
+    <div className="bg-slate-950 border border-slate-800 text-slate-200 rounded-none font-sans shadow-md overflow-hidden select-none">
       {/* Top Bar / Header */}
       <div className="bg-slate-900 border-b border-slate-800 px-4 py-2.5 flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
         <div className="flex items-center space-x-3">
           <div className="flex items-center space-x-2">
             <span className="font-bold text-white tracking-wider text-sm">BTC/USD</span>
-            <span className="text-[10px] bg-slate-800 border border-slate-700 px-1.5 py-0.5 text-slate-300 font-semibold rounded-sm">
+            <span className="text-[10px] bg-slate-800 border border-slate-700 px-1.5 py-0.5 text-slate-300 font-semibold rounded-none">
               PERP
             </span>
           </div>
@@ -243,8 +243,8 @@ export const CryptoWidgetSim: React.FC = () => {
             <span className="text-electric font-semibold">TRENDING (ADX 28.4)</span>
           </div>
 
-          <div className="flex items-center space-x-1.5 px-2 py-0.5 bg-emerald-950/80 border border-emerald-800/60 text-emerald-400 rounded-sm font-mono text-[10px]">
-            <span className="w-1.5 h-1.5 bg-emerald-400 rounded-sm inline-block" />
+          <div className="flex items-center space-x-1.5 px-2 py-0.5 bg-emerald-950/80 border border-emerald-800/60 text-emerald-400 rounded-none font-mono text-[10px]">
+            <span className="w-1.5 h-1.5 bg-emerald-400 rounded-none inline-block" />
             <span className="font-bold">STATUS: LIVE</span>
           </div>
         </div>
@@ -261,7 +261,7 @@ export const CryptoWidgetSim: React.FC = () => {
 
           {/* SVG Interactive Area */}
           <div
-            className="relative w-full h-44 bg-slate-900/60 border border-slate-800/80 rounded-sm overflow-hidden p-1 flex items-center justify-center cursor-crosshair"
+            className="relative w-full h-44 bg-slate-900/60 border border-slate-800/80 rounded-none overflow-hidden p-1 flex items-center justify-center cursor-crosshair"
             onMouseLeave={() => setHoveredPoint(null)}
           >
             {/* Grid lines */}
@@ -291,8 +291,8 @@ export const CryptoWidgetSim: React.FC = () => {
                 fill="none"
                 stroke="#10b981"
                 strokeWidth="2.2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+                strokeLinecap="square"
+                strokeLinejoin="miter"
                 points={pointsString}
               />
 
@@ -315,18 +315,19 @@ export const CryptoWidgetSim: React.FC = () => {
                   .join(' ')}
               />
 
-              {/* Interactive hover points */}
+              {/* Interactive rectangular hover points */}
               {chartPoints.map((pt, i) => {
                 const x = (i / (chartPoints.length - 1)) * svgWidth;
                 const y =
                   svgHeight - ((pt.price - minPrice) / (maxPrice - minPrice)) * (svgHeight - 20) - 10;
                 return (
-                  <circle
+                  <rect
                     key={i}
-                    cx={x}
-                    cy={y}
-                    r="4"
-                    className="fill-slate-900 stroke-emerald-400 stroke-2 hover:r-6 cursor-pointer transition-all"
+                    x={x - 3}
+                    y={y - 3}
+                    width="6"
+                    height="6"
+                    className="fill-slate-900 stroke-emerald-400 stroke-2 hover:stroke-[3] cursor-pointer transition-all"
                     onMouseEnter={() => setHoveredPoint({ x, price: pt.price, time: pt.time })}
                   />
                 );
@@ -336,7 +337,7 @@ export const CryptoWidgetSim: React.FC = () => {
             {/* Hover Tooltip */}
             {hoveredPoint && (
               <div
-                className="absolute top-2 right-2 bg-slate-900 border border-slate-700 px-2 py-1 text-[10px] font-mono text-white rounded-sm shadow pointer-events-none"
+                className="absolute top-2 right-2 bg-slate-900 border border-slate-700 px-2 py-1 text-[10px] font-mono text-white rounded-none shadow pointer-events-none"
               >
                 <div>Time: {hoveredPoint.time}</div>
                 <div className="font-bold text-emerald-400">${hoveredPoint.price.toLocaleString()}</div>
@@ -358,7 +359,7 @@ export const CryptoWidgetSim: React.FC = () => {
             <span className="text-[10px] text-emerald-400">AUTONOMOUS</span>
           </div>
 
-          <div className="h-44 overflow-y-auto space-y-1.5 pr-1 font-mono text-[10.5px] leading-relaxed bg-slate-900/40 p-2 border border-slate-800/60 rounded-sm">
+          <div className="h-44 overflow-y-auto space-y-1.5 pr-1 font-mono text-[10.5px] leading-relaxed bg-slate-900/40 p-2 border border-slate-800/60 rounded-none">
             {signals.map((sig) => {
               let tagColor = 'text-slate-400 border-slate-700 bg-slate-800';
               if (sig.type === 'BUY') tagColor = 'text-emerald-400 border-emerald-800 bg-emerald-950/60';
@@ -370,7 +371,7 @@ export const CryptoWidgetSim: React.FC = () => {
                 <div key={sig.id} className="flex items-start space-x-1.5">
                   <span className="text-slate-500 text-[10px] select-none">[{sig.time}]</span>
                   <span
-                    className={`px-1 py-0.2 text-[9px] font-bold border rounded-sm ${tagColor}`}
+                    className={`px-1 py-0.2 text-[9px] font-bold border rounded-none ${tagColor}`}
                   >
                     {sig.type}
                   </span>
@@ -395,11 +396,11 @@ export const CryptoWidgetSim: React.FC = () => {
             <span className="text-[10px] text-electric">BULLISH (+0.68)</span>
           </div>
 
-          <div className="h-44 overflow-y-auto space-y-2 pr-1 font-mono text-[10.5px] leading-relaxed bg-slate-900/40 p-2 border border-slate-800/60 rounded-sm">
+          <div className="h-44 overflow-y-auto space-y-2 pr-1 font-mono text-[10.5px] leading-relaxed bg-slate-900/40 p-2 border border-slate-800/60 rounded-none">
             {news.map((item) => (
               <div
                 key={item.id}
-                className="p-1.5 border border-slate-800 bg-slate-900/80 rounded-sm space-y-1 hover:border-slate-700 transition-colors"
+                className="p-1.5 border border-slate-800 bg-slate-900/80 rounded-none space-y-1 hover:border-slate-700 transition-colors"
               >
                 <div className="flex items-center justify-between text-[9.5px]">
                   <span className="text-electric font-semibold">{item.source}</span>

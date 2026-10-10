@@ -24,7 +24,7 @@ export const ProjectDetail: React.FC = () => {
         <p className="text-sm text-slate-500">The requested project case study could not be located.</p>
         <Link
           to="/#projects"
-          className="inline-flex items-center space-x-2 px-4 py-2 rounded-sm bg-electric text-white text-xs font-semibold hover:bg-electric-hover transition-colors"
+          className="inline-flex items-center space-x-2 px-4 py-2 rounded-none bg-electric text-white text-xs font-semibold hover:bg-electric-hover transition-colors"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
           <span>{t('projectDetail.backToProjects')}</span>
@@ -47,7 +47,7 @@ export const ProjectDetail: React.FC = () => {
               if (el) el.scrollIntoView({ behavior: 'smooth' });
             }, 50);
           }}
-          className="inline-flex items-center space-x-2 px-3 py-1.5 rounded-sm border border-slate-200 bg-white text-xs font-mono text-slate-600 hover:text-electric hover:border-electric transition-colors shadow-sm"
+          className="inline-flex items-center space-x-2 px-3 py-1.5 rounded-none border border-slate-200 bg-white text-xs font-mono text-slate-600 hover:text-electric hover:border-electric transition-colors shadow-sm"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
           <span>{t('projectDetail.backToProjects')}</span>
@@ -57,12 +57,12 @@ export const ProjectDetail: React.FC = () => {
       {/* Hero Header */}
       <section className="space-y-5 border-b border-slate-200 pb-8">
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <span className="inline-flex items-center px-2.5 py-1 rounded-sm text-xs font-mono font-medium bg-slate-100 text-slate-800 border border-slate-200">
+          <span className="inline-flex items-center px-2.5 py-1 rounded-none text-xs font-mono font-medium bg-slate-100 text-slate-800 border border-slate-200">
             {t(project.tagKey)}
           </span>
 
           {project.statusBadgeKey && (
-            <span className="inline-flex items-center space-x-1.5 text-xs font-mono text-electric bg-electric-light px-2.5 py-1 rounded-sm border border-electric/30">
+            <span className="inline-flex items-center space-x-1.5 text-xs font-mono text-electric bg-electric-light px-2.5 py-1 rounded-none border border-electric/30">
               <span className="w-1.5 h-1.5 rounded-none bg-electric" />
               <span>{t(project.statusBadgeKey)}</span>
             </span>
@@ -82,7 +82,7 @@ export const ProjectDetail: React.FC = () => {
           {project.techStack.map((tech) => (
             <span
               key={tech}
-              className="px-2.5 py-1 text-xs font-mono font-medium rounded-sm bg-white border border-slate-200 text-slate-700 shadow-sm"
+              className="px-2.5 py-1 text-xs font-mono font-medium rounded-none bg-white border border-slate-200 text-slate-700 shadow-sm"
             >
               {tech}
             </span>
@@ -94,9 +94,9 @@ export const ProjectDetail: React.FC = () => {
       {isCryptoHub && (
         <section className="space-y-8">
           {/* Prominent Closed Beta Disclaimer Box */}
-          <div className="border border-slate-300 bg-slate-50 p-4 sm:p-5 rounded-sm space-y-2">
+          <div className="border border-slate-300 bg-slate-50 p-4 sm:p-5 rounded-none space-y-2">
             <div className="flex items-center space-x-2">
-              <span className="px-1.5 py-0.5 bg-slate-200 text-slate-800 font-mono text-[10px] font-bold uppercase rounded-sm">
+              <span className="px-1.5 py-0.5 bg-slate-200 text-slate-800 font-mono text-[10px] font-bold uppercase rounded-none">
                 Confidentiality Notice
               </span>
               <span className="text-xs font-mono text-slate-600 font-semibold uppercase tracking-wider">
@@ -109,7 +109,7 @@ export const ProjectDetail: React.FC = () => {
           </div>
 
           {/* Massive Hero Simulation Component */}
-          <div className="rounded-sm border border-slate-800 shadow-lg overflow-hidden bg-slate-950">
+          <div className="rounded-none border border-slate-800 shadow-lg overflow-hidden bg-slate-950">
             <CryptoWidgetSim />
           </div>
 
@@ -129,7 +129,7 @@ export const ProjectDetail: React.FC = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
               {/* Architecture 1: Top 10 Crypto Tracking */}
-              <div className="p-6 rounded-sm border border-slate-200 bg-white space-y-3 shadow-sm">
+              <div className="p-6 rounded-none border border-slate-200 bg-white space-y-3 shadow-sm">
                 <div className="flex items-center justify-between border-b border-slate-100 pb-2">
                   <span className="text-xs font-mono text-slate-400">01 / SURVEILLANCE</span>
                   <span className="text-[11px] font-mono text-electric font-semibold">11 TOKENS + TOP 5 GAINERS</span>
@@ -146,7 +146,7 @@ export const ProjectDetail: React.FC = () => {
               </div>
 
               {/* Architecture 2: X API Sentiment */}
-              <div className="p-6 rounded-sm border border-slate-200 bg-white space-y-3 shadow-sm">
+              <div className="p-6 rounded-none border border-slate-200 bg-white space-y-3 shadow-sm">
                 <div className="flex items-center justify-between border-b border-slate-100 pb-2">
                   <span className="text-xs font-mono text-slate-400">02 / SENTIMENT</span>
                   <span className="text-[11px] font-mono text-emerald-600 font-semibold">X / TWITTER & NEWS RADAR</span>
@@ -163,7 +163,7 @@ export const ProjectDetail: React.FC = () => {
               </div>
 
               {/* Architecture 3: Trading212 API Integration */}
-              <div className="p-6 rounded-sm border border-slate-200 bg-white space-y-3 shadow-sm">
+              <div className="p-6 rounded-none border border-slate-200 bg-white space-y-3 shadow-sm">
                 <div className="flex items-center justify-between border-b border-slate-100 pb-2">
                   <span className="text-xs font-mono text-slate-400">03 / TELEMETRY</span>
                   <span className="text-[11px] font-mono text-blue-600 font-semibold">HYBRID VISUALIZATION</span>
@@ -180,7 +180,7 @@ export const ProjectDetail: React.FC = () => {
               </div>
 
               {/* Architecture 4: AI Groq Summaries */}
-              <div className="p-6 rounded-sm border border-slate-200 bg-white space-y-3 shadow-sm">
+              <div className="p-6 rounded-none border border-slate-200 bg-white space-y-3 shadow-sm">
                 <div className="flex items-center justify-between border-b border-slate-100 pb-2">
                   <span className="text-xs font-mono text-slate-400">04 / INTELLIGENCE</span>
                   <span className="text-[11px] font-mono text-purple-600 font-semibold">LLAMA 3.3 70B VIA GROQ</span>
@@ -203,7 +203,7 @@ export const ProjectDetail: React.FC = () => {
       {/* Specifications & Key Highlights Grid (Text-driven, zero slop icons) */}
       <section className="grid grid-cols-1 md:grid-cols-12 gap-6">
         {/* Left: Specs Box */}
-        <div className="md:col-span-7 rounded-sm border border-slate-200 bg-white p-6 shadow-sm space-y-4">
+        <div className="md:col-span-7 rounded-none border border-slate-200 bg-white p-6 shadow-sm space-y-4">
           <div className="flex items-center justify-between text-xs font-mono font-semibold uppercase tracking-wider text-slate-500 border-b border-slate-100 pb-2">
             <span>{t('projectDetail.specifications')}</span>
             <span className="text-slate-400">HEIG-VD STANDARDS</span>
@@ -232,7 +232,7 @@ export const ProjectDetail: React.FC = () => {
         </div>
 
         {/* Right: Key Highlights */}
-        <div className="md:col-span-5 rounded-sm border border-slate-200 bg-slate-50 p-6 shadow-sm space-y-4">
+        <div className="md:col-span-5 rounded-none border border-slate-200 bg-slate-50 p-6 shadow-sm space-y-4">
           <div className="flex items-center justify-between text-xs font-mono font-semibold uppercase tracking-wider text-slate-500 border-b border-slate-200/80 pb-2">
             <span>{t('projectDetail.keyHighlights')}</span>
             <span className="text-emerald-600 font-semibold">VERIFIED</span>

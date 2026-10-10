@@ -17,31 +17,25 @@ export const MockIDE: React.FC<MockIDEProps> = ({ filename, code, className = ''
 
   return (
     <div
-      className={`rounded-xl overflow-hidden border border-slate-800 bg-slate-900 shadow-2xl transition-all ${className}`}
+      className={`rounded-none overflow-hidden border border-slate-800 bg-slate-900 shadow-xl transition-all ${className}`}
     >
-      {/* Dark macOS / VS Code Header */}
-      <div className="relative bg-slate-900/95 border-b border-slate-800/80 px-4 py-2.5 flex items-center justify-between select-none">
-        {/* Sleek Minimalist Window Control Micro-Rectangles */}
-        <div className="flex items-center space-x-1.5 z-10">
-          <span className="w-2.5 h-2.5 rounded-[2px] bg-[#FF5F56] border border-[#E0443E]/50 inline-block transition-transform hover:scale-110" />
-          <span className="w-2.5 h-2.5 rounded-[2px] bg-[#FFBD2E] border border-[#DEA123]/50 inline-block transition-transform hover:scale-110" />
-          <span className="w-2.5 h-2.5 rounded-[2px] bg-[#27C93F] border border-[#1AAB29]/50 inline-block transition-transform hover:scale-110" />
-        </div>
-
-        {/* Centered Filename */}
-        <div className="absolute inset-x-0 flex items-center justify-center pointer-events-none">
-          <div className="flex items-center space-x-1.5 text-slate-300 font-mono text-xs font-medium tracking-wide">
-            <Terminal className="w-3.5 h-3.5 text-slate-500" />
-            <span>{filename}</span>
-          </div>
+      {/* FinTech Code Terminal Header */}
+      <div className="relative bg-slate-900/95 border-b border-slate-800 px-4 py-2.5 flex items-center justify-between select-none">
+        {/* Filename and Code Tag */}
+        <div className="flex items-center space-x-2 text-slate-300 font-mono text-xs font-medium tracking-wide">
+          <Terminal className="w-3.5 h-3.5 text-electric" />
+          <span className="text-slate-200">{filename}</span>
+          <span className="text-[10px] text-slate-500 uppercase px-1.5 py-0.2 bg-slate-800 border border-slate-700 rounded-none">
+            SOURCE
+          </span>
         </div>
 
         {/* Copy to Clipboard Button */}
-        <div className="z-10 flex items-center">
+        <div className="flex items-center">
           <button
             type="button"
             onClick={handleCopy}
-            className="p-1.5 rounded-md text-slate-400 hover:text-slate-100 hover:bg-slate-800 transition-colors flex items-center space-x-1 text-xs font-mono"
+            className="p-1.5 rounded-none text-slate-400 hover:text-slate-100 hover:bg-slate-800 transition-colors flex items-center space-x-1.5 text-xs font-mono border border-slate-800 hover:border-slate-700"
             title={copied ? 'Copied to clipboard' : 'Copy code'}
             aria-label={copied ? 'Copied to clipboard' : 'Copy code'}
           >

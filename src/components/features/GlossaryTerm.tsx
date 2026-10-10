@@ -29,7 +29,7 @@ export const GlossaryTerm: React.FC<GlossaryTermProps> = ({ term, definition, cl
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 4, scale: 0.97 }}
             transition={{ duration: 0.15, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-72 p-3 bg-white border border-slate-200 rounded-sm shadow-xl shadow-slate-900/10 z-50 pointer-events-none text-left"
+            className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-72 p-3 bg-white border border-slate-200 rounded-none shadow-xl shadow-slate-900/10 z-50 pointer-events-none text-left"
           >
             {/* Header / Term Label */}
             <div className="flex items-center justify-between pb-1.5 mb-1.5 border-b border-slate-100">
