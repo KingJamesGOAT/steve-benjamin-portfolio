@@ -141,6 +141,42 @@
       "feature1": "Dynamic RSVP State Engine",
       "feature2": "Confidential Routing & URL Privacy",
       "feature3": "Tailored Minimalist Typography"
+    },
+    "cryptoDetail": {
+      "disclaimer": "Note: The live application is currently in closed beta testing for an investment organization. To protect proprietary API keys and institutional logic, the interactive elements below are a frontend simulation utilizing placeholder data.",
+      "sim": {
+        "botActive": "ENGINE ONLINE",
+        "botPaused": "ENGINE PAUSED",
+        "mode": "Mode",
+        "paperMode": "Paper Trading",
+        "liveMode": "Live Execution",
+        "balance": "Simulated Portfolio",
+        "terminalTitle": "Strategy Engine Execution Stream",
+        "clearLogs": "Clear Feed"
+      },
+      "caseStudyTitle": "Technical Architecture & System Design",
+      "caseStudySubtitle": "In-depth engineering breakdown of the quantitative indicators, real-time data streaming, AI sentiment ingestion, and multi-broker telemetry pipeline.",
+      "section1": {
+        "title": "1. Market & Sentiment Tracking (News/X APIs)",
+        "p1": "The market scanning subsystem establishes a dual-tier surveillance pipeline. The primary tier continuously tracks an eleven-token blue-chip basket (BTC, ETH, SOL, BNB, XRP, ADA, DOGE, AVAX, SUI, TRX, and LINK) to maintain baseline market liquidity metrics. Concurrently, a secondary dynamic scanner queries the Binance 24-hour ticker endpoint, filtering over 300 trading pairs with stringent liquidity criteria: enforcing strict USDT pairing, requiring a minimum $10,000,000 quote volume threshold, and eliminating leveraged and stablecoin tokens to prevent non-volatile noise.",
+        "p2": "The dynamic scanner ranks candidates by absolute volatility and selects the top 5 momentum gainers. In parallel, market sentiment is captured through a multi-source news pipeline integrating the CryptoCompare News API and X/Twitter social monitoring feeds. Aggregated headlines and narrative velocity are normalized into a discrete sentiment mode (BULLISH, BEARISH, or NEUTRAL), which acts as an operational governor for algorithmic trade execution."
+      },
+      "section2": {
+        "title": "2. Algorithmic Trading Engine & Indicators (Live vs Paper Trading, MACD/RSI)",
+        "p1": "The execution core implements a dual-regime quantitative model driven by a 14-period Average Directional Index (ADX). When ADX exceeds 25, the engine classifies the regime as Trending and routes capital into the Smart Momentum breakout strategy. This strategy enforces Donchian channel breakouts above the 20-candle high, verified by a strict 2.0x surge above 20-period average volume and expanding Average True Range (ATR). Trade sizing is calculated dynamically using the Kelly Criterion to maximize geometric capital growth while capping individual risk exposure at 2.0% of portfolio equity.",
+        "p2": "When ADX falls below 25, the engine pivots to Dynamic Grid Mean Reversion. This mode identifies oversold market conditions using a 14-period Relative Strength Index (RSI) combined with lower Bollinger Band penetrations (20 SMA, 2 standard deviations). Entry thresholds adjust adaptively based on the sentiment governor (RSI < 40 in bullish sentiment, RSI < 20 in defensive bearish regimes). Grid orders are deployed in three layered tranches, utilizing client-side Ghost Limit Orders to capture local liquidity dips without pre-committing capital.",
+        "p3": "The architecture strictly separates execution environments: Paper Trading records simulated trades, trailing 20-EMA stops, and equity state into PostgreSQL via Supabase with real-time WebSocket subscriptions, while Live Execution constructs HMAC SHA-256 authenticated REST and WebSocket requests against exchange endpoints. Hard circuit breakers halt all automated trading at a 5% portfolio drawdown and require explicit authorization to resume."
+      },
+      "section3": {
+        "title": "3. AI News Aggregator & Briefings",
+        "p1": "To eliminate emotional bias and manual disclosure analysis, the platform integrates an automated AI intelligence pipeline executed via scheduled background workers. The pipeline ingests top macroeconomic news headlines alongside CoinGecko global telemetry, including Bitcoin market dominance percentages, 24-hour global trading volume, and trending search velocity.",
+        "p2": "This consolidated dataset is formatted into a strict institutional context and processed through Groq's high-throughput LLaMA 3.3 70B Versatile model. The model is constrained via system prompts to return deterministic JSON schemas containing normalized numerical sentiment scores (-1.0 extreme bear to +1.0 extreme bull), concise single-sentence dashboard summaries, three key narrative metadata tags, and an institutional Bloomberg-style daily market digest dispatched directly to communication channels."
+      },
+      "section4": {
+        "title": "4. Charting Architecture (Trading 212 API)",
+        "p1": "The platform's visualization layer employs a hybrid architecture designed to deliver sub-millisecond telemetry feedback alongside high-density multi-timeframe financial charts. Deep candlestick inspection is handled by embedding hardware-accelerated TradingView charts with custom toolbar and styling overrides, providing institutional indicators and interactive drawing tools.",
+        "p2": "For portfolio telemetry and equity performance, the frontend utilizes Recharts to render virtual balance history, equity curves, and asset allocation distributions without DOM frame stutter. Modular API adapters interface with Trading 212 API telemetry endpoints and Binance WebSocket streaming connections, ensuring price ticks and simulated fill events update reactively without memory leakage."
+      }
     }
   },
   "projectDetail": {
