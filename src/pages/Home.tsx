@@ -15,20 +15,12 @@ import {
   CheckCircle2,
   BookOpen,
   Lock,
-  MapPin,
-  Users,
-  Heart,
-  Globe2,
-  Dribbble,
-  Timer,
-  Music,
-  Binary,
   ShieldCheck,
   ExternalLink,
 } from 'lucide-react';
 import PhysicsCanvas from '../components/features/PhysicsCanvas';
 import MockIDE from '../components/features/MockIDE';
-import GlossaryTerm from '../components/features/GlossaryTerm';
+import About from './About';
 import { cryptoSnippet, donnonsSnippet } from '../data/projectsData';
 
 export const Home: React.FC = () => {
@@ -47,13 +39,6 @@ export const Home: React.FC = () => {
       }
     }
   }, [location.hash]);
-
-  const languages = [
-    { code: 'EN', name: t('about.section3.en'), level: t('about.section3.enLevel'), tag: 'C2 / Native' },
-    { code: 'FR', name: t('about.section3.fr'), level: t('about.section3.frLevel'), tag: 'C2 / Native' },
-    { code: 'DE', name: t('about.section3.de'), level: t('about.section3.deLevel'), tag: 'B2' },
-    { code: 'TA', name: t('about.section3.ta'), level: t('about.section3.taLevel'), tag: 'B2' },
-  ];
 
   return (
     <div className="space-y-24 sm:space-y-32">
@@ -368,212 +353,7 @@ export const Home: React.FC = () => {
       </section>
 
       {/* SECTION 3: ABOUT */}
-      <section id="about" className="scroll-mt-24 space-y-12">
-        <div className="space-y-3 border-b border-slate-200/80 pb-6">
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <div className="inline-flex items-center space-x-2 px-2.5 py-1 rounded-md text-xs font-mono font-medium bg-slate-100 text-slate-700 border border-slate-200">
-              <MapPin className="w-3.5 h-3.5 text-electric" />
-              <span>{t('about.location')}</span>
-            </div>
-
-            <a
-              href={`${import.meta.env.BASE_URL}CV_Steve_Benjamin.pdf`}
-              target="_blank"
-              rel="noopener noreferrer"
-              download
-              className="inline-flex items-center space-x-1.5 px-3 py-1 text-xs font-mono font-medium rounded-md border border-slate-200 bg-white hover:border-electric hover:text-electric transition-colors shadow-sm"
-            >
-              <FileDown className="w-3.5 h-3.5" />
-              <span>CV_Steve_Benjamin.pdf</span>
-            </a>
-          </div>
-
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-fintech-primary">
-            {t('about.title')}
-          </h2>
-
-          <p className="text-base sm:text-lg text-fintech-secondary max-w-3xl leading-relaxed">
-            {t('about.summary')}
-          </p>
-        </div>
-
-        {/* 1: Bridge from Electronics */}
-        <div className="space-y-4">
-          <span className="text-xs font-mono font-semibold uppercase tracking-wider text-electric">
-            {t('about.section1.badge')}
-          </span>
-          <h3 className="text-2xl font-bold tracking-tight text-fintech-primary flex items-center space-x-2">
-            <Cpu className="w-5 h-5 text-electric flex-shrink-0" />
-            <span>{t('about.section1.title')}</span>
-          </h3>
-
-          <div className="rounded-xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm space-y-4">
-            <p className="text-sm sm:text-base text-fintech-secondary leading-relaxed">
-              {t('about.section1.p1')}{' '}
-              <GlossaryTerm
-                term={t('about.section1.cfcTerm')}
-                definition={t('about.section1.cfcDef')}
-              />{' '}
-              {t('about.section1.p1Cont')}{' '}
-              <GlossaryTerm
-                term={t('about.section1.cpnvTerm')}
-                definition={t('about.section1.cpnvDef')}
-              />
-              {t('about.section1.p1End')}
-            </p>
-
-            <p className="text-sm sm:text-base text-fintech-secondary leading-relaxed">
-              {t('about.section1.p2')}{' '}
-              <GlossaryTerm
-                term={t('about.section1.heigvdTerm')}
-                definition={t('about.section1.heigvdDef')}
-              />
-              {t('about.section1.p2End')}
-            </p>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-slate-100">
-              <div className="p-3.5 rounded-lg bg-slate-50 border border-slate-200/70 space-y-1">
-                <div className="flex items-center space-x-1.5 text-xs font-mono font-semibold text-slate-700">
-                  <Binary className="w-3.5 h-3.5 text-slate-500" />
-                  <span>Electronics Foundation (CPNV)</span>
-                </div>
-                <p className="text-xs text-slate-500 leading-normal">
-                  Deterministic circuits, hardware timing constraints, and zero-defect execution.
-                </p>
-              </div>
-
-              <div className="p-3.5 rounded-lg bg-electric-light/40 border border-electric/20 space-y-1">
-                <div className="flex items-center space-x-1.5 text-xs font-mono font-semibold text-electric">
-                  <Cpu className="w-3.5 h-3.5 text-electric" />
-                  <span>Media Engineering (HEIG-VD)</span>
-                </div>
-                <p className="text-xs text-slate-600 leading-normal">
-                  Full-stack reactive web systems, real-time data feeds, and FinTech UX precision.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* 2: Leadership & Impact */}
-        <div className="space-y-4">
-          <span className="text-xs font-mono font-semibold uppercase tracking-wider text-electric">
-            {t('about.section2.badge')}
-          </span>
-          <h3 className="text-2xl font-bold tracking-tight text-fintech-primary flex items-center space-x-2">
-            <Users className="w-5 h-5 text-electric flex-shrink-0" />
-            <span>{t('about.section2.title')}</span>
-          </h3>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm space-y-3">
-              <div className="flex items-center space-x-2">
-                <span className="p-1.5 rounded bg-electric-light text-electric">
-                  <Users className="w-4 h-4" />
-                </span>
-                <h4 className="text-sm font-bold text-fintech-primary">
-                  {t('about.section2.glgbTitle')}
-                </h4>
-              </div>
-              <p className="text-xs sm:text-sm text-fintech-secondary leading-relaxed">
-                {t('about.section2.glgbDesc')}{' '}
-                <GlossaryTerm
-                  term={t('about.section2.glgbTerm')}
-                  definition={t('about.section2.glgbDef')}
-                />
-                {t('about.section2.glgbEnd')}
-              </p>
-            </div>
-
-            <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm space-y-3">
-              <div className="flex items-center space-x-2">
-                <span className="p-1.5 rounded bg-rose-50 text-rose-600 border border-rose-100">
-                  <Heart className="w-4 h-4" />
-                </span>
-                <h4 className="text-sm font-bold text-fintech-primary">
-                  {t('about.section2.ficfTitle')}
-                </h4>
-              </div>
-              <p className="text-xs sm:text-sm text-fintech-secondary leading-relaxed">
-                {t('about.section2.ficfDesc')}{' '}
-                <GlossaryTerm
-                  term={t('about.section2.ficfTerm')}
-                  definition={t('about.section2.ficfDef')}
-                />
-                {t('about.section2.ficfEnd')}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* 3: Languages */}
-        <div className="space-y-4">
-          <span className="text-xs font-mono font-semibold uppercase tracking-wider text-electric">
-            {t('about.section3.badge')}
-          </span>
-          <h3 className="text-2xl font-bold tracking-tight text-fintech-primary flex items-center space-x-2">
-            <Globe2 className="w-5 h-5 text-electric flex-shrink-0" />
-            <span>{t('about.section3.title')}</span>
-          </h3>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-            {languages.map((lang) => (
-              <div
-                key={lang.code}
-                className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm hover:border-electric transition-colors space-y-1.5"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="font-mono text-xs font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-700">
-                    {lang.code}
-                  </span>
-                  <span className="text-[11px] font-mono text-electric font-semibold">
-                    {lang.tag}
-                  </span>
-                </div>
-                <div className="font-semibold text-sm text-fintech-primary">{lang.name}</div>
-                <div className="text-xs text-slate-500">{lang.level}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* 4: Hobbies */}
-        <div className="space-y-4">
-          <span className="text-xs font-mono font-semibold uppercase tracking-wider text-electric">
-            {t('about.section4.badge')}
-          </span>
-          <h3 className="text-2xl font-bold tracking-tight text-fintech-primary flex items-center space-x-2">
-            <Dribbble className="w-5 h-5 text-electric flex-shrink-0" />
-            <span>{t('about.section4.title')}</span>
-          </h3>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm space-y-2">
-              <div className="p-1.5 w-fit rounded bg-orange-50 text-orange-600">
-                <Dribbble className="w-4 h-4" />
-              </div>
-              <h4 className="font-bold text-sm text-fintech-primary">{t('about.section4.bballTitle')}</h4>
-              <p className="text-xs text-slate-600 leading-relaxed">{t('about.section4.bballDesc')}</p>
-            </div>
-
-            <div className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm space-y-2">
-              <div className="p-1.5 w-fit rounded bg-emerald-50 text-emerald-600">
-                <Timer className="w-4 h-4" />
-              </div>
-              <h4 className="font-bold text-sm text-fintech-primary">{t('about.section4.runningTitle')}</h4>
-              <p className="text-xs text-slate-600 leading-relaxed">{t('about.section4.runningDesc')}</p>
-            </div>
-
-            <div className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm space-y-2">
-              <div className="p-1.5 w-fit rounded bg-purple-50 text-purple-600">
-                <Music className="w-4 h-4" />
-              </div>
-              <h4 className="font-bold text-sm text-fintech-primary">{t('about.section4.musicTitle')}</h4>
-              <p className="text-xs text-slate-600 leading-relaxed">{t('about.section4.musicDesc')}</p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <About id="about" />
 
       {/* SECTION 4: BACHELOR PITCH */}
       <section id="bachelor-pitch" className="scroll-mt-24 space-y-8">

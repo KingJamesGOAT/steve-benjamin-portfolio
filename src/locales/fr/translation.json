@@ -155,61 +155,55 @@
     "evaluation": "Évaluation / Résultat"
   },
   "about": {
-    "badge": "Parcours Ingénierie",
-    "title": "Steve Benjamin",
+    "badge": "03 / Profil & Parcours",
+    "title": "À Propos",
     "location": "Bussigny, Vaud, Suisse",
-    "summary": "Ingénieur des Médias (HEIG-VD) avec un bagage initial en électronique (CFC, CPNV). Alliant la rigueur du matériel à l'agilité du développement web moderne.",
-    "section1": {
-      "badge": "01 / La Fondation",
-      "title": "La Passerelle : De l'Électronique à l'Ingénierie des Médias",
-      "p1": "Mon parcours a débuté dans l'ingénierie matérielle, couronné par un",
-      "cfcTerm": "CFC",
-      "cfcDef": "Certificat Fédéral de Capacité — Diplôme fédéral suisse de formation professionnelle en électronique.",
-      "p1Cont": "en électronique au",
-      "cpnvTerm": "CPNV",
-      "cpnvDef": "Centre Professionnel du Nord Vaudois — École technique et professionnelle en Suisse.",
-      "p1End": ". Travailler sur des microcontrôleurs et le traitement du signal m'a inculqué le respect absolu des contraintes de mémoire, des timings déterministes et de la tolérance zéro défaut.",
-      "p2": "En poursuivant avec un Bachelor en Ingénierie des Médias à la",
-      "heigvdTerm": "HEIG-VD",
-      "heigvdDef": "Haute École d'Ingénierie et de Gestion du Canton de Vaud — Haute école spécialisée suisse.",
-      "p2End": ", j'ai transposé cette rigueur au monde du logiciel. Dans les tableaux de bord FinTech et les terminaux de trading, la latence et la prévisibilité d'état sont tout aussi cruciales que sur un circuit imprimé."
+    "summary": "Ingénieur des Médias en formation à la HEIG-VD, issu d'une formation d'électronicien CFC. Axé sur les architectures logicielles déterministes, les systèmes financiers à faible latence et l'excellence typographique.",
+    "educationTitle": "Formation",
+    "education": {
+      "heig": {
+        "period": "2023 à aujourd'hui",
+        "title": "Bachelor en Ingénierie des Médias",
+        "institution": "HEIG VD"
+      },
+      "occa": {
+        "period": "Janv. 2023 à Mai 2023",
+        "title": "OCCA, Oxford",
+        "institution": "Oxford",
+        "details": "Étude des visions du monde philosophiques, foi, raison, science et éthique."
+      },
+      "etml": {
+        "period": "2021 à 2022",
+        "title": "Maturité Professionnelle TASV",
+        "institution": "ETML, Lausanne"
+      },
+      "cpnv": {
+        "period": "2017 à 2021",
+        "title": "CFC en Électronique",
+        "institution": "CPNV, Yverdon"
+      }
     },
-    "section2": {
-      "badge": "02 / Impact & Engagement",
-      "title": "Leadership & Engagement Humain",
-      "glgbTitle": "Responsable de Groupe de Jeunes (GLGB)",
-      "glgbDesc": "Leader au sein du",
-      "glgbTerm": "GLGB",
-      "glgbDef": "Organisation de jeunesse dédiée à la coordination d'événements, au mentorat et à la communication de vision.",
-      "glgbEnd": ", assurant l'orchestration de rassemblements communautaires, la coordination d'équipes et la gestion logistique.",
-      "ficfTitle": "Bénévole Humanitaire de Terrain (FICF)",
-      "ficfDesc": "Bénévole pour la",
-      "ficfTerm": "FICF",
-      "ficfDef": "Fondation Internationale pour la Coopération et la Fraternité — Organisation humanitaire organisant des missions médicales internationales.",
-      "ficfEnd": ", participant activement à des camps médicaux bénévoles en Inde et assurant des traductions orales et écrites multilingues (anglais, français et dialectes locaux)."
+    "experienceTitle": "Expérience et Leadership",
+    "experience": {
+      "appapp": {
+        "org": "AppApp",
+        "description": "Tutorat et cours académiques dispensés aux étudiants."
+      },
+      "glgb": {
+        "org": "GLGB",
+        "description": "Responsable de groupe de jeunes, gestion d'événements et gestion technique."
+      },
+      "ficf": {
+        "org": "FICF",
+        "description": "Bénévole dans une fondation éducative, notamment lors de camps médicaux en Inde et traductions anglais-français."
+      }
     },
-    "section3": {
-      "badge": "03 / Communication",
-      "title": "Compétences Linguistiques",
-      "subtitle": "Aisance en environnement professionnel international, technique et multiculturel.",
-      "en": "Anglais",
-      "enLevel": "Langue maternelle / Bilingue",
-      "fr": "Français",
-      "frLevel": "Langue maternelle / Bilingue",
-      "de": "Allemand",
-      "deLevel": "Niveau B2 professionnel",
-      "ta": "Tamoul",
-      "taLevel": "Niveau B2 conversationnel & culturel"
-    },
-    "section4": {
-      "badge": "04 / Discipline & Équilibre",
-      "title": "Centres d'Intérêt & Passions",
-      "bballTitle": "Basketball de Compétition",
-      "bballDesc": "Passionné par le jeu de jambes et la balance corporelle. Adepte des chaussures de performance à semelle plate, assurant une adhérence au sol et une stabilité latérale optimales.",
-      "runningTitle": "Course à Pied",
-      "runningDesc": "Course de fond et trail pour développer l'endurance cardiovasculaire, la discipline mentale et la concentration dans l'effort prolongé.",
-      "musicTitle": "Production Musicale & Piano",
-      "musicDesc": "Pianist et compositeur sur FL Studio. Exploration de textures sonores alliant harmonies acoustiques et synthèse sonore assistée par ordinateur."
+    "linksTitle": "Liens",
+    "links": {
+      "linkedinLabel": "LinkedIn",
+      "linkedinText": "Profil LinkedIn",
+      "cvLabel": "Curriculum Vitae",
+      "cvText": "CV_Steve_Benjamin.pdf"
     }
   }
 }
