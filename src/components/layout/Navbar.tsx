@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Search, Globe } from 'lucide-react';
+import { Search } from 'lucide-react';
 
 interface NavbarProps {
   onOpenCommandPalette?: () => void;
@@ -47,7 +47,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
           onClick={() => handleNavClick('home')}
           className="group flex items-center space-x-2.5 text-sm font-semibold tracking-tight transition-opacity hover:opacity-90"
         >
-          <span className="w-2.5 h-2.5 rounded-[2px] bg-electric inline-block" />
+          <span className="w-2.5 h-2.5 rounded-none bg-electric inline-block" />
           <span className="text-fintech-primary font-medium tracking-tight">
             {t('nav.name')}
           </span>
@@ -64,7 +64,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
                 key={link.targetId}
                 type="button"
                 onClick={() => handleNavClick(link.targetId)}
-                className="px-3 py-1.5 text-xs sm:text-sm font-medium rounded-md text-fintech-secondary hover:text-fintech-primary hover:bg-slate-50 transition-colors"
+                className="px-3 py-1.5 text-xs sm:text-sm font-medium rounded-sm text-fintech-secondary hover:text-fintech-primary hover:bg-slate-50 transition-colors"
               >
                 {link.label}
               </button>
@@ -78,11 +78,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
             <button
               onClick={onOpenCommandPalette}
               type="button"
-              className="hidden md:inline-flex items-center space-x-2 px-2.5 py-1 text-xs text-fintech-muted border border-slate-200 rounded-md hover:border-electric hover:text-electric transition-colors bg-surface-subtle"
+              className="hidden md:inline-flex items-center space-x-2 px-2.5 py-1 text-xs text-fintech-muted border border-slate-200 rounded-sm hover:border-electric hover:text-electric transition-colors bg-surface-subtle"
               title={t('cmdPalette.placeholder')}
             >
               <Search className="w-3.5 h-3.5" />
-              <span className="font-mono text-[11px] bg-white px-1.5 py-0.5 rounded border border-slate-200 text-fintech-secondary font-medium">
+              <span className="font-mono text-[11px] bg-white px-1.5 py-0.5 rounded-sm border border-slate-200 text-fintech-secondary font-medium">
                 Ctrl K
               </span>
             </button>
@@ -92,11 +92,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
           <button
             onClick={toggleLanguage}
             type="button"
-            className="inline-flex items-center space-x-1.5 px-2.5 py-1 text-xs font-mono font-medium rounded-md border border-slate-200 text-fintech-secondary hover:text-electric hover:border-electric transition-colors bg-white hover:bg-slate-50"
+            className="inline-flex items-center space-x-1 px-2.5 py-1 text-xs font-mono font-medium rounded-sm border border-slate-200 text-fintech-secondary hover:text-electric hover:border-electric transition-colors bg-white hover:bg-slate-50"
             title="Toggle EN / FR"
             aria-label="Toggle language"
           >
-            <Globe className="w-3 h-3 text-fintech-subtle" />
             <span>{currentLang}</span>
           </button>
         </div>

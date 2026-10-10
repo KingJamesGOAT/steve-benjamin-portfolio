@@ -2,16 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
-import {
-  Search,
-  Home,
-  FolderGit2,
-  GraduationCap,
-  User,
-  ArrowRight,
-  X,
-  ExternalLink,
-} from 'lucide-react';
+import { Search, ArrowRight, X, ExternalLink } from 'lucide-react';
 import type { CommandPaletteItem } from '../../types';
 
 interface CommandPaletteProps {
@@ -35,7 +26,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
       subtitleKey: 'home.tagline',
       path: '#home',
       category: 'navigation',
-      icon: <Home className="w-4 h-4 text-slate-500" />,
+      icon: <span className="font-mono text-xs text-slate-400">#</span>,
     },
     {
       id: 'projects',
@@ -43,7 +34,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
       subtitleKey: 'projects.title',
       path: '#projects',
       category: 'navigation',
-      icon: <FolderGit2 className="w-4 h-4 text-slate-500" />,
+      icon: <span className="font-mono text-xs text-slate-400">#</span>,
     },
     {
       id: 'about',
@@ -51,7 +42,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
       subtitleKey: 'about.title',
       path: '#about',
       category: 'navigation',
-      icon: <User className="w-4 h-4 text-slate-500" />,
+      icon: <span className="font-mono text-xs text-slate-400">#</span>,
     },
     {
       id: 'bachelorPitch',
@@ -59,7 +50,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
       subtitleKey: 'bachelorPitch.title',
       path: '#bachelor-pitch',
       category: 'navigation',
-      icon: <GraduationCap className="w-4 h-4 text-electric" />,
+      icon: <span className="font-mono text-xs text-slate-400">#</span>,
     },
     // Project Detail Routes
     {
@@ -69,7 +60,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
       path: '/projects/crypto-trade-hub',
       category: 'action',
       isRoute: true,
-      icon: <ExternalLink className="w-4 h-4 text-emerald-600" />,
+      icon: <ExternalLink className="w-3.5 h-3.5 text-emerald-600" />,
     },
     {
       id: 'project-donnons',
@@ -78,7 +69,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
       path: '/projects/donnons-ch',
       category: 'action',
       isRoute: true,
-      icon: <ExternalLink className="w-4 h-4 text-rose-500" />,
+      icon: <ExternalLink className="w-3.5 h-3.5 text-rose-500" />,
     },
     {
       id: 'project-catholic',
@@ -87,7 +78,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
       path: '/projects/catholic-route',
       category: 'action',
       isRoute: true,
-      icon: <ExternalLink className="w-4 h-4 text-blue-500" />,
+      icon: <ExternalLink className="w-3.5 h-3.5 text-blue-500" />,
     },
     {
       id: 'project-marriage',
@@ -96,44 +87,48 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
       path: '/projects/marriage-platform',
       category: 'action',
       isRoute: true,
-      icon: <ExternalLink className="w-4 h-4 text-amber-500" />,
+      icon: <ExternalLink className="w-3.5 h-3.5 text-amber-500" />,
     },
   ];
 
   // Filter items based on search query
   const filteredItems = items.filter((item) => {
     const title = t(item.titleKey).toLowerCase();
+    const sub = item.subtitleKey ? t(item.subtitleKey).toLowerCase() : '';
     const q = query.toLowerCase().trim();
-    return title.includes(q) || item.path.toLowerCase().includes(q);
+    return title.includes(q) || sub.includes(q) || item.path.includes(q);
   });
 
-  // Auto focus input when opened
+  // Focus input whenever palette is opened
   useEffect(() => {
     if (isOpen) {
+      setTimeout(() => {
+        inputRef.current?.focus();
+      }, 50);
       setQuery('');
       setSelectedIndex(0);
-      setTimeout(() => inputRef.current?.focus(), 50);
     }
   }, [isOpen]);
 
-  // Handle keyboard navigation inside the palette
+  // Handle keyboard navigation (Arrow keys, Enter, Escape)
   useEffect(() => {
     if (!isOpen) return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowDown') {
         e.preventDefault();
-        setSelectedIndex((prev) => (filteredItems.length ? (prev + 1) % filteredItems.length : 0));
+        setSelectedIndex((prev) => (prev + 1) % Math.max(1, filteredItems.length));
       } else if (e.key === 'ArrowUp') {
         e.preventDefault();
-        setSelectedIndex((prev) =>
-          filteredItems.length ? (prev - 1 + filteredItems.length) % filteredItems.length : 0
-        );
+        setSelectedIndex((prev) => (prev - 1 + filteredItems.length) % Math.max(1, filteredItems.length));
       } else if (e.key === 'Enter') {
         e.preventDefault();
         if (filteredItems[selectedIndex]) {
           handleSelect(filteredItems[selectedIndex]);
         }
+      } else if (e.key === 'Escape') {
+        e.preventDefault();
+        onClose();
       }
     };
 
@@ -143,7 +138,6 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
 
   const handleSelect = (item: (typeof items)[0]) => {
     onClose();
-
     if (item.isRoute) {
       navigate(item.path);
     } else {
@@ -180,7 +174,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.98, y: -8 }}
             transition={{ duration: 0.16, ease: 'easeOut' }}
-            className="relative w-full max-w-lg overflow-hidden rounded-xl bg-white border border-slate-200 shadow-2xl z-10"
+            className="relative w-full max-w-lg overflow-hidden rounded-sm bg-white border border-slate-200 shadow-2xl z-10"
           >
             {/* Search Input Box */}
             <div className="relative flex items-center border-b border-slate-100 px-4 py-3">
@@ -194,7 +188,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
                   setSelectedIndex(0);
                 }}
                 placeholder={t('cmdPalette.placeholder')}
-                className="w-full bg-transparent text-sm text-fintech-primary placeholder-slate-400 outline-none focus:ring-2 focus:ring-[#0052FF] rounded-md px-2 py-1.5 transition-shadow"
+                className="w-full bg-transparent text-sm text-fintech-primary placeholder-slate-400 outline-none focus:ring-1 focus:ring-electric rounded-sm px-2 py-1.5 transition-shadow"
               />
               {query ? (
                 <button
@@ -206,10 +200,10 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
                 </button>
               ) : (
                 <div className="hidden sm:flex items-center space-x-1">
-                  <kbd className="px-2 py-0.5 text-[10px] font-mono font-medium text-slate-500 bg-slate-100 border border-slate-200 rounded">
+                  <kbd className="px-2 py-0.5 text-[10px] font-mono font-medium text-slate-500 bg-slate-100 border border-slate-200 rounded-sm">
                     Ctrl K
                   </kbd>
-                  <kbd className="px-2 py-0.5 text-[10px] font-mono font-medium text-slate-400 bg-slate-100 border border-slate-200 rounded">
+                  <kbd className="px-2 py-0.5 text-[10px] font-mono font-medium text-slate-400 bg-slate-100 border border-slate-200 rounded-sm">
                     ESC
                   </kbd>
                 </div>
@@ -236,7 +230,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
                           type="button"
                           onClick={() => handleSelect(item)}
                           onMouseEnter={() => setSelectedIndex(index)}
-                          className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-medium transition-all ${
+                          className={`w-full flex items-center justify-between px-3 py-2.5 rounded-sm text-xs font-medium transition-all ${
                             isSelected
                               ? 'bg-electric-light text-electric'
                               : 'text-fintech-secondary hover:bg-slate-50 hover:text-fintech-primary'

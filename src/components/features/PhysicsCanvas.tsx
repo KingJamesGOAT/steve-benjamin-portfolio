@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Matter from 'matter-js';
-import { RotateCcw, Hand } from 'lucide-react';
+import { RotateCcw } from 'lucide-react';
 
 interface PhysicsCanvasProps {
   className?: string;
@@ -230,18 +230,18 @@ export const PhysicsCanvas: React.FC<PhysicsCanvasProps> = ({ className = '' }) 
   }, [resetKey]);
 
   return (
-    <div className={`relative w-full h-[420px] sm:h-[480px] rounded-xl border border-slate-200 bg-gradient-to-b from-slate-50/50 to-white overflow-hidden shadow-sm select-none ${className}`}>
+    <div className={`relative w-full h-[420px] sm:h-[480px] rounded-sm border border-slate-200 bg-gradient-to-b from-slate-50/50 to-white overflow-hidden shadow-sm select-none ${className}`}>
       {/* Top Banner & Reset Control with Minimalist Rectangles */}
       <div className="absolute top-3 inset-x-3 z-10 flex items-center justify-between pointer-events-none">
-        <div className="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-md bg-white/95 border border-slate-200 shadow-sm text-[11px] font-mono text-slate-600 backdrop-blur-sm pointer-events-auto">
-          <Hand className="w-3 h-3 text-electric" />
+        <div className="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-sm bg-white/95 border border-slate-200 shadow-sm text-[11px] font-mono text-slate-600 backdrop-blur-sm pointer-events-auto">
+          <span className="w-1.5 h-1.5 bg-electric rounded-none inline-block" />
           <span>Click & throw blocks</span>
         </div>
 
         <button
           type="button"
           onClick={() => setResetKey((prev) => prev + 1)}
-          className="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-md bg-white/95 hover:bg-white border border-slate-200 shadow-sm text-[11px] font-mono text-slate-600 hover:text-electric transition-colors backdrop-blur-sm pointer-events-auto active:scale-95"
+          className="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-sm bg-white/95 hover:bg-white border border-slate-200 shadow-sm text-[11px] font-mono text-slate-600 hover:text-electric transition-colors backdrop-blur-sm pointer-events-auto active:scale-95"
           title="Reset physics gravity simulation"
         >
           <RotateCcw className="w-3 h-3" />

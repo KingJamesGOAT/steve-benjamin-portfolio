@@ -29,7 +29,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
       <footer className="border-t border-slate-200/80 bg-white py-6 text-xs text-fintech-muted">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="flex items-center space-x-2">
-            <span className="w-2 h-2 rounded-[2px] bg-emerald-500 inline-block" />
+            <span className="w-2 h-2 rounded-none bg-emerald-500 inline-block" />
             <span>{t('footer.rights')}</span>
           </div>
 
@@ -39,7 +39,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
               className="text-slate-400 hover:text-electric transition-colors font-mono text-[11px] inline-flex items-center gap-1.5"
             >
               <span>{t('nav.search')}</span>
-              <kbd className="px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded text-[10px] font-semibold text-slate-600">
+              <kbd className="px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded-sm text-[10px] font-semibold text-slate-600">
                 Ctrl K
               </kbd>
             </button>

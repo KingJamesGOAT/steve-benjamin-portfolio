@@ -143,7 +143,7 @@
       "feature3": "Typographie éditoriale épurée"
     },
     "cryptoDetail": {
-      "disclaimer": "Remarque : L'application réelle est actuellement en phase de test bêta fermé pour une organisation d'investissement. Afin de protéger les clés API propriétaires et la logique institutionnelle, les éléments interactifs ci-dessous constituent une simulation frontend utilisant des données fictives.",
+      "disclaimer": "Note: The live application is in closed beta testing. The interface above is a frontend simulation utilizing placeholder data to protect proprietary institutional logic.",
       "sim": {
         "botActive": "MOTEUR EN LIGNE",
         "botPaused": "MOTEUR EN PAUSE",
@@ -157,25 +157,24 @@
       "caseStudyTitle": "Architecture Technique & Conception Système",
       "caseStudySubtitle": "Analyse approfondie des indicateurs quantitatifs, du streaming de données temps réel, de l'ingestion de sentiment par IA et du pipeline télémétrique multi-courtiers.",
       "section1": {
-        "title": "1. Suivi des Marchés & du Sentiment (APIs News/X)",
+        "title": "1. Top 10 Crypto Tracking & Dynamic Scanner",
         "p1": "Le sous-système de scan de marché met en place un pipeline de surveillance à deux niveaux. Le premier niveau analyse en continu un panier de 11 cryptomonnaies majeures (BTC, ETH, SOL, BNB, XRP, ADA, DOGE, AVAX, SUI, TRX et LINK) afin d'établir les métriques de liquidité de référence. Simultanément, un scanner dynamique interroge l'API Binance 24h ticker en filtrant plus de 300 paires avec des règles de liquidité strictes : appairage USDT obligatoire, volume minimal de 10 000 000 $ et exclusion des jetons à effet de levier et stablecoins pour éliminer le bruit non volatil.",
-        "p2": "Le scanner dynamique classe les actifs par volatilité absolue et retient le top 5 des devises à fort momentum. En parallèle, le sentiment de marché est capté via l'API CryptoCompare News et les flux de surveillance sociale X/Twitter. Les gros titres et la vélocité narrative sont normalisés en un mode de sentiment discret (BULLISH, BEARISH ou NEUTRAL), servant de régulateur opérationnel pour l'exécution algorithmique."
+        "p2": "Le scanner dynamique classe les actifs par volatilité absolue et retient le top 5 des devises à fort momentum pour capturer les cassures de marché en temps réel."
       },
       "section2": {
-        "title": "2. Moteur de Trading Algorithmique & Indicateurs (Live vs Paper Trading, MACD/RSI)",
-        "p1": "Le cœur d'exécution implémente un modèle quantitatif à double régime piloté par l'Average Directional Index (ADX) sur 14 périodes. Lorsque l'ADX dépasse 25, le marché est qualifié de tendance (Trending) et le capital est alloué à la stratégie Smart Momentum. Celle-ci détecte les cassures de canaux de Donchian au-dessus du plus haut des 20 dernières bougies, confirmées par un volume supérieur à 2,0 fois la moyenne mobile et une expansion de l'Average True Range (ATR). Le dimensionnement des positions s'appuie sur le critère de Kelly pour optimiser la croissance géométrique tout en plafonnant le risque par transaction à 2,0 % du capital.",
-        "p2": "Lorsque l'ADX passe sous les 25, le moteur bascule sur le modèle Dynamic Grid (retour à la moyenne). Ce mode détecte les surventes via le Relative Strength Index (RSI sur 14 périodes) combiné au franchissement de la bande inférieure de Bollinger (SMA 20, 2 écarts-types). Les seuils d'entrée s'adaptent selon le gouverneur de sentiment (RSI < 40 en sentiment haussier, RSI < 20 en repli défensif). Les ordres en grille sont déployés en 3 tranches avec des ordres limites fantômes (Ghost Limit Orders) côté client pour capter les creux de liquidité sans immobilisation anticipée.",
-        "p3": "L'architecture sépare strictement les environnements d'exécution : le mode Paper Trading enregistre les transactions simulées, les stops suiveurs basés sur l'EMA 20 et l'équité dans PostgreSQL via Supabase avec souscriptions temps réel WebSocket, tandis que le mode Live Execution construit des requêtes REST et WebSocket authentifiées par HMAC SHA-256 auprès des bourses partenaires. Des coupe-circuits automatiques suspendent le trading dès 5 % de perte globale du portefeuille."
+        "title": "2. X API Sentiment & Régulateur de Sentiment",
+        "p1": "Le sentiment de marché est capté via l'API CryptoCompare News et les flux de surveillance sociale X/Twitter. Les gros titres et la vélocité narrative sont normalisés en un mode de sentiment discret (BULLISH, BEARISH ou NEUTRAL), servant de régulateur opérationnel pour l'exécution algorithmique.",
+        "p2": "Lors d'un pic haussier sur X, les seuils d'entrée RSI s'assouplissent pour accompagner le momentum, tandis qu'un sentiment baissier resserre instantanément les paramètres de risque."
       },
       "section3": {
-        "title": "3. Agrégateur d'Actualités IA & Synthèses Stratégiques",
-        "p1": "Afin d'éliminer les biais émotionnels et le dépouillement manuel des informations, la plateforme intègre un pipeline de renseignement automatisé géré par des tâches d'arrière-plan planifiées. Le flux rassemble les principales actualités macroéconomiques et les données globales de CoinGecko, incluant la dominance de Bitcoin, le volume d'échange mondial sur 24 heures et la vélocité des recherches de tendance.",
-        "p2": "Ces données consolidées sont formatées selon un contexte institutionnel strict et traitées par le modèle LLaMA 3.3 70B Versatile via l'infrastructure Groq. Le modèle est contraint par des invites système de retourner un schéma JSON déterministe comprenant un score de sentiment numérique (-1,0 à +1,0), un résumé synthétique pour le tableau de bord, trois étiquettes narratives clés et un rapport quotidien au ton institutionnel type Bloomberg transmis directement aux canaux de communication."
-      },
-      "section4": {
-        "title": "4. Architecture des Graphiques (API Trading 212)",
+        "title": "3. Intégration API Trading212 & Télémétrie Hybride",
         "p1": "La couche de visualisation de la plateforme repose sur une architecture hybride conçue pour offrir un retour télémétrique instantané tout en assurant un affichage graphique dense et multi-unités de temps. L'analyse détaillée en chandeliers japonais est prise en charge par l'intégration de graphiques accélérés TradingView avec personnalisation de barre d'outils et de styles institutionnels.",
         "p2": "Pour la télémétrie de portefeuille et le suivi de performance, le frontend exploite Recharts afin de tracer l'historique du solde virtuel, les courbes d'équité et l'allocation d'actifs sans saccade de rendu. Des adaptateurs d'API modulaires s'interfacent avec les spécifications télémétriques de l'API Trading 212 et les flux WebSocket Binance, garantissant des mises à jour sub-seconde sans fuite de mémoire."
+      },
+      "section4": {
+        "title": "4. Synthèses IA Groq (LLaMA 3.3 70B)",
+        "p1": "Afin d'éliminer les biais émotionnels et le dépouillement manuel des informations, la plateforme intègre un pipeline de renseignement automatisé géré par des tâches d'arrière-plan planifiées. Le flux rassemble les principales actualités macroéconomiques et les données globales de CoinGecko, incluant la dominance de Bitcoin, le volume d'échange mondial sur 24 heures et la vélocité des recherches de tendance.",
+        "p2": "Ces données consolidées sont formatées selon un contexte institutionnel strict et traitées par le modèle LLaMA 3.3 70B Versatile via l'infrastructure Groq. Le modèle est contraint par des invites système de retourner un schéma JSON déterministe comprenant un score de sentiment numérique (-1,0 à +1,0), un résumé synthétique pour le tableau de bord, trois étiquettes narratives clés et un rapport quotidien au ton institutionnel type Bloomberg transmis directement aux canaux de communication."
       }
     }
   },
@@ -198,40 +197,43 @@
     "educationTitle": "Formation",
     "education": {
       "heig": {
-        "period": "2023 à aujourd'hui",
-        "title": "Bachelor en Ingénierie des Médias",
-        "institution": "HEIG VD"
+        "period": "2023-Present",
+        "title": "BSc Media Engineering",
+        "institution": "HEIG-VD"
       },
       "occa": {
-        "period": "Janv. 2023 à Mai 2023",
+        "period": "2023",
         "title": "OCCA, Oxford",
         "institution": "Oxford",
-        "details": "Étude des visions du monde philosophiques, foi, raison, science et éthique."
+        "details": "Philosophy, ethics, science"
       },
       "etml": {
-        "period": "2021 à 2022",
-        "title": "Maturité Professionnelle TASV",
-        "institution": "ETML, Lausanne"
+        "period": "2021-2022",
+        "title": "Professional Maturity",
+        "institution": "ETML"
       },
       "cpnv": {
-        "period": "2017 à 2021",
-        "title": "CFC en Électronique",
-        "institution": "CPNV, Yverdon"
+        "period": "2017-2021",
+        "title": "CFC Electronics",
+        "institution": "CPNV"
       }
     },
     "experienceTitle": "Expérience et Leadership",
     "experience": {
       "appapp": {
         "org": "AppApp",
+        "role": "Tuteur",
         "description": "Tutorat et cours académiques dispensés aux étudiants."
       },
       "glgb": {
         "org": "GLGB",
+        "role": "Responsable Jeunesse",
         "description": "Responsable de groupe de jeunes, gestion d'événements et gestion technique."
       },
       "ficf": {
         "org": "FICF",
-        "description": "Bénévole dans une fondation éducative, notamment lors de camps médicaux en Inde et traductions anglais-français."
+        "role": "Bénévole",
+        "description": "Bénévole dans une fondation éducative, camps médicaux en Inde et traductions anglais-français."
       }
     },
     "linksTitle": "Liens",

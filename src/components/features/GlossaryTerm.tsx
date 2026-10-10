@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Info } from 'lucide-react';
 import type { GlossaryTermProps } from '../../types';
 
 export const GlossaryTerm: React.FC<GlossaryTermProps> = ({ term, definition, className = '' }) => {
@@ -30,12 +29,12 @@ export const GlossaryTerm: React.FC<GlossaryTermProps> = ({ term, definition, cl
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 4, scale: 0.97 }}
             transition={{ duration: 0.15, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-72 p-3 bg-white border border-slate-200 rounded-md shadow-xl shadow-slate-900/10 z-50 pointer-events-none text-left"
+            className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-72 p-3 bg-white border border-slate-200 rounded-sm shadow-xl shadow-slate-900/10 z-50 pointer-events-none text-left"
           >
             {/* Header / Term Label */}
             <div className="flex items-center justify-between pb-1.5 mb-1.5 border-b border-slate-100">
               <div className="flex items-center space-x-1.5">
-                <Info className="w-3.5 h-3.5 text-[#0052FF]" />
+                <span className="w-1.5 h-1.5 bg-[#0052FF] rounded-none inline-block" />
                 <span className="font-mono text-[11px] font-semibold text-fintech-primary uppercase tracking-wider">
                   {term}
                 </span>

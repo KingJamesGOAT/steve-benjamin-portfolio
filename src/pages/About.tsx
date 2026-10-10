@@ -10,41 +10,44 @@ export const About: React.FC<AboutProps> = ({ id = 'about' }) => {
 
   const education = [
     {
-      period: t('about.education.heig.period'),
-      title: t('about.education.heig.title'),
-      institution: t('about.education.heig.institution'),
+      period: '2023-Present',
+      title: 'BSc Media Engineering',
+      institution: 'HEIG-VD',
       details: null,
     },
     {
-      period: t('about.education.occa.period'),
-      title: t('about.education.occa.title'),
-      institution: t('about.education.occa.institution'),
-      details: t('about.education.occa.details'),
+      period: '2023',
+      title: 'OCCA, Oxford',
+      institution: 'Oxford',
+      details: 'Philosophy, ethics, science',
     },
     {
-      period: t('about.education.etml.period'),
-      title: t('about.education.etml.title'),
-      institution: t('about.education.etml.institution'),
+      period: '2021-2022',
+      title: 'Professional Maturity',
+      institution: 'ETML',
       details: null,
     },
     {
-      period: t('about.education.cpnv.period'),
-      title: t('about.education.cpnv.title'),
-      institution: t('about.education.cpnv.institution'),
+      period: '2017-2021',
+      title: 'CFC Electronics',
+      institution: 'CPNV',
       details: null,
     },
   ];
 
   const experience = [
     {
+      role: t('about.experience.appapp.role'),
       org: t('about.experience.appapp.org'),
       description: t('about.experience.appapp.description'),
     },
     {
+      role: t('about.experience.glgb.role'),
       org: t('about.experience.glgb.org'),
       description: t('about.experience.glgb.description'),
     },
     {
+      role: t('about.experience.ficf.role'),
       org: t('about.experience.ficf.org'),
       description: t('about.experience.ficf.description'),
     },
@@ -72,7 +75,7 @@ export const About: React.FC<AboutProps> = ({ id = 'about' }) => {
         </p>
       </div>
 
-      {/* Education */}
+      {/* Education Timeline Grid */}
       <div className="space-y-4">
         <h3 className="text-xs font-mono uppercase tracking-widest text-slate-500 font-semibold">
           {t('about.educationTitle')}
@@ -90,11 +93,8 @@ export const About: React.FC<AboutProps> = ({ id = 'about' }) => {
               <div className="md:col-span-9 space-y-1">
                 <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
                   <h4 className="text-sm sm:text-base font-semibold text-fintech-primary">
-                    {item.title}
+                    {item.title} ({item.institution})
                   </h4>
-                  <span className="font-mono text-xs text-slate-500">
-                    {item.institution}
-                  </span>
                 </div>
                 {item.details && (
                   <p className="text-xs sm:text-sm text-slate-600 leading-relaxed pt-0.5">
@@ -107,7 +107,7 @@ export const About: React.FC<AboutProps> = ({ id = 'about' }) => {
         </div>
       </div>
 
-      {/* Experience and Leadership */}
+      {/* Experience and Leadership Grid */}
       <div className="space-y-4">
         <h3 className="text-xs font-mono uppercase tracking-widest text-slate-500 font-semibold">
           {t('about.experienceTitle')}
@@ -119,10 +119,10 @@ export const About: React.FC<AboutProps> = ({ id = 'about' }) => {
               key={index}
               className="py-4 grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-6 items-baseline"
             >
-              <div className="md:col-span-3 font-mono text-xs sm:text-sm font-semibold text-fintech-primary">
-                {item.org}
+              <div className="md:col-span-4 font-mono text-xs sm:text-sm font-semibold text-fintech-primary">
+                {item.role} at {item.org}
               </div>
-              <div className="md:col-span-9">
+              <div className="md:col-span-8">
                 <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                   {item.description}
                 </p>
