@@ -69,27 +69,27 @@ export const Projects: React.FC = () => {
               <div className="text-lg font-bold font-mono text-emerald-600">
                 {t('projects.crypto.pnlValue')}
               </div>
-              <p className="text-[11px] font-mono text-slate-500">Autonomous Kelly Sizing</p>
+              <p className="text-[11px] font-mono text-slate-500">{t('projects.showcase.autonomousKelly')}</p>
             </div>
 
             <div className="p-3.5 rounded-none bg-slate-50 border border-slate-200 space-y-1">
               <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500">
-                Execution Core
+                {t('projects.showcase.executionCore')}
               </span>
               <div className="text-lg font-bold font-mono text-fintech-primary">
                 ADX / MACD / RSI
               </div>
-              <p className="text-[11px] font-mono text-slate-500">Momentum Breakout Engine</p>
+              <p className="text-[11px] font-mono text-slate-500">{t('projects.showcase.momentumBreakout')}</p>
             </div>
 
             <div className="p-3.5 rounded-none bg-slate-50 border border-slate-200 space-y-1">
               <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500">
-                AI Intelligence
+                {t('projects.showcase.aiIntelligence')}
               </span>
               <div className="text-lg font-bold font-mono text-electric">
                 Groq LLaMA 3.3 70B
               </div>
-              <p className="text-[11px] font-mono text-slate-500">Institutional Market Digest</p>
+              <p className="text-[11px] font-mono text-slate-500">{t('projects.showcase.institutionalDigest')}</p>
             </div>
           </div>
         </div>
@@ -134,27 +134,27 @@ export const Projects: React.FC = () => {
             <div className="text-lg font-bold font-mono text-fintech-primary">
               {t('projects.donnons.gradeValue')}
             </div>
-            <p className="text-[11px] font-mono text-slate-500">Maximum Academic Distinction</p>
+            <p className="text-[11px] font-mono text-slate-500">{t('projects.showcase.maxDistinction')}</p>
           </div>
 
           <div className="p-3.5 rounded-none bg-slate-50 border border-slate-200 space-y-1">
             <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500">
-              Client / Mandate
+              {t('projects.showcase.clientMandate')}
             </span>
             <div className="text-base font-bold font-mono text-fintech-primary truncate">
               Hôpitaux de Genève
             </div>
-            <p className="text-[11px] font-mono text-slate-500">HUG Blood Transfusion Center</p>
+            <p className="text-[11px] font-mono text-slate-500">{t('projects.showcase.hugCenter')}</p>
           </div>
 
           <div className="p-3.5 rounded-none bg-slate-50 border border-slate-200 space-y-1">
             <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500">
-              Architecture Stack
+              {t('projects.showcase.archStack')}
             </span>
             <div className="text-base font-bold font-mono text-slate-700">
               Vue.js 3 • Laravel REST
             </div>
-            <p className="text-[11px] font-mono text-slate-500">Tailwind CSS & Mobile Coordination</p>
+            <p className="text-[11px] font-mono text-slate-500">{t('projects.showcase.tailwindMobile')}</p>
           </div>
         </div>
       </section>
@@ -191,7 +191,7 @@ export const Projects: React.FC = () => {
           </div>
 
           <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
-            <span className="text-xs font-mono text-slate-400">UX / UI Components</span>
+            <span className="text-xs font-mono text-slate-400">{t('projects.showcase.uxUiComponents')}</span>
             <Link
               to="/projects/catholic-route"
               className="inline-flex items-center space-x-1.5 text-xs font-mono font-semibold text-electric hover:underline"
@@ -232,7 +232,7 @@ export const Projects: React.FC = () => {
           </div>
 
           <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
-            <span className="text-xs font-mono text-slate-400">RSVP State Engine</span>
+            <span className="text-xs font-mono text-slate-400">{t('projects.showcase.rsvpEngine')}</span>
             <Link
               to="/projects/marriage-platform"
               className="inline-flex items-center space-x-1.5 text-xs font-mono font-semibold text-electric hover:underline"

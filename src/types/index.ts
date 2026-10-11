@@ -55,7 +55,14 @@ export interface ProjectData {
   statsKey?: string;
   statsValueKey?: string;
   features: string[];
+  featuresFr?: string[];
   specs: {
+    mandate: string;
+    role: string;
+    architecture: string;
+    evaluation?: string;
+  };
+  specsFr?: {
     mandate: string;
     role: string;
     architecture: string;

@@ -19,7 +19,17 @@
     "projectRoutes": "Project Deep Dives",
     "noResults": "No results found for",
     "close": "Close",
-    "hint": "Navigate with arrows or click to jump"
+    "hint": "Navigate with arrows or click to jump",
+    "matchingResults": "Matching Results",
+    "itemsCount": "Items",
+    "backToSearch": "Back to Search",
+    "closeEsc": "Close (ESC)",
+    "glossaryTag": "GLOSSARY",
+    "inspectHint": "Enter to inspect definition"
+  },
+  "glossary": {
+    "pinned": "PINNED",
+    "badge": "GLOSSARY"
   },
   "home": {
     "badge": "Full-Stack Software & Media Engineering",
@@ -47,9 +57,30 @@
         "label": "Bachelor Project",
         "desc": "FinTech Thesis Mandate"
       }
-    }
+    },
+    "cryptoOverviewTitle": "SYSTEM SPECIFICATION & MANDATE (3-PILLAR OVERVIEW)",
+    "mandateLabel": "01 / MANDATE:",
+    "engineLabel": "02 / ENGINE:",
+    "telemetryLabel": "03 / TELEMETRY:",
+    "executionCore": "Execution Core",
+    "aiIntelligence": "AI Intelligence",
+    "sentimentBriefings": "Automated Sentiment & Briefings",
+    "autonomousKellySizing": "Autonomous Kelly Criterion Sizing",
+    "donchianBreakouts": "Donchian Channel Breakouts"
   },
   "bachelorPitch": {
+    "tracks": {
+      "sectionTag": "HEIG-VD 2027 Research Tracks",
+      "track1": "Track 01 / Frontend Core",
+      "track2": "Track 02 / Quantitative UI",
+      "track3": "Track 03 / Autonomous AI",
+      "bottleneck": "The Industry Bottleneck",
+      "proposedArch": "Proposed Architecture",
+      "techFocus": "Technical Focus & Key Concepts:",
+      "deliverableScope": "Deliverable Scope:",
+      "institution": "Institution",
+      "location": "Location"
+    },
     "badge": "Corporate FinTech Mandate / 2027",
     "title": "Bachelor Thesis Proposals 2027",
     "subtitle": "Targeting CTOs & Engineering Leads at SwissBorg, UBS, Yuh, and Revolut. Bringing hardware-grade execution discipline and modern frontend architecture to mission-critical financial platforms.",
@@ -142,7 +173,27 @@
       "feature2": "Confidential Routing & URL Privacy",
       "feature3": "Tailored Minimalist Typography"
     },
+    "showcase": {
+      "autonomousKelly": "Autonomous Kelly Sizing",
+      "executionCore": "Execution Core",
+      "momentumBreakout": "Momentum Breakout Engine",
+      "aiIntelligence": "AI Intelligence",
+      "institutionalDigest": "Institutional Market Digest",
+      "clientMandate": "Client / Mandate",
+      "hugCenter": "HUG Blood Transfusion Center",
+      "archStack": "Architecture Stack",
+      "tailwindMobile": "Tailwind CSS & Mobile Coordination",
+      "uxUiComponents": "UX / UI Components",
+      "rsvpEngine": "RSVP State Engine",
+      "maxDistinction": "Maximum Academic Distinction"
+    },
     "cryptoDetail": {
+      "architectureTitle": "SYSTEM ARCHITECTURE & PHILOSOPHY",
+      "heigStandards": "HEIG-VD STANDARDS",
+      "verified": "VERIFIED",
+      "card1Tag": "300+ PAIR INGESTION",
+      "card2Tag": "DUAL-REGIME ENGINE",
+      "card3Tag": "GROQ LLM SYNTHESIS",
       "disclaimerBadge": "Institutional Closed Beta",
       "disclaimerLabel": "Confidentiality Notice",
       "disclaimer": "Closed Beta Notice: This platform was built as a proprietary system for an investment entity. To maintain institutional confidentiality and protect private API keys, the telemetry and data feeds demonstrated below are simulated frontend replicas of the production engine.",
@@ -254,6 +305,7 @@
       "linkedinText": "LinkedIn Profile",
       "cvLabel": "Curriculum Vitae",
       "cvText": "CV_Steve_Benjamin.pdf"
-    }
+    },
+    "at": "at"
   }
 }

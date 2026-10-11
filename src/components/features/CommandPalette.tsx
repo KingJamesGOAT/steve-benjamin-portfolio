@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, ArrowRight, X, ExternalLink, BookOpen, ArrowLeft } from 'lucide-react';
-import { CRYPTO_GLOSSARY_ENTRIES, type GlossaryEntry } from '../../data/cryptoGlossary';
+import { getGlossaryEntries, type LocalizedGlossaryEntry } from '../../data/cryptoGlossary';
 
 interface CommandPaletteProps {
   isOpen: boolean;
@@ -24,18 +24,21 @@ type PaletteEntry =
   | {
       type: 'glossary';
       id: string;
-      entry: GlossaryEntry;
+      entry: LocalizedGlossaryEntry;
       icon: React.ReactNode;
     };
 
 export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
   const [query, setQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [selectedGlossary, setSelectedGlossary] = useState<GlossaryEntry | null>(null);
+  const [selectedGlossary, setSelectedGlossary] = useState<LocalizedGlossaryEntry | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const currentLang = i18n.language?.startsWith('fr') ? 'fr' : 'en';
+  const glossaryEntries = getGlossaryEntries(currentLang);
 
   const navItems: PaletteEntry[] = [
     // Main Section Anchors
@@ -118,7 +121,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
     },
   ];
 
-  const glossaryItems: PaletteEntry[] = CRYPTO_GLOSSARY_ENTRIES.map((entry) => ({
+  const glossaryItems: PaletteEntry[] = glossaryEntries.map((entry) => ({
     type: 'glossary',
     id: `glossary-${entry.id}`,
     entry,
@@ -287,7 +290,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
                     className="inline-flex items-center space-x-1.5 px-3 py-1.5 bg-white border border-slate-200 hover:border-electric text-xs font-mono font-semibold text-slate-700 transition-colors rounded-none"
                   >
                     <ArrowLeft className="w-3.5 h-3.5" />
-                    <span>Back to Search</span>
+                    <span>{t('cmdPalette.backToSearch')}</span>
                   </button>
 
                   <button
@@ -295,7 +298,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
                     onClick={onClose}
                     className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-xs font-mono text-slate-600 transition-colors rounded-none"
                   >
-                    Close (ESC)
+                    {t('cmdPalette.closeEsc')}
                   </button>
                 </div>
               </div>
@@ -338,9 +341,9 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
                 {/* List of Navigation Links & Glossary Items */}
                 <div className="max-h-80 overflow-y-auto p-2">
                   <div className="px-3 py-1.5 text-[11px] font-mono font-semibold uppercase tracking-wider text-slate-400 flex items-center justify-between">
-                    <span>{query ? 'MATCHING RESULTS' : t('cmdPalette.quickNavigation')}</span>
+                    <span>{query ? t('cmdPalette.matchingResults').toUpperCase() : t('cmdPalette.quickNavigation')}</span>
                     <span className="text-[10px] text-slate-400 font-normal">
-                      {filteredItems.length} ITEMS
+                      {filteredItems.length} {t('cmdPalette.itemsCount').toUpperCase()}
                     </span>
                   </div>
 
@@ -384,7 +387,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
 
                               <div className="flex items-center space-x-2 text-slate-400 shrink-0 ml-3">
                                 <span className="font-mono text-[10px] uppercase tracking-wider px-1.5 py-0.5 bg-slate-100 border border-slate-200">
-                                  {isGlossary ? 'GLOSSARY' : item.path}
+                                  {isGlossary ? t('cmdPalette.glossaryTag') : item.path}
                                 </span>
                                 <ArrowRight
                                   className={`w-3.5 h-3.5 transition-transform ${
@@ -403,7 +406,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
                 {/* Minimalist Clinical Footer Hint */}
                 <div className="border-t border-slate-100 bg-slate-50/70 px-4 py-2 flex items-center justify-between text-[11px] text-slate-400 font-mono">
                   <span>{t('cmdPalette.hint')}</span>
-                  <span className="hidden sm:inline">Enter to inspect definition</span>
+                  <span className="hidden sm:inline">{t('cmdPalette.inspectHint')}</span>
                 </div>
               </>
             )}

@@ -5,11 +5,15 @@ import { ArrowRight, FileDown, ExternalLink } from 'lucide-react';
 import PhysicsCanvas from '../components/features/PhysicsCanvas';
 import CryptoWidgetSim from '../components/features/CryptoWidgetSim';
 import GlossaryTerm from '../components/features/GlossaryTerm';
+import { getGlossaryDef } from '../data/cryptoGlossary';
 import About from './About';
 
 export const Home: React.FC = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const location = useLocation();
+
+  const currentLang = i18n.language?.startsWith('fr') ? 'fr' : 'en';
+  const isFrench = currentLang === 'fr';
 
   // Smooth scroll to hash anchor on mount or hash change
   useEffect(() => {
@@ -232,28 +236,112 @@ export const Home: React.FC = () => {
             <div className="bg-slate-50 border border-slate-200 p-4 sm:p-5 rounded-none space-y-3 font-sans">
               <div className="flex items-center space-x-2 text-xs font-mono font-bold text-slate-500 uppercase tracking-wider border-b border-slate-200/80 pb-2">
                 <span className="w-1.5 h-1.5 bg-electric rounded-none inline-block" />
-                <span>SYSTEM SPECIFICATION & MANDATE (3-PILLAR OVERVIEW)</span>
+                <span>{t('home.cryptoOverviewTitle')}</span>
               </div>
 
               <div className="space-y-2.5 text-xs sm:text-sm text-slate-700 leading-relaxed">
                 <div className="flex items-start space-x-2.5">
-                  <span className="font-mono text-xs font-bold text-electric shrink-0 mt-0.5">01 / MANDATE:</span>
+                  <span className="font-mono text-xs font-bold text-electric shrink-0 mt-0.5">
+                    {t('home.mandateLabel')}
+                  </span>
                   <p>
-                    Autonomous quantitative trading terminal engineered to monitor 300+ trading pairs, execute paper allocations, and enforce strict capital preservation with zero emotional bias.
+                    {isFrench
+                      ? 'Terminal de trading quantitatif autonome conçu pour surveiller plus de 300 paires, exécuter des allocations simulées et appliquer une stricte préservation du capital sans biais émotionnel.'
+                      : 'Autonomous quantitative trading terminal engineered to monitor 300+ trading pairs, execute paper allocations, and enforce strict capital preservation with zero emotional bias.'}
                   </p>
                 </div>
 
                 <div className="flex items-start space-x-2.5">
-                  <span className="font-mono text-xs font-bold text-emerald-600 shrink-0 mt-0.5">02 / ENGINE:</span>
+                  <span className="font-mono text-xs font-bold text-emerald-600 shrink-0 mt-0.5">
+                    {t('home.engineLabel')}
+                  </span>
                   <p>
-                    Dual-regime strategy switching dynamically between <GlossaryTerm term="Donchian Channel" definition="Trend-following 20-candle high/low envelope triggering momentum entries on abnormal volume." /> breakouts and <GlossaryTerm term="Mean Reversion" definition="Mathematical framework placing limit ladders during low-trend regimes to capture micro oscillations." /> grids, sized via fractional <GlossaryTerm term="Kelly Criterion" definition="Formula calculating optimal position sizing based on win probability to maximize capital growth while strictly capping risk." /> with dynamic <GlossaryTerm term="Trailing Stop-Loss" definition="Automated safety floor ratcheting upward as price climbs to ensure winning trades cannot become losses." /> floors.
+                    {isFrench ? (
+                      <span>
+                        Stratégie à double régime alternant dynamiquement entre cassures de{' '}
+                        <GlossaryTerm
+                          term="Canaux de Donchian"
+                          definition={getGlossaryDef('donchian-channel', currentLang)}
+                        />{' '}
+                        et grilles de{' '}
+                        <GlossaryTerm
+                          term="Retour à la Moyenne"
+                          definition={getGlossaryDef('mean-reversion', currentLang)}
+                        />{', '}
+                        dimensionnée par le critère fractionnaire de{' '}
+                        <GlossaryTerm
+                          term="Kelly"
+                          definition={getGlossaryDef('kelly-criterion', currentLang)}
+                        />{' '}
+                        avec paliers de{' '}
+                        <GlossaryTerm
+                          term="Stop-Loss Suiveur"
+                          definition={getGlossaryDef('trailing-stop', currentLang)}
+                        />{' '}
+                        dynamiques.
+                      </span>
+                    ) : (
+                      <span>
+                        Dual-regime strategy switching dynamically between{' '}
+                        <GlossaryTerm
+                          term="Donchian Channel"
+                          definition={getGlossaryDef('donchian-channel', currentLang)}
+                        />{' '}
+                        breakouts and{' '}
+                        <GlossaryTerm
+                          term="Mean Reversion"
+                          definition={getGlossaryDef('mean-reversion', currentLang)}
+                        />{' '}
+                        grids, sized via fractional{' '}
+                        <GlossaryTerm
+                          term="Kelly Criterion"
+                          definition={getGlossaryDef('kelly-criterion', currentLang)}
+                        />{' '}
+                        with dynamic{' '}
+                        <GlossaryTerm
+                          term="Trailing Stop-Loss"
+                          definition={getGlossaryDef('trailing-stop', currentLang)}
+                        />{' '}
+                        floors.
+                      </span>
+                    )}
                   </p>
                 </div>
 
                 <div className="flex items-start space-x-2.5">
-                  <span className="font-mono text-xs font-bold text-purple-600 shrink-0 mt-0.5">03 / TELEMETRY:</span>
+                  <span className="font-mono text-xs font-bold text-purple-600 shrink-0 mt-0.5">
+                    {t('home.telemetryLabel')}
+                  </span>
                   <p>
-                    Low-overhead <GlossaryTerm term="Binance WebSocket Stream" definition="Full-duplex TCP stream delivering sub-millisecond price ticks and orderbook depth without client-side lag." /> paired with scheduled <GlossaryTerm term="Groq LLaMA 3.3 70B" definition="Ultra-low latency LLM pipeline digesting macroeconomic disclosures and sentiment before trade authorization." /> synthesis for automated daily intelligence dispatches.
+                    {isFrench ? (
+                      <span>
+                        Flux{' '}
+                        <GlossaryTerm
+                          term="Binance WebSocket Stream"
+                          definition={getGlossaryDef('websocket-stream', currentLang)}
+                        />{' '}
+                        à faible latence combiné à la synthèse planifiée{' '}
+                        <GlossaryTerm
+                          term="Groq LLaMA 3.3 70B"
+                          definition={getGlossaryDef('llama-groq', currentLang)}
+                        />{' '}
+                        pour la diffusion quotidienne automatisée d'analyses de marché.
+                      </span>
+                    ) : (
+                      <span>
+                        Low-overhead{' '}
+                        <GlossaryTerm
+                          term="Binance WebSocket Stream"
+                          definition={getGlossaryDef('websocket-stream', currentLang)}
+                        />{' '}
+                        paired with scheduled{' '}
+                        <GlossaryTerm
+                          term="Groq LLaMA 3.3 70B"
+                          definition={getGlossaryDef('llama-groq', currentLang)}
+                        />{' '}
+                        synthesis for automated daily intelligence dispatches.
+                      </span>
+                    )}
                   </p>
                 </div>
               </div>
@@ -268,46 +356,73 @@ export const Home: React.FC = () => {
                   {t('projects.crypto.pnlValue')}
                 </div>
                 <p className="text-[11px] font-mono text-slate-500">
-                  Autonomous{' '}
-                  <GlossaryTerm
-                    term="Kelly Criterion"
-                    definition="Mathematical formula determining optimal trade allocation to maximize geometric capital growth while capping vector risk at 2.0%."
-                  />{' '}
-                  Sizing
+                  {isFrench ? (
+                    <span>
+                      Dimensionnement{' '}
+                      <GlossaryTerm
+                        term="Critère de Kelly"
+                        definition={getGlossaryDef('kelly-criterion', currentLang)}
+                      />{' '}
+                      Autonome
+                    </span>
+                  ) : (
+                    <span>
+                      Autonomous{' '}
+                      <GlossaryTerm
+                        term="Kelly Criterion"
+                        definition={getGlossaryDef('kelly-criterion', currentLang)}
+                      />{' '}
+                      Sizing
+                    </span>
+                  )}
                 </p>
               </div>
 
               <div className="p-3.5 rounded-none bg-slate-50 border border-slate-200 space-y-1">
                 <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500">
-                  Execution Core
+                  {t('home.executionCore')}
                 </span>
                 <div className="text-lg font-bold font-mono text-fintech-primary">
                   <GlossaryTerm
                     term="ADX"
-                    definition="Average Directional Index quantifying trend strength above 25.0 to switch between trend breakouts and mean-reversion grids."
+                    definition={getGlossaryDef('adx', currentLang)}
                   />{' '}
                   / MACD / RSI
                 </div>
                 <p className="text-[11px] font-mono text-slate-500">
-                  <GlossaryTerm
-                    term="Donchian Channel"
-                    definition="Trend-following 20-candle high/low envelope triggering momentum entries on abnormal volume."
-                  />{' '}
-                  Breakouts
+                  {isFrench ? (
+                    <span>
+                      Cassures{' '}
+                      <GlossaryTerm
+                        term="Canal de Donchian"
+                        definition={getGlossaryDef('donchian-channel', currentLang)}
+                      />
+                    </span>
+                  ) : (
+                    <span>
+                      <GlossaryTerm
+                        term="Donchian Channel"
+                        definition={getGlossaryDef('donchian-channel', currentLang)}
+                      />{' '}
+                      Breakouts
+                    </span>
+                  )}
                 </p>
               </div>
 
               <div className="p-3.5 rounded-none bg-slate-50 border border-slate-200 space-y-1">
                 <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500">
-                  AI Intelligence
+                  {t('home.aiIntelligence')}
                 </span>
                 <div className="text-lg font-bold font-mono text-electric">
                   <GlossaryTerm
                     term="Groq LLaMA 3.3 70B"
-                    definition="High-throughput LLM synthesis processing macroeconomic headlines, ETF flows, and social sentiment into structured briefings."
+                    definition={getGlossaryDef('llama-groq', currentLang)}
                   />
                 </div>
-                <p className="text-[11px] font-mono text-slate-500">Automated Sentiment & Briefings</p>
+                <p className="text-[11px] font-mono text-slate-500">
+                  {t('home.sentimentBriefings')}
+                </p>
               </div>
             </div>
           </div>

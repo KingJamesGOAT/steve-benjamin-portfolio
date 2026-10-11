@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import type { GlossaryTermProps } from '../../types';
 
 export const GlossaryTerm: React.FC<GlossaryTermProps> = ({ term, definition, className = '' }) => {
+  const { t } = useTranslation();
   const [isHovered, setIsHovered] = useState(false);
   const [isPinned, setIsPinned] = useState(false);
   const containerRef = useRef<HTMLSpanElement>(null);
@@ -76,7 +78,7 @@ export const GlossaryTerm: React.FC<GlossaryTermProps> = ({ term, definition, cl
                 </span>
               </div>
               <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest bg-slate-50 border border-slate-100 px-1 py-0.2">
-                {isPinned ? 'PINNED' : 'GLOSSARY'}
+                {isPinned ? t('glossary.pinned') : t('glossary.badge')}
               </span>
             </div>
 

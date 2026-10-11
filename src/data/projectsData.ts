@@ -120,11 +120,23 @@ export const PROJECTS_DATA: ProjectData[] = [
       'Continuous profit-and-loss (PnL) mathematical simulation engine',
       'High-contrast terminal GUI with low-overhead React render cycles',
     ],
+    featuresFr: [
+      'Ingestion de données WebSocket sub-milliseconde depuis les flux API Binance',
+      'Simulateur d\'exécution d\'ordres dynamique enregistrant les fills en direct',
+      'Moteur mathématique continu de simulation des profits et pertes (PnL)',
+      'Interface terminal à fort contraste avec cycles de rendu React ultra-légers',
+    ],
     specs: {
       mandate: 'Personal FinTech Research & Simulator',
       role: 'Lead Frontend & Systems Architect',
       architecture: 'React 18, Custom WebSocket Hook, Tailwind CSS',
       evaluation: 'Sub-second real-time state synchronization',
+    },
+    specsFr: {
+      mandate: 'Recherche & Simulateur FinTech Personnel',
+      role: 'Architecte Frontend & Systèmes',
+      architecture: 'React 18, Hook WebSocket Personnalisé, Tailwind CSS',
+      evaluation: 'Synchronisation d\'état temps réel sub-seconde',
     },
   },
   {
@@ -145,11 +157,23 @@ export const PROJECTS_DATA: ProjectData[] = [
       'Reactive Vue.js client with component modularity and smooth transitions',
       'Robust Laravel REST backend facilitating active collection point dispatching',
     ],
+    featuresFr: [
+      'Mandat client officiel pour les HUG (Hôpitaux Universitaires de Genève)',
+      'Identité visuelle intentionnelle faite main renforçant le lien émotionnel',
+      'Client réactif Vue.js avec composants modulaires et transitions fluides',
+      'Backend Laravel REST robuste pour la coordination des collectes mobiles',
+    ],
     specs: {
       mandate: 'HUG (Hôpitaux Universitaires de Genève)',
       role: 'Full-Stack Engineering & UX Delivery',
       architecture: 'Vue.js, Laravel Backend, MySQL, Tailwind CSS',
       evaluation: 'Grade 6.0 / 6.0 (Maximum Swiss academic grade)',
+    },
+    specsFr: {
+      mandate: 'HUG (Hôpitaux Universitaires de Genève)',
+      role: 'Ingénierie Full-Stack & Livraison UX',
+      architecture: 'Vue.js, Backend Laravel, MySQL, Tailwind CSS',
+      evaluation: 'Note 6.0 / 6.0 (Note académique maximale suisse)',
     },
   },
   {
@@ -167,11 +191,23 @@ export const PROJECTS_DATA: ProjectData[] = [
       'High-fidelity editorial layout and responsive typography hierarchy',
       'Deep-linking support and accessible semantic HTML architecture',
     ],
+    featuresFr: [
+      'Dictionnaire interactif avec infobulles flottantes Framer Motion fluides',
+      'Navigation globale instantanée au clavier via palette de commandes Ctrl+K',
+      'Mise en page éditoriale soignée et hiérarchie typographique réactive',
+      'Prise en charge des liens profonds et architecture HTML sémantique accessible',
+    ],
     specs: {
       mandate: 'Educational & Cultural Digital Platform',
       role: 'Frontend & Interaction Engineer',
       architecture: 'React, Framer Motion, Context API, Tailwind CSS',
       evaluation: 'Seamless micro-interactions with zero layout shifts',
+    },
+    specsFr: {
+      mandate: 'Plateforme Numérique Éducative & Culturelle',
+      role: 'Ingénieur Frontend & Interactions',
+      architecture: 'React, Framer Motion, Context API, Tailwind CSS',
+      evaluation: 'Micro-interactions fluides sans décalage de mise en page',
     },
   },
   {
@@ -189,11 +225,23 @@ export const PROJECTS_DATA: ProjectData[] = [
       'Editorial Swiss minimalist typography and responsive mobile experience',
       'Deterministic database state dispatching with immediate confirmation feedback',
     ],
+    featuresFr: [
+      'Protocoles privés d\'authentification protégeant la confidentialité des invités',
+      'Gestion d\'état multi-étapes des RSVP et préférences culinaires',
+      'Typographie éditoriale suisse épurée et expérience mobile réactive',
+      'Dispatch déterministe d\'état en base de données avec confirmation immédiate',
+    ],
     specs: {
       mandate: 'Private Event Platform (2026)',
       role: 'Full-Stack Developer & UI Designer',
       architecture: 'React, Vite, Private Routing Engine, Tailwind CSS',
       evaluation: '100% guest RSVP accuracy and zero public indexing',
+    },
+    specsFr: {
+      mandate: 'Plateforme Événementielle Privée (2026)',
+      role: 'Développeur Full-Stack & Designer UI',
+      architecture: 'React, Vite, Moteur de Routage Privé, Tailwind CSS',
+      evaluation: '100% de précision des RSVP et zéro indexation publique',
     },
   },
 ];

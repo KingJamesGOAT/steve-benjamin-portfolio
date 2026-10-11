@@ -73,7 +73,7 @@ export const BachelorPitch: React.FC = () => {
         <div className="space-y-2">
           <div className="inline-flex items-center space-x-2 text-xs font-mono font-semibold uppercase tracking-wider text-electric">
             <span className="w-1.5 h-1.5 bg-electric rounded-none inline-block" />
-            <span>HEIG-VD 2027 Research Tracks</span>
+            <span>{t('bachelorPitch.tracks.sectionTag')}</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-fintech-primary">
             {t('bachelorPitch.sectionTitle')}
@@ -90,7 +90,7 @@ export const BachelorPitch: React.FC = () => {
               <span className="px-3 py-1 rounded-sm text-xs font-mono font-semibold bg-blue-50 text-electric border border-blue-200">
                 {t('bachelorPitch.proposal1.tag')}
               </span>
-              <span className="text-xs font-mono text-slate-400">Track 01 / Frontend Core</span>
+              <span className="text-xs font-mono text-slate-400">{t('bachelorPitch.tracks.track1')}</span>
             </div>
 
             <div className="space-y-3">
@@ -101,7 +101,7 @@ export const BachelorPitch: React.FC = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
                 <div className="space-y-2 bg-slate-50 p-4 rounded-sm border border-slate-200/70">
                   <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-slate-500">
-                    The Industry Bottleneck
+                    {t('bachelorPitch.tracks.bottleneck')}
                   </span>
                   <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                     {t('bachelorPitch.proposal1.problem')}
@@ -110,7 +110,7 @@ export const BachelorPitch: React.FC = () => {
 
                 <div className="space-y-2 bg-electric-light/30 p-4 rounded-sm border border-electric/20">
                   <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-electric">
-                    Proposed Architecture
+                    {t('bachelorPitch.tracks.proposedArch')}
                   </span>
                   <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
                     {t('bachelorPitch.proposal1.solution')}
@@ -122,7 +122,7 @@ export const BachelorPitch: React.FC = () => {
             {/* Glossary Term Integrations */}
             <div className="p-4 rounded-sm bg-slate-50 border border-slate-100 space-y-2">
               <span className="text-xs font-mono font-semibold text-slate-500 uppercase tracking-wider">
-                Technical Focus & Key Concepts:
+                {t('bachelorPitch.tracks.techFocus')}
               </span>
               <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
                 Integration of high-frequency{' '}
@@ -140,7 +140,7 @@ export const BachelorPitch: React.FC = () => {
             </div>
 
             <div className="pt-2 border-t border-slate-100 flex items-center space-x-2 text-xs font-mono text-slate-600">
-              <span className="font-semibold text-fintech-primary">Deliverable Scope:</span>
+              <span className="font-semibold text-fintech-primary">{t('bachelorPitch.tracks.deliverableScope')}</span>
               <span>{t('bachelorPitch.proposal1.deliverables')}</span>
             </div>
           </div>
@@ -151,7 +151,7 @@ export const BachelorPitch: React.FC = () => {
               <span className="px-3 py-1 rounded-sm text-xs font-mono font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
                 {t('bachelorPitch.proposal2.tag')}
               </span>
-              <span className="text-xs font-mono text-slate-400">Track 02 / Quantitative UI</span>
+              <span className="text-xs font-mono text-slate-400">{t('bachelorPitch.tracks.track2')}</span>
             </div>
 
             <div className="space-y-3">
@@ -162,7 +162,7 @@ export const BachelorPitch: React.FC = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
                 <div className="space-y-2 bg-slate-50 p-4 rounded-sm border border-slate-200/70">
                   <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-slate-500">
-                    The Industry Bottleneck
+                    {t('bachelorPitch.tracks.bottleneck')}
                   </span>
                   <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                     {t('bachelorPitch.proposal2.problem')}
@@ -171,7 +171,7 @@ export const BachelorPitch: React.FC = () => {
 
                 <div className="space-y-2 bg-emerald-50/50 p-4 rounded-sm border border-emerald-200/70">
                   <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-emerald-700">
-                    Proposed Architecture
+                    {t('bachelorPitch.tracks.proposedArch')}
                   </span>
                   <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
                     {t('bachelorPitch.proposal2.solution')}{' '}
@@ -191,7 +191,7 @@ export const BachelorPitch: React.FC = () => {
             </div>
 
             <div className="pt-2 border-t border-slate-100 flex items-center space-x-2 text-xs font-mono text-slate-600">
-              <span className="font-semibold text-fintech-primary">Deliverable Scope:</span>
+              <span className="font-semibold text-fintech-primary">{t('bachelorPitch.tracks.deliverableScope')}</span>
               <span>{t('bachelorPitch.proposal2.deliverables')}</span>
             </div>
           </div>
@@ -202,7 +202,7 @@ export const BachelorPitch: React.FC = () => {
               <span className="px-3 py-1 rounded-sm text-xs font-mono font-semibold bg-purple-50 text-purple-700 border border-purple-200">
                 {t('bachelorPitch.proposal3.tag')}
               </span>
-              <span className="text-xs font-mono text-slate-400">Track 03 / Autonomous AI</span>
+              <span className="text-xs font-mono text-slate-400">{t('bachelorPitch.tracks.track3')}</span>
             </div>
 
             <div className="space-y-3">
@@ -213,7 +213,7 @@ export const BachelorPitch: React.FC = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
                 <div className="space-y-2 bg-slate-50 p-4 rounded-sm border border-slate-200/70">
                   <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-slate-500">
-                    The Industry Bottleneck
+                    {t('bachelorPitch.tracks.bottleneck')}
                   </span>
                   <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                     {t('bachelorPitch.proposal3.problem')}
@@ -222,7 +222,7 @@ export const BachelorPitch: React.FC = () => {
 
                 <div className="space-y-2 bg-purple-50/50 p-4 rounded-sm border border-purple-200/70">
                   <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-purple-700">
-                    Proposed Architecture
+                    {t('bachelorPitch.tracks.proposedArch')}
                   </span>
                   <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
                     {t('bachelorPitch.proposal3.solution')}{' '}
@@ -237,7 +237,7 @@ export const BachelorPitch: React.FC = () => {
             </div>
 
             <div className="pt-2 border-t border-slate-100 flex items-center space-x-2 text-xs font-mono text-slate-600">
-              <span className="font-semibold text-fintech-primary">Deliverable Scope:</span>
+              <span className="font-semibold text-fintech-primary">{t('bachelorPitch.tracks.deliverableScope')}</span>
               <span>{t('bachelorPitch.proposal3.deliverables')}</span>
             </div>
           </div>
@@ -266,11 +266,11 @@ export const BachelorPitch: React.FC = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-slate-200 text-xs text-slate-600 font-mono">
           <div>
-            <span className="text-slate-400 uppercase tracking-wider block text-[10px]">Institution</span>
+            <span className="text-slate-400 uppercase tracking-wider block text-[10px]">{t('bachelorPitch.tracks.institution')}</span>
             <span className="text-fintech-primary font-semibold">{t('bachelorPitch.contact.institution')}</span>
           </div>
           <div>
-            <span className="text-slate-400 uppercase tracking-wider block text-[10px]">Location</span>
+            <span className="text-slate-400 uppercase tracking-wider block text-[10px]">{t('bachelorPitch.tracks.location')}</span>
             <span className="text-fintech-primary font-semibold">{t('bachelorPitch.contact.location')}</span>
           </div>
         </div>

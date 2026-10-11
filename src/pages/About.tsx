@@ -6,12 +6,13 @@ interface AboutProps {
 }
 
 export const About: React.FC<AboutProps> = ({ id = 'about' }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const isFrench = i18n.language?.startsWith('fr');
 
   const education = [
     {
-      period: '2023-Present',
-      title: 'BSc Media Engineering',
+      period: isFrench ? '2023-Présent' : '2023-Present',
+      title: isFrench ? 'BSc Ingénierie des Médias' : 'BSc Media Engineering',
       institution: 'HEIG-VD',
       details: null,
     },
@@ -19,17 +20,17 @@ export const About: React.FC<AboutProps> = ({ id = 'about' }) => {
       period: '2023',
       title: 'OCCA, Oxford',
       institution: 'Oxford',
-      details: 'Philosophy, ethics, science',
+      details: isFrench ? 'Philosophie, éthique, sciences' : 'Philosophy, ethics, science',
     },
     {
       period: '2021-2022',
-      title: 'Professional Maturity',
+      title: isFrench ? 'Maturité Professionnelle' : 'Professional Maturity',
       institution: 'ETML',
       details: null,
     },
     {
       period: '2017-2021',
-      title: 'CFC Electronics',
+      title: isFrench ? 'CFC Électronique' : 'CFC Electronics',
       institution: 'CPNV',
       details: null,
     },
@@ -120,7 +121,7 @@ export const About: React.FC<AboutProps> = ({ id = 'about' }) => {
               className="py-4 grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-6 items-baseline"
             >
               <div className="md:col-span-4 font-mono text-xs sm:text-sm font-semibold text-fintech-primary">
-                {item.role} at {item.org}
+                {item.role} {t('about.at')} {item.org}
               </div>
               <div className="md:col-span-8">
                 <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">

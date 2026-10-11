@@ -19,7 +19,17 @@
     "projectRoutes": "Détails des Projets",
     "noResults": "Aucun résultat trouvé pour",
     "close": "Fermer",
-    "hint": "Naviguez avec les flèches ou cliquez pour ouvrir"
+    "hint": "Naviguez avec les flèches ou cliquez pour ouvrir",
+    "matchingResults": "Résultats Correspondants",
+    "itemsCount": "Éléments",
+    "backToSearch": "Retour à la recherche",
+    "closeEsc": "Fermer (Échap)",
+    "glossaryTag": "GLOSSAIRE",
+    "inspectHint": "Entrée pour inspecter la définition"
+  },
+  "glossary": {
+    "pinned": "ÉPINGLÉ",
+    "badge": "GLOSSAIRE"
   },
   "home": {
     "badge": "Ingénierie Logicielle & Ingénierie des Médias",
@@ -47,9 +57,30 @@
         "label": "Projet de Bachelor",
         "desc": "Mandat de Travail de Bachelor FinTech"
       }
-    }
+    },
+    "cryptoOverviewTitle": "SPÉCIFICATIONS SYSTÈME & MANDAT (APERÇU EN 3 PILIERS)",
+    "mandateLabel": "01 / MANDAT :",
+    "engineLabel": "02 / MOTEUR :",
+    "telemetryLabel": "03 / TÉLÉMÉTRIE :",
+    "executionCore": "Cœur d'Exécution",
+    "aiIntelligence": "Intelligence IA",
+    "sentimentBriefings": "Sentiment Automatisé & Synthèses",
+    "autonomousKellySizing": "Dimensionnement Autonome Kelly Criterion",
+    "donchianBreakouts": "Cassures Canal Donchian"
   },
   "bachelorPitch": {
+    "tracks": {
+      "sectionTag": "Axes de Recherche HEIG-VD 2027",
+      "track1": "Axe 01 / Cœur Frontend",
+      "track2": "Axe 02 / UI Quantitative",
+      "track3": "Axe 03 / IA Autonome",
+      "bottleneck": "Le Goulot d'Étranglement Industriel",
+      "proposedArch": "Architecture Proposée",
+      "techFocus": "Focus Technique & Concepts Clés :",
+      "deliverableScope": "Périmètre des Livrables :",
+      "institution": "Institution",
+      "location": "Lieu"
+    },
     "badge": "Mandat FinTech Entreprise / 2027",
     "title": "Propositions de Travail de Bachelor 2027",
     "subtitle": "À l'attention des CTOs et Responsables Ingénierie chez SwissBorg, UBS, Yuh et Revolut. Alliant la rigueur du matériel et les architectures frontend de pointe pour vos plateformes financières critiques.",
@@ -142,7 +173,27 @@
       "feature2": "Routage confidentiel & URLs privées",
       "feature3": "Typographie éditoriale épurée"
     },
+    "showcase": {
+      "autonomousKelly": "Dimensionnement Kelly Autonome",
+      "executionCore": "Cœur d'Exécution",
+      "momentumBreakout": "Moteur de Cassure Momentum",
+      "aiIntelligence": "Intelligence IA",
+      "institutionalDigest": "Synthèse de Marché Institutionnelle",
+      "clientMandate": "Client / Mandat",
+      "hugCenter": "Centre de Transfusion Sanguine HUG",
+      "archStack": "Architecture & Stack",
+      "tailwindMobile": "Tailwind CSS & Coordination Mobile",
+      "uxUiComponents": "Composants UX / UI",
+      "rsvpEngine": "Moteur d'État RSVP",
+      "maxDistinction": "Distinction Académique Maximale"
+    },
     "cryptoDetail": {
+      "architectureTitle": "ARCHITECTURE SYSTÈME & PHILOSOPHIE",
+      "heigStandards": "STANDARDS HEIG-VD",
+      "verified": "VÉRIFIÉ",
+      "card1Tag": "INGESTION 300+ PAIRES",
+      "card2Tag": "MOTEUR DOUBLE RÉGIME",
+      "card3Tag": "SYNTHÈSE LLM GROQ",
       "disclaimerBadge": "Bêta Fermée Institutionnelle",
       "disclaimerLabel": "Avis de Confidentialité",
       "disclaimer": "Avis de bêta fermée : Cette plateforme a été développée en tant que système propriétaire pour une entité d'investissement. Afin de préserver la confidentialité institutionnelle et protéger les clés API privées, les flux de données et la télémétrie présentés ci-dessous sont des répliques simulées de l'interface du moteur de production.",
@@ -254,6 +305,7 @@
       "linkedinText": "Profil LinkedIn",
       "cvLabel": "Curriculum Vitae",
       "cvText": "CV_Steve_Benjamin.pdf"
-    }
+    },
+    "at": "chez"
   }
 }
