@@ -227,11 +227,37 @@ export const Home: React.FC = () => {
             <CryptoWidgetSim />
           </div>
 
-          {/* Sleek, Text-Only Architectural Description */}
+          {/* Institutional 3-Line Core Architecture Breakdown */}
           <div className="space-y-4 pt-2 border-t border-slate-100">
-            <p className="text-sm sm:text-base text-fintech-secondary leading-relaxed">
-              {t('projects.crypto.description')}
-            </p>
+            <div className="bg-slate-50 border border-slate-200 p-4 sm:p-5 rounded-none space-y-3 font-sans">
+              <div className="flex items-center space-x-2 text-xs font-mono font-bold text-slate-500 uppercase tracking-wider border-b border-slate-200/80 pb-2">
+                <span className="w-1.5 h-1.5 bg-electric rounded-none inline-block" />
+                <span>SYSTEM SPECIFICATION & MANDATE (3-PILLAR OVERVIEW)</span>
+              </div>
+
+              <div className="space-y-2.5 text-xs sm:text-sm text-slate-700 leading-relaxed">
+                <div className="flex items-start space-x-2.5">
+                  <span className="font-mono text-xs font-bold text-electric shrink-0 mt-0.5">01 / MANDATE:</span>
+                  <p>
+                    Autonomous quantitative trading terminal engineered to monitor 300+ trading pairs, execute paper allocations, and enforce strict capital preservation with zero emotional bias.
+                  </p>
+                </div>
+
+                <div className="flex items-start space-x-2.5">
+                  <span className="font-mono text-xs font-bold text-emerald-600 shrink-0 mt-0.5">02 / ENGINE:</span>
+                  <p>
+                    Dual-regime strategy switching dynamically between <GlossaryTerm term="Donchian Channel" definition="Trend-following 20-candle high/low envelope triggering momentum entries on abnormal volume." /> breakouts and <GlossaryTerm term="Mean Reversion" definition="Mathematical framework placing limit ladders during low-trend regimes to capture micro oscillations." /> grids, sized via fractional <GlossaryTerm term="Kelly Criterion" definition="Formula calculating optimal position sizing based on win probability to maximize capital growth while strictly capping risk." /> with dynamic <GlossaryTerm term="Trailing Stop-Loss" definition="Automated safety floor ratcheting upward as price climbs to ensure winning trades cannot become losses." /> floors.
+                  </p>
+                </div>
+
+                <div className="flex items-start space-x-2.5">
+                  <span className="font-mono text-xs font-bold text-purple-600 shrink-0 mt-0.5">03 / TELEMETRY:</span>
+                  <p>
+                    Low-overhead <GlossaryTerm term="Binance WebSocket Stream" definition="Full-duplex TCP stream delivering sub-millisecond price ticks and orderbook depth without client-side lag." /> paired with scheduled <GlossaryTerm term="Groq LLaMA 3.3 70B" definition="Ultra-low latency LLM pipeline digesting macroeconomic disclosures and sentiment before trade authorization." /> synthesis for automated daily intelligence dispatches.
+                  </p>
+                </div>
+              </div>
+            </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
               <div className="p-3.5 rounded-none bg-slate-50 border border-slate-200 space-y-1">
