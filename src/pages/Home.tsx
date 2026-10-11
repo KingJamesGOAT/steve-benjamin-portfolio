@@ -222,7 +222,7 @@ export const Home: React.FC = () => {
           </div>
 
           {/* Embedded Live Simulation Window */}
-          <div className="border border-slate-200 rounded-none overflow-hidden bg-slate-950">
+          <div className="border border-slate-800 rounded-none overflow-hidden bg-slate-950 shadow-xl">
             <CryptoWidgetSim />
           </div>
 
