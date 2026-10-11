@@ -39,8 +39,7 @@
     "ctaCaseStudies": "View Case Studies",
     "ctaPitch": "2027 Bachelor Pitch",
     "ctaCV": "Download Resume (PDF)",
-    "physicsBadge": "Interactive Physics Sandbox",
-    "physicsHint": "Drag, fling, and collide the technology stack blocks using Matter.js 2D physics",
+    "xraySliderHint": "Drag to compile hardware into software",
     "stats": {
       "duality": {
         "value": "CFC + BSc",
