@@ -143,7 +143,11 @@
       "feature3": "Tailored Minimalist Typography"
     },
     "cryptoDetail": {
-      "disclaimer": "Note: The live application is in closed beta testing. The interface above is a frontend simulation utilizing placeholder data to protect proprietary institutional logic.",
+      "disclaimerBadge": "Institutional Closed Beta",
+      "disclaimerLabel": "Confidentiality Notice",
+      "disclaimer": "Closed Beta Notice: This platform was built as a proprietary system for an investment entity. To maintain institutional confidentiality and protect private API keys, the telemetry and data feeds demonstrated below are simulated frontend replicas of the production engine.",
+      "overviewTitle": "Institutional Overview & System Design",
+      "overviewSubtitle": "High-throughput autonomous algorithmic trading terminal engineered for multi-pair surveillance, real-time orderbook telemetry, and automated LLM macro synthesis.",
       "sim": {
         "botActive": "ENGINE ONLINE",
         "botPaused": "ENGINE PAUSED",
@@ -157,22 +161,30 @@
       "caseStudyTitle": "Technical Architecture & System Design",
       "caseStudySubtitle": "In-depth engineering breakdown of the quantitative indicators, real-time data streaming, AI sentiment ingestion, and multi-broker telemetry pipeline.",
       "section1": {
-        "title": "1. Top 10 Crypto Tracking & Dynamic Scanner",
+        "tag": "01 / SURVEILLANCE & DISCOVERY",
+        "badge": "11 BLUE CHIPS + TOP 5 GAINERS",
+        "title": "1. Multi-Pair Surveillance Pipeline & 24h Volume Scanner",
         "p1": "The market scanning subsystem establishes a dual-tier surveillance pipeline. The primary tier continuously tracks an eleven-token blue-chip basket (BTC, ETH, SOL, BNB, XRP, ADA, DOGE, AVAX, SUI, TRX, and LINK) to maintain baseline market liquidity metrics. Concurrently, a secondary dynamic scanner queries the Binance 24-hour ticker endpoint, filtering over 300 trading pairs with stringent liquidity criteria: enforcing strict USDT pairing, requiring a minimum $10,000,000 quote volume threshold, and eliminating leveraged and stablecoin tokens to prevent non-volatile noise.",
         "p2": "The dynamic scanner ranks candidates by absolute volatility and selects the top 5 momentum gainers to monitor real-time breakouts across market cycles."
       },
       "section2": {
-        "title": "2. X API Sentiment & Market Sentiment Governor",
-        "p1": "Market sentiment is captured through a multi-source news pipeline integrating the CryptoCompare News API and X/Twitter social monitoring feeds. Aggregated headlines and narrative velocity are normalized into a discrete sentiment mode (BULLISH, BEARISH, or NEUTRAL), which acts as an operational governor for algorithmic trade execution.",
-        "p2": "When bullish social velocity peaks on X, entry RSI thresholds relax from oversold levels into momentum continuation bands, whereas negative regulatory sentiment tightens risk parameters."
+        "tag": "02 / EXECUTION & RISK MANAGEMENT",
+        "badge": "KELLY FRACTION SIZING & STATE MACHINE",
+        "title": "2. Dual-Regime Execution Engine & Vector Allocations",
+        "p1": "The core strategy engine operates on an autonomous dual-regime framework governed by the 14-period Average Directional Index (ADX). When ADX exceeds 25.0, the engine activates the Smart Momentum module, identifying 20-candle Donchian channel breakouts corroborated by a 2.0x surge above the 20-period volume moving average. In low-trend regimes (ADX below 25.0), execution transitions into Dynamic Grid Mean Reversion, placing limit ladders within calibrated Bollinger Band envelopes.",
+        "p2": "Capital allocations adhere to fractional Kelly Criterion sizing capped at 2.0% maximum portfolio risk per vector. The paper trading state machine coordinates continuous trailing stop adjustments, dynamic profit-target lock-ins, and deterministic stop-loss executions with zero DOM latency."
       },
       "section3": {
+        "tag": "03 / TELEMETRY & VISUALIZATION",
+        "badge": "SUB-MILLISECOND EVENT LOOP",
         "title": "3. Trading212 API Integration & Hybrid Telemetry",
         "p1": "The platform's visualization layer employs a hybrid architecture designed to deliver sub-millisecond telemetry feedback alongside high-density multi-timeframe financial charts. Deep candlestick inspection is handled by embedding hardware-accelerated TradingView charts with custom toolbar and styling overrides, providing institutional indicators and interactive drawing tools.",
         "p2": "For portfolio telemetry and equity performance, the frontend utilizes Recharts to render virtual balance history, equity curves, and asset allocation distributions without DOM frame stutter. Modular API adapters interface with Trading 212 API telemetry endpoints and Binance WebSocket streaming connections, ensuring price ticks and simulated fill events update reactively without memory leakage."
       },
       "section4": {
-        "title": "4. AI Groq Summaries (LLaMA 3.3 70B)",
+        "tag": "04 / INTELLIGENCE & SYNTHESIS",
+        "badge": "LLAMA 3.3 70B VIA GROQ",
+        "title": "4. Automated AI Market Intelligence & Daily Strategist Brief",
         "p1": "To eliminate emotional bias and manual disclosure analysis, the platform integrates an automated AI intelligence pipeline executed via scheduled background workers. The pipeline ingests top macroeconomic news headlines alongside CoinGecko global telemetry, including Bitcoin market dominance percentages, 24-hour global trading volume, and trending search velocity.",
         "p2": "This consolidated dataset is formatted into a strict institutional context and processed through Groq's high-throughput LLaMA 3.3 70B Versatile model. The model is constrained via system prompts to return deterministic JSON schemas containing normalized numerical sentiment scores (-1.0 extreme bear to +1.0 extreme bull), concise single-sentence dashboard summaries, three key narrative metadata tags, and an institutional Bloomberg-style daily market digest dispatched directly to communication channels."
       }

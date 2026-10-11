@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Activity, Terminal, Layers } from 'lucide-react';
 import { PROJECTS_DATA } from '../data/projectsData';
-import CryptoWidgetSim from '../components/features/CryptoWidgetSim';
+import MarketOverviewSim from '../components/features/crypto/MarketOverviewSim';
+import PaperTradingSim from '../components/features/crypto/PaperTradingSim';
+import MarketIntelligenceSim from '../components/features/crypto/MarketIntelligenceSim';
 
 export const ProjectDetail: React.FC = () => {
   const { projectId } = useParams<{ projectId: string }>();
@@ -90,34 +92,29 @@ export const ProjectDetail: React.FC = () => {
         </div>
       </section>
 
-      {/* Crypto Trade Hub: Massive Hero Simulation & Architecture */}
+      {/* Crypto Trade Hub: Institutional Multi-Section Product Walkthrough */}
       {isCryptoHub && (
-        <section className="space-y-8">
-          {/* Prominent Closed Beta Disclaimer Box */}
-          <div className="border border-slate-300 bg-slate-50 p-4 sm:p-5 rounded-none space-y-2">
+        <div className="space-y-20 sm:space-y-28">
+          {/* Institutional Closed-Beta Disclaimer */}
+          <div className="border border-slate-300 bg-slate-50 p-4 sm:p-5 rounded-none space-y-2 shadow-sm">
             <div className="flex items-center space-x-2">
               <span className="px-1.5 py-0.5 bg-slate-200 text-slate-800 font-mono text-[10px] font-bold uppercase rounded-none">
-                Confidentiality Notice
+                {t('projects.cryptoDetail.disclaimerLabel')}
               </span>
               <span className="text-xs font-mono text-slate-600 font-semibold uppercase tracking-wider">
-                Institutional Closed Beta
+                {t('projects.cryptoDetail.disclaimerBadge')}
               </span>
             </div>
             <p className="text-xs sm:text-sm text-slate-700 font-mono leading-relaxed">
-              Note: The live application is in closed beta testing. The interface above is a frontend simulation utilizing placeholder data to protect proprietary institutional logic.
+              {t('projects.cryptoDetail.disclaimer')}
             </p>
           </div>
 
-          {/* Massive Hero Simulation Component */}
-          <div className="rounded-none border border-slate-800 shadow-lg overflow-hidden bg-slate-950">
-            <CryptoWidgetSim />
-          </div>
-
-          {/* Clean, Typographic Grid Explaining the Architecture */}
-          <div className="space-y-6 pt-4 border-t border-slate-200">
-            <div className="space-y-1">
+          {/* Section 1: Hero Overview & Architecture Summary */}
+          <section className="space-y-6">
+            <div className="space-y-1.5">
               <span className="text-xs font-mono font-semibold uppercase tracking-wider text-electric">
-                System Architecture
+                SYSTEM ARCHITECTURE & PHILOSOPHY
               </span>
               <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-fintech-primary">
                 {t('projects.cryptoDetail.caseStudyTitle')}
@@ -127,81 +124,139 @@ export const ProjectDetail: React.FC = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
-              {/* Architecture 1: Top 10 Crypto Tracking */}
-              <div className="p-6 rounded-none border border-slate-200 bg-white space-y-3 shadow-sm">
-                <div className="flex items-center justify-between border-b border-slate-100 pb-2">
-                  <span className="text-xs font-mono text-slate-400">01 / SURVEILLANCE</span>
-                  <span className="text-[11px] font-mono text-electric font-semibold">11 TOKENS + TOP 5 GAINERS</span>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+              <div className="p-5 border border-slate-200 bg-white shadow-sm rounded-none space-y-2">
+                <div className="flex items-center space-x-2 text-xs font-mono font-bold text-electric uppercase">
+                  <Activity className="w-3.5 h-3.5" />
+                  <span>300+ PAIR INGESTION</span>
                 </div>
-                <h3 className="text-lg font-bold text-fintech-primary">
-                  {t('projects.cryptoDetail.section1.title')}
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  {t('projects.cryptoDetail.section1.p1')}
-                </p>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  {t('projects.cryptoDetail.section1.p2')}
-                </p>
+                <div className="text-xs text-slate-600 leading-relaxed font-sans">
+                  Dual-tier filtering queries Binance 24h ticker endpoints, eliminating low-liquidity noise and tracking top momentum gainers in real time.
+                </div>
               </div>
 
-              {/* Architecture 2: X API Sentiment */}
-              <div className="p-6 rounded-none border border-slate-200 bg-white space-y-3 shadow-sm">
-                <div className="flex items-center justify-between border-b border-slate-100 pb-2">
-                  <span className="text-xs font-mono text-slate-400">02 / SENTIMENT</span>
-                  <span className="text-[11px] font-mono text-emerald-600 font-semibold">X / TWITTER & NEWS RADAR</span>
+              <div className="p-5 border border-slate-200 bg-white shadow-sm rounded-none space-y-2">
+                <div className="flex items-center space-x-2 text-xs font-mono font-bold text-emerald-600 uppercase">
+                  <Layers className="w-3.5 h-3.5" />
+                  <span>DUAL-REGIME ENGINE</span>
                 </div>
-                <h3 className="text-lg font-bold text-fintech-primary">
-                  {t('projects.cryptoDetail.section2.title')}
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  {t('projects.cryptoDetail.section2.p1')}
-                </p>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  {t('projects.cryptoDetail.section2.p2')}
-                </p>
+                <div className="text-xs text-slate-600 leading-relaxed font-sans">
+                  ADX indicator gates execution: directional Donchian breakouts during trends and dynamic Bollinger limit laddering during range consolidation.
+                </div>
               </div>
 
-              {/* Architecture 3: Trading212 API Integration */}
-              <div className="p-6 rounded-none border border-slate-200 bg-white space-y-3 shadow-sm">
-                <div className="flex items-center justify-between border-b border-slate-100 pb-2">
-                  <span className="text-xs font-mono text-slate-400">03 / TELEMETRY</span>
-                  <span className="text-[11px] font-mono text-blue-600 font-semibold">HYBRID VISUALIZATION</span>
+              <div className="p-5 border border-slate-200 bg-white shadow-sm rounded-none space-y-2">
+                <div className="flex items-center space-x-2 text-xs font-mono font-bold text-purple-600 uppercase">
+                  <Terminal className="w-3.5 h-3.5" />
+                  <span>GROQ LLM SYNTHESIS</span>
                 </div>
-                <h3 className="text-lg font-bold text-fintech-primary">
-                  {t('projects.cryptoDetail.section3.title')}
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  {t('projects.cryptoDetail.section3.p1')}
-                </p>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  {t('projects.cryptoDetail.section3.p2')}
-                </p>
-              </div>
-
-              {/* Architecture 4: AI Groq Summaries */}
-              <div className="p-6 rounded-none border border-slate-200 bg-white space-y-3 shadow-sm">
-                <div className="flex items-center justify-between border-b border-slate-100 pb-2">
-                  <span className="text-xs font-mono text-slate-400">04 / INTELLIGENCE</span>
-                  <span className="text-[11px] font-mono text-purple-600 font-semibold">LLAMA 3.3 70B VIA GROQ</span>
+                <div className="text-xs text-slate-600 leading-relaxed font-sans">
+                  Scheduled workers ingest social sentiment and macroeconomic telemetry into Groq LLaMA 3.3 70B, producing structured daily market briefings.
                 </div>
-                <h3 className="text-lg font-bold text-fintech-primary">
-                  {t('projects.cryptoDetail.section4.title')}
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  {t('projects.cryptoDetail.section4.p1')}
-                </p>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  {t('projects.cryptoDetail.section4.p2')}
-                </p>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+
+          {/* Section 2: Surveillance & Volume Pipeline Simulation */}
+          <section className="space-y-6">
+            <div className="space-y-1.5">
+              <div className="flex items-center justify-between border-b border-slate-200 pb-2">
+                <span className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-400">
+                  {t('projects.cryptoDetail.section1.tag')}
+                </span>
+                <span className="text-[11px] font-mono text-electric font-semibold">
+                  {t('projects.cryptoDetail.section1.badge')}
+                </span>
+              </div>
+              <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-fintech-primary pt-1">
+                {t('projects.cryptoDetail.section1.title')}
+              </h2>
+            </div>
+
+            {/* Embedded Live Dark Simulation Component */}
+            <div className="rounded-none border border-slate-800 shadow-xl overflow-hidden bg-slate-950">
+              <MarketOverviewSim />
+            </div>
+
+            {/* Technical Explanation Card */}
+            <div className="p-6 rounded-none border border-slate-200 bg-white space-y-3 shadow-sm">
+              <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-sans">
+                {t('projects.cryptoDetail.section1.p1')}
+              </p>
+              <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-sans">
+                {t('projects.cryptoDetail.section1.p2')}
+              </p>
+            </div>
+          </section>
+
+          {/* Section 3: Dual-Regime Execution & Vector Allocations Simulation */}
+          <section className="space-y-6">
+            <div className="space-y-1.5">
+              <div className="flex items-center justify-between border-b border-slate-200 pb-2">
+                <span className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-400">
+                  {t('projects.cryptoDetail.section2.tag')}
+                </span>
+                <span className="text-[11px] font-mono text-emerald-600 font-semibold">
+                  {t('projects.cryptoDetail.section2.badge')}
+                </span>
+              </div>
+              <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-fintech-primary pt-1">
+                {t('projects.cryptoDetail.section2.title')}
+              </h2>
+            </div>
+
+            {/* Embedded Live Dark Simulation Component */}
+            <div className="rounded-none border border-slate-800 shadow-xl overflow-hidden bg-slate-950">
+              <PaperTradingSim />
+            </div>
+
+            {/* Technical Explanation Card */}
+            <div className="p-6 rounded-none border border-slate-200 bg-white space-y-3 shadow-sm">
+              <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-sans">
+                {t('projects.cryptoDetail.section2.p1')}
+              </p>
+              <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-sans">
+                {t('projects.cryptoDetail.section2.p2')}
+              </p>
+            </div>
+          </section>
+
+          {/* Section 4: Automated AI Market Intelligence Simulation */}
+          <section className="space-y-6">
+            <div className="space-y-1.5">
+              <div className="flex items-center justify-between border-b border-slate-200 pb-2">
+                <span className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-400">
+                  {t('projects.cryptoDetail.section4.tag')}
+                </span>
+                <span className="text-[11px] font-mono text-purple-600 font-semibold">
+                  {t('projects.cryptoDetail.section4.badge')}
+                </span>
+              </div>
+              <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-fintech-primary pt-1">
+                {t('projects.cryptoDetail.section4.title')}
+              </h2>
+            </div>
+
+            {/* Embedded Live Dark Simulation Component */}
+            <div className="rounded-none border border-slate-800 shadow-xl overflow-hidden bg-slate-950">
+              <MarketIntelligenceSim />
+            </div>
+
+            {/* Technical Explanation Card */}
+            <div className="p-6 rounded-none border border-slate-200 bg-white space-y-3 shadow-sm">
+              <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-sans">
+                {t('projects.cryptoDetail.section4.p1')}
+              </p>
+              <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-sans">
+                {t('projects.cryptoDetail.section4.p2')}
+              </p>
+            </div>
+          </section>
+        </div>
       )}
 
-      {/* Specifications & Key Highlights Grid (Text-driven, zero slop icons) */}
-      <section className="grid grid-cols-1 md:grid-cols-12 gap-6">
+      {/* Specifications & Key Highlights Grid (Text-driven, zero decorative icons) */}
+      <section className="grid grid-cols-1 md:grid-cols-12 gap-6 pt-4 border-t border-slate-200">
         {/* Left: Specs Box */}
         <div className="md:col-span-7 rounded-none border border-slate-200 bg-white p-6 shadow-sm space-y-4">
           <div className="flex items-center justify-between text-xs font-mono font-semibold uppercase tracking-wider text-slate-500 border-b border-slate-100 pb-2">
