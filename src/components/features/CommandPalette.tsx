@@ -318,7 +318,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
                     placeholder={t('cmdPalette.placeholder')}
                     className="w-full bg-transparent text-sm text-fintech-primary placeholder-slate-400 outline-none focus:ring-1 focus:ring-electric rounded-none px-2 py-1.5 transition-shadow"
                   />
-                  {query ? (
+                  {query && (
                     <button
                       type="button"
                       onClick={() => setQuery('')}
@@ -326,15 +326,6 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
                     >
                       <X className="w-4 h-4" />
                     </button>
-                  ) : (
-                    <div className="hidden sm:flex items-center space-x-1">
-                      <kbd className="px-2 py-0.5 text-[10px] font-mono font-medium text-slate-500 bg-slate-100 border border-slate-200 rounded-none">
-                        Ctrl K
-                      </kbd>
-                      <kbd className="px-2 py-0.5 text-[10px] font-mono font-medium text-slate-400 bg-slate-100 border border-slate-200 rounded-none">
-                        ESC
-                      </kbd>
-                    </div>
                   )}
                 </div>
 

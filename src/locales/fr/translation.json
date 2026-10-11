@@ -10,8 +10,8 @@
     "cmdK": "Ctrl K"
   },
   "footer": {
-    "rights": "© 2026 Steve Benjamin — Bussigny, Suisse",
-    "tagline": "Architecture FinTech Light • React 18 & Vite"
+    "rights": "© 2026 Steve Benjamin, Bussigny, Suisse",
+    "tagline": "Architecture React 18 & Vite"
   },
   "cmdPalette": {
     "placeholder": "Tapez une commande ou cherchez une section...",
@@ -23,7 +23,7 @@
     "matchingResults": "Résultats Correspondants",
     "itemsCount": "Éléments",
     "backToSearch": "Retour à la recherche",
-    "closeEsc": "Fermer (Échap)",
+    "closeEsc": "Fermer",
     "glossaryTag": "GLOSSAIRE",
     "inspectHint": "Entrée pour inspecter la définition"
   },
@@ -34,43 +34,17 @@
   "home": {
     "badge": "Ingénierie Logicielle & Ingénierie des Médias",
     "title": "Steve Benjamin",
-    "subtitle": "Ingénieur des Médias et Architecte Frontend",
-    "description": "Allier la précision de l'électronique matérielle au développement web moderne. Mettre en valeur une méthodologie rigoureuse, la gestion budgétaire et l'analyse technique à travers des études de cas documentées.",
-    "ctaCaseStudies": "Voir les Études de Cas",
-    "ctaPitch": "Pitch Bachelor 2027",
+    "subtitle": "Ingénieur des Médias & Développeur Full-Stack",
+    "description": "Développement d'applications web, de systèmes de données et d'interfaces interactives avec une architecture soignée.",
+    "ctaCaseStudies": "Voir les Projets",
+    "ctaPitch": "Pitch Bachelor",
     "ctaCV": "Télécharger le CV (PDF)",
     "bento": {
-      "badge": "CFC Électronique → BSc Ingénierie des Médias",
-      "hint": "Survolez ou appuyez sur un bloc pour inspecter le code sous-jacent",
-      "tag": "Architecture Logicielle",
-      "peekAction": "Survoler pour inspecter le code"
-    },
-    "stats": {
-      "duality": {
-        "value": "CFC + BSc",
-        "label": "Du Hardware au Web",
-        "desc": "CFC Électronique & Ingénierie des Médias"
-      },
-      "grade": {
-        "value": "6.0 / 6.0",
-        "label": "Mandat de Production HUG",
-        "desc": "Note académique maximale"
-      },
-      "pitch": {
-        "value": "2027",
-        "label": "Projet de Bachelor",
-        "desc": "Mandat de Travail de Bachelor FinTech"
-      }
-    },
-    "cryptoOverviewTitle": "SPÉCIFICATIONS SYSTÈME & MANDAT (APERÇU EN 3 PILIERS)",
-    "mandateLabel": "01 / MANDAT :",
-    "engineLabel": "02 / MOTEUR :",
-    "telemetryLabel": "03 / TÉLÉMÉTRIE :",
-    "executionCore": "Cœur d'Exécution",
-    "aiIntelligence": "Intelligence IA",
-    "sentimentBriefings": "Sentiment Automatisé & Synthèses",
-    "autonomousKellySizing": "Dimensionnement Autonome Kelly Criterion",
-    "donchianBreakouts": "Cassures Canal Donchian"
+      "badge": "Compétences",
+      "hint": "Survoler pour inspecter le code",
+      "tag": "Stack Technique",
+      "peekAction": "Inspecter le Code"
+    }
   },
   "bachelorPitch": {
     "tracks": {
@@ -78,25 +52,24 @@
       "track1": "Axe 01 / Cœur Frontend",
       "track2": "Axe 02 / UI Quantitative",
       "track3": "Axe 03 / IA Autonome",
-      "bottleneck": "Le Goulot d'Étranglement Industriel",
+      "bottleneck": "Défi Technique",
       "proposedArch": "Architecture Proposée",
-      "techFocus": "Focus Technique & Concepts Clés :",
-      "deliverableScope": "Périmètre des Livrables :",
+      "techFocus": "Focus Technique :",
+      "deliverableScope": "Livrables :",
       "institution": "Institution",
       "location": "Lieu"
     },
-    "badge": "Mandat FinTech Entreprise / 2027",
     "title": "Propositions de Travail de Bachelor 2027",
-    "subtitle": "À l'attention des CTOs et Responsables Ingénierie chez SwissBorg, UBS, Yuh et Revolut. Alliant la rigueur du matériel et les architectures frontend de pointe pour vos plateformes financières critiques.",
-    "cta": "Engagez-moi pour votre Projet de Bachelor 2027",
-    "ctaSubtitle": "Mandat académique dédié de 16 semaines via la HEIG-VD (Bussigny / Vaud, Suisse)",
+    "subtitle": "Allier la rigueur du matériel et l'architecture frontend aux plateformes financières modernes et aux applications web.",
+    "cta": "Contacter pour un Mandat de Bachelor",
+    "ctaSubtitle": "Mandat d'ingénierie académique de 16 semaines via la HEIG-VD en Suisse",
     "trustBadges": {
       "rigor": "Standards d'Ingénierie Suisses",
-      "latency": "Architecture Réactive Faible Latence",
-      "precision": "Discipline Hardware Zéro Défaut"
+      "latency": "Architecture Faible Latence",
+      "precision": "Discipline Matérielle"
     },
-    "sectionTitle": "3 Propositions Clés de Recherche & Ingénierie",
-    "sectionSubtitle": "Répondre directement aux défis techniques des terminaux de trading modernes, de l'analytique financière et de l'intelligence de marché autonome.",
+    "sectionTitle": "Propositions de Recherche & Ingénierie",
+    "sectionSubtitle": "Défis techniques dans les terminaux web modernes, l'analytique financière et l'intelligence de marché automatisée.",
     "proposal1": {
       "tag": "Proposition 01 / Terminaux de Trading",
       "title": "Optimisation UX/UI pour Terminaux de Trading Haute Fréquence",
@@ -140,42 +113,41 @@
     }
   },
   "projects": {
-    "badge": "Portfolio & Systèmes",
-    "title": "Projets & Architectures Sélectionnés",
-    "subtitle": "Systèmes frontend et full-stack de niveau production, construits avec une rigueur matérielle, des flux de données en temps réel et une esthétique FinTech épurée.",
+    "title": "Projets",
+    "subtitle": "Sélection de projets d'ingénierie et d'applications.",
     "viewCode": "Simulation de code source interactive",
     "viewDeepDive": "Voir l'étude de cas détaillée",
     "crypto": {
-      "tag": "FinTech / Flux WebSockets en direct",
+      "tag": "Application FinTech",
       "title": "Crypto Trade Hub",
-      "description": "Terminal de bot de trading en direct et simulateur de portefeuille conçu avec React, TypeScript et Tailwind CSS. Connecté aux flux WebSockets Binance en temps réel, calcul de PnL dynamique et historique d'exécution dans un terminal interactif.",
-      "status": "STREAM EN DIRECT",
+      "description": "Terminal de trading automatisé surveillant les paires crypto en temps réel, testant des stratégies d'exécution et générant des rapports de marché automatisés.",
+      "status": "Simulation Active",
       "pnlLabel": "PnL Simulé",
       "pnlValue": "+18.4%"
     },
     "donnons": {
-      "tag": "Mandat Santé / Note Académique 6.0/6.0",
-      "title": "Donnons.ch (Sixième Sens)",
-      "description": "Plateforme officielle de coordination pour le don de sang mandatée par les Hôpitaux Universitaires de Genève (HUG). Conçue avec une esthétique soignée 'faite main', alliant une interface Vue.js réactive à un backend Laravel robuste pour faciliter les collectes mobiles.",
-      "status": "MANDAT OFFICIEL HUG",
+      "tag": "Mandat HUG Santé",
+      "title": "Donnons.ch",
+      "description": "Plateforme de coordination pour le don de sang mandatée par les HUG pour gérer les collectes mobiles à Genève.",
+      "status": "Mandat HUG",
       "gradeLabel": "Évaluation Académique",
       "gradeValue": "Note 6.0 / 6.0"
     },
     "catholicRoute": {
-      "tag": "Architecture Interactive UX / UI",
+      "tag": "Application Web Interactive",
       "title": "Catholic Route",
-      "description": "Plateforme pédagogique axée sur des interactions UX/UI haut de gamme. Intègre une palette de commande instantanée (Ctrl+K), une navigation réactive et des infobulles contextuelles pour les termes historiques et théologiques complexes.",
-      "feature1": "Infobulles animées Framer Motion",
-      "feature2": "Recherche clavier instantanée (Ctrl+K)",
-      "feature3": "Mise en page modulaire et réactive"
+      "description": "Plateforme pédagogique de découverte proposant une navigation interactive et des termes de glossaire contextuels.",
+      "feature1": "Infobulles Interactives",
+      "feature2": "Recherche Rapide",
+      "feature3": "Mise en Page Responsive"
     },
     "marriage": {
-      "tag": "Application Web Privée / 2026",
-      "title": "Plateforme Événementielle Privée (2026)",
-      "description": "Application web événementielle sur mesure offrant une expérience utilisateur soignée. Gestion d'invitations et de RSVP en temps réel, préférences culinaires et politique stricte de confidentialité des URLs.",
-      "feature1": "Moteur d'état RSVP dynamique",
-      "feature2": "Routage confidentiel & URLs privées",
-      "feature3": "Typographie éditoriale épurée"
+      "tag": "Application Web Privée",
+      "title": "Plateforme Événementielle Privée",
+      "description": "Plateforme de gestion d'événements pour l'enregistrement des invités, les préférences de repas et le routage confidentiel.",
+      "feature1": "Moteur RSVP Dynamique",
+      "feature2": "Routage Privé",
+      "feature3": "Typographie Minimaliste"
     },
     "showcase": {
       "autonomousKelly": "Dimensionnement Kelly Autonome",
@@ -185,7 +157,7 @@
       "institutionalDigest": "Synthèse de Marché Institutionnelle",
       "clientMandate": "Client / Mandat",
       "hugCenter": "Centre de Transfusion Sanguine HUG",
-      "archStack": "Architecture & Stack",
+      "archStack": "Stack Technique",
       "tailwindMobile": "Tailwind CSS & Coordination Mobile",
       "uxUiComponents": "Composants UX / UI",
       "rsvpEngine": "Moteur d'État RSVP",
@@ -198,11 +170,11 @@
       "card1Tag": "INGESTION 300+ PAIRES",
       "card2Tag": "MOTEUR DOUBLE RÉGIME",
       "card3Tag": "SYNTHÈSE LLM GROQ",
-      "disclaimerBadge": "Bêta Fermée Institutionnelle",
+      "disclaimerBadge": "Bêta Fermée",
       "disclaimerLabel": "Avis de Confidentialité",
-      "disclaimer": "Avis de bêta fermée : Cette plateforme a été développée en tant que système propriétaire pour une entité d'investissement. Afin de préserver la confidentialité institutionnelle et protéger les clés API privées, les flux de données et la télémétrie présentés ci-dessous sont des répliques simulées de l'interface du moteur de production.",
-      "overviewTitle": "Présentation Institutionnelle & Conception Système",
-      "overviewSubtitle": "Terminal de trading algorithmique autonome à haut débit conçu pour la surveillance multi-paires, la télémétrie de carnet d'ordres temps réel et la synthèse macroéconomique automatisée par LLM.",
+      "disclaimer": "Avis de simulation : Cette plateforme a été conçue comme système propriétaire. Pour préserver la confidentialité et protéger les clés d'API privées, les flux de données et la télémétrie présentés ci-dessous sont des répliques simulées de l'interface.",
+      "overviewTitle": "Présentation et Architecture Système",
+      "overviewSubtitle": "Terminal de trading algorithmique conçu pour la surveillance multi-paires, la télémétrie du carnet d'ordres en temps réel et la synthèse macroéconomique automatisée.",
       "sim": {
         "botActive": "MOTEUR EN LIGNE",
         "botPaused": "MOTEUR EN PAUSE",
@@ -260,7 +232,7 @@
     "badge": "03 / Profil & Parcours",
     "title": "À Propos",
     "location": "Bussigny, Vaud, Suisse",
-    "summary": "Ingénieur des Médias en formation à la HEIG-VD, issu d'une formation d'électronicien CFC. Axé sur les architectures logicielles déterministes, les systèmes financiers à faible latence et l'excellence typographique.",
+    "summary": "Étudiant en Ingénierie des Médias à la HEIG-VD avec un parcours préalable en électronique. Spécialisé dans les architectures logicielles fiables, les systèmes de données temps réel et le design d'interfaces soigné.",
     "educationTitle": "Formation",
     "education": {
       "heig": {

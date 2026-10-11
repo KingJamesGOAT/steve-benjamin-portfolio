@@ -8,14 +8,9 @@ export const BachelorPitch: React.FC = () => {
 
   return (
     <div className="space-y-16 sm:space-y-24 max-w-5xl mx-auto">
-      {/* Corporate FinTech Executive Hero */}
-      <section className="relative overflow-hidden rounded-sm border border-slate-200 bg-white p-8 sm:p-12 shadow-sm">
+      {/* Bachelor Pitch Hero */}
+      <section className="relative overflow-hidden rounded-none border border-slate-200 bg-white p-8 sm:p-12 shadow-sm">
         <div className="relative z-10 space-y-6 max-w-3xl">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-sm text-xs font-mono font-medium bg-electric-light text-electric border border-electric/30">
-            <span className="w-1.5 h-1.5 bg-electric rounded-none inline-block" />
-            <span>{t('bachelorPitch.badge')}</span>
-          </div>
-
           <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-fintech-primary leading-tight">
             {t('bachelorPitch.title')}
           </h1>
@@ -24,46 +19,24 @@ export const BachelorPitch: React.FC = () => {
             {t('bachelorPitch.subtitle')}
           </p>
 
-          {/* Primary Rectangular CTA & CV Action */}
-          <div className="pt-2 space-y-4">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-              <a
-                href="mailto:sbstevebenjamin@gmail.com?subject=2027%20Bachelor%20Project%20Mandate%20-%20Steve%20Benjamin"
-                className="inline-flex items-center space-x-2.5 px-6 py-3.5 rounded-sm bg-electric hover:bg-electric-hover text-white text-xs font-semibold shadow-sm transition-colors"
-              >
-                <span>{t('bachelorPitch.cta')}</span>
-                <ArrowRight className="w-4 h-4" />
-              </a>
+          {/* Action Buttons */}
+          <div className="pt-2 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+            <a
+              href="mailto:sbstevebenjamin@gmail.com?subject=2027%20Bachelor%20Project%20Mandate%20-%20Steve%20Benjamin"
+              className="inline-flex items-center space-x-2.5 px-6 py-3.5 rounded-none bg-electric hover:bg-electric-hover text-white text-xs font-semibold shadow-sm transition-colors"
+            >
+              <span>{t('bachelorPitch.cta')}</span>
+              <ArrowRight className="w-4 h-4" />
+            </a>
 
-              <a
-                href={`${import.meta.env.BASE_URL}CV_Steve_Benjamin.pdf`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center space-x-2 px-5 py-3.5 rounded-sm border border-slate-200 bg-white hover:border-electric hover:text-electric text-slate-700 text-xs font-semibold transition-colors shadow-sm"
-              >
-                <span>CV_Steve_Benjamin.pdf</span>
-              </a>
-            </div>
-
-            <p className="text-xs font-mono text-slate-500">
-              {t('bachelorPitch.ctaSubtitle')}
-            </p>
-          </div>
-
-          {/* FinTech Trust Signals */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-6 border-t border-slate-100">
-            <div className="flex items-center space-x-2 text-xs font-medium text-slate-600 font-mono">
-              <span className="w-1.5 h-1.5 bg-emerald-500 rounded-none flex-shrink-0 inline-block" />
-              <span>{t('bachelorPitch.trustBadges.rigor')}</span>
-            </div>
-            <div className="flex items-center space-x-2 text-xs font-medium text-slate-600 font-mono">
-              <span className="w-1.5 h-1.5 bg-emerald-500 rounded-none flex-shrink-0 inline-block" />
-              <span>{t('bachelorPitch.trustBadges.latency')}</span>
-            </div>
-            <div className="flex items-center space-x-2 text-xs font-medium text-slate-600 font-mono">
-              <span className="w-1.5 h-1.5 bg-emerald-500 rounded-none flex-shrink-0 inline-block" />
-              <span>{t('bachelorPitch.trustBadges.precision')}</span>
-            </div>
+            <a
+              href={`${import.meta.env.BASE_URL}CV_Steve_Benjamin.pdf`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center space-x-2 px-5 py-3.5 rounded-none border border-slate-200 bg-white hover:border-electric hover:text-electric text-slate-700 text-xs font-semibold transition-colors shadow-sm"
+            >
+              <span>CV_Steve_Benjamin.pdf</span>
+            </a>
           </div>
         </div>
       </section>

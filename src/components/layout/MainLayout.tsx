@@ -39,11 +39,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
               className="text-slate-400 hover:text-electric transition-colors font-mono text-[11px] inline-flex items-center gap-1.5"
             >
               <span>{t('nav.search')}</span>
-              <kbd className="px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded-none text-[10px] font-semibold text-slate-600">
-                Ctrl K
-              </kbd>
             </button>
-            <span className="text-slate-300">•</span>
             <span className="font-mono text-[11px] text-slate-400">
               {t('footer.tagline')}
             </span>

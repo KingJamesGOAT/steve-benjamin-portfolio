@@ -10,8 +10,8 @@
     "cmdK": "Ctrl K"
   },
   "footer": {
-    "rights": "© 2026 Steve Benjamin — Bussigny, Switzerland",
-    "tagline": "Light FinTech Architecture • React 18 & Vite"
+    "rights": "© 2026 Steve Benjamin, Bussigny, Switzerland",
+    "tagline": "React 18 & Vite Architecture"
   },
   "cmdPalette": {
     "placeholder": "Type a command or search section...",
@@ -23,7 +23,7 @@
     "matchingResults": "Matching Results",
     "itemsCount": "Items",
     "backToSearch": "Back to Search",
-    "closeEsc": "Close (ESC)",
+    "closeEsc": "Close",
     "glossaryTag": "GLOSSARY",
     "inspectHint": "Enter to inspect definition"
   },
@@ -32,45 +32,19 @@
     "badge": "GLOSSARY"
   },
   "home": {
-    "badge": "Full-Stack Software & Media Engineering",
+    "badge": "Software & Media Engineering",
     "title": "Steve Benjamin",
-    "subtitle": "Media Engineer and Frontend Architect",
-    "description": "Bridging the precision of hardware electronics with modern web engineering. Showcasing rigorous methodology, budget management, and technical analysis through documented case studies.",
-    "ctaCaseStudies": "View Case Studies",
-    "ctaPitch": "2027 Bachelor Pitch",
+    "subtitle": "Media Engineer & Full-Stack Developer",
+    "description": "Building web applications, data systems, and interactive interfaces with clean architecture.",
+    "ctaCaseStudies": "View Projects",
+    "ctaPitch": "Bachelor Pitch",
     "ctaCV": "Download Resume (PDF)",
     "bento": {
-      "badge": "CFC Electronics → BSc Media Engineering",
-      "hint": "Hover or tap any domain block to inspect the engineering code beneath",
-      "tag": "Architecture Stack",
-      "peekAction": "Hover to Peek Code"
-    },
-    "stats": {
-      "duality": {
-        "value": "CFC + BSc",
-        "label": "Hardware to Web",
-        "desc": "Electronics CFC & Media Engineering"
-      },
-      "grade": {
-        "value": "6.0 / 6.0",
-        "label": "HUG Production Mandate",
-        "desc": "Maximum academic grade"
-      },
-      "pitch": {
-        "value": "2027",
-        "label": "Bachelor Project",
-        "desc": "FinTech Thesis Mandate"
-      }
-    },
-    "cryptoOverviewTitle": "SYSTEM SPECIFICATION & MANDATE (3-PILLAR OVERVIEW)",
-    "mandateLabel": "01 / MANDATE:",
-    "engineLabel": "02 / ENGINE:",
-    "telemetryLabel": "03 / TELEMETRY:",
-    "executionCore": "Execution Core",
-    "aiIntelligence": "AI Intelligence",
-    "sentimentBriefings": "Automated Sentiment & Briefings",
-    "autonomousKellySizing": "Autonomous Kelly Criterion Sizing",
-    "donchianBreakouts": "Donchian Channel Breakouts"
+      "badge": "Skills",
+      "hint": "Hover to inspect code",
+      "tag": "Technical Stack",
+      "peekAction": "Inspect Code"
+    }
   },
   "bachelorPitch": {
     "tracks": {
@@ -78,25 +52,24 @@
       "track1": "Track 01 / Frontend Core",
       "track2": "Track 02 / Quantitative UI",
       "track3": "Track 03 / Autonomous AI",
-      "bottleneck": "The Industry Bottleneck",
+      "bottleneck": "Technical Challenge",
       "proposedArch": "Proposed Architecture",
-      "techFocus": "Technical Focus & Key Concepts:",
-      "deliverableScope": "Deliverable Scope:",
+      "techFocus": "Technical Focus:",
+      "deliverableScope": "Deliverables:",
       "institution": "Institution",
       "location": "Location"
     },
-    "badge": "Corporate FinTech Mandate / 2027",
     "title": "Bachelor Thesis Proposals 2027",
-    "subtitle": "Targeting CTOs & Engineering Leads at SwissBorg, UBS, Yuh, and Revolut. Bringing hardware-grade execution discipline and modern frontend architecture to mission-critical financial platforms.",
-    "cta": "Hire me for your 2027 Bachelor Project",
-    "ctaSubtitle": "16-week dedicated academic engineering mandate through HEIG-VD (Bussigny / Vaud, Switzerland)",
+    "subtitle": "Bringing hardware discipline and frontend architecture to modern financial platforms and web applications.",
+    "cta": "Contact for Bachelor Mandate",
+    "ctaSubtitle": "16-week dedicated academic engineering mandate through HEIG-VD in Switzerland",
     "trustBadges": {
       "rigor": "Swiss Engineering Standards",
-      "latency": "Low-Latency Reactive Architecture",
-      "precision": "Zero-Defect Hardware Discipline"
+      "latency": "Low-Latency Architecture",
+      "precision": "Hardware Discipline"
     },
-    "sectionTitle": "3 Core Research & Engineering Proposals",
-    "sectionSubtitle": "Directly addressable technical challenges in modern trading terminals, financial analytics, and autonomous market intelligence.",
+    "sectionTitle": "Research & Engineering Proposals",
+    "sectionSubtitle": "Technical challenges in modern web terminals, financial analytics, and automated market intelligence.",
     "proposal1": {
       "tag": "Proposal 01 / Trading Terminals",
       "title": "UX/UI Optimization for High-Frequency Trading Terminals",
@@ -140,42 +113,41 @@
     }
   },
   "projects": {
-    "badge": "Portfolio & Systems",
-    "title": "Selected Works & Architecture",
-    "subtitle": "Production-grade frontend and full-stack software built with hardware-grade precision, live data streaming, and FinTech design aesthetics.",
+    "title": "Projects",
+    "subtitle": "Selected engineering projects and applications.",
     "viewCode": "Interactive Source Simulation",
     "viewDeepDive": "View Deep Dive",
     "crypto": {
-      "tag": "FinTech / Live WebSockets",
+      "tag": "FinTech Application",
       "title": "Crypto Trade Hub",
-      "description": "A high-performance live trading bot terminal and simulated portfolio interface built with React, TypeScript, and Tailwind CSS. Connects to Binance live WebSocket streams, logs sub-second order fills, calculates real-time PnL metrics, and presents execution logs inside an interactive terminal.",
-      "status": "LIVE STREAMING",
+      "description": "An automated trading terminal that monitors cryptocurrency pairs in real time, tests execution strategies, and generates automated market reports.",
+      "status": "Simulation Active",
       "pnlLabel": "Simulated PnL",
       "pnlValue": "+18.4%"
     },
     "donnons": {
-      "tag": "Healthcare Mandate / Academic Grade 6.0/6.0",
-      "title": "Donnons.ch (Sixième Sens)",
-      "description": "Official blood donation coordination platform mandated by the Hôpitaux Universitaires de Genève (HUG). Built with an intentional, handcrafted aesthetic utilizing a reactive Vue.js interface and a resilient Laravel API backend to streamline mobile blood drive collection points.",
-      "status": "OFFICIAL HUG MANDATE",
+      "tag": "HUG Healthcare Mandate",
+      "title": "Donnons.ch",
+      "description": "Blood donation coordination platform mandated by the HUG to manage mobile collection drives across Geneva.",
+      "status": "HUG Mandate",
       "gradeLabel": "Academic Evaluation",
       "gradeValue": "Grade 6.0 / 6.0"
     },
     "catholicRoute": {
-      "tag": "Interactive UX / UI Architecture",
+      "tag": "Interactive Web Application",
       "title": "Catholic Route",
-      "description": "An educational discovery platform focused on state-of-the-art interactive UX/UI components. Features an instant global Ctrl+K search palette, responsive route orchestration, and contextual floating glossary term definitions for complex ecclesiastical and historical concepts.",
-      "feature1": "Custom Framer Motion Tooltips",
-      "feature2": "Instant Keyboard Search (Ctrl+K)",
-      "feature3": "Modular Responsive Layout"
+      "description": "Educational discovery platform featuring interactive route navigation and contextual glossary terms.",
+      "feature1": "Interactive Tooltips",
+      "feature2": "Quick Search",
+      "feature3": "Responsive Layout"
     },
     "marriage": {
-      "tag": "Private Web Application / 2026",
-      "title": "Private Event & RSVP Platform (2026)",
-      "description": "A bespoke private event management platform designed with an elegant editorial UI. Features stateful guest RSVP management, multi-step meal preference handling, and strict private routing protocols to maintain guest privacy.",
-      "feature1": "Dynamic RSVP State Engine",
-      "feature2": "Confidential Routing & URL Privacy",
-      "feature3": "Tailored Minimalist Typography"
+      "tag": "Private Web Application",
+      "title": "Private Event & RSVP Platform",
+      "description": "Event management platform designed for guest registration, meal preferences, and confidential routing.",
+      "feature1": "Dynamic RSVP Engine",
+      "feature2": "Private Routing",
+      "feature3": "Minimalist Typography"
     },
     "showcase": {
       "autonomousKelly": "Autonomous Kelly Sizing",

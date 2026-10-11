@@ -4,8 +4,6 @@ import { useTranslation } from 'react-i18next';
 import { ArrowRight, FileDown, ExternalLink } from 'lucide-react';
 import TechBentoGrid from '../components/features/TechBentoGrid';
 import CryptoWidgetSim from '../components/features/CryptoWidgetSim';
-import GlossaryTerm from '../components/features/GlossaryTerm';
-import { getGlossaryDef } from '../data/cryptoGlossary';
 import About from './About';
 
 export const Home: React.FC = () => {
@@ -103,62 +101,7 @@ export const Home: React.FC = () => {
                   className="w-full aspect-square object-cover grayscale hover:grayscale-0 transition-all duration-500 rounded-none transform group-hover:scale-[1.02]"
                 />
               </div>
-              <div className="mt-3 pt-2.5 border-t border-slate-100 flex items-center justify-between text-[11px] font-mono text-slate-400">
-                <span className="flex items-center space-x-1.5">
-                  <span className="w-1.5 h-1.5 bg-emerald-500 rounded-none inline-block" />
-                  <span className="text-slate-600 font-medium">BSc HEIG-VD // 2026</span>
-                </span>
-                <span className="text-electric font-semibold uppercase tracking-wider">Switzerland</span>
-              </div>
             </div>
-          </div>
-        </div>
-
-        {/* 3 Metric Summary Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 pt-4">
-          <div className="p-5 rounded-none border border-slate-200 bg-white shadow-sm space-y-1.5">
-            <div className="flex items-center justify-between">
-              <span className="font-mono text-[11px] text-slate-400 uppercase tracking-wider">
-                {t('home.stats.duality.label')}
-              </span>
-              <span className="w-1.5 h-1.5 bg-electric rounded-none inline-block" />
-            </div>
-            <div className="text-2xl font-bold font-mono text-fintech-primary">
-              {t('home.stats.duality.value')}
-            </div>
-            <p className="text-xs text-slate-500">
-              {t('home.stats.duality.desc')}
-            </p>
-          </div>
-
-          <div className="p-5 rounded-none border border-slate-200 bg-white shadow-sm space-y-1.5">
-            <div className="flex items-center justify-between">
-              <span className="font-mono text-[11px] text-slate-400 uppercase tracking-wider">
-                {t('home.stats.grade.label')}
-              </span>
-              <span className="w-1.5 h-1.5 bg-emerald-500 rounded-none inline-block" />
-            </div>
-            <div className="text-2xl font-bold font-mono text-emerald-600">
-              {t('home.stats.grade.value')}
-            </div>
-            <p className="text-xs text-slate-500">
-              {t('home.stats.grade.desc')}
-            </p>
-          </div>
-
-          <div className="p-5 rounded-none border border-slate-200 bg-white shadow-sm space-y-1.5">
-            <div className="flex items-center justify-between">
-              <span className="font-mono text-[11px] text-slate-400 uppercase tracking-wider">
-                {t('home.stats.pitch.label')}
-              </span>
-              <span className="w-1.5 h-1.5 bg-electric rounded-none inline-block" />
-            </div>
-            <div className="text-2xl font-bold font-mono text-fintech-primary">
-              {t('home.stats.pitch.value')}
-            </div>
-            <p className="text-xs text-slate-500">
-              {t('home.stats.pitch.desc')}
-            </p>
           </div>
         </div>
 
@@ -169,10 +112,6 @@ export const Home: React.FC = () => {
       {/* SECTION 2: PROJECTS */}
       <section id="projects" className="scroll-mt-24 space-y-12">
         <div className="space-y-2 border-b border-slate-200/80 pb-6">
-          <div className="inline-flex items-center space-x-2 px-2.5 py-1 rounded-none text-xs font-mono font-medium bg-slate-100 text-slate-700 border border-slate-200">
-            <span className="w-1.5 h-1.5 bg-electric rounded-none inline-block" />
-            <span>{t('projects.badge')}</span>
-          </div>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-fintech-primary">
             {t('projects.title')}
           </h2>
@@ -181,18 +120,12 @@ export const Home: React.FC = () => {
           </p>
         </div>
 
-        {/* Primary Project 1: Crypto Trade Hub (With Embedded Interactive Live Sim) */}
+        {/* Primary Project 1: Crypto Trade Hub */}
         <div className="rounded-none border border-slate-200 bg-white p-6 sm:p-8 shadow-sm space-y-6">
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <div className="flex items-center space-x-3">
-              <span className="inline-flex items-center px-2.5 py-0.5 rounded-none text-[11px] font-mono font-medium bg-slate-100 text-slate-700 border border-slate-200">
-                {t('projects.crypto.tag')}
-              </span>
-              <span className="inline-flex items-center space-x-1.5 text-[11px] font-mono text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-none border border-emerald-200">
-                <span className="w-1.5 h-1.5 rounded-none bg-emerald-500" />
-                <span>{t('projects.crypto.status')}</span>
-              </span>
-            </div>
+            <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-fintech-primary">
+              {t('projects.crypto.title')}
+            </h3>
 
             <Link
               to="/projects/crypto-trade-hub"
@@ -203,226 +136,24 @@ export const Home: React.FC = () => {
             </Link>
           </div>
 
-          <div>
-            <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-fintech-primary">
-              {t('projects.crypto.title')}
-            </h3>
-          </div>
-
           {/* Embedded Live Simulation Window */}
           <div className="border border-slate-800 rounded-none overflow-hidden bg-slate-950 shadow-xl">
             <CryptoWidgetSim />
           </div>
 
-          {/* Institutional 3-Line Core Architecture Breakdown */}
-          <div className="space-y-4 pt-2 border-t border-slate-100">
-            <div className="bg-slate-50 border border-slate-200 p-4 sm:p-5 rounded-none space-y-3 font-sans">
-              <div className="flex items-center space-x-2 text-xs font-mono font-bold text-slate-500 uppercase tracking-wider border-b border-slate-200/80 pb-2">
-                <span className="w-1.5 h-1.5 bg-electric rounded-none inline-block" />
-                <span>{t('home.cryptoOverviewTitle')}</span>
-              </div>
-
-              <div className="space-y-2.5 text-xs sm:text-sm text-slate-700 leading-relaxed">
-                <div className="flex items-start space-x-2.5">
-                  <span className="font-mono text-xs font-bold text-electric shrink-0 mt-0.5">
-                    {t('home.mandateLabel')}
-                  </span>
-                  <p>
-                    {isFrench
-                      ? 'Terminal de trading quantitatif autonome conçu pour surveiller plus de 300 paires, exécuter des allocations simulées et appliquer une stricte préservation du capital sans biais émotionnel.'
-                      : 'Autonomous quantitative trading terminal engineered to monitor 300+ trading pairs, execute paper allocations, and enforce strict capital preservation with zero emotional bias.'}
-                  </p>
-                </div>
-
-                <div className="flex items-start space-x-2.5">
-                  <span className="font-mono text-xs font-bold text-emerald-600 shrink-0 mt-0.5">
-                    {t('home.engineLabel')}
-                  </span>
-                  <p>
-                    {isFrench ? (
-                      <span>
-                        Stratégie à double régime alternant dynamiquement entre cassures de{' '}
-                        <GlossaryTerm
-                          term="Canaux de Donchian"
-                          definition={getGlossaryDef('donchian-channel', currentLang)}
-                        />{' '}
-                        et grilles de{' '}
-                        <GlossaryTerm
-                          term="Retour à la Moyenne"
-                          definition={getGlossaryDef('mean-reversion', currentLang)}
-                        />{', '}
-                        dimensionnée par le critère fractionnaire de{' '}
-                        <GlossaryTerm
-                          term="Kelly"
-                          definition={getGlossaryDef('kelly-criterion', currentLang)}
-                        />{' '}
-                        avec paliers de{' '}
-                        <GlossaryTerm
-                          term="Stop-Loss Suiveur"
-                          definition={getGlossaryDef('trailing-stop', currentLang)}
-                        />{' '}
-                        dynamiques.
-                      </span>
-                    ) : (
-                      <span>
-                        Dual-regime strategy switching dynamically between{' '}
-                        <GlossaryTerm
-                          term="Donchian Channel"
-                          definition={getGlossaryDef('donchian-channel', currentLang)}
-                        />{' '}
-                        breakouts and{' '}
-                        <GlossaryTerm
-                          term="Mean Reversion"
-                          definition={getGlossaryDef('mean-reversion', currentLang)}
-                        />{' '}
-                        grids, sized via fractional{' '}
-                        <GlossaryTerm
-                          term="Kelly Criterion"
-                          definition={getGlossaryDef('kelly-criterion', currentLang)}
-                        />{' '}
-                        with dynamic{' '}
-                        <GlossaryTerm
-                          term="Trailing Stop-Loss"
-                          definition={getGlossaryDef('trailing-stop', currentLang)}
-                        />{' '}
-                        floors.
-                      </span>
-                    )}
-                  </p>
-                </div>
-
-                <div className="flex items-start space-x-2.5">
-                  <span className="font-mono text-xs font-bold text-purple-600 shrink-0 mt-0.5">
-                    {t('home.telemetryLabel')}
-                  </span>
-                  <p>
-                    {isFrench ? (
-                      <span>
-                        Flux{' '}
-                        <GlossaryTerm
-                          term="Binance WebSocket Stream"
-                          definition={getGlossaryDef('websocket-stream', currentLang)}
-                        />{' '}
-                        à faible latence combiné à la synthèse planifiée{' '}
-                        <GlossaryTerm
-                          term="Groq LLaMA 3.3 70B"
-                          definition={getGlossaryDef('llama-groq', currentLang)}
-                        />{' '}
-                        pour la diffusion quotidienne automatisée d'analyses de marché.
-                      </span>
-                    ) : (
-                      <span>
-                        Low-overhead{' '}
-                        <GlossaryTerm
-                          term="Binance WebSocket Stream"
-                          definition={getGlossaryDef('websocket-stream', currentLang)}
-                        />{' '}
-                        paired with scheduled{' '}
-                        <GlossaryTerm
-                          term="Groq LLaMA 3.3 70B"
-                          definition={getGlossaryDef('llama-groq', currentLang)}
-                        />{' '}
-                        synthesis for automated daily intelligence dispatches.
-                      </span>
-                    )}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-              <div className="p-3.5 rounded-none bg-slate-50 border border-slate-200 space-y-1">
-                <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500">
-                  {t('projects.crypto.pnlLabel')}
-                </span>
-                <div className="text-lg font-bold font-mono text-emerald-600">
-                  {t('projects.crypto.pnlValue')}
-                </div>
-                <p className="text-[11px] font-mono text-slate-500">
-                  {isFrench ? (
-                    <span>
-                      Dimensionnement{' '}
-                      <GlossaryTerm
-                        term="Critère de Kelly"
-                        definition={getGlossaryDef('kelly-criterion', currentLang)}
-                      />{' '}
-                      Autonome
-                    </span>
-                  ) : (
-                    <span>
-                      Autonomous{' '}
-                      <GlossaryTerm
-                        term="Kelly Criterion"
-                        definition={getGlossaryDef('kelly-criterion', currentLang)}
-                      />{' '}
-                      Sizing
-                    </span>
-                  )}
-                </p>
-              </div>
-
-              <div className="p-3.5 rounded-none bg-slate-50 border border-slate-200 space-y-1">
-                <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500">
-                  {t('home.executionCore')}
-                </span>
-                <div className="text-lg font-bold font-mono text-fintech-primary">
-                  <GlossaryTerm
-                    term="ADX"
-                    definition={getGlossaryDef('adx', currentLang)}
-                  />{' '}
-                  / MACD / RSI
-                </div>
-                <p className="text-[11px] font-mono text-slate-500">
-                  {isFrench ? (
-                    <span>
-                      Cassures{' '}
-                      <GlossaryTerm
-                        term="Canal de Donchian"
-                        definition={getGlossaryDef('donchian-channel', currentLang)}
-                      />
-                    </span>
-                  ) : (
-                    <span>
-                      <GlossaryTerm
-                        term="Donchian Channel"
-                        definition={getGlossaryDef('donchian-channel', currentLang)}
-                      />{' '}
-                      Breakouts
-                    </span>
-                  )}
-                </p>
-              </div>
-
-              <div className="p-3.5 rounded-none bg-slate-50 border border-slate-200 space-y-1">
-                <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500">
-                  {t('home.aiIntelligence')}
-                </span>
-                <div className="text-lg font-bold font-mono text-electric">
-                  <GlossaryTerm
-                    term="Groq LLaMA 3.3 70B"
-                    definition={getGlossaryDef('llama-groq', currentLang)}
-                  />
-                </div>
-                <p className="text-[11px] font-mono text-slate-500">
-                  {t('home.sentimentBriefings')}
-                </p>
-              </div>
-            </div>
-          </div>
+          <p className="text-sm sm:text-base text-fintech-secondary leading-relaxed pt-2">
+            {isFrench
+              ? 'Terminal de trading quantitatif conçu pour surveiller les paires de cryptomonnaies en temps réel, exécuter des allocations simulées et générer des synthèses de marché automatisées.'
+              : 'Quantitative trading terminal engineered to monitor cryptocurrency pairs in real time, execute simulated allocations, and generate automated market summaries.'}
+          </p>
         </div>
 
-        {/* Primary Project 2: Donnons.ch (Clinical Typographic Grid) */}
+        {/* Primary Project 2: Donnons.ch */}
         <div className="rounded-none border border-slate-200 bg-white p-6 sm:p-8 shadow-sm space-y-6">
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <div className="flex items-center space-x-3">
-              <span className="inline-flex items-center px-2.5 py-0.5 rounded-none text-[11px] font-mono font-medium bg-rose-50 text-rose-700 border border-rose-200">
-                {t('projects.donnons.tag')}
-              </span>
-              <span className="inline-flex items-center space-x-1.5 text-[11px] font-mono text-rose-600 bg-rose-50 px-2 py-0.5 rounded-none border border-rose-200">
-                <span className="w-1.5 h-1.5 rounded-none bg-rose-500" />
-                <span>HUG Mandate</span>
-              </span>
-            </div>
+            <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-fintech-primary">
+              {t('projects.donnons.title')}
+            </h3>
 
             <Link
               to="/projects/donnons-ch"
@@ -434,10 +165,7 @@ export const Home: React.FC = () => {
           </div>
 
           <div>
-            <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-fintech-primary">
-              {t('projects.donnons.title')}
-            </h3>
-            <p className="mt-3 text-sm sm:text-base text-fintech-secondary leading-relaxed">
+            <p className="text-sm sm:text-base text-fintech-secondary leading-relaxed">
               {t('projects.donnons.description')}
             </p>
           </div>
@@ -445,32 +173,29 @@ export const Home: React.FC = () => {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
             <div className="p-3.5 rounded-none bg-slate-50 border border-slate-200 space-y-1">
               <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500">
-                {t('projects.donnons.gradeLabel')}
+                Evaluation
               </span>
               <div className="text-lg font-bold font-mono text-fintech-primary">
-                {t('projects.donnons.gradeValue')}
+                Grade 6.0 / 6.0
               </div>
-              <p className="text-[11px] font-mono text-slate-500">Maximum Academic Distinction</p>
             </div>
 
             <div className="p-3.5 rounded-none bg-slate-50 border border-slate-200 space-y-1">
               <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500">
-                Client / Mandate
+                Client
               </span>
               <div className="text-base font-bold font-mono text-fintech-primary truncate">
                 Hôpitaux de Genève
               </div>
-              <p className="text-[11px] font-mono text-slate-500">HUG Blood Transfusion Center</p>
             </div>
 
             <div className="p-3.5 rounded-none bg-slate-50 border border-slate-200 space-y-1">
               <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500">
-                Architecture Stack
+                Stack
               </span>
               <div className="text-base font-bold font-mono text-slate-700">
-                Vue.js 3 • Laravel REST
+                Vue.js 3, Laravel REST
               </div>
-              <p className="text-[11px] font-mono text-slate-500">Tailwind CSS & Mobile Coordination</p>
             </div>
           </div>
         </div>

@@ -71,65 +71,16 @@ export const ProjectDetail: React.FC = () => {
       </div>
 
       {/* Hero Header */}
-      <section className="space-y-5 border-b border-slate-200 pb-8">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <span className="inline-flex items-center px-2.5 py-1 rounded-none text-xs font-mono font-medium bg-slate-100 text-slate-800 border border-slate-200">
-            {t(project.tagKey)}
-          </span>
-
-          {project.statusBadgeKey && (
-            <span className="inline-flex items-center space-x-1.5 text-xs font-mono text-electric bg-electric-light px-2.5 py-1 rounded-none border border-electric/30">
-              <span className="w-1.5 h-1.5 rounded-none bg-electric" />
-              <span>{t(project.statusBadgeKey)}</span>
-            </span>
-          )}
-        </div>
-
+      <section className="space-y-4 border-b border-slate-200 pb-8">
         <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-fintech-primary">
           {t(project.titleKey)}
         </h1>
 
         <p className="text-base sm:text-lg text-fintech-secondary max-w-3xl leading-relaxed">
           {isCryptoHub ? (
-            isFrench ? (
-              <span>
-                Terminal de trading quantitatif autonome conçu avec l'ingestion des{' '}
-                <GlossaryTerm
-                  term="Flux Binance WebSocket Stream"
-                  definition={getGlossaryDef('websocket-stream', currentLang)}
-                />{', '}
-                un cœur d'exécution à double régime piloté par{' '}
-                <GlossaryTerm term="l'ADX" definition={getGlossaryDef('adx', currentLang)} />, le critère fractionnaire de{' '}
-                <GlossaryTerm
-                  term="Kelly"
-                  definition={getGlossaryDef('kelly-criterion', currentLang)}
-                />{' '}
-                pour le dimensionnement du capital, et une synthèse macroéconomique automatisée du sentiment via{' '}
-                <GlossaryTerm
-                  term="Groq LLaMA 3.3 70B"
-                  definition={getGlossaryDef('llama-groq', currentLang)}
-                />.
-              </span>
-            ) : (
-              <span>
-                Autonomous quantitative trading terminal engineered with{' '}
-                <GlossaryTerm
-                  term="Binance WebSocket Stream"
-                  definition={getGlossaryDef('websocket-stream', currentLang)}
-                />{' '}
-                ingestion, a dual-regime execution core governed by{' '}
-                <GlossaryTerm term="ADX" definition={getGlossaryDef('adx', currentLang)} />, fractional{' '}
-                <GlossaryTerm
-                  term="Kelly Criterion"
-                  definition={getGlossaryDef('kelly-criterion', currentLang)}
-                />{' '}
-                capital sizing, and automated macroeconomic sentiment synthesis via{' '}
-                <GlossaryTerm
-                  term="Groq LLaMA 3.3 70B"
-                  definition={getGlossaryDef('llama-groq', currentLang)}
-                />.
-              </span>
-            )
+            isFrench
+              ? 'Un terminal de trading autonome conçu pour surveiller les cryptomonnaies en direct, exécuter des allocations simulées avec gestion du risque et produire des synthèses macroéconomiques quotidiennes.'
+              : 'An autonomous trading terminal engineered to monitor live cryptocurrency pairs, execute paper allocations with automated risk management, and synthesize daily macroeconomic briefings.'
           ) : (
             t(project.descriptionKey)
           )}
@@ -148,21 +99,15 @@ export const ProjectDetail: React.FC = () => {
         </div>
       </section>
 
-      {/* Crypto Trade Hub: Institutional Multi-Section Product Walkthrough */}
+      {/* Crypto Trade Hub: Product Walkthrough */}
       {isCryptoHub && (
-        <div className="space-y-20 sm:space-y-28">
-          {/* Institutional Closed-Beta Disclaimer */}
-          <div className="border border-slate-300 bg-slate-50 p-4 sm:p-5 rounded-none space-y-2 shadow-sm">
-            <div className="flex items-center space-x-2">
-              <span className="px-1.5 py-0.5 bg-slate-200 text-slate-800 font-mono text-[10px] font-bold uppercase rounded-none">
-                {t('projects.cryptoDetail.disclaimerLabel')}
-              </span>
-              <span className="text-xs font-mono text-slate-600 font-semibold uppercase tracking-wider">
-                {t('projects.cryptoDetail.disclaimerBadge')}
-              </span>
-            </div>
-            <p className="text-xs sm:text-sm text-slate-700 font-mono leading-relaxed">
-              {t('projects.cryptoDetail.disclaimer')}
+        <div className="space-y-16 sm:space-y-24">
+          {/* Simulation Note */}
+          <div className="border border-slate-200 bg-slate-50 p-4 rounded-none">
+            <p className="text-xs sm:text-sm text-slate-600 font-mono leading-relaxed">
+              {isFrench
+                ? 'Note : Les flux de données et les ordres affichés ci-dessous sont exécutés dans un environnement de simulation temps réel.'
+                : 'Note: Market data streams and trade allocations shown below are executed in a simulated real-time environment.'}
             </p>
           </div>
 

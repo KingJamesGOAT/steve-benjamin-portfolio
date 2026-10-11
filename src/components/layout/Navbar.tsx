@@ -73,17 +73,17 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
 
           <div className="h-4 w-[1px] bg-slate-200 hidden sm:block" />
 
-          {/* Command Palette Trigger with Explicit "Ctrl K" */}
+          {/* Command Palette Trigger */}
           {onOpenCommandPalette && (
             <button
               onClick={onOpenCommandPalette}
               type="button"
-              className="hidden md:inline-flex items-center space-x-2 px-2.5 py-1 text-xs text-fintech-muted border border-slate-200 rounded-none hover:border-electric hover:text-electric transition-colors bg-surface-subtle"
+              className="hidden md:inline-flex items-center space-x-1.5 px-2.5 py-1 text-xs text-fintech-muted border border-slate-200 rounded-none hover:border-electric hover:text-electric transition-colors bg-white hover:bg-slate-50"
               title={t('cmdPalette.placeholder')}
             >
               <Search className="w-3.5 h-3.5" />
-              <span className="font-mono text-[11px] bg-white px-1.5 py-0.5 rounded-none border border-slate-200 text-fintech-secondary font-medium">
-                Ctrl K
+              <span className="font-mono text-[11px] text-fintech-secondary font-medium">
+                {currentLang === 'FR' ? 'Rechercher' : 'Search'}
               </span>
             </button>
           )}

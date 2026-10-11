@@ -100,7 +100,7 @@ const BentoTileCard: React.FC<{ tile: BentoTile; isFrench: boolean }> = ({ tile,
 };
 
 export const TechBentoGrid: React.FC = () => {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const isFrench = Boolean(i18n.language?.startsWith('fr'));
 
   // 10 Curated Bento Topics with Asymmetric Column Spans
@@ -285,14 +285,13 @@ export const TechBentoGrid: React.FC = () => {
 
   return (
     <div className="space-y-3 pt-6 border-t border-slate-100">
-      {/* Minimal Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5">
-        <div className="inline-flex items-center space-x-2 text-xs font-mono font-semibold uppercase tracking-wider text-electric">
-          <span className="w-1.5 h-1.5 bg-electric rounded-none inline-block" />
-          <span>{t('home.bento.badge')}</span>
-        </div>
-        <span className="text-[11px] font-mono text-slate-400">
-          {t('home.bento.hint')}
+      {/* Clean Skills Header */}
+      <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1.5 pb-1">
+        <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-fintech-primary">
+          {isFrench ? 'Compétences' : 'Skills'}
+        </h2>
+        <span className="text-xs font-mono text-slate-500">
+          {isFrench ? 'Survolez pour inspecter le code' : 'Hover to inspect code'}
         </span>
       </div>
 

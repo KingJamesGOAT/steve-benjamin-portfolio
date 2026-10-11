@@ -58,15 +58,6 @@ export const About: React.FC<AboutProps> = ({ id = 'about' }) => {
     <section id={id} className="scroll-mt-24 space-y-12">
       {/* Header */}
       <div className="space-y-3 border-b border-slate-200 pb-6">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <span className="text-xs font-mono uppercase tracking-wider text-slate-500">
-            {t('about.badge')}
-          </span>
-          <span className="text-xs font-mono text-slate-500">
-            {t('about.location')}
-          </span>
-        </div>
-
         <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-fintech-primary">
           {t('about.title')}
         </h2>

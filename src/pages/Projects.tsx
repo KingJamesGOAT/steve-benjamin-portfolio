@@ -11,10 +11,6 @@ export const Projects: React.FC = () => {
     <div className="space-y-16 sm:space-y-24">
       {/* Page Header */}
       <section className="space-y-3">
-        <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-none text-xs font-mono font-medium bg-electric-light text-electric border border-electric/20">
-          <span className="w-1.5 h-1.5 bg-electric rounded-none inline-block" />
-          <span>{t('projects.badge')}</span>
-        </div>
         <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-fintech-primary">
           {t('projects.title')}
         </h1>
@@ -26,15 +22,9 @@ export const Projects: React.FC = () => {
       {/* Primary Project 1: Crypto Trade Hub with Live Simulation */}
       <section className="rounded-none border border-slate-200 bg-white p-6 sm:p-8 shadow-sm space-y-6">
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <div className="flex items-center space-x-3">
-            <span className="inline-flex items-center px-2.5 py-0.5 rounded-none text-[11px] font-mono font-medium bg-slate-100 text-slate-700 border border-slate-200">
-              {t('projects.crypto.tag')}
-            </span>
-            <span className="inline-flex items-center space-x-1.5 text-[11px] font-mono text-emerald-600 bg-emerald-50 px-2.5 py-0.5 rounded-none border border-emerald-200">
-              <span className="w-1.5 h-1.5 rounded-none bg-emerald-500" />
-              <span>{t('projects.crypto.status')}</span>
-            </span>
-          </div>
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-fintech-primary">
+            {t('projects.crypto.title')}
+          </h2>
 
           <Link
             to="/projects/crypto-trade-hub"
@@ -45,68 +35,24 @@ export const Projects: React.FC = () => {
           </Link>
         </div>
 
-        <div>
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-fintech-primary">
-            {t('projects.crypto.title')}
-          </h2>
-        </div>
-
         {/* Live Simulation Embed */}
         <div className="border border-slate-800 rounded-none overflow-hidden bg-slate-950">
           <CryptoWidgetSim />
         </div>
 
-        <div className="space-y-4 pt-2 border-t border-slate-100">
+        <div className="pt-2 border-t border-slate-100">
           <p className="text-sm sm:text-base text-fintech-secondary leading-relaxed">
             {t('projects.crypto.description')}
           </p>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-            <div className="p-3.5 rounded-none bg-slate-50 border border-slate-200 space-y-1">
-              <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500">
-                {t('projects.crypto.pnlLabel')}
-              </span>
-              <div className="text-lg font-bold font-mono text-emerald-600">
-                {t('projects.crypto.pnlValue')}
-              </div>
-              <p className="text-[11px] font-mono text-slate-500">{t('projects.showcase.autonomousKelly')}</p>
-            </div>
-
-            <div className="p-3.5 rounded-none bg-slate-50 border border-slate-200 space-y-1">
-              <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500">
-                {t('projects.showcase.executionCore')}
-              </span>
-              <div className="text-lg font-bold font-mono text-fintech-primary">
-                ADX / MACD / RSI
-              </div>
-              <p className="text-[11px] font-mono text-slate-500">{t('projects.showcase.momentumBreakout')}</p>
-            </div>
-
-            <div className="p-3.5 rounded-none bg-slate-50 border border-slate-200 space-y-1">
-              <span className="text-[11px] font-mono uppercase tracking-wider text-slate-500">
-                {t('projects.showcase.aiIntelligence')}
-              </span>
-              <div className="text-lg font-bold font-mono text-electric">
-                Groq LLaMA 3.3 70B
-              </div>
-              <p className="text-[11px] font-mono text-slate-500">{t('projects.showcase.institutionalDigest')}</p>
-            </div>
-          </div>
         </div>
       </section>
 
       {/* Primary Project 2: Donnons.ch */}
       <section className="rounded-none border border-slate-200 bg-white p-6 sm:p-8 shadow-sm space-y-6">
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <div className="flex items-center space-x-3">
-            <span className="inline-flex items-center px-2.5 py-0.5 rounded-none text-[11px] font-mono font-medium bg-rose-50 text-rose-700 border border-rose-200">
-              {t('projects.donnons.tag')}
-            </span>
-            <span className="inline-flex items-center space-x-1.5 text-[11px] font-mono text-rose-600 bg-rose-50 px-2.5 py-0.5 rounded-none border border-rose-200">
-              <span className="w-1.5 h-1.5 rounded-none bg-rose-500" />
-              <span>HUG Mandate</span>
-            </span>
-          </div>
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-fintech-primary">
+            {t('projects.donnons.title')}
+          </h2>
 
           <Link
             to="/projects/donnons-ch"
@@ -152,7 +98,7 @@ export const Projects: React.FC = () => {
               {t('projects.showcase.archStack')}
             </span>
             <div className="text-base font-bold font-mono text-slate-700">
-              Vue.js 3 • Laravel REST
+              Vue.js 3, Laravel REST
             </div>
             <p className="text-[11px] font-mono text-slate-500">{t('projects.showcase.tailwindMobile')}</p>
           </div>
