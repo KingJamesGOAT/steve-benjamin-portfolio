@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 interface BentoTile {
   id: string;
+  colSpan: string;
   titleEn: string;
   titleFr: string;
   tagEn: string;
@@ -48,10 +49,10 @@ const BentoTileCard: React.FC<{ tile: BentoTile; isFrench: boolean }> = ({ tile,
       onTouchMove={handleTouchMove}
       onMouseLeave={handleLeave}
       onTouchEnd={handleLeave}
-      className="relative h-32 sm:h-36 border border-slate-800/80 bg-[#0A0D14] overflow-hidden select-none rounded-none cursor-crosshair"
+      className={`relative ${tile.colSpan} h-32 sm:h-36 border border-slate-800/80 bg-[#0A0D14] overflow-hidden select-none rounded-none cursor-crosshair`}
       style={{ touchAction: 'pan-y' }}
     >
-      {/* 1. SURFACE LAYER (MINIMALIST & WELL-BALANCED) */}
+      {/* 1. SURFACE LAYER (CLEAN & BALANCED) */}
       <div className="absolute inset-0 p-3.5 sm:p-4 flex flex-col justify-between z-10 pointer-events-none">
         <div className="space-y-0.5">
           <span className="text-[10px] font-mono uppercase tracking-widest text-slate-500">
@@ -68,13 +69,13 @@ const BentoTileCard: React.FC<{ tile: BentoTile; isFrench: boolean }> = ({ tile,
         </div>
       </div>
 
-      {/* 2. ILLUMINATED CODE LAYER (SHARP, WIDE APERTURE) */}
+      {/* 2. ILLUMINATED CODE LAYER (MASKED BY 168PX SPOTLIGHT) */}
       <div
         className="absolute inset-0 p-3.5 sm:p-4 z-20 flex flex-col justify-center bg-[#070A0F] font-mono text-xs pointer-events-none transition-opacity duration-150"
         style={{
           opacity: pos.active ? 1 : 0,
-          WebkitMaskImage: `radial-gradient(circle 105px at ${pos.x}px ${pos.y}px, black 95px, transparent 105px)`,
-          maskImage: `radial-gradient(circle 105px at ${pos.x}px ${pos.y}px, black 95px, transparent 105px)`,
+          WebkitMaskImage: `radial-gradient(circle 84px at ${pos.x}px ${pos.y}px, black 74px, transparent 84px)`,
+          maskImage: `radial-gradient(circle 84px at ${pos.x}px ${pos.y}px, black 74px, transparent 84px)`,
         }}
       >
         <div className="text-[11px] leading-snug text-slate-200">
@@ -82,15 +83,15 @@ const BentoTileCard: React.FC<{ tile: BentoTile; isFrench: boolean }> = ({ tile,
         </div>
       </div>
 
-      {/* 3. LIGHT CIRCLE CIRCUMFERENCE (210PX CANDLE / SPOTLIGHT RING) */}
+      {/* 3. LIGHT CIRCLE CIRCUMFERENCE (168PX DIAMETER: 20% SMALLER) */}
       {pos.active && (
         <div
-          className="absolute z-30 pointer-events-none -translate-x-1/2 -translate-y-1/2 rounded-full border border-blue-500/80 shadow-[0_0_18px_rgba(0,82,255,0.5)] transition-opacity duration-100"
+          className="absolute z-30 pointer-events-none -translate-x-1/2 -translate-y-1/2 rounded-full border border-blue-500/80 shadow-[0_0_15px_rgba(0,82,255,0.45)] transition-opacity duration-100"
           style={{
             left: `${pos.x}px`,
             top: `${pos.y}px`,
-            width: '210px',
-            height: '210px',
+            width: '168px',
+            height: '168px',
           }}
         />
       )}
@@ -102,25 +103,29 @@ export const TechBentoGrid: React.FC = () => {
   const { t, i18n } = useTranslation();
   const isFrench = Boolean(i18n.language?.startsWith('fr'));
 
+  // 10 Curated Bento Topics with Asymmetric Column Spans
   const tiles: BentoTile[] = [
+    // ROW 1: [2 COLS] [1 COL] [1 COL] = 4 COLS
     {
       id: 'frontend',
-      titleEn: 'Frontend Core',
-      titleFr: 'Cœur Frontend',
-      tagEn: 'React 18 // Vite',
-      tagFr: 'React 18 // Vite',
-      signature: '// 60 FPS',
+      colSpan: 'col-span-1 sm:col-span-2 md:col-span-2',
+      titleEn: 'Frontend Architecture',
+      titleFr: 'Architecture Frontend',
+      tagEn: 'React 18 // Vite Engine',
+      tagFr: 'React 18 // Moteur Vite',
+      signature: '// 60 FPS REACTIVE',
       codeSnippet: (
         <div className="space-y-0.5">
           <div><span className="text-[#38BDF8]">export const</span> <span className="text-[#F59E0B]">Engine</span> = () =&gt; {'{'}</div>
           <div className="pl-3"><span className="text-[#38BDF8]">const</span> {'{'} data {'}'} = <span className="text-[#60A5FA]">useStream</span>();</div>
-          <div className="pl-3"><span className="text-[#38BDF8]">return</span> &lt;<span className="text-[#38BDF8]">Canvas</span> frame={'{'}data{'}'} /&gt;;</div>
+          <div className="pl-3"><span className="text-[#38BDF8]">return</span> &lt;<span className="text-[#38BDF8]">Canvas</span> frame={'{'}data{'}'} fps={<span className="text-[#F43F5E]">60</span>} /&gt;;</div>
           <div>{'}'};</div>
         </div>
       ),
     },
     {
       id: 'typescript',
+      colSpan: 'col-span-1 sm:col-span-1 md:col-span-1',
       titleEn: 'TypeScript Runtime',
       titleFr: 'Runtime TypeScript',
       tagEn: 'Strict TS 5.7 // V8',
@@ -137,6 +142,7 @@ export const TechBentoGrid: React.FC = () => {
     },
     {
       id: 'ui-tokens',
+      colSpan: 'col-span-1 sm:col-span-1 md:col-span-1',
       titleEn: 'UI Design Tokens',
       titleFr: 'Tokens Design UI',
       tagEn: 'CSS3 // Variables',
@@ -151,24 +157,11 @@ export const TechBentoGrid: React.FC = () => {
         </div>
       ),
     },
-    {
-      id: 'hardware',
-      titleEn: 'Hardware Bridge',
-      titleFr: 'Passerelle Hardware',
-      tagEn: 'CFC Electronics // C99',
-      tagFr: 'CFC Électronique // C99',
-      signature: '// 115.2 KBPS',
-      codeSnippet: (
-        <div className="space-y-0.5">
-          <div><span className="text-[#38BDF8]">void</span> <span className="text-[#F59E0B]">UART_Init</span>(<span className="text-[#A78BFA]">void</span>) {'{'}</div>
-          <div className="pl-3">USART2-&gt;BRR = <span className="text-[#F43F5E]">0x0116</span>;</div>
-          <div className="pl-3">USART2-&gt;CR1 |= <span className="text-[#60A5FA]">USART_CR1_UE</span>;</div>
-          <div>{'}'}</div>
-        </div>
-      ),
-    },
+
+    // ROW 2: [1 COL] [2 COLS] [1 COL] = 4 COLS
     {
       id: 'state-machine',
+      colSpan: 'col-span-1 sm:col-span-1 md:col-span-1',
       titleEn: 'State Machine',
       titleFr: 'Machine à États',
       tagEn: 'Zustand // Reactive',
@@ -184,7 +177,25 @@ export const TechBentoGrid: React.FC = () => {
       ),
     },
     {
+      id: 'hardware',
+      colSpan: 'col-span-1 sm:col-span-2 md:col-span-2',
+      titleEn: 'Hardware Bridge',
+      titleFr: 'Passerelle Hardware',
+      tagEn: 'CFC Electronics // C99',
+      tagFr: 'CFC Électronique // C99',
+      signature: '// 115.2 KBPS DMA',
+      codeSnippet: (
+        <div className="space-y-0.5">
+          <div><span className="text-[#38BDF8]">void</span> <span className="text-[#F59E0B]">UART_Bridge_Init</span>(<span className="text-[#A78BFA]">void</span>) {'{'}</div>
+          <div className="pl-3">USART2-&gt;BRR = <span className="text-[#F43F5E]">0x0116</span>; <span className="text-slate-500">// 115.2k</span></div>
+          <div className="pl-3">USART2-&gt;CR1 |= <span className="text-[#60A5FA]">USART_CR1_UE</span> | <span className="text-[#60A5FA]">USART_CR1_TE</span>;</div>
+          <div>{'}'}</div>
+        </div>
+      ),
+    },
+    {
       id: 'websockets',
+      colSpan: 'col-span-1 sm:col-span-1 md:col-span-1',
       titleEn: 'Real-Time WebSockets',
       titleFr: 'WebSockets Temps Réel',
       tagEn: 'WS // Binary Stream',
@@ -199,8 +210,11 @@ export const TechBentoGrid: React.FC = () => {
         </div>
       ),
     },
+
+    // ROW 3: [1 COL] [1 COL] [1 COL] [1 COL] = 4 COLS
     {
       id: 'semantic-dom',
+      colSpan: 'col-span-1 sm:col-span-1 md:col-span-1',
       titleEn: 'Semantic Web & A11y',
       titleFr: 'DOM Sémantique & A11y',
       tagEn: 'HTML5 // WCAG 2.1',
@@ -217,6 +231,7 @@ export const TechBentoGrid: React.FC = () => {
     },
     {
       id: 'api-architecture',
+      colSpan: 'col-span-1 sm:col-span-1 md:col-span-1',
       titleEn: 'REST & API Engine',
       titleFr: 'Moteur API & REST',
       tagEn: 'HTTP/2 // OpenAPI',
@@ -233,6 +248,7 @@ export const TechBentoGrid: React.FC = () => {
     },
     {
       id: 'spi-bus',
+      colSpan: 'col-span-1 sm:col-span-1 md:col-span-1',
       titleEn: 'Microcontroller Bus',
       titleFr: 'Bus Microcontrôleur',
       tagEn: 'ARM Cortex // SPI',
@@ -240,8 +256,8 @@ export const TechBentoGrid: React.FC = () => {
       signature: '// DMA_LINKED',
       codeSnippet: (
         <div className="space-y-0.5">
-          <div><span className="text-[#38BDF8]">uint8_t</span> <span className="text-[#F59E0B]">SPI_TxRx</span>(<span className="text-[#A78BFA]">uint8_t</span> byte) {'{'}</div>
-          <div className="pl-3">SPI1-&gt;DR = byte;</div>
+          <div><span className="text-[#38BDF8]">uint8_t</span> <span className="text-[#F59E0B]">SPI_TxRx</span>(<span className="text-[#A78BFA]">uint8_t</span> b) {'{'}</div>
+          <div className="pl-3">SPI1-&gt;DR = b;</div>
           <div className="pl-3"><span className="text-[#38BDF8]">while</span> (!(SPI1-&gt;SR &amp; SPI_SR_RXNE));</div>
           <div className="pl-3"><span className="text-[#38BDF8]">return</span> SPI1-&gt;DR;</div>
           <div>{'}'}</div>
@@ -249,49 +265,18 @@ export const TechBentoGrid: React.FC = () => {
       ),
     },
     {
-      id: 'build-pipeline',
-      titleEn: 'Build & Bundling',
-      titleFr: 'Build & Compilation',
+      id: 'build-perf',
+      colSpan: 'col-span-1 sm:col-span-1 md:col-span-1',
+      titleEn: 'Build & Performance',
+      titleFr: 'Build & Performance',
       tagEn: 'Vite // Rollup Core',
       tagFr: 'Vite // Rollup Core',
       signature: '// CHUNKS_OPT',
       codeSnippet: (
         <div className="space-y-0.5">
           <div><span className="text-[#38BDF8]">export default</span> <span className="text-[#60A5FA]">defineConfig</span>({'{'}</div>
-          <div className="pl-3">build: {'{'} target: <span className="text-[#34D399]">'esnext'</span>, minify: <span className="text-[#34D399]">'esbuild'</span> {'}'},</div>
+          <div className="pl-3">build: {'{'} target: <span className="text-[#34D399]">'esnext'</span> {'}'},</div>
           <div className="pl-3">plugins: [<span className="text-[#60A5FA]">react</span>()],</div>
-          <div>{'}'});</div>
-        </div>
-      ),
-    },
-    {
-      id: 'telemetry-metrics',
-      titleEn: 'Performance Monitor',
-      titleFr: 'Monitoring Télémétrie',
-      tagEn: 'Performance API',
-      tagFr: 'API Performance',
-      signature: '// RAF_LOOP',
-      codeSnippet: (
-        <div className="space-y-0.5">
-          <div><span className="text-[#38BDF8]">function</span> <span className="text-[#F59E0B]">loop</span>(now: <span className="text-[#A78BFA]">number</span>) {'{'}</div>
-          <div className="pl-3"><span className="text-[#38BDF8]">const</span> delta = now - lastFrame;</div>
-          <div className="pl-3"><span className="text-[#60A5FA]">requestAnimationFrame</span>(loop);</div>
-          <div>{'}'}</div>
-        </div>
-      ),
-    },
-    {
-      id: 'testing-qa',
-      titleEn: 'Automated Testing',
-      titleFr: 'Tests Automatisés',
-      tagEn: 'Vitest // Assertions',
-      tagFr: 'Vitest // Assertions',
-      signature: '// 100% PASS',
-      codeSnippet: (
-        <div className="space-y-0.5">
-          <div><span className="text-[#60A5FA]">test</span>(<span className="text-[#34D399]">'telemetry sync'</span>, () =&gt; {'{'}</div>
-          <div className="pl-3"><span className="text-[#38BDF8]">const</span> packet = <span className="text-[#60A5FA]">createFrame</span>();</div>
-          <div className="pl-3"><span className="text-[#60A5FA]">expect</span>(packet.seq).<span className="text-[#60A5FA]">toBeGreaterThan</span>(<span className="text-[#F43F5E]">0</span>);</div>
           <div>{'}'});</div>
         </div>
       ),
@@ -311,8 +296,8 @@ export const TechBentoGrid: React.FC = () => {
         </span>
       </div>
 
-      {/* 12-Tile Dense Bento Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 select-none">
+      {/* Asymmetric 10-Tile Bento Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2 select-none">
         {tiles.map((tile) => (
           <BentoTileCard key={tile.id} tile={tile} isFrench={isFrench} />
         ))}
