@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { ArrowRight, FileDown, ExternalLink } from 'lucide-react';
 import PhysicsCanvas from '../components/features/PhysicsCanvas';
 import CryptoWidgetSim from '../components/features/CryptoWidgetSim';
+import GlossaryTerm from '../components/features/GlossaryTerm';
 import About from './About';
 
 export const Home: React.FC = () => {
@@ -240,7 +241,14 @@ export const Home: React.FC = () => {
                 <div className="text-lg font-bold font-mono text-emerald-600">
                   {t('projects.crypto.pnlValue')}
                 </div>
-                <p className="text-[11px] font-mono text-slate-500">Autonomous Kelly Criterion Sizing</p>
+                <p className="text-[11px] font-mono text-slate-500">
+                  Autonomous{' '}
+                  <GlossaryTerm
+                    term="Kelly Criterion"
+                    definition="Mathematical formula determining optimal trade allocation to maximize geometric capital growth while capping vector risk at 2.0%."
+                  />{' '}
+                  Sizing
+                </p>
               </div>
 
               <div className="p-3.5 rounded-none bg-slate-50 border border-slate-200 space-y-1">
@@ -248,9 +256,19 @@ export const Home: React.FC = () => {
                   Execution Core
                 </span>
                 <div className="text-lg font-bold font-mono text-fintech-primary">
-                  ADX / MACD / RSI
+                  <GlossaryTerm
+                    term="ADX"
+                    definition="Average Directional Index quantifying trend strength above 25.0 to switch between trend breakouts and mean-reversion grids."
+                  />{' '}
+                  / MACD / RSI
                 </div>
-                <p className="text-[11px] font-mono text-slate-500">Trend Breakout & Mean Reversion</p>
+                <p className="text-[11px] font-mono text-slate-500">
+                  <GlossaryTerm
+                    term="Donchian Channel"
+                    definition="Trend-following 20-candle high/low envelope triggering momentum entries on abnormal volume."
+                  />{' '}
+                  Breakouts
+                </p>
               </div>
 
               <div className="p-3.5 rounded-none bg-slate-50 border border-slate-200 space-y-1">
@@ -258,7 +276,10 @@ export const Home: React.FC = () => {
                   AI Intelligence
                 </span>
                 <div className="text-lg font-bold font-mono text-electric">
-                  Groq LLaMA 3.3 70B
+                  <GlossaryTerm
+                    term="Groq LLaMA 3.3 70B"
+                    definition="High-throughput LLM synthesis processing macroeconomic headlines, ETF flows, and social sentiment into structured briefings."
+                  />
                 </div>
                 <p className="text-[11px] font-mono text-slate-500">Automated Sentiment & Briefings</p>
               </div>
