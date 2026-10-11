@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ArrowRight, FileDown, ExternalLink } from 'lucide-react';
-import XRaySlider from '../components/features/XRaySlider';
+import TechBentoGrid from '../components/features/TechBentoGrid';
 import CryptoWidgetSim from '../components/features/CryptoWidgetSim';
 import GlossaryTerm from '../components/features/GlossaryTerm';
 import { getGlossaryDef } from '../data/cryptoGlossary';
@@ -87,15 +87,29 @@ export const Home: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: Hardware-to-Software X-Ray Slider */}
-          <div className="lg:col-span-5 flex flex-col justify-center w-full space-y-2.5">
-            <XRaySlider />
-            <div className="flex items-center justify-between text-[11px] font-mono text-slate-400 px-0.5">
-              <span className="flex items-center space-x-1.5">
-                <span className="w-1.5 h-1.5 bg-electric rounded-none inline-block" />
-                <span className="text-slate-500">{t('home.xraySliderHint')}</span>
-              </span>
-              <span className="uppercase text-[10px] text-slate-400">50/50 X-RAY</span>
+          {/* Right Column: Sharp Profile Picture Frame */}
+          <div className="lg:col-span-5 flex justify-center lg:justify-end">
+            <div className="relative w-full max-w-md border border-slate-200 bg-white p-3 shadow-xl shadow-slate-900/5 rounded-none group">
+              <div className="overflow-hidden bg-slate-100">
+                <img
+                  src="/profile.jpg"
+                  alt="Steve Benjamin"
+                  onError={(e) => {
+                    const target = e.currentTarget;
+                    if (!target.src.includes('steve-benjamin-portfolio')) {
+                      target.src = `${import.meta.env.BASE_URL}profile.jpg`;
+                    }
+                  }}
+                  className="w-full aspect-square object-cover grayscale hover:grayscale-0 transition-all duration-500 rounded-none transform group-hover:scale-[1.02]"
+                />
+              </div>
+              <div className="mt-3 pt-2.5 border-t border-slate-100 flex items-center justify-between text-[11px] font-mono text-slate-400">
+                <span className="flex items-center space-x-1.5">
+                  <span className="w-1.5 h-1.5 bg-emerald-500 rounded-none inline-block" />
+                  <span className="text-slate-600 font-medium">BSc HEIG-VD // 2026</span>
+                </span>
+                <span className="text-electric font-semibold uppercase tracking-wider">Switzerland</span>
+              </div>
             </div>
           </div>
         </div>
@@ -147,6 +161,9 @@ export const Home: React.FC = () => {
             </p>
           </div>
         </div>
+
+        {/* Centerpiece Tech Stack Bento Grid */}
+        <TechBentoGrid />
       </section>
 
       {/* SECTION 2: PROJECTS */}

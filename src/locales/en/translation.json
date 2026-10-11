@@ -39,7 +39,12 @@
     "ctaCaseStudies": "View Case Studies",
     "ctaPitch": "2027 Bachelor Pitch",
     "ctaCV": "Download Resume (PDF)",
-    "xraySliderHint": "Drag to compile hardware into software",
+    "bento": {
+      "badge": "CFC Electronics → BSc Media Engineering",
+      "hint": "Hover or tap any domain block to inspect the engineering code beneath",
+      "tag": "Architecture Stack",
+      "peekAction": "Hover to Peek Code"
+    },
     "stats": {
       "duality": {
         "value": "CFC + BSc",

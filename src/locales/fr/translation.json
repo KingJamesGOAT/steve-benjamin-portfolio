@@ -39,7 +39,12 @@
     "ctaCaseStudies": "Voir les Études de Cas",
     "ctaPitch": "Pitch Bachelor 2027",
     "ctaCV": "Télécharger le CV (PDF)",
-    "xraySliderHint": "Glissez pour compiler le hardware en software",
+    "bento": {
+      "badge": "CFC Électronique → BSc Ingénierie des Médias",
+      "hint": "Survolez ou appuyez sur un bloc pour inspecter le code sous-jacent",
+      "tag": "Architecture Logicielle",
+      "peekAction": "Survoler pour inspecter le code"
+    },
     "stats": {
       "duality": {
         "value": "CFC + BSc",
