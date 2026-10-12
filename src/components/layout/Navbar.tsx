@@ -41,19 +41,23 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
   return (
     <header className="sticky top-0 z-40 w-full border-b border-slate-200/80 bg-white/95 backdrop-blur-md">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-        {/* Minimalist Brand / Logo */}
+        {/* Brand Logo */}
         <Link
           to="/#home"
           onClick={() => handleNavClick('home')}
-          className="group flex items-center space-x-2.5 text-sm font-semibold tracking-tight transition-opacity hover:opacity-90"
+          className="group flex items-center transition-opacity hover:opacity-85 focus:outline-none"
+          aria-label="Steve Benjamin"
         >
-          <span className="w-2.5 h-2.5 rounded-none bg-electric inline-block" />
-          <span className="text-fintech-primary font-medium tracking-tight">
-            {t('nav.name')}
-          </span>
-          <span className="hidden sm:inline-block text-[11px] font-normal uppercase tracking-wider text-fintech-subtle border-l border-slate-200 pl-2">
-            {t('nav.role')}
-          </span>
+          <img
+            src={`${import.meta.env.BASE_URL}Logo.png`}
+            alt="Steve Benjamin"
+            className="h-9 sm:h-10 w-auto max-h-10 object-contain"
+            onError={(e) => {
+              const target = e.currentTarget;
+              if (target.src.endsWith('/Logo.png')) return;
+              target.src = `${import.meta.env.BASE_URL}Logo.png`;
+            }}
+          />
         </Link>
 
         {/* Navigation & Controls */}

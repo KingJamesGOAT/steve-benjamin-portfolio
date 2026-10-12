@@ -35,6 +35,12 @@
     "badge": "Ingénierie Logicielle & Ingénierie des Médias",
     "title": "Steve Benjamin",
     "subtitle": "Ingénieur des Médias & Développeur Full-Stack",
+    "heroPrefix": "Expert en",
+    "heroTitles": [
+      "Ingénierie Logicielle & Full-Stack",
+      "Design UX/UI & Architecture Web",
+      "Gestion de Projet Digital"
+    ],
     "description": "Développement d'applications web, de systèmes de données et d'interfaces interactives avec une architecture soignée.",
     "ctaCaseStudies": "Voir les Projets",
     "ctaPitch": "Pitch Bachelor",

@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { ArrowRight, FileDown, ExternalLink } from 'lucide-react';
 import TechBentoGrid from '../components/features/TechBentoGrid';
 import CryptoWidgetSim from '../components/features/CryptoWidgetSim';
+import RotatingTitle from '../components/features/RotatingTitle';
 import About from './About';
 
 export const Home: React.FC = () => {
@@ -26,6 +27,21 @@ export const Home: React.FC = () => {
     }
   }, [location.hash]);
 
+  const rawTitles = t('home.heroTitles', { returnObjects: true });
+  const heroTitles: string[] = Array.isArray(rawTitles)
+    ? (rawTitles as string[])
+    : isFrench
+    ? [
+        'Ingénierie Logicielle & Full-Stack',
+        'Design UX/UI & Architecture Web',
+        'Gestion de Projet Digital',
+      ]
+    : [
+        'Software Engineering',
+        'UX/UI & Web Architecture',
+        'Digital Product Management',
+      ];
+
   return (
     <div className="space-y-32 sm:space-y-40">
       {/* SECTION 1: HERO & PHYSICS CANVAS */}
@@ -34,21 +50,22 @@ export const Home: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           {/* Left Column: Oversized Typography & CTAs */}
           <div className="lg:col-span-7 space-y-8">
-            {/* Status Badge */}
-            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-none text-xs font-mono font-medium bg-electric-light text-electric border border-electric/30">
-              <span className="w-2 h-2 rounded-none bg-electric inline-block" />
-              <span>{t('home.badge')}</span>
-            </div>
-
             {/* Hero Headline & Subtitle */}
             <div className="space-y-4">
               <h1 className="text-5xl sm:text-7xl lg:text-8xl font-black tracking-tight text-fintech-primary leading-[0.98]">
                 Steve Benjamin
               </h1>
 
-              <p className="text-xl sm:text-2xl font-bold text-electric tracking-tight">
-                {t('home.subtitle')}
-              </p>
+              <div className="text-xl sm:text-2xl font-normal text-fintech-secondary tracking-tight min-h-[2.5rem] flex flex-wrap items-baseline gap-x-2">
+                <span className="text-fintech-secondary font-medium">
+                  {t('home.heroPrefix', isFrench ? 'Expert en' : 'Expert in')}
+                </span>
+                <RotatingTitle
+                  titles={heroTitles}
+                  intervalMs={5000}
+                  className="text-electric font-bold"
+                />
+              </div>
 
               <p className="text-base sm:text-lg text-fintech-secondary max-w-xl leading-relaxed font-normal">
                 {t('home.description')}

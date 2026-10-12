@@ -35,6 +35,12 @@
     "badge": "Software & Media Engineering",
     "title": "Steve Benjamin",
     "subtitle": "Media Engineer & Full-Stack Developer",
+    "heroPrefix": "Expert in",
+    "heroTitles": [
+      "Software Engineering",
+      "UX/UI & Web Architecture",
+      "Digital Product Management"
+    ],
     "description": "Building web applications, data systems, and interactive interfaces with clean architecture.",
     "ctaCaseStudies": "View Projects",
     "ctaPitch": "Bachelor Pitch",
