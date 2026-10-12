@@ -374,32 +374,73 @@ export const Home: React.FC = () => {
 
       {/* SECTION 4: BACHELOR PITCH */}
       <section id="bachelor-pitch" className="scroll-mt-24 space-y-8">
-        <div className="rounded-none border border-slate-200 bg-white p-8 sm:p-12 shadow-sm space-y-6">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-none text-xs font-mono font-medium bg-electric-light text-electric border border-electric/30">
-            <span className="w-1.5 h-1.5 bg-electric rounded-none inline-block" />
-            <span>{t('bachelorPitch.badge')}</span>
+        <div className="rounded-none border border-slate-200 bg-white p-8 sm:p-12 shadow-sm space-y-8">
+          <div className="space-y-4">
+            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-none text-xs font-mono font-medium bg-blue-50 text-electric border border-blue-200">
+              <span className="w-1.5 h-1.5 bg-electric rounded-none inline-block" />
+              <span>{t('bachelorPitch.tag')}</span>
+            </div>
+
+            <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-fintech-primary">
+              {t('bachelorPitch.title')}
+            </h2>
+
+            <p className="text-base sm:text-lg text-fintech-secondary max-w-3xl leading-relaxed">
+              {t('bachelorPitch.subtitle')}
+            </p>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-fintech-primary">
-            {t('bachelorPitch.title')}
-          </h2>
+          {/* Quick Institutional Highlights */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
+            <div className="p-4 border border-slate-200 bg-slate-50/50 space-y-1.5">
+              <div className="text-[10px] font-mono uppercase tracking-wider text-slate-400">01 / Duration</div>
+              <div className="text-sm font-bold text-fintech-primary">{t('bachelorPitch.context.durationTitle')}</div>
+              <p className="text-xs text-slate-600 leading-relaxed">{t('bachelorPitch.context.durationDesc')}</p>
+            </div>
 
-          <p className="text-base sm:text-lg text-fintech-secondary max-w-3xl leading-relaxed">
-            {t('bachelorPitch.subtitle')}
-          </p>
+            <div className="p-4 border border-slate-200 bg-slate-50/50 space-y-1.5">
+              <div className="text-[10px] font-mono uppercase tracking-wider text-slate-400">02 / Financials</div>
+              <div className="text-sm font-bold text-fintech-primary">{t('bachelorPitch.context.remunerationTitle')}</div>
+              <p className="text-xs text-slate-600 leading-relaxed">{t('bachelorPitch.context.remunerationDesc')}</p>
+            </div>
 
-          <div className="flex flex-wrap items-center gap-4 pt-2">
+            <div className="p-4 border border-slate-200 bg-slate-50/50 space-y-1.5">
+              <div className="text-[10px] font-mono uppercase tracking-wider text-slate-400">03 / Legal & IP</div>
+              <div className="text-sm font-bold text-fintech-primary">{t('bachelorPitch.context.confidentialityTitle')}</div>
+              <p className="text-xs text-slate-600 leading-relaxed">{t('bachelorPitch.context.confidentialityDesc')}</p>
+            </div>
+
+            <div className="p-4 border border-slate-200 bg-slate-50/50 space-y-1.5">
+              <div className="text-[10px] font-mono uppercase tracking-wider text-slate-400">04 / Framework</div>
+              <div className="text-sm font-bold text-fintech-primary">{t('bachelorPitch.context.autonomyTitle')}</div>
+              <p className="text-xs text-slate-600 leading-relaxed">{t('bachelorPitch.context.autonomyDesc')}</p>
+            </div>
+          </div>
+
+          {/* Actions & Document Access */}
+          <div className="pt-2 border-t border-slate-100 flex flex-wrap items-center gap-4">
             <Link
               to="/bachelor-pitch"
               className="inline-flex items-center space-x-2 px-6 py-3.5 rounded-none bg-electric hover:bg-electric-hover text-white text-xs font-semibold shadow-sm transition-colors uppercase tracking-wider"
             >
-              <span>{t('bachelorPitch.cta')}</span>
+              <span>{t('bachelorPitch.ctaExplore')}</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
 
             <a
+              href={`${import.meta.env.BASE_URL}HEIG-VD-Guide_TB-filiere-IM-2026-27.pdf`}
+              target="_blank"
+              rel="noopener noreferrer"
+              download
+              className="inline-flex items-center space-x-2 px-5 py-3.5 rounded-none border border-slate-200 bg-white hover:border-electric hover:text-electric text-slate-700 text-xs font-semibold transition-colors shadow-sm"
+            >
+              <FileDown className="w-4 h-4 text-electric" />
+              <span>{t('bachelorPitch.ctaGuide')}</span>
+            </a>
+
+            <a
               href="mailto:sbstevebenjamin@gmail.com?subject=HEIG-VD%20Bachelor%20Project%202027"
-              className="inline-flex items-center space-x-2 px-5 py-3.5 rounded-none border border-slate-200 bg-white hover:border-slate-300 text-slate-700 text-xs font-semibold transition-colors shadow-sm"
+              className="inline-flex items-center space-x-2 px-5 py-3.5 rounded-none border border-slate-200 bg-white hover:border-slate-300 text-slate-700 text-xs font-mono transition-colors shadow-sm"
             >
               <span>sbstevebenjamin@gmail.com</span>
             </a>
