@@ -154,9 +154,9 @@ export const CryptoWidgetSim: React.FC = () => {
           </div>
         </div>
 
-        {/* Stable, Rock-Solid Fixed Height SVG Canvas (~10% larger: h-56 sm:h-64) */}
+        {/* Stable, Rock-Solid Fixed Height SVG Canvas */}
         <div
-          className="relative w-full h-56 sm:h-64 bg-[#0E131E]/80 border border-[#1E2638] rounded-none overflow-hidden p-2 flex items-center justify-center cursor-crosshair shrink-0"
+          className="relative w-full h-56 sm:h-64 md:h-72 bg-[#0E131E]/80 border border-[#1E2638] rounded-none overflow-hidden p-2 flex items-center justify-center cursor-crosshair shrink-0"
           onMouseMove={handleChartMouseMove}
           onMouseLeave={() => setHoveredIndex(null)}
         >

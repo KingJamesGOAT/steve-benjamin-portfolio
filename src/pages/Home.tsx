@@ -149,100 +149,103 @@ export const Home: React.FC = () => {
             </p>
           </div>
 
-          {/* 2-Column Balanced Grid: Streamlined Widget (Left) + Architectural Side Context (Right) */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
-            {/* Left: Scaled Down & Lightweight Terminal Widget */}
-            <div className="lg:col-span-8 border border-slate-800 rounded-none overflow-hidden bg-slate-950 shadow-xl">
+          {/* Full-Width Layout: Live Terminal Widget + Key Specifications Placed Underneath */}
+          <div className="space-y-5">
+            {/* Full-Width Quantitative Terminal Widget */}
+            <div className="w-full border border-slate-800 rounded-none overflow-hidden bg-slate-950 shadow-xl">
               <CryptoWidgetSim />
             </div>
 
-            {/* Right: Architectural Sidebar Context */}
-            <div className="lg:col-span-4 rounded-none border border-slate-200 bg-slate-50/80 p-5 flex flex-col space-y-4 font-sans">
-              <div className="space-y-3.5">
-                <div className="flex items-center justify-between border-b border-slate-200 pb-2">
-                  <span className="font-mono text-[11px] uppercase tracking-wider text-slate-500 font-semibold">
-                    {isFrench ? 'Spécifications Clés' : 'Key Specifications'}
+            {/* Architectural Context: Key Specifications (Under Graph across Full Width) */}
+            <div className="rounded-none border border-slate-200 bg-slate-50/80 p-5 sm:p-6 space-y-4 font-sans">
+              <div className="flex items-center justify-between border-b border-slate-200 pb-2.5">
+                <span className="font-mono text-xs uppercase tracking-wider text-slate-600 font-bold">
+                  {isFrench ? 'Spécifications Clés' : 'Key Specifications'}
+                </span>
+                <span className="font-mono text-[10px] text-emerald-600 font-bold bg-emerald-50 border border-emerald-200 px-2 py-0.5">
+                  {isFrench ? 'TEMPS RÉEL' : 'REAL-TIME'}
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-slate-600 leading-relaxed">
+                <div className="space-y-1.5">
+                  <span className="font-semibold text-slate-800 block text-xs sm:text-sm">
+                    {isFrench ? 'Flux de Marché en Direct' : 'Live Market Feed'}
                   </span>
-                  <span className="font-mono text-[10px] text-emerald-600 font-bold bg-emerald-50 border border-emerald-200 px-1.5 py-0.5">
-                    {isFrench ? 'TEMPS RÉEL' : 'REAL-TIME'}
-                  </span>
+                  <p className="text-slate-500 pt-0.5 text-xs">
+                    {isFrench ? (
+                      <>
+                        Reçoit les cours et volumes instantanément via{' '}
+                        <GlossaryTerm
+                          term="WebSockets Binance"
+                          definition="Connexion réseau temps réel bidirectionnelle délivrant les variations de prix en quelques millisecondes sans recharger la page."
+                        />{' '}
+                        sans aucune latence.
+                      </>
+                    ) : (
+                      <>
+                        Streams live cryptocurrency prices and volume directly from{' '}
+                        <GlossaryTerm
+                          term="Binance WebSockets"
+                          definition="Full-duplex network connection streaming live crypto price ticks with zero page reloads."
+                        />{' '}
+                        with sub-millisecond responsiveness.
+                      </>
+                    )}
+                  </p>
                 </div>
 
-                <div className="space-y-3 text-xs text-slate-600 leading-relaxed">
-                  <div>
-                    <span className="font-semibold text-slate-800 block text-xs">
-                      {isFrench ? 'Flux de Marché en Direct' : 'Live Market Feed'}
-                    </span>
-                    <p className="text-slate-500 pt-1">
-                      {isFrench ? (
-                        <>
-                          Reçoit les cours et volumes instantanément via{' '}
-                          <GlossaryTerm
-                            term="WebSockets Binance"
-                            definition="Connexion réseau temps réel bidirectionnelle délivrant les variations de prix en quelques millisecondes sans recharger la page."
-                          />{' '}
-                          sans aucune latence.
-                        </>
-                      ) : (
-                        <>
-                          Streams live cryptocurrency prices and volume directly from{' '}
-                          <GlossaryTerm
-                            term="Binance WebSockets"
-                            definition="Full-duplex network connection streaming live crypto price ticks with zero page reloads."
-                          />{' '}
-                          with sub-millisecond responsiveness.
-                        </>
-                      )}
-                    </p>
-                  </div>
-
-                  <div>
-                    <span className="font-semibold text-slate-800 block text-xs">
-                      {isFrench ? 'Stratégie & Gestion du Risque' : 'Automated Strategy & Risk'}
-                    </span>
-                    <p className="text-slate-500 pt-1">
-                      {isFrench ? (
-                        <>
-                          Utilise l'
-                          <GlossaryTerm
-                            term="Indicateur ADX"
-                            definition="Average Directional Index : mesure la force de la tendance pour basculer automatiquement entre suivi de tendance et grille de retour à la moyenne."
-                          />{' '}
-                          pour détecter les tendances, et calcule la taille sécurisée des ordres via le{' '}
-                          <GlossaryTerm
-                            term="Critère de Kelly"
-                            definition="Formule mathématique de gestion du risque optimisant la taille des positions tout en plafonnant strictement la perte maximale à 2%."
-                          />
-                          .
-                        </>
-                      ) : (
-                        <>
-                          Uses the{' '}
-                          <GlossaryTerm
-                            term="ADX Indicator"
-                            definition="Average Directional Index: measures trend strength to switch automatically between momentum breakouts and range trading."
-                          />{' '}
-                          to detect market trends, and calculates safe order sizes using the{' '}
-                          <GlossaryTerm
-                            term="Kelly Criterion"
-                            definition="A mathematical risk model that determines optimal position sizing to maximize growth while strictly capping downside loss to 2%."
-                          />
-                          .
-                        </>
-                      )}
-                    </p>
-                  </div>
+                <div className="space-y-1.5">
+                  <span className="font-semibold text-slate-800 block text-xs sm:text-sm">
+                    {isFrench ? 'Stratégie & Gestion du Risque' : 'Automated Strategy & Risk'}
+                  </span>
+                  <p className="text-slate-500 pt-0.5 text-xs">
+                    {isFrench ? (
+                      <>
+                        Utilise l'
+                        <GlossaryTerm
+                          term="Indicateur ADX"
+                          definition="Average Directional Index : mesure la force de la tendance pour basculer automatiquement entre suivi de tendance et grille de retour à la moyenne."
+                        />{' '}
+                        pour détecter les tendances, et calcule la taille sécurisée des ordres via le{' '}
+                        <GlossaryTerm
+                          term="Critère de Kelly"
+                          definition="Formule mathématique de gestion du risque optimisant la taille des positions tout en plafonnant strictement la perte maximale à 2%."
+                        />
+                        .
+                      </>
+                    ) : (
+                      <>
+                        Uses the{' '}
+                        <GlossaryTerm
+                          term="ADX Indicator"
+                          definition="Average Directional Index: measures trend strength to switch automatically between momentum breakouts and range trading."
+                        />{' '}
+                        to detect market trends, and calculates safe order sizes using the{' '}
+                        <GlossaryTerm
+                          term="Kelly Criterion"
+                          definition="A mathematical risk model that determines optimal position sizing to maximize growth while strictly capping downside loss to 2%."
+                        />
+                        .
+                      </>
+                    )}
+                  </p>
                 </div>
 
-                <div className="pt-2.5 border-t border-slate-200 space-y-1.5">
-                  <span className="font-mono text-[10px] uppercase tracking-wider text-slate-400 block font-semibold">
+                <div className="space-y-2 border-t md:border-t-0 md:border-l md:pl-6 border-slate-200">
+                  <span className="font-semibold text-slate-800 block text-xs sm:text-sm">
                     {isFrench ? 'Stack Technique' : 'Architecture Stack'}
                   </span>
-                  <div className="flex flex-wrap gap-1 text-[10.5px] font-mono text-slate-600">
-                    <span className="px-1.5 py-0.5 bg-white border border-slate-200">React 18</span>
-                    <span className="px-1.5 py-0.5 bg-white border border-slate-200">TypeScript</span>
-                    <span className="px-1.5 py-0.5 bg-white border border-slate-200">WebSockets</span>
-                    <span className="px-1.5 py-0.5 bg-white border border-slate-200">LLaMA 3.3</span>
+                  <p className="text-slate-500 text-xs">
+                    {isFrench
+                      ? 'Architecture modulaire haute performance pour le traitement des données de trading temps réel.'
+                      : 'High-performance modular architecture built for real-time streaming telemetry.'}
+                  </p>
+                  <div className="flex flex-wrap gap-1.5 pt-1 text-[11px] font-mono text-slate-700">
+                    <span className="px-2 py-0.5 bg-white border border-slate-200">React 18</span>
+                    <span className="px-2 py-0.5 bg-white border border-slate-200">TypeScript</span>
+                    <span className="px-2 py-0.5 bg-white border border-slate-200">WebSockets</span>
+                    <span className="px-2 py-0.5 bg-white border border-slate-200">LLaMA 3.3</span>
                   </div>
                 </div>
               </div>
