@@ -68,7 +68,7 @@ export const About: React.FC<AboutProps> = ({ id = 'about' }) => {
               {t('about.title')}
             </h2>
 
-            <p className="text-base sm:text-lg text-fintech-secondary leading-relaxed">
+            <p className="text-base sm:text-lg text-fintech-secondary leading-relaxed text-justify">
               {t('about.summary')}
             </p>
 
