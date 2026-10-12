@@ -114,9 +114,9 @@ export const Projects: React.FC = () => {
         </div>
       </section>
 
-      {/* Smaller Showcase Grid: Catholic Route & Marriage Website */}
+      {/* Smaller Showcase Grid: Lexicon Engine & Marriage Website */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-        {/* Showcase: Catholic Route */}
+        {/* Showcase: Lexicon Engine */}
         <section className="rounded-none border border-slate-200 bg-white p-6 sm:p-7 shadow-sm flex flex-col justify-between space-y-6">
           <div className="space-y-4">
             <span className="inline-flex items-center px-2.5 py-0.5 rounded-none text-[11px] font-mono font-medium bg-blue-50 text-blue-700 border border-blue-200">

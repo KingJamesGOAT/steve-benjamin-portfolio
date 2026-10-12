@@ -184,16 +184,14 @@ export const PROJECTS_DATA: ProjectData[] = [
     filename: 'src/components/GlossarySearch.tsx',
     code: catholicSnippet,
     features: [
-      'Fast Ctrl+K fuzzy search engine indexing over 5,000 scholarly theological terms',
+      'Fast Ctrl+K fuzzy search engine indexing over 5,000 philosophical and scientific terms with Enter selection',
       'SmartText reader with contextual Apple-glass floating definition cards on hover',
-      'Multi-century chronological timeline charting historical councils and writings',
-      'Curated documentary video player with responsive aspect-ratio framing',
+      'Multi-century chronological timeline charting intellectual lineage, treatises, and scholars',
     ],
     featuresFr: [
-      'Moteur de recherche floue Ctrl+K indexant plus de 5 000 termes théologiques et philosophiques',
+      'Moteur de recherche floue Ctrl+K indexant plus de 5 000 termes philosophiques et scientifiques avec sélection Entrée',
       'Lecteur SmartText avec infobulles contextuelles flottantes style Apple-glass au survol',
-      'Frise chronologique multi-séculaire cartographiant conciles, érudits et écrits historiques',
-      'Lecteur vidéo documentaire responsive avec chapitrage intégré et esthétique minimaliste',
+      'Frise chronologique multi-séculaire cartographiant débats, érudits et traités historiques',
     ],
     specs: {
       mandate: 'Scholarly Digital Humanities & Research Engine',

@@ -365,15 +365,19 @@ export const Home: React.FC = () => {
                   <span className="px-1.5 py-0.5 bg-white/10 text-slate-300 text-[10px] border border-white/15">Ctrl + K</span>
                 </div>
                 <div className="text-[11px] text-slate-300 font-sans leading-relaxed pt-0.5">
-                  Scholarly definitions like the{' '}
+                  Scholarly definitions like{' '}
                   <span className="text-blue-400 underline decoration-blue-500/60 decoration-dotted underline-offset-2">
-                    Magisterium
+                    Ontology
+                  </span>
+                  ,{' '}
+                  <span className="text-blue-400 underline decoration-blue-500/60 decoration-dotted underline-offset-2">
+                    Epistemology
                   </span>{' '}
                   and{' '}
                   <span className="text-blue-400 underline decoration-blue-500/60 decoration-dotted underline-offset-2">
-                    Hypostatic Union
+                    Magisterium
                   </span>{' '}
-                  with multi-century council timelines.
+                  with multi-century intellectual timelines.
                 </div>
               </div>
             </div>
