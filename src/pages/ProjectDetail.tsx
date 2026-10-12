@@ -535,47 +535,47 @@ export const ProjectDetail: React.FC = () => {
         <DonnonsDetailShowcase />
       )}
 
-      {/* Specifications & Key Highlights Grid (Text-driven, zero decorative icons) */}
-      <section className="grid grid-cols-1 md:grid-cols-12 gap-6 pt-4 border-t border-slate-200">
+      {/* Specifications & Key Highlights Grid (Concise, shorter, zero duplicate text) */}
+      <section className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-6 pt-2 border-t border-slate-200">
         {/* Left: Specs Box */}
-        <div className="md:col-span-7 rounded-none border border-slate-200 bg-white p-6 shadow-sm space-y-4">
+        <div className="md:col-span-7 rounded-none border border-slate-200 bg-white p-4 sm:p-5 shadow-sm space-y-3">
           <div className="flex items-center justify-between text-xs font-mono font-semibold uppercase tracking-wider text-slate-500 border-b border-slate-100 pb-2">
             <span>{t('projectDetail.specifications')}</span>
             <span className="text-slate-400">{t('projects.cryptoDetail.heigStandards')}</span>
           </div>
 
-          <dl className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono">
+          <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2.5 text-xs font-mono">
             <div>
-              <dt className="text-slate-400 uppercase tracking-wider">{t('projectDetail.mandate')}</dt>
-              <dd className="font-semibold text-fintech-primary mt-1 text-sm">{currentSpecs.mandate}</dd>
+              <dt className="text-slate-400 uppercase tracking-wider text-[11px]">{t('projectDetail.mandate')}</dt>
+              <dd className="font-semibold text-fintech-primary mt-0.5 text-xs sm:text-sm">{currentSpecs.mandate}</dd>
             </div>
             <div>
-              <dt className="text-slate-400 uppercase tracking-wider">{t('projectDetail.role')}</dt>
-              <dd className="font-semibold text-fintech-primary mt-1 text-sm">{currentSpecs.role}</dd>
+              <dt className="text-slate-400 uppercase tracking-wider text-[11px]">{t('projectDetail.role')}</dt>
+              <dd className="font-semibold text-fintech-primary mt-0.5 text-xs sm:text-sm">{currentSpecs.role}</dd>
             </div>
             <div className="sm:col-span-2">
-              <dt className="text-slate-400 uppercase tracking-wider">{t('projectDetail.architectureOverview')}</dt>
-              <dd className="font-semibold text-fintech-primary mt-1 text-sm">{currentSpecs.architecture}</dd>
+              <dt className="text-slate-400 uppercase tracking-wider text-[11px]">{t('projectDetail.architectureOverview')}</dt>
+              <dd className="font-semibold text-fintech-primary mt-0.5 text-xs sm:text-sm">{currentSpecs.architecture}</dd>
             </div>
             {currentSpecs.evaluation && (
               <div className="sm:col-span-2">
-                <dt className="text-slate-400 uppercase tracking-wider">{t('projectDetail.evaluation')}</dt>
-                <dd className="font-semibold text-emerald-600 mt-1 text-sm">{currentSpecs.evaluation}</dd>
+                <dt className="text-slate-400 uppercase tracking-wider text-[11px]">{t('projectDetail.evaluation')}</dt>
+                <dd className="font-semibold text-emerald-600 mt-0.5 text-xs sm:text-sm">{currentSpecs.evaluation}</dd>
               </div>
             )}
           </dl>
         </div>
 
         {/* Right: Key Highlights */}
-        <div className="md:col-span-5 rounded-none border border-slate-200 bg-slate-50 p-6 shadow-sm space-y-4">
+        <div className="md:col-span-5 rounded-none border border-slate-200 bg-slate-50 p-4 sm:p-5 shadow-sm space-y-3">
           <div className="flex items-center justify-between text-xs font-mono font-semibold uppercase tracking-wider text-slate-500 border-b border-slate-200/80 pb-2">
             <span>{t('projectDetail.keyHighlights')}</span>
             <span className="text-emerald-600 font-semibold">{t('projects.cryptoDetail.verified')}</span>
           </div>
 
-          <ul className="space-y-3 text-xs text-slate-700 leading-relaxed font-sans">
+          <ul className="space-y-2 text-xs text-slate-700 leading-relaxed font-sans">
             {currentFeatures.map((feature, idx) => (
-              <li key={idx} className="flex items-start space-x-2.5">
+              <li key={idx} className="flex items-start space-x-2">
                 <span className="w-1.5 h-1.5 bg-electric rounded-none flex-shrink-0 mt-1.5 inline-block" />
                 <span className="font-medium text-slate-800">{feature}</span>
               </li>

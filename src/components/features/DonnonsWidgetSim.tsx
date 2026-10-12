@@ -24,7 +24,6 @@ export const DonnonsWidgetSim: React.FC = () => {
       {/* Top Bar with Live Project Links */}
       <div className="bg-white border-b-2 border-black px-4 sm:px-6 py-2.5 flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center space-x-2">
-          <span className="w-2.5 h-2.5 bg-rose-500 inline-block border border-black" />
           <span className="font-mono font-black text-xs sm:text-sm tracking-tight text-black">
             DONNONS.CH
           </span>
@@ -105,9 +104,21 @@ export const DonnonsWidgetSim: React.FC = () => {
                 <span className="text-sm sm:text-lg font-bold text-black font-mono leading-tight flex items-center gap-1.5">
                   <span className="text-[#0073e6]">{livesSaved}</span>{' '}
                   <span>{isFrench ? 'vies sauvées.' : 'lives saved.'}</span>
-                  <span title={isFrench ? 'Un don de sang peut sauver jusqu\'à 3 vies' : 'One donation can save up to 3 lives'}>
-                    <Info className="w-3.5 h-3.5 text-slate-500 hover:text-[#0073e6] cursor-help" />
-                  </span>
+                  <div className="relative group inline-flex items-center">
+                    <button
+                      type="button"
+                      className="p-0.5 text-slate-500 hover:text-[#0073e6] cursor-help transition-colors"
+                      aria-label="Info"
+                    >
+                      <Info className="w-3.5 h-3.5" />
+                    </button>
+                    {/* Tooltip Popup */}
+                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block z-50 w-64 sm:w-72 p-2.5 bg-black text-white text-[11px] font-mono shadow-[3px_3px_0px_0px_rgba(0,0,0,0.5)] leading-relaxed pointer-events-none border border-slate-700 text-center">
+                      {isFrench
+                        ? `Les ${livesSaved} vies sauvées sont une estimation basée sur le fait qu'un don de sang peut sauver jusqu'à 3 vies.`
+                        : `The ${livesSaved} lives saved are an estimate based on the fact that one blood donation can save up to 3 lives.`}
+                    </div>
+                  </div>
                 </span>
               </div>
             </div>
@@ -165,7 +176,7 @@ export const DonnonsWidgetSim: React.FC = () => {
                         <img
                           src={`${baseUrl}images/donnons/dono_default.png`}
                           alt="Roby"
-                          className="w-full h-full object-contain animate-bounce cursor-pointer hover:scale-125 transition-transform origin-bottom"
+                          className="w-[70%] h-[70%] object-contain animate-bounce cursor-pointer hover:scale-110 transition-transform origin-bottom"
                           onError={(e) => {
                             (e.target as HTMLElement).style.display = 'none';
                           }}
@@ -204,7 +215,7 @@ export const DonnonsWidgetSim: React.FC = () => {
 
               {/* Foreground Center White Cutout Square */}
               <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
-                <div className="bg-[#fffbf1] border-2 border-black px-4 py-2 sm:px-5 sm:py-2.5 shadow-[3px_3px_0px_0px_#000] flex flex-col items-center justify-center pointer-events-auto">
+                <div className="bg-[#fffbf1] border-2 border-black px-4 py-2 sm:px-5 sm:py-2.5 shadow-[3px_3px_0px_0px_#000] flex flex-col items-center justify-center pointer-events-auto group relative cursor-help">
                   <span className="text-[#0073e6] font-mono text-3xl sm:text-5xl font-black leading-none">
                     {livesSaved}
                   </span>
@@ -212,15 +223,30 @@ export const DonnonsWidgetSim: React.FC = () => {
                     {isFrench ? 'Potentielles vies' : 'Potential lives'}<br />
                     {isFrench ? 'sauvées' : 'saved'}
                   </span>
+                  {/* Tooltip Popup on Hover */}
+                  <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block z-50 w-64 p-2 bg-black text-white text-[11px] font-mono shadow-[3px_3px_0px_0px_rgba(0,0,0,0.5)] leading-relaxed pointer-events-none border border-slate-700 text-center">
+                    {isFrench
+                      ? `Les ${livesSaved} vies sauvées sont une estimation basée sur le fait qu'un don de sang peut sauver jusqu'à 3 vies.`
+                      : `The ${livesSaved} lives saved are an estimate based on the fact that one blood donation can save up to 3 lives.`}
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Grid Footnote (Clean count without unnecessary text) */}
+            {/* Grid Footnote */}
             <div className="w-full max-w-[460px] pt-2 flex items-center justify-between text-[11px] font-mono text-slate-500">
-              <span className="font-semibold text-slate-700">
-                {isFrench ? 'Modèle prévisionnel 1 don = 3 vies' : 'Forecasting model 1 donation = 3 lives'}
-              </span>
+              <div className="relative group inline-flex items-center gap-1 cursor-help">
+                <span className="font-semibold text-slate-700">
+                  {isFrench ? 'Modèle prévisionnel 1 don = 3 vies' : 'Forecasting model 1 donation = 3 lives'}
+                </span>
+                <Info className="w-3.5 h-3.5 text-slate-400 group-hover:text-black transition-colors" />
+                {/* Tooltip Popup */}
+                <div className="absolute bottom-full left-0 mb-2 hidden group-hover:block z-50 w-64 p-2 bg-black text-white text-[11px] font-mono shadow-[3px_3px_0px_0px_rgba(0,0,0,0.5)] leading-relaxed pointer-events-none border border-slate-700 text-left">
+                  {isFrench
+                    ? `Les ${livesSaved} vies sauvées sont une estimation basée sur le fait qu'un don de sang peut sauver jusqu'à 3 vies.`
+                    : `The ${livesSaved} lives saved are an estimate based on the fact that one blood donation can save up to 3 lives.`}
+                </div>
+              </div>
               <span className="font-bold text-[#0073e6]">
                 {blueCount} / {totalGrid} {isFrench ? 'donneurs actifs' : 'active donors'}
               </span>

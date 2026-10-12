@@ -55,9 +55,9 @@ export const DonnonsDetailShowcase: React.FC = () => {
         </div>
 
         {/* Playable Cosmic Quiz Screen */}
-        <div className="border-2 border-black shadow-[4px_4px_0px_0px_#000] bg-[#241838] text-white p-6 sm:p-10 relative overflow-hidden">
-          {/* Real Background Image from sixieme_sens-main */}
-          <div className="absolute inset-0 opacity-40 pointer-events-none">
+        <div className="border-2 border-black shadow-[6px_6px_0px_0px_#000] bg-[#241838] text-white p-6 sm:p-10 relative overflow-hidden">
+          {/* Authentic Space Background from sixieme_sens-main */}
+          <div className="absolute inset-0 opacity-50 pointer-events-none">
             <img
               src={`${baseUrl}images/donnons/quiz/00_bkg/background_space.png`}
               alt="Space background"
@@ -69,126 +69,119 @@ export const DonnonsDetailShowcase: React.FC = () => {
           </div>
 
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            {/* Left: The Question Card */}
-            <div className="lg:col-span-7 bg-[#2E2045] border-2 border-black p-5 sm:p-7 shadow-[4px_4px_0px_0px_#000] space-y-5">
-              <div className="flex items-center justify-between text-[11px] font-mono border-b border-purple-800/80 pb-2">
-                <span className="px-2 py-0.5 bg-purple-950 border border-purple-700 text-purple-200 font-bold">
+            {/* Left: The Authentic QuizzCobrand Question Box (#463b78) */}
+            <div className="lg:col-span-7 bg-[#463b78] border-2 border-black p-6 sm:p-8 shadow-[6px_6px_0px_0px_#000] text-[#fffbf1] space-y-5">
+              <div className="flex items-center justify-between text-xs font-mono border-b border-black/30 pb-3">
+                <span className="px-3 py-1 bg-[#322947] border-2 border-black text-white font-bold shadow-[2px_2px_0px_0px_#000]">
                   QUESTION 06 / 12
                 </span>
-                <span className="text-purple-300 flex items-center gap-1">
-                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                <span className="flex items-center gap-1.5 text-xs text-[#ffeeab] font-bold">
+                  <ShieldCheck className="w-4 h-4 text-emerald-400" />
                   <span>{isFrench ? 'Critère de sécurité HUG' : 'HUG safety protocol'}</span>
                 </span>
               </div>
 
               <div className="space-y-2">
-                <h3 className="text-lg sm:text-xl font-bold font-mono text-white leading-snug">
+                <h3 className="text-xl sm:text-2xl font-bold font-mono text-white leading-tight">
                   {isFrench
                     ? 'As-tu été piqué par une tique dans les 4 dernières semaines ?'
                     : 'Have you been bitten by a tick in the last 4 weeks?'}
                 </h3>
-                <p className="text-xs text-purple-200 leading-relaxed font-sans">
+                <p className="text-xs sm:text-sm text-[#D5D9ED] leading-relaxed font-sans">
                   {isFrench
                     ? 'Ce critère prévient la transmission potentielle de bactéries ou virus transmissibles par les tiques.'
-                    : 'This safety criteria prevents potential transmission of tick-borne bacteria or viruses.'}
+                    : 'This safety criterion prevents the potential transmission of tick-borne bacteria or viruses.'}
                 </p>
               </div>
 
-              {/* Action Buttons */}
-              <div className="flex flex-wrap gap-3 font-mono text-xs">
+              {/* Action Buttons styled as QuizzCobrand */}
+              <div className="flex flex-wrap gap-3 font-mono text-xs sm:text-sm pt-1">
                 <button
                   type="button"
                   onClick={() => setQuizAnswer('no')}
-                  className={`px-4 py-2.5 border-2 font-bold transition-all flex items-center space-x-2 ${
+                  className={`px-4 sm:px-5 py-2.5 sm:py-3 border-2 border-black font-bold transition-all flex items-center space-x-2 ${
                     quizAnswer === 'no'
-                      ? 'bg-emerald-400 text-black border-black shadow-[3px_3px_0px_0px_#000]'
-                      : 'bg-[#1D132D] text-purple-200 border-purple-700 hover:border-purple-400'
+                      ? 'bg-[#4ade80] text-black shadow-[4px_4px_0px_0px_#000]'
+                      : 'bg-white text-black shadow-[2px_2px_0px_0px_#000] hover:shadow-[1px_1px_0px_0px_#000] hover:translate-y-[1px]'
                   }`}
                 >
-                  <CheckCircle2 className="w-4 h-4" />
-                  <span>{isFrench ? 'Non, aucune piqûre' : 'No, no bites'}</span>
+                  <CheckCircle2 className="w-4 h-4 text-emerald-800" />
+                  <span>{isFrench ? 'Non, aucune piqûre' : 'No, no bites.'}</span>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => setQuizAnswer('yes')}
-                  className={`px-4 py-2.5 border-2 font-bold transition-all flex items-center space-x-2 ${
+                  className={`px-4 sm:px-5 py-2.5 sm:py-3 border-2 border-black font-bold transition-all flex items-center space-x-2 ${
                     quizAnswer === 'yes'
-                      ? 'bg-amber-400 text-black border-black shadow-[3px_3px_0px_0px_#000]'
-                      : 'bg-[#1D132D] text-purple-200 border-purple-700 hover:border-purple-400'
+                      ? 'bg-[#ff9166] text-black shadow-[4px_4px_0px_0px_#000]'
+                      : 'bg-white text-black shadow-[2px_2px_0px_0px_#000] hover:shadow-[1px_1px_0px_0px_#000] hover:translate-y-[1px]'
                   }`}
                 >
-                  <AlertCircle className="w-4 h-4" />
+                  <AlertCircle className="w-4 h-4 text-amber-900" />
                   <span>{isFrench ? 'Oui, récemment' : 'Yes, recently'}</span>
                 </button>
               </div>
 
-              {/* Dynamic Feedback Card */}
+              {/* Feedback Display */}
               <div className="pt-2">
                 {quizAnswer === 'no' ? (
-                  <div className="p-3.5 bg-emerald-950/90 border-2 border-emerald-500 text-emerald-200 text-xs flex items-start space-x-3">
-                    <img
-                      src={`${baseUrl}images/donnons/quiz/06_tick/tick_no.png`}
-                      alt="Tick No"
-                      className="w-8 h-8 object-contain shrink-0"
-                      onError={(e) => {
-                        (e.target as HTMLElement).style.display = 'none';
-                      }}
-                    />
-                    <div>
-                      <span className="font-bold text-emerald-300 block text-sm font-mono">
-                        {isFrench ? 'La tique a raté sa cible, zéro souci !' : 'Target missed, all clear!'}
+                  <div className="p-4 bg-[#1f3f2d] border-2 border-black text-emerald-100 shadow-[3px_3px_0px_0px_#000] space-y-1">
+                    <div className="flex items-center justify-between text-xs font-mono font-bold">
+                      <span className="px-2 py-0.5 bg-[#4ade80] text-black border border-black uppercase text-[10px]">
+                        Tick: No
                       </span>
-                      <p className="text-[11px] text-emerald-200/90 pt-0.5 font-sans leading-relaxed">
-                        {isFrench
-                          ? 'Tu es pleinement éligible pour donner ton sang lors de la prochaine collecte en entreprise.'
-                          : 'You are fully eligible to donate blood at the upcoming corporate mobile drive.'}
-                      </p>
+                      <span className="text-emerald-400 font-bold">
+                        {isFrench ? 'Éligible au don' : 'Eligible'}
+                      </span>
                     </div>
+                    <span className="font-bold text-white block text-sm sm:text-base font-mono pt-1">
+                      {isFrench ? 'La tique a raté sa cible, zéro souci !' : 'Target missed, all clear!'}
+                    </span>
+                    <p className="text-xs text-emerald-200/90 font-sans leading-relaxed">
+                      {isFrench
+                        ? 'Tu es pleinement éligible pour donner ton sang lors de la prochaine collecte en entreprise.'
+                        : 'You are fully eligible to donate blood at the upcoming corporate mobile drive.'}
+                    </p>
                   </div>
                 ) : (
-                  <div className="p-3.5 bg-amber-950/90 border-2 border-amber-500 text-amber-200 text-xs flex items-start space-x-3">
-                    <img
-                      src={`${baseUrl}images/donnons/quiz/06_tick/tick_yes.png`}
-                      alt="Tick Yes"
-                      className="w-8 h-8 object-contain shrink-0"
-                      onError={(e) => {
-                        (e.target as HTMLElement).style.display = 'none';
-                      }}
-                    />
-                    <div>
-                      <span className="font-bold text-amber-300 block text-sm font-mono">
-                        {isFrench ? 'Délai de précaution de 4 semaines' : '4-week precaution buffer'}
+                  <div className="p-4 bg-[#3d2319] border-2 border-black text-amber-100 shadow-[3px_3px_0px_0px_#000] space-y-1">
+                    <div className="flex items-center justify-between text-xs font-mono font-bold">
+                      <span className="px-2 py-0.5 bg-[#ff9166] text-black border border-black uppercase text-[10px]">
+                        Tick: Yes
                       </span>
-                      <p className="text-[11px] text-amber-200/90 pt-0.5 font-sans leading-relaxed">
-                        {isFrench
-                          ? 'Simple report temporaire par précaution. Tu pourras participer dès la fin de ce délai sans aucune démarche compliquée !'
-                          : 'Simple temporary deferral for peace of mind. You will be able to donate as soon as this period elapses!'}
-                      </p>
+                      <span className="text-amber-400 font-bold">
+                        {isFrench ? 'Report temporaire' : 'Temporary buffer'}
+                      </span>
                     </div>
+                    <span className="font-bold text-white block text-sm sm:text-base font-mono pt-1">
+                      {isFrench ? 'Délai de précaution de 4 semaines' : '4-week precaution buffer'}
+                    </span>
+                    <p className="text-xs text-amber-200/90 font-sans leading-relaxed">
+                      {isFrench
+                        ? 'Simple report temporaire par précaution. Tu pourras participer dès la fin de ce délai sans aucune démarche compliquée !'
+                        : 'Simple temporary deferral for peace of mind. You will be able to donate as soon as this period elapses!'}
+                    </p>
                   </div>
                 )}
               </div>
             </div>
 
-            {/* Right: Real Roby Mascot & Parachute Asset from sixieme_sens-main */}
-            <div className="lg:col-span-5 flex flex-col items-center justify-center p-4 space-y-4">
-              <div className="relative">
-                <img
-                  src={`${baseUrl}images/donnons/dono_smiling.png`}
-                  alt="Roby"
-                  className="w-36 sm:w-44 h-auto object-contain drop-shadow-xl"
-                  onError={(e) => {
-                    (e.target as HTMLElement).style.display = 'none';
-                  }}
-                />
-              </div>
+            {/* Right: Authentic Tick Quiz Illustration from 06_tick/ */}
+            <div className="lg:col-span-5 flex flex-col items-center justify-center p-2 relative min-h-[260px] sm:min-h-[340px]">
+              <img
+                src={`${baseUrl}images/donnons/quiz/06_tick/tick_${
+                  quizAnswer === 'yes' ? 'yes' : quizAnswer === 'no' ? 'no' : 'base'
+                }.png`}
+                alt="Tick Quiz Roby"
+                className="max-h-[260px] sm:max-h-[340px] w-auto object-contain drop-shadow-[0_12px_24px_rgba(0,0,0,0.7)] transition-all duration-300"
+                onError={(e) => {
+                  (e.target as HTMLElement).style.display = 'none';
+                }}
+              />
 
-              {/* Neo-brutalist Speech Bubble */}
-              <div className="bg-[#1a81e7] text-white p-3.5 border-2 border-black shadow-[3px_3px_0px_0px_#000] max-w-xs text-center font-mono text-xs font-bold leading-snug">
-                {isFrench
-                  ? 'Salut ! Je suis Roby. Ensemble, on vérifie ton éligibilité en toute bienveillance.'
-                  : 'Hey! I am Roby. Together, we check your blood donation eligibility smoothly.'}
+              <div className="mt-3 px-3 py-1 bg-black/60 border border-purple-500/40 text-[11px] font-mono text-purple-200">
+                <span>{quizAnswer === 'no' ? 'tick_no.png (Roby esquive la tique)' : 'tick_yes.png (Impact temporaire)'}</span>
               </div>
             </div>
           </div>
