@@ -18,7 +18,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
   };
 
   const navLinks = [
-    { targetId: 'home', label: t('nav.home') },
     { targetId: 'projects', label: t('nav.projects') },
     { targetId: 'about', label: t('nav.about') },
     { targetId: 'bachelor-pitch', label: t('nav.bachelorPitch') },

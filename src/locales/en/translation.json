@@ -267,18 +267,18 @@
     "experience": {
       "appapp": {
         "org": "AppApp",
-        "role": "Academic Tutor (Mathematics, Physics & Economics)",
-        "description": "Providing private tutoring and individualized academic instruction in mathematics, physics, and economics to secondary and high school students over the past 3 years."
+        "role": "Academic Tutor",
+        "description": "Maths, physics, and economics private lessons (3 years)."
       },
       "glgb": {
-        "org": "Global Leadership Geneva-Bern (GLGB), Geneva",
-        "role": "Volunteer in an International Organization",
-        "description": "Participant registration coordination, digital workflow and technical presentation management (Google Drive), photography, and video editing."
+        "org": "GLGB (Geneva)",
+        "role": "Volunteer",
+        "description": "Participant registration, technical presentation support, photography and video editing."
       },
       "ficf": {
-        "org": "Foundation for Indian Children's Future (FICF), Fribourg",
+        "org": "FICF (Fribourg)",
         "role": "Educational Foundation Member",
-        "description": "On-site educational project visits in India, volunteering in medical camps and childcare, administrative support in Switzerland, English-to-French child profile translations, and donor documentation preparation."
+        "description": "Field visits in India, medical camps, administrative support, and French-English translations."
       }
     },
     "linksTitle": "Links",

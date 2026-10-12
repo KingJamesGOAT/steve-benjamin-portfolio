@@ -267,18 +267,18 @@
     "experience": {
       "appapp": {
         "org": "AppApp",
-        "role": "Tuteur Académique (Mathématiques, Physique & Économie)",
-        "description": "Dispense de cours d'appui et suivi pédagogique individualisé pour des élèves en mathématiques, physique et économie au cours des 3 dernières années."
+        "role": "Tuteur Académique",
+        "description": "Cours d'appui en mathématiques, physique et économie (3 ans)."
       },
       "glgb": {
-        "org": "Global Leadership Geneva-Bern (GLGB), Genève",
-        "role": "Bénévole dans une organisation internationale",
-        "description": "Aide à l'enregistrement des participants, gestion de la technique et des présentations (Google Drive), photographies et montage."
+        "org": "GLGB (Genève)",
+        "role": "Bénévole",
+        "description": "Accueil des participants, support technique et présentations, photo et montage."
       },
       "ficf": {
-        "org": "Foundation for Indian Children's Future (FICF), Fribourg",
-        "role": "Membre dans une fondation éducative",
-        "description": "Visite de sites de projets en Inde, bénévolat dans des camps médicaux et activités de soins aux enfants, aide administrative en Suisse, traduction des profils d'enfants de l'anglais au français et préparation de documents pour les sponsors et les donateurs."
+        "org": "FICF (Fribourg)",
+        "role": "Membre Fondation Éducative",
+        "description": "Visites de projets en Inde, camps médicaux, aide administrative et traductions."
       }
     },
     "linksTitle": "Liens",

@@ -124,7 +124,9 @@ export const About: React.FC<AboutProps> = ({ id = 'about' }) => {
                   </h4>
                 </div>
                 <p className="text-xs sm:text-sm text-slate-600 leading-relaxed pt-0.5">
-                  <span className="font-semibold text-slate-800">{item.org}</span> — {item.description}
+                  <span className="font-semibold text-slate-800">{item.org}</span>
+                  <span className="mx-2 text-slate-400">·</span>
+                  {item.description}
                 </p>
               </div>
             </div>

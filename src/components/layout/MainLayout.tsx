@@ -1,5 +1,4 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 import Navbar from './Navbar';
 import CommandPalette from '../features/CommandPalette';
 import useCtrlK from '../../hooks/useCtrlK';
@@ -9,7 +8,6 @@ interface MainLayoutProps {
 }
 
 export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
-  const { t } = useTranslation();
   const { isOpen, close, open } = useCtrlK();
 
   return (
@@ -25,26 +23,9 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
         {children}
       </main>
 
-      {/* Sleek Minimalist FinTech Footer */}
-      <footer className="border-t border-slate-200/80 bg-white py-6 text-xs text-fintech-muted">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <div className="flex items-center space-x-2">
-            <span className="w-2 h-2 rounded-none bg-emerald-500 inline-block" />
-            <span>{t('footer.rights')}</span>
-          </div>
-
-          <div className="flex items-center space-x-4">
-            <button
-              onClick={open}
-              className="text-slate-400 hover:text-electric transition-colors font-mono text-[11px] inline-flex items-center gap-1.5"
-            >
-              <span>{t('nav.search')}</span>
-            </button>
-            <span className="font-mono text-[11px] text-slate-400">
-              {t('footer.tagline')}
-            </span>
-          </div>
-        </div>
+      {/* Minimalist Centered Footer */}
+      <footer className="border-t border-slate-200/80 bg-white py-8 text-xs text-slate-500 font-mono text-center">
+        <p>© 2026 Steve Benjamin</p>
       </footer>
     </div>
   );
