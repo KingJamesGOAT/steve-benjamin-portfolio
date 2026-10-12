@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { ExternalLink, ArrowRight } from 'lucide-react';
 import CryptoWidgetSim from '../components/features/CryptoWidgetSim';
+import DonnonsWidgetSim from '../components/features/DonnonsWidgetSim';
 
 export const Projects: React.FC = () => {
   const { t } = useTranslation();
@@ -49,27 +50,29 @@ export const Projects: React.FC = () => {
 
       {/* Primary Project 2: Donnons.ch */}
       <section className="rounded-none border border-slate-200 bg-white p-6 sm:p-8 shadow-sm space-y-6">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-fintech-primary">
-            {t('projects.donnons.title')}
-          </h2>
+        <div className="space-y-2">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-fintech-primary">
+              {t('projects.donnons.title')}
+            </h2>
 
-          <Link
-            to="/projects/donnons-ch"
-            className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-none bg-electric hover:bg-electric-hover text-white text-xs font-semibold shadow-sm transition-colors"
-          >
-            <span>{t('projects.viewDeepDive')}</span>
-            <ExternalLink className="w-3.5 h-3.5" />
-          </Link>
-        </div>
+            <Link
+              to="/projects/donnons-ch"
+              className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-none bg-electric hover:bg-electric-hover text-white text-xs font-semibold shadow-sm transition-colors"
+            >
+              <span>{t('projects.viewDeepDive')}</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </Link>
+          </div>
 
-        <div>
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-fintech-primary">
-            {t('projects.donnons.title')}
-          </h2>
-          <p className="mt-3 text-sm sm:text-base text-fintech-secondary leading-relaxed">
+          <p className="text-sm sm:text-base text-fintech-secondary leading-relaxed">
             {t('projects.donnons.description')}
           </p>
+        </div>
+
+        {/* Live Simulation Embed */}
+        <div className="w-full">
+          <DonnonsWidgetSim />
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
