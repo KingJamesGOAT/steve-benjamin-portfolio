@@ -18,7 +18,6 @@ interface LexiconTerm {
 interface TimelineItem {
   id: string;
   year: number;
-  era: 'ancient' | 'patristic' | 'scholastic' | 'modern';
   type: 'treatise' | 'scholar' | 'method';
   title: { en: string; fr: string };
   description: { en: string; fr: string };
@@ -36,11 +35,10 @@ export const LexiconDetailShowcase: React.FC = () => {
   // 2. SmartText Hovered Term
   const [hoveredTerm, setHoveredTerm] = useState<LexiconTerm | null>(null);
 
-  // 3. Timeline Active Era
-  const [selectedEra, setSelectedEra] = useState<string>('all');
+  // 3. Timeline Active Event
   const [selectedEventId, setSelectedEventId] = useState<string>('nicaea');
 
-  // Curated database: scientific, philosophical, and classical Latin/Greek terms
+  // Curated database: scientific, physical, philosophical, and Latin/theological terms
   const lexiconData: LexiconTerm[] = [
     {
       id: 'ontology',
@@ -109,6 +107,116 @@ export const LexiconDetailShowcase: React.FC = () => {
       related: ['Disputatio', 'Thomas Aquinas', 'Dialectics', 'Logica Vetus'],
     },
     {
+      id: 'entropy',
+      term: { en: 'Entropy', fr: 'Entropie' },
+      category: { en: 'Thermodynamics & Information Theory', fr: 'Thermodynamique & Théorie de l\'Information' },
+      origin: 'Greek: en (in) + trope (transformation)',
+      definition: {
+        en: 'A foundational physical quantity measuring microscopic degeneracy, irreversibility of state evolution, and informational uncertainty in closed physical systems.',
+        fr: 'Grandeur physique fondamentale mesurant le degré de désordre microscopique, l\'irréversibilité des transformations et la dispersion de l\'énergie d\'un système.',
+      },
+      related: ['Thermodynamics', 'Statistical Mechanics', 'Information Theory'],
+    },
+    {
+      id: 'causality',
+      term: { en: 'Causality', fr: 'Causalité' },
+      category: { en: 'Theoretical Physics & Metaphysics', fr: 'Physique Théorique & Métaphysique' },
+      origin: 'Latin: causalitas (relation of cause to effect)',
+      definition: {
+        en: 'The invariant principle governing physical spacetime stating that no effect can precede its cause, preserving relativistic light-cone ordering and deterministic chains.',
+        fr: 'Le principe fondamental en physique et philosophie stipulant que tout état subséquent résulte d\'interactions antérieures respectant le cône de lumière relativiste.',
+      },
+      related: ['Determinism', 'Relativity', 'Ontology', 'Teleology'],
+    },
+    {
+      id: 'axiom',
+      term: { en: 'Axiom', fr: 'Axiome' },
+      category: { en: 'Mathematical Logic & Foundations', fr: 'Logique Mathématique & Fondements' },
+      origin: 'Greek: axioma (that which is thought worthy / self-evident proposition)',
+      definition: {
+        en: 'A foundational proposition accepted without formal proof, serving as the necessary starting premise for deductive mathematical and logical derivation.',
+        fr: 'Énoncé premier posé comme vrai a priori, servant de base indémontrable mais nécessaire à la construction d\'un système formel ou d\'une théorie mathématique.',
+      },
+      related: ['Deduction', 'Formal Logic', 'Axiomatics', 'Epistemology'],
+    },
+    {
+      id: 'dialectics',
+      term: { en: 'Dialectics', fr: 'Dialectique' },
+      category: { en: 'Logic & Critical Philosophy', fr: 'Logique & Philosophie Critique' },
+      origin: 'Greek: dialektike (art of conversation / debate)',
+      definition: {
+        en: 'A discourse method resolving rational oppositions through structured contradiction, counter-argumentation, and systematic higher-level synthetic reconciliation.',
+        fr: 'Méthode de raisonnement progressant par examen contradictoire de thèses opposées en vue de parvenir à une synthèse conceptuelle supérieure.',
+      },
+      related: ['Scholasticism', 'Disputatio', 'Logic', 'Rhetoric'],
+    },
+    {
+      id: 'determinism',
+      term: { en: 'Determinism', fr: 'Déterminisme' },
+      category: { en: 'Philosophy of Physics', fr: 'Philosophie de la Physique' },
+      origin: 'Latin: determinare (to bound / limit)',
+      definition: {
+        en: 'The philosophical and physical doctrine positing that all events, states, and evolutions are completely determined by unbroken chains of prior physical conditions and laws.',
+        fr: 'Principe physique et philosophique selon lequel l\'enchaînement des événements est rigoureusement régi par des lois causales nécessaires sans indétermination pure.',
+      },
+      related: ['Causality', 'Classical Mechanics', 'Entropy'],
+    },
+    {
+      id: 'dogma',
+      term: { en: 'Dogma', fr: 'Dogme' },
+      category: { en: 'Epistemology & Foundational Doctrine', fr: 'Épistémologie & Doctrine Fondamentale' },
+      origin: 'Greek: dogma (that which seems true / decreed principle)',
+      definition: {
+        en: 'A central authoritative tenet or verified fundamental principle established by recognized scholastic or institutional consensus as essential and non-negotiable.',
+        fr: 'Proposition ou principe fondamental tenu pour certain et intangible, établi au terme d\'un consensus doctrinal ou institutionnel rigoureusement consigné.',
+      },
+      related: ['Magisterium', 'Canon', 'Tradition'],
+    },
+    {
+      id: 'exegesis',
+      term: { en: 'Exegesis', fr: 'Exégèse' },
+      category: { en: 'Philology & Textual Analysis', fr: 'Philologie & Analyse Textuelle' },
+      origin: 'Greek: exegesis (explanation / leading out)',
+      definition: {
+        en: 'Critical, objective grammatical, historical, and contextual explanation or interpretation of a manuscript or foundational text.',
+        fr: 'Analyse critique, philologique et historique d\'un texte ancien visant à en dégager le sens authentique et le contexte d\'élaboration originel.',
+      },
+      related: ['Hermeneutics', 'Philology', 'Canon'],
+    },
+    {
+      id: 'patristics',
+      term: { en: 'Patristics', fr: 'Patristique' },
+      category: { en: 'Historical Intellectual Lineage', fr: 'Histoire Intellectuelle & Philologie' },
+      origin: 'Latin: patres (early teachers / fathers)',
+      definition: {
+        en: 'The historical and textual study of early foundational thinkers and scholars who developed classical metaphysics and codified intellectual transmission.',
+        fr: 'Discipline consacrée à l\'étude des penseurs, traités et controverses philosophiques et textuelles des premiers siècles de l\'ère savante.',
+      },
+      related: ['Tradition', 'Magisterium', 'Hermeneutics'],
+    },
+    {
+      id: 'canon',
+      term: { en: 'Canon', fr: 'Canon' },
+      category: { en: 'Normative Epistemology', fr: 'Épistémologie Normative' },
+      origin: 'Greek: kanon (measuring rod / standard rule)',
+      definition: {
+        en: 'An officially codified standard, authoritative criterion, or comprehensive accepted corpus of texts recognized as foundational and authentic.',
+        fr: 'Ensemble normatif des textes, règles ou critères méthodologiques officiellement reconnus comme faisant autorité et servant d\'étalon de référence.',
+      },
+      related: ['Magisterium', 'Dogma', 'Exegesis'],
+    },
+    {
+      id: 'heuristic',
+      term: { en: 'Heuristic', fr: 'Heuristique' },
+      category: { en: 'Cognitive Science & Algorithmic Method', fr: 'Sciences Cognitives & Méthode Algorithmique' },
+      origin: 'Greek: heuriskein (to find / discover)',
+      definition: {
+        en: 'A practical problem-solving methodology or computational rule designed to produce satisfactory solutions under constraints of incomplete knowledge.',
+        fr: 'Démarche méthodologique ou algorithmique pratique visant à trouver des solutions approchées efficaces face à des problèmes complexes non calculables directement.',
+      },
+      related: ['Epistemology', 'Empiricism', 'Methodology'],
+    },
+    {
       id: 'hermeneutics',
       term: { en: 'Hermeneutics', fr: 'Herméneutique' },
       category: { en: 'Textual Criticism & Philology', fr: 'Critique Textuelle & Philologie' },
@@ -137,7 +245,6 @@ export const LexiconDetailShowcase: React.FC = () => {
     {
       id: 'nicaea',
       year: 325,
-      era: 'ancient',
       type: 'treatise',
       title: { en: 'First Conciliar Consensus (325 AD)', fr: 'Premier Consensus Conciliaire (325)' },
       description: {
@@ -152,7 +259,6 @@ export const LexiconDetailShowcase: React.FC = () => {
     {
       id: 'boethius',
       year: 524,
-      era: 'patristic',
       type: 'scholar',
       title: { en: 'Boethius: Translation of Organon (524 AD)', fr: 'Boèce : Traduction de l\'Organon (524)' },
       description: {
@@ -167,7 +273,6 @@ export const LexiconDetailShowcase: React.FC = () => {
     {
       id: 'aquinas',
       year: 1274,
-      era: 'scholastic',
       type: 'scholar',
       title: { en: 'Thomas Aquinas: Scholastic Synthesis (1274 AD)', fr: 'Thomas d\'Aquin : Synthèse Scolastique (1274)' },
       description: {
@@ -182,7 +287,6 @@ export const LexiconDetailShowcase: React.FC = () => {
     {
       id: 'descartes',
       year: 1637,
-      era: 'modern',
       type: 'method',
       title: { en: 'Discourse on the Method (1637 AD)', fr: 'Discours de la Méthode (1637)' },
       description: {
@@ -211,12 +315,6 @@ export const LexiconDetailShowcase: React.FC = () => {
   });
 
   const activeTerm = lexiconData.find((t) => t.id === selectedTermId) || lexiconData[0];
-
-  // Filtering timeline
-  const filteredEvents = timelineEvents.filter((item) => {
-    if (selectedEra === 'all') return true;
-    return item.era === selectedEra;
-  });
 
   const activeEvent = timelineEvents.find((e) => e.id === selectedEventId) || timelineEvents[0];
 
@@ -278,11 +376,7 @@ export const LexiconDetailShowcase: React.FC = () => {
                     setSelectedTermId(filteredLexicon[0].id);
                   }
                 }}
-                placeholder={
-                  isFrench
-                    ? 'Rechercher un terme (ex: Ontologie, Épistémologie, Magistère, Scolastique)...'
-                    : 'Search across 5,000+ terms (e.g., Ontology, Epistemology, Magisterium, Scholasticism)...'
-                }
+                placeholder={isFrench ? 'Rechercher un terme' : 'Search a term'}
                 className="w-full bg-transparent text-sm text-white placeholder-slate-500 font-mono focus:outline-none"
               />
               <div className="hidden sm:flex items-center space-x-1 pl-3 text-[11px] font-mono text-slate-400 shrink-0">
@@ -296,7 +390,7 @@ export const LexiconDetailShowcase: React.FC = () => {
           {/* Interactive Two-Column Result Explorer */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 pt-2">
             {/* Left: Term List */}
-            <div className="lg:col-span-5 bg-black/40 border border-white/10 p-2 max-h-[340px] overflow-y-auto divide-y divide-white/5 space-y-1">
+            <div className="lg:col-span-5 bg-black/40 border border-white/10 p-2 max-h-[380px] overflow-y-auto divide-y divide-white/5 space-y-1">
               {filteredLexicon.length > 0 ? (
                 filteredLexicon.map((term) => (
                   <button
@@ -309,16 +403,8 @@ export const LexiconDetailShowcase: React.FC = () => {
                         : 'hover:bg-white/5 text-slate-300'
                     }`}
                   >
-                    <div className="space-y-0.5 pr-2">
-                      <div className="font-mono text-sm font-bold group-hover:text-blue-300 transition-colors">
-                        {isFrench ? term.term.fr : term.term.en}
-                      </div>
-                      <div className="text-[11px] text-slate-500 font-mono">
-                        {isFrench ? term.category.fr : term.category.en}
-                      </div>
-                    </div>
-                    <span className="text-[10px] font-mono px-1.5 py-0.5 bg-white/5 border border-white/10 text-slate-400">
-                      {term.id}
+                    <span className="font-mono text-sm font-bold group-hover:text-blue-300 transition-colors">
+                      {isFrench ? term.term.fr : term.term.en}
                     </span>
                   </button>
                 ))
@@ -332,18 +418,10 @@ export const LexiconDetailShowcase: React.FC = () => {
             {/* Right: Detailed Definition Inspector Card */}
             <div className="lg:col-span-7 bg-white/[0.03] border border-white/10 p-5 sm:p-7 space-y-4 flex flex-col justify-between">
               <div className="space-y-3">
-                <div className="flex items-center justify-between border-b border-white/10 pb-3">
-                  <div className="space-y-0.5">
-                    <span className="text-[11px] font-mono font-bold text-blue-400 uppercase tracking-wider block">
-                      {isFrench ? activeTerm.category.fr : activeTerm.category.en}
-                    </span>
-                    <h3 className="text-2xl font-bold font-mono text-white">
-                      {isFrench ? activeTerm.term.fr : activeTerm.term.en}
-                    </h3>
-                  </div>
-                  <span className="px-2.5 py-1 bg-blue-500/10 border border-blue-500/30 text-blue-300 text-xs font-mono">
-                    {activeTerm.origin}
-                  </span>
+                <div className="border-b border-white/10 pb-3">
+                  <h3 className="text-2xl font-bold font-mono text-white">
+                    {isFrench ? activeTerm.term.fr : activeTerm.term.en}
+                  </h3>
                 </div>
 
                 <p className="text-sm text-slate-200 leading-relaxed font-sans pt-1">
@@ -549,9 +627,6 @@ export const LexiconDetailShowcase: React.FC = () => {
                   <p className="text-xs text-slate-300 leading-relaxed font-sans">
                     {isFrench ? hoveredTerm.definition.fr : hoveredTerm.definition.en}
                   </p>
-                  <div className="text-[10px] text-slate-500 font-mono pt-1">
-                    {hoveredTerm.origin}
-                  </div>
                 </div>
               ) : (
                 <div className="p-4 bg-white/[0.02] border border-dashed border-white/10 text-xs font-mono text-slate-500 text-center">
@@ -588,31 +663,6 @@ export const LexiconDetailShowcase: React.FC = () => {
 
         {/* Timeline Interactive Component */}
         <div className="bg-[#05050a] border border-white/10 shadow-2xl p-6 sm:p-8 space-y-6">
-          {/* Era Filter Tabs */}
-          <div className="flex flex-wrap items-center gap-2 border-b border-white/10 pb-4">
-            <span className="text-xs font-mono text-slate-400 mr-2">{isFrench ? 'Période :' : 'Era:'}</span>
-            {[
-              { id: 'all', label: isFrench ? 'Tous les siècles' : 'All Eras' },
-              { id: 'ancient', label: isFrench ? 'Antiquité Tardive (325)' : 'Late Antiquity (325)' },
-              { id: 'patristic', label: isFrench ? 'Transmission Logique (524)' : 'Logical Transmission (524)' },
-              { id: 'scholastic', label: isFrench ? 'Apogée Scolastique (1274)' : 'Scholastic Peak (1274)' },
-              { id: 'modern', label: isFrench ? 'Méthode Moderne (1637)' : 'Modern Method (1637)' },
-            ].map((era) => (
-              <button
-                key={era.id}
-                type="button"
-                onClick={() => setSelectedEra(era.id)}
-                className={`px-3 py-1 border text-xs font-mono transition-colors ${
-                  selectedEra === era.id
-                    ? 'bg-blue-600 text-white border-blue-400 font-bold'
-                    : 'bg-white/5 text-slate-300 border-white/10 hover:border-white/30'
-                }`}
-              >
-                {era.label}
-              </button>
-            ))}
-          </div>
-
           {/* Timeline Grid: Event Buttons & Inspector */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
             {/* Left: Interactive Chronological Scrubber */}
@@ -621,7 +671,7 @@ export const LexiconDetailShowcase: React.FC = () => {
                 {isFrench ? 'Sélectionner un jalon historique :' : 'Select historical milestone:'}
               </span>
               <div className="space-y-2 max-h-[360px] overflow-y-auto pr-1">
-                {filteredEvents.map((evt) => (
+                {timelineEvents.map((evt) => (
                   <button
                     key={evt.id}
                     type="button"
