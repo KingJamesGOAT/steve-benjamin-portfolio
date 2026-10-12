@@ -238,7 +238,7 @@
     "badge": "03 / Profile & Trajectory",
     "title": "About",
     "location": "Bussigny, Vaud, Switzerland",
-    "summary": "Full-stack Media Engineering undergraduate with a prior vocational background in electronics. Focused on deterministic software architecture, low-latency financial systems, and clinical typographic design.",
+    "summary": "I'm Steve Benjamin, 24 years old, based in Bussigny and studying Media Engineering at HEIG-VD. I've been coding for nearly 9 years, starting with C in hardware electronics (drones, Bluetooth audio) before moving into modern web front-end and UX/UI design in Figma. Outside of pure tech, I founded and led a youth group for over 4 years and regularly deliver presentations and talks at work and conferences.",
     "educationTitle": "Education",
     "education": {
       "heig": {
