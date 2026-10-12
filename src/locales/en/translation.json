@@ -128,12 +128,12 @@
       "gradeValue": "Grade 6.0 / 6.0"
     },
     "catholicRoute": {
-      "tag": "Interactive Web Application",
-      "title": "Catholic Route",
-      "description": "Educational discovery platform featuring interactive route navigation and contextual glossary terms.",
-      "feature1": "Interactive Tooltips",
-      "feature2": "Quick Search",
-      "feature3": "Responsive Layout"
+      "tag": "Scholarly Digital Humanities Platform",
+      "title": "Lexicon & Chronology Engine",
+      "description": "Scholarly digital research engine featuring an indexed 5,000+ word lexicon with Ctrl+K navigation, contextual hover definitions, interactive multi-century chronology, and documentary media.",
+      "feature1": "5,000+ Word Ctrl+K Lexicon",
+      "feature2": "Contextual Hover Definitions",
+      "feature3": "Multi-Century Chronology Timeline"
     },
     "marriage": {
       "tag": "Private Web Application",

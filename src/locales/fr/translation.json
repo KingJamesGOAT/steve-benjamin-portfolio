@@ -128,12 +128,12 @@
       "gradeValue": "Note 6.0 / 6.0"
     },
     "catholicRoute": {
-      "tag": "Application Web Interactive",
-      "title": "Catholic Route",
-      "description": "Plateforme pédagogique de découverte proposant une navigation interactive et des termes de glossaire contextuels.",
-      "feature1": "Infobulles Interactives",
-      "feature2": "Recherche Rapide",
-      "feature3": "Mise en Page Responsive"
+      "tag": "Plateforme d'Humanités Numériques & Recherche",
+      "title": "Moteur Lexical & Frise Chronologique",
+      "description": "Moteur de recherche et d'exploration textuelle intégrant un lexique de plus de 5 000 entrées avec recherche Ctrl+K, infobulles contextuelles au survol, frise chronologique multi-séculaire et médias documentaires.",
+      "feature1": "Recherche Lexicale Ctrl+K (5 000+ mots)",
+      "feature2": "Infobulles Contextuelles au Survol",
+      "feature3": "Frise Chronologique Multi-Séculaire"
     },
     "marriage": {
       "tag": "Application Web Privée",

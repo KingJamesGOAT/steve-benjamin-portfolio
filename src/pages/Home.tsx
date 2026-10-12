@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { ArrowRight, FileDown, ExternalLink } from 'lucide-react';
+import { ArrowRight, FileDown, ExternalLink, Search } from 'lucide-react';
 import TechBentoGrid from '../components/features/TechBentoGrid';
 import CryptoWidgetSim from '../components/features/CryptoWidgetSim';
 import DonnonsWidgetSim from '../components/features/DonnonsWidgetSim';
@@ -338,23 +338,48 @@ export const Home: React.FC = () => {
           </div>
         </div>
 
-        {/* Smaller Showcases: Catholic Route & Marriage Platform */}
+        {/* Smaller Showcases: Lexicon Engine & Marriage Platform */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="rounded-none border border-slate-200 bg-white p-6 shadow-sm flex flex-col justify-between space-y-5">
             <div className="space-y-3">
-              <span className="inline-flex items-center px-2 py-0.5 rounded-none text-[11px] font-mono font-medium bg-blue-50 text-blue-700 border border-blue-200">
-                {t('projects.catholicRoute.tag')}
-              </span>
+              <div className="flex items-center justify-between">
+                <span className="inline-flex items-center px-2 py-0.5 rounded-none text-[11px] font-mono font-medium bg-blue-50 text-blue-700 border border-blue-200">
+                  {t('projects.catholicRoute.tag')}
+                </span>
+                <span className="text-[10px] font-mono text-slate-400">5,000+ words</span>
+              </div>
               <h3 className="text-xl font-bold tracking-tight text-fintech-primary">
                 {t('projects.catholicRoute.title')}
               </h3>
               <p className="text-xs sm:text-sm text-fintech-secondary leading-relaxed">
                 {t('projects.catholicRoute.description')}
               </p>
+
+              {/* Minimalist Preview Box */}
+              <div className="bg-[#05050a] border border-white/10 p-3.5 space-y-2 font-mono text-xs">
+                <div className="flex items-center justify-between bg-black/60 border border-white/10 px-2.5 py-1.5 text-slate-400 text-[11px]">
+                  <span className="flex items-center gap-1.5">
+                    <Search className="w-3 h-3 text-blue-400" />
+                    <span>Search 5,000+ terms...</span>
+                  </span>
+                  <span className="px-1.5 py-0.5 bg-white/10 text-slate-300 text-[10px] border border-white/15">Ctrl + K</span>
+                </div>
+                <div className="text-[11px] text-slate-300 font-sans leading-relaxed pt-0.5">
+                  Scholarly definitions like the{' '}
+                  <span className="text-blue-400 underline decoration-blue-500/60 decoration-dotted underline-offset-2">
+                    Magisterium
+                  </span>{' '}
+                  and{' '}
+                  <span className="text-blue-400 underline decoration-blue-500/60 decoration-dotted underline-offset-2">
+                    Hypostatic Union
+                  </span>{' '}
+                  with multi-century council timelines.
+                </div>
+              </div>
             </div>
 
             <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
-              <span className="text-xs font-mono text-slate-400">UX / UI Components</span>
+              <span className="text-xs font-mono text-slate-400">Ctrl+K · SmartText · Timeline</span>
               <Link
                 to="/projects/catholic-route"
                 className="inline-flex items-center space-x-1.5 text-xs font-mono font-semibold text-electric hover:underline"
