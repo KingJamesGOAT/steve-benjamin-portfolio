@@ -130,8 +130,8 @@
     "catholicRoute": {
       "tag": "Plateforme d'Humanités Numériques & Recherche",
       "title": "Moteur Lexical & Frise Chronologique",
-      "description": "Moteur de recherche et d'exploration textuelle intégrant un lexique de plus de 5 000 entrées avec recherche Ctrl+K, infobulles contextuelles au survol et frise chronologique multi-séculaire.",
-      "feature1": "Recherche Lexicale Ctrl+K (5 000+ mots)",
+      "description": "Moteur de recherche et d'exploration textuelle intégrant un lexique de plus de 5 000 entrées avec recherche instantanée, infobulles contextuelles au survol et frise chronologique multi-séculaire.",
+      "feature1": "Recherche Lexicale (5 000+ mots)",
       "feature2": "Infobulles Contextuelles au Survol",
       "feature3": "Frise Chronologique Multi-Séculaire"
     },

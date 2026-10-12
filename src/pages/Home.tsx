@@ -360,30 +360,49 @@ export const Home: React.FC = () => {
                 <div className="flex items-center justify-between bg-black/60 border border-white/10 px-2.5 py-1.5 text-slate-400 text-[11px]">
                   <span className="flex items-center gap-1.5">
                     <Search className="w-3 h-3 text-blue-400" />
-                    <span>Search 5,000+ terms...</span>
+                    <span>{isFrench ? 'Rechercher parmi 5 000+ termes...' : 'Search 5,000+ terms...'}</span>
                   </span>
-                  <span className="px-1.5 py-0.5 bg-white/10 text-slate-300 text-[10px] border border-white/15">Ctrl + K</span>
                 </div>
-                <div className="text-[11px] text-slate-300 font-sans leading-relaxed pt-0.5">
-                  Scholarly definitions like{' '}
-                  <span className="text-blue-400 underline decoration-blue-500/60 decoration-dotted underline-offset-2">
-                    Ontology
-                  </span>
-                  ,{' '}
-                  <span className="text-blue-400 underline decoration-blue-500/60 decoration-dotted underline-offset-2">
-                    Epistemology
-                  </span>{' '}
-                  and{' '}
-                  <span className="text-blue-400 underline decoration-blue-500/60 decoration-dotted underline-offset-2">
-                    Causality
-                  </span>{' '}
-                  with multi-century intellectual timelines.
-                </div>
+                {isFrench ? (
+                  <div className="text-[11px] text-slate-300 font-sans leading-relaxed pt-0.5">
+                    Définitions formelles comme{' '}
+                    <span className="text-blue-400 underline decoration-blue-500/60 decoration-dotted underline-offset-2">
+                      Ontologie
+                    </span>
+                    ,{' '}
+                    <span className="text-blue-400 underline decoration-blue-500/60 decoration-dotted underline-offset-2">
+                      Épistémologie
+                    </span>{' '}
+                    et{' '}
+                    <span className="text-blue-400 underline decoration-blue-500/60 decoration-dotted underline-offset-2">
+                      Causalité
+                    </span>{' '}
+                    avec frise chronologique multi-séculaire.
+                  </div>
+                ) : (
+                  <div className="text-[11px] text-slate-300 font-sans leading-relaxed pt-0.5">
+                    Formal definitions including{' '}
+                    <span className="text-blue-400 underline decoration-blue-500/60 decoration-dotted underline-offset-2">
+                      Ontology
+                    </span>
+                    ,{' '}
+                    <span className="text-blue-400 underline decoration-blue-500/60 decoration-dotted underline-offset-2">
+                      Epistemology
+                    </span>{' '}
+                    and{' '}
+                    <span className="text-blue-400 underline decoration-blue-500/60 decoration-dotted underline-offset-2">
+                      Causality
+                    </span>{' '}
+                    with multi-century timelines.
+                  </div>
+                )}
               </div>
             </div>
 
             <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
-              <span className="text-xs font-mono text-slate-400">Ctrl+K · SmartText · Timeline</span>
+              <span className="text-xs font-mono text-slate-400">
+                {isFrench ? 'Recherche · SmartText · Frise' : 'Search · SmartText · Timeline'}
+              </span>
               <Link
                 to="/projects/catholic-route"
                 className="inline-flex items-center space-x-1.5 text-xs font-mono font-semibold text-electric hover:underline"

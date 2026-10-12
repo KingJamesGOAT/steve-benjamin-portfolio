@@ -130,8 +130,8 @@
     "catholicRoute": {
       "tag": "Scholarly Digital Humanities Platform",
       "title": "Lexicon & Chronology Engine",
-      "description": "Scholarly digital research engine featuring an indexed 5,000+ word lexicon with Ctrl+K navigation, contextual hover definitions, and interactive multi-century chronology.",
-      "feature1": "5,000+ Word Ctrl+K Lexicon",
+      "description": "Scholarly digital research engine featuring an indexed 5,000+ word lexicon with instant navigation, contextual hover definitions, and interactive multi-century chronology.",
+      "feature1": "5,000+ Word Lexicon Search",
       "feature2": "Contextual Hover Definitions",
       "feature3": "Multi-Century Chronology Timeline"
     },
