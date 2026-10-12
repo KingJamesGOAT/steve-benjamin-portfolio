@@ -126,7 +126,7 @@
     "crypto": {
       "tag": "Application FinTech",
       "title": "Crypto Trade Hub",
-      "description": "Terminal de trading automatisé surveillant les paires crypto en temps réel, testant des stratégies d'exécution et générant des rapports de marché automatisés.",
+      "description": "Terminal de trading quantitatif conçu pour surveiller les paires de cryptomonnaies en temps réel, exécuter des allocations simulées et générer des synthèses de marché automatisées.",
       "status": "Simulation Active",
       "pnlLabel": "PnL Simulé",
       "pnlValue": "+18.4%"

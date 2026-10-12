@@ -21,29 +21,29 @@ export const Projects: React.FC = () => {
 
       {/* Primary Project 1: Crypto Trade Hub with Live Simulation */}
       <section className="rounded-none border border-slate-200 bg-white p-6 sm:p-8 shadow-sm space-y-6">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-fintech-primary">
-            {t('projects.crypto.title')}
-          </h2>
+        <div className="space-y-2">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-fintech-primary">
+              {t('projects.crypto.title')}
+            </h2>
 
-          <Link
-            to="/projects/crypto-trade-hub"
-            className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-none bg-electric hover:bg-electric-hover text-white text-xs font-semibold shadow-sm transition-colors"
-          >
-            <span>{t('projects.viewDeepDive')}</span>
-            <ExternalLink className="w-3.5 h-3.5" />
-          </Link>
+            <Link
+              to="/projects/crypto-trade-hub"
+              className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-none bg-electric hover:bg-electric-hover text-white text-xs font-semibold shadow-sm transition-colors"
+            >
+              <span>{t('projects.viewDeepDive')}</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+
+          <p className="text-sm sm:text-base text-fintech-secondary leading-relaxed">
+            {t('projects.crypto.description')}
+          </p>
         </div>
 
         {/* Live Simulation Embed */}
         <div className="border border-slate-800 rounded-none overflow-hidden bg-slate-950">
           <CryptoWidgetSim />
-        </div>
-
-        <div className="pt-2 border-t border-slate-100">
-          <p className="text-sm sm:text-base text-fintech-secondary leading-relaxed">
-            {t('projects.crypto.description')}
-          </p>
         </div>
       </section>
 

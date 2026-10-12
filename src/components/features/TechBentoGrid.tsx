@@ -49,24 +49,17 @@ const BentoTileCard: React.FC<{ tile: BentoTile; isFrench: boolean }> = ({ tile,
       onTouchMove={handleTouchMove}
       onMouseLeave={handleLeave}
       onTouchEnd={handleLeave}
-      className={`relative ${tile.colSpan} h-32 sm:h-36 border border-slate-800/80 bg-[#0A0D14] overflow-hidden select-none rounded-none cursor-crosshair`}
+      className={`relative ${tile.colSpan} h-36 sm:h-40 border border-slate-800/80 bg-[#0A0D14] overflow-hidden select-none rounded-none cursor-crosshair`}
       style={{ touchAction: 'pan-y' }}
     >
-      {/* 1. SURFACE LAYER (CLEAN & BALANCED) */}
-      <div className="absolute inset-0 p-3.5 sm:p-4 flex flex-col justify-between z-10 pointer-events-none">
-        <div className="space-y-0.5">
-          <span className="text-[10px] font-mono uppercase tracking-widest text-slate-500">
-            {isFrench ? tile.tagFr : tile.tagEn}
-          </span>
-          <h3 className="text-xs sm:text-sm font-bold font-mono tracking-tight text-slate-200">
-            {isFrench ? tile.titleFr : tile.titleEn}
-          </h3>
-        </div>
-
-        <div className="flex items-center justify-between text-[10px] font-mono text-slate-600">
-          <span>{tile.signature}</span>
-          <span className="w-1.5 h-1.5 bg-slate-700 rounded-none inline-block" />
-        </div>
+      {/* 1. SURFACE LAYER (CENTERED & PROMINENT) */}
+      <div className="absolute inset-0 p-4 sm:p-5 flex flex-col items-center justify-center text-center z-10 pointer-events-none space-y-1 sm:space-y-1.5">
+        <span className="text-xs sm:text-sm font-mono font-semibold uppercase tracking-wider text-slate-400">
+          {isFrench ? tile.tagFr : tile.tagEn}
+        </span>
+        <h3 className="text-sm sm:text-base md:text-lg font-bold font-mono tracking-tight text-slate-100">
+          {isFrench ? tile.titleFr : tile.titleEn}
+        </h3>
       </div>
 
       {/* 2. ILLUMINATED CODE LAYER (MASKED BY 168PX SPOTLIGHT) */}

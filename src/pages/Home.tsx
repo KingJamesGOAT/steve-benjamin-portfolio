@@ -115,7 +115,7 @@ export const Home: React.FC = () => {
                       target.src = `${import.meta.env.BASE_URL}profile.jpg`;
                     }
                   }}
-                  className="w-full aspect-square object-cover grayscale hover:grayscale-0 transition-all duration-500 rounded-none transform group-hover:scale-[1.02]"
+                  className="w-full aspect-square object-cover transition-all duration-500 rounded-none transform group-hover:scale-[1.02]"
                 />
               </div>
             </div>
@@ -139,30 +139,32 @@ export const Home: React.FC = () => {
 
         {/* Primary Project 1: Crypto Trade Hub */}
         <div className="rounded-none border border-slate-200 bg-white p-6 sm:p-8 shadow-sm space-y-6">
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-fintech-primary">
-              {t('projects.crypto.title')}
-            </h3>
+          <div className="space-y-2">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-fintech-primary">
+                {t('projects.crypto.title')}
+              </h3>
 
-            <Link
-              to="/projects/crypto-trade-hub"
-              className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-none bg-electric hover:bg-electric-hover text-white text-xs font-semibold shadow-sm transition-colors"
-            >
-              <span>{t('projects.viewDeepDive')}</span>
-              <ExternalLink className="w-3.5 h-3.5" />
-            </Link>
+              <Link
+                to="/projects/crypto-trade-hub"
+                className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-none bg-electric hover:bg-electric-hover text-white text-xs font-semibold shadow-sm transition-colors"
+              >
+                <span>{t('projects.viewDeepDive')}</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+
+            <p className="text-sm sm:text-base text-fintech-secondary leading-relaxed">
+              {isFrench
+                ? 'Terminal de trading quantitatif conçu pour surveiller les paires de cryptomonnaies en temps réel, exécuter des allocations simulées et générer des synthèses de marché automatisées.'
+                : 'Quantitative trading terminal engineered to monitor cryptocurrency pairs in real time, execute simulated allocations, and generate automated market summaries.'}
+            </p>
           </div>
 
           {/* Embedded Live Simulation Window */}
           <div className="border border-slate-800 rounded-none overflow-hidden bg-slate-950 shadow-xl">
             <CryptoWidgetSim />
           </div>
-
-          <p className="text-sm sm:text-base text-fintech-secondary leading-relaxed pt-2">
-            {isFrench
-              ? 'Terminal de trading quantitatif conçu pour surveiller les paires de cryptomonnaies en temps réel, exécuter des allocations simulées et générer des synthèses de marché automatisées.'
-              : 'Quantitative trading terminal engineered to monitor cryptocurrency pairs in real time, execute simulated allocations, and generate automated market summaries.'}
-          </p>
         </div>
 
         {/* Primary Project 2: Donnons.ch */}
