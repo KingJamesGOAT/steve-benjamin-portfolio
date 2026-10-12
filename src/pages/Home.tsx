@@ -163,14 +163,14 @@ export const Home: React.FC = () => {
           </div>
 
           {/* 2-Column Balanced Grid: Streamlined Widget (Left) + Architectural Side Context (Right) */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
             {/* Left: Scaled Down & Lightweight Terminal Widget */}
-            <div className="lg:col-span-8 border border-slate-800 rounded-none overflow-hidden bg-slate-950 shadow-xl flex flex-col justify-center">
+            <div className="lg:col-span-8 border border-slate-800 rounded-none overflow-hidden bg-slate-950 shadow-xl">
               <CryptoWidgetSim />
             </div>
 
             {/* Right: Architectural Sidebar Context */}
-            <div className="lg:col-span-4 rounded-none border border-slate-200 bg-slate-50/80 p-5 flex flex-col justify-between space-y-4 font-sans">
+            <div className="lg:col-span-4 rounded-none border border-slate-200 bg-slate-50/80 p-5 flex flex-col space-y-4 font-sans">
               <div className="space-y-3.5">
                 <div className="flex items-center justify-between border-b border-slate-200 pb-2">
                   <span className="font-mono text-[11px] uppercase tracking-wider text-slate-500 font-semibold">
@@ -258,15 +258,6 @@ export const Home: React.FC = () => {
                     <span className="px-1.5 py-0.5 bg-white border border-slate-200">LLaMA 3.3</span>
                   </div>
                 </div>
-              </div>
-
-              {/* Minimalist Live Status Footer without Duplicate CTA Button */}
-              <div className="pt-2.5 border-t border-slate-200 flex items-center justify-between text-[11px] font-mono text-slate-500">
-                <span className="flex items-center space-x-1.5">
-                  <span className="w-1.5 h-1.5 bg-emerald-500 rounded-none inline-block shadow-[0_0_4px_rgba(16,185,129,0.6)]" />
-                  <span>{isFrench ? 'Télémétrie active' : 'Telemetry active'}</span>
-                </span>
-                <span className="text-[10px] text-slate-400">15M TICKS</span>
               </div>
             </div>
           </div>

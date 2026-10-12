@@ -40,7 +40,7 @@ export const CryptoWidgetSim: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // SVG Chart Bounds & Coordinate Math
+  // SVG Chart Bounds & Coordinate Math (~10% larger chart height)
   const minPrice = 67600;
   const maxPrice = 68700;
   const breakoutPrice = 68340;
@@ -48,10 +48,10 @@ export const CryptoWidgetSim: React.FC = () => {
   const maxVolume = 700;
 
   const svgWidth = 840;
-  const svgHeight = 210;
+  const svgHeight = 230;
 
   const getY = (p: number) => {
-    return svgHeight - ((p - minPrice) / (maxPrice - minPrice)) * (svgHeight - 60) - 35;
+    return svgHeight - ((p - minPrice) / (maxPrice - minPrice)) * (svgHeight - 65) - 38;
   };
 
   const breakoutY = getY(breakoutPrice);
@@ -83,18 +83,18 @@ export const CryptoWidgetSim: React.FC = () => {
   const activeY = activePt ? getY(activePt.price) : 0;
 
   return (
-    <div className="bg-[#0B0E14] border border-[#1E2638] text-slate-200 rounded-none font-sans shadow-2xl overflow-hidden select-none">
-      {/* 1. Header Bar: Ticker, Live Price & System Status */}
-      <div className="bg-[#111622] border-b border-[#1E2638] px-4 sm:px-5 py-3 flex flex-wrap items-center justify-between gap-3 font-mono text-xs">
-        <div className="flex flex-wrap items-center gap-3 sm:gap-4">
-          <div className="flex items-center space-x-2">
+    <div className="bg-[#0B0E14] border border-[#1E2638] text-slate-200 rounded-none font-sans shadow-2xl overflow-hidden select-none flex flex-col">
+      {/* 1. Header Bar: Fixed 48px height, whitespace-nowrap to prevent vertical expansion */}
+      <div className="bg-[#111622] border-b border-[#1E2638] px-4 sm:px-5 h-12 flex items-center justify-between gap-3 font-mono text-xs overflow-hidden shrink-0 whitespace-nowrap">
+        <div className="flex items-center gap-3 sm:gap-4 overflow-hidden">
+          <div className="flex items-center space-x-2 shrink-0">
             <span className="font-bold text-slate-100 tracking-wider text-xs sm:text-sm">BTC/USDT</span>
             <span className="text-[10px] bg-[#161F30] border border-[#273756] px-1.5 py-0.5 text-slate-300 font-semibold rounded-none">
               PERPETUAL
             </span>
           </div>
 
-          <div className="flex items-baseline space-x-2">
+          <div className="flex items-baseline space-x-2 shrink-0">
             <span className="text-base sm:text-lg font-bold text-slate-100 tracking-tight tabular-nums">
               ${displayedPrice.toLocaleString('en-US', {
                 minimumFractionDigits: 2,
@@ -102,7 +102,7 @@ export const CryptoWidgetSim: React.FC = () => {
               })}
             </span>
             <span
-              className={`text-xs font-semibold ${
+              className={`text-xs font-semibold tabular-nums ${
                 (activePt ? activePt.isPositive : priceChange >= 0) ? 'text-emerald-400' : 'text-rose-500'
               }`}
             >
@@ -111,7 +111,7 @@ export const CryptoWidgetSim: React.FC = () => {
           </div>
         </div>
 
-        <div className="flex items-center space-x-3 text-[11px]">
+        <div className="flex items-center space-x-3 text-[11px] shrink-0">
           <div className="hidden sm:flex items-center space-x-1.5 text-slate-400">
             <span>REGIME:</span>
             <span className="text-blue-400 font-bold">TRENDING (ADX 28.4)</span>
@@ -125,16 +125,16 @@ export const CryptoWidgetSim: React.FC = () => {
       </div>
 
       {/* 2. Streamlined Financial Graph Area */}
-      <div className="p-3 sm:p-4 space-y-2.5 bg-[#0B0E14]">
-        {/* Minimal Graph Legend Bar */}
-        <div className="flex flex-wrap items-center justify-between gap-2 text-[10.5px] font-mono text-slate-400 border-b border-[#1E2638] pb-2">
-          <div className="flex items-center space-x-2 text-slate-300">
+      <div className="p-3 sm:p-4 space-y-2 bg-[#0B0E14] flex-1 flex flex-col justify-between">
+        {/* Fixed Height Minimal Graph Legend Bar */}
+        <div className="h-7 flex items-center justify-between gap-2 text-[10.5px] font-mono text-slate-400 border-b border-[#1E2638] pb-1.5 shrink-0 overflow-hidden whitespace-nowrap">
+          <div className="flex items-center space-x-2 text-slate-300 shrink-0">
             <Activity className="w-3.5 h-3.5 text-blue-400" />
             <span className="font-semibold uppercase tracking-wider text-[10px] sm:text-[11px]">
               15M EXECUTION TELEMETRY
             </span>
           </div>
-          <div className="flex flex-wrap items-center gap-2.5 text-[10px]">
+          <div className="flex items-center gap-2.5 text-[10px] shrink-0">
             <span className="flex items-center space-x-1">
               <span className="w-2 h-0.5 bg-emerald-400 inline-block" />
               <span>MARK</span>
@@ -154,15 +154,15 @@ export const CryptoWidgetSim: React.FC = () => {
           </div>
         </div>
 
-        {/* Compact SVG Canvas with Smooth Horizontal Scrubbing */}
+        {/* Stable, Rock-Solid Fixed Height SVG Canvas (~10% larger: h-56 sm:h-64) */}
         <div
-          className="relative w-full h-48 sm:h-56 bg-[#0E131E]/80 border border-[#1E2638] rounded-none overflow-hidden p-2 flex items-center justify-center cursor-crosshair"
+          className="relative w-full h-56 sm:h-64 bg-[#0E131E]/80 border border-[#1E2638] rounded-none overflow-hidden p-2 flex items-center justify-center cursor-crosshair shrink-0"
           onMouseMove={handleChartMouseMove}
           onMouseLeave={() => setHoveredIndex(null)}
         >
           <svg
             viewBox={`0 0 ${svgWidth} ${svgHeight}`}
-            className="w-full h-full overflow-visible"
+            className="w-full h-full block overflow-hidden"
             preserveAspectRatio="none"
           >
             <defs>
@@ -235,7 +235,7 @@ export const CryptoWidgetSim: React.FC = () => {
             {CANDLE_DATA.map((pt, i) => {
               const barWidth = 14;
               const x = (i / (CANDLE_DATA.length - 1)) * (svgWidth - 90) + 70 - barWidth / 2;
-              const barHeight = (pt.volume / maxVolume) * 30;
+              const barHeight = (pt.volume / maxVolume) * 34;
               const y = svgHeight - 20 - barHeight;
               const isHovered = hoveredIndex === i;
 
@@ -353,29 +353,29 @@ export const CryptoWidgetSim: React.FC = () => {
                 <circle
                   cx={activeX}
                   cy={activeY}
-                  r="7.5"
+                  r="8.5"
                   fill="#0052FF"
                   fillOpacity="0.3"
                   stroke="#38BDF8"
-                  strokeWidth="1.2"
+                  strokeWidth="1.5"
                 />
                 <circle
                   cx={activeX}
                   cy={activeY}
-                  r="3.5"
+                  r="4"
                   fill="#FFFFFF"
                   stroke="#0052FF"
                   strokeWidth="2"
                 />
 
-                {/* 4. Rich Floating HUD Tooltip Badge */}
+                {/* 4. Enhanced Floating HUD Tooltip Badge (~20% larger, high-legibility) */}
                 {(() => {
-                  const tooltipWidth = 126;
-                  const tooltipHeight = 42;
-                  const isFarRight = activeX > svgWidth - 170;
-                  const isFarLeft = activeX < 180;
-                  const tooltipX = isFarRight ? activeX - tooltipWidth - 10 : isFarLeft ? activeX + 12 : activeX - tooltipWidth / 2;
-                  const tooltipY = activeY > 55 ? activeY - tooltipHeight - 10 : activeY + 12;
+                  const tooltipWidth = 152;
+                  const tooltipHeight = 52;
+                  const isFarRight = activeX > svgWidth - 190;
+                  const isFarLeft = activeX < 200;
+                  const tooltipX = isFarRight ? activeX - tooltipWidth - 12 : isFarLeft ? activeX + 14 : activeX - tooltipWidth / 2;
+                  const tooltipY = activeY > 65 ? activeY - tooltipHeight - 12 : activeY + 14;
 
                   return (
                     <g transform={`translate(${tooltipX}, ${tooltipY})`}>
@@ -386,27 +386,27 @@ export const CryptoWidgetSim: React.FC = () => {
                         height={tooltipHeight}
                         fill="#070A10"
                         stroke="#273756"
-                        strokeWidth="1"
-                        className="filter drop-shadow-[0_4px_14px_rgba(0,0,0,0.7)]"
+                        strokeWidth="1.2"
+                        className="filter drop-shadow-[0_6px_20px_rgba(0,0,0,0.8)]"
                       />
                       <rect
                         x="0"
                         y="0"
-                        width="3"
+                        width="3.5"
                         height={tooltipHeight}
                         fill={activePt.isPositive ? '#10B981' : '#F43F5E'}
                       />
-                      <text x="9" y="13" fill="#94A3B8" fontSize="8.5" fontFamily="monospace" fontWeight="bold">
+                      <text x="12" y="15" fill="#94A3B8" fontSize="9.5" fontFamily="monospace" fontWeight="bold">
                         {activePt.time} UTC · {activePt.volume} BTC
                       </text>
-                      <text x="9" y="26" fill="#F8FAFC" fontSize="11" fontFamily="monospace" fontWeight="bold">
+                      <text x="12" y="32" fill="#F8FAFC" fontSize="13" fontFamily="monospace" fontWeight="bold">
                         ${activePt.price.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                       </text>
                       <text
-                        x="9"
-                        y="37"
+                        x="12"
+                        y="45"
                         fill={activePt.isPositive ? '#34D399' : '#FB7185'}
-                        fontSize="8.5"
+                        fontSize="9.5"
                         fontFamily="monospace"
                         fontWeight="semibold"
                       >
@@ -445,8 +445,8 @@ export const CryptoWidgetSim: React.FC = () => {
         </div>
       </div>
 
-      {/* 3. Subtle Monospace Telemetry Footer Strip */}
-      <div className="bg-[#0C101A] px-4 sm:px-5 py-2 border-t border-[#1E2638] flex flex-wrap items-center justify-between gap-2.5 text-[10px] font-mono text-slate-500">
+      {/* 3. Fixed Height Monospace Telemetry Footer Strip */}
+      <div className="bg-[#0C101A] px-4 sm:px-5 h-8 border-t border-[#1E2638] flex items-center justify-between gap-2.5 text-[10px] font-mono text-slate-500 overflow-hidden shrink-0 whitespace-nowrap">
         <div className="flex items-center space-x-3 sm:space-x-4">
           <span>24H VOL: $12.65B</span>
           <span className="hidden sm:inline">SPREAD: 0.01%</span>
