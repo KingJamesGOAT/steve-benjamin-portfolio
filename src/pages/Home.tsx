@@ -375,7 +375,7 @@ export const Home: React.FC = () => {
                   </span>{' '}
                   and{' '}
                   <span className="text-blue-400 underline decoration-blue-500/60 decoration-dotted underline-offset-2">
-                    Magisterium
+                    Causality
                   </span>{' '}
                   with multi-century intellectual timelines.
                 </div>
