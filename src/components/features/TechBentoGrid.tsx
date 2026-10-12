@@ -55,9 +55,9 @@ const BentoTileCard: React.FC<{ tile: BentoTile; isFrench: boolean }> = ({ tile,
           </div>
         </div>
 
-        {/* 2. BACK FACE (FLIPPED 180 DEG ON X AXIS, WEBSITE ELECTRIC BLUE, WHITE BOLD SERIF TEXT) */}
+        {/* 2. BACK FACE (FLIPPED 180 DEG ON X AXIS, WEBSITE ELECTRIC BLUE, WHITE BOLD SANS TEXT) */}
         <div className="absolute inset-0 w-full h-full backface-hidden rotate-x-180 bg-electric border border-blue-400/40 shadow-[0_0_25px_rgba(0,82,255,0.4)] p-5 sm:p-6 flex flex-col items-center justify-center text-center overflow-hidden">
-          <p className="text-xs sm:text-sm md:text-[15px] text-white font-bold leading-relaxed font-serif tracking-wide max-w-[95%] select-text">
+          <p className="text-xs sm:text-sm md:text-[15px] text-white font-bold leading-relaxed font-sans max-w-[95%] select-text">
             {isFrench ? tile.descFr : tile.descEn}
           </p>
         </div>
