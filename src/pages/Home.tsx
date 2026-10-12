@@ -105,7 +105,7 @@ export const Home: React.FC = () => {
           {/* Right Column: Sharp Profile Picture Frame */}
           <div className="lg:col-span-5 flex justify-center lg:justify-end">
             <div className="relative w-full max-w-md border border-slate-200 bg-white p-3 shadow-xl shadow-slate-900/5 rounded-none group">
-              <div className="overflow-hidden bg-slate-100">
+              <div className="overflow-hidden bg-white">
                 <img
                   src="/profile.jpg"
                   alt="Steve Benjamin"

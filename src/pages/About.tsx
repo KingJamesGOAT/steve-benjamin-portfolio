@@ -38,16 +38,19 @@ export const About: React.FC<AboutProps> = ({ id = 'about' }) => {
 
   const experience = [
     {
+      period: isFrench ? '2023 - Présent' : '2023 - Present',
       role: t('about.experience.appapp.role'),
       org: t('about.experience.appapp.org'),
       description: t('about.experience.appapp.description'),
     },
     {
+      period: isFrench ? 'Déc. 2023 - Présent' : 'Dec. 2023 - Present',
       role: t('about.experience.glgb.role'),
       org: t('about.experience.glgb.org'),
       description: t('about.experience.glgb.description'),
     },
     {
+      period: isFrench ? 'Déc. 2021 - Présent' : 'Dec. 2021 - Present',
       role: t('about.experience.ficf.role'),
       org: t('about.experience.ficf.org'),
       description: t('about.experience.ficf.description'),
@@ -111,12 +114,17 @@ export const About: React.FC<AboutProps> = ({ id = 'about' }) => {
               key={index}
               className="py-4 grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-6 items-baseline"
             >
-              <div className="md:col-span-4 font-mono text-xs sm:text-sm font-semibold text-fintech-primary">
-                {item.role} {t('about.at')} {item.org}
+              <div className="md:col-span-3 font-mono text-xs sm:text-sm text-slate-500 tabular-nums">
+                {item.period}
               </div>
-              <div className="md:col-span-8">
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  {item.description}
+              <div className="md:col-span-9 space-y-1">
+                <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+                  <h4 className="text-sm sm:text-base font-semibold text-fintech-primary">
+                    {item.role}
+                  </h4>
+                </div>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed pt-0.5">
+                  <span className="font-semibold text-slate-800">{item.org}</span> — {item.description}
                 </p>
               </div>
             </div>

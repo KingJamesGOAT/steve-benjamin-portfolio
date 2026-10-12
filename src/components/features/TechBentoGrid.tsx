@@ -49,7 +49,7 @@ const BentoTileCard: React.FC<{ tile: BentoTile; isFrench: boolean }> = ({ tile,
       onTouchMove={handleTouchMove}
       onMouseLeave={handleLeave}
       onTouchEnd={handleLeave}
-      className={`relative ${tile.colSpan} h-36 sm:h-40 border border-slate-800/80 bg-[#0A0D14] overflow-hidden select-none rounded-none cursor-crosshair`}
+      className={`relative ${tile.colSpan} h-36 sm:h-40 border border-slate-800/80 bg-[#0A0D14] overflow-hidden select-none rounded-none cursor-default`}
       style={{ touchAction: 'pan-y' }}
     >
       {/* 1. SURFACE LAYER (CENTERED & PROMINENT) */}
@@ -62,13 +62,13 @@ const BentoTileCard: React.FC<{ tile: BentoTile; isFrench: boolean }> = ({ tile,
         </h3>
       </div>
 
-      {/* 2. ILLUMINATED CODE LAYER (MASKED BY 168PX SPOTLIGHT) */}
+      {/* 2. ILLUMINATED CODE LAYER (MASKED BY 152PX SPOTLIGHT: 10% SMALLER, NO PLUS) */}
       <div
         className="absolute inset-0 p-3.5 sm:p-4 z-20 flex flex-col justify-center bg-[#070A0F] font-mono text-xs pointer-events-none transition-opacity duration-150"
         style={{
           opacity: pos.active ? 1 : 0,
-          WebkitMaskImage: `radial-gradient(circle 84px at ${pos.x}px ${pos.y}px, black 74px, transparent 84px)`,
-          maskImage: `radial-gradient(circle 84px at ${pos.x}px ${pos.y}px, black 74px, transparent 84px)`,
+          WebkitMaskImage: `radial-gradient(circle 76px at ${pos.x}px ${pos.y}px, black 66px, transparent 76px)`,
+          maskImage: `radial-gradient(circle 76px at ${pos.x}px ${pos.y}px, black 66px, transparent 76px)`,
         }}
       >
         <div className="text-[11px] leading-snug text-slate-200">
@@ -76,15 +76,15 @@ const BentoTileCard: React.FC<{ tile: BentoTile; isFrench: boolean }> = ({ tile,
         </div>
       </div>
 
-      {/* 3. LIGHT CIRCLE CIRCUMFERENCE (168PX DIAMETER: 20% SMALLER) */}
+      {/* 3. LIGHT CIRCLE CIRCUMFERENCE (152PX DIAMETER: 10% SMALLER) */}
       {pos.active && (
         <div
           className="absolute z-30 pointer-events-none -translate-x-1/2 -translate-y-1/2 rounded-full border border-blue-500/80 shadow-[0_0_15px_rgba(0,82,255,0.45)] transition-opacity duration-100"
           style={{
             left: `${pos.x}px`,
             top: `${pos.y}px`,
-            width: '168px',
-            height: '168px',
+            width: '152px',
+            height: '152px',
           }}
         />
       )}
@@ -108,11 +108,43 @@ export const TechBentoGrid: React.FC = () => {
       tagFr: 'React 18 // Moteur Vite',
       signature: '// 60 FPS REACTIVE',
       codeSnippet: (
-        <div className="space-y-0.5">
-          <div><span className="text-[#38BDF8]">export const</span> <span className="text-[#F59E0B]">Engine</span> = () =&gt; {'{'}</div>
-          <div className="pl-3"><span className="text-[#38BDF8]">const</span> {'{'} data {'}'} = <span className="text-[#60A5FA]">useStream</span>();</div>
-          <div className="pl-3"><span className="text-[#38BDF8]">return</span> &lt;<span className="text-[#38BDF8]">Canvas</span> frame={'{'}data{'}'} fps={<span className="text-[#F43F5E]">60</span>} /&gt;;</div>
-          <div>{'}'};</div>
+        <div className="space-y-1 font-mono text-[11px] whitespace-nowrap leading-relaxed overflow-hidden">
+          <div>
+            <span className="text-[#38BDF8]">export const</span>{' '}
+            <span className="text-[#F59E0B]">TelemetryCanvas</span>
+            <span className="text-slate-400">:</span>{' '}
+            <span className="text-[#A78BFA]">React.FC&lt;StreamProps&gt;</span>{' '}
+            <span className="text-slate-400">=</span>{' '}
+            <span className="text-slate-300">({'{'} endpoint, hz = </span>
+            <span className="text-[#F43F5E]">60</span>
+            <span className="text-slate-300"> {'}'}) =&gt; {'{'}</span>
+          </div>
+          <div className="pl-3">
+            <span className="text-[#38BDF8]">const</span>{' '}
+            <span className="text-slate-300">{'{'} stream, ping {'}'}</span>{' '}
+            <span className="text-slate-400">=</span>{' '}
+            <span className="text-[#60A5FA]">useBinaryStream</span>
+            <span className="text-slate-300">&lt;</span>
+            <span className="text-[#A78BFA]">MarketFeed</span>
+            <span className="text-slate-300">&gt;(endpoint, {'{'} autoSync: </span>
+            <span className="text-[#F43F5E]">true</span>
+            <span className="text-slate-300"> {'}'});</span>
+          </div>
+          <div className="pl-3">
+            <span className="text-[#38BDF8]">return</span>{' '}
+            <span className="text-slate-300">&lt;</span>
+            <span className="text-[#38BDF8]">RenderEngine</span>{' '}
+            <span className="text-slate-300">buffer=</span>
+            <span className="text-slate-300">{'{'}stream.data{'}'}</span>{' '}
+            <span className="text-slate-300">fps=</span>
+            <span className="text-slate-300">{'{'}hz{'}'}</span>{' '}
+            <span className="text-slate-300">latency=</span>
+            <span className="text-slate-300">{'{'}ping{'}'}</span>{' '}
+            <span className="text-slate-300">/&gt;;</span>
+          </div>
+          <div>
+            <span className="text-slate-300">{'}'};</span>
+          </div>
         </div>
       ),
     },
@@ -178,11 +210,37 @@ export const TechBentoGrid: React.FC = () => {
       tagFr: 'CFC Électronique // C99',
       signature: '// 115.2 KBPS DMA',
       codeSnippet: (
-        <div className="space-y-0.5">
-          <div><span className="text-[#38BDF8]">void</span> <span className="text-[#F59E0B]">UART_Bridge_Init</span>(<span className="text-[#A78BFA]">void</span>) {'{'}</div>
-          <div className="pl-3">USART2-&gt;BRR = <span className="text-[#F43F5E]">0x0116</span>; <span className="text-slate-500">// 115.2k</span></div>
-          <div className="pl-3">USART2-&gt;CR1 |= <span className="text-[#60A5FA]">USART_CR1_UE</span> | <span className="text-[#60A5FA]">USART_CR1_TE</span>;</div>
-          <div>{'}'}</div>
+        <div className="space-y-1 font-mono text-[11px] whitespace-nowrap leading-relaxed overflow-hidden">
+          <div>
+            <span className="text-[#38BDF8]">void</span>{' '}
+            <span className="text-[#F59E0B]">UART_Bridge_Init</span>
+            <span className="text-slate-300">(</span>
+            <span className="text-[#A78BFA]">USART_TypeDef</span>{' '}
+            <span className="text-slate-300">*USARTx, </span>
+            <span className="text-[#A78BFA]">uint32_t</span>{' '}
+            <span className="text-slate-300">baudrate, </span>
+            <span className="text-[#A78BFA]">uint8_t</span>{' '}
+            <span className="text-slate-300">dma_channel) {'{'}</span>
+          </div>
+          <div className="pl-3">
+            <span className="text-slate-300">USARTx-&gt;BRR = </span>
+            <span className="text-[#60A5FA]">SystemCoreClock</span>
+            <span className="text-slate-300"> / baudrate; </span>
+            <span className="text-slate-500">// Configure hardware baudrate divider</span>
+          </div>
+          <div className="pl-3">
+            <span className="text-slate-300">USARTx-&gt;CR1 |= </span>
+            <span className="text-[#60A5FA]">USART_CR1_UE</span>
+            <span className="text-slate-300"> | </span>
+            <span className="text-[#60A5FA]">USART_CR1_TE</span>
+            <span className="text-slate-300"> | </span>
+            <span className="text-[#60A5FA]">USART_CR1_RE</span>
+            <span className="text-slate-300">; </span>
+            <span className="text-slate-500">// Enable TX/RX transceiver circuits</span>
+          </div>
+          <div>
+            <span className="text-slate-300">{'}'}</span>
+          </div>
         </div>
       ),
     },
