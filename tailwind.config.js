@@ -47,6 +47,14 @@ export default {
           'Consolas',
           'monospace',
         ],
+        serif: [
+          'Newsreader',
+          'Playfair Display',
+          'Georgia',
+          'Cambria',
+          'Times New Roman',
+          'serif',
+        ],
       },
       boxShadow: {
         'fintech-subtle': '0 1px 3px 0 rgba(0, 0, 0, 0.03), 0 1px 2px -1px rgba(0, 0, 0, 0.03)',
