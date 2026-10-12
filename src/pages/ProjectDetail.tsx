@@ -6,6 +6,7 @@ import { PROJECTS_DATA } from '../data/projectsData';
 import MarketOverviewSim from '../components/features/crypto/MarketOverviewSim';
 import PaperTradingSim from '../components/features/crypto/PaperTradingSim';
 import MarketIntelligenceSim from '../components/features/crypto/MarketIntelligenceSim';
+import DonnonsDetailShowcase from '../components/features/donnons/DonnonsDetailShowcase';
 import GlossaryTerm from '../components/features/GlossaryTerm';
 import { getGlossaryDef } from '../data/cryptoGlossary';
 
@@ -19,6 +20,7 @@ export const ProjectDetail: React.FC = () => {
 
   const project = PROJECTS_DATA.find((p) => p.slug === projectId);
   const isCryptoHub = projectId === 'crypto-trade-hub';
+  const isDonnons = projectId === 'donnons-ch';
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -526,6 +528,11 @@ export const ProjectDetail: React.FC = () => {
             </div>
           </section>
         </div>
+      )}
+      
+      {/* Donnons.ch Complete Showcase Deep Dive */}
+      {isDonnons && (
+        <DonnonsDetailShowcase />
       )}
 
       {/* Specifications & Key Highlights Grid (Text-driven, zero decorative icons) */}
