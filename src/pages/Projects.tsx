@@ -83,7 +83,9 @@ export const Projects: React.FC = () => {
             <div className="text-lg font-bold font-mono text-fintech-primary">
               {t('projects.donnons.gradeValue')}
             </div>
-            <p className="text-[11px] font-mono text-slate-500">{t('projects.showcase.maxDistinction')}</p>
+            <p className="text-[11px] font-mono text-slate-500">
+              {t('projects.showcase.maxDistinction')}
+            </p>
           </div>
 
           <div className="p-3.5 rounded-none bg-slate-50 border border-slate-200 space-y-1">
@@ -91,9 +93,11 @@ export const Projects: React.FC = () => {
               {t('projects.showcase.clientMandate')}
             </span>
             <div className="text-base font-bold font-mono text-fintech-primary truncate">
-              Hôpitaux de Genève
+              Hôpitaux de Genève (HUG)
             </div>
-            <p className="text-[11px] font-mono text-slate-500">{t('projects.showcase.hugCenter')}</p>
+            <p className="text-[11px] font-mono text-slate-500">
+              Résorption du taux de rejet de 30%
+            </p>
           </div>
 
           <div className="p-3.5 rounded-none bg-slate-50 border border-slate-200 space-y-1">
@@ -101,9 +105,11 @@ export const Projects: React.FC = () => {
               {t('projects.showcase.archStack')}
             </span>
             <div className="text-base font-bold font-mono text-slate-700">
-              Vue.js 3, Laravel REST
+              Vue.js 3, MySQL, Laravel, Tailwind
             </div>
-            <p className="text-[11px] font-mono text-slate-500">{t('projects.showcase.tailwindMobile')}</p>
+            <p className="text-[11px] font-mono text-slate-500">
+              Architecture full-stack & Design Néo-brutaliste
+            </p>
           </div>
         </div>
       </section>

@@ -297,40 +297,40 @@ export const Home: React.FC = () => {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-slate-600 leading-relaxed">
                 <div className="space-y-1.5">
                   <span className="font-semibold text-slate-800 block text-xs sm:text-sm">
-                    {isFrench ? 'Mandat Client Officiel' : 'Official Client Mandate'}
+                    {isFrench ? 'Mandat HUG & Problématique' : 'HUG Mandate & Challenge'}
                   </span>
                   <p className="text-slate-500 pt-0.5 text-xs">
                     {isFrench
-                      ? 'Développé pour les Hôpitaux Universitaires de Genève (HUG) pour digitaliser et démultiplier les collectes de sang en entreprise.'
-                      : 'Commissioned by Geneva University Hospitals (HUG) to digitize and scale corporate blood collection drives.'}
+                      ? 'Résorption du différentiel de 30% : les HUG constataient que 30% des volontaires se déplaçant en entreprise étaient refusés sur place (critères médicaux ignorés). Donnons.ch qualifie l\'éligibilité en amont de façon anonyme et ludique.'
+                      : 'Eliminating the 30% on-site rejection rate: HUG reported that 30% of willing corporate donors were deferred at collection points due to overlooked criteria. Donnons.ch pre-screens eligibility beforehand through playful guidance.'}
                   </p>
                 </div>
 
                 <div className="space-y-1.5">
                   <span className="font-semibold text-slate-800 block text-xs sm:text-sm">
-                    {isFrench ? 'Gamification & Démystification' : 'Gamification & Eligibility UX'}
+                    {isFrench ? 'Gamification & Engagement RSE' : 'Gamification & Corporate CSR'}
                   </span>
                   <p className="text-slate-500 pt-0.5 text-xs">
                     {isFrench
-                      ? 'Quiz interactif bienveillant levant les freins psychologiques et simulateur d\'impact en direct pour engager les équipes.'
-                      : 'Interactive frictionless eligibility quiz reducing medical apprehension paired with real-time impact simulation.'}
+                      ? 'Quiz interactif avec Roby la mascotte, projection d\'impact en direct (vies sauvées) et attribution du Trophée de la Générosité / Label CTS pour valoriser la politique RSE des entreprises partenaires.'
+                      : 'Interactive cosmic quiz with Roby the mascot, real-time lives-saved impact calculation, and the Corporate Donor Label (Label CTS) recognizing employer CSR engagement.'}
                   </p>
                 </div>
 
                 <div className="space-y-2 border-t md:border-t-0 md:border-l md:pl-6 border-slate-200">
                   <span className="font-semibold text-slate-800 block text-xs sm:text-sm">
-                    {isFrench ? 'Stack Technique' : 'Architecture Stack'}
+                    {isFrench ? 'Architecture & Stack Technique' : 'Architecture & Technical Stack'}
                   </span>
                   <p className="text-slate-500 text-xs">
                     {isFrench
-                      ? 'Architecture moderne axée sur l\'accessibilité WCAG et la performance mobile.'
-                      : 'Modern architecture prioritizing WCAG accessibility and mobile responsiveness.'}
+                      ? 'Développement full-stack : Vue.js 3 réactif, API REST Laravel, modélisation relationnelle MySQL et Tailwind CSS. Note maximale 6.0 / 6.0 décernée par les HUG et la HEIG-VD.'
+                      : 'Full-stack delivery: Reactive Vue.js 3, robust Laravel REST API, MySQL relational data modeling, and Tailwind CSS. Maximum grade 6.0 / 6.0 awarded by HUG and HEIG-VD.'}
                   </p>
                   <div className="flex flex-wrap gap-1.5 pt-1 text-[11px] font-mono text-slate-700">
                     <span className="px-2 py-0.5 bg-white border border-slate-200">Vue.js 3</span>
+                    <span className="px-2 py-0.5 bg-white border border-slate-200">MySQL</span>
                     <span className="px-2 py-0.5 bg-white border border-slate-200">Laravel REST</span>
                     <span className="px-2 py-0.5 bg-white border border-slate-200">Tailwind CSS</span>
-                    <span className="px-2 py-0.5 bg-white border border-slate-200">MySQL</span>
                   </div>
                 </div>
               </div>
