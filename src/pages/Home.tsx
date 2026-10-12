@@ -5,6 +5,7 @@ import { ArrowRight, FileDown, ExternalLink } from 'lucide-react';
 import TechBentoGrid from '../components/features/TechBentoGrid';
 import CryptoWidgetSim from '../components/features/CryptoWidgetSim';
 import RotatingTitle from '../components/features/RotatingTitle';
+import GlossaryTerm from '../components/features/GlossaryTerm';
 import About from './About';
 
 export const Home: React.FC = () => {
@@ -170,41 +171,83 @@ export const Home: React.FC = () => {
 
             {/* Right: Architectural Sidebar Context */}
             <div className="lg:col-span-4 rounded-none border border-slate-200 bg-slate-50/80 p-5 flex flex-col justify-between space-y-4 font-sans">
-              <div className="space-y-3">
+              <div className="space-y-3.5">
                 <div className="flex items-center justify-between border-b border-slate-200 pb-2">
                   <span className="font-mono text-[11px] uppercase tracking-wider text-slate-500 font-semibold">
-                    {isFrench ? 'Spécifications' : 'Key Specifications'}
+                    {isFrench ? 'Spécifications Clés' : 'Key Specifications'}
                   </span>
                   <span className="font-mono text-[10px] text-emerald-600 font-bold bg-emerald-50 border border-emerald-200 px-1.5 py-0.5">
                     {isFrench ? 'TEMPS RÉEL' : 'REAL-TIME'}
                   </span>
                 </div>
 
-                <div className="space-y-2.5 text-xs text-slate-600 leading-relaxed">
+                <div className="space-y-3 text-xs text-slate-600 leading-relaxed">
                   <div>
-                    <span className="font-semibold text-slate-800 block">
-                      {isFrench ? 'Surveillance Multi-Paires' : 'Multi-Pair Surveillance'}
+                    <span className="font-semibold text-slate-800 block text-xs">
+                      {isFrench ? 'Flux de Marché en Direct' : 'Live Market Feed'}
                     </span>
-                    <p className="text-slate-500 pt-0.5">
-                      {isFrench
-                        ? 'Flux binaire WebSocket Binance avec filtrage dynamique de liquidité (seuil $10M+).'
-                        : 'Binance WebSocket streaming with liquidity filters enforcing a $10M+ threshold.'}
+                    <p className="text-slate-500 pt-1">
+                      {isFrench ? (
+                        <>
+                          Reçoit les cours et volumes instantanément via{' '}
+                          <GlossaryTerm
+                            term="WebSockets Binance"
+                            definition="Connexion réseau temps réel bidirectionnelle délivrant les variations de prix en quelques millisecondes sans recharger la page."
+                          />{' '}
+                          sans aucune latence.
+                        </>
+                      ) : (
+                        <>
+                          Streams live cryptocurrency prices and volume directly from{' '}
+                          <GlossaryTerm
+                            term="Binance WebSockets"
+                            definition="Full-duplex network connection streaming live crypto price ticks with zero page reloads."
+                          />{' '}
+                          with sub-millisecond responsiveness.
+                        </>
+                      )}
                     </p>
                   </div>
 
                   <div>
-                    <span className="font-semibold text-slate-800 block">
-                      {isFrench ? 'Régime ADX & Sizing Kelly' : 'ADX Gate & Kelly Sizing'}
+                    <span className="font-semibold text-slate-800 block text-xs">
+                      {isFrench ? 'Stratégie & Gestion du Risque' : 'Automated Strategy & Risk'}
                     </span>
-                    <p className="text-slate-500 pt-0.5">
-                      {isFrench
-                        ? 'Basculement Donchian / Grid et contrôle strict du risque plafonné à 2.0%.'
-                        : 'Automated Donchian / Grid switching with strict 2.0% fractional Kelly cap.'}
+                    <p className="text-slate-500 pt-1">
+                      {isFrench ? (
+                        <>
+                          Utilise l'
+                          <GlossaryTerm
+                            term="Indicateur ADX"
+                            definition="Average Directional Index : mesure la force de la tendance pour basculer automatiquement entre suivi de tendance et grille de retour à la moyenne."
+                          />{' '}
+                          pour détecter les tendances, et calcule la taille sécurisée des ordres via le{' '}
+                          <GlossaryTerm
+                            term="Critère de Kelly"
+                            definition="Formule mathématique de gestion du risque optimisant la taille des positions tout en plafonnant strictement la perte maximale à 2%."
+                          />
+                          .
+                        </>
+                      ) : (
+                        <>
+                          Uses the{' '}
+                          <GlossaryTerm
+                            term="ADX Indicator"
+                            definition="Average Directional Index: measures trend strength to switch automatically between momentum breakouts and range trading."
+                          />{' '}
+                          to detect market trends, and calculates safe order sizes using the{' '}
+                          <GlossaryTerm
+                            term="Kelly Criterion"
+                            definition="A mathematical risk model that determines optimal position sizing to maximize growth while strictly capping downside loss to 2%."
+                          />
+                          .
+                        </>
+                      )}
                     </p>
                   </div>
                 </div>
 
-                <div className="pt-2 border-t border-slate-200 space-y-1.5">
+                <div className="pt-2.5 border-t border-slate-200 space-y-1.5">
                   <span className="font-mono text-[10px] uppercase tracking-wider text-slate-400 block font-semibold">
                     {isFrench ? 'Stack Technique' : 'Architecture Stack'}
                   </span>
@@ -217,14 +260,13 @@ export const Home: React.FC = () => {
                 </div>
               </div>
 
-              <div className="pt-2 border-t border-slate-200">
-                <Link
-                  to="/projects/crypto-trade-hub"
-                  className="inline-flex items-center justify-between w-full px-3 py-2 text-xs font-semibold text-fintech-primary bg-white hover:bg-slate-100 border border-slate-300 transition-colors rounded-none shadow-sm"
-                >
-                  <span>{isFrench ? 'Dossier Technique Détaillé' : 'Architecture Breakdown'}</span>
-                  <ArrowRight className="w-3.5 h-3.5 ml-1 text-slate-500" />
-                </Link>
+              {/* Minimalist Live Status Footer without Duplicate CTA Button */}
+              <div className="pt-2.5 border-t border-slate-200 flex items-center justify-between text-[11px] font-mono text-slate-500">
+                <span className="flex items-center space-x-1.5">
+                  <span className="w-1.5 h-1.5 bg-emerald-500 rounded-none inline-block shadow-[0_0_4px_rgba(16,185,129,0.6)]" />
+                  <span>{isFrench ? 'Télémétrie active' : 'Telemetry active'}</span>
+                </span>
+                <span className="text-[10px] text-slate-400">15M TICKS</span>
               </div>
             </div>
           </div>

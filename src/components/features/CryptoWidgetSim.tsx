@@ -66,6 +66,22 @@ export const CryptoWidgetSim: React.FC = () => {
   const areaString = `70,${svgHeight - 20} ${pointsString} ${svgWidth - 20},${svgHeight - 20}`;
   const displayedPrice = hoveredIndex !== null ? CANDLE_DATA[hoveredIndex].price : livePrice;
 
+  // Horizontal mouse scrubbing calculation
+  const handleChartMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const clientX = e.clientX - rect.left;
+    const svgX = (clientX / rect.width) * svgWidth;
+    const minX = 70;
+    const maxX = svgWidth - 20; // 820
+    const ratio = Math.max(0, Math.min(1, (svgX - minX) / (maxX - minX)));
+    const nearestIndex = Math.round(ratio * (CANDLE_DATA.length - 1));
+    setHoveredIndex(nearestIndex);
+  };
+
+  const activePt = hoveredIndex !== null ? CANDLE_DATA[hoveredIndex] : null;
+  const activeX = hoveredIndex !== null ? (hoveredIndex / (CANDLE_DATA.length - 1)) * (svgWidth - 90) + 70 : 0;
+  const activeY = activePt ? getY(activePt.price) : 0;
+
   return (
     <div className="bg-[#0B0E14] border border-[#1E2638] text-slate-200 rounded-none font-sans shadow-2xl overflow-hidden select-none">
       {/* 1. Header Bar: Ticker, Live Price & System Status */}
@@ -87,10 +103,10 @@ export const CryptoWidgetSim: React.FC = () => {
             </span>
             <span
               className={`text-xs font-semibold ${
-                priceChange >= 0 ? 'text-emerald-400' : 'text-rose-500'
+                (activePt ? activePt.isPositive : priceChange >= 0) ? 'text-emerald-400' : 'text-rose-500'
               }`}
             >
-              {priceChange >= 0 ? `+${priceChange}%` : `${priceChange}%`}
+              {activePt ? activePt.delta : (priceChange >= 0 ? `+${priceChange}%` : `${priceChange}%`)}
             </span>
           </div>
         </div>
@@ -138,9 +154,10 @@ export const CryptoWidgetSim: React.FC = () => {
           </div>
         </div>
 
-        {/* Compact SVG Canvas with Reduced Height */}
+        {/* Compact SVG Canvas with Smooth Horizontal Scrubbing */}
         <div
-          className="relative w-full h-48 sm:h-56 bg-[#0E131E]/80 border border-[#1E2638] rounded-none overflow-hidden p-2 flex items-center justify-center cursor-default"
+          className="relative w-full h-48 sm:h-56 bg-[#0E131E]/80 border border-[#1E2638] rounded-none overflow-hidden p-2 flex items-center justify-center cursor-crosshair"
+          onMouseMove={handleChartMouseMove}
           onMouseLeave={() => setHoveredIndex(null)}
         >
           <svg
@@ -229,10 +246,9 @@ export const CryptoWidgetSim: React.FC = () => {
                   y={y}
                   width={barWidth}
                   height={barHeight}
-                  fill={isHovered ? '#3b82f6' : pt.volume > 450 ? '#10b981' : '#1E293B'}
-                  opacity={isHovered ? '1' : '0.75'}
-                  className="transition-colors cursor-pointer"
-                  onMouseEnter={() => setHoveredIndex(i)}
+                  fill={isHovered ? '#38BDF8' : pt.volume > 450 ? '#10b981' : '#1E293B'}
+                  opacity={hoveredIndex === null ? (pt.volume > 450 ? '0.85' : '0.6') : isHovered ? '1' : '0.25'}
+                  className="transition-all duration-100"
                 />
               );
             })}
@@ -264,42 +280,27 @@ export const CryptoWidgetSim: React.FC = () => {
               }).join(' ')}
             />
 
-            {/* Interactive Data Nodes along the Price Line */}
+            {/* Static Data Nodes along the Price Line */}
             {CANDLE_DATA.map((pt, i) => {
               const x = (i / (CANDLE_DATA.length - 1)) * (svgWidth - 90) + 70;
               const y = getY(pt.price);
-              const isHovered = hoveredIndex === i;
               const isBreakoutPoint = i === 6; // 10:30 candle
               const isTrailingRatchetPoint = i === 10; // 11:30 candle
 
               return (
-                <g key={`node-${i}`} onMouseEnter={() => setHoveredIndex(i)} className="cursor-pointer">
-                  {/* Subtle vertical crosshair guide line when hovered */}
-                  {isHovered && (
-                    <line
-                      x1={x}
-                      y1="15"
-                      x2={x}
-                      y2={svgHeight - 20}
-                      stroke="#3b82f6"
-                      strokeWidth="1"
-                      strokeDasharray="2 2"
-                    />
-                  )}
-
+                <g key={`node-${i}`}>
                   <rect
-                    x={x - (isHovered ? 4.5 : 3)}
-                    y={y - (isHovered ? 4.5 : 3)}
-                    width={isHovered ? 9 : 6}
-                    height={isHovered ? 9 : 6}
-                    fill={isHovered ? '#3b82f6' : isBreakoutPoint ? '#10b981' : '#0B0E14'}
-                    stroke={isHovered ? '#ffffff' : isBreakoutPoint ? '#34d399' : '#10b981'}
-                    strokeWidth={isHovered ? '2' : '1.5'}
-                    className="transition-all"
+                    x={x - 3}
+                    y={y - 3}
+                    width={6}
+                    height={6}
+                    fill={isBreakoutPoint ? '#10b981' : '#0B0E14'}
+                    stroke={isBreakoutPoint ? '#34d399' : '#10b981'}
+                    strokeWidth="1.5"
                   />
 
                   {/* Marker Pin at Breakout Point */}
-                  {isBreakoutPoint && !isHovered && (
+                  {isBreakoutPoint && hoveredIndex !== i && (
                     <g transform={`translate(${x - 30}, ${y - 16})`}>
                       <rect x="0" y="0" width="60" height="11" fill="#064E3B" stroke="#10b981" strokeWidth="0.6" />
                       <text x="4" y="8.5" fill="#A7F3D0" fontSize="7" fontFamily="monospace" fontWeight="bold">
@@ -309,7 +310,7 @@ export const CryptoWidgetSim: React.FC = () => {
                   )}
 
                   {/* Marker Pin at Trailing Stop Ratchet */}
-                  {isTrailingRatchetPoint && !isHovered && (
+                  {isTrailingRatchetPoint && hoveredIndex !== i && (
                     <g transform={`translate(${x - 34}, ${y - 16})`}>
                       <rect x="0" y="0" width="68" height="11" fill="#78350F" stroke="#f59e0b" strokeWidth="0.6" />
                       <text x="4" y="8.5" fill="#FDE68A" fontSize="7" fontFamily="monospace" fontWeight="bold">
@@ -320,6 +321,102 @@ export const CryptoWidgetSim: React.FC = () => {
                 </g>
               );
             })}
+
+            {/* Dynamic Interactive Elements When Hovered */}
+            {hoveredIndex !== null && activePt && (
+              <g className="pointer-events-none">
+                {/* 1. Full Vertical Crosshair Guide Line */}
+                <line
+                  x1={activeX}
+                  y1={15}
+                  x2={activeX}
+                  y2={svgHeight - 20}
+                  stroke="#38BDF8"
+                  strokeWidth="1.5"
+                  strokeDasharray="3 3"
+                  opacity="0.85"
+                />
+
+                {/* 2. Horizontal Axis Guide Line */}
+                <line
+                  x1={65}
+                  y1={activeY}
+                  x2={activeX}
+                  y2={activeY}
+                  stroke="#60A5FA"
+                  strokeWidth="1"
+                  strokeDasharray="2 2"
+                  opacity="0.5"
+                />
+
+                {/* 3. Pulsing Active Node Rings */}
+                <circle
+                  cx={activeX}
+                  cy={activeY}
+                  r="7.5"
+                  fill="#0052FF"
+                  fillOpacity="0.3"
+                  stroke="#38BDF8"
+                  strokeWidth="1.2"
+                />
+                <circle
+                  cx={activeX}
+                  cy={activeY}
+                  r="3.5"
+                  fill="#FFFFFF"
+                  stroke="#0052FF"
+                  strokeWidth="2"
+                />
+
+                {/* 4. Rich Floating HUD Tooltip Badge */}
+                {(() => {
+                  const tooltipWidth = 126;
+                  const tooltipHeight = 42;
+                  const isFarRight = activeX > svgWidth - 170;
+                  const isFarLeft = activeX < 180;
+                  const tooltipX = isFarRight ? activeX - tooltipWidth - 10 : isFarLeft ? activeX + 12 : activeX - tooltipWidth / 2;
+                  const tooltipY = activeY > 55 ? activeY - tooltipHeight - 10 : activeY + 12;
+
+                  return (
+                    <g transform={`translate(${tooltipX}, ${tooltipY})`}>
+                      <rect
+                        x="0"
+                        y="0"
+                        width={tooltipWidth}
+                        height={tooltipHeight}
+                        fill="#070A10"
+                        stroke="#273756"
+                        strokeWidth="1"
+                        className="filter drop-shadow-[0_4px_14px_rgba(0,0,0,0.7)]"
+                      />
+                      <rect
+                        x="0"
+                        y="0"
+                        width="3"
+                        height={tooltipHeight}
+                        fill={activePt.isPositive ? '#10B981' : '#F43F5E'}
+                      />
+                      <text x="9" y="13" fill="#94A3B8" fontSize="8.5" fontFamily="monospace" fontWeight="bold">
+                        {activePt.time} UTC · {activePt.volume} BTC
+                      </text>
+                      <text x="9" y="26" fill="#F8FAFC" fontSize="11" fontFamily="monospace" fontWeight="bold">
+                        ${activePt.price.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                      </text>
+                      <text
+                        x="9"
+                        y="37"
+                        fill={activePt.isPositive ? '#34D399' : '#FB7185'}
+                        fontSize="8.5"
+                        fontFamily="monospace"
+                        fontWeight="semibold"
+                      >
+                        {activePt.delta}
+                      </text>
+                    </g>
+                  );
+                })()}
+              </g>
+            )}
 
             {/* X-Axis Time Labels */}
             {CANDLE_DATA.map((pt, i) => {
