@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ArrowUpRight } from 'lucide-react';
 
 interface BentoTile {
   id: string;
   colSpan: string;
-  tagEn: string;
-  tagFr: string;
+  tagEn?: string;
+  tagFr?: string;
   titleEn: string;
   titleFr: string;
   descEn: string;
@@ -23,34 +22,20 @@ const BentoTileCard: React.FC<{ tile: BentoTile; isFrench: boolean }> = ({ tile,
       onClick={() => setFlipped((prev) => !prev)}
       className={`group relative ${tile.colSpan} h-40 sm:h-44 border border-slate-800 bg-[#0A0D14] overflow-hidden select-none rounded-none cursor-pointer transition-all duration-300 hover:border-blue-500/70 hover:shadow-[0_0_20px_rgba(0,82,255,0.18)]`}
     >
-      {/* 1. FAINT BACKGROUND WATERMARK CODE (12% opacity, slightly sharpens on hover) */}
+      {/* 1. FAINT BACKGROUND WATERMARK CODE */}
       <div className="absolute inset-0 p-3 sm:p-4 font-mono text-[11px] leading-relaxed text-slate-300 opacity-15 group-hover:opacity-25 transition-opacity duration-300 pointer-events-none overflow-hidden select-none">
         {tile.codeSnippet}
       </div>
 
-      {/* 2. DEFAULT FRONT LAYER (CRISP & LEGIBLE) */}
+      {/* 2. DEFAULT FRONT LAYER (TITLE & TOOLS) */}
       <div
         className={`absolute inset-0 p-4 sm:p-5 flex flex-col justify-between z-10 transition-all duration-300 ${
           flipped ? 'opacity-0 pointer-events-none' : 'opacity-100 group-hover:opacity-0 group-hover:pointer-events-none'
         }`}
       >
-        <div className="flex items-center justify-between">
-          <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-slate-400">
-            {isFrench ? tile.tagFr : tile.tagEn}
-          </span>
-          <span className="text-slate-500 text-xs font-mono group-hover:text-electric transition-colors">
-            <ArrowUpRight className="w-3.5 h-3.5" />
-          </span>
-        </div>
-
-        <div className="space-y-1">
-          <h3 className="text-sm sm:text-base md:text-lg font-bold font-mono tracking-tight text-white leading-snug">
-            {isFrench ? tile.titleFr : tile.titleEn}
-          </h3>
-          <p className="text-[11px] font-mono text-slate-400">
-            {isFrench ? 'Cliquez pour détails' : 'Click for details'}
-          </p>
-        </div>
+        <h3 className="text-sm sm:text-base md:text-lg font-bold font-mono tracking-tight text-white leading-snug">
+          {isFrench ? tile.titleFr : tile.titleEn}
+        </h3>
 
         {/* Tools badges row */}
         <div className="flex flex-wrap gap-1.5 pt-1">
@@ -65,42 +50,17 @@ const BentoTileCard: React.FC<{ tile: BentoTile; isFrench: boolean }> = ({ tile,
         </div>
       </div>
 
-      {/* 3. REVEALED EXPLANATION LAYER (FLIPS/TURNS ON HOVER OR MOBILE CLICK) */}
+      {/* 3. HOVER / TAP LAYER (JUST THE TEXT AND NOTHING ELSE) */}
       <div
-        className={`absolute inset-0 p-4 sm:p-5 z-20 flex flex-col justify-between bg-[#070A0F]/95 backdrop-blur-sm border-t-2 border-electric transition-all duration-300 ${
+        className={`absolute inset-0 p-4 sm:p-5 z-20 flex items-center justify-center bg-[#070A0F]/95 backdrop-blur-sm border-t-2 border-electric transition-all duration-300 ${
           flipped
             ? 'opacity-100 pointer-events-auto'
             : 'opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto'
         }`}
       >
-        <div className="space-y-1.5">
-          <div className="flex items-center justify-between text-[10px] font-mono text-electric uppercase tracking-wider font-semibold">
-            <span>{isFrench ? tile.tagFr : tile.tagEn}</span>
-            <span className="text-slate-400 text-[9px] uppercase">
-              {isFrench ? 'Détails' : 'Details'}
-            </span>
-          </div>
-
-          <h4 className="text-xs sm:text-sm font-bold font-mono text-white leading-tight">
-            {isFrench ? tile.titleFr : tile.titleEn}
-          </h4>
-
-          <p className="text-xs text-slate-300 leading-relaxed font-sans pt-1">
-            {isFrench ? tile.descFr : tile.descEn}
-          </p>
-        </div>
-
-        {/* Stack badges */}
-        <div className="flex flex-wrap gap-1 pt-2 border-t border-slate-800/80">
-          {tile.tools.map((tool) => (
-            <span
-              key={tool}
-              className="px-1.5 py-0.5 text-[9px] font-mono bg-slate-800 text-blue-200 border border-slate-700"
-            >
-              {tool}
-            </span>
-          ))}
-        </div>
+        <p className="text-xs sm:text-[13px] text-slate-200 leading-relaxed font-sans">
+          {isFrench ? tile.descFr : tile.descEn}
+        </p>
       </div>
     </div>
   );
@@ -350,8 +310,8 @@ export const TechBentoGrid: React.FC = () => {
         </h2>
         <span className="text-xs font-mono text-slate-500">
           {isFrench
-            ? 'Survolez ou cliquez pour afficher les détails'
-            : 'Hover or tap to inspect capabilities'}
+            ? 'Survolez pour en savoir plus'
+            : 'Hover to view details'}
         </span>
       </div>
 
