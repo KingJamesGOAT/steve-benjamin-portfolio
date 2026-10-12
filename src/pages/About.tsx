@@ -75,16 +75,28 @@ export const About: React.FC<AboutProps> = ({ id = 'about' }) => {
             {/* Clean Metadata Badges */}
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2 text-xs font-mono">
               <div className="p-3 border border-slate-200 bg-slate-50/60">
-                <span className="text-slate-400 block text-[10px] uppercase">Location</span>
-                <span className="font-semibold text-fintech-primary">Bussigny, Switzerland</span>
+                <span className="text-slate-400 block text-[10px] uppercase">
+                  {t('about.facts.locationLabel')}
+                </span>
+                <span className="font-semibold text-fintech-primary">
+                  {t('about.facts.locationValue')}
+                </span>
               </div>
               <div className="p-3 border border-slate-200 bg-slate-50/60">
-                <span className="text-slate-400 block text-[10px] uppercase">Education</span>
-                <span className="font-semibold text-fintech-primary">HEIG-VD (BSc IM)</span>
+                <span className="text-slate-400 block text-[10px] uppercase">
+                  {t('about.facts.educationLabel')}
+                </span>
+                <span className="font-semibold text-fintech-primary">
+                  {t('about.facts.educationValue')}
+                </span>
               </div>
               <div className="p-3 border border-slate-200 bg-slate-50/60">
-                <span className="text-slate-400 block text-[10px] uppercase">Passions</span>
-                <span className="font-semibold text-fintech-primary">Hoops · Chess · Reading</span>
+                <span className="text-slate-400 block text-[10px] uppercase">
+                  {t('about.facts.hobbyLabel')}
+                </span>
+                <span className="font-semibold text-fintech-primary">
+                  {t('about.facts.hobbyValue')}
+                </span>
               </div>
             </div>
           </div>
@@ -107,7 +119,7 @@ export const About: React.FC<AboutProps> = ({ id = 'about' }) => {
               </div>
               <div className="pt-2.5 px-0.5 flex items-center justify-between text-[11px] font-mono text-slate-500">
                 <span className="font-semibold text-slate-700">Steve Benjamin</span>
-                <span className="text-slate-400">24 y.o.</span>
+                <span className="text-slate-400">{t('about.facts.ageCaption')}</span>
               </div>
             </div>
           </div>

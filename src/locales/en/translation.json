@@ -226,6 +226,15 @@
     "badge": "03 / Profile & Trajectory",
     "title": "About",
     "location": "Bussigny, Vaud, Switzerland",
+    "facts": {
+      "locationLabel": "Location",
+      "locationValue": "Bussigny, Switzerland",
+      "educationLabel": "Education",
+      "educationValue": "HEIG-VD (BSc IM)",
+      "hobbyLabel": "Hobby",
+      "hobbyValue": "Basketball · Chess · Reading",
+      "ageCaption": "24 y.o."
+    },
     "summary": "I'm Steve Benjamin, 24, based in Bussigny, Switzerland, studying Media Engineering at HEIG-VD. I began coding nearly 9 years ago in embedded electronics, writing C for microcontrollers, drones, and Bluetooth audio, before shifting my focus to modern web front-end development and UX/UI design in Figma. Outside of pure tech, I spent over 4 years founding and leading a youth group, which built my foundation in team leadership and public speaking at conferences and work. When I'm away from the keyboard, you'll usually find me on the basketball court, analyzing chess games, or reading.",
     "educationTitle": "Education",
     "education": {
