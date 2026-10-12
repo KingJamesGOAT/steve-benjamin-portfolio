@@ -113,7 +113,7 @@ export const DonnonsWidgetSim: React.FC = () => {
                       <Info className="w-3.5 h-3.5" />
                     </button>
                     {/* Tooltip Popup */}
-                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block z-50 w-64 sm:w-72 p-2.5 bg-black text-white text-[11px] font-mono shadow-[3px_3px_0px_0px_rgba(0,0,0,0.5)] leading-relaxed pointer-events-none border border-slate-700 text-center">
+                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block z-50 w-64 sm:w-72 p-2.5 bg-white text-black text-[11px] font-mono shadow-[3px_3px_0px_0px_#000] leading-relaxed pointer-events-none border-2 border-black text-center">
                       {isFrench
                         ? `Les ${livesSaved} vies sauvées sont une estimation basée sur le fait qu'un don de sang peut sauver jusqu'à 3 vies.`
                         : `The ${livesSaved} lives saved are an estimate based on the fact that one blood donation can save up to 3 lives.`}
@@ -176,7 +176,7 @@ export const DonnonsWidgetSim: React.FC = () => {
                         <img
                           src={`${baseUrl}images/donnons/dono_default.png`}
                           alt="Roby"
-                          className="w-[70%] h-[70%] object-contain animate-bounce cursor-pointer hover:scale-110 transition-transform origin-bottom"
+                          className="w-[60%] h-[60%] object-contain animate-bounce cursor-pointer hover:scale-110 transition-transform origin-bottom"
                           onError={(e) => {
                             (e.target as HTMLElement).style.display = 'none';
                           }}
@@ -224,7 +224,7 @@ export const DonnonsWidgetSim: React.FC = () => {
                     {isFrench ? 'sauvées' : 'saved'}
                   </span>
                   {/* Tooltip Popup on Hover */}
-                  <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block z-50 w-64 p-2 bg-black text-white text-[11px] font-mono shadow-[3px_3px_0px_0px_rgba(0,0,0,0.5)] leading-relaxed pointer-events-none border border-slate-700 text-center">
+                  <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block z-50 w-64 p-2 bg-white text-black text-[11px] font-mono shadow-[3px_3px_0px_0px_#000] leading-relaxed pointer-events-none border-2 border-black text-center">
                     {isFrench
                       ? `Les ${livesSaved} vies sauvées sont une estimation basée sur le fait qu'un don de sang peut sauver jusqu'à 3 vies.`
                       : `The ${livesSaved} lives saved are an estimate based on the fact that one blood donation can save up to 3 lives.`}
@@ -241,7 +241,7 @@ export const DonnonsWidgetSim: React.FC = () => {
                 </span>
                 <Info className="w-3.5 h-3.5 text-slate-400 group-hover:text-black transition-colors" />
                 {/* Tooltip Popup */}
-                <div className="absolute bottom-full left-0 mb-2 hidden group-hover:block z-50 w-64 p-2 bg-black text-white text-[11px] font-mono shadow-[3px_3px_0px_0px_rgba(0,0,0,0.5)] leading-relaxed pointer-events-none border border-slate-700 text-left">
+                <div className="absolute bottom-full left-0 mb-2 hidden group-hover:block z-50 w-64 p-2 bg-white text-black text-[11px] font-mono shadow-[3px_3px_0px_0px_#000] leading-relaxed pointer-events-none border-2 border-black text-left">
                   {isFrench
                     ? `Les ${livesSaved} vies sauvées sont une estimation basée sur le fait qu'un don de sang peut sauver jusqu'à 3 vies.`
                     : `The ${livesSaved} lives saved are an estimate based on the fact that one blood donation can save up to 3 lives.`}

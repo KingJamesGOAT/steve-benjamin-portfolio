@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { CheckCircle2, AlertCircle, ShieldCheck } from 'lucide-react';
+import { CheckCircle2, AlertCircle } from 'lucide-react';
 
 export const DonnonsDetailShowcase: React.FC = () => {
   const { i18n } = useTranslation();
@@ -74,10 +74,6 @@ export const DonnonsDetailShowcase: React.FC = () => {
               <div className="flex items-center justify-between text-xs font-mono border-b border-black/30 pb-3">
                 <span className="px-3 py-1 bg-[#322947] border-2 border-black text-white font-bold shadow-[2px_2px_0px_0px_#000]">
                   QUESTION 06 / 12
-                </span>
-                <span className="flex items-center gap-1.5 text-xs text-[#ffeeab] font-bold">
-                  <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                  <span>{isFrench ? 'Critère de sécurité HUG' : 'HUG safety protocol'}</span>
                 </span>
               </div>
 
@@ -179,10 +175,6 @@ export const DonnonsDetailShowcase: React.FC = () => {
                   (e.target as HTMLElement).style.display = 'none';
                 }}
               />
-
-              <div className="mt-3 px-3 py-1 bg-black/60 border border-purple-500/40 text-[11px] font-mono text-purple-200">
-                <span>{quizAnswer === 'no' ? 'tick_no.png (Roby esquive la tique)' : 'tick_yes.png (Impact temporaire)'}</span>
-              </div>
             </div>
           </div>
         </div>
