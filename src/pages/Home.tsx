@@ -401,7 +401,7 @@ export const Home: React.FC = () => {
 
             <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
               <span className="text-xs font-mono text-slate-400">
-                {isFrench ? 'Recherche · SmartText · Frise' : 'Search · SmartText · Timeline'}
+                {isFrench ? 'Ctrl+K · SmartText · Frise' : 'Ctrl+K · SmartText · Timeline'}
               </span>
               <Link
                 to="/projects/catholic-route"

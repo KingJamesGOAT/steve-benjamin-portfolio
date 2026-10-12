@@ -344,11 +344,6 @@ export const LexiconDetailShowcase: React.FC = () => {
                 placeholder={isFrench ? 'Rechercher un terme' : 'Search a term'}
                 className="w-full bg-transparent text-sm text-white placeholder-slate-500 font-mono focus:outline-none"
               />
-              <div className="hidden sm:flex items-center space-x-1 pl-3 text-[11px] font-mono text-slate-400 shrink-0">
-                <kbd className="px-1.5 py-0.5 bg-white/10 border border-white/20 text-slate-300">Ctrl</kbd>
-                <span>+</span>
-                <kbd className="px-1.5 py-0.5 bg-white/10 border border-white/20 text-slate-300">K</kbd>
-              </div>
             </div>
           </div>
 
