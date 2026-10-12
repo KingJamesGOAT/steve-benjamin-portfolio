@@ -59,15 +59,59 @@ export const About: React.FC<AboutProps> = ({ id = 'about' }) => {
 
   return (
     <section id={id} className="scroll-mt-24 space-y-12">
-      {/* Header */}
-      <div className="space-y-3 border-b border-slate-200 pb-6">
-        <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-fintech-primary">
-          {t('about.title')}
-        </h2>
+      {/* Header with Profile Photo on the Right */}
+      <div className="border-b border-slate-200 pb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+          {/* Left Column: Title, Bio & Quick Highlights */}
+          <div className="lg:col-span-8 space-y-6">
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-fintech-primary">
+              {t('about.title')}
+            </h2>
 
-        <p className="text-base sm:text-lg text-fintech-secondary max-w-3xl leading-relaxed">
-          {t('about.summary')}
-        </p>
+            <p className="text-base sm:text-lg text-fintech-secondary leading-relaxed">
+              {t('about.summary')}
+            </p>
+
+            {/* Clean Metadata Badges */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2 text-xs font-mono">
+              <div className="p-3 border border-slate-200 bg-slate-50/60">
+                <span className="text-slate-400 block text-[10px] uppercase">Location</span>
+                <span className="font-semibold text-fintech-primary">Bussigny, Switzerland</span>
+              </div>
+              <div className="p-3 border border-slate-200 bg-slate-50/60">
+                <span className="text-slate-400 block text-[10px] uppercase">Education</span>
+                <span className="font-semibold text-fintech-primary">HEIG-VD (BSc IM)</span>
+              </div>
+              <div className="p-3 border border-slate-200 bg-slate-50/60">
+                <span className="text-slate-400 block text-[10px] uppercase">Passions</span>
+                <span className="font-semibold text-fintech-primary">Hoops · Chess · Reading</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column: Clean, Structured Profile Picture Frame */}
+          <div className="lg:col-span-4 flex justify-center lg:justify-end">
+            <div className="w-full max-w-[260px] sm:max-w-[280px] border border-slate-200 bg-white p-3 shadow-md shadow-slate-900/5">
+              <div className="overflow-hidden bg-slate-100 aspect-square relative">
+                <img
+                  src={`${import.meta.env.BASE_URL}profile.jpg`}
+                  alt="Steve Benjamin"
+                  onError={(e) => {
+                    const target = e.currentTarget;
+                    if (!target.src.endsWith('/profile.jpg')) {
+                      target.src = '/profile.jpg';
+                    }
+                  }}
+                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                />
+              </div>
+              <div className="pt-2.5 px-0.5 flex items-center justify-between text-[11px] font-mono text-slate-500">
+                <span className="font-semibold text-slate-700">Steve Benjamin</span>
+                <span className="text-slate-400">24 y.o.</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Education Timeline Grid */}

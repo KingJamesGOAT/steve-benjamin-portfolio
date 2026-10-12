@@ -7,6 +7,7 @@ import CryptoWidgetSim from '../components/features/CryptoWidgetSim';
 import RotatingTitle from '../components/features/RotatingTitle';
 import GlossaryTerm from '../components/features/GlossaryTerm';
 import About from './About';
+import DeveloperHeroCard from '../components/features/DeveloperHeroCard';
 
 export const Home: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -103,23 +104,9 @@ export const Home: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: Sharp Profile Picture Frame */}
+          {/* Right Column: Interactive Developer Telemetry Terminal */}
           <div className="lg:col-span-5 flex justify-center lg:justify-end">
-            <div className="relative w-full max-w-md border border-slate-200 bg-white p-3 shadow-xl shadow-slate-900/5 rounded-none group">
-              <div className="overflow-hidden bg-white">
-                <img
-                  src="/profile.jpg"
-                  alt="Steve Benjamin"
-                  onError={(e) => {
-                    const target = e.currentTarget;
-                    if (!target.src.includes('steve-benjamin-portfolio')) {
-                      target.src = `${import.meta.env.BASE_URL}profile.jpg`;
-                    }
-                  }}
-                  className="w-full aspect-square object-cover transition-all duration-500 rounded-none transform group-hover:scale-[1.02]"
-                />
-              </div>
-            </div>
+            <DeveloperHeroCard />
           </div>
         </div>
 
