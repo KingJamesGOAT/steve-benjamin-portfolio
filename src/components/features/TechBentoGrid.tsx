@@ -319,9 +319,9 @@ export const TechBentoGrid: React.FC = () => {
       id: 'build-perf',
       colSpan: 'col-span-1 sm:col-span-1 md:col-span-1',
       titleEn: 'Build & Performance',
-      titleFr: 'Build & Performance',
+      titleFr: 'Compilation & Performance',
       tagEn: 'Vite // Rollup Core',
-      tagFr: 'Vite // Rollup Core',
+      tagFr: 'Vite // Moteur Rollup',
       signature: '// CHUNKS_OPT',
       codeSnippet: (
         <div className="space-y-0.5">
