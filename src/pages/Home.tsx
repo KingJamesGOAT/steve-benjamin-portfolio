@@ -161,9 +161,72 @@ export const Home: React.FC = () => {
             </p>
           </div>
 
-          {/* Embedded Live Simulation Window */}
-          <div className="border border-slate-800 rounded-none overflow-hidden bg-slate-950 shadow-xl">
-            <CryptoWidgetSim />
+          {/* 2-Column Balanced Grid: Streamlined Widget (Left) + Architectural Side Context (Right) */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
+            {/* Left: Scaled Down & Lightweight Terminal Widget */}
+            <div className="lg:col-span-8 border border-slate-800 rounded-none overflow-hidden bg-slate-950 shadow-xl flex flex-col justify-center">
+              <CryptoWidgetSim />
+            </div>
+
+            {/* Right: Architectural Sidebar Context */}
+            <div className="lg:col-span-4 rounded-none border border-slate-200 bg-slate-50/80 p-5 flex flex-col justify-between space-y-4 font-sans">
+              <div className="space-y-3">
+                <div className="flex items-center justify-between border-b border-slate-200 pb-2">
+                  <span className="font-mono text-[11px] uppercase tracking-wider text-slate-500 font-semibold">
+                    {isFrench ? 'Spécifications' : 'Key Specifications'}
+                  </span>
+                  <span className="font-mono text-[10px] text-emerald-600 font-bold bg-emerald-50 border border-emerald-200 px-1.5 py-0.5">
+                    {isFrench ? 'TEMPS RÉEL' : 'REAL-TIME'}
+                  </span>
+                </div>
+
+                <div className="space-y-2.5 text-xs text-slate-600 leading-relaxed">
+                  <div>
+                    <span className="font-semibold text-slate-800 block">
+                      {isFrench ? 'Surveillance Multi-Paires' : 'Multi-Pair Surveillance'}
+                    </span>
+                    <p className="text-slate-500 pt-0.5">
+                      {isFrench
+                        ? 'Flux binaire WebSocket Binance avec filtrage dynamique de liquidité (seuil $10M+).'
+                        : 'Binance WebSocket streaming with liquidity filters enforcing a $10M+ threshold.'}
+                    </p>
+                  </div>
+
+                  <div>
+                    <span className="font-semibold text-slate-800 block">
+                      {isFrench ? 'Régime ADX & Sizing Kelly' : 'ADX Gate & Kelly Sizing'}
+                    </span>
+                    <p className="text-slate-500 pt-0.5">
+                      {isFrench
+                        ? 'Basculement Donchian / Grid et contrôle strict du risque plafonné à 2.0%.'
+                        : 'Automated Donchian / Grid switching with strict 2.0% fractional Kelly cap.'}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="pt-2 border-t border-slate-200 space-y-1.5">
+                  <span className="font-mono text-[10px] uppercase tracking-wider text-slate-400 block font-semibold">
+                    {isFrench ? 'Stack Technique' : 'Architecture Stack'}
+                  </span>
+                  <div className="flex flex-wrap gap-1 text-[10.5px] font-mono text-slate-600">
+                    <span className="px-1.5 py-0.5 bg-white border border-slate-200">React 18</span>
+                    <span className="px-1.5 py-0.5 bg-white border border-slate-200">TypeScript</span>
+                    <span className="px-1.5 py-0.5 bg-white border border-slate-200">WebSockets</span>
+                    <span className="px-1.5 py-0.5 bg-white border border-slate-200">LLaMA 3.3</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="pt-2 border-t border-slate-200">
+                <Link
+                  to="/projects/crypto-trade-hub"
+                  className="inline-flex items-center justify-between w-full px-3 py-2 text-xs font-semibold text-fintech-primary bg-white hover:bg-slate-100 border border-slate-300 transition-colors rounded-none shadow-sm"
+                >
+                  <span>{isFrench ? 'Dossier Technique Détaillé' : 'Architecture Breakdown'}</span>
+                  <ArrowRight className="w-3.5 h-3.5 ml-1 text-slate-500" />
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
 
