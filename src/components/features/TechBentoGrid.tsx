@@ -1,93 +1,107 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { ArrowUpRight } from 'lucide-react';
 
 interface BentoTile {
   id: string;
   colSpan: string;
-  titleEn: string;
-  titleFr: string;
   tagEn: string;
   tagFr: string;
-  signature: string;
+  titleEn: string;
+  titleFr: string;
+  descEn: string;
+  descFr: string;
+  tools: string[];
   codeSnippet: React.ReactNode;
 }
 
 const BentoTileCard: React.FC<{ tile: BentoTile; isFrench: boolean }> = ({ tile, isFrench }) => {
-  const [pos, setPos] = useState<{ x: number; y: number; active: boolean }>({
-    x: -999,
-    y: -999,
-    active: false,
-  });
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    setPos({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-      active: true,
-    });
-  };
-
-  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
-    if (e.touches[0]) {
-      const rect = e.currentTarget.getBoundingClientRect();
-      setPos({
-        x: e.touches[0].clientX - rect.left,
-        y: e.touches[0].clientY - rect.top,
-        active: true,
-      });
-    }
-  };
-
-  const handleLeave = () => {
-    setPos((prev) => ({ ...prev, active: false }));
-  };
+  const [flipped, setFlipped] = useState(false);
 
   return (
     <div
-      onMouseMove={handleMouseMove}
-      onTouchMove={handleTouchMove}
-      onMouseLeave={handleLeave}
-      onTouchEnd={handleLeave}
-      className={`relative ${tile.colSpan} h-36 sm:h-40 border border-slate-800/80 bg-[#0A0D14] overflow-hidden select-none rounded-none cursor-default`}
-      style={{ touchAction: 'pan-y' }}
+      onClick={() => setFlipped((prev) => !prev)}
+      className={`group relative ${tile.colSpan} h-40 sm:h-44 border border-slate-800 bg-[#0A0D14] overflow-hidden select-none rounded-none cursor-pointer transition-all duration-300 hover:border-blue-500/70 hover:shadow-[0_0_20px_rgba(0,82,255,0.18)]`}
     >
-      {/* 1. SURFACE LAYER (CENTERED & PROMINENT) */}
-      <div className="absolute inset-0 p-4 sm:p-5 flex flex-col items-center justify-center text-center z-10 pointer-events-none space-y-1 sm:space-y-1.5">
-        <span className="text-xs sm:text-sm font-mono font-semibold uppercase tracking-wider text-slate-400">
-          {isFrench ? tile.tagFr : tile.tagEn}
-        </span>
-        <h3 className="text-sm sm:text-base md:text-lg font-bold font-mono tracking-tight text-slate-100">
-          {isFrench ? tile.titleFr : tile.titleEn}
-        </h3>
+      {/* 1. FAINT BACKGROUND WATERMARK CODE (12% opacity, slightly sharpens on hover) */}
+      <div className="absolute inset-0 p-3 sm:p-4 font-mono text-[11px] leading-relaxed text-slate-300 opacity-15 group-hover:opacity-25 transition-opacity duration-300 pointer-events-none overflow-hidden select-none">
+        {tile.codeSnippet}
       </div>
 
-      {/* 2. ILLUMINATED CODE LAYER (MASKED BY 152PX SPOTLIGHT: 10% SMALLER, NO PLUS) */}
+      {/* 2. DEFAULT FRONT LAYER (CRISP & LEGIBLE) */}
       <div
-        className="absolute inset-0 p-3.5 sm:p-4 z-20 flex flex-col justify-center bg-[#070A0F] font-mono text-xs pointer-events-none transition-opacity duration-150"
-        style={{
-          opacity: pos.active ? 1 : 0,
-          WebkitMaskImage: `radial-gradient(circle 76px at ${pos.x}px ${pos.y}px, black 66px, transparent 76px)`,
-          maskImage: `radial-gradient(circle 76px at ${pos.x}px ${pos.y}px, black 66px, transparent 76px)`,
-        }}
+        className={`absolute inset-0 p-4 sm:p-5 flex flex-col justify-between z-10 transition-all duration-300 ${
+          flipped ? 'opacity-0 pointer-events-none' : 'opacity-100 group-hover:opacity-0 group-hover:pointer-events-none'
+        }`}
       >
-        <div className="text-[11px] leading-snug text-slate-200">
-          {tile.codeSnippet}
+        <div className="flex items-center justify-between">
+          <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-slate-400">
+            {isFrench ? tile.tagFr : tile.tagEn}
+          </span>
+          <span className="text-slate-500 text-xs font-mono group-hover:text-electric transition-colors">
+            <ArrowUpRight className="w-3.5 h-3.5" />
+          </span>
+        </div>
+
+        <div className="space-y-1">
+          <h3 className="text-sm sm:text-base md:text-lg font-bold font-mono tracking-tight text-white leading-snug">
+            {isFrench ? tile.titleFr : tile.titleEn}
+          </h3>
+          <p className="text-[11px] font-mono text-slate-400">
+            {isFrench ? 'Cliquez pour détails' : 'Click for details'}
+          </p>
+        </div>
+
+        {/* Tools badges row */}
+        <div className="flex flex-wrap gap-1.5 pt-1">
+          {tile.tools.slice(0, 3).map((tool) => (
+            <span
+              key={tool}
+              className="px-1.5 py-0.5 text-[10px] font-mono bg-slate-900/90 text-slate-300 border border-slate-800"
+            >
+              {tool}
+            </span>
+          ))}
         </div>
       </div>
 
-      {/* 3. LIGHT CIRCLE CIRCUMFERENCE (152PX DIAMETER: 10% SMALLER) */}
-      {pos.active && (
-        <div
-          className="absolute z-30 pointer-events-none -translate-x-1/2 -translate-y-1/2 rounded-full border border-blue-500/80 shadow-[0_0_15px_rgba(0,82,255,0.45)] transition-opacity duration-100"
-          style={{
-            left: `${pos.x}px`,
-            top: `${pos.y}px`,
-            width: '152px',
-            height: '152px',
-          }}
-        />
-      )}
+      {/* 3. REVEALED EXPLANATION LAYER (FLIPS/TURNS ON HOVER OR MOBILE CLICK) */}
+      <div
+        className={`absolute inset-0 p-4 sm:p-5 z-20 flex flex-col justify-between bg-[#070A0F]/95 backdrop-blur-sm border-t-2 border-electric transition-all duration-300 ${
+          flipped
+            ? 'opacity-100 pointer-events-auto'
+            : 'opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto'
+        }`}
+      >
+        <div className="space-y-1.5">
+          <div className="flex items-center justify-between text-[10px] font-mono text-electric uppercase tracking-wider font-semibold">
+            <span>{isFrench ? tile.tagFr : tile.tagEn}</span>
+            <span className="text-slate-400 text-[9px] uppercase">
+              {isFrench ? 'Détails' : 'Details'}
+            </span>
+          </div>
+
+          <h4 className="text-xs sm:text-sm font-bold font-mono text-white leading-tight">
+            {isFrench ? tile.titleFr : tile.titleEn}
+          </h4>
+
+          <p className="text-xs text-slate-300 leading-relaxed font-sans pt-1">
+            {isFrench ? tile.descFr : tile.descEn}
+          </p>
+        </div>
+
+        {/* Stack badges */}
+        <div className="flex flex-wrap gap-1 pt-2 border-t border-slate-800/80">
+          {tile.tools.map((tool) => (
+            <span
+              key={tool}
+              className="px-1.5 py-0.5 text-[9px] font-mono bg-slate-800 text-blue-200 border border-slate-700"
+            >
+              {tool}
+            </span>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
@@ -96,24 +110,25 @@ export const TechBentoGrid: React.FC = () => {
   const { i18n } = useTranslation();
   const isFrench = Boolean(i18n.language?.startsWith('fr'));
 
-  // 10 Curated Bento Topics with Asymmetric Column Spans
   const tiles: BentoTile[] = [
     // ROW 1: [2 COLS] [1 COL] [1 COL] = 4 COLS
     {
       id: 'frontend',
       colSpan: 'col-span-1 sm:col-span-2 md:col-span-2',
+      tagEn: 'React 18 // TypeScript',
+      tagFr: 'React 18 // TypeScript',
       titleEn: 'Frontend Architecture',
       titleFr: 'Architecture Frontend',
-      tagEn: 'React 18 // Vite Engine',
-      tagFr: 'React 18 // Moteur Vite',
-      signature: '// 60 FPS REACTIVE',
+      descEn: 'Architecting modular, type-safe web applications with reactive state, component isolation, and sub-millisecond render updates.',
+      descFr: 'Conception d\'applications web modulaires et typées avec état réactif, isolation des composants et mises à jour DOM fluides.',
+      tools: ['React 18', 'TypeScript', 'Vite', 'Tailwind'],
       codeSnippet: (
-        <div className="space-y-1 font-mono text-[11px] whitespace-nowrap leading-relaxed overflow-hidden">
+        <div className="space-y-1 whitespace-nowrap">
           <div>
             <span className="text-[#38BDF8]">export const</span>{' '}
             <span className="text-[#F59E0B]">TelemetryCanvas</span>
             <span className="text-slate-400">:</span>{' '}
-            <span className="text-[#A78BFA]">React.FC&lt;StreamProps&gt;</span>{' '}
+            <span className="text-[#A78BFA]">React.FC&lt;Props&gt;</span>{' '}
             <span className="text-slate-400">=</span>{' '}
             <span className="text-slate-300">({'{'} endpoint, hz = </span>
             <span className="text-[#F43F5E]">60</span>
@@ -121,58 +136,52 @@ export const TechBentoGrid: React.FC = () => {
           </div>
           <div className="pl-3">
             <span className="text-[#38BDF8]">const</span>{' '}
-            <span className="text-slate-300">{'{'} stream, ping {'}'}</span>{' '}
+            <span className="text-slate-300">{'{'} stream {'}'}</span>{' '}
             <span className="text-slate-400">=</span>{' '}
             <span className="text-[#60A5FA]">useBinaryStream</span>
-            <span className="text-slate-300">&lt;</span>
-            <span className="text-[#A78BFA]">MarketFeed</span>
-            <span className="text-slate-300">&gt;(endpoint, {'{'} autoSync: </span>
-            <span className="text-[#F43F5E]">true</span>
-            <span className="text-slate-300"> {'}'});</span>
+            <span className="text-slate-300">(endpoint);</span>
           </div>
           <div className="pl-3">
             <span className="text-[#38BDF8]">return</span>{' '}
             <span className="text-slate-300">&lt;</span>
-            <span className="text-[#38BDF8]">RenderEngine</span>{' '}
-            <span className="text-slate-300">buffer=</span>
+            <span className="text-[#38BDF8]">Canvas</span>{' '}
+            <span className="text-slate-300">data=</span>
             <span className="text-slate-300">{'{'}stream.data{'}'}</span>{' '}
-            <span className="text-slate-300">fps=</span>
-            <span className="text-slate-300">{'{'}hz{'}'}</span>{' '}
-            <span className="text-slate-300">latency=</span>
-            <span className="text-slate-300">{'{'}ping{'}'}</span>{' '}
             <span className="text-slate-300">/&gt;;</span>
           </div>
-          <div>
-            <span className="text-slate-300">{'}'};</span>
-          </div>
+          <div><span className="text-slate-300">{'}'};</span></div>
         </div>
       ),
     },
     {
-      id: 'typescript',
+      id: 'ui-ux',
       colSpan: 'col-span-1 sm:col-span-1 md:col-span-1',
-      titleEn: 'TypeScript Runtime',
-      titleFr: 'Runtime TypeScript',
-      tagEn: 'Strict TS 5.7 // V8',
-      tagFr: 'TS 5.7 Strict // V8',
-      signature: '// 0 ANY',
+      tagEn: 'Figma // UI Systems',
+      tagFr: 'Figma // Systèmes UI',
+      titleEn: 'UI/UX & Prototyping',
+      titleFr: 'Design UI/UX & Prototypes',
+      descEn: 'Translating user needs into interactive high-fidelity Figma prototypes, ergonomic wireframes, and tested digital flows.',
+      descFr: 'Transformation des besoins utilisateurs en prototypes interactifs haute fidélité sur Figma et parcours fluides.',
+      tools: ['Figma', 'Wireframes', 'UX Testing'],
       codeSnippet: (
         <div className="space-y-0.5">
-          <div><span className="text-[#38BDF8]">interface</span> <span className="text-[#F59E0B]">Packet</span> {'{'}</div>
-          <div className="pl-3">seq: <span className="text-[#A78BFA]">number</span>;</div>
-          <div className="pl-3">payload: <span className="text-[#A78BFA]">ArrayBuffer</span>;</div>
-          <div>{'}'}</div>
+          <div><span className="text-[#38BDF8]">const</span> <span className="text-[#F59E0B]">LayoutSpec</span> = {'{'}</div>
+          <div className="pl-3">grid: <span className="text-[#34D399]">'12-col'</span>, gutter: <span className="text-[#F43F5E]">24</span>,</div>
+          <div className="pl-3">breakpoint: <span className="text-[#34D399]">'1280px'</span>,</div>
+          <div>{'}'};</div>
         </div>
       ),
     },
     {
-      id: 'ui-tokens',
+      id: 'design-tokens',
       colSpan: 'col-span-1 sm:col-span-1 md:col-span-1',
-      titleEn: 'UI Design Tokens',
-      titleFr: 'Tokens Design UI',
       tagEn: 'CSS3 // Variables',
       tagFr: 'CSS3 // Variables',
-      signature: '// DESIGN_SYS',
+      titleEn: 'Design Systems & Tokens',
+      titleFr: 'Design Systems & Tokens',
+      descEn: 'Structuring scalable CSS variables, design tokens, accessible components, and unified themes conforming to WCAG standards.',
+      descFr: 'Structuration de tokens de design, variables CSS réutilisables et composants accessibles conformes aux normes WCAG.',
+      tools: ['Tailwind CSS', 'CSS Variables', 'WCAG 2.1'],
       codeSnippet: (
         <div className="space-y-0.5">
           <div><span className="text-[#38BDF8]">:root</span> {'{'}</div>
@@ -187,11 +196,13 @@ export const TechBentoGrid: React.FC = () => {
     {
       id: 'state-machine',
       colSpan: 'col-span-1 sm:col-span-1 md:col-span-1',
-      titleEn: 'State Machine',
-      titleFr: 'Machine à États',
-      tagEn: 'Zustand // Reactive',
-      tagFr: 'Zustand // Réactif',
-      signature: '// STORE_READY',
+      tagEn: 'Zustand // State Flow',
+      tagFr: 'Zustand // Flux d\'État',
+      titleEn: 'Reactive State Machine',
+      titleFr: 'Machine à États Réactive',
+      descEn: 'Managing application state predictably with atomic stores, deterministic transitions, and zero unnecessary re-renders.',
+      descFr: 'Gestion prédictible de l\'état applicatif avec stores atomiques, transitions déterministes et zéro re-rendu superflu.',
+      tools: ['Zustand', 'Context API', 'State Machine'],
       codeSnippet: (
         <div className="space-y-0.5">
           <div><span className="text-[#38BDF8]">const</span> useStore = <span className="text-[#60A5FA]">create</span>((set) =&gt; ({'{'}</div>
@@ -202,13 +213,15 @@ export const TechBentoGrid: React.FC = () => {
       ),
     },
     {
-      id: 'hardware',
+      id: 'embedded-c',
       colSpan: 'col-span-1 sm:col-span-2 md:col-span-2',
-      titleEn: 'Hardware Bridge',
-      titleFr: 'Passerelle Hardware',
-      tagEn: 'CFC Electronics // C99',
-      tagFr: 'CFC Électronique // C99',
-      signature: '// 115.2 KBPS DMA',
+      tagEn: 'C99 // ARM Cortex',
+      tagFr: 'C99 // ARM Cortex',
+      titleEn: 'Embedded Hardware & C',
+      titleFr: 'Systèmes Embarqués & C',
+      descEn: 'Low-level microcontroller firmware, peripheral registers, direct memory access (DMA), and UART/SPI communication.',
+      descFr: 'Développement firmware bas niveau, registres périphériques, accès direct à la mémoire (DMA) et protocoles UART/SPI.',
+      tools: ['C99', 'ARM Cortex', 'DMA', 'SPI / UART'],
       codeSnippet: (
         <div className="space-y-1 font-mono text-[11px] whitespace-nowrap leading-relaxed overflow-hidden">
           <div>
@@ -218,40 +231,28 @@ export const TechBentoGrid: React.FC = () => {
             <span className="text-[#A78BFA]">USART_TypeDef</span>{' '}
             <span className="text-slate-300">*USARTx, </span>
             <span className="text-[#A78BFA]">uint32_t</span>{' '}
-            <span className="text-slate-300">baudrate, </span>
-            <span className="text-[#A78BFA]">uint8_t</span>{' '}
-            <span className="text-slate-300">dma_channel) {'{'}</span>
+            <span className="text-slate-300">baudrate) {'{'}</span>
           </div>
           <div className="pl-3">
-            <span className="text-slate-300">USARTx-&gt;BRR = </span>
-            <span className="text-[#60A5FA]">SystemCoreClock</span>
-            <span className="text-slate-300"> / baudrate; </span>
-            <span className="text-slate-500">// Configure hardware baudrate divider</span>
+            <span className="text-slate-300">USARTx-&gt;BRR = SystemCoreClock / baudrate;</span>
           </div>
           <div className="pl-3">
-            <span className="text-slate-300">USARTx-&gt;CR1 |= </span>
-            <span className="text-[#60A5FA]">USART_CR1_UE</span>
-            <span className="text-slate-300"> | </span>
-            <span className="text-[#60A5FA]">USART_CR1_TE</span>
-            <span className="text-slate-300"> | </span>
-            <span className="text-[#60A5FA]">USART_CR1_RE</span>
-            <span className="text-slate-300">; </span>
-            <span className="text-slate-500">// Enable TX/RX transceiver circuits</span>
+            <span className="text-slate-300">USARTx-&gt;CR1 |= USART_CR1_UE | USART_CR1_TE;</span>
           </div>
-          <div>
-            <span className="text-slate-300">{'}'}</span>
-          </div>
+          <div><span className="text-slate-300">{'}'}</span></div>
         </div>
       ),
     },
     {
       id: 'websockets',
       colSpan: 'col-span-1 sm:col-span-1 md:col-span-1',
-      titleEn: 'Real-Time WebSockets',
-      titleFr: 'WebSockets Temps Réel',
       tagEn: 'WS // Binary Stream',
       tagFr: 'WS // Flux Binaire',
-      signature: '// &lt; 15MS',
+      titleEn: 'Real-Time WebSockets',
+      titleFr: 'WebSockets Temps Réel',
+      descEn: 'Full-duplex TCP connections, binary streaming protocols, and low-latency live telemetry synchronization.',
+      descFr: 'Connexions TCP bidirectionnelles, protocoles de streaming binaire et synchronisation de télémétrie temps réel.',
+      tools: ['WebSockets', 'ArrayBuffer', 'TCP Streaming'],
       codeSnippet: (
         <div className="space-y-0.5">
           <div>ws.onmessage = (<span className="text-slate-300">e</span>) =&gt; {'{'}</div>
@@ -264,30 +265,33 @@ export const TechBentoGrid: React.FC = () => {
 
     // ROW 3: [1 COL] [1 COL] [1 COL] [1 COL] = 4 COLS
     {
-      id: 'semantic-dom',
+      id: 'dataviz',
       colSpan: 'col-span-1 sm:col-span-1 md:col-span-1',
-      titleEn: 'Semantic Web & A11y',
-      titleFr: 'DOM Sémantique & A11y',
-      tagEn: 'HTML5 // WCAG 2.1',
-      tagFr: 'HTML5 // WCAG 2.1',
-      signature: '// WCAG_AAA',
+      tagEn: 'D3.js // SVG & Canvas',
+      tagFr: 'D3.js // SVG & Canvas',
+      titleEn: 'Data Visualization',
+      titleFr: 'Visualisation de Données',
+      descEn: 'Transforming complex datasets into high-density interactive charts, responsive graphs, and analytical views.',
+      descFr: 'Transformation de jeux de données complexes en graphiques interactifs haute densité et tableaux de bord analytiques.',
+      tools: ['D3.js', 'Recharts', 'SVG / Canvas'],
       codeSnippet: (
         <div className="space-y-0.5">
-          <div>&lt;<span className="text-[#38BDF8]">article</span> <span className="text-slate-300">role</span>=<span className="text-[#34D399]">"feed"</span>&gt;</div>
-          <div className="pl-3">&lt;<span className="text-[#38BDF8]">header</span> class=<span className="text-[#34D399]">"hud"</span> /&gt;</div>
-          <div className="pl-3">&lt;<span className="text-[#38BDF8]">main</span> aria-live=<span className="text-[#34D399]">"polite"</span> /&gt;</div>
-          <div>&lt;/<span className="text-[#38BDF8]">article</span>&gt;</div>
+          <div><span className="text-[#38BDF8]">const</span> x = <span className="text-[#60A5FA]">scaleTime</span>().domain([t0, t1]);</div>
+          <div className="pl-3"><span className="text-[#38BDF8]">const</span> y = <span className="text-[#60A5FA]">scaleLinear</span>().domain([min, max]);</div>
+          <div><span className="text-[#38BDF8]">return</span> line().x(d =&gt; x(d.t));</div>
         </div>
       ),
     },
     {
       id: 'api-architecture',
       colSpan: 'col-span-1 sm:col-span-1 md:col-span-1',
-      titleEn: 'REST & API Engine',
-      titleFr: 'Moteur API & REST',
-      tagEn: 'HTTP/2 // OpenAPI',
-      tagFr: 'HTTP/2 // OpenAPI',
-      signature: '// TYPE_FETCH',
+      tagEn: 'REST // OpenAPI',
+      tagFr: 'REST // OpenAPI',
+      titleEn: 'API Architecture & REST',
+      titleFr: 'Architecture API & REST',
+      descEn: 'End-to-end typed contract design, resilient HTTP/2 fetching pipelines, caching policies, and clean service adapters.',
+      descFr: 'Modélisation de contrats typés de bout en bout, requêtes HTTP/2 résilientes et adaptateurs de services modulaires.',
+      tools: ['REST APIs', 'OpenAPI', 'Fetch API'],
       codeSnippet: (
         <div className="space-y-0.5">
           <div><span className="text-[#38BDF8]">async function</span> <span className="text-[#F59E0B]">queryApi</span>&lt;<span className="text-[#A78BFA]">T</span>&gt;(url: <span className="text-[#A78BFA]">string</span>) {'{'}</div>
@@ -298,37 +302,40 @@ export const TechBentoGrid: React.FC = () => {
       ),
     },
     {
-      id: 'spi-bus',
-      colSpan: 'col-span-1 sm:col-span-1 md:col-span-1',
-      titleEn: 'Microcontroller Bus',
-      titleFr: 'Bus Microcontrôleur',
-      tagEn: 'ARM Cortex // SPI',
-      tagFr: 'ARM Cortex // SPI',
-      signature: '// DMA_LINKED',
-      codeSnippet: (
-        <div className="space-y-0.5">
-          <div><span className="text-[#38BDF8]">uint8_t</span> <span className="text-[#F59E0B]">SPI_TxRx</span>(<span className="text-[#A78BFA]">uint8_t</span> b) {'{'}</div>
-          <div className="pl-3">SPI1-&gt;DR = b;</div>
-          <div className="pl-3"><span className="text-[#38BDF8]">while</span> (!(SPI1-&gt;SR &amp; SPI_SR_RXNE));</div>
-          <div className="pl-3"><span className="text-[#38BDF8]">return</span> SPI1-&gt;DR;</div>
-          <div>{'}'}</div>
-        </div>
-      ),
-    },
-    {
       id: 'build-perf',
       colSpan: 'col-span-1 sm:col-span-1 md:col-span-1',
-      titleEn: 'Build & Performance',
-      titleFr: 'Compilation & Performance',
       tagEn: 'Vite // Rollup Core',
       tagFr: 'Vite // Moteur Rollup',
-      signature: '// CHUNKS_OPT',
+      titleEn: 'Build & Performance',
+      titleFr: 'Compilation & Performance',
+      descEn: 'Modern build pipelines, ES module bundling, tree-shaking, code splitting, and sub-second asset delivery.',
+      descFr: 'Pipelines de compilation modernes, découpage de code, tree-shaking et distribution ultra-rapide des assets web.',
+      tools: ['Vite', 'Rollup', 'Code Splitting'],
       codeSnippet: (
         <div className="space-y-0.5">
           <div><span className="text-[#38BDF8]">export default</span> <span className="text-[#60A5FA]">defineConfig</span>({'{'}</div>
           <div className="pl-3">build: {'{'} target: <span className="text-[#34D399]">'esnext'</span> {'}'},</div>
           <div className="pl-3">plugins: [<span className="text-[#60A5FA]">react</span>()],</div>
           <div>{'}'});</div>
+        </div>
+      ),
+    },
+    {
+      id: 'agile-management',
+      colSpan: 'col-span-1 sm:col-span-1 md:col-span-1',
+      tagEn: 'Agile // Project Delivery',
+      tagFr: 'Agile // Gestion de Projet',
+      titleEn: 'Project Integration & Agile',
+      titleFr: 'Gestion de Projet & Agile',
+      descEn: 'Driving digital projects from requirements scoping to release, sprint planning, client communications, and teamwork.',
+      descFr: 'Pilotage de projets numériques du cadrage au déploiement, planification agile, suivi client et travail en équipe.',
+      tools: ['Agile / Scrum', 'Git Flow', 'Roadmapping'],
+      codeSnippet: (
+        <div className="space-y-0.5">
+          <div><span className="text-[#38BDF8]">interface</span> <span className="text-[#F59E0B]">SprintRelease</span> {'{'}</div>
+          <div className="pl-3">milestone: <span className="text-[#34D399]">'v1.0.0'</span>,</div>
+          <div className="pl-3">qaCheck: <span className="text-[#F43F5E]">true</span>,</div>
+          <div>{'}'}</div>
         </div>
       ),
     },
@@ -339,10 +346,12 @@ export const TechBentoGrid: React.FC = () => {
       {/* Clean Skills Header */}
       <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1.5 pb-1">
         <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-fintech-primary">
-          {isFrench ? 'Compétences' : 'Skills'}
+          {isFrench ? 'Compétences Techniques' : 'Technical Skills'}
         </h2>
         <span className="text-xs font-mono text-slate-500">
-          {isFrench ? 'Survolez pour inspecter le code' : 'Hover to inspect code'}
+          {isFrench
+            ? 'Survolez ou cliquez pour afficher les détails'
+            : 'Hover or tap to inspect capabilities'}
         </span>
       </div>
 
