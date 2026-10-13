@@ -173,7 +173,7 @@ export const Home: React.FC = () => {
                 </h3>
                 {/* 3 High-Impact Metric Badges */}
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="px-2.5 py-1 text-[11px] font-mono font-semibold bg-blue-50 text-electric border border-blue-200">
+                  <span className="px-2.5 py-1 text-[11px] font-mono font-semibold bg-slate-100 text-slate-700 border border-slate-200">
                     {isFrench ? '< 50ms Latence Ticks' : '< 50ms Tick Latency'}
                   </span>
                   <span className="px-2.5 py-1 text-[11px] font-mono font-semibold bg-slate-100 text-slate-700 border border-slate-200">
@@ -268,7 +268,7 @@ export const Home: React.FC = () => {
                   <span className="px-2.5 py-1 text-[11px] font-mono font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
                     {isFrench ? 'Note 6.0 / 6.0 HUG & HEIG-VD' : 'Grade 6.0 / 6.0 HUG & HEIG-VD'}
                   </span>
-                  <span className="px-2.5 py-1 text-[11px] font-mono font-semibold bg-blue-50 text-electric border border-blue-200">
+                  <span className="px-2.5 py-1 text-[11px] font-mono font-semibold bg-slate-100 text-slate-700 border border-slate-200">
                     {isFrench ? '-30% Rejets sur Place' : '-30% On-Site Deferrals'}
                   </span>
                   <span className="px-2.5 py-1 text-[11px] font-mono font-semibold bg-slate-100 text-slate-700 border border-slate-200">
@@ -357,7 +357,7 @@ export const Home: React.FC = () => {
                 </h3>
                 {/* 3 Metric Badges */}
                 <div className="flex flex-wrap items-center gap-1.5">
-                  <span className="px-2 py-0.5 text-[10px] font-mono font-semibold bg-blue-50 text-electric border border-blue-200">
+                  <span className="px-2 py-0.5 text-[10px] font-mono font-semibold bg-slate-100 text-slate-700 border border-slate-200">
                     {isFrench ? '< 10ms Recherche' : '< 10ms Search Index'}
                   </span>
                   <span className="px-2 py-0.5 text-[10px] font-mono font-semibold bg-slate-100 text-slate-700 border border-slate-200">
@@ -371,8 +371,8 @@ export const Home: React.FC = () => {
 
               <p className="text-xs sm:text-sm text-fintech-secondary leading-relaxed">
                 {isFrench
-                  ? 'Moteur de recherche érudit articulant ontologie et épistémologie avec indexation floue instantanée (< 10ms) et frise chronologique réactive.'
-                  : 'Scholarly research engine synthesizing conceptual ontology with sub-10ms instant fuzzy indexing and interactive chronological timeline navigation.'}
+                  ? 'Moteur de recherche instantané (< 10ms) et frise chronologique pour explorer des définitions formelles (comme Ontologie, Épistémologie, Entropie et Causalité)'
+                  : 'Instant search engine (< 10ms) and interactive timeline for exploring formal definitions (such as Ontology, Epistemology, Entropy, and Causality)'}
               </p>
 
               {/* Interactive Lexicon & Chronology Simulation Widget */}
@@ -401,10 +401,10 @@ export const Home: React.FC = () => {
                 </h3>
                 {/* 3 Metric Badges */}
                 <div className="flex flex-wrap items-center gap-1.5">
-                  <span className="px-2 py-0.5 text-[10px] font-mono font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                  <span className="px-2 py-0.5 text-[10px] font-mono font-semibold bg-slate-100 text-slate-700 border border-slate-200">
                     {isFrench ? '100% Mobile First' : '100% Mobile-First UX'}
                   </span>
-                  <span className="px-2 py-0.5 text-[10px] font-mono font-semibold bg-blue-50 text-electric border border-blue-200">
+                  <span className="px-2 py-0.5 text-[10px] font-mono font-semibold bg-slate-100 text-slate-700 border border-slate-200">
                     {isFrench ? 'Sync Webhook Excel' : 'Excel Webhook Sync'}
                   </span>
                   <span className="px-2 py-0.5 text-[10px] font-mono font-semibold bg-slate-100 text-slate-700 border border-slate-200">
