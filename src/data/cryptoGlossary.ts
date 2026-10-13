@@ -739,14 +739,14 @@ export function getGlossaryEntries(lang: string = 'en'): LocalizedGlossaryEntry[
 }
 
 /**
- * Returns a localized 3-line structured definition for hover tooltips.
+ * Returns a localized concise 2-4 lines definition for hover tooltips and dialogs.
  */
 export function getGlossaryDef(id: string, lang: string = 'en'): string {
   const l = normalizeLang(lang);
   const entry = BILINGUAL_GLOSSARY_DATA.find((e) => e.id === id);
   if (!entry) return '';
   const c = entry[l];
-  return `${c.line1} ${c.line2} ${c.line3}`;
+  return `${c.shortDef} ${c.line1}`;
 }
 
 /**

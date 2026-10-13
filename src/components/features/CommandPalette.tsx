@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, X, BookOpen, ArrowLeft } from 'lucide-react';
@@ -18,27 +18,46 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
 
   const currentLang = i18n.language?.startsWith('fr') ? 'fr' : 'en';
   const isFrench = currentLang === 'fr';
-  const glossaryEntries = getGlossaryEntries(currentLang);
+  const glossaryEntries = useMemo(() => getGlossaryEntries(currentLang), [currentLang]);
 
-  // Filter glossary items based on query (returns top 3 matches when searching)
-  const filteredItems = query.trim()
-    ? glossaryEntries
-        .filter((entry) => {
-          const q = query.toLowerCase().trim();
-          const term = entry.term.toLowerCase();
-          const def = entry.shortDef.toLowerCase();
-          const cat = entry.category.toLowerCase();
-          return term.includes(q) || def.includes(q) || cat.includes(q);
-        })
-        .slice(0, 3)
-    : glossaryEntries.slice(0, 6);
+  // Filter glossary items: 0 items when query is empty; top 3 closest matches when typing
+  const filteredItems = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return [];
+
+    const matches = glossaryEntries.filter((entry) => {
+      const term = entry.term.toLowerCase();
+      const def = entry.shortDef.toLowerCase();
+      const cat = entry.category.toLowerCase();
+      return term.includes(q) || def.includes(q) || cat.includes(q);
+    });
+
+    // Closest match ranking
+    matches.sort((a, b) => {
+      const aTerm = a.term.toLowerCase();
+      const bTerm = b.term.toLowerCase();
+      const aStarts = aTerm.startsWith(q);
+      const bStarts = bTerm.startsWith(q);
+      if (aStarts && !bStarts) return -1;
+      if (!aStarts && bStarts) return 1;
+
+      const aWordStarts = aTerm.split(/\s+/).some((w) => w.startsWith(q));
+      const bWordStarts = bTerm.split(/\s+/).some((w) => w.startsWith(q));
+      if (aWordStarts && !bWordStarts) return -1;
+      if (!aWordStarts && bWordStarts) return 1;
+
+      return aTerm.localeCompare(bTerm);
+    });
+
+    return matches.slice(0, 3);
+  }, [glossaryEntries, query]);
 
   // Reset selected index when query changes
   useEffect(() => {
     setSelectedIndex(0);
   }, [query]);
 
-  // Focus input whenever palette is opened
+  // Focus input whenever palette is opened and reset query
   useEffect(() => {
     if (isOpen) {
       setTimeout(() => {
@@ -65,13 +84,17 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
 
       if (e.key === 'ArrowDown') {
         e.preventDefault();
-        setSelectedIndex((prev) => (prev + 1) % Math.max(1, filteredItems.length));
+        if (filteredItems.length > 0) {
+          setSelectedIndex((prev) => (prev + 1) % filteredItems.length);
+        }
       } else if (e.key === 'ArrowUp') {
         e.preventDefault();
-        setSelectedIndex((prev) => (prev - 1 + filteredItems.length) % Math.max(1, filteredItems.length));
+        if (filteredItems.length > 0) {
+          setSelectedIndex((prev) => (prev - 1 + filteredItems.length) % filteredItems.length);
+        }
       } else if (e.key === 'Enter') {
         e.preventDefault();
-        if (filteredItems[selectedIndex]) {
+        if (filteredItems.length > 0 && filteredItems[selectedIndex]) {
           setSelectedGlossary(filteredItems[selectedIndex]);
         }
       } else if (e.key === 'Escape') {
@@ -106,7 +129,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
             transition={{ duration: 0.16, ease: 'easeOut' }}
             className="relative w-full max-w-xl overflow-hidden rounded-none bg-white border border-slate-200 shadow-2xl z-10"
           >
-            {/* If a glossary term is selected, show its clean 2-3 line explanation (no grey box, no bullets) */}
+            {/* If a glossary term is selected, show its clean 2-4 lines concise explanation */}
             {selectedGlossary ? (
               <div className="p-6 space-y-4 font-sans text-left">
                 {/* Term Header */}
@@ -122,17 +145,10 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
                   </span>
                 </div>
 
-                {/* Main Definition (Normal clean text, no grey container) */}
-                <p className="text-sm font-semibold text-slate-900 leading-relaxed font-sans">
-                  {selectedGlossary.shortDef}
+                {/* Concise Definition (2-4 lines max, fluent paragraph, zero bullets) */}
+                <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-sans pt-1">
+                  {selectedGlossary.shortDef} {selectedGlossary.line1}
                 </p>
-
-                {/* Clear 2-3 explanatory lines without bullet points or numbering */}
-                <div className="space-y-2 text-xs sm:text-sm text-slate-600 leading-relaxed font-sans pt-1">
-                  <p>{selectedGlossary.line1}</p>
-                  <p>{selectedGlossary.line2}</p>
-                  {selectedGlossary.line3 && <p>{selectedGlossary.line3}</p>}
-                </div>
 
                 {/* Footer Controls */}
                 <div className="flex items-center justify-between pt-4 border-t border-slate-100">
@@ -167,7 +183,11 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
                       setQuery(e.target.value);
                       setSelectedIndex(0);
                     }}
-                    placeholder={isFrench ? 'Rechercher un terme du glossaire...' : 'Search glossary term...'}
+                    placeholder={
+                      isFrench
+                        ? 'Rechercher un terme (ex. ADX, Ontologie, Serverless)...'
+                        : 'Search term (e.g. ADX, Ontology, Serverless)...'
+                    }
                     className="w-full bg-transparent text-sm text-fintech-primary placeholder-slate-400 outline-none focus:ring-1 focus:ring-electric rounded-none px-2 py-1.5 transition-shadow font-mono"
                   />
                   {query && (
@@ -181,22 +201,17 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
                   )}
                 </div>
 
-                {/* List of Glossary Items */}
-                <div className="max-h-80 overflow-y-auto p-2">
-                  <div className="px-3 py-1.5 text-[11px] font-mono font-semibold uppercase tracking-wider text-slate-400 flex items-center justify-between">
-                    <span>
-                      {query
-                        ? t('cmdPalette.matchingResults').toUpperCase()
-                        : isFrench
-                        ? 'TERMES DU GLOSSAIRE'
-                        : 'GLOSSARY TERMS'}
-                    </span>
-                    <span className="text-[10px] text-slate-400 font-normal">
-                      {filteredItems.length} {t('cmdPalette.itemsCount').toUpperCase()}
-                    </span>
-                  </div>
-
-                  {filteredItems.length === 0 ? (
+                {/* Content Area */}
+                <div className="p-2">
+                  {!query.trim() ? (
+                    <div className="py-10 text-center space-y-1 text-slate-400 font-mono text-xs">
+                      <p>
+                        {isFrench
+                          ? 'Tapez une lettre pour explorer les termes du glossaire...'
+                          : 'Type a letter to explore glossary terms...'}
+                      </p>
+                    </div>
+                  ) : filteredItems.length === 0 ? (
                     <div className="py-8 text-center text-xs text-slate-400 font-mono">
                       {t('cmdPalette.noResults')} "{query}"
                     </div>
