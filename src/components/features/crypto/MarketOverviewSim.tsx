@@ -1,5 +1,6 @@
 import React from 'react';
 import { Activity, BarChart2, TrendingUp } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface VolumeAsset {
   rank: number;
@@ -133,6 +134,9 @@ const TABLE_ASSETS_DATA: TableAsset[] = [
 ];
 
 export const MarketOverviewSim: React.FC = () => {
+  const { i18n } = useTranslation();
+  const isFrench = i18n.language?.startsWith('fr');
+
   const renderSparkline = (data: number[], isUp: boolean) => {
     const min = Math.min(...data);
     const max = Math.max(...data);
@@ -171,15 +175,15 @@ export const MarketOverviewSim: React.FC = () => {
         <div className="flex items-center space-x-2.5">
           <div className="w-2.5 h-2.5 bg-emerald-400 rounded-none shadow-[0_0_8px_rgba(52,211,153,0.6)]" />
           <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-100">
-            MARKET HYPE & VOLUME SURVEILLANCE
+            {isFrench ? 'SURVEILLANCE DU MARCHÉ ET DES VOLUMES' : 'MARKET HYPE & VOLUME SURVEILLANCE'}
           </span>
         </div>
         <div className="flex items-center space-x-3 text-xs font-mono text-slate-400">
           <span className="px-2 py-0.5 bg-[#111622] border border-[#1E2638] text-[11px] text-slate-300">
-            SCANNER: 300+ PAIRS
+            {isFrench ? 'SCANNER : 300+ PAIRES' : 'SCANNER: 300+ PAIRS'}
           </span>
           <span className="hidden sm:inline-block text-[11px] text-slate-500">
-            INTERVAL: REALTIME TICK
+            {isFrench ? 'INTERVALLE : TICKS TEMPS RÉEL' : 'INTERVAL: REALTIME TICK'}
           </span>
         </div>
       </div>
@@ -192,10 +196,12 @@ export const MarketOverviewSim: React.FC = () => {
             <div className="flex items-center space-x-2">
               <BarChart2 className="w-3.5 h-3.5 text-blue-400" />
               <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-300">
-                TOP VOLUME (24H)
+                {isFrench ? 'VOLUMES LES PLUS ÉLEVÉS (24H)' : 'TOP VOLUME (24H)'}
               </span>
             </div>
-            <span className="text-[10px] font-mono text-slate-500 uppercase">USDT PAIRINGS</span>
+            <span className="text-[10px] font-mono text-slate-500 uppercase">
+              {isFrench ? 'PAIRES USDT' : 'USDT PAIRINGS'}
+            </span>
           </div>
 
           <div className="divide-y divide-[#1E2638]/60">
@@ -236,10 +242,12 @@ export const MarketOverviewSim: React.FC = () => {
             <div className="flex items-center space-x-2">
               <TrendingUp className="w-3.5 h-3.5 text-emerald-400" />
               <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-300">
-                TRENDING SEARCH
+                {isFrench ? 'TENDANCES DE RECHERCHE' : 'TRENDING SEARCH'}
               </span>
             </div>
-            <span className="text-[10px] font-mono text-slate-500 uppercase">ALGORITHM REGIME</span>
+            <span className="text-[10px] font-mono text-slate-500 uppercase">
+              {isFrench ? 'RÉGIME ALGORITHMIQUE' : 'ALGORITHM REGIME'}
+            </span>
           </div>
 
           <div className="divide-y divide-[#1E2638]/60">
@@ -257,7 +265,7 @@ export const MarketOverviewSim: React.FC = () => {
                 </div>
 
                 <div className="border border-[#243048] bg-[#0E131F] px-2 py-0.5 text-[11px] text-slate-400 rounded-none">
-                  Rank #{item.marketRank}
+                  {isFrench ? `Rang #${item.marketRank}` : `Rank #${item.marketRank}`}
                 </div>
               </div>
             ))}
@@ -271,12 +279,12 @@ export const MarketOverviewSim: React.FC = () => {
           <div className="flex items-center space-x-2">
             <Activity className="w-3.5 h-3.5 text-blue-400" />
             <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-200">
-              GLOBAL MARKET OVERVIEW (TOP ASSETS)
+              {isFrench ? 'APERÇU GLOBAL DU MARCHÉ (TOP ACTIFS)' : 'GLOBAL MARKET OVERVIEW (TOP ASSETS)'}
             </span>
           </div>
           <div className="flex items-center space-x-2 text-[10px] font-mono text-slate-400">
             <span className="w-1.5 h-1.5 bg-emerald-400 rounded-none" />
-            <span>ORDERBOOK AGGREGATION: ACTIVE</span>
+            <span>{isFrench ? 'AGRÉGATION DU CARNET D\'ORDRES : ACTIVE' : 'ORDERBOOK AGGREGATION: ACTIVE'}</span>
           </div>
         </div>
 
@@ -286,15 +294,15 @@ export const MarketOverviewSim: React.FC = () => {
             <thead>
               <tr className="border-b border-[#1E2638] text-[11px] text-slate-400 uppercase tracking-wider">
                 <th className="py-2.5 px-2 font-normal w-8">#</th>
-                <th className="py-2.5 px-2 font-normal">Asset</th>
-                <th className="py-2.5 px-2 font-normal text-right">Price</th>
+                <th className="py-2.5 px-2 font-normal">{isFrench ? 'Actif' : 'Asset'}</th>
+                <th className="py-2.5 px-2 font-normal text-right">{isFrench ? 'Prix' : 'Price'}</th>
                 <th className="py-2.5 px-2 font-normal text-right">1h %</th>
                 <th className="py-2.5 px-2 font-normal text-right">24h %</th>
                 <th className="py-2.5 px-2 font-normal text-right">7d %</th>
-                <th className="py-2.5 px-2 font-normal text-right hidden sm:table-cell">Market Cap</th>
-                <th className="py-2.5 px-2 font-normal text-right hidden md:table-cell">Volume (24h)</th>
-                <th className="py-2.5 px-2 font-normal text-right hidden lg:table-cell">Circulating Supply</th>
-                <th className="py-2.5 px-2 font-normal text-right w-32">Last 7 Days</th>
+                <th className="py-2.5 px-2 font-normal text-right hidden sm:table-cell">{isFrench ? 'Cap. Marché' : 'Market Cap'}</th>
+                <th className="py-2.5 px-2 font-normal text-right hidden md:table-cell">{isFrench ? 'Volume (24h)' : 'Volume (24h)'}</th>
+                <th className="py-2.5 px-2 font-normal text-right hidden lg:table-cell">{isFrench ? 'Offre en Circulation' : 'Circulating Supply'}</th>
+                <th className="py-2.5 px-2 font-normal text-right w-32">{isFrench ? '7 Derniers Jours' : 'Last 7 Days'}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-[#1E2638]/60">

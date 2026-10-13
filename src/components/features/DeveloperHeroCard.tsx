@@ -45,11 +45,15 @@ export const DeveloperHeroCard: React.FC = () => {
           </div>
           <div className="pl-4">
             <span className="text-slate-500">degree:</span>{' '}
-            <span className="text-emerald-700">"BSc Media Engineering @ HEIG-VD"</span>,
+            <span className="text-emerald-700">
+              {isFrench ? '"BSc Ingénierie des Médias @ HEIG-VD"' : '"BSc Media Engineering @ HEIG-VD"'}
+            </span>,
           </div>
           <div className="pl-4">
             <span className="text-slate-500">background:</span>{' '}
-            <span className="text-emerald-700">"C Hardware (9 yrs) &rarr; Web & UI/UX"</span>,
+            <span className="text-emerald-700">
+              {isFrench ? '"Hardware C (9 ans) → Web & UI/UX"' : '"C Hardware (9 yrs) → Web & UI/UX"'}
+            </span>,
           </div>
           <div className="pl-4">
             <span className="text-slate-500">coreStack:</span> [
@@ -61,11 +65,15 @@ export const DeveloperHeroCard: React.FC = () => {
           </div>
           <div className="pl-4">
             <span className="text-slate-500">mandateScope:</span>{' '}
-            <span className="text-emerald-700">"14-Week Capstone (CHF 0 / NDA)"</span>,
+            <span className="text-emerald-700">
+              {isFrench ? '"Mandat 14 semaines (0 CHF / NDA)"' : '"14-Week Capstone (CHF 0 / NDA)"'}
+            </span>,
           </div>
           <div className="pl-4">
             <span className="text-slate-500">location:</span>{' '}
-            <span className="text-emerald-700">"Bussigny / Vaud, Switzerland"</span>
+            <span className="text-emerald-700">
+              {isFrench ? '"Bussigny / Vaud, Suisse"' : '"Bussigny / Vaud, Switzerland"'}
+            </span>
           </div>
           <div>&#125;;</div>
         </div>

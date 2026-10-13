@@ -1,32 +1,42 @@
 import React, { useState } from 'react';
 import { Activity, Terminal, TrendingUp, Shield, CheckCircle2 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 type IndicatorKey = 'rsi' | 'adx' | 'kelly';
 
 export const MarketIntelligenceSim: React.FC = () => {
+  const { i18n } = useTranslation();
+  const isFrench = i18n.language?.startsWith('fr');
+
   const [selectedIndicator, setSelectedIndicator] = useState<IndicatorKey>('adx');
 
-  const indicatorDetails: Record<IndicatorKey, { name: string; value: string; status: string; description: string }> = {
+  const indicatorDetails: Record<
+    IndicatorKey,
+    { name: string; value: string; status: string; description: string }
+  > = {
     rsi: {
-      name: 'RSI (14-PERIOD)',
+      name: isFrench ? 'RSI (14 PÉRIODES)' : 'RSI (14-PERIOD)',
       value: '54.2',
-      status: 'NEUTRAL EQUILIBRIUM',
-      description:
-        'Momentum oscillator is operating within the healthy equilibrium band (45.0 - 65.0). Neither extreme exhaustion nor overbought rejection detected across major surveillance pairs.',
+      status: isFrench ? 'ÉQUILIBRE NEUTRE' : 'NEUTRAL EQUILIBRIUM',
+      description: isFrench
+        ? 'L\'oscillateur de momentum évolue dans une zone d\'équilibre saine (45.0 - 65.0). Ni épuisement extrême ni rejet de surachat détecté sur les paires surveillées.'
+        : 'Momentum oscillator is operating within the healthy equilibrium band (45.0 - 65.0). Neither extreme exhaustion nor overbought rejection detected across major surveillance pairs.',
     },
     adx: {
-      name: 'ADX (14-PERIOD DIRECTIONAL)',
+      name: isFrench ? 'ADX (14 PÉRIODES DIRECTIONNEL)' : 'ADX (14-PERIOD DIRECTIONAL)',
       value: '26.8',
-      status: 'TRENDING REGIME CONFIRMED',
-      description:
-        'ADX > 25.0 threshold validated. Market structure has shifted from range-bound chop into directional trend momentum. Dynamic Grid switches off; Smart Momentum module takes execution priority.',
+      status: isFrench ? 'RÉGIME DIRECTIONNEL CONFIRMÉ' : 'TRENDING REGIME CONFIRMED',
+      description: isFrench
+        ? 'Seuil ADX > 25.0 validé. La structure du marché a basculé d\'un range vers un momentum directionnel. La grille dynamique se désactive au profit du module Smart Momentum.'
+        : 'ADX > 25.0 threshold validated. Market structure has shifted from range-bound chop into directional trend momentum. Dynamic Grid switches off; Smart Momentum module takes execution priority.',
     },
     kelly: {
-      name: 'VOLATILITY & SIZING REGIME',
+      name: isFrench ? 'RÉGIME DE VOLATILITÉ & TAILLE' : 'VOLATILITY & SIZING REGIME',
       value: '1.25x ACTIVE',
-      status: 'KELLY CRITERION FRACTION',
-      description:
-        'Fractional Kelly criterion dynamically calibrated against 30-day win rate (58.4%) and payoff ratio (1.82). Maximum downside exposure per trade capped at 2.0% of portfolio equity.',
+      status: isFrench ? 'FRACTION CRITÈRE DE KELLY' : 'KELLY CRITERION FRACTION',
+      description: isFrench
+        ? 'Fraction de Kelly calibrée dynamiquement sur le taux de réussite à 30 jours (58.4%) et le ratio de gain (1.82). Risque baissier maximal plafonné à 2.0% des capitaux propres.'
+        : 'Fractional Kelly criterion dynamically calibrated against 30-day win rate (58.4%) and payoff ratio (1.82). Maximum downside exposure per trade capped at 2.0% of portfolio equity.',
     },
   };
 
@@ -37,7 +47,7 @@ export const MarketIntelligenceSim: React.FC = () => {
         <div className="flex items-center space-x-2.5">
           <Terminal className="w-4 h-4 text-purple-400" />
           <h3 className="text-xs sm:text-sm font-mono font-bold uppercase tracking-wider text-slate-100">
-            AI MARKET INTELLIGENCE & SYNTHESIS
+            {isFrench ? 'INTELLIGENCE DE MARCHÉ IA & SYNTHÈSE' : 'AI MARKET INTELLIGENCE & SYNTHESIS'}
           </h3>
         </div>
         <div className="flex items-center space-x-2 text-xs font-mono text-purple-400 bg-purple-950/40 border border-purple-800/40 px-2 py-0.5 rounded-none">
@@ -51,8 +61,10 @@ export const MarketIntelligenceSim: React.FC = () => {
         {/* Global Sentiment */}
         <div className="md:col-span-5 bg-[#111622] border border-[#1E2638] rounded-none p-4 space-y-3">
           <div className="text-[11px] font-mono text-slate-400 uppercase tracking-wider flex items-center justify-between">
-            <span>Global Sentiment</span>
-            <span className="text-[10px] text-slate-500">AGGREGATED SCORE</span>
+            <span>{isFrench ? 'Sentiment Global' : 'Global Sentiment'}</span>
+            <span className="text-[10px] text-slate-500">
+              {isFrench ? 'SCORE AGRÉGÉ' : 'AGGREGATED SCORE'}
+            </span>
           </div>
 
           <div className="flex items-baseline space-x-2">
@@ -61,19 +73,21 @@ export const MarketIntelligenceSim: React.FC = () => {
             </span>
             <span className="text-xs font-mono font-semibold text-emerald-500 flex items-center">
               <TrendingUp className="w-3.5 h-3.5 mr-1" />
-              Bullish Bias
+              {isFrench ? 'Biais Haussier' : 'Bullish Bias'}
             </span>
           </div>
 
           <div className="text-[11px] font-mono text-slate-400 leading-relaxed border-t border-[#1E2638] pt-2">
-            Derived from X (Twitter) API volume surges, CryptoCompare news velocity, and orderbook bid/ask ratios.
+            {isFrench
+              ? 'Calculé à partir des volumes de l\'API X (Twitter), de la vélocité des actualités CryptoCompare et des ratios bid/ask du carnet d\'ordres.'
+              : 'Derived from X (Twitter) API volume surges, CryptoCompare news velocity, and orderbook bid/ask ratios.'}
           </div>
         </div>
 
         {/* Active Narrative Tags */}
         <div className="md:col-span-7 bg-[#111622] border border-[#1E2638] rounded-none p-4 space-y-3">
           <div className="text-[11px] font-mono text-slate-400 uppercase tracking-wider">
-            Active Narrative Metadata
+            {isFrench ? 'Métadonnées des Narratifs Actifs' : 'Active Narrative Metadata'}
           </div>
 
           <div className="flex flex-wrap gap-2 pt-1">
@@ -88,7 +102,9 @@ export const MarketIntelligenceSim: React.FC = () => {
           </div>
 
           <div className="text-[11px] font-mono text-slate-500 pt-1">
-            Automated cluster tags extracted from natural language sentiment embeddings.
+            {isFrench
+              ? 'Tags de clusters automatisés extraits par analyse de sentiment en langage naturel.'
+              : 'Automated cluster tags extracted from natural language sentiment embeddings.'}
           </div>
         </div>
       </div>
@@ -99,16 +115,20 @@ export const MarketIntelligenceSim: React.FC = () => {
           <div className="flex items-center space-x-2">
             <Activity className="w-3.5 h-3.5 text-blue-400" />
             <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-200">
-              DAILY STRATEGIST BRIEF (Automated Synthesis)
+              {isFrench
+                ? 'BRIEF QUOTIDIEN DU STRATÈGE (Synthèse Automatisée)'
+                : 'DAILY STRATEGIST BRIEF (Automated Synthesis)'}
             </span>
           </div>
           <span className="text-[10px] font-mono text-slate-500">
-            TIMESTAMP: 08:00 UTC
+            {isFrench ? 'HORODATAGE : 08:00 UTC' : 'TIMESTAMP: 08:00 UTC'}
           </span>
         </div>
 
         <div className="bg-[#0B0E14] border border-[#1E2638] p-4 text-xs font-mono text-slate-300 leading-relaxed rounded-none">
-          Market structure indicates a moderate bull trend with BTC dominance holding at 57.52% and global 24h volume consolidating near $102.94B. Smart Momentum module detects 20-candle Donchian breakouts on SOL and LINK with 2.0x volume surges. Dynamic Grid Mean Reversion continues active limit laddering on ranging pairs. Sentiment aggregation from X (Twitter) API and news feeds remains net positive with macro altcoin rotation anticipated.
+          {isFrench
+            ? 'La structure du marché indique une tendance haussière modérée avec une dominance du BTC à 57.52% et un volume mondial 24h consolidant autour de 102.94B$. Le module Smart Momentum détecte des cassures de canaux Donchian à 20 périodes sur SOL et LINK accompagnées d\'un volume en hausse de 2.0x. La grille dynamique de retour à la moyenne maintient ses échelons de limites sur les paires sans tendance. L\'agrégation du sentiment reste nettement positive avec une rotation macro anticipée vers les altcoins.'
+            : 'Market structure indicates a moderate bull trend with BTC dominance holding at 57.52% and global 24h volume consolidating near $102.94B. Smart Momentum module detects 20-candle Donchian breakouts on SOL and LINK with 2.0x volume surges. Dynamic Grid Mean Reversion continues active limit laddering on ranging pairs. Sentiment aggregation from X (Twitter) API and news feeds remains net positive with macro altcoin rotation anticipated.'}
         </div>
       </div>
 
@@ -118,11 +138,13 @@ export const MarketIntelligenceSim: React.FC = () => {
           <div className="flex items-center space-x-2">
             <Shield className="w-3.5 h-3.5 text-emerald-400" />
             <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-200">
-              ALGORITHMIC TELEMETRY & REGIME FILTERS
+              {isFrench
+                ? 'TÉLÉMÉTRIE ALGORITHMIQUE & FILTRES DE RÉGIME'
+                : 'ALGORITHMIC TELEMETRY & REGIME FILTERS'}
             </span>
           </div>
           <span className="text-[10px] font-mono text-slate-500">
-            SELECT METRIC TO INSPECT
+            {isFrench ? 'CHOISIR UNE MÉTRIQUE À INSPECTER' : 'SELECT METRIC TO INSPECT'}
           </span>
         </div>
 
@@ -139,7 +161,9 @@ export const MarketIntelligenceSim: React.FC = () => {
           >
             <div className="text-[10px] text-slate-400 uppercase">RSI (14)</div>
             <div className="text-lg font-bold text-slate-100 mt-1">54.2</div>
-            <div className="text-[10px] text-slate-400 mt-0.5">Neutral Band</div>
+            <div className="text-[10px] text-slate-400 mt-0.5">
+              {isFrench ? 'Bande Neutre' : 'Neutral Band'}
+            </div>
           </button>
 
           <button
@@ -153,7 +177,9 @@ export const MarketIntelligenceSim: React.FC = () => {
           >
             <div className="text-[10px] text-slate-400 uppercase">ADX (14)</div>
             <div className="text-lg font-bold text-emerald-400 mt-1">26.8</div>
-            <div className="text-[10px] text-emerald-500 mt-0.5">Trending Regime</div>
+            <div className="text-[10px] text-emerald-500 mt-0.5">
+              {isFrench ? 'Régime Tendance' : 'Trending Regime'}
+            </div>
           </button>
 
           <button
@@ -165,9 +191,13 @@ export const MarketIntelligenceSim: React.FC = () => {
                 : 'bg-[#0B0E14] border-[#1E2638] text-slate-300 hover:border-slate-700'
             }`}
           >
-            <div className="text-[10px] text-slate-400 uppercase">Volatility Regime</div>
+            <div className="text-[10px] text-slate-400 uppercase">
+              {isFrench ? 'Régime Volatilité' : 'Volatility Regime'}
+            </div>
             <div className="text-lg font-bold text-purple-400 mt-1">1.25x Active</div>
-            <div className="text-[10px] text-purple-400 mt-0.5">Kelly Criterion</div>
+            <div className="text-[10px] text-purple-400 mt-0.5">
+              {isFrench ? 'Critère de Kelly' : 'Kelly Criterion'}
+            </div>
           </button>
         </div>
 

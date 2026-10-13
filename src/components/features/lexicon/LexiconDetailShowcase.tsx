@@ -665,7 +665,7 @@ export const LexiconDetailShowcase: React.FC = () => {
 
               <div className="space-y-2">
                 <span className="text-[11px] font-mono text-slate-400 uppercase tracking-wider block">
-                  {isFrench ? 'Contexte & Débats Doctrinals :' : 'Historical Context & Debates:'}
+                  {isFrench ? 'Contexte Historique & Débats :' : 'Historical Context & Debates:'}
                 </span>
                 <p className="text-sm text-slate-200 leading-relaxed font-sans">
                   {isFrench ? activeEvent.description.fr : activeEvent.description.en}

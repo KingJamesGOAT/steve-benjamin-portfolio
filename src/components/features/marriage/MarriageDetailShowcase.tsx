@@ -197,7 +197,9 @@ export const MarriageDetailShowcase: React.FC = () => {
                   {isFrench ? 'Paramètre d\'accès URL (Magic Link)' : 'URL Access Parameter (Magic Link)'}
                 </span>
                 <span className="font-mono text-[10px] text-stone-500">
-                  {hasMagicLink ? '?invite=dinner (Dîner inclus)' : '?invite=standard (Apéro)'}
+                  {hasMagicLink
+                    ? (isFrench ? '?invite=dinner (Dîner inclus)' : '?invite=dinner (Dinner access)')
+                    : (isFrench ? '?invite=standard (Apéro)' : '?invite=standard (Cocktail reception)')}
                 </span>
               </div>
               <button

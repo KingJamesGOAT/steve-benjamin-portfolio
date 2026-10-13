@@ -240,7 +240,9 @@ export const DonnonsDetailShowcase: React.FC = () => {
                       <span>BCGE (Banque Cantonale de Genève)</span>
                     </td>
                     <td className="p-3 text-slate-700">02.07.2026</td>
-                    <td className="p-3 font-bold text-blue-700">280 employés</td>
+                    <td className="p-3 font-bold text-blue-700">
+                      {isFrench ? '280 employés' : '280 employees'}
+                    </td>
                     <td className="p-3 text-right space-x-2">
                       <button type="button" className="px-3 py-1 bg-[#5bb124] text-white font-bold border border-black shadow-[2px_2px_0px_0px_#000]">
                         {isFrench ? 'Clore' : 'Close'}
@@ -253,7 +255,9 @@ export const DonnonsDetailShowcase: React.FC = () => {
                       <span>Swisscom (Centre Genève)</span>
                     </td>
                     <td className="p-3 text-slate-700">15.08.2026</td>
-                    <td className="p-3 font-bold text-blue-700">140 employés</td>
+                    <td className="p-3 font-bold text-blue-700">
+                      {isFrench ? '140 employés' : '140 employees'}
+                    </td>
                     <td className="p-3 text-right space-x-2">
                       <button type="button" className="px-3 py-1 bg-[#5bb124] text-white font-bold border border-black shadow-[2px_2px_0px_0px_#000]">
                         {isFrench ? 'Clore' : 'Close'}
@@ -294,26 +298,30 @@ export const DonnonsDetailShowcase: React.FC = () => {
                   <tr>
                     <td className="p-3 font-bold text-slate-900">Rolex (Les Acacias)</td>
                     <td className="p-3 text-slate-700">22.09.2026</td>
-                    <td className="p-3 text-slate-700">450 employés</td>
+                    <td className="p-3 text-slate-700">
+                      {isFrench ? '450 employés' : '450 employees'}
+                    </td>
                     <td className="p-3">
                       <span className="text-[#0073e6] font-bold underline cursor-pointer">donnons.ch/rolex</span>
                     </td>
                     <td className="p-3 text-right">
                       <span className="px-2 py-0.5 bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold text-[10px]">
-                        SYNCHRONISÉ
+                        {isFrench ? 'SYNCHRONISÉ' : 'SYNCHRONIZED'}
                       </span>
                     </td>
                   </tr>
                   <tr>
                     <td className="p-3 font-bold text-slate-900">Migros Genève</td>
                     <td className="p-3 text-slate-700">08.10.2026</td>
-                    <td className="p-3 text-slate-700">320 employés</td>
+                    <td className="p-3 text-slate-700">
+                      {isFrench ? '320 employés' : '320 employees'}
+                    </td>
                     <td className="p-3">
                       <span className="text-[#0073e6] font-bold underline cursor-pointer">donnons.ch/migros</span>
                     </td>
                     <td className="p-3 text-right">
                       <span className="px-2 py-0.5 bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold text-[10px]">
-                        SYNCHRONISÉ
+                        {isFrench ? 'SYNCHRONISÉ' : 'SYNCHRONIZED'}
                       </span>
                     </td>
                   </tr>
@@ -371,8 +379,8 @@ export const DonnonsDetailShowcase: React.FC = () => {
               <span className="font-bold text-slate-700">{isFrench ? 'Catégorie :' : 'Award:'}</span>
               {[
                 { id: 'all', label: isFrench ? 'Tous' : 'All' },
-                { id: 'gold', label: 'Prix Or' },
-                { id: 'silver', label: 'Prix Argent' },
+                { id: 'gold', label: isFrench ? 'Prix Or' : 'Gold Award' },
+                { id: 'silver', label: isFrench ? 'Prix Argent' : 'Silver Award' },
               ].map((cat) => (
                 <button
                   key={cat.id}
@@ -392,35 +400,46 @@ export const DonnonsDetailShowcase: React.FC = () => {
 
           {/* Partner Cards Grid using real logos from companies_logo/ */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            {filteredPartners.map((company) => (
-              <div
-                key={company.name}
-                className="bg-white border-2 border-black p-4 shadow-[3px_3px_0px_0px_#000] flex flex-col items-center justify-between text-center space-y-3 hover:translate-y-[-2px] transition-transform"
-              >
-                <div className="h-12 flex items-center justify-center w-full">
-                  <img
-                    src={`${baseUrl}images/donnons/companies_logo/${company.logo}`}
-                    alt={company.name}
-                    className="max-h-10 max-w-[80%] object-contain"
-                    onError={(e) => {
-                      (e.target as HTMLElement).style.display = 'none';
-                    }}
-                  />
-                </div>
+            {filteredPartners.map((company) => {
+              const localizedAward =
+                company.award === 'Or 2025'
+                  ? (isFrench ? 'Or 2025' : 'Gold 2025')
+                  : company.award === 'Argent 2025'
+                  ? (isFrench ? 'Argent 2025' : 'Silver 2025')
+                  : (isFrench ? 'Partenaire' : 'Partner');
 
-                <div className="w-full border-t border-slate-200 pt-2 font-mono">
-                  <span className="font-bold text-xs text-slate-900 block truncate">
-                    {company.name}
-                  </span>
-                  <span className="text-[10px] text-[#0073e6] font-bold block">
-                    {company.award}
-                  </span>
-                  <span className="text-[9px] text-slate-500 block">
-                    Partenaire du Don · {company.years} ans
-                  </span>
+              return (
+                <div
+                  key={company.name}
+                  className="bg-white border-2 border-black p-4 shadow-[3px_3px_0px_0px_#000] flex flex-col items-center justify-between text-center space-y-3 hover:translate-y-[-2px] transition-transform"
+                >
+                  <div className="h-12 flex items-center justify-center w-full">
+                    <img
+                      src={`${baseUrl}images/donnons/companies_logo/${company.logo}`}
+                      alt={company.name}
+                      className="max-h-10 max-w-[80%] object-contain"
+                      onError={(e) => {
+                        (e.target as HTMLElement).style.display = 'none';
+                      }}
+                    />
+                  </div>
+
+                  <div className="w-full border-t border-slate-200 pt-2 font-mono">
+                    <span className="font-bold text-xs text-slate-900 block truncate">
+                      {company.name}
+                    </span>
+                    <span className="text-[10px] text-[#0073e6] font-bold block">
+                      {localizedAward}
+                    </span>
+                    <span className="text-[9px] text-slate-500 block">
+                      {isFrench
+                        ? `Partenaire du Don · ${company.years} ans`
+                        : `Blood Drive Partner · ${company.years} yrs`}
+                    </span>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

@@ -139,9 +139,9 @@ export const DonnonsWidgetSim: React.FC = () => {
                 className="w-full h-2.5 bg-slate-200 border border-black appearance-none cursor-pointer accent-[#0073e6]"
               />
               <div className="flex justify-between text-[10px] font-mono text-slate-500">
-                <span>10% (Min)</span>
-                <span>50% (Moyenne HUG)</span>
-                <span>100% (Objectif)</span>
+                <span>{isFrench ? '10% (Min)' : '10% (Min)'}</span>
+                <span>{isFrench ? '50% (Moyenne)' : '50% (Average)'}</span>
+                <span>{isFrench ? '100% (Objectif)' : '100% (Target)'}</span>
               </div>
             </div>
 

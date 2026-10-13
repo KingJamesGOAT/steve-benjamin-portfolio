@@ -454,19 +454,25 @@ export const Home: React.FC = () => {
           {/* Quick Institutional Highlights */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
             <div className="p-4 border border-slate-200 bg-slate-50/50 space-y-1.5">
-              <div className="text-[10px] font-mono uppercase tracking-wider text-slate-400">01 / Duration</div>
+              <div className="text-[10px] font-mono uppercase tracking-wider text-slate-400">
+                {isFrench ? '01 / Durée' : '01 / Duration'}
+              </div>
               <div className="text-sm font-bold text-fintech-primary">{t('bachelorPitch.conditions.durationTitle')}</div>
               <p className="text-xs text-slate-600 leading-relaxed">{t('bachelorPitch.conditions.durationDesc')}</p>
             </div>
 
             <div className="p-4 border border-slate-200 bg-slate-50/50 space-y-1.5">
-              <div className="text-[10px] font-mono uppercase tracking-wider text-slate-400">02 / Financials</div>
+              <div className="text-[10px] font-mono uppercase tracking-wider text-slate-400">
+                {isFrench ? '02 / Aspects Financiers' : '02 / Financials'}
+              </div>
               <div className="text-sm font-bold text-fintech-primary">{t('bachelorPitch.conditions.costTitle')}</div>
               <p className="text-xs text-slate-600 leading-relaxed">{t('bachelorPitch.conditions.costDesc')}</p>
             </div>
 
             <div className="p-4 border border-slate-200 bg-slate-50/50 space-y-1.5">
-              <div className="text-[10px] font-mono uppercase tracking-wider text-slate-400">03 / Confidentiality</div>
+              <div className="text-[10px] font-mono uppercase tracking-wider text-slate-400">
+                {isFrench ? '03 / Confidentialité' : '03 / Confidentiality'}
+              </div>
               <div className="text-sm font-bold text-fintech-primary">{t('bachelorPitch.conditions.confidentialityTitle')}</div>
               <p className="text-xs text-slate-600 leading-relaxed">{t('bachelorPitch.conditions.confidentialityDesc')}</p>
             </div>

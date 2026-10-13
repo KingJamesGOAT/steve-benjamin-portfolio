@@ -239,24 +239,24 @@
     "educationTitle": "Formation",
     "education": {
       "heig": {
-        "period": "2023-Present",
-        "title": "BSc Media Engineering",
+        "period": "2023-Présent",
+        "title": "BSc Ingénierie des Médias",
         "institution": "HEIG-VD"
       },
       "occa": {
         "period": "2023",
         "title": "OCCA, Oxford",
         "institution": "Oxford",
-        "details": "Philosophy, ethics, science"
+        "details": "Philosophie, éthique, sciences"
       },
       "etml": {
         "period": "2021-2022",
-        "title": "Professional Maturity",
+        "title": "Maturité Professionnelle",
         "institution": "ETML"
       },
       "cpnv": {
         "period": "2017-2021",
-        "title": "CFC Electronics",
+        "title": "CFC Électronique",
         "institution": "CPNV"
       }
     },

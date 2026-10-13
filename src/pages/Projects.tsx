@@ -6,7 +6,8 @@ import CryptoWidgetSim from '../components/features/CryptoWidgetSim';
 import DonnonsWidgetSim from '../components/features/DonnonsWidgetSim';
 
 export const Projects: React.FC = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const isFrench = Boolean(i18n.language?.startsWith('fr'));
 
   return (
     <div className="space-y-16 sm:space-y-24">
@@ -96,7 +97,7 @@ export const Projects: React.FC = () => {
               Hôpitaux de Genève (HUG)
             </div>
             <p className="text-[11px] font-mono text-slate-500">
-              Résorption du taux de rejet de 30%
+              {isFrench ? 'Résorption du taux de rejet de 30%' : 'Eliminating the 30% deferral rate'}
             </p>
           </div>
 
@@ -108,7 +109,7 @@ export const Projects: React.FC = () => {
               Vue.js 3, MySQL, Laravel, Tailwind
             </div>
             <p className="text-[11px] font-mono text-slate-500">
-              Architecture full-stack & Design Néo-brutaliste
+              {isFrench ? 'Architecture full-stack & Design Néo-brutaliste' : 'Full-stack Architecture & Neo-brutalist Design'}
             </p>
           </div>
         </div>

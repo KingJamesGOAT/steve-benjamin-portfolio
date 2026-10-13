@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Activity, Layers, Wallet, TrendingUp, Target, Search, X } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface Position {
   asset: string;
@@ -10,8 +11,10 @@ interface Position {
   pnl: string;
   roi: string;
   isPositive: boolean;
-  auditTitle: string;
-  auditDetails: string;
+  auditTitleEn: string;
+  auditTitleFr: string;
+  auditDetailsEn: string;
+  auditDetailsFr: string;
 }
 
 interface ScoutMission {
@@ -37,8 +40,10 @@ const POSITIONS_DATA: Position[] = [
     pnl: '+$21.91',
     roi: '+0.89%',
     isPositive: true,
-    auditTitle: 'DEFENSE REGIME: ACTIVE TRAILING FLOOR',
-    auditDetails: 'Position secured. Trailing stop anchored to 20-EMA on 15m candle. Risk allocation: 2.0% Kelly fraction.',
+    auditTitleEn: 'DEFENSE REGIME: ACTIVE TRAILING FLOOR',
+    auditTitleFr: 'RÉGIME DE DÉFENSE : TRAILING STOP ACTIF',
+    auditDetailsEn: 'Position secured. Trailing stop anchored to 20-EMA on 15m candle. Risk allocation: 2.0% Kelly fraction.',
+    auditDetailsFr: 'Position sécurisée. Trailing stop ancré sur EMA-20 en bougie 15m. Allocation de risque : fraction de Kelly à 2.0%.',
   },
   {
     asset: 'TRUMP',
@@ -49,8 +54,10 @@ const POSITIONS_DATA: Position[] = [
     pnl: '$0.00',
     roi: '0.00%',
     isPositive: true,
-    auditTitle: 'BREAKOUT ENTRY: AWAITING VOLATILITY EXPANSION',
-    auditDetails: 'Limit ladder fill completed. Bollinger Band width compressed. Stop-loss hard locked at -2.5% deviation.',
+    auditTitleEn: 'BREAKOUT ENTRY: AWAITING VOLATILITY EXPANSION',
+    auditTitleFr: 'ENTRÉE SUR CASSURE : EN ATTENTE D\'EXPANSION DE VOLATILITÉ',
+    auditDetailsEn: 'Limit ladder fill completed. Bollinger Band width compressed. Stop-loss hard locked at -2.5% deviation.',
+    auditDetailsFr: 'Ordres limites exécutés. Compression de bande de Bollinger. Stop-loss verrouillé à -2.5% d\'écart.',
   },
   {
     asset: 'LINK',
@@ -61,8 +68,10 @@ const POSITIONS_DATA: Position[] = [
     pnl: '+$23.96',
     roi: '+0.96%',
     isPositive: true,
-    auditTitle: 'MOMENTUM CONTINUATION: DONCHIAN 20 HIGH',
-    auditDetails: 'Volume breakout verified at 2.1x 20-period moving average. Dynamic profit target locked at $13.6210.',
+    auditTitleEn: 'MOMENTUM CONTINUATION: DONCHIAN 20 HIGH',
+    auditTitleFr: 'CONTINUATION DE MOMENTUM : SOMMET CANAL DONCHIAN 20',
+    auditDetailsEn: 'Volume breakout verified at 2.1x 20-period moving average. Dynamic profit target locked at $13.6210.',
+    auditDetailsFr: 'Cassure de volume validée à 2.1x la moyenne mobile à 20 périodes. Prise de bénéfice dynamique verrouillée à 13.6210$.',
   },
   {
     asset: 'TRX',
@@ -73,8 +82,10 @@ const POSITIONS_DATA: Position[] = [
     pnl: '-$11.19',
     roi: '-0.33%',
     isPositive: false,
-    auditTitle: 'MEAN REVERSION GRID: SECONDARY RUNG BUFFER',
-    auditDetails: 'Oscillator in oversold envelope. ADX at 19.4 indicates ranging regime. Position size normalized to grid spacing.',
+    auditTitleEn: 'MEAN REVERSION GRID: SECONDARY RUNG BUFFER',
+    auditTitleFr: 'GRILLE DE RETOUR À LA MOYENNE : TAMPON ÉCHELON SECONDAIRE',
+    auditDetailsEn: 'Oscillator in oversold envelope. ADX at 19.4 indicates ranging regime. Position size normalized to grid spacing.',
+    auditDetailsFr: 'Oscillateur en zone de survente. ADX à 19.4 indiquant un régime sans tendance. Taille d\'ordre normalisée au maillage de la grille.',
   },
 ];
 
@@ -118,6 +129,9 @@ const SCOUT_MISSIONS: ScoutMission[] = [
 ];
 
 export const PaperTradingSim: React.FC = () => {
+  const { i18n } = useTranslation();
+  const isFrench = i18n.language?.startsWith('fr');
+
   const [isEngineActive, setIsEngineActive] = useState<boolean>(true);
   const [selectedAudit, setSelectedAudit] = useState<Position | null>(null);
 
@@ -136,11 +150,13 @@ export const PaperTradingSim: React.FC = () => {
                 }`}
               />
               <h3 className="text-sm sm:text-base font-mono font-bold uppercase tracking-wider text-slate-100">
-                GHOST COMMAND CENTER
+                {isFrench ? 'CENTRE DE COMMANDE VIRTUEL' : 'GHOST COMMAND CENTER'}
               </h3>
             </div>
             <p className="text-[11px] font-mono text-slate-400">
-              System Online | v.2.0.0 | Connected to Neural Net
+              {isFrench
+                ? 'Système En Ligne | v.2.0.0 | Connecté au Réseau Neuronal'
+                : 'System Online | v.2.0.0 | Connected to Neural Net'}
             </p>
           </div>
 
@@ -152,7 +168,13 @@ export const PaperTradingSim: React.FC = () => {
                   : 'bg-rose-950/60 text-rose-400 border-rose-800/60'
               }`}
             >
-              {isEngineActive ? 'SYSTEM ONLINE' : 'ENGINE PAUSED'}
+              {isEngineActive
+                ? isFrench
+                  ? 'SYSTÈME EN LIGNE'
+                  : 'SYSTEM ONLINE'
+                : isFrench
+                ? 'MOTEUR EN PAUSE'
+                : 'ENGINE PAUSED'}
             </span>
           </div>
         </div>
@@ -163,21 +185,21 @@ export const PaperTradingSim: React.FC = () => {
         {/* Available Balance */}
         <div className="bg-[#111622] border border-[#1E2638] rounded-none p-4 space-y-2">
           <div className="flex items-center justify-between text-[11px] font-mono text-slate-400 uppercase tracking-wider">
-            <span>Available Balance</span>
+            <span>{isFrench ? 'Solde Disponible' : 'Available Balance'}</span>
             <Wallet className="w-3.5 h-3.5 text-slate-500" />
           </div>
           <div className="text-2xl font-mono font-bold text-slate-100 tracking-tight">
             $27,321 <span className="text-xs font-normal text-slate-400">USDT</span>
           </div>
           <div className="text-[10px] font-mono text-slate-500">
-            Paper Execution Capital
+            {isFrench ? 'Capital de Simulation Paper' : 'Paper Execution Capital'}
           </div>
         </div>
 
         {/* Global Open PnL */}
         <div className="bg-[#111622] border border-[#1E2638] rounded-none p-4 space-y-2">
           <div className="flex items-center justify-between text-[11px] font-mono text-slate-400 uppercase tracking-wider">
-            <span>Global Open PnL</span>
+            <span>{isFrench ? 'P&L Latent Global' : 'Global Open PnL'}</span>
             <TrendingUp className="w-3.5 h-3.5 text-emerald-400" />
           </div>
           <div className="text-2xl font-mono font-bold text-emerald-400 tracking-tight flex items-center space-x-1">
@@ -185,14 +207,14 @@ export const PaperTradingSim: React.FC = () => {
             <span className="text-xs text-emerald-500 font-normal">(+0.34%)</span>
           </div>
           <div className="text-[10px] font-mono text-slate-500">
-            4 Active Positions Aggregate
+            {isFrench ? 'Cumul de 4 positions actives' : '4 Active Positions Aggregate'}
           </div>
         </div>
 
         {/* Engine Toggle Control */}
         <div className="bg-[#111622] border border-[#1E2638] rounded-none p-4 flex flex-col justify-between space-y-2">
           <div className="text-[11px] font-mono text-slate-400 uppercase tracking-wider">
-            Execution State
+            {isFrench ? 'État d\'Exécution' : 'Execution State'}
           </div>
           <button
             type="button"
@@ -203,7 +225,13 @@ export const PaperTradingSim: React.FC = () => {
                 : 'bg-emerald-600 hover:bg-emerald-500 text-white border-emerald-700'
             }`}
           >
-            {isEngineActive ? '[ STOP ENGINE ]' : '[ START ENGINE ]'}
+            {isEngineActive
+              ? isFrench
+                ? '[ ARRÊTER LE MOTEUR ]'
+                : '[ STOP ENGINE ]'
+              : isFrench
+              ? '[ DÉMARRER LE MOTEUR ]'
+              : '[ START ENGINE ]'}
           </button>
         </div>
       </div>
@@ -214,21 +242,23 @@ export const PaperTradingSim: React.FC = () => {
           <div className="flex items-center space-x-2">
             <Layers className="w-3.5 h-3.5 text-blue-400" />
             <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-200">
-              ACTIVE VECTOR ALLOCATIONS
+              {isFrench ? 'ALLOCATIONS DE VECTEURS ACTIVES' : 'ACTIVE VECTOR ALLOCATIONS'}
             </span>
           </div>
-          <span className="text-[11px] font-mono text-slate-400">4 ALLOCATED POOLS</span>
+          <span className="text-[11px] font-mono text-slate-400">
+            {isFrench ? '4 POOLS ALLOUÉS' : '4 ALLOCATED POOLS'}
+          </span>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full text-left font-mono text-xs">
             <thead>
               <tr className="border-b border-[#1E2638] text-[11px] text-slate-400 uppercase tracking-wider">
-                <th className="py-2.5 px-2 font-normal">Asset</th>
-                <th className="py-2.5 px-2 font-normal text-right">Size</th>
-                <th className="py-2.5 px-2 font-normal text-right">Invested</th>
-                <th className="py-2.5 px-2 font-normal text-right">Entry</th>
-                <th className="py-2.5 px-2 font-normal text-right">Mark</th>
+                <th className="py-2.5 px-2 font-normal">{isFrench ? 'Actif' : 'Asset'}</th>
+                <th className="py-2.5 px-2 font-normal text-right">{isFrench ? 'Taille' : 'Size'}</th>
+                <th className="py-2.5 px-2 font-normal text-right">{isFrench ? 'Investi' : 'Invested'}</th>
+                <th className="py-2.5 px-2 font-normal text-right">{isFrench ? 'Entrée' : 'Entry'}</th>
+                <th className="py-2.5 px-2 font-normal text-right">{isFrench ? 'Cours' : 'Mark'}</th>
                 <th className="py-2.5 px-2 font-normal text-right">PnL</th>
                 <th className="py-2.5 px-2 font-normal text-right">ROI</th>
                 <th className="py-2.5 px-2 font-normal text-center">Audit</th>
@@ -286,11 +316,11 @@ export const PaperTradingSim: React.FC = () => {
           <div className="flex items-center space-x-2">
             <Target className="w-3.5 h-3.5 text-emerald-400" />
             <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-200">
-              LIVE SCOUT MISSIONS
+              {isFrench ? 'MISSIONS D\'EXPLORATION EN DIRECT' : 'LIVE SCOUT MISSIONS'}
             </span>
           </div>
           <span className="text-[11px] font-mono text-emerald-400 bg-emerald-950/60 border border-emerald-800/60 px-2 py-0.5 rounded-none">
-            3 ACTIVE
+            {isFrench ? '3 ACTIVES' : '3 ACTIVE'}
           </span>
         </div>
 
@@ -309,7 +339,9 @@ export const PaperTradingSim: React.FC = () => {
                 </div>
 
                 <div className="text-right">
-                  <div className="text-slate-400 text-[11px]">Entry: {scout.entry}</div>
+                  <div className="text-slate-400 text-[11px]">
+                    {isFrench ? 'Entrée :' : 'Entry:'} {scout.entry}
+                  </div>
                   <div
                     className={`font-semibold ${
                       scout.isPositive ? 'text-emerald-400' : 'text-rose-500'
@@ -336,7 +368,7 @@ export const PaperTradingSim: React.FC = () => {
                 </div>
 
                 <div className="text-center text-[10px] font-mono text-slate-500 pt-0.5">
-                  Live Tracking Active
+                  {isFrench ? 'Suivi en direct actif' : 'Live Tracking Active'}
                 </div>
               </div>
             </div>
@@ -352,7 +384,9 @@ export const PaperTradingSim: React.FC = () => {
               <div className="flex items-center space-x-2">
                 <Activity className="w-4 h-4 text-blue-400" />
                 <span className="text-xs font-bold text-slate-100 tracking-wider">
-                  TELEMETRY AUDIT: {selectedAudit.asset}
+                  {isFrench
+                    ? `AUDIT TÉLÉMÉTRIQUE : ${selectedAudit.asset}`
+                    : `TELEMETRY AUDIT: ${selectedAudit.asset}`}
                 </span>
               </div>
               <button
@@ -367,24 +401,30 @@ export const PaperTradingSim: React.FC = () => {
             <div className="space-y-3 text-xs">
               <div className="bg-[#0B0E14] border border-[#1E2638] p-3 space-y-1.5">
                 <div className="text-[11px] text-emerald-400 font-bold uppercase">
-                  {selectedAudit.auditTitle}
+                  {isFrench ? selectedAudit.auditTitleFr : selectedAudit.auditTitleEn}
                 </div>
                 <div className="text-slate-300 leading-relaxed">
-                  {selectedAudit.auditDetails}
+                  {isFrench ? selectedAudit.auditDetailsFr : selectedAudit.auditDetailsEn}
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-2 text-[11px]">
                 <div className="bg-[#0B0E14] p-2 border border-[#1E2638]">
-                  <span className="text-slate-500">ENTRY BENCHMARK:</span>
+                  <span className="text-slate-500">
+                    {isFrench ? 'REPÈRE D\'ENTRÉE :' : 'ENTRY BENCHMARK:'}
+                  </span>
                   <div className="text-slate-200 font-bold">{selectedAudit.entry}</div>
                 </div>
                 <div className="bg-[#0B0E14] p-2 border border-[#1E2638]">
-                  <span className="text-slate-500">CURRENT MARK:</span>
+                  <span className="text-slate-500">
+                    {isFrench ? 'COURS ACTUEL :' : 'CURRENT MARK:'}
+                  </span>
                   <div className="text-slate-200 font-bold">{selectedAudit.mark}</div>
                 </div>
                 <div className="bg-[#0B0E14] p-2 border border-[#1E2638]">
-                  <span className="text-slate-500">UNREALIZED PNL:</span>
+                  <span className="text-slate-500">
+                    {isFrench ? 'P&L NON RÉALISÉ :' : 'UNREALIZED PNL:'}
+                  </span>
                   <div
                     className={`font-bold ${
                       selectedAudit.isPositive ? 'text-emerald-400' : 'text-rose-500'
@@ -394,7 +434,9 @@ export const PaperTradingSim: React.FC = () => {
                   </div>
                 </div>
                 <div className="bg-[#0B0E14] p-2 border border-[#1E2638]">
-                  <span className="text-slate-500">KELLY ALLOCATION:</span>
+                  <span className="text-slate-500">
+                    {isFrench ? 'ALLOCATION DE KELLY :' : 'KELLY ALLOCATION:'}
+                  </span>
                   <div className="text-slate-200 font-bold">{selectedAudit.invested}</div>
                 </div>
               </div>
@@ -406,7 +448,7 @@ export const PaperTradingSim: React.FC = () => {
                 onClick={() => setSelectedAudit(null)}
                 className="px-4 py-1.5 bg-[#1E2638] hover:bg-[#28334C] text-xs text-slate-200 font-bold rounded-none"
               >
-                CLOSE AUDIT
+                {isFrench ? 'FERMER L\'AUDIT' : 'CLOSE AUDIT'}
               </button>
             </div>
           </div>

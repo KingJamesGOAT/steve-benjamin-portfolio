@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Activity } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface CandlePoint {
   time: string;
@@ -25,6 +26,9 @@ const CANDLE_DATA: CandlePoint[] = [
 ];
 
 export const CryptoWidgetSim: React.FC = () => {
+  const { i18n } = useTranslation();
+  const isFrench = Boolean(i18n.language?.startsWith('fr'));
+
   // Live Price Simulation State
   const [livePrice, setLivePrice] = useState<number>(68492.30);
   const [priceChange, setPriceChange] = useState<number>(2.84);
@@ -90,7 +94,7 @@ export const CryptoWidgetSim: React.FC = () => {
           <div className="flex items-center space-x-2 shrink-0">
             <span className="font-bold text-slate-100 tracking-wider text-xs sm:text-sm">BTC/USDT</span>
             <span className="text-[10px] bg-[#161F30] border border-[#273756] px-1.5 py-0.5 text-slate-300 font-semibold rounded-none">
-              PERPETUAL
+              {isFrench ? 'PERPÉTUEL' : 'PERPETUAL'}
             </span>
           </div>
 
@@ -113,13 +117,15 @@ export const CryptoWidgetSim: React.FC = () => {
 
         <div className="flex items-center space-x-3 text-[11px] shrink-0">
           <div className="hidden sm:flex items-center space-x-1.5 text-slate-400">
-            <span>REGIME:</span>
-            <span className="text-blue-400 font-bold">TRENDING (ADX 28.4)</span>
+            <span>{isFrench ? 'RÉGIME :' : 'REGIME:'}</span>
+            <span className="text-blue-400 font-bold">
+              {isFrench ? 'DIRECTIONNEL (ADX 28.4)' : 'TRENDING (ADX 28.4)'}
+            </span>
           </div>
 
           <div className="flex items-center space-x-1.5 px-2 py-0.5 bg-emerald-950/70 border border-emerald-800 text-emerald-400 rounded-none text-[10px] font-bold">
             <span className="w-1.5 h-1.5 bg-emerald-400 rounded-none inline-block shadow-[0_0_6px_rgba(52,211,153,0.8)]" />
-            <span>ONLINE</span>
+            <span>{isFrench ? 'EN LIGNE' : 'ONLINE'}</span>
           </div>
         </div>
       </div>
@@ -131,13 +137,13 @@ export const CryptoWidgetSim: React.FC = () => {
           <div className="flex items-center space-x-2 text-slate-300 shrink-0">
             <Activity className="w-3.5 h-3.5 text-blue-400" />
             <span className="font-semibold uppercase tracking-wider text-[10px] sm:text-[11px]">
-              15M EXECUTION TELEMETRY
+              {isFrench ? 'TÉLÉMÉTRIE D\'EXÉCUTION 15M' : '15M EXECUTION TELEMETRY'}
             </span>
           </div>
           <div className="flex items-center gap-2.5 text-[10px] shrink-0">
             <span className="flex items-center space-x-1">
               <span className="w-2 h-0.5 bg-emerald-400 inline-block" />
-              <span>MARK</span>
+              <span>{isFrench ? 'COURS' : 'MARK'}</span>
             </span>
             <span className="flex items-center space-x-1">
               <span className="w-2 h-0.5 bg-[#0052FF] inline-block" />
@@ -145,11 +151,11 @@ export const CryptoWidgetSim: React.FC = () => {
             </span>
             <span className="flex items-center space-x-1">
               <span className="w-2 h-0.5 bg-emerald-500 border-b border-dashed border-emerald-400 inline-block" />
-              <span>BREAKOUT ($68,340)</span>
+              <span>{isFrench ? 'CASSURE (68 340 $)' : 'BREAKOUT ($68,340)'}</span>
             </span>
             <span className="flex items-center space-x-1">
               <span className="w-2 h-0.5 bg-amber-500 inline-block" />
-              <span>TRAIL STOP ($68,120)</span>
+              <span>{isFrench ? 'TRAIL STOP (68 120 $)' : 'TRAIL STOP ($68,120)'}</span>
             </span>
           </div>
         </div>
@@ -220,14 +226,14 @@ export const CryptoWidgetSim: React.FC = () => {
             <g transform={`translate(${svgWidth - 200}, ${breakoutY - 6})`}>
               <rect x="0" y="-8" width="185" height="14" fill="#0B132B" stroke="#10b981" strokeWidth="0.8" />
               <text x="6" y="2" fill="#34d399" fontSize="8" fontFamily="monospace" fontWeight="bold">
-                DONCHIAN HIGH ($68,340)
+                {isFrench ? 'SOMMET DONCHIAN (68 340 $)' : 'DONCHIAN HIGH ($68,340)'}
               </text>
             </g>
 
             <g transform={`translate(${svgWidth - 200}, ${trailingStopY - 6})`}>
               <rect x="0" y="-8" width="185" height="14" fill="#1C1408" stroke="#f59e0b" strokeWidth="0.8" />
               <text x="6" y="2" fill="#fbbf24" fontSize="8" fontFamily="monospace" fontWeight="bold">
-                TRAILING STOP ($68,120)
+                {isFrench ? 'TRAILING STOP (68 120 $)' : 'TRAILING STOP ($68,120)'}
               </text>
             </g>
 
@@ -304,7 +310,7 @@ export const CryptoWidgetSim: React.FC = () => {
                     <g transform={`translate(${x - 30}, ${y - 16})`}>
                       <rect x="0" y="0" width="60" height="11" fill="#064E3B" stroke="#10b981" strokeWidth="0.6" />
                       <text x="4" y="8.5" fill="#A7F3D0" fontSize="7" fontFamily="monospace" fontWeight="bold">
-                        LONG ENTRY
+                        {isFrench ? 'ACHAT (LONG)' : 'LONG ENTRY'}
                       </text>
                     </g>
                   )}
@@ -314,7 +320,7 @@ export const CryptoWidgetSim: React.FC = () => {
                     <g transform={`translate(${x - 34}, ${y - 16})`}>
                       <rect x="0" y="0" width="68" height="11" fill="#78350F" stroke="#f59e0b" strokeWidth="0.6" />
                       <text x="4" y="8.5" fill="#FDE68A" fontSize="7" fontFamily="monospace" fontWeight="bold">
-                        STOP RATCHET
+                        {isFrench ? 'HAUSSE STOP' : 'STOP RATCHET'}
                       </text>
                     </g>
                   )}
@@ -448,14 +454,14 @@ export const CryptoWidgetSim: React.FC = () => {
       {/* 3. Fixed Height Monospace Telemetry Footer Strip */}
       <div className="bg-[#0C101A] px-4 sm:px-5 h-8 border-t border-[#1E2638] flex items-center justify-between gap-2.5 text-[10px] font-mono text-slate-500 overflow-hidden shrink-0 whitespace-nowrap">
         <div className="flex items-center space-x-3 sm:space-x-4">
-          <span>24H VOL: $12.65B</span>
-          <span className="hidden sm:inline">SPREAD: 0.01%</span>
-          <span className="hidden sm:inline">SLIPPAGE: 0.002%</span>
-          <span className="hidden sm:inline">INTERVAL: 15M</span>
+          <span>{isFrench ? 'VOL 24H : 12.65B $' : '24H VOL: $12.65B'}</span>
+          <span className="hidden sm:inline">{isFrench ? 'ÉCART : 0.01%' : 'SPREAD: 0.01%'}</span>
+          <span className="hidden sm:inline">{isFrench ? 'GLISSEMENT : 0.002%' : 'SLIPPAGE: 0.002%'}</span>
+          <span className="hidden sm:inline">{isFrench ? 'INTERVALLE : 15M' : 'INTERVAL: 15M'}</span>
         </div>
         <div className="flex items-center space-x-1.5 text-slate-400">
           <span className="w-1.5 h-1.5 bg-emerald-400 rounded-none inline-block shadow-[0_0_6px_rgba(52,211,153,0.8)]" />
-          <span>BINANCE WEBSOCKET FEED</span>
+          <span>{isFrench ? 'FLUX WEBSOCKET BINANCE' : 'BINANCE WEBSOCKET FEED'}</span>
         </div>
       </div>
     </div>
