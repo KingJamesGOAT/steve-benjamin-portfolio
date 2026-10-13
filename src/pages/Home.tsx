@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { ArrowRight, FileDown, ExternalLink } from 'lucide-react';
+import { ArrowRight, FileDown, ExternalLink, ChevronDown } from 'lucide-react';
 import TechBentoGrid from '../components/features/TechBentoGrid';
 import CryptoWidgetSim from '../components/features/CryptoWidgetSim';
 import DonnonsWidgetSim from '../components/features/DonnonsWidgetSim';
@@ -112,6 +112,28 @@ export const Home: React.FC = () => {
             <div className="lg:col-span-5 flex justify-center lg:justify-end">
               <DeveloperHeroCard />
             </div>
+          </div>
+
+          {/* Clean Scroll Indicator to Skills */}
+          <div className="flex flex-col items-center justify-center pt-4 pb-2">
+            <button
+              type="button"
+              onClick={() => {
+                const el = document.getElementById('skills');
+                if (el) {
+                  el.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+              className="group flex flex-col items-center space-y-1.5 text-slate-400 hover:text-slate-800 transition-colors cursor-pointer select-none focus:outline-hidden"
+              aria-label={isFrench ? 'Voir les compétences techniques' : 'Scroll to technical skills'}
+            >
+              <span className="text-[10px] font-mono tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                {isFrench ? 'Compétences' : 'Skills'}
+              </span>
+              <div className="w-8 h-8 rounded-full border border-slate-200 group-hover:border-slate-400 bg-white shadow-2xs flex items-center justify-center transition-all duration-200 group-hover:shadow-xs">
+                <ChevronDown className="w-4 h-4 text-slate-400 group-hover:text-slate-700 transition-transform duration-200 group-hover:translate-y-0.5 animate-bounce" />
+              </div>
+            </button>
           </div>
         </section>
 
