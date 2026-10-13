@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { CheckCircle2, AlertCircle } from 'lucide-react';
+import GlossaryTerm from '../GlossaryTerm';
+import { getGlossaryDef } from '../../../data/cryptoGlossary';
 
 export const DonnonsDetailShowcase: React.FC = () => {
   const { i18n } = useTranslation();
@@ -291,7 +293,19 @@ export const DonnonsDetailShowcase: React.FC = () => {
                     <th className="p-3">{isFrench ? 'Dates' : 'Dates'}</th>
                     <th className="p-3">{isFrench ? 'Effectif total' : 'Headcount'}</th>
                     <th className="p-3">{isFrench ? 'Plateforme Co-brandée' : 'Co-branded URL'}</th>
-                    <th className="p-3 text-right">{isFrench ? 'OneDoc HUG' : 'OneDoc Sync'}</th>
+                    <th className="p-3 text-right">
+                      {isFrench ? (
+                        <GlossaryTerm
+                          term="OneDoc HUG"
+                          definition={getGlossaryDef('onedoc-sync', 'fr')}
+                        />
+                      ) : (
+                        <GlossaryTerm
+                          term="OneDoc Sync"
+                          definition={getGlossaryDef('onedoc-sync', 'en')}
+                        />
+                      )}
+                    </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-200 bg-[#fffbf1]">
@@ -347,9 +361,25 @@ export const DonnonsDetailShowcase: React.FC = () => {
             {isFrench ? 'Système de Trophées & Leaderboard des Entreprises' : 'Trophy System & Corporate Leaderboard'}
           </h2>
           <p className="text-sm text-slate-600 font-sans leading-relaxed max-w-3xl">
-            {isFrench
-              ? 'Le Label Partenaire du Don valorise la marque employeur et la responsabilité sociétale des entreprises genevoises participantes, avec distinction Or, Argent et Bronze selon les promesses recueillies.'
-              : 'The Corporate Donor Label enhances employer brand and CSR commitments for participating Geneva institutions, granting Gold, Silver, and Bronze awards based on donation targets.'}
+            {isFrench ? (
+              <>
+                Le{' '}
+                <GlossaryTerm
+                  term="Label Partenaire du Don"
+                  definition={getGlossaryDef('label-cts', 'fr')}
+                />{' '}
+                valorise la marque employeur et la responsabilité sociétale des entreprises genevoises participantes, avec distinction Or, Argent et Bronze selon les promesses recueillies.
+              </>
+            ) : (
+              <>
+                The{' '}
+                <GlossaryTerm
+                  term="Corporate Donor Label"
+                  definition={getGlossaryDef('label-cts', 'en')}
+                />{' '}
+                enhances employer brand and CSR commitments for participating Geneva institutions, granting Gold, Silver, and Bronze awards based on donation targets.
+              </>
+            )}
           </p>
         </div>
 

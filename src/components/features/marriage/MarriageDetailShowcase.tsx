@@ -6,6 +6,8 @@ import {
   RotateCcw,
   Send,
 } from 'lucide-react';
+import GlossaryTerm from '../GlossaryTerm';
+import { getGlossaryDef } from '../../../data/cryptoGlossary';
 
 interface GuestRecord {
   id: string;
@@ -333,7 +335,10 @@ export const MarriageDetailShowcase: React.FC = () => {
                           {isFrench ? 'Option Privée : Participation au Dîner' : 'Private Option: Dinner Attendance'}
                         </span>
                         <span className="text-[10px] font-mono bg-stone-100 text-stone-700 px-1.5 py-0.5">
-                          Magic Link
+                          <GlossaryTerm
+                            term="Magic Link"
+                            definition={getGlossaryDef('magic-link', isFrench ? 'fr' : 'en')}
+                          />
                         </span>
                       </div>
                       <div className="flex gap-4 pt-1 text-xs font-mono">
@@ -448,15 +453,55 @@ export const MarriageDetailShowcase: React.FC = () => {
       <section className="space-y-6">
         <div className="space-y-1.5 border-b border-slate-200 pb-3">
           <span className="text-xs font-mono uppercase tracking-wider text-slate-400">
-            {isFrench ? 'Module 02 // Architecture Serverless' : 'Module 02 // Serverless Architecture'}
+            {isFrench ? (
+              <>
+                Module 02 //{' '}
+                <GlossaryTerm
+                  term="Architecture Serverless"
+                  definition={getGlossaryDef('serverless-architecture', 'fr')}
+                />
+              </>
+            ) : (
+              <>
+                Module 02 //{' '}
+                <GlossaryTerm
+                  term="Serverless Architecture"
+                  definition={getGlossaryDef('serverless-architecture', 'en')}
+                />
+              </>
+            )}
           </span>
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-fintech-primary">
             {isFrench ? 'Synchronisation Tableur (Google Apps Script → Excel)' : 'Spreadsheet Synchronization (Google Apps Script → Excel)'}
           </h2>
           <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-sans">
-            {isFrench
-              ? 'Chaque soumission déclenche une requête POST vers un endpoint Google Apps Script en mode no-cors. Les réponses sont insérées directement dans la feuille de calcul des organisateurs sans base de données SQL coûteuse.'
-              : 'Each submission dispatches an asynchronous POST to a Google Apps Script web endpoint in no-cors mode. Responses are atomically appended to the organizers\' spreadsheet with zero managed SQL database overhead.'}
+            {isFrench ? (
+              <>
+                Chaque soumission déclenche une requête POST vers un endpoint Google Apps Script en{' '}
+                <GlossaryTerm
+                  term="mode no-cors"
+                  definition={getGlossaryDef('no-cors-mode', 'fr')}
+                />. Les réponses sont{' '}
+                <GlossaryTerm
+                  term="insérées directement"
+                  definition={getGlossaryDef('atomic-insert', 'fr')}
+                />{' '}
+                dans la feuille de calcul des organisateurs sans base de données SQL coûteuse.
+              </>
+            ) : (
+              <>
+                Each submission dispatches an asynchronous POST to a Google Apps Script web endpoint in{' '}
+                <GlossaryTerm
+                  term="no-cors mode"
+                  definition={getGlossaryDef('no-cors-mode', 'en')}
+                />. Responses are{' '}
+                <GlossaryTerm
+                  term="atomically appended"
+                  definition={getGlossaryDef('atomic-insert', 'en')}
+                />{' '}
+                to the organizers' spreadsheet with zero managed SQL database overhead.
+              </>
+            )}
           </p>
         </div>
 

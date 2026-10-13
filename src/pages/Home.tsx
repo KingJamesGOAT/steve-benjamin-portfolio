@@ -9,6 +9,7 @@ import LexiconWidgetSim from '../components/features/LexiconWidgetSim';
 import MarriageWidgetSim from '../components/features/MarriageWidgetSim';
 import RotatingTitle from '../components/features/RotatingTitle';
 import GlossaryTerm from '../components/features/GlossaryTerm';
+import { getGlossaryDef } from '../data/cryptoGlossary';
 import About from './About';
 import DeveloperHeroCard from '../components/features/DeveloperHeroCard';
 import IntroAnimation from '../components/features/IntroAnimation';
@@ -334,9 +335,25 @@ export const Home: React.FC = () => {
                     {isFrench ? 'Mandat HUG & Problématique' : 'HUG Mandate & Challenge'}
                   </span>
                   <p className="text-slate-500 pt-0.5 text-xs">
-                    {isFrench
-                      ? 'Résorption du différentiel de 30% : les HUG constataient que 30% des volontaires se déplaçant en entreprise étaient refusés sur place (critères médicaux ignorés). Donnons.ch qualifie l\'éligibilité en amont de façon anonyme et ludique.'
-                      : 'Eliminating the 30% on-site rejection rate: HUG reported that 30% of willing corporate donors were deferred at collection points due to overlooked criteria. Donnons.ch pre-screens eligibility beforehand through playful guidance.'}
+                    {isFrench ? (
+                      <>
+                        Résorption du{' '}
+                        <GlossaryTerm
+                          term="différentiel de rejet de 30%"
+                          definition={getGlossaryDef('donor-deferral', currentLang)}
+                        />{' '}
+                        : les HUG constataient que 30% des volontaires se déplaçant en entreprise étaient refusés sur place (critères médicaux ignorés). Donnons.ch qualifie l'éligibilité en amont de façon anonyme et ludique.
+                      </>
+                    ) : (
+                      <>
+                        Eliminating the{' '}
+                        <GlossaryTerm
+                          term="30% on-site rejection rate"
+                          definition={getGlossaryDef('donor-deferral', currentLang)}
+                        />{' '}
+                        : HUG reported that 30% of willing corporate donors were deferred at collection points due to overlooked criteria. Donnons.ch pre-screens eligibility beforehand through playful guidance.
+                      </>
+                    )}
                   </p>
                 </div>
 
@@ -345,9 +362,25 @@ export const Home: React.FC = () => {
                     {isFrench ? 'Gamification & Engagement RSE' : 'Gamification & Corporate CSR'}
                   </span>
                   <p className="text-slate-500 pt-0.5 text-xs">
-                    {isFrench
-                      ? 'Quiz interactif avec Roby la mascotte, projection d\'impact en direct (vies sauvées) et attribution du Trophée de la Générosité / Label CTS pour valoriser la politique RSE des entreprises partenaires.'
-                      : 'Interactive cosmic quiz with Roby the mascot, real-time lives-saved impact calculation, and the Corporate Donor Label (Label CTS) recognizing employer CSR engagement.'}
+                    {isFrench ? (
+                      <>
+                        Quiz interactif avec Roby la mascotte, projection d'impact en direct (vies sauvées) et attribution du Trophée de la Générosité /{' '}
+                        <GlossaryTerm
+                          term="Label CTS"
+                          definition={getGlossaryDef('label-cts', currentLang)}
+                        />{' '}
+                        pour valoriser la politique RSE des entreprises partenaires.
+                      </>
+                    ) : (
+                      <>
+                        Interactive cosmic quiz with Roby the mascot, real-time lives-saved impact calculation, and the Corporate Donor Label ({' '}
+                        <GlossaryTerm
+                          term="Label CTS"
+                          definition={getGlossaryDef('label-cts', currentLang)}
+                        />{' '}
+                        ) recognizing employer CSR engagement.
+                      </>
+                    )}
                   </p>
                 </div>
 
@@ -380,7 +413,35 @@ export const Home: React.FC = () => {
                 {t('projects.catholicRoute.title')}
               </h3>
               <p className="text-xs sm:text-sm text-fintech-secondary leading-relaxed">
-                {t('projects.catholicRoute.description')}
+                {isFrench ? (
+                  <>
+                    Moteur de recherche et d'exploration conceptuelle articulant{' '}
+                    <GlossaryTerm
+                      term="Ontologie"
+                      definition={getGlossaryDef('ontology', currentLang)}
+                    />{' '}
+                    et{' '}
+                    <GlossaryTerm
+                      term="Épistémologie"
+                      definition={getGlossaryDef('epistemology', currentLang)}
+                    />
+                    , avec recherche instantanée, infobulles contextuelles et frise chronologique.
+                  </>
+                ) : (
+                  <>
+                    Scholarly digital research engine synthesizing{' '}
+                    <GlossaryTerm
+                      term="Ontology"
+                      definition={getGlossaryDef('ontology', currentLang)}
+                    />{' '}
+                    and{' '}
+                    <GlossaryTerm
+                      term="Epistemology"
+                      definition={getGlossaryDef('epistemology', currentLang)}
+                    />
+                    , with instant search, contextual tooltips, and interactive chronology.
+                  </>
+                )}
               </p>
 
               {/* Interactive Lexicon & Chronology Simulation Widget */}
@@ -407,7 +468,35 @@ export const Home: React.FC = () => {
                 {t('projects.marriage.title')}
               </h3>
               <p className="text-xs sm:text-sm text-fintech-secondary leading-relaxed">
-                {t('projects.marriage.description')}
+                {isFrench ? (
+                  <>
+                    Plateforme événementielle privée intégrant un moteur de RSVP dynamique, une{' '}
+                    <GlossaryTerm
+                      term="architecture serverless"
+                      definition={getGlossaryDef('serverless-architecture', currentLang)}
+                    />{' '}
+                    vers tableur Excel et un contrôle d'accès par{' '}
+                    <GlossaryTerm
+                      term="Magic Link"
+                      definition={getGlossaryDef('magic-link', currentLang)}
+                    />
+                    .
+                  </>
+                ) : (
+                  <>
+                    Private event web platform engineered with a dynamic RSVP intake engine, real-time{' '}
+                    <GlossaryTerm
+                      term="serverless architecture"
+                      definition={getGlossaryDef('serverless-architecture', currentLang)}
+                    />{' '}
+                    to Excel spreadsheets, and{' '}
+                    <GlossaryTerm
+                      term="Magic Link"
+                      definition={getGlossaryDef('magic-link', currentLang)}
+                    />{' '}
+                    access control.
+                  </>
+                )}
               </p>
 
               {/* Interactive Wedding Preview Widget */}
@@ -474,7 +563,37 @@ export const Home: React.FC = () => {
                 {isFrench ? '03 / Confidentialité' : '03 / Confidentiality'}
               </div>
               <div className="text-sm font-bold text-fintech-primary">{t('bachelorPitch.conditions.confidentialityTitle')}</div>
-              <p className="text-xs text-slate-600 leading-relaxed">{t('bachelorPitch.conditions.confidentialityDesc')}</p>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                {isFrench ? (
+                  <>
+                    Le projet peut être classé strictement{' '}
+                    <GlossaryTerm
+                      term="confidentiel (NDA)"
+                      definition={getGlossaryDef('nda', currentLang)}
+                    />{' '}
+                    sur simple demande de l'entreprise. La{' '}
+                    <GlossaryTerm
+                      term="propriété intellectuelle"
+                      definition={getGlossaryDef('ip-transfer', currentLang)}
+                    />{' '}
+                    est convenue d'entente.
+                  </>
+                ) : (
+                  <>
+                    Projects can be held strictly{' '}
+                    <GlossaryTerm
+                      term="confidential (NDA)"
+                      definition={getGlossaryDef('nda', currentLang)}
+                    />{' '}
+                    upon enterprise request.{' '}
+                    <GlossaryTerm
+                      term="Intellectual property"
+                      definition={getGlossaryDef('ip-transfer', currentLang)}
+                    />{' '}
+                    is arranged directly with the company.
+                  </>
+                )}
+              </p>
             </div>
           </div>
 

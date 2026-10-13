@@ -1,8 +1,13 @@
 import React from 'react';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { Search } from 'lucide-react';
 
-export const Navbar: React.FC = () => {
+interface NavbarProps {
+  onOpenCommandPalette?: () => void;
+}
+
+export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
   const { t, i18n } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
@@ -70,6 +75,20 @@ export const Navbar: React.FC = () => {
           </nav>
 
           <div className="h-4 w-[1px] bg-slate-200 hidden sm:block" />
+
+          {/* Unified Single-Container Search & Ctrl K Trigger */}
+          {onOpenCommandPalette && (
+            <button
+              onClick={onOpenCommandPalette}
+              type="button"
+              className="hidden md:inline-flex items-center space-x-1.5 px-2.5 py-1 text-xs font-mono border border-slate-200 rounded-none hover:border-electric hover:text-electric transition-colors bg-white text-slate-500 hover:bg-slate-50 cursor-pointer"
+              title={t('cmdPalette.placeholder')}
+              aria-label="Search Glossary (Ctrl K)"
+            >
+              <Search className="w-3.5 h-3.5 text-slate-400 group-hover:text-electric" />
+              <span className="font-medium text-[11px]">Ctrl K</span>
+            </button>
+          )}
 
           {/* Clean FinTech EN / FR Language Toggle */}
           <button

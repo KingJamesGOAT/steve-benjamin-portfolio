@@ -14,9 +14,13 @@ import {
   Calendar,
 } from 'lucide-react';
 
+import GlossaryTerm from '../components/features/GlossaryTerm';
+import { getGlossaryDef } from '../data/cryptoGlossary';
+
 export const BachelorPitch: React.FC = () => {
   const { t, i18n } = useTranslation();
-  const isFrench = i18n.language?.startsWith('fr');
+  const currentLang = i18n.language?.startsWith('fr') ? 'fr' : 'en';
+  const isFrench = currentLang === 'fr';
 
   // Ensure scroll is at the top on mount
   useEffect(() => {
@@ -125,7 +129,35 @@ export const BachelorPitch: React.FC = () => {
               {t('bachelorPitch.conditions.confidentialityTitle')}
             </h3>
             <p className="text-xs text-slate-600 leading-relaxed">
-              {t('bachelorPitch.conditions.confidentialityDesc')}
+              {isFrench ? (
+                <>
+                  Le projet peut être classé strictement{' '}
+                  <GlossaryTerm
+                    term="confidentiel (NDA)"
+                    definition={getGlossaryDef('nda', 'fr')}
+                  />{' '}
+                  sur simple demande de l'entreprise (seuls le titre et le résumé restent publics). La{' '}
+                  <GlossaryTerm
+                    term="propriété intellectuelle"
+                    definition={getGlossaryDef('ip-transfer', 'fr')}
+                  />{' '}
+                  est convenue d'entente.
+                </>
+              ) : (
+                <>
+                  Projects can be held strictly{' '}
+                  <GlossaryTerm
+                    term="confidential (NDA)"
+                    definition={getGlossaryDef('nda', 'en')}
+                  />{' '}
+                  upon request (only title and abstract made public).{' '}
+                  <GlossaryTerm
+                    term="IP terms"
+                    definition={getGlossaryDef('ip-transfer', 'en')}
+                  />{' '}
+                  are arranged directly with the company.
+                </>
+              )}
             </p>
           </div>
 
@@ -215,7 +247,27 @@ export const BachelorPitch: React.FC = () => {
           <div className="space-y-1 pb-3 sm:pb-0 sm:pr-3">
             <div className="font-mono text-[11px] text-electric font-semibold">{t('bachelorPitch.timeline.step1Dates')}</div>
             <h4 className="text-xs font-bold text-fintech-primary">{t('bachelorPitch.timeline.step1Title')}</h4>
-            <p className="text-[11px] text-slate-600 leading-relaxed">{t('bachelorPitch.timeline.step1Desc')}</p>
+            <p className="text-[11px] text-slate-600 leading-relaxed">
+              {isFrench ? (
+                <>
+                  Échanges initiaux pour définir le{' '}
+                  <GlossaryTerm
+                    term="cahier des charges"
+                    definition={getGlossaryDef('project-specifications', 'fr')}
+                  />{' '}
+                  et les contours du projet.
+                </>
+              ) : (
+                <>
+                  Initial discussions to define{' '}
+                  <GlossaryTerm
+                    term="project specifications"
+                    definition={getGlossaryDef('project-specifications', 'en')}
+                  />{' '}
+                  and project scope.
+                </>
+              )}
+            </p>
           </div>
 
           <div className="space-y-1 py-3 sm:py-0 sm:px-3">

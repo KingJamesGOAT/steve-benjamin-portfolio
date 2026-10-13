@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, X, ExternalLink, BookOpen, ArrowLeft, Home, Layers, User, GraduationCap } from 'lucide-react';
+import { Search, X, BookOpen, ArrowLeft } from 'lucide-react';
 import { getGlossaryEntries, type LocalizedGlossaryEntry } from '../../data/cryptoGlossary';
 
 interface CommandPaletteProps {
@@ -10,148 +9,29 @@ interface CommandPaletteProps {
   onClose: () => void;
 }
 
-type PaletteEntry =
-  | {
-      type: 'nav';
-      id: string;
-      titleKey: string;
-      subtitleKey?: string;
-      path: string;
-      category: 'navigation' | 'action';
-      isRoute?: boolean;
-      icon: React.ReactNode;
-    }
-  | {
-      type: 'glossary';
-      id: string;
-      entry: LocalizedGlossaryEntry;
-      icon: React.ReactNode;
-    };
-
 export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose }) => {
   const { t, i18n } = useTranslation();
-  const navigate = useNavigate();
-  const location = useLocation();
   const [query, setQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [selectedGlossary, setSelectedGlossary] = useState<LocalizedGlossaryEntry | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const currentLang = i18n.language?.startsWith('fr') ? 'fr' : 'en';
+  const isFrench = currentLang === 'fr';
   const glossaryEntries = getGlossaryEntries(currentLang);
 
-  const navItems: PaletteEntry[] = [
-    // Main Section Anchors
-    {
-      type: 'nav',
-      id: 'home',
-      titleKey: 'nav.home',
-      subtitleKey: 'home.tagline',
-      path: '#home',
-      category: 'navigation',
-      icon: <Home className="w-3.5 h-3.5" />,
-    },
-    {
-      type: 'nav',
-      id: 'projects',
-      titleKey: 'nav.projects',
-      subtitleKey: 'projects.title',
-      path: '#projects',
-      category: 'navigation',
-      icon: <Layers className="w-3.5 h-3.5" />,
-    },
-    {
-      type: 'nav',
-      id: 'about',
-      titleKey: 'nav.about',
-      subtitleKey: 'about.title',
-      path: '#about',
-      category: 'navigation',
-      icon: <User className="w-3.5 h-3.5" />,
-    },
-    {
-      type: 'nav',
-      id: 'bachelorPitch',
-      titleKey: 'nav.bachelorPitch',
-      subtitleKey: 'bachelorPitch.title',
-      path: '#bachelor-pitch',
-      category: 'navigation',
-      icon: <GraduationCap className="w-3.5 h-3.5" />,
-    },
-    // Project Detail Routes
-    {
-      type: 'nav',
-      id: 'project-crypto',
-      titleKey: 'projects.crypto.title',
-      subtitleKey: 'projects.crypto.tag',
-      path: '/projects/crypto-trade-hub',
-      category: 'action',
-      isRoute: true,
-      icon: <ExternalLink className="w-3.5 h-3.5 text-emerald-600" />,
-    },
-    {
-      type: 'nav',
-      id: 'project-donnons',
-      titleKey: 'projects.donnons.title',
-      subtitleKey: 'projects.donnons.tag',
-      path: '/projects/donnons-ch',
-      category: 'action',
-      isRoute: true,
-      icon: <ExternalLink className="w-3.5 h-3.5 text-rose-500" />,
-    },
-    {
-      type: 'nav',
-      id: 'project-catholic',
-      titleKey: 'projects.catholicRoute.title',
-      subtitleKey: 'projects.catholicRoute.tag',
-      path: '/projects/catholic-route',
-      category: 'action',
-      isRoute: true,
-      icon: <ExternalLink className="w-3.5 h-3.5 text-blue-500" />,
-    },
-    {
-      type: 'nav',
-      id: 'project-marriage',
-      titleKey: 'projects.marriage.title',
-      subtitleKey: 'projects.marriage.tag',
-      path: '/projects/marriage-platform',
-      category: 'action',
-      isRoute: true,
-      icon: <ExternalLink className="w-3.5 h-3.5 text-amber-500" />,
-    },
-  ];
-
-  const glossaryItems: PaletteEntry[] = glossaryEntries.map((entry) => ({
-    type: 'glossary',
-    id: `glossary-${entry.id}`,
-    entry,
-    icon: <BookOpen className="w-3.5 h-3.5 text-blue-500" />,
-  }));
-
-  const allItems: PaletteEntry[] = [...navItems, ...glossaryItems];
-
-  // Filter items based on query (returns top 3 matches when searching)
+  // Filter glossary items based on query (returns top 3 matches when searching)
   const filteredItems = query.trim()
-    ? allItems
-        .filter((item) => {
+    ? glossaryEntries
+        .filter((entry) => {
           const q = query.toLowerCase().trim();
-          if (item.type === 'nav') {
-            const title = t(item.titleKey).toLowerCase();
-            const sub = item.subtitleKey ? t(item.subtitleKey).toLowerCase() : '';
-            return title.includes(q) || sub.includes(q) || item.path.includes(q);
-          }
-
-          if (item.type === 'glossary') {
-            const term = item.entry.term.toLowerCase();
-            const def = item.entry.shortDef.toLowerCase();
-            const cat = item.entry.category.toLowerCase();
-            return term.includes(q) || def.includes(q) || cat.includes(q);
-          }
-
-          return false;
+          const term = entry.term.toLowerCase();
+          const def = entry.shortDef.toLowerCase();
+          const cat = entry.category.toLowerCase();
+          return term.includes(q) || def.includes(q) || cat.includes(q);
         })
         .slice(0, 3)
-    : navItems;
+    : glossaryEntries.slice(0, 6);
 
   // Reset selected index when query changes
   useEffect(() => {
@@ -192,7 +72,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
       } else if (e.key === 'Enter') {
         e.preventDefault();
         if (filteredItems[selectedIndex]) {
-          handleSelect(filteredItems[selectedIndex]);
+          setSelectedGlossary(filteredItems[selectedIndex]);
         }
       } else if (e.key === 'Escape') {
         e.preventDefault();
@@ -202,36 +82,13 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, filteredItems, selectedIndex, selectedGlossary]);
-
-  const handleSelect = (item: PaletteEntry) => {
-    if (item.type === 'glossary') {
-      setSelectedGlossary(item.entry);
-      return;
-    }
-
-    onClose();
-    if (item.isRoute) {
-      navigate(item.path);
-    } else {
-      const targetId = item.path.replace('#', '');
-      if (location.pathname === '/' || location.pathname === '') {
-        const el = document.getElementById(targetId);
-        if (el) {
-          el.scrollIntoView({ behavior: 'smooth' });
-          window.history.pushState(null, '', `#${targetId}`);
-        }
-      } else {
-        navigate(`/#${targetId}`);
-      }
-    }
-  };
+  }, [isOpen, filteredItems, selectedIndex, selectedGlossary, onClose]);
 
   return (
     <AnimatePresence>
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4">
-          {/* Backdrop Blur Overlay */}
+          {/* Backdrop Overlay */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -241,7 +98,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
             className="fixed inset-0 bg-slate-900/35 backdrop-blur-md"
           />
 
-          {/* Modal Container with Sharp Minimalist FinTech Styling */}
+          {/* Modal Container */}
           <motion.div
             initial={{ opacity: 0, scale: 0.98, y: -8 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -249,9 +106,10 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
             transition={{ duration: 0.16, ease: 'easeOut' }}
             className="relative w-full max-w-xl overflow-hidden rounded-none bg-white border border-slate-200 shadow-2xl z-10"
           >
-            {/* If a glossary term is selected, show its deep 3-line explanation */}
+            {/* If a glossary term is selected, show its clean 2-3 line explanation (no grey box, no bullets) */}
             {selectedGlossary ? (
               <div className="p-6 space-y-4 font-sans text-left">
+                {/* Term Header */}
                 <div className="flex items-center justify-between border-b border-slate-100 pb-3">
                   <div className="flex items-center space-x-2">
                     <span className="w-2 h-2 bg-[#0052FF] rounded-none inline-block" />
@@ -264,37 +122,24 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
                   </span>
                 </div>
 
-                <div className="text-xs text-slate-700 font-mono bg-slate-50 p-3 border border-slate-200 leading-relaxed">
+                {/* Main Definition (Normal clean text, no grey container) */}
+                <p className="text-sm font-semibold text-slate-900 leading-relaxed font-sans">
                   {selectedGlossary.shortDef}
+                </p>
+
+                {/* Clear 2-3 explanatory lines without bullet points or numbering */}
+                <div className="space-y-2 text-xs sm:text-sm text-slate-600 leading-relaxed font-sans pt-1">
+                  <p>{selectedGlossary.line1}</p>
+                  <p>{selectedGlossary.line2}</p>
+                  {selectedGlossary.line3 && <p>{selectedGlossary.line3}</p>}
                 </div>
 
-                {/* 3 Structured Explanation Lines */}
-                <div className="space-y-2.5 pt-1 text-xs text-slate-600">
-                  <div className="flex items-start space-x-2.5">
-                    <span className="font-mono text-[11px] font-bold text-electric shrink-0 mt-0.5">
-                      01 /
-                    </span>
-                    <p className="leading-relaxed">{selectedGlossary.line1}</p>
-                  </div>
-                  <div className="flex items-start space-x-2.5">
-                    <span className="font-mono text-[11px] font-bold text-electric shrink-0 mt-0.5">
-                      02 /
-                    </span>
-                    <p className="leading-relaxed">{selectedGlossary.line2}</p>
-                  </div>
-                  <div className="flex items-start space-x-2.5">
-                    <span className="font-mono text-[11px] font-bold text-electric shrink-0 mt-0.5">
-                      03 /
-                    </span>
-                    <p className="leading-relaxed">{selectedGlossary.line3}</p>
-                  </div>
-                </div>
-
+                {/* Footer Controls */}
                 <div className="flex items-center justify-between pt-4 border-t border-slate-100">
                   <button
                     type="button"
                     onClick={() => setSelectedGlossary(null)}
-                    className="inline-flex items-center space-x-1.5 px-3 py-1.5 bg-white border border-slate-200 hover:border-electric text-xs font-mono font-semibold text-slate-700 transition-colors rounded-none"
+                    className="inline-flex items-center space-x-1.5 px-3 py-1.5 bg-white border border-slate-200 hover:border-electric text-xs font-mono font-semibold text-slate-700 transition-colors rounded-none cursor-pointer"
                   >
                     <ArrowLeft className="w-3.5 h-3.5" />
                     <span>{t('cmdPalette.backToSearch')}</span>
@@ -303,7 +148,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
                   <button
                     type="button"
                     onClick={onClose}
-                    className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-xs font-mono text-slate-600 transition-colors rounded-none"
+                    className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-xs font-mono text-slate-600 transition-colors rounded-none cursor-pointer"
                   >
                     {t('cmdPalette.closeEsc')}
                   </button>
@@ -322,24 +167,30 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
                       setQuery(e.target.value);
                       setSelectedIndex(0);
                     }}
-                    placeholder={t('cmdPalette.placeholder')}
-                    className="w-full bg-transparent text-sm text-fintech-primary placeholder-slate-400 outline-none focus:ring-1 focus:ring-electric rounded-none px-2 py-1.5 transition-shadow"
+                    placeholder={isFrench ? 'Rechercher un terme du glossaire...' : 'Search glossary term...'}
+                    className="w-full bg-transparent text-sm text-fintech-primary placeholder-slate-400 outline-none focus:ring-1 focus:ring-electric rounded-none px-2 py-1.5 transition-shadow font-mono"
                   />
                   {query && (
                     <button
                       type="button"
                       onClick={() => setQuery('')}
-                      className="p-1 text-slate-400 hover:text-fintech-primary transition-colors"
+                      className="p-1 text-slate-400 hover:text-fintech-primary transition-colors cursor-pointer"
                     >
                       <X className="w-4 h-4" />
                     </button>
                   )}
                 </div>
 
-                {/* List of Navigation Links & Glossary Items */}
+                {/* List of Glossary Items */}
                 <div className="max-h-80 overflow-y-auto p-2">
                   <div className="px-3 py-1.5 text-[11px] font-mono font-semibold uppercase tracking-wider text-slate-400 flex items-center justify-between">
-                    <span>{query ? t('cmdPalette.matchingResults').toUpperCase() : t('cmdPalette.quickNavigation')}</span>
+                    <span>
+                      {query
+                        ? t('cmdPalette.matchingResults').toUpperCase()
+                        : isFrench
+                        ? 'TERMES DU GLOSSAIRE'
+                        : 'GLOSSARY TERMS'}
+                    </span>
                     <span className="text-[10px] text-slate-400 font-normal">
                       {filteredItems.length} {t('cmdPalette.itemsCount').toUpperCase()}
                     </span>
@@ -351,34 +202,31 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
                     </div>
                   ) : (
                     <ul className="space-y-1">
-                      {filteredItems.map((item, index) => {
+                      {filteredItems.map((entry, index) => {
                         const isSelected = index === selectedIndex;
-                        const isGlossary = item.type === 'glossary';
 
                         return (
-                          <li key={item.id}>
+                          <li key={entry.id}>
                             <button
                               type="button"
-                              onClick={() => handleSelect(item)}
+                              onClick={() => setSelectedGlossary(entry)}
                               onMouseEnter={() => setSelectedIndex(index)}
-                              className={`w-full flex items-center justify-between px-3 py-2.5 rounded-none text-xs font-medium transition-all ${
+                              className={`w-full flex items-center justify-between px-3 py-2.5 rounded-none text-xs font-medium transition-all cursor-pointer ${
                                 isSelected
                                   ? 'bg-electric-light text-electric'
                                   : 'text-fintech-secondary hover:bg-slate-50 hover:text-fintech-primary'
                               }`}
                             >
                               <div className="flex items-center space-x-3 text-left">
-                                <span className={isSelected ? 'text-electric' : 'text-slate-400'}>
-                                  {item.icon}
+                                <span className={isSelected ? 'text-electric' : 'text-blue-500'}>
+                                  <BookOpen className="w-3.5 h-3.5" />
                                 </span>
                                 <div>
                                   <div className="text-sm font-medium">
-                                    {isGlossary ? item.entry.term : t(item.titleKey)}
+                                    {entry.term}
                                   </div>
                                   <div className="text-[11px] text-slate-500 font-normal line-clamp-1">
-                                    {isGlossary
-                                      ? item.entry.shortDef
-                                      : item.subtitleKey && t(item.subtitleKey)}
+                                    {entry.shortDef}
                                   </div>
                                 </div>
                               </div>

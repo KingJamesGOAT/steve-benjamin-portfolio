@@ -5,6 +5,9 @@ import { ExternalLink, ArrowRight } from 'lucide-react';
 import CryptoWidgetSim from '../components/features/CryptoWidgetSim';
 import DonnonsWidgetSim from '../components/features/DonnonsWidgetSim';
 
+import GlossaryTerm from '../components/features/GlossaryTerm';
+import { getGlossaryDef } from '../data/cryptoGlossary';
+
 export const Projects: React.FC = () => {
   const { t, i18n } = useTranslation();
   const isFrench = Boolean(i18n.language?.startsWith('fr'));
@@ -97,7 +100,23 @@ export const Projects: React.FC = () => {
               Hôpitaux de Genève (HUG)
             </div>
             <p className="text-[11px] font-mono text-slate-500">
-              {isFrench ? 'Résorption du taux de rejet de 30%' : 'Eliminating the 30% deferral rate'}
+              {isFrench ? (
+                <>
+                  Résorption du{' '}
+                  <GlossaryTerm
+                    term="taux de rejet de 30%"
+                    definition={getGlossaryDef('donor-deferral', 'fr')}
+                  />
+                </>
+              ) : (
+                <>
+                  Eliminating the{' '}
+                  <GlossaryTerm
+                    term="30% deferral rate"
+                    definition={getGlossaryDef('donor-deferral', 'en')}
+                  />
+                </>
+              )}
             </p>
           </div>
 
@@ -182,7 +201,25 @@ export const Projects: React.FC = () => {
               </li>
               <li className="flex items-center space-x-2">
                 <span className="w-1.5 h-1.5 rounded-none bg-amber-500 inline-block" />
-                <span>{t('projects.marriage.feature3')}</span>
+                <span>
+                  {isFrench ? (
+                    <>
+                      Session Navigateur &{' '}
+                      <GlossaryTerm
+                        term="Magic Link"
+                        definition={getGlossaryDef('magic-link', 'fr')}
+                      />
+                    </>
+                  ) : (
+                    <>
+                      Browser Session &{' '}
+                      <GlossaryTerm
+                        term="Magic Link"
+                        definition={getGlossaryDef('magic-link', 'en')}
+                      />
+                    </>
+                  )}
+                </span>
               </li>
             </ul>
           </div>
