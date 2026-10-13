@@ -40,10 +40,6 @@ export const DeveloperHeroCard: React.FC = () => {
             <span className="text-blue-600 font-semibold">engineer</span> = &#123;
           </div>
           <div className="pl-4">
-            <span className="text-slate-500">name:</span>{' '}
-            <span className="text-emerald-700">"Steve Benjamin"</span>,
-          </div>
-          <div className="pl-4">
             <span className="text-slate-500">degree:</span>{' '}
             <span className="text-emerald-700">
               {isFrench ? '"BSc Ingénierie des Médias @ HEIG-VD"' : '"BSc Media Engineering @ HEIG-VD"'}
@@ -67,12 +63,6 @@ export const DeveloperHeroCard: React.FC = () => {
             <span className="text-slate-500">mandateScope:</span>{' '}
             <span className="text-emerald-700">
               {isFrench ? '"Mandat 14 semaines (0 CHF / NDA)"' : '"14-Week Capstone (CHF 0 / NDA)"'}
-            </span>,
-          </div>
-          <div className="pl-4">
-            <span className="text-slate-500">location:</span>{' '}
-            <span className="text-emerald-700">
-              {isFrench ? '"Bussigny / Vaud, Suisse"' : '"Bussigny / Vaud, Switzerland"'}
             </span>
           </div>
           <div>&#125;;</div>

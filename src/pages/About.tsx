@@ -72,32 +72,33 @@ export const About: React.FC<AboutProps> = ({ id = 'about' }) => {
               {t('about.summary')}
             </p>
 
-            {/* Clean Metadata Badges */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2 text-xs font-mono">
-              <div className="p-3 border border-slate-200 bg-slate-50/60">
-                <span className="text-slate-400 block text-[10px] uppercase">
-                  {t('about.facts.locationLabel')}
-                </span>
-                <span className="font-semibold text-fintech-primary">
-                  {t('about.facts.locationValue')}
-                </span>
-              </div>
-              <div className="p-3 border border-slate-200 bg-slate-50/60">
-                <span className="text-slate-400 block text-[10px] uppercase">
-                  {t('about.facts.educationLabel')}
-                </span>
-                <span className="font-semibold text-fintech-primary">
-                  {t('about.facts.educationValue')}
-                </span>
-              </div>
-              <div className="p-3 border border-slate-200 bg-slate-50/60">
-                <span className="text-slate-400 block text-[10px] uppercase">
-                  {t('about.facts.hobbyLabel')}
-                </span>
-                <span className="font-semibold text-fintech-primary">
-                  {t('about.facts.hobbyValue')}
-                </span>
-              </div>
+            {/* Clean Direct Links Row */}
+            <div className="flex flex-wrap items-center gap-3 pt-1 font-mono text-xs">
+              <a
+                href="https://www.linkedin.com/in/steve-benjamin/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center space-x-1.5 text-slate-700 hover:text-electric transition-colors"
+              >
+                <span>LinkedIn ↗</span>
+              </a>
+              <span className="text-slate-300">·</span>
+              <a
+                href={`${import.meta.env.BASE_URL}CV_Steve_Benjamin.pdf`}
+                target="_blank"
+                rel="noopener noreferrer"
+                download
+                className="inline-flex items-center space-x-1.5 text-slate-700 hover:text-electric transition-colors"
+              >
+                <span>CV (PDF) ↗</span>
+              </a>
+              <span className="text-slate-300">·</span>
+              <a
+                href="mailto:sbstevebenjamin@gmail.com"
+                className="inline-flex items-center space-x-1.5 text-slate-700 hover:text-electric transition-colors"
+              >
+                <span>sbstevebenjamin@gmail.com</span>
+              </a>
             </div>
           </div>
 
@@ -187,48 +188,6 @@ export const About: React.FC<AboutProps> = ({ id = 'about' }) => {
               </div>
             </div>
           ))}
-        </div>
-      </div>
-
-      {/* Links */}
-      <div className="space-y-4">
-        <h3 className="text-xs font-mono uppercase tracking-widest text-slate-500 font-semibold">
-          {t('about.linksTitle')}
-        </h3>
-
-        <div className="border-t border-b border-slate-200 divide-y divide-slate-200">
-          <div className="py-4 grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-6 items-baseline">
-            <div className="md:col-span-3 font-mono text-xs sm:text-sm text-slate-500">
-              {t('about.links.linkedinLabel')}
-            </div>
-            <div className="md:col-span-9">
-              <a
-                href="https://www.linkedin.com/in/steve-benjamin/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-mono text-xs sm:text-sm text-fintech-primary hover:text-electric underline underline-offset-4 decoration-slate-300 hover:decoration-electric transition-colors"
-              >
-                {t('about.links.linkedinText')}
-              </a>
-            </div>
-          </div>
-
-          <div className="py-4 grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-6 items-baseline">
-            <div className="md:col-span-3 font-mono text-xs sm:text-sm text-slate-500">
-              {t('about.links.cvLabel')}
-            </div>
-            <div className="md:col-span-9">
-              <a
-                href={`${import.meta.env.BASE_URL}CV_Steve_Benjamin.pdf`}
-                target="_blank"
-                rel="noopener noreferrer"
-                download
-                className="font-mono text-xs sm:text-sm text-fintech-primary hover:text-electric underline underline-offset-4 decoration-slate-300 hover:decoration-electric transition-colors"
-              >
-                {t('about.links.cvText')}
-              </a>
-            </div>
-          </div>
         </div>
       </div>
     </section>
