@@ -55,11 +55,9 @@ const BentoTileCard: React.FC<{ tile: BentoTile; isFrench: boolean }> = ({ tile,
           </div>
         </div>
 
-        {/* 2. BACK FACE (FLIPPED 180 DEG ON X AXIS, DEEP SAPPHIRE GRADIENT, HIGH-CONTRAST TEXT) */}
-        <div className="absolute inset-0 w-full h-full backface-hidden rotate-x-180 bg-gradient-to-br from-[#0038B8] via-[#002472] to-[#071329] border border-blue-500/40 shadow-[0_4px_20px_rgba(0,82,255,0.22)] p-3.5 sm:p-4 flex flex-col items-center justify-center text-center overflow-hidden">
-          {/* Subtle top ambient glow */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(0,82,255,0.25),_transparent_70%)] pointer-events-none" />
-          <p className="relative z-10 text-xs sm:text-[13px] md:text-sm text-slate-100 font-medium sm:font-semibold leading-relaxed font-sans max-w-[95%] select-text drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
+        {/* 2. BACK FACE (FLIPPED 180 DEG ON X AXIS, UNIFIED SOLID DARK #0A0D14, ELECTRIC BLUE BORDER) */}
+        <div className="absolute inset-0 w-full h-full backface-hidden rotate-x-180 bg-[#0A0D14] border border-electric shadow-[0_0_15px_rgba(0,82,255,0.2)] p-3.5 sm:p-4 flex flex-col items-center justify-center text-center overflow-hidden">
+          <p className="text-xs sm:text-[13px] md:text-sm text-slate-100 font-mono font-medium leading-relaxed max-w-[95%] select-text">
             {isFrench ? tile.descFr : tile.descEn}
           </p>
         </div>
@@ -81,8 +79,8 @@ export const TechBentoGrid: React.FC = () => {
       tagFr: 'React 18 // TypeScript',
       titleEn: 'Frontend Architecture',
       titleFr: 'Architecture Frontend',
-      descEn: 'Architecting modular, type-safe web applications with reactive state, component isolation, and sub-millisecond render updates.',
-      descFr: 'Conception d\'applications web modulaires et typées avec état réactif, isolation des composants et mises à jour DOM fluides.',
+      descEn: 'Modular, type-safe web apps with sub-millisecond rendering.',
+      descFr: 'Apps web modulaires, typées et ultra-réactives.',
       tools: ['React 18', 'TypeScript', 'Vite', 'Tailwind'],
       codeSnippet: (
         <div className="space-y-1 whitespace-nowrap">
@@ -122,8 +120,8 @@ export const TechBentoGrid: React.FC = () => {
       tagFr: 'Figma // Systèmes UI',
       titleEn: 'UI/UX & Prototyping',
       titleFr: 'Design UI/UX & Prototypes',
-      descEn: 'Translating user needs into interactive high-fidelity Figma prototypes, ergonomic wireframes, and tested digital flows.',
-      descFr: 'Transformation des besoins utilisateurs en prototypes interactifs haute fidélité sur Figma et parcours fluides.',
+      descEn: 'Interactive Figma prototypes and ergonomic user flows.',
+      descFr: 'Prototypes Figma interactifs et parcours utilisateurs fluides.',
       tools: ['Figma', 'Wireframes', 'UX Testing'],
       codeSnippet: (
         <div className="space-y-0.5">
@@ -141,8 +139,8 @@ export const TechBentoGrid: React.FC = () => {
       tagFr: 'CSS3 // Variables',
       titleEn: 'Design Systems & Tokens',
       titleFr: 'Design Systems & Tokens',
-      descEn: 'Structuring scalable CSS variables, design tokens, accessible components, and unified themes conforming to WCAG standards.',
-      descFr: 'Structuration de tokens de design, variables CSS réutilisables et composants accessibles conformes aux normes WCAG.',
+      descEn: 'Scalable design tokens and WCAG-compliant UI systems.',
+      descFr: 'Design tokens scalables et systèmes UI conformes WCAG.',
       tools: ['Tailwind CSS', 'CSS Variables', 'WCAG 2.1'],
       codeSnippet: (
         <div className="space-y-0.5">
@@ -162,8 +160,8 @@ export const TechBentoGrid: React.FC = () => {
       tagFr: 'Zustand // Flux d\'État',
       titleEn: 'Reactive State Machine',
       titleFr: 'Machine à États Réactive',
-      descEn: 'Managing application state predictably with atomic stores, deterministic transitions, and zero unnecessary re-renders.',
-      descFr: 'Gestion prédictible de l\'état applicatif avec stores atomiques, transitions déterministes et zéro re-rendu superflu.',
+      descEn: 'Predictable atomic state stores with zero re-render lag.',
+      descFr: 'Stores atomiques prédictibles sans re-rendus superflus.',
       tools: ['Zustand', 'Context API', 'State Machine'],
       codeSnippet: (
         <div className="space-y-0.5">
@@ -181,8 +179,8 @@ export const TechBentoGrid: React.FC = () => {
       tagFr: 'C99 // ARM Cortex',
       titleEn: 'Embedded Hardware & C',
       titleFr: 'Systèmes Embarqués & C',
-      descEn: 'Low-level microcontroller firmware, peripheral registers, direct memory access (DMA), and UART/SPI communication.',
-      descFr: 'Développement firmware bas niveau, registres périphériques, accès direct à la mémoire (DMA) et protocoles UART/SPI.',
+      descEn: 'Low-level firmware, DMA registers, and SPI/UART protocols.',
+      descFr: 'Firmware bas niveau, registres DMA et protocoles SPI/UART.',
       tools: ['C99', 'ARM Cortex', 'DMA', 'SPI / UART'],
       codeSnippet: (
         <div className="space-y-1 font-mono text-[11px] whitespace-nowrap leading-relaxed overflow-hidden">
@@ -212,8 +210,8 @@ export const TechBentoGrid: React.FC = () => {
       tagFr: 'WS // Flux Binaire',
       titleEn: 'Real-Time WebSockets',
       titleFr: 'WebSockets Temps Réel',
-      descEn: 'Full-duplex TCP connections, binary streaming protocols, and low-latency live telemetry synchronization.',
-      descFr: 'Connexions TCP bidirectionnelles, protocoles de streaming binaire et synchronisation de télémétrie temps réel.',
+      descEn: 'Full-duplex live telemetry and low-latency binary streams.',
+      descFr: 'Télémétrie temps réel et flux binaires à faible latence.',
       tools: ['WebSockets', 'ArrayBuffer', 'TCP Streaming'],
       codeSnippet: (
         <div className="space-y-0.5">
@@ -233,8 +231,8 @@ export const TechBentoGrid: React.FC = () => {
       tagFr: 'D3.js // SVG & Canvas',
       titleEn: 'Data Visualization',
       titleFr: 'Visualisation de Données',
-      descEn: 'Transforming complex datasets into high-density interactive charts, responsive graphs, and analytical views.',
-      descFr: 'Transformation de jeux de données complexes en graphiques interactifs haute densité et tableaux de bord analytiques.',
+      descEn: 'Interactive, high-density charts and real-time dashboards.',
+      descFr: 'Graphiques interactifs haute densité et dashboards temps réel.',
       tools: ['D3.js', 'Recharts', 'SVG / Canvas'],
       codeSnippet: (
         <div className="space-y-0.5">
@@ -251,8 +249,8 @@ export const TechBentoGrid: React.FC = () => {
       tagFr: 'REST // OpenAPI',
       titleEn: 'API Architecture & REST',
       titleFr: 'Architecture API & REST',
-      descEn: 'End-to-end typed contract design, resilient HTTP/2 fetching pipelines, caching policies, and clean service adapters.',
-      descFr: 'Modélisation de contrats typés de bout en bout, requêtes HTTP/2 résilientes et adaptateurs de services modulaires.',
+      descEn: 'Typed API contracts, resilient HTTP pipelines, and caching.',
+      descFr: 'Contrats d\'API typés, requêtes résilientes et mise en cache.',
       tools: ['REST APIs', 'OpenAPI', 'Fetch API'],
       codeSnippet: (
         <div className="space-y-0.5">
@@ -270,8 +268,8 @@ export const TechBentoGrid: React.FC = () => {
       tagFr: 'Vite // Moteur Rollup',
       titleEn: 'Build & Performance',
       titleFr: 'Compilation & Performance',
-      descEn: 'Modern build pipelines, ES module bundling, tree-shaking, code splitting, and sub-second asset delivery.',
-      descFr: 'Pipelines de compilation modernes, découpage de code, tree-shaking et distribution ultra-rapide des assets web.',
+      descEn: 'Fast Vite bundling, tree-shaking, and optimized asset delivery.',
+      descFr: 'Bundling Vite rapide, tree-shaking et distribution optimisée.',
       tools: ['Vite', 'Rollup', 'Code Splitting'],
       codeSnippet: (
         <div className="space-y-0.5">
@@ -289,8 +287,8 @@ export const TechBentoGrid: React.FC = () => {
       tagFr: 'Agile // Gestion de Projet',
       titleEn: 'Project Integration & Agile',
       titleFr: 'Gestion de Projet & Agile',
-      descEn: 'Driving digital projects from requirements scoping to release, sprint planning, client communications, and teamwork.',
-      descFr: 'Pilotage de projets numériques du cadrage au déploiement, planification agile, suivi client et travail en équipe.',
+      descEn: 'Sprint leadership, technical roadmapping, and delivery.',
+      descFr: 'Pilotage de sprints, roadmaps techniques et livraison.',
       tools: ['Agile / Scrum', 'Git Flow', 'Roadmapping'],
       codeSnippet: (
         <div className="space-y-0.5">
