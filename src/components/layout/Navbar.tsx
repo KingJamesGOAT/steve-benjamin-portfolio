@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Search } from 'lucide-react';
@@ -11,6 +11,17 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
   const { t, i18n } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const toggleLanguage = () => {
     const nextLang = i18n.language.startsWith('fr') ? 'en' : 'fr';
@@ -38,8 +49,20 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
   const isFrench = Boolean(i18n.language?.toLowerCase().startsWith('fr'));
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-slate-200/80 bg-white/95 backdrop-blur-md">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+    <header
+      className={`sticky z-40 w-full transition-all duration-300 ease-in-out ${
+        isScrolled
+          ? 'top-2 sm:top-3 px-4 sm:px-6 pointer-events-none'
+          : 'top-0 px-0 bg-white border-b border-slate-200/80 pointer-events-auto'
+      }`}
+    >
+      <div
+        className={`max-w-6xl mx-auto flex items-center justify-between transition-all duration-300 ease-in-out ${
+          isScrolled
+            ? 'pointer-events-auto h-13 sm:h-14 px-4 sm:px-6 border border-slate-200/80 bg-white/80 backdrop-blur-md shadow-xs'
+            : 'h-16 px-4 sm:px-6 bg-transparent'
+        }`}
+      >
         {/* Brand Logo */}
         <Link
           to="/#home"
@@ -50,7 +73,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
           <img
             src={`${import.meta.env.BASE_URL}Logo.png`}
             alt="Steve Benjamin"
-            className="h-9 sm:h-10 w-auto max-h-10 object-contain"
+            className={`w-auto object-contain transition-all duration-300 ${
+              isScrolled ? 'h-8 sm:h-8.5 max-h-8.5' : 'h-9 sm:h-10 max-h-10'
+            }`}
             onError={(e) => {
               const target = e.currentTarget;
               if (target.src.endsWith('/Logo.png')) return;
@@ -67,7 +92,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
                 key={link.targetId}
                 type="button"
                 onClick={() => handleNavClick(link.targetId)}
-                className="px-3 py-1.5 text-xs sm:text-sm font-medium rounded-none text-fintech-secondary hover:text-fintech-primary hover:bg-slate-50 transition-colors"
+                className="px-2.5 sm:px-3 py-1.5 text-xs sm:text-sm font-medium rounded-none text-fintech-secondary hover:text-fintech-primary hover:bg-slate-50 transition-colors cursor-pointer"
               >
                 {link.label}
               </button>
