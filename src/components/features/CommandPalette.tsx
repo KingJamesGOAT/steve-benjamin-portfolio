@@ -187,11 +187,11 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
         id: 'action-linkedin',
         type: 'action',
         title: isFrench ? 'Ouvrir LinkedIn' : 'Open LinkedIn Profile',
-        subtitle: 'linkedin.com/in/steve-benjamin',
+        subtitle: 'linkedin.com/in/sb-steve-benjamin',
         categoryLabel: isFrench ? 'Action' : 'Action',
         keywords: ['linkedin', 'reseau', 'profil', 'profile', 'social'],
         action: () => {
-          window.open('https://www.linkedin.com/in/steve-benjamin/', '_blank');
+          window.open('https://www.linkedin.com/in/sb-steve-benjamin/', '_blank');
           onClose();
         },
       },

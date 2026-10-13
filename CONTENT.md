@@ -16,7 +16,7 @@
     * GLGB: Youth Group Leader, event management, and technical management.
     * FICF: Volunteer in an educational foundation, including work at medical camps in India and English to French translations.
   - Links:
-    * LinkedIn Profile: https://www.linkedin.com/in/steve-benjamin/
+    * LinkedIn Profile: https://www.linkedin.com/in/sb-steve-benjamin/
 
 3. PROJECTS TO SHOWCASE
   - Crypto Trade Hub Built with ReactViteTailwind. Highlight live trading bot integration, PnL simulation.

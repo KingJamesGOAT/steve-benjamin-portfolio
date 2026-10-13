@@ -75,7 +75,7 @@ export const About: React.FC<AboutProps> = ({ id = 'about' }) => {
             {/* Clean Direct Links Row */}
             <div className="flex flex-wrap items-center gap-3 pt-1 font-mono text-xs">
               <a
-                href="https://www.linkedin.com/in/steve-benjamin/"
+                href="https://www.linkedin.com/in/sb-steve-benjamin/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center space-x-1.5 text-slate-700 hover:text-electric transition-colors"
