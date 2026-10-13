@@ -138,10 +138,10 @@
     "marriage": {
       "tag": "Application Web Privée",
       "title": "Plateforme Événementielle Privée",
-      "description": "Plateforme de gestion d'événements pour l'enregistrement des invités, les préférences de repas et le routage confidentiel.",
-      "feature1": "Moteur RSVP Dynamique",
-      "feature2": "Routage Privé",
-      "feature3": "Typographie Minimaliste"
+      "description": "Plateforme de gestion d'événement intégrant un moteur de RSVP dynamique, une synchronisation bidirectionnelle par webhook vers tableur Excel, la persistance de session navigateur et la gestion de formulaires.",
+      "feature1": "Moteur RSVP & Quotas en Direct",
+      "feature2": "Synchronisation Bidirectionnelle Excel",
+      "feature3": "Session Navigateur & Magic Link"
     },
     "showcase": {
       "autonomousKelly": "Dimensionnement Kelly Autonome",

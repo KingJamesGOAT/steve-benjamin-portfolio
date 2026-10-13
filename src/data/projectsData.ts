@@ -80,26 +80,62 @@ export const DictionaryHover = ({ term, definition }) => {
   );
 };`;
 
-export const marriageSnippet = `import { useState } from 'react';
+export const marriageSnippet = `import { useState, useEffect } from 'react';
+import { EmailService } from '../services/EmailService';
 
-export function RSVPForm({ invitationId }: { invitationId: string }) {
-  const [status, setStatus] = useState<'attending' | 'declined' | 'pending'>('pending');
-  const [dietary, setDietary] = useState<string>('');
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzBk.../exec';
 
-  const submitRSVP = async () => {
-    await fetch('/api/guest/rsvp', {
+export function RSVPWorkflow() {
+  const [formData, setFormData] = useState({
+    attending: 'yes',
+    firstName: '',
+    lastName: '',
+    email: '',
+    guests: '1',
+    children: '0',
+    dietaryType: 'none',
+    dinnerAttendance: '',
+    aperoContribution: 'no',
+    aperoItem: '',
+  });
+  const [isDinnerGuest, setIsDinnerGuest] = useState(false);
+
+  // Magic Link Access Control (?invite=dinner)
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('invite') === 'dinner') setIsDinnerGuest(true);
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // 1. Live Webhook Dispatch to Google Sheets / Excel DB
+    await fetch(SCRIPT_URL, {
       method: 'POST',
+      mode: 'no-cors',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ invitationId, status, dietary }),
+      body: JSON.stringify({ type: 'rsvp', ...formData }),
+    });
+
+    // 2. Client-Side Persistent Session Storage
+    const sessionData = { rsvp: { ...formData } };
+    localStorage.setItem('wedding_user_data', JSON.stringify(sessionData));
+    window.dispatchEvent(new Event('wedding-data-updated'));
+
+    // 3. Automated Bilingual Confirmation Dispatch
+    await EmailService.sendRSVPConfirmation({
+      to_name: \`\${formData.firstName} \${formData.lastName}\`,
+      to_email: formData.email,
+      attending_status: formData.attending === 'yes' ? 'Présent(e)' : 'Absent(e)',
+      guests_count: formData.guests,
+      children_count: parseInt(formData.children),
+      dinner_status: formData.dinnerAttendance || 'N/A',
+      dietary_info: formData.dietaryType,
     });
   };
 
-  return (
-    <form onSubmit={(e) => { e.preventDefault(); submitRSVP(); }} className="space-y-4">
-      {/* Confidential RSVP State Form */}
-    </form>
-  );
-}`;
+  return <form onSubmit={handleSubmit}>{/* Dynamic Multi-Step RSVP UI */}</form>;
+};`;
 
 export const PROJECTS_DATA: ProjectData[] = [
   {
@@ -212,32 +248,34 @@ export const PROJECTS_DATA: ProjectData[] = [
     titleKey: 'projects.marriage.title',
     tagKey: 'projects.marriage.tag',
     descriptionKey: 'projects.marriage.description',
-    techStack: ['React / Vite', 'RSVP Engine', 'Private Access', 'Editorial UI'],
-    filename: 'src/components/RSVPForm.tsx',
+    techStack: ['React 18', 'TypeScript', 'Google Sheets / Excel Sync', 'LocalStorage Session', 'Magic Link Access', 'EmailJS'],
+    filename: 'src/components/pages/RSVP.tsx',
     code: marriageSnippet,
     features: [
-      'Private authentication and confidentiality protocols shielding guest URLs',
-      'Stateful multi-step guest RSVP tracking and dietary requirement handling',
-      'Editorial Swiss minimalist typography and responsive mobile experience',
-      'Deterministic database state dispatching with immediate confirmation feedback',
+      'Dynamic multi-criteria RSVP engine with headcount calculation (adults/children) and dietary management',
+      'Two-way real-time webhook synchronization with Google Sheets / Excel acting as a serverless database',
+      'Magic Link access protocol (?invite=dinner) shielding conditional dinner RSVP without credential friction',
+      'Persistent client session (LocalStorage) coupled with a floating guest dashboard and backend validation',
+      'Automated bilingual confirmation workflows via EmailJS and Tally form intake support',
     ],
     featuresFr: [
-      'Protocoles privés d\'authentification protégeant la confidentialité des invités',
-      'Gestion d\'état multi-étapes des RSVP et préférences culinaires',
-      'Typographie éditoriale suisse épurée et expérience mobile réactive',
-      'Dispatch déterministe d\'état en base de données avec confirmation immédiate',
+      'Moteur de RSVP multi-critères dynamique avec calcul de jauge (adultes/enfants) et gestion des régimes',
+      'Synchronisation bidirectionnelle en temps réel par webhook vers Google Sheets / Excel en base de données serverless',
+      'Protocole Magic Link (?invite=dinner) déverrouillant conditionnellement le souper sans friction de mot de passe',
+      'Session client persistante (LocalStorage) couplée à un tiroir invité flottant et vérification backend',
+      'Pipelines d\'accusés de réception bilingues automatisés via EmailJS et intégration des formulaires Tally',
     ],
     specs: {
       mandate: 'Private Event Platform (2026)',
       role: 'Full-Stack Developer & UI Designer',
-      architecture: 'React, Vite, Private Routing Engine, Tailwind CSS',
-      evaluation: '100% guest RSVP accuracy and zero public indexing',
+      architecture: 'React 18, Google Apps Script Webhook (Excel DB), LocalStorage, EmailJS',
+      evaluation: '100% RSVP intake accuracy, 0€/month serverless infrastructure, sub-50ms client state',
     },
     specsFr: {
       mandate: 'Plateforme Événementielle Privée (2026)',
       role: 'Développeur Full-Stack & Designer UI',
-      architecture: 'React, Vite, Moteur de Routage Privé, Tailwind CSS',
-      evaluation: '100% de précision des RSVP et zéro indexation publique',
+      architecture: 'React 18, Webhook Google Apps Script (Base Excel), LocalStorage, EmailJS',
+      evaluation: '100% de précision des RSVP, 0€/mois d\'infrastructure serverless, état client < 50ms',
     },
   },
 ];

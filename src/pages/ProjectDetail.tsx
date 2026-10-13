@@ -8,6 +8,7 @@ import PaperTradingSim from '../components/features/crypto/PaperTradingSim';
 import MarketIntelligenceSim from '../components/features/crypto/MarketIntelligenceSim';
 import DonnonsDetailShowcase from '../components/features/donnons/DonnonsDetailShowcase';
 import LexiconDetailShowcase from '../components/features/lexicon/LexiconDetailShowcase';
+import MarriageDetailShowcase from '../components/features/marriage/MarriageDetailShowcase';
 import GlossaryTerm from '../components/features/GlossaryTerm';
 import { getGlossaryDef } from '../data/cryptoGlossary';
 
@@ -23,6 +24,7 @@ export const ProjectDetail: React.FC = () => {
   const isCryptoHub = projectId === 'crypto-trade-hub';
   const isDonnons = projectId === 'donnons-ch';
   const isLexicon = projectId === 'catholic-route';
+  const isMarriage = projectId === 'marriage-platform';
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -540,6 +542,11 @@ export const ProjectDetail: React.FC = () => {
       {/* Lexicon & Chronology Engine Deep Dive */}
       {isLexicon && (
         <LexiconDetailShowcase />
+      )}
+
+      {/* Private Event Platform Showcase Deep Dive */}
+      {isMarriage && (
+        <MarriageDetailShowcase />
       )}
 
       {/* Specifications & Key Highlights Grid (Concise, shorter, zero duplicate text) */}

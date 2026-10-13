@@ -138,10 +138,10 @@
     "marriage": {
       "tag": "Private Web Application",
       "title": "Private Event & RSVP Platform",
-      "description": "Event management platform designed for guest registration, meal preferences, and confidential routing.",
-      "feature1": "Dynamic RSVP Engine",
-      "feature2": "Private Routing",
-      "feature3": "Minimalist Typography"
+      "description": "Private event web platform engineered with a dynamic RSVP intake engine, two-way webhook synchronization with Excel spreadsheets, persistent browser session state, and form management.",
+      "feature1": "Live RSVP Engine & Quotas",
+      "feature2": "Two-Way Excel Webhook Sync",
+      "feature3": "Browser Session & Magic Link"
     },
     "showcase": {
       "autonomousKelly": "Autonomous Kelly Sizing",
