@@ -101,12 +101,8 @@ export const APP_ITEMS: AppItem[] = [
     id: 'tally',
     name: 'Tally',
     svg: (cls) => (
-      <svg className={cls} viewBox="0 0 24 24" fill="currentColor">
-        <rect x="2.5" y="4" width="2.2" height="16" rx="1.1" />
-        <rect x="7.5" y="4" width="2.2" height="16" rx="1.1" />
-        <rect x="12.5" y="4" width="2.2" height="16" rx="1.1" />
-        <rect x="17.5" y="4" width="2.2" height="16" rx="1.1" />
-        <path d="M1.2 18.5a1.1 1.1 0 0 1 .2-1.55l19.5-12a1.1 1.1 0 1 1 1.16 1.86l-19.5 12a1.1 1.1 0 0 1-1.36-.31z" />
+      <svg className={cls} viewBox="0 0 128 124" fill="currentColor">
+        <path d="M79.9335 17.1445C79.9335 24.2262 77.3191 33.969 73.4647 47.0615L70.7069 57.1173L79.4337 51.4172C96.022 39.7688 106.04 35.397 112.67 35.397C120.212 35.397 128 40.7864 128 51.5052C128 65.1402 113.443 69.0136 85.3379 69.4912L74.8298 69.9849L83.1169 76.5821C102.791 91.747 109.612 99.1764 109.612 108.59C109.612 115.999 102.727 123.715 94.1897 123.715C81.3632 123.715 75.5655 110.387 67.7502 87.7575L63.7662 77.922L60.0183 87.7575C51.2591 113.46 44.5174 123.479 33.343 123.479C24.334 123.479 17.9208 115.289 17.9208 108.354C17.9208 97.9942 27.3369 89.3825 44.6517 76.5821L52.9388 69.9849L42.6666 69.4912C12.8171 69.2501 0 64.957 0 51.2688C0 40.55 8.02804 35.1605 15.4268 35.1605C24.3617 35.1605 34.1064 41.1875 48.5708 51.4172L57.2976 57.1173L54.5398 47.0615C50.3616 33.2597 48.3996 23.1344 48.3996 17.1445C48.3996 7.76783 53.6838 0 64.0023 0C74.5567 1.03096e-07 79.9335 7.76783 79.9335 17.1445Z" />
       </svg>
     ),
   },
@@ -133,7 +129,16 @@ export const APP_ITEMS: AppItem[] = [
     name: 'FL Studio',
     svg: (cls) => (
       <svg className={cls} viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12.4 1.8c-.8 0-1.5.5-1.9 1.2-.5.8-.4 1.8-.1 2.7-2.3.8-4.2 2.6-4.9 5.1-.8 2.8-.2 5.8 1.6 8 2 2.4 5.3 3.6 8.4 2.9 3.2-.7 5.7-3.2 6.3-6.4.7-3.4-.7-6.9-3.5-8.9-.3-.2-.5-.5-.6-.9-.3-1.1-.1-2.4.6-3.3-1.8-.3-4 .3-5.9-.5zm.5 5.5c2.5.5 4.3 2.6 4.3 5.2 0 3-2.4 5.4-5.4 5.4-2.7 0-4.9-1.9-5.3-4.5-.4-2.7 1.2-5.3 3.8-6 1-.3 1.9-.3 2.6-.1z" />
+        {/* Arching Stem */}
+        <path d="M16.4 2.2c-.6.4-1.2 1-1.7 1.8-.5.8-1 1.7-1.3 2.3.4.2.8.4 1.2.7.3-.6.7-1.3 1.1-1.9.4-.6.9-1 1.3-1.3l-.6-1.6z" />
+        {/* Left Leaf */}
+        <path d="M11.8 5.8c-.5-.7-1.5-1.5-2.5-1.5-2.1.1-3.7 1.9-3.5 3.3.2.8 1.8.2 3.6-.3.8-.2 1.6-.4 2.4-.7v-.8z" />
+        {/* Right Leaf */}
+        <path d="M15.8 8.4c.7 1.1 1.5 2.5 2.2 2.5 1.2 0 1.1-3.1-.2-4.6-.5-.6-1.7-.9-2.7-.6.2.9.5 1.8.7 2.7z" />
+        {/* Center Leaf */}
+        <path d="M13.1 6.1c2.3.8 2 2.1 1.6 3-.5 1.2-2 2.5-3.2 2.1-1.2-.4-2-2.5-1.2-4.6.5-1.2 1.6-.9 2.8-.5z" />
+        {/* Fruit Pepper Body */}
+        <path d="M7.6 8.3c-.6 1-1.1 2.6-1.3 3.6-.7 3.3.1 8.6 1.9 9.2 1.8.6 4.9-2.8 6.4-5.4.7-1.1 1.3-2.9 1.4-4.3-1.6-.3-4.3-.8-6.1-1.9-.8-.5-1.6-.9-2.3-1.2z" />
       </svg>
     ),
   },
@@ -193,7 +198,7 @@ export const AppCarousel: React.FC = () => {
         onMouseLeave={() => {
           isHoveredRef.current = false;
         }}
-        className="relative w-full overflow-hidden py-2 border border-slate-200/60 bg-slate-50/40 select-none cursor-default"
+        className="relative w-full overflow-hidden py-3 select-none cursor-default"
       >
         {/* Left & Right Subtle Gradient Fades */}
         <div className="absolute left-0 top-0 bottom-0 w-8 sm:w-16 bg-gradient-to-r from-white to-transparent pointer-events-none z-10" />
@@ -201,17 +206,17 @@ export const AppCarousel: React.FC = () => {
 
         <div
           ref={trackRef}
-          className="flex items-center space-x-3 sm:space-x-4 will-change-transform"
+          className="flex items-center space-x-6 sm:space-x-8 md:space-x-10 will-change-transform"
           style={{ width: 'max-content' }}
         >
           {marqueeItems.map((app, index) => (
             <div
               key={`${app.id}-${index}`}
-              className="w-28 sm:w-32 md:w-34 h-22 sm:h-24 flex flex-col items-center justify-center gap-1.5 sm:gap-2 px-2 py-2 border border-slate-200/90 bg-white hover:border-electric hover:shadow-sm transition-all select-none group flex-shrink-0"
+              className="w-24 sm:w-28 md:w-32 flex flex-col items-center justify-center gap-1.5 sm:gap-2 select-none group flex-shrink-0"
               title={app.name}
             >
               {/* Enlarged Blue SVG Logo Icon */}
-              <div className="w-8 h-8 sm:w-9 sm:h-9 text-[#0052FF] flex items-center justify-center group-hover:scale-110 transition-transform">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 text-[#0052FF] flex items-center justify-center group-hover:scale-110 transition-transform">
                 {app.svg('w-full h-full object-contain')}
               </div>
               {/* App Name in Matching Electric Blue */}
