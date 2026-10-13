@@ -597,6 +597,62 @@ export const ProjectDetail: React.FC = () => {
           </ul>
         </div>
       </section>
+
+      {/* Project Pagination Navigation Bar */}
+      {(() => {
+        const currentIndex = PROJECTS_DATA.findIndex((p) => p.slug === projectId);
+        const prevProject =
+          currentIndex > 0
+            ? PROJECTS_DATA[currentIndex - 1]
+            : PROJECTS_DATA[PROJECTS_DATA.length - 1];
+        const nextProject =
+          currentIndex >= 0 && currentIndex < PROJECTS_DATA.length - 1
+            ? PROJECTS_DATA[currentIndex + 1]
+            : PROJECTS_DATA[0];
+
+        return (
+          <nav
+            aria-label="Project Pagination"
+            className="pt-8 border-t border-slate-200 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 font-mono text-xs"
+          >
+            {prevProject && (
+              <Link
+                to={`/projects/${prevProject.slug}`}
+                className="flex items-center space-x-2 text-slate-600 hover:text-electric transition-colors p-1 self-start sm:self-auto"
+              >
+                <span>←</span>
+                <span className="text-slate-400">{isFrench ? 'Précédent :' : 'Previous:'}</span>
+                <span className="font-semibold text-fintech-primary">{t(prevProject.titleKey)}</span>
+              </Link>
+            )}
+
+            <button
+              type="button"
+              onClick={() => {
+                navigate('/#projects');
+                setTimeout(() => {
+                  const el = document.getElementById('projects');
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }, 50);
+              }}
+              className="px-4 py-2 border border-slate-200 bg-white hover:border-slate-300 hover:text-electric text-slate-600 text-xs font-mono transition-colors text-center cursor-pointer shadow-2xs self-center"
+            >
+              {isFrench ? 'Tous les Projets' : 'All Projects'}
+            </button>
+
+            {nextProject && (
+              <Link
+                to={`/projects/${nextProject.slug}`}
+                className="flex items-center justify-end space-x-2 text-slate-600 hover:text-electric transition-colors p-1 self-end sm:self-auto text-right"
+              >
+                <span className="text-slate-400">{isFrench ? 'Suivant :' : 'Next:'}</span>
+                <span className="font-semibold text-fintech-primary">{t(nextProject.titleKey)}</span>
+                <span>→</span>
+              </Link>
+            )}
+          </nav>
+        );
+      })()}
     </div>
   );
 };

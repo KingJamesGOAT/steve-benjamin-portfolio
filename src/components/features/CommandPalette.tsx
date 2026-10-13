@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, X, BookOpen, ArrowLeft } from 'lucide-react';
+import { Search, X, BookOpen, ArrowLeft, ArrowUpRight, Compass, FileText } from 'lucide-react';
 import { getGlossaryEntries, type LocalizedGlossaryEntry } from '../../data/cryptoGlossary';
 
 interface CommandPaletteProps {
@@ -9,48 +10,259 @@ interface CommandPaletteProps {
   onClose: () => void;
 }
 
+type PaletteItemType = 'nav' | 'project' | 'action' | 'glossary';
+
+interface PaletteItem {
+  id: string;
+  type: PaletteItemType;
+  title: string;
+  subtitle: string;
+  categoryLabel: string;
+  keywords: string[];
+  action: () => void;
+  glossaryEntry?: LocalizedGlossaryEntry;
+}
+
 export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose }) => {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
   const [query, setQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [selectedGlossary, setSelectedGlossary] = useState<LocalizedGlossaryEntry | null>(null);
+  const [actionFeedback, setActionFeedback] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const currentLang = i18n.language?.startsWith('fr') ? 'fr' : 'en';
   const isFrench = currentLang === 'fr';
   const glossaryEntries = useMemo(() => getGlossaryEntries(currentLang), [currentLang]);
 
-  // Filter glossary items: 0 items when query is empty; top 3 closest matches when typing
+  // Master catalog of all available actions, navigations, projects, and glossary terms
+  const allItems = useMemo<PaletteItem[]>(() => {
+    const items: PaletteItem[] = [
+      // 1. Navigation items
+      {
+        id: 'nav-projects',
+        type: 'nav',
+        title: isFrench ? 'Explorer les Projets' : 'Explore Projects',
+        subtitle: isFrench ? 'Accéder à la section projets & études de cas' : 'Jump to projects & case studies section',
+        categoryLabel: isFrench ? 'Navigation' : 'Navigation',
+        keywords: ['projets', 'projects', 'cases', 'portfolio', 'travaux', 'work'],
+        action: () => {
+          navigate('/#projects');
+          setTimeout(() => {
+            document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+          }, 60);
+          onClose();
+        },
+      },
+      {
+        id: 'nav-skills',
+        type: 'nav',
+        title: isFrench ? 'Compétences & Stack' : 'Skills & Tech Stack',
+        subtitle: isFrench ? 'Bento grid technique & écosystème logiciel' : 'Technical bento grid & software ecosystem',
+        categoryLabel: isFrench ? 'Navigation' : 'Navigation',
+        keywords: ['competences', 'skills', 'stack', 'technique', 'react', 'typescript', 'figma'],
+        action: () => {
+          navigate('/#skills');
+          setTimeout(() => {
+            document.getElementById('skills')?.scrollIntoView({ behavior: 'smooth' });
+          }, 60);
+          onClose();
+        },
+      },
+      {
+        id: 'nav-about',
+        type: 'nav',
+        title: isFrench ? 'À Propos & Parcours' : 'About & Experience',
+        subtitle: isFrench ? 'Formation HEIG-VD, CFC électronique & leadership' : 'HEIG-VD education, electronics & leadership',
+        categoryLabel: isFrench ? 'Navigation' : 'Navigation',
+        keywords: ['about', 'propos', 'parcours', 'bio', 'formation', 'education', 'experience'],
+        action: () => {
+          navigate('/#about');
+          setTimeout(() => {
+            document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+          }, 60);
+          onClose();
+        },
+      },
+      {
+        id: 'nav-bachelor',
+        type: 'nav',
+        title: isFrench ? 'Mandat de Bachelor 2027' : 'Bachelor Mandate 2027',
+        subtitle: isFrench ? '14 semaines, CHF 0 de salaire, cadre NDA / HEIG-VD' : '14-week capstone, CHF 0 salary, NDA / HEIG-VD',
+        categoryLabel: isFrench ? 'Mandat' : 'Mandate',
+        keywords: ['bachelor', 'mandat', 'pitch', 'heig', 'heig-vd', 'stage', 'thesis', '2027'],
+        action: () => {
+          navigate('/bachelor-pitch');
+          onClose();
+        },
+      },
+
+      // 2. Case studies
+      {
+        id: 'project-crypto',
+        type: 'project',
+        title: 'Crypto Trade Hub',
+        subtitle: isFrench ? 'Terminal quantitatif temps réel & Critère de Kelly' : 'Real-time quantitative terminal & Kelly risk engine',
+        categoryLabel: isFrench ? 'Étude de cas' : 'Case Study',
+        keywords: ['crypto', 'trading', 'terminal', 'binance', 'websocket', 'kelly', 'llama'],
+        action: () => {
+          navigate('/projects/crypto-trade-hub');
+          onClose();
+        },
+      },
+      {
+        id: 'project-donnons',
+        type: 'project',
+        title: 'Donnons.ch (HUG)',
+        subtitle: isFrench ? 'Plateforme don du sang, qualification & gamification' : 'HUG blood donation qualification & gamification platform',
+        categoryLabel: isFrench ? 'Étude de cas' : 'Case Study',
+        keywords: ['donnons', 'hug', 'sang', 'blood', 'don', 'vue', 'laravel', 'geneve'],
+        action: () => {
+          navigate('/projects/donnons-ch');
+          onClose();
+        },
+      },
+      {
+        id: 'project-lexicon',
+        type: 'project',
+        title: isFrench ? 'Moteur Lexical & Frise' : 'Lexicon Engine & Timeline',
+        subtitle: isFrench ? 'Recherche indexée < 10ms & chronologie réactive' : 'Sub-10ms indexed search & reactive chronology',
+        categoryLabel: isFrench ? 'Étude de cas' : 'Case Study',
+        keywords: ['lexique', 'lexicon', 'catholic', 'moteur', 'recherche', 'search', 'ontologie', 'frise'],
+        action: () => {
+          navigate('/projects/catholic-route');
+          onClose();
+        },
+      },
+      {
+        id: 'project-marriage',
+        type: 'project',
+        title: isFrench ? 'Plateforme Événementielle' : 'Event Platform',
+        subtitle: isFrench ? 'Flux RSVP mobile-first & synchronisation tableur' : 'Mobile-first RSVP flow & spreadsheet webhook sync',
+        categoryLabel: isFrench ? 'Étude de cas' : 'Case Study',
+        keywords: ['marriage', 'mariage', 'wedding', 'event', 'evenement', 'rsvp', 'excel'],
+        action: () => {
+          navigate('/projects/marriage-platform');
+          onClose();
+        },
+      },
+
+      // 3. Quick Actions
+      {
+        id: 'action-cv',
+        type: 'action',
+        title: isFrench ? 'Télécharger le CV (PDF)' : 'Download Resume (PDF)',
+        subtitle: isFrench ? 'Curriculum Vitae Steve Benjamin' : 'Steve Benjamin Curriculum Vitae',
+        categoryLabel: isFrench ? 'Action' : 'Action',
+        keywords: ['cv', 'resume', 'pdf', 'curriculum', 'telecharger', 'download'],
+        action: () => {
+          const link = document.createElement('a');
+          link.href = `${import.meta.env.BASE_URL}CV_Steve_Benjamin.pdf`;
+          link.download = 'CV_Steve_Benjamin.pdf';
+          link.target = '_blank';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          onClose();
+        },
+      },
+      {
+        id: 'action-email',
+        type: 'action',
+        title: isFrench ? 'Copier l\'adresse Email' : 'Copy Email Address',
+        subtitle: 'sbstevebenjamin@gmail.com',
+        categoryLabel: isFrench ? 'Action' : 'Action',
+        keywords: ['email', 'mail', 'contact', 'copier', 'copy', 'adresse'],
+        action: () => {
+          navigator.clipboard.writeText('sbstevebenjamin@gmail.com');
+          setActionFeedback(isFrench ? '✓ Email copié dans le presse-papier !' : '✓ Email copied to clipboard!');
+          setTimeout(() => {
+            setActionFeedback(null);
+            onClose();
+          }, 700);
+        },
+      },
+      {
+        id: 'action-linkedin',
+        type: 'action',
+        title: isFrench ? 'Ouvrir LinkedIn' : 'Open LinkedIn Profile',
+        subtitle: 'linkedin.com/in/steve-benjamin',
+        categoryLabel: isFrench ? 'Action' : 'Action',
+        keywords: ['linkedin', 'reseau', 'profil', 'profile', 'social'],
+        action: () => {
+          window.open('https://www.linkedin.com/in/steve-benjamin/', '_blank');
+          onClose();
+        },
+      },
+      {
+        id: 'action-lang',
+        type: 'action',
+        title: isFrench ? 'Switch to English' : 'Passer en Français',
+        subtitle: isFrench ? 'Changer la langue du portfolio en anglais' : 'Toggle portfolio language to French',
+        categoryLabel: isFrench ? 'Action' : 'Action',
+        keywords: ['langue', 'language', 'anglais', 'english', 'francais', 'french', 'fr', 'en'],
+        action: () => {
+          const nextLang = isFrench ? 'en' : 'fr';
+          i18n.changeLanguage(nextLang);
+          onClose();
+        },
+      },
+    ];
+
+    // 4. Glossary items
+    glossaryEntries.forEach((entry) => {
+      items.push({
+        id: `glossary-${entry.id}`,
+        type: 'glossary',
+        title: entry.term,
+        subtitle: entry.shortDef,
+        categoryLabel: entry.category,
+        keywords: [entry.term.toLowerCase(), entry.category.toLowerCase(), ...entry.shortDef.toLowerCase().split(/\s+/)],
+        action: () => {
+          setSelectedGlossary(entry);
+        },
+        glossaryEntry: entry,
+      });
+    });
+
+    return items;
+  }, [isFrench, navigate, onClose, i18n, glossaryEntries]);
+
+  // Filter items: 0 items when query is empty; EXACTLY TOP 3 closest matches when typing
   const filteredItems = useMemo(() => {
     const q = query.trim().toLowerCase();
     if (!q) return [];
 
-    const matches = glossaryEntries.filter((entry) => {
-      const term = entry.term.toLowerCase();
-      const def = entry.shortDef.toLowerCase();
-      const cat = entry.category.toLowerCase();
-      return term.includes(q) || def.includes(q) || cat.includes(q);
+    const matches = allItems.filter((item) => {
+      const titleMatch = item.title.toLowerCase().includes(q);
+      const subMatch = item.subtitle.toLowerCase().includes(q);
+      const catMatch = item.categoryLabel.toLowerCase().includes(q);
+      const keywordMatch = item.keywords.some((k) => k.includes(q));
+      return titleMatch || subMatch || catMatch || keywordMatch;
     });
 
-    // Closest match ranking
+    // Ranking algorithm: prioritize exact & prefix matches on title and keywords
     matches.sort((a, b) => {
-      const aTerm = a.term.toLowerCase();
-      const bTerm = b.term.toLowerCase();
-      const aStarts = aTerm.startsWith(q);
-      const bStarts = bTerm.startsWith(q);
+      const aTitle = a.title.toLowerCase();
+      const bTitle = b.title.toLowerCase();
+
+      const aStarts = aTitle.startsWith(q);
+      const bStarts = bTitle.startsWith(q);
       if (aStarts && !bStarts) return -1;
       if (!aStarts && bStarts) return 1;
 
-      const aWordStarts = aTerm.split(/\s+/).some((w) => w.startsWith(q));
-      const bWordStarts = bTerm.split(/\s+/).some((w) => w.startsWith(q));
-      if (aWordStarts && !bWordStarts) return -1;
-      if (!aWordStarts && bWordStarts) return 1;
+      const aKeyStarts = a.keywords.some((k) => k.startsWith(q));
+      const bKeyStarts = b.keywords.some((k) => k.startsWith(q));
+      if (aKeyStarts && !bKeyStarts) return -1;
+      if (!aKeyStarts && bKeyStarts) return 1;
 
-      return aTerm.localeCompare(bTerm);
+      return aTitle.localeCompare(bTitle);
     });
 
+    // Strict constraint: at most 3 items to preserve minimalist Swiss aesthetic
     return matches.slice(0, 3);
-  }, [glossaryEntries, query]);
+  }, [allItems, query]);
 
   // Reset selected index when query changes
   useEffect(() => {
@@ -66,6 +278,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
       setQuery('');
       setSelectedIndex(0);
       setSelectedGlossary(null);
+      setActionFeedback(null);
     }
   }, [isOpen]);
 
@@ -95,7 +308,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
       } else if (e.key === 'Enter') {
         e.preventDefault();
         if (filteredItems.length > 0 && filteredItems[selectedIndex]) {
-          setSelectedGlossary(filteredItems[selectedIndex]);
+          filteredItems[selectedIndex].action();
         }
       } else if (e.key === 'Escape') {
         e.preventDefault();
@@ -106,6 +319,19 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, filteredItems, selectedIndex, selectedGlossary, onClose]);
+
+  const renderItemIcon = (type: PaletteItemType) => {
+    switch (type) {
+      case 'nav':
+        return <Compass className="w-3.5 h-3.5 text-slate-500" />;
+      case 'project':
+        return <ArrowUpRight className="w-3.5 h-3.5 text-electric" />;
+      case 'action':
+        return <FileText className="w-3.5 h-3.5 text-emerald-600" />;
+      case 'glossary':
+        return <BookOpen className="w-3.5 h-3.5 text-blue-500" />;
+    }
+  };
 
   return (
     <AnimatePresence>
@@ -129,7 +355,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
             transition={{ duration: 0.16, ease: 'easeOut' }}
             className="relative w-full max-w-xl overflow-hidden rounded-none bg-white border border-slate-200 shadow-2xl z-10"
           >
-            {/* If a glossary term is selected, show its clean 2-4 lines concise explanation */}
+            {/* If a glossary term is selected, show concise explanation */}
             {selectedGlossary ? (
               <div className="p-6 space-y-4 font-sans text-left">
                 {/* Term Header with Back Icon Button on the left */}
@@ -144,7 +370,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
                     >
                       <ArrowLeft className="w-4 h-4" />
                     </button>
-                    <span className="w-2 h-2 bg-[#0052FF] rounded-none inline-block" />
+                    <span className="w-2 h-2 bg-electric inline-block" />
                     <h3 className="font-mono text-sm sm:text-base font-bold text-fintech-primary uppercase tracking-wider">
                       {selectedGlossary.term}
                     </h3>
@@ -154,7 +380,6 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
                   </span>
                 </div>
 
-                {/* Concise Definition (2-4 lines max, fluent paragraph, zero bullets) */}
                 <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-sans pt-1">
                   {selectedGlossary.shortDef} {selectedGlossary.line1}
                 </p>
@@ -174,8 +399,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
                     }}
                     placeholder={
                       isFrench
-                        ? 'Rechercher un terme (ex. ADX, Ontologie, Serverless)...'
-                        : 'Search term (e.g. ADX, Ontology, Serverless)...'
+                        ? 'Rechercher un projet, une action ou un terme...'
+                        : 'Search a project, action, or term...'
                     }
                     className="w-full bg-transparent text-sm text-fintech-primary placeholder-slate-400 outline-none focus:ring-1 focus:ring-electric rounded-none px-2 py-1.5 transition-shadow font-mono"
                   />
@@ -190,14 +415,21 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
                   )}
                 </div>
 
-                {/* Content Area */}
+                {/* Optional Feedback Banner */}
+                {actionFeedback && (
+                  <div className="bg-emerald-50 border-b border-emerald-200 px-4 py-2 text-xs font-mono text-emerald-700 text-center">
+                    {actionFeedback}
+                  </div>
+                )}
+
+                {/* Content Area: Empty State or Max 3 Logical Results */}
                 <div className="p-2">
                   {!query.trim() ? (
-                    <div className="py-10 text-center space-y-1 text-slate-400 font-mono text-xs">
+                    <div className="py-8 text-center space-y-1 text-slate-400 font-mono text-xs">
                       <p>
                         {isFrench
-                          ? 'Tapez une lettre pour explorer les termes du glossaire...'
-                          : 'Type a letter to explore glossary terms...'}
+                          ? 'Tapez pour chercher (ex. Projets, CV, Donnons, Contact, ADX)...'
+                          : 'Type to search (e.g. Projects, CV, Donnons, Contact, ADX)...'}
                       </p>
                     </div>
                   ) : filteredItems.length === 0 ? (
@@ -206,14 +438,14 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
                     </div>
                   ) : (
                     <ul className="space-y-1">
-                      {filteredItems.map((entry, index) => {
+                      {filteredItems.map((item, index) => {
                         const isSelected = index === selectedIndex;
 
                         return (
-                          <li key={entry.id}>
+                          <li key={item.id}>
                             <button
                               type="button"
-                              onClick={() => setSelectedGlossary(entry)}
+                              onClick={item.action}
                               onMouseEnter={() => setSelectedIndex(index)}
                               className={`w-full flex items-center justify-between px-3 py-2.5 rounded-none text-xs font-medium transition-all cursor-pointer ${
                                 isSelected
@@ -221,19 +453,23 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
                                   : 'text-fintech-secondary hover:bg-slate-50 hover:text-fintech-primary'
                               }`}
                             >
-                              <div className="flex items-center space-x-3 text-left">
-                                <span className={isSelected ? 'text-electric' : 'text-blue-500'}>
-                                  <BookOpen className="w-3.5 h-3.5" />
+                              <div className="flex items-center space-x-3 text-left min-w-0 pr-2">
+                                <span className={isSelected ? 'text-electric' : 'text-slate-400'}>
+                                  {renderItemIcon(item.type)}
                                 </span>
-                                <div>
-                                  <div className="text-sm font-medium">
-                                    {entry.term}
+                                <div className="min-w-0">
+                                  <div className="text-sm font-semibold truncate text-fintech-primary">
+                                    {item.title}
                                   </div>
-                                  <div className="text-[11px] text-slate-500 font-normal line-clamp-1">
-                                    {entry.shortDef}
+                                  <div className="text-[11px] text-slate-500 font-normal truncate">
+                                    {item.subtitle}
                                   </div>
                                 </div>
                               </div>
+
+                              <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 bg-slate-100 px-2 py-0.5 border border-slate-200 shrink-0">
+                                {item.categoryLabel}
+                              </span>
                             </button>
                           </li>
                         );
