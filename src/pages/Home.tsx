@@ -65,8 +65,9 @@ export const Home: React.FC = () => {
             <div className="lg:col-span-7 space-y-8">
               {/* Hero Headline & Subtitle */}
               <div className="space-y-4">
-                <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-fintech-primary leading-tight">
-                  Steve Benjamin
+                <h1 className="text-5xl sm:text-6xl lg:text-[4.75rem] font-black tracking-tight text-fintech-primary leading-[0.95]">
+                  <span className="block">Steve</span>
+                  <span className="block">Benjamin</span>
                 </h1>
 
                 <div className="text-xl sm:text-2xl font-normal text-fintech-secondary tracking-tight min-h-[2.5rem] flex flex-wrap items-baseline gap-x-2">
