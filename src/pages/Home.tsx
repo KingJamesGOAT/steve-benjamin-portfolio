@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { ArrowRight, FileDown, ExternalLink, Search, ChevronDown } from 'lucide-react';
+import { ArrowRight, FileDown, ExternalLink, ChevronDown } from 'lucide-react';
 import TechBentoGrid from '../components/features/TechBentoGrid';
 import CryptoWidgetSim from '../components/features/CryptoWidgetSim';
 import DonnonsWidgetSim from '../components/features/DonnonsWidgetSim';
+import LexiconWidgetSim from '../components/features/LexiconWidgetSim';
 import MarriageWidgetSim from '../components/features/MarriageWidgetSim';
 import RotatingTitle from '../components/features/RotatingTitle';
 import GlossaryTerm from '../components/features/GlossaryTerm';
@@ -382,48 +383,8 @@ export const Home: React.FC = () => {
                 {t('projects.catholicRoute.description')}
               </p>
 
-              {/* Minimalist Preview Box */}
-              <div className="bg-[#05050a] border border-white/10 p-3.5 space-y-2 font-mono text-xs">
-                <div className="flex items-center justify-between bg-black/60 border border-white/10 px-2.5 py-1.5 text-slate-400 text-[11px]">
-                  <span className="flex items-center gap-1.5">
-                    <Search className="w-3 h-3 text-blue-400" />
-                    <span>{isFrench ? 'Rechercher parmi 5 000+ termes...' : 'Search 5,000+ terms...'}</span>
-                  </span>
-                </div>
-                {isFrench ? (
-                  <div className="text-[11px] text-slate-300 font-sans leading-relaxed pt-0.5">
-                    Définitions formelles comme{' '}
-                    <span className="text-blue-400 underline decoration-blue-500/60 decoration-dotted underline-offset-2">
-                      Ontologie
-                    </span>
-                    ,{' '}
-                    <span className="text-blue-400 underline decoration-blue-500/60 decoration-dotted underline-offset-2">
-                      Épistémologie
-                    </span>{' '}
-                    et{' '}
-                    <span className="text-blue-400 underline decoration-blue-500/60 decoration-dotted underline-offset-2">
-                      Causalité
-                    </span>{' '}
-                    avec frise chronologique multi-séculaire.
-                  </div>
-                ) : (
-                  <div className="text-[11px] text-slate-300 font-sans leading-relaxed pt-0.5">
-                    Formal definitions including{' '}
-                    <span className="text-blue-400 underline decoration-blue-500/60 decoration-dotted underline-offset-2">
-                      Ontology
-                    </span>
-                    ,{' '}
-                    <span className="text-blue-400 underline decoration-blue-500/60 decoration-dotted underline-offset-2">
-                      Epistemology
-                    </span>{' '}
-                    and{' '}
-                    <span className="text-blue-400 underline decoration-blue-500/60 decoration-dotted underline-offset-2">
-                      Causality
-                    </span>{' '}
-                    with multi-century timelines.
-                  </div>
-                )}
-              </div>
+              {/* Interactive Lexicon & Chronology Simulation Widget */}
+              <LexiconWidgetSim />
             </div>
 
             <div className="pt-3 border-t border-slate-100 flex items-center justify-between">

@@ -33,8 +33,8 @@ export const MarriageWidgetSim: React.FC = () => {
             onClick={() => setIsAttending(true)}
             className={`py-2 px-3 text-xs font-mono transition-all text-center border ${
               isAttending
-                ? 'bg-stone-900 border-stone-900 text-white font-semibold'
-                : 'bg-white border-stone-300 text-stone-700 hover:border-stone-400'
+                ? 'bg-[#785942] border-[#785942] text-white font-semibold shadow-xs'
+                : 'bg-white border-stone-300 text-stone-700 hover:border-[#785942]/50 hover:text-[#785942]'
             }`}
           >
             {isFrench ? 'Je serai présent(e)' : 'Joyfully Accept'}
@@ -44,8 +44,8 @@ export const MarriageWidgetSim: React.FC = () => {
             onClick={() => setIsAttending(false)}
             className={`py-2 px-3 text-xs font-mono transition-all text-center border ${
               !isAttending
-                ? 'bg-stone-900 border-stone-900 text-white font-semibold'
-                : 'bg-white border-stone-300 text-stone-700 hover:border-stone-400'
+                ? 'bg-[#785942] border-[#785942] text-white font-semibold shadow-xs'
+                : 'bg-white border-stone-300 text-stone-700 hover:border-[#785942]/50 hover:text-[#785942]'
             }`}
           >
             {isFrench ? 'Je serai absent(e)' : 'Regretfully Decline'}
@@ -60,7 +60,7 @@ export const MarriageWidgetSim: React.FC = () => {
             <label className="text-[10px] font-mono uppercase tracking-wider text-stone-500">
               {isFrench ? 'Nombre de convives' : 'Number of Guests'}
             </label>
-            <span className="text-[11px] font-mono text-stone-700 font-medium">
+            <span className="text-[11px] font-mono text-[#6B4E3A] font-medium">
               {guestCount > 1
                 ? (isFrench ? `${guestCount} personnes attendues` : `${guestCount} guests attending`)
                 : (isFrench ? '1 personne attendue' : '1 guest attending')}
@@ -74,8 +74,8 @@ export const MarriageWidgetSim: React.FC = () => {
                 onClick={() => setGuestCount(count)}
                 className={`py-1.5 text-xs font-mono border transition-all text-center ${
                   guestCount === count
-                    ? 'bg-stone-900 text-white border-stone-900 font-bold'
-                    : 'bg-white text-stone-700 border-stone-300 hover:border-stone-400'
+                    ? 'bg-[#785942] text-white border-[#785942] font-bold shadow-xs'
+                    : 'bg-white text-stone-700 border-stone-300 hover:border-[#785942]/50 hover:text-[#785942]'
                 }`}
               >
                 {count === 4 ? '4+' : count}

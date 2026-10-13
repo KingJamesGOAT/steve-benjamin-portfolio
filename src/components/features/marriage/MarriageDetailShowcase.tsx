@@ -221,8 +221,8 @@ export const MarriageDetailShowcase: React.FC = () => {
                     onClick={() => setIsAttending(true)}
                     className={`py-2 px-3 text-xs font-mono font-medium border transition-all ${
                       isAttending
-                        ? 'bg-stone-900 border-stone-900 text-white'
-                        : 'bg-white border-stone-200 text-stone-600 hover:border-stone-300'
+                        ? 'bg-[#785942] border-[#785942] text-white shadow-xs'
+                        : 'bg-white border-stone-200 text-stone-600 hover:border-[#785942]/50 hover:text-[#785942]'
                     }`}
                   >
                     {isFrench ? 'Je serai présent(e)' : 'Joyfully Accept'}
@@ -232,8 +232,8 @@ export const MarriageDetailShowcase: React.FC = () => {
                     onClick={() => setIsAttending(false)}
                     className={`py-2 px-3 text-xs font-mono font-medium border transition-all ${
                       !isAttending
-                        ? 'bg-stone-900 border-stone-900 text-white'
-                        : 'bg-white border-stone-200 text-stone-600 hover:border-stone-300'
+                        ? 'bg-[#785942] border-[#785942] text-white shadow-xs'
+                        : 'bg-white border-stone-200 text-stone-600 hover:border-[#785942]/50 hover:text-[#785942]'
                     }`}
                   >
                     {isFrench ? 'Je serai absent(e)' : 'Regretfully Decline'}
@@ -365,7 +365,7 @@ export const MarriageDetailShowcase: React.FC = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-2.5 px-4 bg-stone-900 hover:bg-black text-white text-xs font-mono transition-colors flex items-center justify-center space-x-2 disabled:opacity-50"
+                className="w-full py-2.5 px-4 bg-[#785942] hover:bg-[#684C37] text-white text-xs font-mono transition-colors flex items-center justify-center space-x-2 disabled:opacity-50 shadow-xs"
               >
                 <Send className="w-3.5 h-3.5" />
                 <span>
