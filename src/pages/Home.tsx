@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { ArrowRight, FileDown, ExternalLink, Search } from 'lucide-react';
+import { ArrowRight, FileDown, ExternalLink, Search, ChevronDown } from 'lucide-react';
 import TechBentoGrid from '../components/features/TechBentoGrid';
 import CryptoWidgetSim from '../components/features/CryptoWidgetSim';
 import DonnonsWidgetSim from '../components/features/DonnonsWidgetSim';
@@ -10,6 +10,7 @@ import RotatingTitle from '../components/features/RotatingTitle';
 import GlossaryTerm from '../components/features/GlossaryTerm';
 import About from './About';
 import DeveloperHeroCard from '../components/features/DeveloperHeroCard';
+import IntroAnimation from '../components/features/IntroAnimation';
 
 export const Home: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -47,74 +48,105 @@ export const Home: React.FC = () => {
       ];
 
   return (
-    <div className="space-y-32 sm:space-y-40">
-      {/* SECTION 1: HERO & PHYSICS CANVAS */}
-      <section id="home" className="scroll-mt-24 space-y-16 sm:space-y-24">
-        {/* Two-Column FinTech Hero Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          {/* Left Column: Oversized Typography & CTAs */}
-          <div className="lg:col-span-7 space-y-8">
-            {/* Hero Headline & Subtitle */}
-            <div className="space-y-4">
-              <h1 className="text-5xl sm:text-7xl lg:text-8xl font-black tracking-tight text-fintech-primary leading-[0.98]">
-                Steve Benjamin
-              </h1>
+    <>
+      {/* Cinematic Intro Reveal Animation */}
+      <IntroAnimation />
 
-              <div className="text-xl sm:text-2xl font-normal text-fintech-secondary tracking-tight min-h-[2.5rem] flex flex-wrap items-baseline gap-x-2">
-                <span className="text-fintech-secondary font-medium">
-                  {t('home.heroPrefix', isFrench ? 'Expert en' : 'Expert in')}
-                </span>
-                <RotatingTitle
-                  titles={heroTitles}
-                  intervalMs={5000}
-                  className="text-electric font-bold"
-                />
+      <div className="space-y-32 sm:space-y-40">
+        {/* SECTION 1: HERO VIEWPORT (FULL-VIEWPORT COVERAGE) */}
+        <section
+          id="home"
+          className="min-h-[calc(100vh-8rem)] sm:min-h-[calc(100vh-9.5rem)] flex flex-col justify-between scroll-mt-24"
+        >
+          {/* Two-Column FinTech Hero Grid */}
+          <div className="my-auto py-4 sm:py-8 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            {/* Left Column: Oversized Typography & CTAs */}
+            <div className="lg:col-span-7 space-y-8">
+              {/* Hero Headline & Subtitle */}
+              <div className="space-y-4">
+                <h1 className="text-5xl sm:text-7xl lg:text-8xl font-black tracking-tight text-fintech-primary leading-[0.98]">
+                  Steve Benjamin
+                </h1>
+
+                <div className="text-xl sm:text-2xl font-normal text-fintech-secondary tracking-tight min-h-[2.5rem] flex flex-wrap items-baseline gap-x-2">
+                  <span className="text-fintech-secondary font-medium">
+                    {t('home.heroPrefix', isFrench ? 'Expert en' : 'Expert in')}
+                  </span>
+                  <RotatingTitle
+                    titles={heroTitles}
+                    intervalMs={5000}
+                    className="text-electric font-bold"
+                  />
+                </div>
+
+                <p className="text-base sm:text-lg text-fintech-secondary max-w-xl leading-relaxed font-normal">
+                  {t('home.description')}
+                </p>
               </div>
 
-              <p className="text-base sm:text-lg text-fintech-secondary max-w-xl leading-relaxed font-normal">
-                {t('home.description')}
-              </p>
+              {/* Strict Rectangular FinTech Action Buttons */}
+              <div className="flex flex-wrap items-center gap-4 pt-2">
+                <a
+                  href="#projects"
+                  className="inline-flex items-center space-x-2 px-6 py-3.5 rounded-none bg-electric hover:bg-electric-hover text-white text-xs font-semibold shadow-sm transition-colors uppercase tracking-wider"
+                >
+                  <span>{t('home.ctaCaseStudies')}</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </a>
+
+                <a
+                  href="#bachelor-pitch"
+                  className="inline-flex items-center space-x-2 px-6 py-3.5 rounded-none border border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50 text-slate-800 text-xs font-semibold transition-colors shadow-sm uppercase tracking-wider"
+                >
+                  <span>{t('home.ctaPitch')}</span>
+                </a>
+
+                <a
+                  href={`${import.meta.env.BASE_URL}CV_Steve_Benjamin.pdf`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  download
+                  className="inline-flex items-center space-x-2 px-4 py-3.5 rounded-none border border-slate-200 bg-white hover:border-electric hover:text-electric text-slate-500 text-xs font-mono transition-colors shadow-sm"
+                >
+                  <FileDown className="w-3.5 h-3.5" />
+                  <span>CV (PDF)</span>
+                </a>
+              </div>
             </div>
 
-            {/* Strict Rectangular FinTech Action Buttons */}
-            <div className="flex flex-wrap items-center gap-4 pt-2">
-              <a
-                href="#projects"
-                className="inline-flex items-center space-x-2 px-6 py-3.5 rounded-none bg-electric hover:bg-electric-hover text-white text-xs font-semibold shadow-sm transition-colors uppercase tracking-wider"
-              >
-                <span>{t('home.ctaCaseStudies')}</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </a>
-
-              <a
-                href="#bachelor-pitch"
-                className="inline-flex items-center space-x-2 px-6 py-3.5 rounded-none border border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50 text-slate-800 text-xs font-semibold transition-colors shadow-sm uppercase tracking-wider"
-              >
-                <span>{t('home.ctaPitch')}</span>
-              </a>
-
-              <a
-                href={`${import.meta.env.BASE_URL}CV_Steve_Benjamin.pdf`}
-                target="_blank"
-                rel="noopener noreferrer"
-                download
-                className="inline-flex items-center space-x-2 px-4 py-3.5 rounded-none border border-slate-200 bg-white hover:border-electric hover:text-electric text-slate-500 text-xs font-mono transition-colors shadow-sm"
-              >
-                <FileDown className="w-3.5 h-3.5" />
-                <span>CV (PDF)</span>
-              </a>
+            {/* Right Column: Interactive Developer Telemetry Terminal */}
+            <div className="lg:col-span-5 flex justify-center lg:justify-end">
+              <DeveloperHeroCard />
             </div>
           </div>
 
-          {/* Right Column: Interactive Developer Telemetry Terminal */}
-          <div className="lg:col-span-5 flex justify-center lg:justify-end">
-            <DeveloperHeroCard />
+          {/* Modern Clean Grey Scroll Indicator */}
+          <div className="flex flex-col items-center justify-center pt-4 pb-2">
+            <button
+              type="button"
+              onClick={() => {
+                const el = document.getElementById('skills');
+                if (el) {
+                  el.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+              className="group flex flex-col items-center space-y-1.5 text-slate-400 hover:text-slate-800 transition-colors cursor-pointer select-none focus:outline-hidden"
+              aria-label={isFrench ? 'Voir les compétences techniques' : 'Scroll to technical skills'}
+            >
+              <span className="text-[10px] font-mono tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                {isFrench ? 'Compétences' : 'Skills'}
+              </span>
+              <div className="w-8 h-8 rounded-full border border-slate-200 group-hover:border-slate-400 bg-white shadow-2xs flex items-center justify-center transition-all duration-200 group-hover:shadow-xs">
+                <ChevronDown className="w-4 h-4 text-slate-400 group-hover:text-slate-700 transition-transform duration-200 group-hover:translate-y-0.5 animate-bounce" />
+              </div>
+            </button>
           </div>
-        </div>
+        </section>
 
-        {/* Centerpiece Tech Stack Bento Grid */}
-        <TechBentoGrid />
-      </section>
+        {/* SECTION 1.5: TECHNICAL SKILLS (BELOW THE FOLD) */}
+        <section id="skills" className="scroll-mt-24 pt-4">
+          <TechBentoGrid />
+        </section>
 
       {/* SECTION 2: PROJECTS */}
       <section id="projects" className="scroll-mt-24 space-y-12">
@@ -514,7 +546,8 @@ export const Home: React.FC = () => {
         </div>
       </section>
     </div>
-  );
+  </>
+);
 };
 
 export default Home;
