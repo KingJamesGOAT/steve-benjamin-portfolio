@@ -55,9 +55,11 @@ const BentoTileCard: React.FC<{ tile: BentoTile; isFrench: boolean }> = ({ tile,
           </div>
         </div>
 
-        {/* 2. BACK FACE (FLIPPED 180 DEG ON X AXIS, WEBSITE ELECTRIC BLUE, WHITE BOLD SANS TEXT) */}
-        <div className="absolute inset-0 w-full h-full backface-hidden rotate-x-180 bg-electric border border-blue-400/40 shadow-[0_0_25px_rgba(0,82,255,0.4)] p-3.5 sm:p-4 flex flex-col items-center justify-center text-center overflow-hidden">
-          <p className="text-xs sm:text-[13px] md:text-sm text-white font-bold leading-relaxed font-sans max-w-[95%] select-text">
+        {/* 2. BACK FACE (FLIPPED 180 DEG ON X AXIS, DEEP SAPPHIRE GRADIENT, HIGH-CONTRAST TEXT) */}
+        <div className="absolute inset-0 w-full h-full backface-hidden rotate-x-180 bg-gradient-to-br from-[#0038B8] via-[#002472] to-[#071329] border border-blue-500/40 shadow-[0_4px_20px_rgba(0,82,255,0.22)] p-3.5 sm:p-4 flex flex-col items-center justify-center text-center overflow-hidden">
+          {/* Subtle top ambient glow */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(0,82,255,0.25),_transparent_70%)] pointer-events-none" />
+          <p className="relative z-10 text-xs sm:text-[13px] md:text-sm text-slate-100 font-medium sm:font-semibold leading-relaxed font-sans max-w-[95%] select-text drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
             {isFrench ? tile.descFr : tile.descEn}
           </p>
         </div>
