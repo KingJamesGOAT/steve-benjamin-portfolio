@@ -38,10 +38,10 @@ export const IntroAnimation: React.FC<IntroAnimationProps> = ({ onComplete }) =>
   useEffect(() => {
     if (stage === 'gone') return;
 
-    // Fast, lightweight timing: hold for ~1s, then smooth fade-out
+    // Extended duration (at least twice as long): hold for 2.4s, then fade out smoothly
     const fadeTimer = setTimeout(() => {
       setStage('fading');
-    }, 1050);
+    }, 2400);
 
     const removeTimer = setTimeout(() => {
       setStage('gone');
@@ -51,7 +51,7 @@ export const IntroAnimation: React.FC<IntroAnimationProps> = ({ onComplete }) =>
         // storage disabled fallback
       }
       if (onComplete) onComplete();
-    }, 1450);
+    }, 3000);
 
     return () => {
       clearTimeout(fadeTimer);
@@ -74,26 +74,26 @@ export const IntroAnimation: React.FC<IntroAnimationProps> = ({ onComplete }) =>
   return (
     <div
       onClick={handleDismiss}
-      className={`fixed inset-0 z-[100] bg-white flex flex-col items-center justify-center select-none cursor-pointer transition-all duration-400 ease-out ${
+      className={`fixed inset-0 z-[100] bg-white flex flex-col items-center justify-center select-none cursor-pointer transition-all duration-600 ease-out ${
         stage === 'fading'
           ? 'opacity-0 -translate-y-4 pointer-events-none'
           : 'opacity-100 translate-y-0 pointer-events-auto'
       }`}
       style={{ willChange: 'opacity, transform' }}
     >
-      <div className="flex flex-col items-center text-center px-6 max-w-3xl space-y-3">
-        {/* Main Title: Media Engineer */}
-        <h1 className="text-4xl sm:text-6xl md:text-7xl font-black text-fintech-primary tracking-tight leading-none uppercase">
-          {isFrench ? 'Ingénieur des Médias' : 'Media Engineer'}
+      <div className="flex flex-col items-center text-center px-6 max-w-4xl space-y-4 sm:space-y-6">
+        {/* Main Title: Steve Benjamin */}
+        <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black text-fintech-primary tracking-tight leading-none">
+          Steve Benjamin
         </h1>
 
-        {/* Accent Bar & Monospace Subtitle: Software */}
-        <div className="flex items-center space-x-2.5 pt-2">
-          <span className="w-2.5 h-2.5 bg-electric rounded-none inline-block" />
-          <span className="text-xl sm:text-2xl md:text-3xl font-mono font-bold text-slate-700 tracking-wider uppercase">
-            {isFrench ? 'Logiciel' : 'Software'}
-          </span>
-        </div>
+        {/* Electric Blue Accent Line */}
+        <div className="h-[3px] w-24 sm:w-32 bg-electric rounded-none" />
+
+        {/* Subtitle Under Name: Media Engineer */}
+        <p className="text-base sm:text-xl md:text-2xl font-mono text-slate-600 uppercase tracking-widest pt-1">
+          {isFrench ? 'Ingénieur des Médias' : 'Media Engineer'}
+        </p>
       </div>
     </div>
   );
