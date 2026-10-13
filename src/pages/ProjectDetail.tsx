@@ -613,19 +613,24 @@ export const ProjectDetail: React.FC = () => {
         return (
           <nav
             aria-label="Project Pagination"
-            className="pt-8 border-t border-slate-200 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 font-mono text-xs"
+            className="pt-10 sm:pt-12 border-t border-slate-200 grid grid-cols-3 items-center gap-2 sm:gap-4 font-mono select-none"
           >
+            {/* Left: Previous Project */}
             {prevProject && (
               <Link
                 to={`/projects/${prevProject.slug}`}
-                className="flex items-center space-x-2 text-slate-600 hover:text-electric transition-colors p-1 self-start sm:self-auto"
+                className="group flex flex-col items-start text-left justify-self-start max-w-full"
               >
-                <span>←</span>
-                <span className="text-slate-400">{isFrench ? 'Précédent :' : 'Previous:'}</span>
-                <span className="font-semibold text-fintech-primary">{t(prevProject.titleKey)}</span>
+                <span className="text-[11px] sm:text-xs text-slate-400 group-hover:text-electric transition-colors">
+                  {isFrench ? '← Précédent' : '← Previous'}
+                </span>
+                <span className="text-xs sm:text-sm md:text-base font-bold text-fintech-primary group-hover:text-electric transition-colors line-clamp-2">
+                  {t(prevProject.titleKey)}
+                </span>
               </Link>
             )}
 
+            {/* Center: All Projects */}
             <button
               type="button"
               onClick={() => {
@@ -635,19 +640,23 @@ export const ProjectDetail: React.FC = () => {
                   if (el) el.scrollIntoView({ behavior: 'smooth' });
                 }, 50);
               }}
-              className="px-4 py-2 border border-slate-200 bg-white hover:border-slate-300 hover:text-electric text-slate-600 text-xs font-mono transition-colors text-center cursor-pointer shadow-2xs self-center"
+              className="justify-self-center text-center text-xs sm:text-sm font-medium text-slate-500 hover:text-electric transition-colors cursor-pointer py-1"
             >
               {isFrench ? 'Tous les Projets' : 'All Projects'}
             </button>
 
+            {/* Right: Next Project */}
             {nextProject && (
               <Link
                 to={`/projects/${nextProject.slug}`}
-                className="flex items-center justify-end space-x-2 text-slate-600 hover:text-electric transition-colors p-1 self-end sm:self-auto text-right"
+                className="group flex flex-col items-end text-right justify-self-end max-w-full"
               >
-                <span className="text-slate-400">{isFrench ? 'Suivant :' : 'Next:'}</span>
-                <span className="font-semibold text-fintech-primary">{t(nextProject.titleKey)}</span>
-                <span>→</span>
+                <span className="text-[11px] sm:text-xs text-slate-400 group-hover:text-electric transition-colors">
+                  {isFrench ? 'Suivant →' : 'Next →'}
+                </span>
+                <span className="text-xs sm:text-sm md:text-base font-bold text-fintech-primary group-hover:text-electric transition-colors line-clamp-2">
+                  {t(nextProject.titleKey)}
+                </span>
               </Link>
             )}
           </nav>
