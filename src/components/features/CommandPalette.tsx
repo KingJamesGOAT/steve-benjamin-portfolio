@@ -132,9 +132,18 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
             {/* If a glossary term is selected, show its clean 2-4 lines concise explanation */}
             {selectedGlossary ? (
               <div className="p-6 space-y-4 font-sans text-left">
-                {/* Term Header */}
+                {/* Term Header with Back Icon Button on the left */}
                 <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-2.5">
+                    <button
+                      type="button"
+                      onClick={() => setSelectedGlossary(null)}
+                      className="p-1 -ml-1 text-slate-400 hover:text-slate-800 transition-colors cursor-pointer"
+                      title={isFrench ? 'Retour à la recherche' : 'Back to search'}
+                      aria-label="Back"
+                    >
+                      <ArrowLeft className="w-4 h-4" />
+                    </button>
                     <span className="w-2 h-2 bg-[#0052FF] rounded-none inline-block" />
                     <h3 className="font-mono text-sm sm:text-base font-bold text-fintech-primary uppercase tracking-wider">
                       {selectedGlossary.term}
@@ -149,26 +158,6 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
                 <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-sans pt-1">
                   {selectedGlossary.shortDef} {selectedGlossary.line1}
                 </p>
-
-                {/* Footer Controls */}
-                <div className="flex items-center justify-between pt-4 border-t border-slate-100">
-                  <button
-                    type="button"
-                    onClick={() => setSelectedGlossary(null)}
-                    className="inline-flex items-center space-x-1.5 px-3 py-1.5 bg-white border border-slate-200 hover:border-electric text-xs font-mono font-semibold text-slate-700 transition-colors rounded-none cursor-pointer"
-                  >
-                    <ArrowLeft className="w-3.5 h-3.5" />
-                    <span>{t('cmdPalette.backToSearch')}</span>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={onClose}
-                    className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-xs font-mono text-slate-600 transition-colors rounded-none cursor-pointer"
-                  >
-                    {t('cmdPalette.closeEsc')}
-                  </button>
-                </div>
               </div>
             ) : (
               <>
