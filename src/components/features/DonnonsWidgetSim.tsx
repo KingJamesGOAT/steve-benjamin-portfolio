@@ -234,19 +234,7 @@ export const DonnonsWidgetSim: React.FC = () => {
             </div>
 
             {/* Grid Footnote */}
-            <div className="w-full max-w-[460px] pt-2 flex items-center justify-between text-[11px] font-mono text-slate-500">
-              <div className="relative group inline-flex items-center gap-1 cursor-help">
-                <span className="font-semibold text-slate-700">
-                  {isFrench ? 'Modèle prévisionnel 1 don = 3 vies' : 'Forecasting model 1 donation = 3 lives'}
-                </span>
-                <Info className="w-3.5 h-3.5 text-slate-400 group-hover:text-black transition-colors" />
-                {/* Tooltip Popup */}
-                <div className="absolute bottom-full left-0 mb-2 hidden group-hover:block z-50 w-64 p-2 bg-white text-black text-[11px] font-mono shadow-[3px_3px_0px_0px_#000] leading-relaxed pointer-events-none border-2 border-black text-left">
-                  {isFrench
-                    ? `Les ${livesSaved} vies sauvées sont une estimation basée sur le fait qu'un don de sang peut sauver jusqu'à 3 vies.`
-                    : `The ${livesSaved} lives saved are an estimate based on the fact that one blood donation can save up to 3 lives.`}
-                </div>
-              </div>
+            <div className="w-full max-w-[460px] pt-2 flex items-center justify-end text-[11px] font-mono text-slate-500">
               <span className="font-bold text-[#0073e6]">
                 {blueCount} / {totalGrid} {isFrench ? 'donneurs actifs' : 'active donors'}
               </span>
