@@ -8,12 +8,12 @@ interface MainLayoutProps {
 }
 
 export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
-  const { isOpen, close, open } = useCtrlK();
+  const { isOpen, close } = useCtrlK();
 
   return (
     <div className="min-h-screen bg-white text-fintech-primary flex flex-col font-sans selection:bg-electric-light selection:text-electric">
       {/* Global Navbar */}
-      <Navbar onOpenCommandPalette={open} />
+      <Navbar />
 
       {/* Global Command Palette */}
       <CommandPalette isOpen={isOpen} onClose={close} />

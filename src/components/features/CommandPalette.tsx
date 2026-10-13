@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, ArrowRight, X, ExternalLink, BookOpen, ArrowLeft } from 'lucide-react';
+import { Search, X, ExternalLink, BookOpen, ArrowLeft, Home, Layers, User, GraduationCap } from 'lucide-react';
 import { getGlossaryEntries, type LocalizedGlossaryEntry } from '../../data/cryptoGlossary';
 
 interface CommandPaletteProps {
@@ -49,7 +49,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
       subtitleKey: 'home.tagline',
       path: '#home',
       category: 'navigation',
-      icon: <span className="font-mono text-xs text-slate-400">#</span>,
+      icon: <Home className="w-3.5 h-3.5" />,
     },
     {
       type: 'nav',
@@ -58,7 +58,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
       subtitleKey: 'projects.title',
       path: '#projects',
       category: 'navigation',
-      icon: <span className="font-mono text-xs text-slate-400">#</span>,
+      icon: <Layers className="w-3.5 h-3.5" />,
     },
     {
       type: 'nav',
@@ -67,7 +67,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
       subtitleKey: 'about.title',
       path: '#about',
       category: 'navigation',
-      icon: <span className="font-mono text-xs text-slate-400">#</span>,
+      icon: <User className="w-3.5 h-3.5" />,
     },
     {
       type: 'nav',
@@ -76,7 +76,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
       subtitleKey: 'bachelorPitch.title',
       path: '#bachelor-pitch',
       category: 'navigation',
-      icon: <span className="font-mono text-xs text-slate-400">#</span>,
+      icon: <GraduationCap className="w-3.5 h-3.5" />,
     },
     // Project Detail Routes
     {
@@ -130,26 +130,33 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
 
   const allItems: PaletteEntry[] = [...navItems, ...glossaryItems];
 
-  // Filter items based on query
-  const filteredItems = allItems.filter((item) => {
-    const q = query.toLowerCase().trim();
-    if (!q) return true;
+  // Filter items based on query (returns top 3 matches when searching)
+  const filteredItems = query.trim()
+    ? allItems
+        .filter((item) => {
+          const q = query.toLowerCase().trim();
+          if (item.type === 'nav') {
+            const title = t(item.titleKey).toLowerCase();
+            const sub = item.subtitleKey ? t(item.subtitleKey).toLowerCase() : '';
+            return title.includes(q) || sub.includes(q) || item.path.includes(q);
+          }
 
-    if (item.type === 'nav') {
-      const title = t(item.titleKey).toLowerCase();
-      const sub = item.subtitleKey ? t(item.subtitleKey).toLowerCase() : '';
-      return title.includes(q) || sub.includes(q) || item.path.includes(q);
-    }
+          if (item.type === 'glossary') {
+            const term = item.entry.term.toLowerCase();
+            const def = item.entry.shortDef.toLowerCase();
+            const cat = item.entry.category.toLowerCase();
+            return term.includes(q) || def.includes(q) || cat.includes(q);
+          }
 
-    if (item.type === 'glossary') {
-      const term = item.entry.term.toLowerCase();
-      const def = item.entry.shortDef.toLowerCase();
-      const cat = item.entry.category.toLowerCase();
-      return term.includes(q) || def.includes(q) || cat.includes(q);
-    }
+          return false;
+        })
+        .slice(0, 3)
+    : navItems;
 
-    return false;
-  });
+  // Reset selected index when query changes
+  useEffect(() => {
+    setSelectedIndex(0);
+  }, [query]);
 
   // Focus input whenever palette is opened
   useEffect(() => {
@@ -375,29 +382,12 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
                                   </div>
                                 </div>
                               </div>
-
-                              <div className="flex items-center space-x-2 text-slate-400 shrink-0 ml-3">
-                                <span className="font-mono text-[10px] uppercase tracking-wider px-1.5 py-0.5 bg-slate-100 border border-slate-200">
-                                  {isGlossary ? t('cmdPalette.glossaryTag') : item.path}
-                                </span>
-                                <ArrowRight
-                                  className={`w-3.5 h-3.5 transition-transform ${
-                                    isSelected ? 'translate-x-0.5 text-electric' : 'opacity-40'
-                                  }`}
-                                />
-                              </div>
                             </button>
                           </li>
                         );
                       })}
                     </ul>
                   )}
-                </div>
-
-                {/* Minimalist Clinical Footer Hint */}
-                <div className="border-t border-slate-100 bg-slate-50/70 px-4 py-2 flex items-center justify-between text-[11px] text-slate-400 font-mono">
-                  <span>{t('cmdPalette.hint')}</span>
-                  <span className="hidden sm:inline">{t('cmdPalette.inspectHint')}</span>
                 </div>
               </>
             )}
