@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Search, X, Sparkles, Clock, BookOpen } from 'lucide-react';
+import { Search, X } from 'lucide-react';
 
 interface TermData {
   id: string;
@@ -8,13 +8,6 @@ interface TermData {
   category: { en: string; fr: string };
   definition: { en: string; fr: string };
   related: { en: string[]; fr: string[] };
-}
-
-interface TimelineEvent {
-  id: string;
-  year: number;
-  label: { en: string; fr: string };
-  desc: { en: string; fr: string };
 }
 
 const SAMPLE_TERMS: TermData[] = [
@@ -85,54 +78,13 @@ const SAMPLE_TERMS: TermData[] = [
   },
 ];
 
-const TIMELINE_EVENTS: TimelineEvent[] = [
-  {
-    id: 'nicaea',
-    year: 325,
-    label: { en: 'Council of Nicaea', fr: 'Concile de Nicée' },
-    desc: {
-      en: 'Codification of formal philosophical vocabulary (homoousios) to harmonize metaphysical semantics.',
-      fr: 'Codification du vocabulaire philosophique formel (homoousios) pour unifier la sémantique métaphysique.',
-    },
-  },
-  {
-    id: 'aquinas',
-    year: 1265,
-    label: { en: 'Thomas Aquinas', fr: 'Thomas d\'Aquin' },
-    desc: {
-      en: 'Systematic integration of Aristotelian formal logic with medieval scholastic epistemology.',
-      fr: 'Intégration systématique de la logique aristotélicienne et de l\'épistémologie scolastique.',
-    },
-  },
-  {
-    id: 'descartes',
-    year: 1637,
-    label: { en: 'Descartes (Discourse)', fr: 'Descartes (Discours)' },
-    desc: {
-      en: 'Publication of Discourse on the Method, establishing modern rational doubt and formal deduction.',
-      fr: 'Parution du Discours de la méthode, posant les bases du doute rationnel et de la déduction formelle.',
-    },
-  },
-  {
-    id: 'quantum',
-    year: 1927,
-    label: { en: 'Copenhagen Solvay', fr: 'Congrès Solvay' },
-    desc: {
-      en: 'Fifth Solvay conference debating quantum causality, physical determinism, and epistemic limits.',
-      fr: 'Cinquième congrès Solvay débattant de la causalité quantique, du déterminisme et des limites épistémiques.',
-    },
-  },
-];
-
 export const LexiconWidgetSim: React.FC = () => {
   const { i18n } = useTranslation();
   const isFrench = Boolean(i18n.language?.startsWith('fr'));
 
-  const [activeTab, setActiveTab] = useState<'smartText' | 'timeline'>('smartText');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [activeTermId, setActiveTermId] = useState<string>('ontology');
   const [hoveredTermId, setHoveredTermId] = useState<string | null>(null);
-  const [activeTimelineId, setActiveTimelineId] = useState<string>('nicaea');
 
   // Currently displayed term (hover takes transient priority over selected)
   const currentTermId = hoveredTermId || activeTermId;
@@ -150,9 +102,6 @@ export const LexiconWidgetSim: React.FC = () => {
       })
     : [];
 
-  const activeEvent =
-    TIMELINE_EVENTS.find((e) => e.id === activeTimelineId) || TIMELINE_EVENTS[0];
-
   const handleSelectRelated = (relatedName: string) => {
     const match = SAMPLE_TERMS.find(
       (t) =>
@@ -167,45 +116,14 @@ export const LexiconWidgetSim: React.FC = () => {
 
   return (
     <div className="bg-[#05050a] border border-white/10 p-3 sm:p-4 space-y-3 font-mono text-xs rounded-none select-none text-slate-300">
-      {/* Top Header / Mode Switcher */}
+      {/* Top Header without icon or extra terms count */}
       <div className="flex items-center justify-between pb-2 border-b border-white/10">
-        <div className="flex items-center space-x-1.5 text-[11px] text-blue-400 font-semibold tracking-wider">
-          <BookOpen className="w-3.5 h-3.5 text-blue-400" />
-          <span className="uppercase">{isFrench ? 'Moteur Lexique' : 'Lexicon Engine'}</span>
-          <span className="text-slate-500 font-normal hidden sm:inline">// 5 000+ {isFrench ? 'termes' : 'terms'}</span>
-        </div>
-
-        {/* View Toggle */}
-        <div className="flex items-center space-x-1 text-[10px]">
-          <button
-            type="button"
-            onClick={() => setActiveTab('smartText')}
-            className={`px-2 py-0.5 transition-colors border ${
-              activeTab === 'smartText'
-                ? 'bg-blue-600/30 text-blue-300 border-blue-500/50 font-bold'
-                : 'text-slate-400 border-transparent hover:text-slate-200'
-            }`}
-          >
-            {isFrench ? 'SmartText' : 'SmartText'}
-          </button>
-          <button
-            type="button"
-            onClick={() => setActiveTab('timeline')}
-            className={`px-2 py-0.5 transition-colors border ${
-              activeTab === 'timeline'
-                ? 'bg-blue-600/30 text-blue-300 border-blue-500/50 font-bold'
-                : 'text-slate-400 border-transparent hover:text-slate-200'
-            }`}
-          >
-            <span className="flex items-center gap-1">
-              <Clock className="w-2.5 h-2.5" />
-              <span>{isFrench ? 'Frise' : 'Timeline'}</span>
-            </span>
-          </button>
+        <div className="text-[11px] text-blue-400 font-semibold tracking-wider uppercase">
+          {isFrench ? 'Moteur Lexique' : 'Lexicon Engine'}
         </div>
       </div>
 
-      {/* Interactive Search Bar */}
+      {/* Interactive Search Bar (clean placeholder without e.g.) */}
       <div className="relative">
         <div className="flex items-center bg-black/70 border border-white/15 px-2.5 py-1.5 focus-within:border-blue-500/80 transition-colors">
           <Search className="w-3.5 h-3.5 text-blue-400 shrink-0 mr-2" />
@@ -213,11 +131,7 @@ export const LexiconWidgetSim: React.FC = () => {
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder={
-              isFrench
-                ? 'Rechercher un terme (ex: Ontologie, Entropie)...'
-                : 'Search term (e.g. Ontology, Entropy)...'
-            }
+            placeholder={isFrench ? 'Rechercher un terme...' : 'Search term...'}
             className="w-full bg-transparent text-[11px] text-white placeholder-slate-500 focus:outline-none font-mono"
           />
           {searchQuery && (
@@ -264,190 +178,144 @@ export const LexiconWidgetSim: React.FC = () => {
         )}
       </div>
 
-      {activeTab === 'smartText' ? (
-        <>
-          {/* SmartText Sample Context with Clickable/Hoverable Blue Words */}
-          <div className="text-[11px] text-slate-300 font-sans leading-relaxed bg-black/40 p-2.5 border border-white/5">
-            <span className="text-slate-400 font-mono text-[10px] block pb-1">
-              {isFrench ? 'SURVOLEZ OU CLIQUEZ SUR LES TERMES BLEUS :' : 'HOVER OR CLICK ON BLUE WORDS :'}
+      {/* SmartText Sample Context with Clickable/Hoverable Blue Words */}
+      <div className="text-[11px] text-slate-300 font-sans leading-relaxed bg-black/40 p-2.5 border border-white/5">
+        <span className="text-slate-400 font-mono text-[10px] block pb-1">
+          {isFrench ? 'SURVOLEZ OU CLIQUEZ SUR LES TERMES BLEUS :' : 'HOVER OR CLICK ON BLUE WORDS :'}
+        </span>
+        {isFrench ? (
+          <span>
+            Définitions formelles comme{' '}
+            <button
+              type="button"
+              onMouseEnter={() => setHoveredTermId('ontology')}
+              onClick={() => setActiveTermId('ontology')}
+              className={`text-blue-400 font-semibold cursor-pointer underline decoration-blue-500/60 decoration-dotted underline-offset-2 hover:text-blue-200 transition-colors px-1 py-0.5 rounded-xs ${
+                currentTermId === 'ontology' ? 'bg-blue-600/30 text-blue-200 font-bold ring-1 ring-blue-500/50' : ''
+              }`}
+            >
+              Ontologie
+            </button>
+            ,{' '}
+            <button
+              type="button"
+              onMouseEnter={() => setHoveredTermId('epistemology')}
+              onClick={() => setActiveTermId('epistemology')}
+              className={`text-blue-400 font-semibold cursor-pointer underline decoration-blue-500/60 decoration-dotted underline-offset-2 hover:text-blue-200 transition-colors px-1 py-0.5 rounded-xs ${
+                currentTermId === 'epistemology' ? 'bg-blue-600/30 text-blue-200 font-bold ring-1 ring-blue-500/50' : ''
+              }`}
+            >
+              Épistémologie
+            </button>
+            ,{' '}
+            <button
+              type="button"
+              onMouseEnter={() => setHoveredTermId('entropy')}
+              onClick={() => setActiveTermId('entropy')}
+              className={`text-blue-400 font-semibold cursor-pointer underline decoration-blue-500/60 decoration-dotted underline-offset-2 hover:text-blue-200 transition-colors px-1 py-0.5 rounded-xs ${
+                currentTermId === 'entropy' ? 'bg-blue-600/30 text-blue-200 font-bold ring-1 ring-blue-500/50' : ''
+              }`}
+            >
+              Entropie
+            </button>{' '}
+            et{' '}
+            <button
+              type="button"
+              onMouseEnter={() => setHoveredTermId('causality')}
+              onClick={() => setActiveTermId('causality')}
+              className={`text-blue-400 font-semibold cursor-pointer underline decoration-blue-500/60 decoration-dotted underline-offset-2 hover:text-blue-200 transition-colors px-1 py-0.5 rounded-xs ${
+                currentTermId === 'causality' ? 'bg-blue-600/30 text-blue-200 font-bold ring-1 ring-blue-500/50' : ''
+              }`}
+            >
+              Causalité
+            </button>
+            .
+          </span>
+        ) : (
+          <span>
+            Formal definitions including{' '}
+            <button
+              type="button"
+              onMouseEnter={() => setHoveredTermId('ontology')}
+              onClick={() => setActiveTermId('ontology')}
+              className={`text-blue-400 font-semibold cursor-pointer underline decoration-blue-500/60 decoration-dotted underline-offset-2 hover:text-blue-200 transition-colors px-1 py-0.5 rounded-xs ${
+                currentTermId === 'ontology' ? 'bg-blue-600/30 text-blue-200 font-bold ring-1 ring-blue-500/50' : ''
+              }`}
+            >
+              Ontology
+            </button>
+            ,{' '}
+            <button
+              type="button"
+              onMouseEnter={() => setHoveredTermId('epistemology')}
+              onClick={() => setActiveTermId('epistemology')}
+              className={`text-blue-400 font-semibold cursor-pointer underline decoration-blue-500/60 decoration-dotted underline-offset-2 hover:text-blue-200 transition-colors px-1 py-0.5 rounded-xs ${
+                currentTermId === 'epistemology' ? 'bg-blue-600/30 text-blue-200 font-bold ring-1 ring-blue-500/50' : ''
+              }`}
+            >
+              Epistemology
+            </button>
+            ,{' '}
+            <button
+              type="button"
+              onMouseEnter={() => setHoveredTermId('entropy')}
+              onClick={() => setActiveTermId('entropy')}
+              className={`text-blue-400 font-semibold cursor-pointer underline decoration-blue-500/60 decoration-dotted underline-offset-2 hover:text-blue-200 transition-colors px-1 py-0.5 rounded-xs ${
+                currentTermId === 'entropy' ? 'bg-blue-600/30 text-blue-200 font-bold ring-1 ring-blue-500/50' : ''
+              }`}
+            >
+              Entropy
+            </button>{' '}
+            and{' '}
+            <button
+              type="button"
+              onMouseEnter={() => setHoveredTermId('causality')}
+              onClick={() => setActiveTermId('causality')}
+              className={`text-blue-400 font-semibold cursor-pointer underline decoration-blue-500/60 decoration-dotted underline-offset-2 hover:text-blue-200 transition-colors px-1 py-0.5 rounded-xs ${
+                currentTermId === 'causality' ? 'bg-blue-600/30 text-blue-200 font-bold ring-1 ring-blue-500/50' : ''
+              }`}
+            >
+              Causality
+            </button>
+            .
+          </span>
+        )}
+      </div>
+
+      {/* Interactive SmartText Live Definition Card (no star icon) */}
+      <div className="bg-[#0b0c16] border border-blue-500/40 p-3 space-y-2 relative transition-all duration-150">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <span className="text-xs font-bold text-white font-mono">
+              {isFrench ? currentTerm.name.fr : currentTerm.name.en}
             </span>
-            {isFrench ? (
-              <span>
-                Définitions formelles comme{' '}
-                <button
-                  type="button"
-                  onMouseEnter={() => setHoveredTermId('ontology')}
-                  onClick={() => setActiveTermId('ontology')}
-                  className={`text-blue-400 font-semibold cursor-pointer underline decoration-blue-500/60 decoration-dotted underline-offset-2 hover:text-blue-200 transition-colors px-1 py-0.5 rounded-xs ${
-                    currentTermId === 'ontology' ? 'bg-blue-600/30 text-blue-200 font-bold ring-1 ring-blue-500/50' : ''
-                  }`}
-                >
-                  Ontologie
-                </button>
-                ,{' '}
-                <button
-                  type="button"
-                  onMouseEnter={() => setHoveredTermId('epistemology')}
-                  onClick={() => setActiveTermId('epistemology')}
-                  className={`text-blue-400 font-semibold cursor-pointer underline decoration-blue-500/60 decoration-dotted underline-offset-2 hover:text-blue-200 transition-colors px-1 py-0.5 rounded-xs ${
-                    currentTermId === 'epistemology' ? 'bg-blue-600/30 text-blue-200 font-bold ring-1 ring-blue-500/50' : ''
-                  }`}
-                >
-                  Épistémologie
-                </button>
-                ,{' '}
-                <button
-                  type="button"
-                  onMouseEnter={() => setHoveredTermId('entropy')}
-                  onClick={() => setActiveTermId('entropy')}
-                  className={`text-blue-400 font-semibold cursor-pointer underline decoration-blue-500/60 decoration-dotted underline-offset-2 hover:text-blue-200 transition-colors px-1 py-0.5 rounded-xs ${
-                    currentTermId === 'entropy' ? 'bg-blue-600/30 text-blue-200 font-bold ring-1 ring-blue-500/50' : ''
-                  }`}
-                >
-                  Entropie
-                </button>{' '}
-                et{' '}
-                <button
-                  type="button"
-                  onMouseEnter={() => setHoveredTermId('causality')}
-                  onClick={() => setActiveTermId('causality')}
-                  className={`text-blue-400 font-semibold cursor-pointer underline decoration-blue-500/60 decoration-dotted underline-offset-2 hover:text-blue-200 transition-colors px-1 py-0.5 rounded-xs ${
-                    currentTermId === 'causality' ? 'bg-blue-600/30 text-blue-200 font-bold ring-1 ring-blue-500/50' : ''
-                  }`}
-                >
-                  Causalité
-                </button>
-                .
-              </span>
-            ) : (
-              <span>
-                Formal definitions including{' '}
-                <button
-                  type="button"
-                  onMouseEnter={() => setHoveredTermId('ontology')}
-                  onClick={() => setActiveTermId('ontology')}
-                  className={`text-blue-400 font-semibold cursor-pointer underline decoration-blue-500/60 decoration-dotted underline-offset-2 hover:text-blue-200 transition-colors px-1 py-0.5 rounded-xs ${
-                    currentTermId === 'ontology' ? 'bg-blue-600/30 text-blue-200 font-bold ring-1 ring-blue-500/50' : ''
-                  }`}
-                >
-                  Ontology
-                </button>
-                ,{' '}
-                <button
-                  type="button"
-                  onMouseEnter={() => setHoveredTermId('epistemology')}
-                  onClick={() => setActiveTermId('epistemology')}
-                  className={`text-blue-400 font-semibold cursor-pointer underline decoration-blue-500/60 decoration-dotted underline-offset-2 hover:text-blue-200 transition-colors px-1 py-0.5 rounded-xs ${
-                    currentTermId === 'epistemology' ? 'bg-blue-600/30 text-blue-200 font-bold ring-1 ring-blue-500/50' : ''
-                  }`}
-                >
-                  Epistemology
-                </button>
-                ,{' '}
-                <button
-                  type="button"
-                  onMouseEnter={() => setHoveredTermId('entropy')}
-                  onClick={() => setActiveTermId('entropy')}
-                  className={`text-blue-400 font-semibold cursor-pointer underline decoration-blue-500/60 decoration-dotted underline-offset-2 hover:text-blue-200 transition-colors px-1 py-0.5 rounded-xs ${
-                    currentTermId === 'entropy' ? 'bg-blue-600/30 text-blue-200 font-bold ring-1 ring-blue-500/50' : ''
-                  }`}
-                >
-                  Entropy
-                </button>{' '}
-                and{' '}
-                <button
-                  type="button"
-                  onMouseEnter={() => setHoveredTermId('causality')}
-                  onClick={() => setActiveTermId('causality')}
-                  className={`text-blue-400 font-semibold cursor-pointer underline decoration-blue-500/60 decoration-dotted underline-offset-2 hover:text-blue-200 transition-colors px-1 py-0.5 rounded-xs ${
-                    currentTermId === 'causality' ? 'bg-blue-600/30 text-blue-200 font-bold ring-1 ring-blue-500/50' : ''
-                  }`}
-                >
-                  Causality
-                </button>
-                .
-              </span>
-            )}
-          </div>
-
-          {/* Interactive SmartText Live Definition Card */}
-          <div className="bg-[#0b0c16] border border-blue-500/40 p-3 space-y-2 relative transition-all duration-150">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-2">
-                <span className="text-xs font-bold text-white font-mono flex items-center gap-1">
-                  <Sparkles className="w-3 h-3 text-blue-400" />
-                  <span>{isFrench ? currentTerm.name.fr : currentTerm.name.en}</span>
-                </span>
-                <span className="text-[9px] font-mono px-1.5 py-0.2 bg-blue-950/70 border border-blue-500/40 text-blue-300">
-                  {isFrench ? currentTerm.category.fr : currentTerm.category.en}
-                </span>
-              </div>
-            </div>
-
-            <p className="text-[11px] text-slate-300 font-sans leading-relaxed">
-              {isFrench ? currentTerm.definition.fr : currentTerm.definition.en}
-            </p>
-
-            {/* Clickable Related Concepts Tags */}
-            <div className="pt-1.5 border-t border-white/10 flex flex-wrap items-center gap-1.5 text-[10px]">
-              <span className="text-slate-500 font-mono text-[9px] uppercase tracking-wider">
-                {isFrench ? 'Notions liées :' : 'Related :'}
-              </span>
-              {(isFrench ? currentTerm.related.fr : currentTerm.related.en).map((rel) => (
-                <button
-                  key={rel}
-                  type="button"
-                  onClick={() => handleSelectRelated(rel)}
-                  className="px-1.5 py-0.5 bg-black/60 border border-white/10 text-blue-300 hover:border-blue-400 hover:text-white transition-colors"
-                >
-                  {rel}
-                </button>
-              ))}
-            </div>
-          </div>
-        </>
-      ) : (
-        /* Timeline Mode */
-        <div className="space-y-3 pt-1">
-          {/* Timeline Nodes */}
-          <div className="grid grid-cols-4 gap-1.5">
-            {TIMELINE_EVENTS.map((event) => (
-              <button
-                key={event.id}
-                type="button"
-                onClick={() => setActiveTimelineId(event.id)}
-                className={`p-2 text-left border transition-all ${
-                  activeTimelineId === event.id
-                    ? 'bg-blue-950/60 border-blue-400 text-white shadow-xs'
-                    : 'bg-black/40 border-white/10 text-slate-400 hover:border-white/20'
-                }`}
-              >
-                <div className="text-[10px] font-mono font-bold text-blue-400">
-                  {event.year} AD
-                </div>
-                <div className="text-[10px] font-sans truncate font-medium pt-0.5">
-                  {isFrench ? event.label.fr : event.label.en}
-                </div>
-              </button>
-            ))}
-          </div>
-
-          {/* Active Timeline Event Detail Box */}
-          <div className="bg-[#0b0c16] border border-blue-500/40 p-3 space-y-1.5">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-white font-mono">
-                {activeEvent.year} AD — {isFrench ? activeEvent.label.fr : activeEvent.label.en}
-              </span>
-              <span className="text-[9px] font-mono px-1.5 py-0.2 bg-blue-950/70 border border-blue-500/40 text-blue-300">
-                {isFrench ? 'Événement historique' : 'Milestone'}
-              </span>
-            </div>
-            <p className="text-[11px] text-slate-300 font-sans leading-relaxed">
-              {isFrench ? activeEvent.desc.fr : activeEvent.desc.en}
-            </p>
+            <span className="text-[9px] font-mono px-1.5 py-0.2 bg-blue-950/70 border border-blue-500/40 text-blue-300">
+              {isFrench ? currentTerm.category.fr : currentTerm.category.en}
+            </span>
           </div>
         </div>
-      )}
+
+        <p className="text-[11px] text-slate-300 font-sans leading-relaxed">
+          {isFrench ? currentTerm.definition.fr : currentTerm.definition.en}
+        </p>
+
+        {/* Clickable Related Concepts Tags */}
+        <div className="pt-1.5 border-t border-white/10 flex flex-wrap items-center gap-1.5 text-[10px]">
+          <span className="text-slate-500 font-mono text-[9px] uppercase tracking-wider">
+            {isFrench ? 'Notions liées :' : 'Related :'}
+          </span>
+          {(isFrench ? currentTerm.related.fr : currentTerm.related.en).map((rel) => (
+            <button
+              key={rel}
+              type="button"
+              onClick={() => handleSelectRelated(rel)}
+              className="px-1.5 py-0.5 bg-black/60 border border-white/10 text-blue-300 hover:border-blue-400 hover:text-white transition-colors"
+            >
+              {rel}
+            </button>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
