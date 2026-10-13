@@ -94,6 +94,17 @@ export const MarriageDetailShowcase: React.FC = () => {
 
   const [records, setRecords] = useState<GuestRecord[]>(INITIAL_RECORDS);
 
+  const translateDietary = (d: string) => {
+    if (d.includes('gluten')) return isFrench ? 'Sans gluten (1)' : 'Gluten-free (1)';
+    if (d.includes('gétarien') || d.includes('getarian')) return isFrench ? 'Végétarien (2)' : 'Vegetarian (2)';
+    if (d.includes('lactose')) return isFrench ? 'Sans lactose' : 'Lactose-free';
+    if (d === 'Vegan') return 'Vegan';
+    if (d === 'Standard' || d === 'Menu Standard' || d === 'Standard Menu') {
+      return isFrench ? 'Menu standard' : 'Standard menu';
+    }
+    return d;
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -411,7 +422,7 @@ export const MarriageDetailShowcase: React.FC = () => {
                 </div>
                 <div className="flex justify-between py-1 border-b border-stone-200/70">
                   <span className="text-stone-500">{isFrench ? 'Régime' : 'Dietary'}</span>
-                  <span className="text-stone-800">{savedSession.dietary}</span>
+                  <span className="text-stone-800">{translateDietary(savedSession.dietary)}</span>
                 </div>
                 <div className="flex justify-between py-1">
                   <span className="text-stone-500">{isFrench ? 'Dîner' : 'Dinner Access'}</span>
@@ -453,7 +464,7 @@ export const MarriageDetailShowcase: React.FC = () => {
           <div className="bg-slate-900 text-white p-3.5 sm:px-4 flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
             <div className="flex items-center space-x-2">
               <FileSpreadsheet className="w-4 h-4 text-emerald-400" />
-              <span className="font-bold">FEUILLE_RSVP_2026.xlsx</span>
+              <span className="font-bold">{isFrench ? 'FEUILLE_RSVP_2026.xlsx' : 'RSVP_SHEET_2026.xlsx'}</span>
               <span className="text-slate-400 text-[11px]">({records.length} {isFrench ? 'lignes' : 'rows'})</span>
             </div>
             <div className="flex items-center space-x-3">
@@ -506,7 +517,7 @@ export const MarriageDetailShowcase: React.FC = () => {
                     </td>
                     <td className="py-2.5 px-3 text-slate-700">{rec.adults}</td>
                     <td className="py-2.5 px-3 text-slate-700">{rec.children}</td>
-                    <td className="py-2.5 px-3 text-slate-600 whitespace-nowrap">{rec.dietary}</td>
+                    <td className="py-2.5 px-3 text-slate-600 whitespace-nowrap">{translateDietary(rec.dietary)}</td>
                     <td className="py-2.5 px-3 whitespace-nowrap">
                       {rec.dinnerGuest ? (
                         rec.dinnerAttending ? (
@@ -531,7 +542,7 @@ export const MarriageDetailShowcase: React.FC = () => {
             <span className="font-mono text-[11px] text-slate-400 font-semibold uppercase block">
               {isFrench ? 'Coût d\'Infrastructure' : 'Infrastructure Cost'}
             </span>
-            <div className="text-lg font-bold font-mono text-emerald-600">0.00 CHF / mois</div>
+            <div className="text-lg font-bold font-mono text-emerald-600">{isFrench ? '0.00 CHF / mois' : '0.00 CHF / mo'}</div>
             <p className="text-slate-600 leading-relaxed text-[11px]">
               {isFrench
                 ? 'Aucune base de données managée payante (RDS/Postgres). Google Apps Script assure le rôle de middleware gratuit et fiable.'

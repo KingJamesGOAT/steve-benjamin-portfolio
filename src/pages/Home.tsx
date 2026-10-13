@@ -5,6 +5,7 @@ import { ArrowRight, FileDown, ExternalLink, Search } from 'lucide-react';
 import TechBentoGrid from '../components/features/TechBentoGrid';
 import CryptoWidgetSim from '../components/features/CryptoWidgetSim';
 import DonnonsWidgetSim from '../components/features/DonnonsWidgetSim';
+import MarriageWidgetSim from '../components/features/MarriageWidgetSim';
 import RotatingTitle from '../components/features/RotatingTitle';
 import GlossaryTerm from '../components/features/GlossaryTerm';
 import About from './About';
@@ -416,26 +417,8 @@ export const Home: React.FC = () => {
                 {t('projects.marriage.description')}
               </p>
 
-              {/* Authentic Wedding Preview Box */}
-              <div className="bg-[#FAF8F5] border border-stone-200 p-3.5 space-y-2 text-xs">
-                <div className="flex items-center justify-between border-b border-stone-200/70 pb-1.5 text-stone-700">
-                  <span className="font-serif italic font-medium text-stone-800 text-[13px] tracking-wide">
-                    R.S.V.P. · {isFrench ? 'Célébration & Réception' : 'Celebration & Reception'}
-                  </span>
-                  <span className="text-[10px] font-mono text-rose-800/80 uppercase tracking-wider">
-                    {isFrench ? 'Présence confirmée' : 'Attendance confirmed'}
-                  </span>
-                </div>
-                {isFrench ? (
-                  <div className="text-[11px] text-stone-600 font-sans leading-relaxed pt-0.5">
-                    Moteur de réponse en direct : répartition des invités (adultes & enfants), régimes alimentaires, accès conditionnel au dîner et synchronisation instantanée vers tableur.
-                  </div>
-                ) : (
-                  <div className="text-[11px] text-stone-600 font-sans leading-relaxed pt-0.5">
-                    Live RSVP intake engine: headcount split (adults & children), dietary preferences, conditional dinner access, and real-time spreadsheet synchronization.
-                  </div>
-                )}
-              </div>
+              {/* Interactive Wedding Preview Widget */}
+              <MarriageWidgetSim />
             </div>
 
             <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
