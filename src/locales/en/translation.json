@@ -138,9 +138,9 @@
     "marriage": {
       "tag": "Private Web Application",
       "title": "Private Event & RSVP Platform",
-      "description": "Private event web platform engineered with a dynamic RSVP intake engine, two-way webhook synchronization with Excel spreadsheets, persistent browser session state, and form management.",
-      "feature1": "Live RSVP Engine & Quotas",
-      "feature2": "Two-Way Excel Webhook Sync",
+      "description": "Private event web platform engineered with a dynamic RSVP intake engine, real-time Excel spreadsheet webhook sync, and persistent browser session state.",
+      "feature1": "Live RSVP Intake Engine",
+      "feature2": "Real-Time Excel Webhook Sync",
       "feature3": "Browser Session & Magic Link"
     },
     "showcase": {

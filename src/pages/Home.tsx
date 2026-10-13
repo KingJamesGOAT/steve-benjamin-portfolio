@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { ArrowRight, FileDown, ExternalLink, Search, FileSpreadsheet } from 'lucide-react';
+import { ArrowRight, FileDown, ExternalLink, Search } from 'lucide-react';
 import TechBentoGrid from '../components/features/TechBentoGrid';
 import CryptoWidgetSim from '../components/features/CryptoWidgetSim';
 import DonnonsWidgetSim from '../components/features/DonnonsWidgetSim';
@@ -342,12 +342,6 @@ export const Home: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="rounded-none border border-slate-200 bg-white p-6 shadow-sm flex flex-col justify-between space-y-5">
             <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <span className="inline-flex items-center px-2 py-0.5 rounded-none text-[11px] font-mono font-medium bg-blue-50 text-blue-700 border border-blue-200">
-                  {t('projects.catholicRoute.tag')}
-                </span>
-                <span className="text-[10px] font-mono text-slate-400">5,000+ words</span>
-              </div>
               <h3 className="text-xl font-bold tracking-tight text-fintech-primary">
                 {t('projects.catholicRoute.title')}
               </h3>
@@ -415,14 +409,6 @@ export const Home: React.FC = () => {
 
           <div className="rounded-none border border-slate-200 bg-white p-6 shadow-sm flex flex-col justify-between space-y-5">
             <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <span className="inline-flex items-center px-2 py-0.5 rounded-none text-[11px] font-mono font-medium bg-rose-50 text-rose-800 border border-rose-200">
-                  {t('projects.marriage.tag')}
-                </span>
-                <span className="text-[10px] font-mono text-emerald-600 font-semibold bg-emerald-50 border border-emerald-200 px-2 py-0.5">
-                  Excel Sync 200 OK
-                </span>
-              </div>
               <h3 className="text-xl font-bold tracking-tight text-fintech-primary">
                 {t('projects.marriage.title')}
               </h3>
@@ -430,22 +416,23 @@ export const Home: React.FC = () => {
                 {t('projects.marriage.description')}
               </p>
 
-              {/* Minimalist Preview Box */}
-              <div className="bg-[#fbf9f5] border border-stone-200 p-3.5 space-y-2 font-mono text-xs">
-                <div className="flex items-center justify-between bg-white border border-stone-200 px-2.5 py-1.5 text-stone-700 text-[11px]">
-                  <span className="flex items-center gap-1.5 font-bold">
-                    <FileSpreadsheet className="w-3.5 h-3.5 text-emerald-600" />
-                    <span>Google Apps Script → FEUILLE_RSVP.xlsx</span>
+              {/* Authentic Wedding Preview Box */}
+              <div className="bg-[#FAF8F5] border border-stone-200 p-3.5 space-y-2 text-xs">
+                <div className="flex items-center justify-between border-b border-stone-200/70 pb-1.5 text-stone-700">
+                  <span className="font-serif italic font-medium text-stone-800 text-[13px] tracking-wide">
+                    R.S.V.P. · {isFrench ? 'Célébration & Réception' : 'Celebration & Reception'}
                   </span>
-                  <span className="text-[10px] text-emerald-600 font-bold">200 OK</span>
+                  <span className="text-[10px] font-mono text-rose-800/80 uppercase tracking-wider">
+                    {isFrench ? 'Présence confirmée' : 'Attendance confirmed'}
+                  </span>
                 </div>
                 {isFrench ? (
                   <div className="text-[11px] text-stone-600 font-sans leading-relaxed pt-0.5">
-                    Moteur de RSVP en direct, contrôle d'accès <strong>Magic Link</strong> (<span className="font-mono text-rose-700">?invite=dinner</span>), persistance de session client (<span className="font-mono text-stone-800">LocalStorage</span>) et quotas d'apéro temps réel sans serveur SQL.
+                    Moteur de réponse en direct : répartition des invités (adultes & enfants), régimes alimentaires, accès conditionnel au dîner et synchronisation instantanée vers tableur.
                   </div>
                 ) : (
                   <div className="text-[11px] text-stone-600 font-sans leading-relaxed pt-0.5">
-                    Live RSVP intake engine, <strong>Magic Link</strong> access (<span className="font-mono text-rose-700">?invite=dinner</span>), client session persistence (<span className="font-mono text-stone-800">LocalStorage</span>), and dynamic apero quotas with zero SQL server overhead.
+                    Live RSVP intake engine: headcount split (adults & children), dietary preferences, conditional dinner access, and real-time spreadsheet synchronization.
                   </div>
                 )}
               </div>
@@ -453,7 +440,7 @@ export const Home: React.FC = () => {
 
             <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
               <span className="text-xs font-mono text-slate-400">
-                {isFrench ? 'Excel Sync · Cookies · Tally Forms' : 'Excel Sync · Cookies · Tally Forms'}
+                {isFrench ? 'RSVP · LocalStorage · Tableur Excel' : 'RSVP · LocalStorage · Excel Sync'}
               </span>
               <Link
                 to="/projects/marriage-platform"

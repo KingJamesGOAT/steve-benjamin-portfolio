@@ -138,9 +138,9 @@
     "marriage": {
       "tag": "Application Web Privée",
       "title": "Plateforme Événementielle Privée",
-      "description": "Plateforme de gestion d'événement intégrant un moteur de RSVP dynamique, une synchronisation bidirectionnelle par webhook vers tableur Excel, la persistance de session navigateur et la gestion de formulaires.",
-      "feature1": "Moteur RSVP & Quotas en Direct",
-      "feature2": "Synchronisation Bidirectionnelle Excel",
+      "description": "Plateforme événementielle privée intégrant un moteur de RSVP dynamique, une synchronisation par webhook vers tableur Excel et la persistance de session navigateur.",
+      "feature1": "Moteur de RSVP en Direct",
+      "feature2": "Synchronisation Tableur Excel",
       "feature3": "Session Navigateur & Magic Link"
     },
     "showcase": {
