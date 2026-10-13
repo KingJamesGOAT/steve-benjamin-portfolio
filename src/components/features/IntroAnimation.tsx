@@ -55,23 +55,13 @@ export const IntroAnimation: React.FC<IntroAnimationProps> = ({ onComplete }) =>
           }}
           className="fixed inset-0 z-[100] bg-white flex flex-col items-center justify-center cursor-pointer select-none"
         >
-          <div className="flex flex-col items-center text-center px-6 max-w-lg space-y-3">
-            {/* Minimalist Year & Scope Tag */}
-            <motion.span
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, delay: 0.08 }}
-              className="text-[10px] sm:text-[11px] font-mono tracking-widest uppercase text-slate-400"
-            >
-              PORTFOLIO // 2026
-            </motion.span>
-
-            {/* Kinetic Typographic Name Reveal */}
+          <div className="flex flex-col items-center text-center px-6 max-w-4xl space-y-4 sm:space-y-6">
+            {/* Kinetic Typographic Name Reveal (Oversized Hero Display) */}
             <motion.h1
               initial={{ opacity: 0, scale: 0.94, letterSpacing: '0.04em' }}
               animate={{ opacity: 1, scale: 1, letterSpacing: '-0.02em' }}
-              transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="text-4xl sm:text-6xl md:text-7xl font-black text-fintech-primary tracking-tight leading-none"
+              transition={{ duration: 0.7, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+              className="text-6xl sm:text-8xl md:text-9xl font-black text-fintech-primary tracking-tight leading-none"
             >
               Steve Benjamin
             </motion.h1>
@@ -79,17 +69,17 @@ export const IntroAnimation: React.FC<IntroAnimationProps> = ({ onComplete }) =>
             {/* Expanding Electric Blue Accent Line */}
             <motion.div
               initial={{ width: 0 }}
-              animate={{ width: 72 }}
-              transition={{ duration: 0.65, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className="h-[2px] bg-electric"
+              animate={{ width: 110 }}
+              transition={{ duration: 0.6, delay: 0.28, ease: [0.22, 1, 0.36, 1] }}
+              className="h-[3px] bg-electric rounded-full"
             />
 
-            {/* Subtitle */}
+            {/* Subtitle Under Name (Enlarged) */}
             <motion.p
-              initial={{ opacity: 0, y: 6 }}
+              initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, delay: 0.55 }}
-              className="text-xs sm:text-sm font-mono text-slate-500 uppercase tracking-widest pt-1"
+              transition={{ duration: 0.45, delay: 0.45 }}
+              className="text-base sm:text-xl md:text-2xl font-mono text-slate-500 uppercase tracking-widest pt-1"
             >
               Software & Media Engineering
             </motion.p>
