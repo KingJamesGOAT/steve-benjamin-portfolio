@@ -89,4 +89,25 @@
   .group:hover .group-hover-rotate-x-180 {
     transform: rotateX(180deg);
   }
+
+  /* Infinite Marquee with hover slowdown */
+  @keyframes marquee-scroll {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-marquee-infinite {
+    display: flex;
+    width: max-content;
+    animation: marquee-scroll 32s linear infinite;
+    will-change: transform;
+  }
+
+  .marquee-hover-slow:hover .animate-marquee-infinite {
+    animation-duration: 95s;
+  }
 }

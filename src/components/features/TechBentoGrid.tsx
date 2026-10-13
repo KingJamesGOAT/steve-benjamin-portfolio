@@ -21,7 +21,7 @@ const BentoTileCard: React.FC<{ tile: BentoTile; isFrench: boolean }> = ({ tile,
     <div
       onClick={() => setFlipped((prev) => !prev)}
       onMouseLeave={() => setFlipped(false)}
-      className={`group ${tile.colSpan} h-44 sm:h-48 perspective-1000 select-none cursor-pointer`}
+      className={`group ${tile.colSpan} h-32 sm:h-36 md:h-38 perspective-1000 select-none cursor-pointer`}
     >
       <div
         className={`relative w-full h-full transition-transform duration-500 ease-in-out preserve-3d will-change-transform group-hover-rotate-x-180 ${
@@ -31,22 +31,22 @@ const BentoTileCard: React.FC<{ tile: BentoTile; isFrench: boolean }> = ({ tile,
         {/* 1. FRONT FACE (DEFAULT) */}
         <div className="absolute inset-0 w-full h-full backface-hidden border border-slate-800 bg-[#0A0D14] overflow-hidden select-none transition-all duration-300 group-hover:border-blue-500/50 group-hover:shadow-[0_0_20px_rgba(0,82,255,0.18)]">
           {/* FAINT BACKGROUND WATERMARK CODE */}
-          <div className="absolute inset-0 p-3 sm:p-4 font-mono text-[11px] leading-relaxed text-slate-300 opacity-15 pointer-events-none overflow-hidden select-none">
+          <div className="absolute inset-0 p-2.5 sm:p-3 font-mono text-[10px] sm:text-[10.5px] leading-relaxed text-slate-300 opacity-15 pointer-events-none overflow-hidden select-none">
             {tile.codeSnippet}
           </div>
 
           {/* FRONT CONTENT (CENTERED TITLE & 3 BADGES) */}
-          <div className="absolute inset-0 p-4 sm:p-5 flex flex-col items-center justify-center text-center gap-3 z-10 pointer-events-none">
-            <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold font-mono tracking-tight text-white leading-snug text-center max-w-[95%]">
+          <div className="absolute inset-0 p-3 sm:p-4 flex flex-col items-center justify-center text-center gap-2 z-10 pointer-events-none">
+            <h3 className="text-sm sm:text-base md:text-lg font-bold font-mono tracking-tight text-white leading-snug text-center max-w-[95%]">
               {isFrench ? tile.titleFr : tile.titleEn}
             </h3>
 
             {/* 3 tools badges centered under the title */}
-            <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
+            <div className="flex flex-wrap items-center justify-center gap-1.5">
               {tile.tools.slice(0, 3).map((tool) => (
                 <span
                   key={tool}
-                  className="px-2 py-0.5 text-[10px] sm:text-[11px] font-mono bg-slate-900/90 text-slate-300 border border-slate-800"
+                  className="px-1.5 py-0.5 text-[9px] sm:text-[10px] font-mono bg-slate-900/90 text-slate-300 border border-slate-800"
                 >
                   {tool}
                 </span>
@@ -56,8 +56,8 @@ const BentoTileCard: React.FC<{ tile: BentoTile; isFrench: boolean }> = ({ tile,
         </div>
 
         {/* 2. BACK FACE (FLIPPED 180 DEG ON X AXIS, WEBSITE ELECTRIC BLUE, WHITE BOLD SANS TEXT) */}
-        <div className="absolute inset-0 w-full h-full backface-hidden rotate-x-180 bg-electric border border-blue-400/40 shadow-[0_0_25px_rgba(0,82,255,0.4)] p-5 sm:p-6 flex flex-col items-center justify-center text-center overflow-hidden">
-          <p className="text-xs sm:text-sm md:text-[15px] text-white font-bold leading-relaxed font-sans max-w-[95%] select-text">
+        <div className="absolute inset-0 w-full h-full backface-hidden rotate-x-180 bg-electric border border-blue-400/40 shadow-[0_0_25px_rgba(0,82,255,0.4)] p-3.5 sm:p-4 flex flex-col items-center justify-center text-center overflow-hidden">
+          <p className="text-xs sm:text-[13px] md:text-sm text-white font-bold leading-relaxed font-sans max-w-[95%] select-text">
             {isFrench ? tile.descFr : tile.descEn}
           </p>
         </div>
@@ -302,13 +302,13 @@ export const TechBentoGrid: React.FC = () => {
   ];
 
   return (
-    <div className="space-y-3 pt-6 border-t border-slate-100">
+    <div className="space-y-2 pt-3 border-t border-slate-100">
       {/* Clean Skills Header */}
-      <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1.5 pb-1">
-        <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-fintech-primary">
+      <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 pb-0.5">
+        <h2 className="text-lg sm:text-xl font-bold tracking-tight text-fintech-primary">
           {isFrench ? 'Compétences Techniques' : 'Technical Skills'}
         </h2>
-        <span className="text-xs font-mono text-slate-500">
+        <span className="text-[11px] font-mono text-slate-500">
           {isFrench
             ? 'Survolez pour en savoir plus'
             : 'Hover to view details'}

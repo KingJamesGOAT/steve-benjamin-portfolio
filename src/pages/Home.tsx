@@ -13,6 +13,7 @@ import { getGlossaryDef } from '../data/cryptoGlossary';
 import About from './About';
 import DeveloperHeroCard from '../components/features/DeveloperHeroCard';
 import IntroAnimation from '../components/features/IntroAnimation';
+import AppCarousel from '../components/features/AppCarousel';
 
 export const Home: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -145,9 +146,10 @@ export const Home: React.FC = () => {
           </div>
         </section>
 
-        {/* SECTION 1.5: TECHNICAL SKILLS (BELOW THE FOLD) */}
-        <section id="skills" className="scroll-mt-24 pt-4">
+        {/* SECTION 1.5: TECHNICAL SKILLS & SOFTWARE ECOSYSTEM */}
+        <section id="skills" className="scroll-mt-20 pt-2 space-y-4">
           <TechBentoGrid />
+          <AppCarousel />
         </section>
 
       {/* SECTION 2: PROJECTS */}

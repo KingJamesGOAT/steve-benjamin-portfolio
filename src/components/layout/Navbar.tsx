@@ -35,7 +35,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
     }
   };
 
-  const currentLang = i18n.language?.toUpperCase().slice(0, 2) === 'FR' ? 'FR' : 'EN';
+  const isFrench = Boolean(i18n.language?.toLowerCase().startsWith('fr'));
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-slate-200/80 bg-white/95 backdrop-blur-md">
@@ -90,16 +90,40 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
             </button>
           )}
 
-          {/* Clean FinTech EN / FR Language Toggle */}
-          <button
+          {/* Interactive FinTech EN / FR Language Toggle Switch */}
+          <div
             onClick={toggleLanguage}
-            type="button"
-            className="inline-flex items-center space-x-1 px-2.5 py-1 text-xs font-mono font-medium rounded-none border border-slate-200 text-fintech-secondary hover:text-electric hover:border-electric transition-colors bg-white hover:bg-slate-50"
-            title="Toggle EN / FR"
-            aria-label="Toggle language"
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                toggleLanguage();
+              }
+            }}
+            className="inline-flex items-center p-0.5 border border-slate-200 bg-slate-100/90 rounded-none cursor-pointer select-none text-[11px] font-mono transition-colors hover:border-slate-300"
+            title={isFrench ? 'Passer en anglais (Switch to English)' : 'Passer en français (Switch to French)'}
+            aria-label="Toggle language between FR and EN"
           >
-            <span>{currentLang}</span>
-          </button>
+            <span
+              className={`px-2 py-0.5 transition-all font-semibold ${
+                isFrench
+                  ? 'bg-white text-electric shadow-xs border border-slate-200/80'
+                  : 'text-slate-400 hover:text-slate-700'
+              }`}
+            >
+              FR
+            </span>
+            <span
+              className={`px-2 py-0.5 transition-all font-semibold ${
+                !isFrench
+                  ? 'bg-white text-electric shadow-xs border border-slate-200/80'
+                  : 'text-slate-400 hover:text-slate-700'
+              }`}
+            >
+              EN
+            </span>
+          </div>
         </div>
       </div>
     </header>
