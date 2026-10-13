@@ -371,8 +371,8 @@ export const Home: React.FC = () => {
 
               <p className="text-xs sm:text-sm text-fintech-secondary leading-relaxed">
                 {isFrench
-                  ? 'Moteur de recherche instantané (< 10ms) et frise chronologique pour explorer des définitions formelles (comme Ontologie, Épistémologie, Entropie et Causalité)'
-                  : 'Instant search engine (< 10ms) and interactive timeline for exploring formal definitions (such as Ontology, Epistemology, Entropy, and Causality)'}
+                  ? 'Moteur de recherche instantané (< 10ms) et frise chronologique pour explorer des définitions'
+                  : 'Instant search engine (< 10ms) and interactive timeline for exploring definitions'}
               </p>
 
               {/* Interactive Lexicon & Chronology Simulation Widget */}

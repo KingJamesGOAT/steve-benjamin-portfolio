@@ -110,7 +110,7 @@
     "title": "Projects",
     "subtitle": "Selected engineering projects and applications.",
     "viewCode": "Interactive Source Simulation",
-    "viewDeepDive": "View Deep Dive",
+    "viewDeepDive": "Case Study",
     "crypto": {
       "tag": "FinTech Application",
       "title": "Crypto Trade Hub",
@@ -130,7 +130,7 @@
     "catholicRoute": {
       "tag": "Scholarly Digital Humanities Platform",
       "title": "Lexicon & Chronology Engine",
-      "description": "Instant search engine (< 10ms) and interactive timeline for exploring formal definitions (such as Ontology, Epistemology, Entropy, and Causality)",
+      "description": "Instant search engine (< 10ms) and interactive timeline for exploring definitions",
       "feature1": "5,000+ Word Lexicon Search",
       "feature2": "Contextual Hover Definitions",
       "feature3": "Multi-Century Chronology Timeline"

@@ -110,7 +110,7 @@
     "title": "Projets",
     "subtitle": "Sélection de projets d'ingénierie et d'applications.",
     "viewCode": "Simulation de code source interactive",
-    "viewDeepDive": "Voir l'étude de cas détaillée",
+    "viewDeepDive": "Étude de cas",
     "crypto": {
       "tag": "Application FinTech",
       "title": "Crypto Trade Hub",
@@ -130,7 +130,7 @@
     "catholicRoute": {
       "tag": "Plateforme d'Humanités Numériques & Recherche",
       "title": "Moteur Lexical & Frise Chronologique",
-      "description": "Moteur de recherche instantané (< 10ms) et frise chronologique pour explorer des définitions formelles (comme Ontologie, Épistémologie, Entropie et Causalité)",
+      "description": "Moteur de recherche instantané (< 10ms) et frise chronologique pour explorer des définitions",
       "feature1": "Recherche Lexicale (5 000+ mots)",
       "feature2": "Infobulles Contextuelles au Survol",
       "feature3": "Frise Chronologique Multi-Séculaire"
