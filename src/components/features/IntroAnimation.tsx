@@ -18,7 +18,7 @@ export const IntroAnimation: React.FC<IntroAnimationProps> = ({ onComplete }) =>
   useEffect(() => {
     if (!isVisible) return;
 
-    // Crisp total duration: ~1.4 seconds before initiating smooth exit
+    // Extended duration (+30%): ~1.85 seconds before initiating smooth exit
     const timer = setTimeout(() => {
       setIsVisible(false);
       try {
@@ -27,7 +27,7 @@ export const IntroAnimation: React.FC<IntroAnimationProps> = ({ onComplete }) =>
         // storage disabled fallback
       }
       if (onComplete) onComplete();
-    }, 1400);
+    }, 1850);
 
     return () => clearTimeout(timer);
   }, [isVisible, onComplete]);
@@ -50,8 +50,8 @@ export const IntroAnimation: React.FC<IntroAnimationProps> = ({ onComplete }) =>
           initial={{ opacity: 1 }}
           exit={{
             opacity: 0,
-            y: -24,
-            transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+            y: -28,
+            transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
           }}
           className="fixed inset-0 z-[100] bg-white flex flex-col items-center justify-center cursor-pointer select-none"
         >
@@ -60,7 +60,7 @@ export const IntroAnimation: React.FC<IntroAnimationProps> = ({ onComplete }) =>
             <motion.span
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35, delay: 0.05 }}
+              transition={{ duration: 0.45, delay: 0.08 }}
               className="text-[10px] sm:text-[11px] font-mono tracking-widest uppercase text-slate-400"
             >
               PORTFOLIO // 2026
@@ -70,7 +70,7 @@ export const IntroAnimation: React.FC<IntroAnimationProps> = ({ onComplete }) =>
             <motion.h1
               initial={{ opacity: 0, scale: 0.94, letterSpacing: '0.04em' }}
               animate={{ opacity: 1, scale: 1, letterSpacing: '-0.02em' }}
-              transition={{ duration: 0.55, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
               className="text-4xl sm:text-6xl md:text-7xl font-black text-fintech-primary tracking-tight leading-none"
             >
               Steve Benjamin
@@ -80,7 +80,7 @@ export const IntroAnimation: React.FC<IntroAnimationProps> = ({ onComplete }) =>
             <motion.div
               initial={{ width: 0 }}
               animate={{ width: 72 }}
-              transition={{ duration: 0.5, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.65, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
               className="h-[2px] bg-electric"
             />
 
@@ -88,7 +88,7 @@ export const IntroAnimation: React.FC<IntroAnimationProps> = ({ onComplete }) =>
             <motion.p
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35, delay: 0.4 }}
+              transition={{ duration: 0.45, delay: 0.55 }}
               className="text-xs sm:text-sm font-mono text-slate-500 uppercase tracking-widest pt-1"
             >
               Software & Media Engineering
