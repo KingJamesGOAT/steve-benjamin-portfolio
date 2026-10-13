@@ -215,7 +215,7 @@ export const DonnonsWidgetSim: React.FC = () => {
 
               {/* Foreground Center White Cutout Square */}
               <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
-                <div className="bg-[#fffbf1] border-2 border-black px-4 py-2 sm:px-5 sm:py-2.5 shadow-[3px_3px_0px_0px_#000] flex flex-col items-center justify-center pointer-events-auto group relative cursor-help">
+                <div className="bg-[#fffbf1] border-2 border-black px-4 py-2 sm:px-5 sm:py-2.5 shadow-[3px_3px_0px_0px_#000] flex flex-col items-center justify-center pointer-events-auto">
                   <span className="text-[#0073e6] font-mono text-3xl sm:text-5xl font-black leading-none">
                     {livesSaved}
                   </span>
@@ -223,12 +223,6 @@ export const DonnonsWidgetSim: React.FC = () => {
                     {isFrench ? 'Potentielles vies' : 'Potential lives'}<br />
                     {isFrench ? 'sauvées' : 'saved'}
                   </span>
-                  {/* Tooltip Popup on Hover */}
-                  <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block z-50 w-64 p-2 bg-white text-black text-[11px] font-mono shadow-[3px_3px_0px_0px_#000] leading-relaxed pointer-events-none border-2 border-black text-center">
-                    {isFrench
-                      ? `Les ${livesSaved} vies sauvées sont une estimation basée sur le fait qu'un don de sang peut sauver jusqu'à 3 vies.`
-                      : `The ${livesSaved} lives saved are an estimate based on the fact that one blood donation can save up to 3 lives.`}
-                  </div>
                 </div>
               </div>
             </div>
