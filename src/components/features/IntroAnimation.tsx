@@ -38,10 +38,10 @@ export const IntroAnimation: React.FC<IntroAnimationProps> = ({ onComplete }) =>
   useEffect(() => {
     if (stage === 'gone') return;
 
-    // Extended duration (at least twice as long): hold for 2.4s, then fade out smoothly
+    // Shortened duration (-30%): hold for ~1.68s, then fade out smoothly
     const fadeTimer = setTimeout(() => {
       setStage('fading');
-    }, 2400);
+    }, 1680);
 
     const removeTimer = setTimeout(() => {
       setStage('gone');
@@ -51,7 +51,7 @@ export const IntroAnimation: React.FC<IntroAnimationProps> = ({ onComplete }) =>
         // storage disabled fallback
       }
       if (onComplete) onComplete();
-    }, 3000);
+    }, 2100);
 
     return () => {
       clearTimeout(fadeTimer);
@@ -74,7 +74,7 @@ export const IntroAnimation: React.FC<IntroAnimationProps> = ({ onComplete }) =>
   return (
     <div
       onClick={handleDismiss}
-      className={`fixed inset-0 z-[100] bg-white flex flex-col items-center justify-center select-none cursor-pointer transition-all duration-600 ease-out ${
+      className={`fixed inset-0 z-[100] bg-white flex flex-col items-center justify-center select-none cursor-pointer transition-all duration-450 ease-out ${
         stage === 'fading'
           ? 'opacity-0 -translate-y-4 pointer-events-none'
           : 'opacity-100 translate-y-0 pointer-events-auto'
