@@ -165,11 +165,25 @@ export const Home: React.FC = () => {
 
         {/* Primary Project 1: Crypto Trade Hub */}
         <div className="rounded-none border border-slate-200 bg-white p-6 sm:p-8 shadow-sm space-y-6">
-          <div className="space-y-2">
+          <div className="space-y-3">
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-fintech-primary">
-                {t('projects.crypto.title')}
-              </h3>
+              <div className="space-y-2">
+                <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-fintech-primary">
+                  {t('projects.crypto.title')}
+                </h3>
+                {/* 3 High-Impact Metric Badges */}
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="px-2.5 py-1 text-[11px] font-mono font-semibold bg-blue-50 text-electric border border-blue-200">
+                    {isFrench ? '< 50ms Latence Ticks' : '< 50ms Tick Latency'}
+                  </span>
+                  <span className="px-2.5 py-1 text-[11px] font-mono font-semibold bg-slate-100 text-slate-700 border border-slate-200">
+                    {isFrench ? 'Modèle de Risque Kelly' : 'Kelly Risk Engine'}
+                  </span>
+                  <span className="px-2.5 py-1 text-[11px] font-mono font-semibold bg-slate-100 text-slate-700 border border-slate-200">
+                    LLaMA 3.3 AI
+                  </span>
+                </div>
+              </div>
 
               <Link
                 to="/projects/crypto-trade-hub"
@@ -180,10 +194,10 @@ export const Home: React.FC = () => {
               </Link>
             </div>
 
-            <p className="text-sm sm:text-base text-fintech-secondary leading-relaxed">
+            <p className="text-xs sm:text-sm text-fintech-secondary leading-relaxed">
               {isFrench
-                ? 'Terminal de trading quantitatif conçu pour surveiller les paires de cryptomonnaies en temps réel, exécuter des allocations simulées et générer des synthèses de marché automatisées.'
-                : 'Quantitative trading terminal engineered to monitor cryptocurrency pairs in real time, execute simulated allocations, and generate automated market summaries.'}
+                ? 'Terminal de trading quantitatif temps réel connectant les flux Binance WebSockets, avec dimensionnement autonome des ordres selon le Critère de Kelly et synthèses LLaMA 3.3.'
+                : 'Real-time quantitative trading terminal streaming live Binance WebSockets with automated Kelly-sized risk management and automated LLaMA 3.3 summaries.'}
             </p>
           </div>
 
@@ -194,91 +208,41 @@ export const Home: React.FC = () => {
               <CryptoWidgetSim />
             </div>
 
-            {/* Architectural Context: Key Specifications (Under Graph across Full Width) */}
-            <div className="rounded-none border border-slate-200 bg-slate-50/80 p-5 sm:p-6 space-y-4 font-sans">
-              <div className="flex items-center justify-between border-b border-slate-200 pb-2.5">
-                <span className="font-mono text-xs uppercase tracking-wider text-slate-600 font-bold">
-                  {isFrench ? 'Spécifications Clés' : 'Key Specifications'}
-                </span>
-                <span className="font-mono text-[10px] text-emerald-600 font-bold bg-emerald-50 border border-emerald-200 px-2 py-0.5">
-                  {isFrench ? 'TEMPS RÉEL' : 'REAL-TIME'}
-                </span>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-slate-600 leading-relaxed">
-                <div className="space-y-1.5">
-                  <span className="font-semibold text-slate-800 block text-xs sm:text-sm">
-                    {isFrench ? 'Flux de Marché en Direct' : 'Live Market Feed'}
+            {/* Architectural Highlights: 3 Crisp Data Points */}
+            <div className="rounded-none border border-slate-200 bg-slate-50/80 p-4 sm:p-5 font-sans">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 text-xs text-slate-600">
+                <div className="space-y-1">
+                  <span className="font-mono text-[10px] tracking-wider uppercase text-slate-400 font-bold block">
+                    {isFrench ? 'FLUX TEMPS RÉEL' : 'REAL-TIME DATA'}
                   </span>
-                  <p className="text-slate-500 pt-0.5 text-xs">
-                    {isFrench ? (
-                      <>
-                        Reçoit les cours et volumes instantanément via{' '}
-                        <GlossaryTerm
-                          term="WebSockets Binance"
-                          definition="Connexion réseau temps réel bidirectionnelle délivrant les variations de prix en quelques millisecondes sans recharger la page."
-                        />{' '}
-                        sans aucune latence.
-                      </>
-                    ) : (
-                      <>
-                        Streams live cryptocurrency prices and volume directly from{' '}
-                        <GlossaryTerm
-                          term="Binance WebSockets"
-                          definition="Full-duplex network connection streaming live crypto price ticks with zero page reloads."
-                        />{' '}
-                        with sub-millisecond responsiveness.
-                      </>
-                    )}
-                  </p>
-                </div>
-
-                <div className="space-y-1.5">
-                  <span className="font-semibold text-slate-800 block text-xs sm:text-sm">
-                    {isFrench ? 'Stratégie & Gestion du Risque' : 'Automated Strategy & Risk'}
+                  <span className="font-semibold text-slate-800 text-xs sm:text-sm block">
+                    Binance WebSockets
                   </span>
-                  <p className="text-slate-500 pt-0.5 text-xs">
-                    {isFrench ? (
-                      <>
-                        Utilise l'
-                        <GlossaryTerm
-                          term="Indicateur ADX"
-                          definition="Average Directional Index : mesure la force de la tendance pour basculer automatiquement entre suivi de tendance et grille de retour à la moyenne."
-                        />{' '}
-                        pour détecter les tendances, et calcule la taille sécurisée des ordres via le{' '}
-                        <GlossaryTerm
-                          term="Critère de Kelly"
-                          definition="Formule mathématique de gestion du risque optimisant la taille des positions tout en plafonnant strictement la perte maximale à 2%."
-                        />
-                        .
-                      </>
-                    ) : (
-                      <>
-                        Uses the{' '}
-                        <GlossaryTerm
-                          term="ADX Indicator"
-                          definition="Average Directional Index: measures trend strength to switch automatically between momentum breakouts and range trading."
-                        />{' '}
-                        to detect market trends, and calculates safe order sizes using the{' '}
-                        <GlossaryTerm
-                          term="Kelly Criterion"
-                          definition="A mathematical risk model that determines optimal position sizing to maximize growth while strictly capping downside loss to 2%."
-                        />
-                        .
-                      </>
-                    )}
-                  </p>
-                </div>
-
-                <div className="space-y-2 border-t md:border-t-0 md:border-l md:pl-6 border-slate-200">
-                  <span className="font-semibold text-slate-800 block text-xs sm:text-sm">
-                    {isFrench ? 'Stack Technique' : 'Architecture Stack'}
-                  </span>
-                  <p className="text-slate-500 text-xs">
+                  <p className="text-slate-500 text-xs leading-relaxed">
                     {isFrench
-                      ? 'Architecture modulaire haute performance pour le traitement des données de trading temps réel.'
-                      : 'High-performance modular architecture built for real-time streaming telemetry.'}
+                      ? 'Streaming bidirectionnel full-duplex de ticks crypto sans rechargement de page.'
+                      : 'Full-duplex tick streaming delivering live price movements with zero page reload.'}
                   </p>
+                </div>
+
+                <div className="space-y-1">
+                  <span className="font-mono text-[10px] tracking-wider uppercase text-slate-400 font-bold block">
+                    {isFrench ? 'GESTION DU RISQUE' : 'QUANTITATIVE RISK'}
+                  </span>
+                  <span className="font-semibold text-slate-800 text-xs sm:text-sm block">
+                    {isFrench ? 'Critère de Kelly & ADX' : 'Kelly Criterion & ADX'}
+                  </span>
+                  <p className="text-slate-500 text-xs leading-relaxed">
+                    {isFrench
+                      ? 'Détection de tendance automatique et plafonnement strict de la perte maximale à 2%.'
+                      : 'Automated regime detection with strict 2% downside capital protection formula.'}
+                  </p>
+                </div>
+
+                <div className="space-y-1 border-t md:border-t-0 md:border-l md:pl-6 border-slate-200">
+                  <span className="font-mono text-[10px] tracking-wider uppercase text-slate-400 font-bold block">
+                    {isFrench ? 'STACK PRODUCTION' : 'PRODUCTION STACK'}
+                  </span>
                   <div className="flex flex-wrap gap-1.5 pt-1 text-[11px] font-mono text-slate-700">
                     <span className="px-2 py-0.5 bg-white border border-slate-200">React 18</span>
                     <span className="px-2 py-0.5 bg-white border border-slate-200">TypeScript</span>
@@ -293,11 +257,25 @@ export const Home: React.FC = () => {
 
         {/* Primary Project 2: Donnons.ch */}
         <div className="rounded-none border border-slate-200 bg-white p-6 sm:p-8 shadow-sm space-y-6">
-          <div className="space-y-2">
+          <div className="space-y-3">
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-fintech-primary">
-                {t('projects.donnons.title')}
-              </h3>
+              <div className="space-y-2">
+                <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-fintech-primary">
+                  {t('projects.donnons.title')}
+                </h3>
+                {/* 3 High-Impact Metric Badges */}
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="px-2.5 py-1 text-[11px] font-mono font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                    {isFrench ? 'Note 6.0 / 6.0 HUG & HEIG-VD' : 'Grade 6.0 / 6.0 HUG & HEIG-VD'}
+                  </span>
+                  <span className="px-2.5 py-1 text-[11px] font-mono font-semibold bg-blue-50 text-electric border border-blue-200">
+                    {isFrench ? '-30% Rejets sur Place' : '-30% On-Site Deferrals'}
+                  </span>
+                  <span className="px-2.5 py-1 text-[11px] font-mono font-semibold bg-slate-100 text-slate-700 border border-slate-200">
+                    Vue 3 · Laravel API
+                  </span>
+                </div>
+              </div>
 
               <Link
                 to="/projects/donnons-ch"
@@ -308,8 +286,10 @@ export const Home: React.FC = () => {
               </Link>
             </div>
 
-            <p className="text-sm sm:text-base text-fintech-secondary leading-relaxed">
-              {t('projects.donnons.description')}
+            <p className="text-xs sm:text-sm text-fintech-secondary leading-relaxed">
+              {isFrench
+                ? 'Plateforme primée développée pour les Hôpitaux Universitaires de Genève (HUG) : qualification anonyme des donneurs en entreprise pour résorber le taux de rejet de 30%.'
+                : 'Award-winning blood donation platform engineered for Geneva University Hospitals (HUG) to pre-qualify corporate volunteers and eliminate the 30% on-site deferral bottleneck.'}
             </p>
           </div>
 
@@ -320,81 +300,41 @@ export const Home: React.FC = () => {
               <DonnonsWidgetSim />
             </div>
 
-            {/* Architectural Context: Key Specifications (Under Widget across Full Width) */}
-            <div className="rounded-none border border-slate-200 bg-slate-50/80 p-5 sm:p-6 space-y-4 font-sans">
-              <div className="flex items-center justify-between border-b border-slate-200 pb-2.5">
-                <span className="font-mono text-xs uppercase tracking-wider text-slate-600 font-bold">
-                  {isFrench ? 'Spécifications Clés' : 'Key Specifications'}
-                </span>
-                <span className="font-mono text-[10px] text-blue-700 font-bold bg-blue-50 border border-blue-200 px-2 py-0.5">
-                  {isFrench ? 'NOTE 6.0 / 6.0' : 'GRADE 6.0 / 6.0'}
-                </span>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-slate-600 leading-relaxed">
-                <div className="space-y-1.5">
-                  <span className="font-semibold text-slate-800 block text-xs sm:text-sm">
-                    {isFrench ? 'Mandat HUG & Problématique' : 'HUG Mandate & Challenge'}
+            {/* Architectural Highlights: 3 Crisp Data Points */}
+            <div className="rounded-none border border-slate-200 bg-slate-50/80 p-4 sm:p-5 font-sans">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 text-xs text-slate-600">
+                <div className="space-y-1">
+                  <span className="font-mono text-[10px] tracking-wider uppercase text-slate-400 font-bold block">
+                    {isFrench ? 'DÉFI INSTITUTIONNEL' : 'INSTITUTIONAL CHALLENGE'}
                   </span>
-                  <p className="text-slate-500 pt-0.5 text-xs">
-                    {isFrench ? (
-                      <>
-                        Résorption du{' '}
-                        <GlossaryTerm
-                          term="différentiel de rejet de 30%"
-                          definition={getGlossaryDef('donor-deferral', currentLang)}
-                        />{' '}
-                        : les HUG constataient que 30% des volontaires se déplaçant en entreprise étaient refusés sur place (critères médicaux ignorés). Donnons.ch qualifie l'éligibilité en amont de façon anonyme et ludique.
-                      </>
-                    ) : (
-                      <>
-                        Eliminating the{' '}
-                        <GlossaryTerm
-                          term="30% on-site rejection rate"
-                          definition={getGlossaryDef('donor-deferral', currentLang)}
-                        />{' '}
-                        : HUG reported that 30% of willing corporate donors were deferred at collection points due to overlooked criteria. Donnons.ch pre-screens eligibility beforehand through playful guidance.
-                      </>
-                    )}
-                  </p>
-                </div>
-
-                <div className="space-y-1.5">
-                  <span className="font-semibold text-slate-800 block text-xs sm:text-sm">
-                    {isFrench ? 'Gamification & Engagement RSE' : 'Gamification & Corporate CSR'}
+                  <span className="font-semibold text-slate-800 text-xs sm:text-sm block">
+                    {isFrench ? 'Mandat HUG & HEIG-VD' : 'HUG & HEIG-VD Mandate'}
                   </span>
-                  <p className="text-slate-500 pt-0.5 text-xs">
-                    {isFrench ? (
-                      <>
-                        Quiz interactif avec Roby la mascotte, projection d'impact en direct (vies sauvées) et attribution du Trophée de la Générosité /{' '}
-                        <GlossaryTerm
-                          term="Label CTS"
-                          definition={getGlossaryDef('label-cts', currentLang)}
-                        />{' '}
-                        pour valoriser la politique RSE des entreprises partenaires.
-                      </>
-                    ) : (
-                      <>
-                        Interactive cosmic quiz with Roby the mascot, real-time lives-saved impact calculation, and the Corporate Donor Label ({' '}
-                        <GlossaryTerm
-                          term="Label CTS"
-                          definition={getGlossaryDef('label-cts', currentLang)}
-                        />{' '}
-                        ) recognizing employer CSR engagement.
-                      </>
-                    )}
-                  </p>
-                </div>
-
-                <div className="space-y-2 border-t md:border-t-0 md:border-l md:pl-6 border-slate-200">
-                  <span className="font-semibold text-slate-800 block text-xs sm:text-sm">
-                    {isFrench ? 'Architecture & Stack Technique' : 'Architecture & Technical Stack'}
-                  </span>
-                  <p className="text-slate-500 text-xs">
+                  <p className="text-slate-500 text-xs leading-relaxed">
                     {isFrench
-                      ? 'Développement full-stack : Vue.js 3 réactif, API REST Laravel, modélisation relationnelle MySQL et Tailwind CSS. Note maximale 6.0 / 6.0 décernée par les HUG et la HEIG-VD.'
-                      : 'Full-stack delivery: Reactive Vue.js 3, robust Laravel REST API, MySQL relational data modeling, and Tailwind CSS. Maximum grade 6.0 / 6.0 awarded by HUG and HEIG-VD.'}
+                      ? '30% des volontaires étaient refusés sur place par manque d\'information. Donnons.ch pré-qualifie l\'éligibilité en amont.'
+                      : '30% of willing corporate donors were deferred at collection points. Donnons.ch pre-screens eligibility playfully.'}
                   </p>
+                </div>
+
+                <div className="space-y-1">
+                  <span className="font-mono text-[10px] tracking-wider uppercase text-slate-400 font-bold block">
+                    {isFrench ? 'ENGAGEMENT & IMPACT' : 'GAMIFICATION & CSR'}
+                  </span>
+                  <span className="font-semibold text-slate-800 text-xs sm:text-sm block">
+                    {isFrench ? 'Roby Mascotte & Label CTS' : 'Roby Mascot & CTS Label'}
+                  </span>
+                  <p className="text-slate-500 text-xs leading-relaxed">
+                    {isFrench
+                      ? 'Quiz médical interactif, projection de vies sauvées en direct et reconnaissance RSE d\'entreprise.'
+                      : 'Interactive quiz, real-time lives-saved impact calculation, and corporate employer CSR engagement.'}
+                  </p>
+                </div>
+
+                <div className="space-y-1 border-t md:border-t-0 md:border-l md:pl-6 border-slate-200">
+                  <span className="font-mono text-[10px] tracking-wider uppercase text-slate-400 font-bold block">
+                    {isFrench ? 'STACK PRODUCTION' : 'PRODUCTION STACK'}
+                  </span>
                   <div className="flex flex-wrap gap-1.5 pt-1 text-[11px] font-mono text-slate-700">
                     <span className="px-2 py-0.5 bg-white border border-slate-200">Vue.js 3</span>
                     <span className="px-2 py-0.5 bg-white border border-slate-200">MySQL</span>
@@ -411,39 +351,28 @@ export const Home: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="rounded-none border border-slate-200 bg-white p-6 shadow-sm flex flex-col justify-between space-y-5">
             <div className="space-y-3">
-              <h3 className="text-xl font-bold tracking-tight text-fintech-primary">
-                {t('projects.catholicRoute.title')}
-              </h3>
+              <div className="space-y-2">
+                <h3 className="text-xl font-bold tracking-tight text-fintech-primary">
+                  {t('projects.catholicRoute.title')}
+                </h3>
+                {/* 3 Metric Badges */}
+                <div className="flex flex-wrap items-center gap-1.5">
+                  <span className="px-2 py-0.5 text-[10px] font-mono font-semibold bg-blue-50 text-electric border border-blue-200">
+                    {isFrench ? '< 10ms Recherche' : '< 10ms Search Index'}
+                  </span>
+                  <span className="px-2 py-0.5 text-[10px] font-mono font-semibold bg-slate-100 text-slate-700 border border-slate-200">
+                    {isFrench ? '50+ Nœuds Sémantiques' : '50+ Semantic Nodes'}
+                  </span>
+                  <span className="px-2 py-0.5 text-[10px] font-mono font-semibold bg-slate-100 text-slate-700 border border-slate-200">
+                    {isFrench ? 'Frise Réactive' : 'Reactive Timeline'}
+                  </span>
+                </div>
+              </div>
+
               <p className="text-xs sm:text-sm text-fintech-secondary leading-relaxed">
-                {isFrench ? (
-                  <>
-                    Moteur de recherche et d'exploration conceptuelle articulant{' '}
-                    <GlossaryTerm
-                      term="Ontologie"
-                      definition={getGlossaryDef('ontology', currentLang)}
-                    />{' '}
-                    et{' '}
-                    <GlossaryTerm
-                      term="Épistémologie"
-                      definition={getGlossaryDef('epistemology', currentLang)}
-                    />
-                    , avec recherche instantanée, infobulles contextuelles et frise chronologique.
-                  </>
-                ) : (
-                  <>
-                    Scholarly digital research engine synthesizing{' '}
-                    <GlossaryTerm
-                      term="Ontology"
-                      definition={getGlossaryDef('ontology', currentLang)}
-                    />{' '}
-                    and{' '}
-                    <GlossaryTerm
-                      term="Epistemology"
-                      definition={getGlossaryDef('epistemology', currentLang)}
-                    />
-                    , with instant search, contextual tooltips, and interactive chronology.
-                  </>
-                )}
+                {isFrench
+                  ? 'Moteur de recherche érudit articulant ontologie et épistémologie avec indexation floue instantanée (< 10ms) et frise chronologique réactive.'
+                  : 'Scholarly research engine synthesizing conceptual ontology with sub-10ms instant fuzzy indexing and interactive chronological timeline navigation.'}
               </p>
 
               {/* Interactive Lexicon & Chronology Simulation Widget */}
@@ -452,7 +381,7 @@ export const Home: React.FC = () => {
 
             <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
               <span className="text-xs font-mono text-slate-400">
-                {isFrench ? 'Recherche · SmartText' : 'Search · SmartText'}
+                React 18 · TypeScript · SVG
               </span>
               <Link
                 to="/projects/catholic-route"
@@ -466,39 +395,28 @@ export const Home: React.FC = () => {
 
           <div className="rounded-none border border-slate-200 bg-white p-6 shadow-sm flex flex-col justify-between space-y-5">
             <div className="space-y-3">
-              <h3 className="text-xl font-bold tracking-tight text-fintech-primary">
-                {t('projects.marriage.title')}
-              </h3>
+              <div className="space-y-2">
+                <h3 className="text-xl font-bold tracking-tight text-fintech-primary">
+                  {t('projects.marriage.title')}
+                </h3>
+                {/* 3 Metric Badges */}
+                <div className="flex flex-wrap items-center gap-1.5">
+                  <span className="px-2 py-0.5 text-[10px] font-mono font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                    {isFrench ? '100% Mobile First' : '100% Mobile-First UX'}
+                  </span>
+                  <span className="px-2 py-0.5 text-[10px] font-mono font-semibold bg-blue-50 text-electric border border-blue-200">
+                    {isFrench ? 'Sync Webhook Excel' : 'Excel Webhook Sync'}
+                  </span>
+                  <span className="px-2 py-0.5 text-[10px] font-mono font-semibold bg-slate-100 text-slate-700 border border-slate-200">
+                    {isFrench ? 'Zéro Lag 60 FPS' : 'Zero-Lag 60 FPS'}
+                  </span>
+                </div>
+              </div>
+
               <p className="text-xs sm:text-sm text-fintech-secondary leading-relaxed">
-                {isFrench ? (
-                  <>
-                    Plateforme événementielle privée intégrant un moteur de RSVP dynamique, une{' '}
-                    <GlossaryTerm
-                      term="architecture serverless"
-                      definition={getGlossaryDef('serverless-architecture', currentLang)}
-                    />{' '}
-                    vers tableur Excel et un contrôle d'accès par{' '}
-                    <GlossaryTerm
-                      term="Magic Link"
-                      definition={getGlossaryDef('magic-link', currentLang)}
-                    />
-                    .
-                  </>
-                ) : (
-                  <>
-                    Private event web platform engineered with a dynamic RSVP intake engine, real-time{' '}
-                    <GlossaryTerm
-                      term="serverless architecture"
-                      definition={getGlossaryDef('serverless-architecture', currentLang)}
-                    />{' '}
-                    to Excel spreadsheets, and{' '}
-                    <GlossaryTerm
-                      term="Magic Link"
-                      definition={getGlossaryDef('magic-link', currentLang)}
-                    />{' '}
-                    access control.
-                  </>
-                )}
+                {isFrench
+                  ? 'Plateforme événementielle mobile-first intégrant un flux de RSVP interactif avec synchronisation temps réel vers tableur Excel.'
+                  : 'Mobile-first event platform engineered with interactive RSVP guest intake and real-time webhook spreadsheet synchronization.'}
               </p>
 
               {/* Interactive Wedding Preview Widget */}
@@ -507,7 +425,7 @@ export const Home: React.FC = () => {
 
             <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
               <span className="text-xs font-mono text-slate-400">
-                {isFrench ? 'RSVP · LocalStorage · Tableur Excel' : 'RSVP · LocalStorage · Excel Sync'}
+                React 18 · LocalStorage · Serverless
               </span>
               <Link
                 to="/projects/marriage-platform"
