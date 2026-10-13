@@ -27,7 +27,7 @@ export const BachelorPitch: React.FC = () => {
       <section className="border border-slate-200 bg-white p-6 sm:p-8 shadow-sm space-y-5">
         <div className="space-y-2">
           <div className="text-[11px] font-mono uppercase tracking-wider text-slate-400">
-            HEIG-VD · Ingénierie des Médias 2027
+            {isFrench ? 'HEIG-VD · Ingénierie des Médias 2027' : 'HEIG-VD · Media Engineering 2027'}
           </div>
 
           <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-fintech-primary">
@@ -213,50 +213,6 @@ export const BachelorPitch: React.FC = () => {
             <p className="text-[11px] text-slate-600 leading-relaxed">
               {t('bachelorPitch.timeline.step4Desc')}
             </p>
-          </div>
-        </div>
-      </section>
-
-      {/* 04 / Direct Contact Card */}
-      <section className="border border-slate-200 bg-slate-50 p-5 sm:p-6 space-y-4">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div className="space-y-0.5">
-            <h2 className="text-sm sm:text-base font-bold text-fintech-primary">
-              {t('bachelorPitch.contact.title')}
-            </h2>
-            <p className="text-xs text-slate-600">
-              {t('bachelorPitch.contact.desc')}
-            </p>
-          </div>
-
-          <a
-            href="mailto:sbstevebenjamin@gmail.com?subject=HEIG-VD%20Bachelor%20Project%202027"
-            className="px-4 py-2.5 bg-fintech-primary hover:bg-slate-800 text-white text-xs font-mono font-medium shadow-sm transition-colors self-start sm:self-auto shrink-0"
-          >
-            sbstevebenjamin@gmail.com ↗
-          </a>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-3 border-t border-slate-200 text-xs font-mono text-slate-600">
-          <div>
-            <span className="text-slate-400 uppercase text-[10px] block">Institution</span>
-            <span className="font-semibold text-fintech-primary">{t('bachelorPitch.contact.institution')}</span>
-          </div>
-          <div>
-            <span className="text-slate-400 uppercase text-[10px] block">{isFrench ? 'Localisation' : 'Location'}</span>
-            <span className="font-semibold text-fintech-primary">{t('bachelorPitch.contact.location')}</span>
-          </div>
-          <div>
-            <span className="text-slate-400 uppercase text-[10px] block">{isFrench ? 'Document' : 'Document'}</span>
-            <a
-              href={`${import.meta.env.BASE_URL}HEIG-VD-Guide_TB-filiere-IM-2026-27.pdf`}
-              target="_blank"
-              rel="noopener noreferrer"
-              download
-              className="text-electric hover:underline font-semibold"
-            >
-              Guide_TB_2026-27.pdf ↗
-            </a>
           </div>
         </div>
       </section>

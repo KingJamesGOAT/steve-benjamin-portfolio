@@ -437,11 +437,6 @@ export const Home: React.FC = () => {
       <section id="bachelor-pitch" className="scroll-mt-24">
         <div className="rounded-none border border-slate-200 bg-white p-8 sm:p-10 shadow-sm space-y-6">
           <div className="space-y-3">
-            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-none text-xs font-mono font-medium bg-slate-100 text-slate-700 border border-slate-200">
-              <span className="w-1.5 h-1.5 bg-electric rounded-none inline-block" />
-              <span>{t('bachelorPitch.tag')}</span>
-            </div>
-
             <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-fintech-primary">
               {t('bachelorPitch.title')}
             </h2>
@@ -451,42 +446,24 @@ export const Home: React.FC = () => {
             </p>
           </div>
 
-          {/* 3 Key Institutional Highlights in a single scannable row */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 py-1 font-mono text-xs">
-            <div className="p-3 border border-slate-200 bg-slate-50/60">
-              <span className="text-slate-400 block text-[10px] uppercase font-bold">
-                {isFrench ? '01 / DURÉE' : '01 / DURATION'}
+          {/* 3 Key Institutional Highlights */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 py-1">
+            <div className="p-4 sm:p-5 border border-slate-200 bg-slate-50/70 flex items-center justify-center text-center shadow-xs">
+              <span className="text-sm sm:text-base font-bold text-fintech-primary tracking-tight">
+                {isFrench ? '14 Semaines Dédiées' : '14 Dedicated Weeks'}
               </span>
-              <span className="font-semibold text-slate-800">
-                {isFrench ? '14 Semaines dédiées' : '14 Dedicated Weeks'}
-              </span>
-              <p className="text-slate-500 text-[11px] font-sans pt-0.5">
-                {isFrench ? 'Avril - Août 2027 à plein temps' : 'April - August 2027 full-time'}
-              </p>
             </div>
 
-            <div className="p-3 border border-slate-200 bg-slate-50/60">
-              <span className="text-slate-400 block text-[10px] uppercase font-bold">
-                {isFrench ? '02 / COÛT' : '02 / FINANCIALS'}
+            <div className="p-4 sm:p-5 border border-slate-200 bg-slate-50/70 flex items-center justify-center text-center shadow-xs">
+              <span className="text-sm sm:text-base font-bold text-fintech-primary tracking-tight">
+                {isFrench ? 'CHF 0 de Salaire Obligatoire' : 'CHF 0 Mandatory Salary'}
               </span>
-              <span className="font-semibold text-slate-800">
-                {isFrench ? 'CHF 0 de salaire obligatoire' : 'CHF 0 Mandatory Salary'}
-              </span>
-              <p className="text-slate-500 text-[11px] font-sans pt-0.5">
-                {isFrench ? 'Projet intégré au cursus HEIG-VD' : 'Academic curriculum capstone'}
-              </p>
             </div>
 
-            <div className="p-3 border border-slate-200 bg-slate-50/60">
-              <span className="text-slate-400 block text-[10px] uppercase font-bold">
-                {isFrench ? '03 / ACCORD' : '03 / IP & NDA'}
+            <div className="p-4 sm:p-5 border border-slate-200 bg-slate-50/70 flex items-center justify-center text-center shadow-xs">
+              <span className="text-sm sm:text-base font-bold text-fintech-primary tracking-tight">
+                {isFrench ? 'Confidentialité & NDA Garantis' : 'Strict NDA & IP Transfer'}
               </span>
-              <span className="font-semibold text-slate-800">
-                {isFrench ? 'Confidentialité & NDA garantis' : 'Strict NDA & IP Transfer'}
-              </span>
-              <p className="text-slate-500 text-[11px] font-sans pt-0.5">
-                {isFrench ? 'Propriété intellectuelle d\'entente' : 'IP assigned to enterprise'}
-              </p>
             </div>
           </div>
 
