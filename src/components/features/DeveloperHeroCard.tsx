@@ -1,24 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Terminal } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 export const DeveloperHeroCard: React.FC = () => {
   const { i18n } = useTranslation();
   const isFrench = i18n.language?.startsWith('fr');
-  const [copied, setCopied] = useState(false);
-
-  const codeString = `const engineer = {
-  degree: "${isFrench ? 'BSc Ingénierie des Médias @ HEIG-VD' : 'BSc Media Engineering @ HEIG-VD'}",
-  background: "${isFrench ? 'Hardware C (9 ans) → Web & UI/UX' : 'C Hardware (9 yrs) → Web & UI/UX'}",
-  coreStack: ["React", "TypeScript", "Tailwind", "Figma", "C"],
-  mandateScope: "${isFrench ? 'Mandat 14 semaines (0 CHF / NDA)' : '14-Week Capstone (CHF 0 / NDA)'}"
-};`;
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(codeString);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
 
   return (
     <div className="w-full max-w-lg border border-slate-200 bg-white shadow-xl shadow-slate-900/5 rounded-none font-mono text-xs">
@@ -27,35 +13,29 @@ export const DeveloperHeroCard: React.FC = () => {
         <div className="flex items-center space-x-2">
           {/* macOS Window Controls: Red, Yellow, Green */}
           <div className="flex space-x-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f56] inline-block" />
-            <span className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e] inline-block" />
-            <span className="w-2.5 h-2.5 rounded-full bg-[#27c93f] inline-block" />
+            <button
+              type="button"
+              className="w-2.5 h-2.5 rounded-full bg-[#ff5f56] inline-block cursor-pointer hover:opacity-80 transition-opacity focus:outline-none"
+              title="Close"
+              aria-label="Close"
+            />
+            <button
+              type="button"
+              className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e] inline-block cursor-pointer hover:opacity-80 transition-opacity focus:outline-none"
+              title="Minimize"
+              aria-label="Minimize"
+            />
+            <button
+              type="button"
+              className="w-2.5 h-2.5 rounded-full bg-[#27c93f] inline-block cursor-pointer hover:opacity-80 transition-opacity focus:outline-none"
+              title="Expand"
+              aria-label="Expand"
+            />
           </div>
           <span className="text-[11px] font-semibold text-slate-600 pl-1.5 flex items-center space-x-1">
             <Terminal className="w-3 h-3 text-electric" />
             <span>developer.config.ts</span>
           </span>
-        </div>
-
-        {/* Live Status Indicator & Copy Action */}
-        <div className="flex items-center space-x-2 sm:space-x-3">
-          <div className="inline-flex items-center space-x-1.5 text-[10px] font-mono text-emerald-700 font-medium">
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
-            </span>
-            <span>{isFrench ? 'Mandat 2027' : 'Mandate 2027'}</span>
-          </div>
-
-          <button
-            type="button"
-            onClick={handleCopy}
-            className="text-[10px] font-mono text-slate-500 hover:text-electric px-2 py-0.5 border border-slate-200 hover:border-slate-300 bg-white transition-colors cursor-pointer"
-            title={isFrench ? 'Copier le code' : 'Copy code snippet'}
-            aria-label="Copy code"
-          >
-            {copied ? (isFrench ? '✓ Copié' : '✓ Copied') : (isFrench ? 'Copier' : 'Copy')}
-          </button>
         </div>
       </div>
 

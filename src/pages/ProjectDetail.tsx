@@ -610,6 +610,23 @@ export const ProjectDetail: React.FC = () => {
             ? PROJECTS_DATA[currentIndex + 1]
             : PROJECTS_DATA[0];
 
+        const renderTitle = (proj: typeof prevProject) => {
+          if (proj.slug === 'marriage-platform') {
+            return isFrench ? (
+              <>
+                <span className="block">Plateforme Événementielle</span>
+                <span className="block">Privée</span>
+              </>
+            ) : (
+              <>
+                <span className="block">Private Event &</span>
+                <span className="block">RSVP Platform</span>
+              </>
+            );
+          }
+          return t(proj.titleKey);
+        };
+
         return (
           <nav
             aria-label="Project Pagination"
@@ -625,7 +642,7 @@ export const ProjectDetail: React.FC = () => {
                   {isFrench ? '← Précédent' : '← Previous'}
                 </span>
                 <span className="text-xs sm:text-sm md:text-base font-bold text-fintech-primary group-hover:text-electric transition-colors line-clamp-2">
-                  {t(prevProject.titleKey)}
+                  {renderTitle(prevProject)}
                 </span>
               </Link>
             )}
@@ -655,7 +672,7 @@ export const ProjectDetail: React.FC = () => {
                   {isFrench ? 'Suivant →' : 'Next →'}
                 </span>
                 <span className="text-xs sm:text-sm md:text-base font-bold text-fintech-primary group-hover:text-electric transition-colors line-clamp-2">
-                  {t(nextProject.titleKey)}
+                  {renderTitle(nextProject)}
                 </span>
               </Link>
             )}
