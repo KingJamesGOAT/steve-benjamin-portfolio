@@ -38,10 +38,10 @@ export const IntroAnimation: React.FC<IntroAnimationProps> = ({ onComplete }) =>
   useEffect(() => {
     if (stage === 'gone') return;
 
-    // UX Sweet Spot: hold for ~0.85s, then smooth 350ms fade-out (total ~1.2s)
+    // Silky-smooth timing: 1.0s clean hold, followed by 600ms gradual dissolve
     const fadeTimer = setTimeout(() => {
       setStage('fading');
-    }, 850);
+    }, 1000);
 
     const removeTimer = setTimeout(() => {
       setStage('gone');
@@ -51,7 +51,7 @@ export const IntroAnimation: React.FC<IntroAnimationProps> = ({ onComplete }) =>
         // storage disabled fallback
       }
       if (onComplete) onComplete();
-    }, 1200);
+    }, 1600);
 
     return () => {
       clearTimeout(fadeTimer);
@@ -74,16 +74,24 @@ export const IntroAnimation: React.FC<IntroAnimationProps> = ({ onComplete }) =>
   return (
     <div
       onClick={handleDismiss}
-      className={`fixed inset-0 z-[100] bg-white flex flex-col items-center justify-center select-none cursor-pointer transition-all duration-350 ease-out ${
+      className={`fixed inset-0 z-[100] bg-white flex flex-col items-center justify-center select-none cursor-pointer transition-opacity duration-600 ease-in-out ${
         stage === 'fading'
-          ? 'opacity-0 -translate-y-4 pointer-events-none'
-          : 'opacity-100 translate-y-0 pointer-events-auto'
+          ? 'opacity-0 pointer-events-none'
+          : 'opacity-100 pointer-events-auto'
       }`}
-      style={{ willChange: 'opacity, transform' }}
+      style={{
+        willChange: 'opacity',
+        WebkitFontSmoothing: 'antialiased',
+        MozOsxFontSmoothing: 'grayscale',
+        textRendering: 'optimizeLegibility',
+      }}
     >
       <div className="flex flex-col items-center text-center px-6 max-w-4xl space-y-4 sm:space-y-6">
         {/* Main Title: Steve Benjamin */}
-        <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black text-fintech-primary tracking-tight leading-none">
+        <h1
+          className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black text-fintech-primary tracking-tight leading-none"
+          style={{ fontSynthesis: 'none' }}
+        >
           Steve Benjamin
         </h1>
 
@@ -91,7 +99,10 @@ export const IntroAnimation: React.FC<IntroAnimationProps> = ({ onComplete }) =>
         <div className="h-[3px] w-24 sm:w-32 bg-electric rounded-none" />
 
         {/* Subtitle Under Name: Media Engineer */}
-        <p className="text-base sm:text-xl md:text-2xl font-mono text-slate-600 uppercase tracking-widest pt-1">
+        <p
+          className="text-base sm:text-xl md:text-2xl font-mono text-slate-600 uppercase tracking-widest pt-1"
+          style={{ fontSynthesis: 'none' }}
+        >
           {isFrench ? 'Ingénieur des Médias' : 'Media Engineer'}
         </p>
       </div>
