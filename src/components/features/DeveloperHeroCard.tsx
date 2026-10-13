@@ -11,17 +11,17 @@ export const DeveloperHeroCard: React.FC = () => {
   const [isMinimized, setIsMinimized] = useState(false);
   const [isRunning, setIsRunning] = useState(false);
 
-  // When closed with red button: show only container with "developer.config.ts"
+  // When closed with red button: show only compact container with "developer.config.ts"
   if (isClosed) {
     return (
-      <div className="w-full max-w-lg border border-slate-200 bg-white shadow-sm rounded-none font-mono text-xs px-3.5 py-2.5">
+      <div className="w-full flex justify-center lg:justify-end">
         <button
           type="button"
           onClick={() => {
             setIsClosed(false);
             setIsMinimized(false);
           }}
-          className="text-[11px] font-semibold text-slate-600 hover:text-electric transition-colors cursor-pointer select-none"
+          className="border border-slate-200 bg-white hover:border-electric shadow-sm rounded-none font-mono text-[11px] font-semibold text-slate-600 hover:text-electric transition-colors cursor-pointer select-none px-3.5 py-2 inline-flex items-center"
           title="developer.config.ts"
         >
           developer.config.ts
