@@ -206,21 +206,21 @@ export const AppCarousel: React.FC = () => {
 
         <div
           ref={trackRef}
-          className="flex items-center space-x-6 sm:space-x-8 md:space-x-10 will-change-transform"
+          className="flex items-center space-x-5 sm:space-x-8 md:space-x-10 will-change-transform"
           style={{ width: 'max-content' }}
         >
           {marqueeItems.map((app, index) => (
             <div
               key={`${app.id}-${index}`}
-              className="w-24 sm:w-28 md:w-32 flex flex-col items-center justify-center gap-1.5 sm:gap-2 select-none group flex-shrink-0"
+              className="w-20 sm:w-28 md:w-32 flex flex-col items-center justify-center gap-1 sm:gap-2 select-none group flex-shrink-0"
               title={app.name}
             >
-              {/* Enlarged Blue SVG Logo Icon */}
-              <div className="w-9 h-9 sm:w-10 sm:h-10 text-[#0052FF] flex items-center justify-center group-hover:scale-110 transition-transform">
+              {/* Blue SVG Logo Icon */}
+              <div className="w-7 h-7 sm:w-10 sm:h-10 text-[#0052FF] flex items-center justify-center group-hover:scale-110 transition-transform">
                 {app.svg('w-full h-full object-contain')}
               </div>
               {/* App Name in Matching Electric Blue */}
-              <span className="font-mono text-xs sm:text-[13px] font-bold text-[#0052FF] tracking-tight whitespace-nowrap">
+              <span className="font-mono text-[10.5px] sm:text-[13px] font-bold text-[#0052FF] tracking-tight whitespace-nowrap">
                 {app.name}
               </span>
             </div>

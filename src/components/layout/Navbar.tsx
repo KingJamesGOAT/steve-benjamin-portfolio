@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Search, ChevronDown } from 'lucide-react';
+import { Search, ChevronDown, Menu, X } from 'lucide-react';
 
 interface NavbarProps {
   onOpenCommandPalette?: () => void;
@@ -14,6 +14,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState<string>('');
   const [isProjectsOpen, setIsProjectsOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const dropdownTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const isFrench = Boolean(i18n.language?.toLowerCase().startsWith('fr'));
@@ -49,6 +50,22 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Prevent background scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      const originalOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = originalOverflow;
+      };
+    }
+  }, [isMobileMenuOpen]);
+
+  // Close mobile menu on location change
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname, location.hash]);
+
   // Track active section as user scrolls through the page
   useEffect(() => {
     if (location.pathname === '/bachelor-pitch') {
@@ -65,7 +82,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
 
     const sectionIds = ['bachelor-pitch', 'about', 'projects'];
     const handleScrollSpy = () => {
-      // If near or at the bottom of the page, activate bachelor-pitch
       const isAtBottom =
         window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 140;
       if (isAtBottom) {
@@ -120,6 +136,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
 
   const handleNavClick = (targetId: string) => {
     setIsProjectsOpen(false);
+    setIsMobileMenuOpen(false);
     setActiveSection(targetId);
     if (location.pathname === '/' || location.pathname === '') {
       const element = document.getElementById(targetId);
@@ -145,6 +162,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
 
   const handleProjectSelect = (slug: string) => {
     setIsProjectsOpen(false);
+    setIsMobileMenuOpen(false);
     navigate(`/projects/${slug}`);
   };
 
@@ -152,18 +170,18 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
     <header
       className={`sticky z-40 w-full transition-all duration-300 ease-in-out ${
         isScrolled
-          ? 'top-2 sm:top-3 px-4 sm:px-6 pointer-events-none'
+          ? 'top-2 sm:top-3 px-3 sm:px-6 pointer-events-none'
           : 'top-0 px-0 bg-white border-b border-slate-200/80 pointer-events-auto'
       }`}
     >
       <div
         className={`max-w-6xl mx-auto flex items-center justify-between transition-all duration-300 ease-in-out ${
           isScrolled
-            ? 'pointer-events-auto h-13 sm:h-14 px-4 sm:px-6 border border-slate-200/80 bg-white/80 backdrop-blur-md shadow-xs'
-            : 'h-16 px-4 sm:px-6 bg-transparent'
+            ? 'pointer-events-auto h-12 sm:h-14 px-3 sm:px-6 border border-slate-200/80 bg-white/90 backdrop-blur-md shadow-xs'
+            : 'h-14 sm:h-16 px-4 sm:px-6 bg-transparent'
         }`}
       >
-        {/* Brand Logo */}
+        {/* Brand Logo (Home link) */}
         <Link
           to="/#home"
           onClick={() => handleNavClick('home')}
@@ -174,7 +192,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
             src={`${import.meta.env.BASE_URL}Logo.png`}
             alt="Steve Benjamin"
             className={`w-auto object-contain transition-all duration-300 ${
-              isScrolled ? 'h-8 sm:h-8.5 max-h-8.5' : 'h-9 sm:h-10 max-h-10'
+              isScrolled ? 'h-7 sm:h-8.5 max-h-8.5' : 'h-8 sm:h-10 max-h-10'
             }`}
             onError={(e) => {
               const target = e.currentTarget;
@@ -184,9 +202,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
           />
         </Link>
 
-        {/* Navigation & Controls */}
-        <div className="flex items-center space-x-2 sm:space-x-4">
-          <nav className="flex items-center space-x-1 sm:space-x-2">
+        {/* Desktop Navigation & Controls (Visible on md and above) */}
+        <div className="hidden md:flex items-center space-x-4">
+          <nav className="flex items-center space-x-2">
             {navLinks.map((link) => {
               const isActive = activeSection === link.targetId;
 
@@ -201,10 +219,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
                   >
                     <button
                       type="button"
-                      onClick={() => {
-                        handleNavClick('projects');
-                      }}
-                      className={`px-2.5 sm:px-3 py-1.5 text-xs sm:text-sm transition-colors cursor-pointer inline-flex items-center gap-1 select-none ${
+                      onClick={() => handleNavClick('projects')}
+                      className={`px-3 py-1.5 text-xs sm:text-sm transition-colors cursor-pointer inline-flex items-center gap-1 select-none ${
                         isActive
                           ? 'text-electric font-semibold'
                           : 'text-fintech-secondary hover:text-electric font-medium'
@@ -249,7 +265,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
                   key={link.targetId}
                   type="button"
                   onClick={() => handleNavClick(link.targetId)}
-                  className={`px-2.5 sm:px-3 py-1.5 text-xs sm:text-sm transition-colors cursor-pointer select-none ${
+                  className={`px-3 py-1.5 text-xs sm:text-sm transition-colors cursor-pointer select-none ${
                     isActive
                       ? 'text-electric font-semibold'
                       : 'text-fintech-secondary hover:text-electric font-medium'
@@ -261,14 +277,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
             })}
           </nav>
 
-          <div className="h-4 w-[1px] bg-slate-200 hidden sm:block" />
+          <div className="h-4 w-[1px] bg-slate-200" />
 
-          {/* Unified Single-Container Search & Ctrl K Trigger */}
+          {/* Single-Container Search & Ctrl K Trigger */}
           {onOpenCommandPalette && (
             <button
               onClick={onOpenCommandPalette}
               type="button"
-              className="hidden md:inline-flex items-center space-x-1.5 px-2.5 py-1 text-xs font-mono border border-slate-200 rounded-none hover:border-electric hover:text-electric transition-colors bg-white text-slate-500 hover:bg-slate-50 cursor-pointer"
+              className="inline-flex items-center space-x-1.5 px-2.5 py-1 text-xs font-mono border border-slate-200 rounded-none hover:border-electric hover:text-electric transition-colors bg-white text-slate-500 hover:bg-slate-50 cursor-pointer"
               title={t('cmdPalette.placeholder')}
               aria-label="Search Glossary (Ctrl K)"
             >
@@ -277,7 +293,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
             </button>
           )}
 
-          {/* Interactive FinTech EN / FR Language Toggle Switch */}
+          {/* Desktop Language Switch */}
           <div
             onClick={toggleLanguage}
             role="button"
@@ -312,7 +328,139 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
             </span>
           </div>
         </div>
+
+        {/* Mobile Header Controls: ONLY Language Switch + Hamburger (Strict Minimalist) */}
+        <div className="flex md:hidden items-center space-x-2">
+          {/* Mobile Language Switch */}
+          <div
+            onClick={toggleLanguage}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                toggleLanguage();
+              }
+            }}
+            className="inline-flex items-center p-0.5 border border-slate-200 bg-slate-100/90 rounded-none cursor-pointer select-none text-[10px] font-mono transition-colors"
+            title={isFrench ? 'Switch to English' : 'Passer en français'}
+            aria-label="Toggle language"
+          >
+            <span
+              className={`px-1.5 py-0.5 transition-all font-semibold ${
+                isFrench
+                  ? 'bg-white text-electric shadow-xs'
+                  : 'text-slate-400'
+              }`}
+            >
+              FR
+            </span>
+            <span
+              className={`px-1.5 py-0.5 transition-all font-semibold ${
+                !isFrench
+                  ? 'bg-white text-electric shadow-xs'
+                  : 'text-slate-400'
+              }`}
+            >
+              EN
+            </span>
+          </div>
+
+          {/* Minimal Hamburger Button */}
+          <button
+            type="button"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="p-1.5 border border-slate-200 bg-white text-slate-700 hover:text-electric transition-colors focus:outline-none"
+            aria-label={isMobileMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+          >
+            {isMobileMenuOpen ? (
+              <X className="w-5 h-5 text-slate-800" />
+            ) : (
+              <Menu className="w-5 h-5 text-slate-800" />
+            )}
+          </button>
+        </div>
       </div>
+
+      {/* Mobile Drawer / Overlay Menu */}
+      {isMobileMenuOpen && (
+        <div
+          className="fixed inset-x-0 top-14 bottom-0 z-50 bg-white/95 backdrop-blur-md md:hidden flex flex-col justify-between p-5 border-t border-slate-200 overflow-y-auto pointer-events-auto"
+          onClick={() => setIsMobileMenuOpen(false)}
+        >
+          <div className="space-y-6 pt-1" onClick={(e) => e.stopPropagation()}>
+            {/* Direct Projects Quick Access */}
+            <div className="space-y-2">
+              <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400 font-bold block">
+                {isFrench ? 'PROJETS SÉLECTIONNÉS' : 'FEATURED PROJECTS'}
+              </span>
+              <div className="space-y-1">
+                {projectsList.map((p) => (
+                  <button
+                    key={p.slug}
+                    type="button"
+                    onClick={() => handleProjectSelect(p.slug)}
+                    className="w-full text-left py-2.5 px-3 border border-slate-200 bg-white hover:border-electric text-xs font-mono font-medium text-slate-800 hover:text-electric transition-colors flex items-center justify-between"
+                  >
+                    <span>{p.title}</span>
+                    <span className="text-electric text-xs">→</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Core Section Links */}
+            <div className="space-y-2 pt-2 border-t border-slate-100">
+              <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400 font-bold block">
+                {isFrench ? 'SECTIONS' : 'NAVIGATION'}
+              </span>
+              <div className="space-y-1 font-sans">
+                <button
+                  type="button"
+                  onClick={() => handleNavClick('about')}
+                  className="w-full text-left py-2 px-2 text-sm font-semibold text-slate-800 hover:text-electric transition-colors"
+                >
+                  {t('nav.about')}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleNavClick('bachelor-pitch')}
+                  className="w-full text-left py-2 px-2 text-sm font-semibold text-slate-800 hover:text-electric transition-colors flex items-center justify-between"
+                >
+                  <span>{t('nav.bachelorPitch')}</span>
+                  <span className="text-[10px] font-mono text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5">
+                    2027
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Direct Document / Profile Links */}
+          <div
+            className="pt-4 border-t border-slate-200 flex items-center justify-between text-xs font-mono"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <a
+              href={`${import.meta.env.BASE_URL}CV_Steve_Benjamin.pdf`}
+              target="_blank"
+              rel="noopener noreferrer"
+              download
+              className="px-3.5 py-2 border border-slate-200 bg-white text-slate-700 hover:border-electric hover:text-electric font-semibold transition-colors"
+            >
+              CV (PDF) ↗
+            </a>
+            <a
+              href="https://www.linkedin.com/in/sb-steve-benjamin/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-3.5 py-2 border border-slate-200 bg-white text-slate-700 hover:border-electric hover:text-electric font-semibold transition-colors"
+            >
+              LinkedIn ↗
+            </a>
+          </div>
+        </div>
+      )}
     </header>
   );
 };

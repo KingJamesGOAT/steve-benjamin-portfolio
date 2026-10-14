@@ -268,11 +268,11 @@ export const PaperTradingSim: React.FC = () => {
             <thead>
               <tr className="border-b border-[#1E2638] text-[11px] text-slate-400 uppercase tracking-wider">
                 <th className="py-2.5 px-2 font-normal">{isFrench ? 'Actif' : 'Asset'}</th>
-                <th className="py-2.5 px-2 font-normal text-right">{isFrench ? 'Taille' : 'Size'}</th>
-                <th className="py-2.5 px-2 font-normal text-right">{isFrench ? 'Investi' : 'Invested'}</th>
-                <th className="py-2.5 px-2 font-normal text-right">{isFrench ? 'Entrée' : 'Entry'}</th>
+                <th className="py-2.5 px-2 font-normal text-right hidden sm:table-cell">{isFrench ? 'Taille' : 'Size'}</th>
+                <th className="py-2.5 px-2 font-normal text-right hidden md:table-cell">{isFrench ? 'Investi' : 'Invested'}</th>
+                <th className="py-2.5 px-2 font-normal text-right hidden sm:table-cell">{isFrench ? 'Entrée' : 'Entry'}</th>
                 <th className="py-2.5 px-2 font-normal text-right">{isFrench ? 'Cours' : 'Mark'}</th>
-                <th className="py-2.5 px-2 font-normal text-right">PnL</th>
+                <th className="py-2.5 px-2 font-normal text-right hidden sm:table-cell">PnL</th>
                 <th className="py-2.5 px-2 font-normal text-right">ROI</th>
                 <th className="py-2.5 px-2 font-normal text-center">Audit</th>
               </tr>
@@ -283,7 +283,7 @@ export const PaperTradingSim: React.FC = () => {
                   key={pos.asset}
                   className="hover:bg-[#161C2C] transition-colors text-slate-200"
                 >
-                  <td className="py-3 px-2">
+                  <td className="py-2.5 sm:py-3 px-2">
                     <div className="flex items-center space-x-2">
                       <CryptoIcon symbol={pos.asset} size={20} />
                       <span className="font-bold text-slate-100 text-xs">
@@ -291,25 +291,25 @@ export const PaperTradingSim: React.FC = () => {
                       </span>
                     </div>
                   </td>
-                  <td className="py-3 px-2 text-right text-slate-300">{pos.size}</td>
-                  <td className="py-3 px-2 text-right text-blue-300">{pos.invested}</td>
-                  <td className="py-3 px-2 text-right text-slate-400">{pos.entry}</td>
-                  <td className="py-3 px-2 text-right font-semibold text-slate-100">{pos.mark}</td>
+                  <td className="py-2.5 sm:py-3 px-2 text-right text-slate-300 hidden sm:table-cell">{pos.size}</td>
+                  <td className="py-2.5 sm:py-3 px-2 text-right text-blue-300 hidden md:table-cell">{pos.invested}</td>
+                  <td className="py-2.5 sm:py-3 px-2 text-right text-slate-400 hidden sm:table-cell">{pos.entry}</td>
+                  <td className="py-2.5 sm:py-3 px-2 text-right font-semibold text-slate-100">{pos.mark}</td>
                   <td
-                    className={`py-3 px-2 text-right font-semibold ${
+                    className={`py-2.5 sm:py-3 px-2 text-right font-semibold hidden sm:table-cell ${
                       pos.isPositive ? 'text-emerald-400' : 'text-rose-500'
                     }`}
                   >
                     {pos.pnl}
                   </td>
                   <td
-                    className={`py-3 px-2 text-right font-semibold ${
+                    className={`py-2.5 sm:py-3 px-2 text-right font-semibold ${
                       pos.isPositive ? 'text-emerald-400' : 'text-rose-500'
                     }`}
                   >
                     {pos.roi}
                   </td>
-                  <td className="py-3 px-2 text-center">
+                  <td className="py-2.5 sm:py-3 px-2 text-center">
                     <button
                       type="button"
                       onClick={() => setSelectedAudit(pos)}

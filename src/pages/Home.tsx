@@ -54,18 +54,18 @@ export const Home: React.FC = () => {
       {/* Cinematic Intro Reveal Animation */}
       <IntroAnimation />
 
-      <div className="space-y-32 sm:space-y-40">
-        {/* SECTION 1: HERO VIEWPORT (FULL-VIEWPORT COVERAGE) */}
+      <div className="space-y-16 sm:space-y-28 lg:space-y-40">
+        {/* SECTION 1: HERO VIEWPORT */}
         <section
           id="home"
-          className="min-h-[calc(100vh-8rem)] sm:min-h-[calc(100vh-9.5rem)] flex flex-col justify-between scroll-mt-24"
+          className="min-h-[calc(100vh-6rem)] sm:min-h-[calc(100vh-9.5rem)] flex flex-col justify-between scroll-mt-20 sm:scroll-mt-24"
         >
           {/* Two-Column FinTech Hero Grid */}
-          <div className="my-auto py-4 sm:py-8 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          <div className="my-auto py-2 sm:py-8 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
             {/* Left Column: Oversized Typography & CTAs */}
-            <div className="lg:col-span-7 space-y-8">
+            <div className="lg:col-span-7 space-y-6 sm:space-y-8">
               {/* Hero Headline & Subtitle */}
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 {/* Availability Badge */}
                 <div>
                   <Link
@@ -81,12 +81,12 @@ export const Home: React.FC = () => {
                   </Link>
                 </div>
 
-                <h1 className="text-5xl sm:text-6xl lg:text-[4.75rem] font-black tracking-tight text-fintech-primary leading-[0.95]">
+                <h1 className="text-4xl sm:text-6xl lg:text-[4.75rem] font-black tracking-tight text-fintech-primary leading-[1.0] sm:leading-[0.95]">
                   <span className="block">Steve</span>
                   <span className="block">Benjamin</span>
                 </h1>
 
-                <div className="text-xl sm:text-2xl font-normal text-fintech-secondary tracking-tight min-h-[2.5rem] flex flex-wrap items-baseline gap-x-2">
+                <div className="text-lg sm:text-2xl font-normal text-fintech-secondary tracking-tight min-h-[2rem] sm:min-h-[2.5rem] flex flex-wrap items-baseline gap-x-2">
                   <span className="text-fintech-secondary font-medium">
                     {t('home.heroPrefix', isFrench ? 'Votre' : 'Your')}
                   </span>
@@ -97,16 +97,16 @@ export const Home: React.FC = () => {
                   />
                 </div>
 
-                <p className="text-base sm:text-lg text-fintech-secondary max-w-xl leading-relaxed font-normal">
+                <p className="text-sm sm:text-lg text-fintech-secondary max-w-xl leading-relaxed font-normal">
                   {t('home.description')}
                 </p>
               </div>
 
               {/* Strict Rectangular FinTech Action Buttons */}
-              <div className="flex flex-wrap items-center gap-4 pt-2">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-4 pt-1 sm:pt-2">
                 <a
                   href="#projects"
-                  className="inline-flex items-center space-x-2 px-6 py-3.5 rounded-none bg-electric hover:bg-electric-hover text-white text-xs font-semibold shadow-sm transition-colors uppercase tracking-wider"
+                  className="inline-flex items-center justify-center space-x-2 px-5 py-3 rounded-none bg-electric hover:bg-electric-hover text-white text-xs font-semibold shadow-sm transition-colors uppercase tracking-wider text-center"
                 >
                   <span>{t('home.ctaCaseStudies')}</span>
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -117,7 +117,7 @@ export const Home: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   download
-                  className="inline-flex items-center space-x-2 px-5 py-3.5 rounded-none border border-slate-200 bg-white hover:border-electric hover:text-electric text-slate-700 text-xs font-semibold transition-colors shadow-sm uppercase tracking-wider"
+                  className="inline-flex items-center justify-center space-x-2 px-4 py-3 rounded-none border border-slate-200 bg-white hover:border-electric hover:text-electric text-slate-700 text-xs font-semibold transition-colors shadow-sm uppercase tracking-wider text-center"
                 >
                   <FileDown className="w-3.5 h-3.5 text-electric" />
                   <span>CV (PDF)</span>
@@ -131,8 +131,8 @@ export const Home: React.FC = () => {
             </div>
           </div>
 
-          {/* Clean Scroll Indicator to Skills */}
-          <div className="flex flex-col items-center justify-center pt-4 pb-2">
+          {/* Clean Scroll Indicator to Skills (Desktop only) */}
+          <div className="hidden sm:flex flex-col items-center justify-center pt-4 pb-2">
             <button
               type="button"
               onClick={() => {
@@ -172,30 +172,30 @@ export const Home: React.FC = () => {
         </div>
 
         {/* Primary Project 1: Crypto Trade Hub */}
-        <div className="rounded-none border border-slate-200 bg-white p-6 sm:p-8 shadow-sm space-y-6">
+        <div className="rounded-none border border-slate-200 bg-white p-4 sm:p-8 shadow-sm space-y-4 sm:space-y-6">
           <div className="space-y-3">
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <div className="space-y-2">
-                <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-fintech-primary">
+              <div className="space-y-1.5 sm:space-y-2">
+                <h3 className="text-xl sm:text-3xl font-bold tracking-tight text-fintech-primary">
                   {t('projects.crypto.title')}
                 </h3>
-                {/* 3 High-Impact Metric Badges */}
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="px-2.5 py-1 text-[11px] font-mono font-semibold bg-slate-100 text-slate-700 border border-slate-200">
-                    {isFrench ? '< 50ms Latence Ticks' : '< 50ms Tick Latency'}
+                {/* Clean Impact Metric Badges (2 on mobile, 3 on desktop) */}
+                <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+                  <span className="px-2 py-0.5 sm:px-2.5 sm:py-1 text-[10px] sm:text-[11px] font-mono font-semibold bg-slate-100 text-slate-700 border border-slate-200">
+                    {isFrench ? '< 50ms Latence' : '< 50ms Latency'}
                   </span>
-                  <span className="px-2.5 py-1 text-[11px] font-mono font-semibold bg-slate-100 text-slate-700 border border-slate-200">
+                  <span className="px-2 py-0.5 sm:px-2.5 sm:py-1 text-[10px] sm:text-[11px] font-mono font-semibold bg-slate-100 text-slate-700 border border-slate-200">
+                    {isFrench ? 'Flux Binance' : 'Live Binance'}
+                  </span>
+                  <span className="hidden sm:inline-block px-2.5 py-1 text-[11px] font-mono font-semibold bg-slate-100 text-slate-700 border border-slate-200">
                     {isFrench ? 'Modèle Risque Kelly' : 'Kelly Risk Engine'}
-                  </span>
-                  <span className="px-2.5 py-1 text-[11px] font-mono font-semibold bg-slate-100 text-slate-700 border border-slate-200">
-                    {isFrench ? 'Flux Binance Direct' : 'Live Binance Stream'}
                   </span>
                 </div>
               </div>
 
               <Link
                 to="/projects/crypto-trade-hub"
-                className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-none bg-electric hover:bg-electric-hover text-white text-xs font-semibold shadow-sm transition-colors"
+                className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-none bg-electric hover:bg-electric-hover text-white text-xs font-semibold shadow-sm transition-colors"
               >
                 <span>{t('projects.viewDeepDive')}</span>
                 <ExternalLink className="w-3.5 h-3.5" />
@@ -210,14 +210,14 @@ export const Home: React.FC = () => {
           </div>
 
           {/* Full-Width Layout: Live Terminal Widget + Key Specifications Placed Underneath */}
-          <div className="space-y-5">
+          <div className="space-y-4 sm:space-y-5">
             {/* Full-Width Quantitative Terminal Widget */}
             <div className="w-full border border-slate-800 rounded-none overflow-hidden bg-slate-950 shadow-xl">
               <CryptoWidgetSim />
             </div>
 
-            {/* Architectural Highlights: 3 Crisp Data Points */}
-            <div className="rounded-none border border-slate-200 bg-slate-50/80 p-4 sm:p-5 font-sans">
+            {/* Architectural Highlights: 3 Crisp Data Points (Desktop only for minimalist mobile) */}
+            <div className="hidden md:block rounded-none border border-slate-200 bg-slate-50/80 p-4 sm:p-5 font-sans">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 text-xs text-slate-600">
                 <div className="space-y-1">
                   <span className="font-mono text-[10px] tracking-wider uppercase text-slate-400 font-bold block">
@@ -264,22 +264,22 @@ export const Home: React.FC = () => {
         </div>
 
         {/* Primary Project 2: Donnons.ch */}
-        <div className="rounded-none border border-slate-200 bg-white p-6 sm:p-8 shadow-sm space-y-6">
+        <div className="rounded-none border border-slate-200 bg-white p-4 sm:p-8 shadow-sm space-y-4 sm:space-y-6">
           <div className="space-y-3">
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <div className="space-y-2">
-                <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-fintech-primary">
+              <div className="space-y-1.5 sm:space-y-2">
+                <h3 className="text-xl sm:text-3xl font-bold tracking-tight text-fintech-primary">
                   {t('projects.donnons.title')}
                 </h3>
-                {/* 3 High-Impact Metric Badges */}
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="px-2.5 py-1 text-[11px] font-mono font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
-                    {isFrench ? 'Note 6.0 / 6.0 HUG & HEIG-VD' : 'Grade 6.0 / 6.0 HUG & HEIG-VD'}
+                {/* Metric Badges (2 on mobile, 3 on desktop) */}
+                <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+                  <span className="px-2 py-0.5 sm:px-2.5 sm:py-1 text-[10px] sm:text-[11px] font-mono font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                    {isFrench ? 'Note 6.0 / 6.0' : 'Grade 6.0 / 6.0'}
                   </span>
-                  <span className="px-2.5 py-1 text-[11px] font-mono font-semibold bg-slate-100 text-slate-700 border border-slate-200">
-                    {isFrench ? '-30% Rejets sur Place' : '-30% On-Site Deferrals'}
+                  <span className="px-2 py-0.5 sm:px-2.5 sm:py-1 text-[10px] sm:text-[11px] font-mono font-semibold bg-slate-100 text-slate-700 border border-slate-200">
+                    {isFrench ? '-30% Rejets' : '-30% Deferrals'}
                   </span>
-                  <span className="px-2.5 py-1 text-[11px] font-mono font-semibold bg-slate-100 text-slate-700 border border-slate-200">
+                  <span className="hidden sm:inline-block px-2.5 py-1 text-[11px] font-mono font-semibold bg-slate-100 text-slate-700 border border-slate-200">
                     {isFrench ? 'Qualification Anonyme' : 'Anonymous Screening'}
                   </span>
                 </div>
@@ -287,7 +287,7 @@ export const Home: React.FC = () => {
 
               <Link
                 to="/projects/donnons-ch"
-                className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-none bg-electric hover:bg-electric-hover text-white text-xs font-semibold shadow-sm transition-colors"
+                className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-none bg-electric hover:bg-electric-hover text-white text-xs font-semibold shadow-sm transition-colors"
               >
                 <span>{t('projects.viewDeepDive')}</span>
                 <ExternalLink className="w-3.5 h-3.5" />
@@ -301,15 +301,14 @@ export const Home: React.FC = () => {
             </p>
           </div>
 
-          {/* Full-Width Donnons.ch Simulator + Key Specifications Placed Underneath */}
-          <div className="space-y-5">
-            {/* Full-Width Interactive Widget */}
+          {/* Full-Width Donnons.ch Simulator */}
+          <div className="space-y-4 sm:space-y-5">
             <div className="w-full">
               <DonnonsWidgetSim />
             </div>
 
-            {/* Architectural Highlights: 3 Crisp Data Points */}
-            <div className="rounded-none border border-slate-200 bg-slate-50/80 p-4 sm:p-5 font-sans">
+            {/* Architectural Highlights: 3 Crisp Data Points (Desktop only) */}
+            <div className="hidden md:block rounded-none border border-slate-200 bg-slate-50/80 p-4 sm:p-5 font-sans">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 text-xs text-slate-600">
                 <div className="space-y-1">
                   <span className="font-mono text-[10px] tracking-wider uppercase text-slate-400 font-bold block">
@@ -356,14 +355,14 @@ export const Home: React.FC = () => {
         </div>
 
         {/* Smaller Showcases: Lexicon Engine & Marriage Platform */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="rounded-none border border-slate-200 bg-white p-6 shadow-sm flex flex-col justify-between space-y-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+          <div className="rounded-none border border-slate-200 bg-white p-4 sm:p-6 shadow-sm flex flex-col justify-between space-y-4 sm:space-y-5">
             <div className="space-y-3">
-              <div className="space-y-2">
-                <h3 className="text-xl font-bold tracking-tight text-fintech-primary">
+              <div className="space-y-1.5 sm:space-y-2">
+                <h3 className="text-lg sm:text-xl font-bold tracking-tight text-fintech-primary">
                   {t('projects.catholicRoute.title')}
                 </h3>
-                {/* 3 Metric Badges */}
+                {/* Metric Badges (2 on mobile, 3 on desktop) */}
                 <div className="flex flex-wrap items-center gap-1.5">
                   <span className="px-2 py-0.5 text-[10px] font-mono font-semibold bg-slate-100 text-slate-700 border border-slate-200">
                     {isFrench ? '< 10ms Recherche' : '< 10ms Search Index'}
@@ -371,7 +370,7 @@ export const Home: React.FC = () => {
                   <span className="px-2 py-0.5 text-[10px] font-mono font-semibold bg-slate-100 text-slate-700 border border-slate-200">
                     {isFrench ? '50+ Nœuds Sémantiques' : '50+ Semantic Nodes'}
                   </span>
-                  <span className="px-2 py-0.5 text-[10px] font-mono font-semibold bg-slate-100 text-slate-700 border border-slate-200">
+                  <span className="hidden sm:inline-block px-2 py-0.5 text-[10px] font-mono font-semibold bg-slate-100 text-slate-700 border border-slate-200">
                     {isFrench ? 'Frise Réactive' : 'Reactive Timeline'}
                   </span>
                 </div>
@@ -388,8 +387,8 @@ export const Home: React.FC = () => {
             </div>
 
             <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
-              <span className="text-xs font-mono text-slate-400">
-                React 18 · TypeScript · SVG
+              <span className="text-[11px] sm:text-xs font-mono text-slate-400">
+                React 18 · TypeScript
               </span>
               <Link
                 to="/projects/catholic-route"
@@ -401,13 +400,13 @@ export const Home: React.FC = () => {
             </div>
           </div>
 
-          <div className="rounded-none border border-slate-200 bg-white p-6 shadow-sm flex flex-col justify-between space-y-5">
+          <div className="rounded-none border border-slate-200 bg-white p-4 sm:p-6 shadow-sm flex flex-col justify-between space-y-4 sm:space-y-5">
             <div className="space-y-3">
-              <div className="space-y-2">
-                <h3 className="text-xl font-bold tracking-tight text-fintech-primary">
+              <div className="space-y-1.5 sm:space-y-2">
+                <h3 className="text-lg sm:text-xl font-bold tracking-tight text-fintech-primary">
                   {t('projects.marriage.title')}
                 </h3>
-                {/* 3 Metric Badges */}
+                {/* Metric Badges (2 on mobile, 3 on desktop) */}
                 <div className="flex flex-wrap items-center gap-1.5">
                   <span className="px-2 py-0.5 text-[10px] font-mono font-semibold bg-slate-100 text-slate-700 border border-slate-200">
                     {isFrench ? '100% Mobile First' : '100% Mobile-First UX'}
@@ -415,7 +414,7 @@ export const Home: React.FC = () => {
                   <span className="px-2 py-0.5 text-[10px] font-mono font-semibold bg-slate-100 text-slate-700 border border-slate-200">
                     {isFrench ? 'Sync Webhook Excel' : 'Excel Webhook Sync'}
                   </span>
-                  <span className="px-2 py-0.5 text-[10px] font-mono font-semibold bg-slate-100 text-slate-700 border border-slate-200">
+                  <span className="hidden sm:inline-block px-2 py-0.5 text-[10px] font-mono font-semibold bg-slate-100 text-slate-700 border border-slate-200">
                     {isFrench ? 'Zéro Lag 60 FPS' : 'Zero-Lag 60 FPS'}
                   </span>
                 </div>
@@ -432,8 +431,8 @@ export const Home: React.FC = () => {
             </div>
 
             <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
-              <span className="text-xs font-mono text-slate-400">
-                React 18 · LocalStorage · Serverless
+              <span className="text-[11px] sm:text-xs font-mono text-slate-400">
+                React 18 · Serverless
               </span>
               <Link
                 to="/projects/marriage-platform"
@@ -451,44 +450,44 @@ export const Home: React.FC = () => {
       <About id="about" />
 
       {/* SECTION 4: BACHELOR PITCH */}
-      <section id="bachelor-pitch" className="scroll-mt-24">
-        <div className="rounded-none border border-slate-200 bg-white p-8 sm:p-10 shadow-sm space-y-6">
-          <div className="space-y-3">
-            <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-fintech-primary">
+      <section id="bachelor-pitch" className="scroll-mt-20 sm:scroll-mt-24">
+        <div className="rounded-none border border-slate-200 bg-white p-5 sm:p-10 shadow-sm space-y-4 sm:space-y-6">
+          <div className="space-y-2 sm:space-y-3">
+            <h2 className="text-xl sm:text-4xl font-bold tracking-tight text-fintech-primary">
               {t('bachelorPitch.title')}
             </h2>
 
-            <p className="text-sm sm:text-base text-fintech-secondary max-w-2xl leading-relaxed">
+            <p className="text-xs sm:text-base text-fintech-secondary max-w-2xl leading-relaxed">
               {t('bachelorPitch.subtitle')}
             </p>
           </div>
 
           {/* 3 Key Institutional Highlights */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 py-1">
-            <div className="p-4 sm:p-5 border border-slate-200 bg-slate-50/70 flex items-center justify-center text-center shadow-xs">
-              <span className="text-sm sm:text-base font-bold text-fintech-primary tracking-tight">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 py-1">
+            <div className="p-3 sm:p-5 border border-slate-200 bg-slate-50/70 flex items-center justify-center text-center shadow-xs">
+              <span className="text-xs sm:text-base font-bold text-fintech-primary tracking-tight">
                 {isFrench ? '14 Semaines Dédiées' : '14 Dedicated Weeks'}
               </span>
             </div>
 
-            <div className="p-4 sm:p-5 border border-slate-200 bg-slate-50/70 flex items-center justify-center text-center shadow-xs">
-              <span className="text-sm sm:text-base font-bold text-fintech-primary tracking-tight">
+            <div className="p-3 sm:p-5 border border-slate-200 bg-slate-50/70 flex items-center justify-center text-center shadow-xs">
+              <span className="text-xs sm:text-base font-bold text-fintech-primary tracking-tight">
                 {isFrench ? 'CHF 0 de Salaire Obligatoire' : 'CHF 0 Mandatory Salary'}
               </span>
             </div>
 
-            <div className="p-4 sm:p-5 border border-slate-200 bg-slate-50/70 flex items-center justify-center text-center shadow-xs">
-              <span className="text-sm sm:text-base font-bold text-fintech-primary tracking-tight">
+            <div className="p-3 sm:p-5 border border-slate-200 bg-slate-50/70 flex items-center justify-center text-center shadow-xs">
+              <span className="text-xs sm:text-base font-bold text-fintech-primary tracking-tight">
                 {isFrench ? 'Confidentialité & NDA Garantis' : 'Strict NDA & IP Transfer'}
               </span>
             </div>
           </div>
 
           {/* Actions & Document Access */}
-          <div className="pt-3 border-t border-slate-100 flex flex-wrap items-center gap-4">
+          <div className="pt-2 sm:pt-3 border-t border-slate-100 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-4">
             <Link
               to="/bachelor-pitch"
-              className="inline-flex items-center space-x-2 px-6 py-3 rounded-none bg-electric hover:bg-electric-hover text-white text-xs font-semibold shadow-sm transition-colors uppercase tracking-wider"
+              className="inline-flex items-center justify-center space-x-2 px-5 py-3 rounded-none bg-electric hover:bg-electric-hover text-white text-xs font-semibold shadow-sm transition-colors uppercase tracking-wider text-center"
             >
               <span>{t('bachelorPitch.ctaExplore')}</span>
               <ArrowRight className="w-4 h-4" />
@@ -499,7 +498,7 @@ export const Home: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               download
-              className="inline-flex items-center space-x-2 px-5 py-3 rounded-none border border-slate-200 bg-white hover:border-electric hover:text-electric text-slate-700 text-xs font-semibold transition-colors shadow-sm"
+              className="inline-flex items-center justify-center space-x-2 px-4 py-3 rounded-none border border-slate-200 bg-white hover:border-electric hover:text-electric text-slate-700 text-xs font-semibold transition-colors shadow-sm text-center"
             >
               <FileDown className="w-4 h-4 text-electric" />
               <span>{t('bachelorPitch.ctaGuide')}</span>
@@ -507,7 +506,7 @@ export const Home: React.FC = () => {
 
             <CopyEmailButton
               subject="HEIG-VD Bachelor Project 2027"
-              className="px-5 py-3 rounded-none border border-slate-200 bg-white hover:border-slate-300 text-slate-700 text-xs shadow-sm"
+              className="px-4 py-3 rounded-none border border-slate-200 bg-white hover:border-slate-300 text-slate-700 text-xs shadow-sm justify-center"
             />
           </div>
         </div>

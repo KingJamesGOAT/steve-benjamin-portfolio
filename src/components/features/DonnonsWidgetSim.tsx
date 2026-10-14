@@ -22,7 +22,7 @@ export const DonnonsWidgetSim: React.FC = () => {
   return (
     <div className="bg-[#fffbf1] border-2 border-black shadow-[4px_4px_0px_0px_#000] text-black rounded-none overflow-hidden select-none font-sans">
       {/* Top Bar with Live Project Links */}
-      <div className="bg-white border-b-2 border-black px-4 sm:px-6 py-2.5 flex flex-wrap items-center justify-between gap-3">
+      <div className="bg-white border-b-2 border-black px-3.5 sm:px-6 py-2 flex items-center justify-between gap-2">
         <div className="flex items-center space-x-2">
           <span className="font-mono font-black text-xs sm:text-sm tracking-tight text-black">
             DONNONS.CH
@@ -32,8 +32,8 @@ export const DonnonsWidgetSim: React.FC = () => {
           </span>
         </div>
 
-        {/* Real Live Links to donnons.ch, /quizz, and /roby-game */}
-        <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-[11px] font-mono font-bold">
+        {/* Real Live Links - Only primary on mobile */}
+        <div className="flex items-center gap-1.5 sm:gap-2 text-[11px] font-mono font-bold">
           <a
             href="https://donnons.ch"
             target="_blank"
@@ -49,10 +49,10 @@ export const DonnonsWidgetSim: React.FC = () => {
             href="https://donnons.ch/quizz"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center space-x-1 px-2 py-0.5 bg-slate-100 hover:bg-purple-700 hover:text-white border border-black transition-colors"
+            className="hidden sm:inline-flex items-center space-x-1 px-2 py-0.5 bg-slate-100 hover:bg-purple-700 hover:text-white border border-black transition-colors"
           >
             <HelpCircle className="w-3 h-3" />
-            <span>donnons.ch/quizz</span>
+            <span>/quizz</span>
             <ExternalLink className="w-2.5 h-2.5" />
           </a>
 
@@ -60,16 +60,16 @@ export const DonnonsWidgetSim: React.FC = () => {
             href="https://donnons.ch/roby-game"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center space-x-1 px-2 py-0.5 bg-slate-100 hover:bg-emerald-600 hover:text-white border border-black transition-colors"
+            className="hidden sm:inline-flex items-center space-x-1 px-2 py-0.5 bg-slate-100 hover:bg-emerald-600 hover:text-white border border-black transition-colors"
           >
             <Gamepad2 className="w-3 h-3" />
-            <span>donnons.ch/roby-game</span>
+            <span>/roby-game</span>
             <ExternalLink className="w-2.5 h-2.5" />
           </a>
         </div>
       </div>
 
-      <div className="p-6 sm:p-8 lg:p-10">
+      <div className="p-4 sm:p-8 lg:p-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           {/* Left Column: Heading, Stats & Slider */}
           <div className="lg:col-span-6 space-y-6">
@@ -150,7 +150,7 @@ export const DonnonsWidgetSim: React.FC = () => {
               <button
                 type="button"
                 onClick={(e) => e.preventDefault()}
-                className="inline-flex items-center space-x-2 bg-[#0073e6] text-white font-mono text-sm sm:text-base font-bold px-6 py-2.5 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all cursor-default"
+                className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 bg-[#0073e6] text-white font-mono text-sm sm:text-base font-bold px-6 py-2.5 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all cursor-default text-center"
               >
                 <span>{isFrench ? 'Organiser une collecte' : 'Schedule a blood drive'}</span>
               </button>
@@ -159,16 +159,16 @@ export const DonnonsWidgetSim: React.FC = () => {
 
           {/* Right Column: Resized LittleMen Grid & Roby Mascot */}
           <div className="lg:col-span-6 flex flex-col items-center justify-center">
-            <div className="relative w-full max-w-[460px] bg-white border-2 border-black p-4 sm:p-5 shadow-[4px_4px_0px_0px_#000]">
-              {/* Background Grid: 60 larger avatars perfectly matching Roby's size */}
-              <div className="grid grid-cols-10 gap-2 sm:gap-2.5 justify-items-center">
+            <div className="relative w-full max-w-[460px] bg-white border-2 border-black p-3 sm:p-5 shadow-[4px_4px_0px_0px_#000]">
+              {/* Background Grid: 60 avatars scaled for mobile */}
+              <div className="grid grid-cols-10 gap-1 sm:gap-2.5 justify-items-center">
                 {Array.from({ length: totalGrid }).map((_, i) => {
                   // Roby mascot position
                   if (i === robyIndex) {
                     return (
                       <div
                         key={`roby-${i}`}
-                        className="relative w-7 h-10 sm:w-9 sm:h-12 flex items-center justify-center cursor-pointer z-20"
+                        className="relative w-6 h-8 sm:w-9 sm:h-12 flex items-center justify-center cursor-pointer z-20"
                         onMouseEnter={() => setIsRobyHovered(true)}
                         onMouseLeave={() => setIsRobyHovered(false)}
                         onClick={() => setIsRobyClicked((prev) => !prev)}
@@ -196,7 +196,7 @@ export const DonnonsWidgetSim: React.FC = () => {
                   return (
                     <div
                       key={`avatar-${i}`}
-                      className="w-7 h-10 sm:w-9 sm:h-12 flex items-center justify-center"
+                      className="w-6 h-8 sm:w-9 sm:h-12 flex items-center justify-center"
                     >
                       <img
                         src={`${baseUrl}images/donnons/${isBlue ? 'littleman_blue.png' : 'littleman_grey.png'}`}

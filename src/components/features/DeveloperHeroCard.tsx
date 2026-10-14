@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Terminal } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -8,8 +8,23 @@ export const DeveloperHeroCard: React.FC = () => {
   const isFrench = i18n.language?.startsWith('fr');
 
   const [isClosed, setIsClosed] = useState(false);
-  const [isMinimized, setIsMinimized] = useState(false);
+  const [isMinimized, setIsMinimized] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth < 1024;
+    }
+    return false;
+  });
   const [isRunning, setIsRunning] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 1024 && !isMinimized && !isRunning) {
+        setIsMinimized(true);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [isMinimized, isRunning]);
 
   // When closed with red button: show only compact container with "developer.config.ts"
   if (isClosed) {
@@ -73,6 +88,11 @@ export const DeveloperHeroCard: React.FC = () => {
           <span className="text-[11px] font-semibold text-slate-600 pl-1.5 flex items-center space-x-1">
             <Terminal className="w-3 h-3 text-electric" />
             <span>developer.config.ts</span>
+            {isMinimized && (
+              <span className="text-[10px] text-slate-400 font-normal pl-1">
+                ({isFrench ? 'cliquer pour ouvrir' : 'tap to open'})
+              </span>
+            )}
           </span>
         </div>
       </div>

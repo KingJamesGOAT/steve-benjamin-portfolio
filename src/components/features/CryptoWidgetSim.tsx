@@ -141,20 +141,20 @@ export const CryptoWidgetSim: React.FC = () => {
         <div className="flex items-center gap-3 sm:gap-4 overflow-hidden">
           <div className="flex items-center space-x-2 shrink-0">
             <span className="font-bold text-slate-100 tracking-wider text-xs sm:text-sm">BTC/USDT</span>
-            <span className="text-[10px] bg-[#161F30] border border-[#273756] px-1.5 py-0.5 text-slate-300 font-semibold rounded-none">
+            <span className="hidden sm:inline-block text-[10px] bg-[#161F30] border border-[#273756] px-1.5 py-0.5 text-slate-300 font-semibold rounded-none">
               {isFrench ? 'PERPÉTUEL' : 'PERPETUAL'}
             </span>
           </div>
 
           <div className="flex items-baseline space-x-2 shrink-0">
-            <span className="text-base sm:text-lg font-bold text-slate-100 tracking-tight tabular-nums">
+            <span className="text-sm sm:text-lg font-bold text-slate-100 tracking-tight tabular-nums">
               ${displayedPrice.toLocaleString('en-US', {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
               })}
             </span>
             <span
-              className={`text-xs font-semibold tabular-nums ${
+              className={`text-[11px] sm:text-xs font-semibold tabular-nums ${
                 (activePt ? activePt.isPositive : priceChange >= 0) ? 'text-emerald-400' : 'text-rose-500'
               }`}
             >
@@ -163,13 +163,13 @@ export const CryptoWidgetSim: React.FC = () => {
           </div>
         </div>
 
-        {/* Minimalist Line / Candles Switcher (Replaces previous ONLINE badge) */}
+        {/* Minimalist Line / Candles Switcher */}
         <div className="flex items-center space-x-2 shrink-0">
           <div className="flex items-center border border-[#1E2638] bg-[#0A0E17] p-0.5 font-mono text-[10px]">
             <button
               type="button"
               onClick={() => setChartMode('line')}
-              className={`px-2.5 py-0.5 transition-all cursor-pointer ${
+              className={`px-2 py-0.5 sm:px-2.5 transition-all cursor-pointer ${
                 chartMode === 'line'
                   ? 'bg-[#1D283A] text-sky-400 font-bold border border-[#38BDF8]/40 shadow-sm'
                   : 'text-slate-400 hover:text-slate-200'
@@ -181,7 +181,7 @@ export const CryptoWidgetSim: React.FC = () => {
             <button
               type="button"
               onClick={() => setChartMode('candles')}
-              className={`px-2.5 py-0.5 transition-all cursor-pointer ${
+              className={`px-2 py-0.5 sm:px-2.5 transition-all cursor-pointer ${
                 chartMode === 'candles'
                   ? 'bg-[#1D283A] text-sky-400 font-bold border border-[#38BDF8]/40 shadow-sm'
                   : 'text-slate-400 hover:text-slate-200'
@@ -195,7 +195,7 @@ export const CryptoWidgetSim: React.FC = () => {
       </div>
 
       {/* 2. Streamlined Financial Graph Area */}
-      <div className="p-3 sm:p-4 space-y-2 bg-[#0B0E14] flex-1 flex flex-col justify-between">
+      <div className="p-2.5 sm:p-4 space-y-2 bg-[#0B0E14] flex-1 flex flex-col justify-between">
         {/* Fixed Height Minimal Graph Legend Bar */}
         <div className="h-6 flex items-center justify-end gap-3 text-[10px] font-mono text-slate-400 border-b border-[#1E2638] pb-1.5 shrink-0 overflow-hidden whitespace-nowrap">
           {chartMode === 'line' ? (
@@ -216,9 +216,9 @@ export const CryptoWidgetSim: React.FC = () => {
           </span>
         </div>
 
-        {/* Stable, Rock-Solid Fixed Height SVG Canvas */}
+        {/* Stable, Rock-Solid Responsive Height SVG Canvas */}
         <div
-          className="relative w-full h-56 sm:h-64 md:h-72 bg-[#0E131E]/80 border border-[#1E2638] rounded-none overflow-hidden p-2 flex items-center justify-center cursor-crosshair shrink-0"
+          className="relative w-full h-44 sm:h-64 md:h-72 bg-[#0E131E]/80 border border-[#1E2638] rounded-none overflow-hidden p-2 flex items-center justify-center cursor-crosshair shrink-0"
           onMouseMove={handleChartMouseMove}
           onMouseLeave={() => {
             setHoveredIndex(null);

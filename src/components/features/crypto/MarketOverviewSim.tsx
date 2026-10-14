@@ -487,16 +487,16 @@ export const MarketOverviewSim: React.FC = () => {
           <table className="w-full text-left font-mono text-xs">
             <thead>
               <tr className="border-b border-[#1E2638] text-[11px] text-slate-400 uppercase tracking-wider">
-                <th className="py-2.5 px-2 font-normal w-8">#</th>
+                <th className="py-2.5 px-2 font-normal w-6 sm:w-8">#</th>
                 <th className="py-2.5 px-2 font-normal">{isFrench ? 'Actif' : 'Asset'}</th>
                 <th className="py-2.5 px-2 font-normal text-right">{isFrench ? 'Prix' : 'Price'}</th>
-                <th className="py-2.5 px-2 font-normal text-right">1h %</th>
+                <th className="py-2.5 px-2 font-normal text-right hidden sm:table-cell">1h %</th>
                 <th className="py-2.5 px-2 font-normal text-right">24h %</th>
-                <th className="py-2.5 px-2 font-normal text-right">7d %</th>
-                <th className="py-2.5 px-2 font-normal text-right hidden sm:table-cell">{isFrench ? 'Cap. Marché' : 'Market Cap'}</th>
-                <th className="py-2.5 px-2 font-normal text-right hidden md:table-cell">{isFrench ? 'Volume (24h)' : 'Volume (24h)'}</th>
-                <th className="py-2.5 px-2 font-normal text-right hidden lg:table-cell">{isFrench ? 'Offre en Circulation' : 'Circulating Supply'}</th>
-                <th className="py-2.5 px-2 font-normal text-right w-32">{isFrench ? '7 Derniers Jours' : 'Last 7 Days'}</th>
+                <th className="py-2.5 px-2 font-normal text-right hidden sm:table-cell">7d %</th>
+                <th className="py-2.5 px-2 font-normal text-right hidden md:table-cell">{isFrench ? 'Cap. Marché' : 'Market Cap'}</th>
+                <th className="py-2.5 px-2 font-normal text-right hidden lg:table-cell">{isFrench ? 'Volume (24h)' : 'Volume (24h)'}</th>
+                <th className="py-2.5 px-2 font-normal text-right hidden xl:table-cell">{isFrench ? 'Offre en Circulation' : 'Circulating Supply'}</th>
+                <th className="py-2.5 px-2 font-normal text-right hidden sm:table-cell w-32">{isFrench ? '7 Derniers Jours' : 'Last 7 Days'}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-[#1E2638]/60">
@@ -507,52 +507,52 @@ export const MarketOverviewSim: React.FC = () => {
                   className="hover:bg-[#1A253A] border-l-2 border-transparent hover:border-blue-400 cursor-pointer transition-colors text-slate-200 group"
                   title={isFrench ? `Cliquer pour inspecter ${asset.name}` : `Click to inspect ${asset.name}`}
                 >
-                  <td className="py-3 px-2 text-slate-500">{asset.rank}</td>
-                  <td className="py-3 px-2">
-                    <div className="flex items-center space-x-2.5">
-                      <CryptoIcon symbol={asset.symbol} size={26} />
+                  <td className="py-2.5 sm:py-3 px-2 text-slate-500">{asset.rank}</td>
+                  <td className="py-2.5 sm:py-3 px-2">
+                    <div className="flex items-center space-x-2 sm:space-x-2.5">
+                      <CryptoIcon symbol={asset.symbol} size={22} />
                       <div>
-                        <div className="font-bold text-slate-100 group-hover:text-blue-400 transition-colors">
+                        <div className="font-bold text-slate-100 group-hover:text-blue-400 transition-colors text-xs">
                           {asset.name}
                         </div>
                         <div className="text-[10px] text-slate-500 uppercase">{asset.symbol}</div>
                       </div>
                     </div>
                   </td>
-                  <td className="py-3 px-2 text-right font-semibold text-slate-100">
+                  <td className="py-2.5 sm:py-3 px-2 text-right font-semibold text-slate-100">
                     {asset.price}
                   </td>
                   <td
-                    className={`py-3 px-2 text-right ${
+                    className={`py-2.5 sm:py-3 px-2 text-right hidden sm:table-cell ${
                       asset.is1hPositive ? 'text-emerald-400' : 'text-rose-500'
                     }`}
                   >
                     {asset.change1h}
                   </td>
                   <td
-                    className={`py-3 px-2 text-right ${
+                    className={`py-2.5 sm:py-3 px-2 text-right ${
                       asset.is24hPositive ? 'text-emerald-400' : 'text-rose-500'
                     }`}
                   >
                     {asset.change24h}
                   </td>
                   <td
-                    className={`py-3 px-2 text-right ${
+                    className={`py-2.5 sm:py-3 px-2 text-right hidden sm:table-cell ${
                       asset.is7dPositive ? 'text-emerald-400' : 'text-rose-500'
                     }`}
                   >
                     {asset.change7d}
                   </td>
-                  <td className="py-3 px-2 text-right text-slate-300 hidden sm:table-cell">
+                  <td className="py-2.5 sm:py-3 px-2 text-right text-slate-300 hidden md:table-cell">
                     {asset.marketCap}
                   </td>
-                  <td className="py-3 px-2 text-right text-slate-300 hidden md:table-cell">
+                  <td className="py-2.5 sm:py-3 px-2 text-right text-slate-300 hidden lg:table-cell">
                     {asset.volume24h}
                   </td>
-                  <td className="py-3 px-2 text-right text-slate-400 hidden lg:table-cell">
+                  <td className="py-2.5 sm:py-3 px-2 text-right text-slate-400 hidden xl:table-cell">
                     {asset.circulatingSupply}
                   </td>
-                  <td className="py-3 px-2 text-right">
+                  <td className="py-2.5 sm:py-3 px-2 text-right hidden sm:table-cell">
                     {renderSparkline(asset.sparkline, asset.is7dPositive)}
                   </td>
                 </tr>

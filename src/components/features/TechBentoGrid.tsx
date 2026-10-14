@@ -21,7 +21,7 @@ const BentoTileCard: React.FC<{ tile: BentoTile; isFrench: boolean }> = ({ tile,
     <div
       onClick={() => setFlipped((prev) => !prev)}
       onMouseLeave={() => setFlipped(false)}
-      className={`group ${tile.colSpan} h-32 sm:h-36 md:h-38 perspective-1000 select-none cursor-pointer`}
+      className={`group ${tile.colSpan} h-24 sm:h-32 md:h-38 perspective-1000 select-none cursor-pointer`}
     >
       <div
         className={`relative w-full h-full transition-transform duration-500 ease-in-out preserve-3d will-change-transform group-hover-rotate-x-180 ${
@@ -31,22 +31,22 @@ const BentoTileCard: React.FC<{ tile: BentoTile; isFrench: boolean }> = ({ tile,
         {/* 1. FRONT FACE (DEFAULT) */}
         <div className="absolute inset-0 w-full h-full backface-hidden border border-slate-800 bg-[#0A0D14] overflow-hidden select-none transition-all duration-300 group-hover:border-blue-500/50 group-hover:shadow-[0_0_20px_rgba(0,82,255,0.18)]">
           {/* FAINT BACKGROUND WATERMARK CODE */}
-          <div className="absolute inset-0 p-2.5 sm:p-3 font-mono text-[10px] sm:text-[10.5px] leading-relaxed text-slate-300 opacity-15 pointer-events-none overflow-hidden select-none">
+          <div className="absolute inset-0 p-2 sm:p-3 font-mono text-[9px] sm:text-[10.5px] leading-relaxed text-slate-300 opacity-15 pointer-events-none overflow-hidden select-none">
             {tile.codeSnippet}
           </div>
 
-          {/* FRONT CONTENT (CENTERED TITLE & 3 BADGES) */}
-          <div className="absolute inset-0 p-3 sm:p-4 flex flex-col items-center justify-center text-center gap-2 z-10 pointer-events-none">
-            <h3 className="text-sm sm:text-base md:text-lg font-bold font-mono tracking-tight text-white leading-snug text-center max-w-[95%]">
+          {/* FRONT CONTENT (CENTERED TITLE & BADGES) */}
+          <div className="absolute inset-0 p-2 sm:p-4 flex flex-col items-center justify-center text-center gap-1 sm:gap-2 z-10 pointer-events-none">
+            <h3 className="text-xs sm:text-sm md:text-base font-bold font-mono tracking-tight text-white leading-tight text-center max-w-[95%]">
               {isFrench ? tile.titleFr : tile.titleEn}
             </h3>
 
-            {/* 3 tools badges centered under the title */}
-            <div className="flex flex-wrap items-center justify-center gap-1.5">
-              {tile.tools.slice(0, 3).map((tool) => (
+            {/* Badges centered under the title (2 on mobile, up to 3 on desktop) */}
+            <div className="flex flex-wrap items-center justify-center gap-1 sm:gap-1.5">
+              {tile.tools.slice(0, 2).map((tool) => (
                 <span
                   key={tool}
-                  className="px-1.5 py-0.5 text-[9px] sm:text-[10px] font-mono bg-slate-900/90 text-slate-300 border border-slate-800"
+                  className="px-1.5 py-0.2 sm:py-0.5 text-[8.5px] sm:text-[10px] font-mono bg-slate-900/90 text-slate-300 border border-slate-800"
                 >
                   {tool}
                 </span>
@@ -55,9 +55,9 @@ const BentoTileCard: React.FC<{ tile: BentoTile; isFrench: boolean }> = ({ tile,
           </div>
         </div>
 
-        {/* 2. BACK FACE (FLIPPED 180 DEG ON X AXIS, SOLID ELECTRIC BLUE, CRISP MONO TEXT) */}
-        <div className="absolute inset-0 w-full h-full backface-hidden rotate-x-180 bg-electric border border-blue-400/40 p-3.5 sm:p-4 flex flex-col items-center justify-center text-center overflow-hidden">
-          <p className="text-xs sm:text-[13px] md:text-sm text-white font-mono font-medium leading-relaxed max-w-[95%] select-text">
+        {/* 2. BACK FACE */}
+        <div className="absolute inset-0 w-full h-full backface-hidden rotate-x-180 bg-electric border border-blue-400/40 p-2.5 sm:p-4 flex flex-col items-center justify-center text-center overflow-hidden">
+          <p className="text-[11px] sm:text-xs md:text-sm text-white font-mono font-medium leading-relaxed max-w-[95%] select-text">
             {isFrench ? tile.descFr : tile.descEn}
           </p>
         </div>
@@ -74,7 +74,7 @@ export const TechBentoGrid: React.FC = () => {
     // ROW 1: [2 COLS] [1 COL] [1 COL] = 4 COLS
     {
       id: 'frontend',
-      colSpan: 'col-span-1 sm:col-span-2 md:col-span-2',
+      colSpan: 'col-span-2 md:col-span-2',
       tagEn: 'React 18 // TypeScript',
       tagFr: 'React 18 // TypeScript',
       titleEn: 'Frontend Architecture',
@@ -174,7 +174,7 @@ export const TechBentoGrid: React.FC = () => {
     },
     {
       id: 'embedded-c',
-      colSpan: 'col-span-1 sm:col-span-2 md:col-span-2',
+      colSpan: 'col-span-2 md:col-span-2',
       tagEn: 'C99 // ARM Cortex',
       tagFr: 'C99 // ARM Cortex',
       titleEn: 'Embedded Hardware & C',
@@ -316,7 +316,7 @@ export const TechBentoGrid: React.FC = () => {
       </div>
 
       {/* Asymmetric 10-Tile Bento Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2 select-none">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-2 select-none">
         {tiles.map((tile) => (
           <BentoTileCard key={tile.id} tile={tile} isFrench={isFrench} />
         ))}

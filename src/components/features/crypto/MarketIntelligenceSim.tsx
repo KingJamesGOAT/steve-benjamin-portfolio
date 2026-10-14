@@ -25,16 +25,16 @@ export const MarketIntelligenceSim: React.FC = () => {
       </div>
 
       {/* Top Macro Indicators (Pure & Minimalist) */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 font-mono">
+      <div className="grid grid-cols-3 gap-1.5 sm:gap-3 font-mono">
         {/* Global Sentiment */}
-        <div className="bg-[#111622] border border-[#1E2638] p-3 space-y-1">
-          <div className="text-[10px] text-slate-400 uppercase tracking-wider">
-            {isFrench ? 'Sentiment Global IA' : 'AI Global Sentiment'}
+        <div className="bg-[#111622] border border-[#1E2638] p-2 sm:p-3 space-y-0.5 sm:space-y-1">
+          <div className="text-[9px] sm:text-[10px] text-slate-400 uppercase tracking-wider truncate">
+            {isFrench ? 'Sentiment' : 'Sentiment'}
           </div>
-          <div className="flex items-baseline space-x-2">
-            <span className="text-xl font-bold text-emerald-400">+20%</span>
-            <span className="text-xs text-emerald-500 font-semibold">
-              {isFrench ? 'Biais Haussier' : 'Bullish Bias'}
+          <div className="flex flex-col sm:flex-row sm:items-baseline sm:space-x-2">
+            <span className="text-base sm:text-xl font-bold text-emerald-400">+20%</span>
+            <span className="text-[9px] sm:text-xs text-emerald-500 font-semibold truncate">
+              {isFrench ? 'Haussier' : 'Bullish'}
             </span>
           </div>
           <div className="w-full h-1 bg-[#1E2638] overflow-hidden mt-1">
@@ -43,14 +43,14 @@ export const MarketIntelligenceSim: React.FC = () => {
         </div>
 
         {/* BTC Dominance */}
-        <div className="bg-[#111622] border border-[#1E2638] p-3 space-y-1">
-          <div className="text-[10px] text-slate-400 uppercase tracking-wider">
-            {isFrench ? 'Dominance BTC' : 'BTC Dominance'}
+        <div className="bg-[#111622] border border-[#1E2638] p-2 sm:p-3 space-y-0.5 sm:space-y-1">
+          <div className="text-[9px] sm:text-[10px] text-slate-400 uppercase tracking-wider truncate">
+            {isFrench ? 'Dominance' : 'Dominance'}
           </div>
-          <div className="flex items-baseline space-x-2">
-            <span className="text-xl font-bold text-slate-100">57.5%</span>
-            <span className="text-[11px] text-slate-400 font-medium">
-              {isFrench ? 'Consolidation' : 'Holding'}
+          <div className="flex flex-col sm:flex-row sm:items-baseline sm:space-x-2">
+            <span className="text-base sm:text-xl font-bold text-slate-100">57.5%</span>
+            <span className="text-[9px] sm:text-[11px] text-slate-400 font-medium truncate">
+              BTC
             </span>
           </div>
           <div className="w-full h-1 bg-[#1E2638] overflow-hidden mt-1">
@@ -59,13 +59,13 @@ export const MarketIntelligenceSim: React.FC = () => {
         </div>
 
         {/* 24h Global Volume */}
-        <div className="bg-[#111622] border border-[#1E2638] p-3 space-y-1">
-          <div className="text-[10px] text-slate-400 uppercase tracking-wider">
-            {isFrench ? 'Volume Global (24h)' : '24h Global Volume'}
+        <div className="bg-[#111622] border border-[#1E2638] p-2 sm:p-3 space-y-0.5 sm:space-y-1">
+          <div className="text-[9px] sm:text-[10px] text-slate-400 uppercase tracking-wider truncate">
+            {isFrench ? 'Volume (24h)' : 'Volume (24h)'}
           </div>
-          <div className="flex items-baseline space-x-2">
-            <span className="text-xl font-bold text-slate-100">$102.9B</span>
-            <span className="text-[11px] text-emerald-400 font-semibold">+4.2%</span>
+          <div className="flex flex-col sm:flex-row sm:items-baseline sm:space-x-2">
+            <span className="text-base sm:text-xl font-bold text-slate-100">$102.9B</span>
+            <span className="text-[9px] sm:text-[11px] text-emerald-400 font-semibold truncate">+4.2%</span>
           </div>
           <div className="w-full h-1 bg-[#1E2638] overflow-hidden mt-1">
             <div className="h-full bg-emerald-400" style={{ width: '64%' }} />
