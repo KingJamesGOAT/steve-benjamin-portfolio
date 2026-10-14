@@ -108,8 +108,8 @@ export const DeveloperHeroCard: React.FC = () => {
                   <p className="text-slate-300">
                     <span className="text-slate-500">-&gt;</span>{' '}
                     {isFrench
-                      ? 'Background: 9 ans C & hardware -> Web Architecture & UI/UX'
-                      : 'Background: 9 yrs C & hardware -> Web Architecture & UI/UX'}
+                      ? 'Background: 9 ans de code & hardware -> Web Architecture & UI/UX'
+                      : 'Background: 9 yrs coding & hardware -> Web Architecture & UI/UX'}
                   </p>
                   <p className="text-emerald-400">
                     [OK]{' '}
@@ -145,8 +145,8 @@ export const DeveloperHeroCard: React.FC = () => {
                     <span className="text-slate-500">background:</span>{' '}
                     <span className="text-emerald-700">
                       {isFrench
-                        ? '"Hardware C (9 ans) → Web & UI/UX"'
-                        : '"C Hardware (9 yrs) → Web & UI/UX"'}
+                        ? '"Code & Hardware (9 ans) → Web & UI/UX"'
+                        : '"Coding & Hardware (9 yrs) → Web & UI/UX"'}
                     </span>,
                   </div>
                   <div className="pl-4">

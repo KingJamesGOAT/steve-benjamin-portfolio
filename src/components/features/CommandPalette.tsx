@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, X, BookOpen, ArrowLeft, ArrowUpRight, Compass, FileText } from 'lucide-react';
+import { Search, X, BookOpen, ArrowLeft, ArrowUpRight, Compass, FileText, Info } from 'lucide-react';
 import { getGlossaryEntries, type LocalizedGlossaryEntry } from '../../data/cryptoGlossary';
 
 interface CommandPaletteProps {
@@ -10,7 +10,7 @@ interface CommandPaletteProps {
   onClose: () => void;
 }
 
-type PaletteItemType = 'nav' | 'project' | 'action' | 'glossary';
+type PaletteItemType = 'nav' | 'project' | 'action' | 'glossary' | 'fact';
 
 interface PaletteItem {
   id: string;
@@ -61,7 +61,10 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
         title: isFrench ? 'Compétences & Stack' : 'Skills & Tech Stack',
         subtitle: isFrench ? 'Bento grid technique & écosystème logiciel' : 'Technical bento grid & software ecosystem',
         categoryLabel: isFrench ? 'Navigation' : 'Navigation',
-        keywords: ['competences', 'skills', 'stack', 'technique', 'react', 'typescript', 'figma'],
+        keywords: [
+          'competences', 'skills', 'stack', 'technique', 'react', 'typescript', 'figma',
+          'technologies', 'outils', 'tools', 'quelle stack', 'what stack'
+        ],
         action: () => {
           navigate('/#skills');
           setTimeout(() => {
@@ -73,10 +76,10 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
       {
         id: 'nav-about',
         type: 'nav',
-        title: isFrench ? 'À Propos & Parcours' : 'About & Experience',
-        subtitle: isFrench ? 'Formation HEIG-VD, CFC électronique & leadership' : 'HEIG-VD education, electronics & leadership',
+        title: isFrench ? 'À Propos & Biographie' : 'About & Biography',
+        subtitle: isFrench ? 'Profil personnel, vision & philosophie d\'ingénierie' : 'Personal profile, engineering vision & philosophy',
         categoryLabel: isFrench ? 'Navigation' : 'Navigation',
-        keywords: ['about', 'propos', 'parcours', 'bio', 'formation', 'education', 'experience'],
+        keywords: ['about', 'propos', 'bio', 'biographie', 'presentation', 'profil', 'profile'],
         action: () => {
           navigate('/#about');
           setTimeout(() => {
@@ -88,10 +91,16 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
       {
         id: 'nav-bachelor',
         type: 'nav',
-        title: isFrench ? 'Mandat de Bachelor 2027' : 'Bachelor Mandate 2027',
-        subtitle: isFrench ? '14 semaines, CHF 0 de salaire, cadre NDA / HEIG-VD' : '14-week capstone, CHF 0 salary, NDA / HEIG-VD',
+        title: isFrench ? 'Mandat de Bachelor (Printemps 2027)' : 'Bachelor Mandate (Spring 2027)',
+        subtitle: isFrench
+          ? 'Étudiant HEIG-VD en fin de cursus · Recherche mandat entreprise de 14 sem. (Avr – Août 2027)'
+          : 'Final-year HEIG-VD student · Seeking 14-week corporate thesis mandate (Apr – Aug 2027)',
         categoryLabel: isFrench ? 'Mandat' : 'Mandate',
-        keywords: ['bachelor', 'mandat', 'pitch', 'heig', 'heig-vd', 'stage', 'thesis', '2027'],
+        keywords: [
+          'bachelor', 'mandat', 'pitch', 'heig', 'heig-vd', 'stage', 'thesis', '2027',
+          'disponible', 'disponibilite', 'available', 'availability', 'when available',
+          'quand', 'recherche', 'embauche', 'internship', 'travail de bachelor', 'etudiant', 'student'
+        ],
         action: () => {
           navigate('/bachelor-pitch');
           onClose();
@@ -173,7 +182,10 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
         title: isFrench ? 'Copier l\'adresse Email' : 'Copy Email Address',
         subtitle: 'sbstevebenjamin@gmail.com',
         categoryLabel: isFrench ? 'Action' : 'Action',
-        keywords: ['email', 'mail', 'contact', 'copier', 'copy', 'adresse'],
+        keywords: [
+          'email', 'mail', 'contact', 'copier', 'copy', 'adresse',
+          'how to contact', 'comment contacter', 'ecrire', 'write', 'joindre', 'reach'
+        ],
         action: () => {
           navigator.clipboard.writeText('sbstevebenjamin@gmail.com');
           setActionFeedback(isFrench ? '✓ Email copié dans le presse-papier !' : '✓ Email copied to clipboard!');
@@ -208,9 +220,113 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
           onClose();
         },
       },
+
+      // 4. Smart Facts (Questions & Direct Answers)
+      {
+        id: 'fact-age',
+        type: 'fact',
+        title: isFrench ? 'Steve Benjamin (24 ans)' : 'Steve Benjamin (24 y/o)',
+        subtitle: isFrench
+          ? '24 ans (né en 2002) · Basé à Bussigny (Vaud, Suisse)'
+          : '24 years old (born 2002) · Based in Bussigny (Vaud, Switzerland)',
+        categoryLabel: 'Info',
+        keywords: [
+          'age', 'old', 'how old', 'quel age', 'naissance', 'birthday', '24 ans',
+          'qui est', 'who is', 'steve'
+        ],
+        action: () => {
+          navigate('/#about');
+          setTimeout(() => {
+            document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+          }, 60);
+          onClose();
+        },
+      },
+      {
+        id: 'fact-studies',
+        type: 'fact',
+        title: isFrench ? 'BSc Ingénierie des Médias @ HEIG-VD' : 'BSc Media Engineering @ HEIG-VD',
+        subtitle: isFrench
+          ? 'Cursus d\'ingénieur 2023–2027 · Yverdon-les-Bains (Vaud)'
+          : 'Engineering degree 2023–2027 · Yverdon-les-Bains (Vaud)',
+        categoryLabel: isFrench ? 'Formation' : 'Education',
+        keywords: [
+          'etudes', 'formation', 'ecole', 'school', 'study', 'studies', 'where study',
+          'ou etudie', 'quelles etudes', 'what did he study', 'diplome', 'degree',
+          'universite', 'university', 'yverdon', 'ingenieur'
+        ],
+        action: () => {
+          navigate('/#about');
+          setTimeout(() => {
+            document.getElementById('education')?.scrollIntoView({ behavior: 'smooth' });
+          }, 60);
+          onClose();
+        },
+      },
+      {
+        id: 'fact-background',
+        type: 'fact',
+        title: isFrench ? 'CFC Électronicien, Maturité TASV & Oxford' : 'Electronics CFC, TASV Maturity & Oxford',
+        subtitle: isFrench
+          ? '9 ans de pratique du code · CPNV Yverdon, ETML Lausanne & 6 mois à Oxford'
+          : '9 yrs coding experience · CPNV Yverdon, ETML Lausanne & 6 months at Oxford',
+        categoryLabel: isFrench ? 'Parcours' : 'Background',
+        keywords: [
+          'parcours', 'background', 'code', '9 ans', 'cpnv', 'etml', 'cfc',
+          'electronicien', 'electronics', 'tasv', 'oxford', 'maturite', 'histoire', 'electronique'
+        ],
+        action: () => {
+          navigate('/#about');
+          setTimeout(() => {
+            document.getElementById('education')?.scrollIntoView({ behavior: 'smooth' });
+          }, 60);
+          onClose();
+        },
+      },
+      {
+        id: 'fact-location',
+        type: 'fact',
+        title: isFrench ? 'Localisation : Bussigny (Vaud, Suisse)' : 'Location: Bussigny (Vaud, Switzerland)',
+        subtitle: isFrench
+          ? 'Basé à Bussigny · Mobile sur l\'arc lémanique / Suisse romande et en télétravail'
+          : 'Based in Bussigny · Mobile across Western Switzerland & remote',
+        categoryLabel: 'Info',
+        keywords: [
+          'ou habite', 'where live', 'where based', 'localisation', 'location',
+          'ville', 'city', 'bussigny', 'vaud', 'suisse', 'switzerland', 'lausanne',
+          'remote', 'teletravail', 'adresse', 'residence'
+        ],
+        action: () => {
+          navigate('/#about');
+          setTimeout(() => {
+            document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+          }, 60);
+          onClose();
+        },
+      },
+      {
+        id: 'fact-experience',
+        type: 'fact',
+        title: isFrench ? 'Ingénieur Solutions @ AppApp SARL' : 'Solutions Engineer @ AppApp SARL',
+        subtitle: isFrench
+          ? 'En poste depuis 2023 · Responsable technique GLGB & engagement FICF'
+          : 'Employed since 2023 · Technical lead at GLGB & volunteer at FICF',
+        categoryLabel: isFrench ? 'Expérience' : 'Experience',
+        keywords: [
+          'travail', 'job', 'poste', 'role', 'entreprise', 'appapp', 'where work',
+          'ou travaille', 'experience actuelle', 'glgb', 'ficf', 'occupation'
+        ],
+        action: () => {
+          navigate('/#about');
+          setTimeout(() => {
+            document.getElementById('experience')?.scrollIntoView({ behavior: 'smooth' });
+          }, 60);
+          onClose();
+        },
+      },
     ];
 
-    // 4. Glossary items
+    // 5. Glossary items
     glossaryEntries.forEach((entry) => {
       items.push({
         id: `glossary-${entry.id}`,
@@ -234,34 +350,62 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
     const q = query.trim().toLowerCase();
     if (!q) return [];
 
-    const matches = allItems.filter((item) => {
-      const titleMatch = item.title.toLowerCase().includes(q);
-      const subMatch = item.subtitle.toLowerCase().includes(q);
-      const catMatch = item.categoryLabel.toLowerCase().includes(q);
-      const keywordMatch = item.keywords.some((k) => k.includes(q));
-      return titleMatch || subMatch || catMatch || keywordMatch;
-    });
+    const queryWords = q.split(/\s+/).filter((w) => w.length > 1);
 
-    // Ranking algorithm: prioritize exact & prefix matches on title and keywords
-    matches.sort((a, b) => {
-      const aTitle = a.title.toLowerCase();
-      const bTitle = b.title.toLowerCase();
+    const scoredItems = allItems
+      .map((item) => {
+        let score = 0;
+        const titleLower = item.title.toLowerCase();
+        const subLower = item.subtitle.toLowerCase();
+        const catLower = item.categoryLabel.toLowerCase();
 
-      const aStarts = aTitle.startsWith(q);
-      const bStarts = bTitle.startsWith(q);
-      if (aStarts && !bStarts) return -1;
-      if (!aStarts && bStarts) return 1;
+        // Exact query matches
+        if (titleLower === q) score += 100;
+        else if (titleLower.startsWith(q)) score += 50;
+        else if (titleLower.includes(q)) score += 30;
 
-      const aKeyStarts = a.keywords.some((k) => k.startsWith(q));
-      const bKeyStarts = b.keywords.some((k) => k.startsWith(q));
-      if (aKeyStarts && !bKeyStarts) return -1;
-      if (!aKeyStarts && bKeyStarts) return 1;
+        if (subLower.includes(q)) score += 15;
+        if (catLower.includes(q)) score += 10;
 
-      return aTitle.localeCompare(bTitle);
-    });
+        // Keyword matches (bi-directional: keyword contains query OR natural question contains keyword)
+        for (const k of item.keywords) {
+          const kLower = k.toLowerCase();
+          if (kLower === q) {
+            score += 80;
+          } else if (kLower.startsWith(q)) {
+            score += 45;
+          } else if (kLower.includes(q)) {
+            score += 25;
+          } else if (q.includes(kLower) && kLower.length >= 3) {
+            // Natural language question matching (e.g. "how old is steve" contains "how old")
+            score += 35 + kLower.length;
+          }
+        }
+
+        // Multi-word question matching (e.g. "where" "he" "study")
+        let wordHits = 0;
+        for (const word of queryWords) {
+          if (
+            titleLower.includes(word) ||
+            subLower.includes(word) ||
+            item.keywords.some((k) => k.toLowerCase().includes(word) || word.includes(k.toLowerCase()))
+          ) {
+            wordHits++;
+          }
+        }
+        if (wordHits > 0) {
+          score += wordHits * 8;
+        }
+
+        return { item, score };
+      })
+      .filter(({ score }) => score > 0);
+
+    // Sort by highest score first, then alphabetical tie-breaker
+    scoredItems.sort((a, b) => b.score - a.score || a.item.title.localeCompare(b.item.title));
 
     // Strict constraint: at most 3 items to preserve minimalist Swiss aesthetic
-    return matches.slice(0, 3);
+    return scoredItems.slice(0, 3).map(({ item }) => item);
   }, [allItems, query]);
 
   // Reset selected index when query changes
@@ -330,6 +474,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
         return <FileText className="w-3.5 h-3.5 text-emerald-600" />;
       case 'glossary':
         return <BookOpen className="w-3.5 h-3.5 text-blue-500" />;
+      case 'fact':
+        return <Info className="w-3.5 h-3.5 text-blue-600" />;
     }
   };
 
@@ -399,8 +545,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
                     }}
                     placeholder={
                       isFrench
-                        ? 'Rechercher un projet, une action ou un terme...'
-                        : 'Search a project, action, or term...'
+                        ? 'Rechercher un projet, poser une question ou un terme...'
+                        : 'Search a project, ask a question, or a term...'
                     }
                     className="w-full bg-transparent text-sm text-fintech-primary placeholder-slate-400 outline-none focus:ring-1 focus:ring-electric rounded-none px-2 py-1.5 transition-shadow font-mono"
                   />
@@ -428,8 +574,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
                     <div className="py-8 text-center space-y-1 text-slate-400 font-mono text-xs">
                       <p>
                         {isFrench
-                          ? 'Tapez pour chercher (ex. Projets, CV, Donnons, Contact, ADX)...'
-                          : 'Type to search (e.g. Projects, CV, Donnons, Contact, ADX)...'}
+                          ? 'Tapez pour chercher ou poser une question (ex. Études, Âge, Projets, CV, ADX)...'
+                          : 'Type to search or ask a question (e.g. Studies, Age, Projects, CV, ADX)...'}
                       </p>
                     </div>
                   ) : filteredItems.length === 0 ? (

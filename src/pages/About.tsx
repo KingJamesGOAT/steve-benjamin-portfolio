@@ -17,21 +17,21 @@ export const About: React.FC<AboutProps> = ({ id = 'about' }) => {
       details: null,
     },
     {
-      period: '2023',
+      period: isFrench ? '2023 (6 mois)' : '2023 (6 months)',
       title: 'OCCA, Oxford',
       institution: 'Oxford',
       details: isFrench ? 'Philosophie, éthique, sciences' : 'Philosophy, ethics, science',
     },
     {
       period: '2021-2022',
-      title: isFrench ? 'Maturité Professionnelle' : 'Professional Maturity',
-      institution: 'ETML',
+      title: isFrench ? 'Maturité Professionnelle TASV' : 'Professional Maturity TASV',
+      institution: 'ETML Lausanne',
       details: null,
     },
     {
       period: '2017-2021',
-      title: isFrench ? 'CFC Électronique' : 'CFC Electronics',
-      institution: 'CPNV',
+      title: isFrench ? 'CFC Électronicien' : 'Electronics CFC',
+      institution: 'CPNV Yverdon',
       details: null,
     },
   ];
@@ -128,7 +128,7 @@ export const About: React.FC<AboutProps> = ({ id = 'about' }) => {
       </div>
 
       {/* Education Timeline Grid */}
-      <div className="space-y-4">
+      <div id="education" className="space-y-4 scroll-mt-24">
         <h3 className="text-xs font-mono uppercase tracking-widest text-slate-500 font-semibold">
           {t('about.educationTitle')}
         </h3>
@@ -160,7 +160,7 @@ export const About: React.FC<AboutProps> = ({ id = 'about' }) => {
       </div>
 
       {/* Experience and Leadership Grid */}
-      <div className="space-y-4">
+      <div id="experience" className="space-y-4 scroll-mt-24">
         <h3 className="text-xs font-mono uppercase tracking-widest text-slate-500 font-semibold">
           {t('about.experienceTitle')}
         </h3>
