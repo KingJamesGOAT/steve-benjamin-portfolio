@@ -51,12 +51,12 @@ const NEWS_CATALYSTS: NewsCatalyst[] = [
     badge: 'DOGE',
     accentColor: '#F59E0B',
     time: '09:45',
-    tagFr: 'INTÉGRATION X · 09:45 UTC',
-    tagEn: 'X INTEGRATION · 09:45 UTC',
-    line1Fr: 'Licence de paiements validée pour X (Twitter)',
-    line1En: 'Payments transmitter license approved for X',
-    line2Fr: 'Forte spéculation sur l\'intégration de Dogecoin ($DOGE)',
-    line2En: 'Heavy speculation on native Dogecoin ($DOGE) rollout',
+    tagFr: 'PAIEMENTS X · 09:45',
+    tagEn: 'X PAYMENTS · 09:45',
+    line1Fr: 'Licence paiements crypto validée pour X',
+    line1En: 'Crypto payments license approved for X',
+    line2Fr: 'Rebond haussier sur Dogecoin ($DOGE)',
+    line2En: 'Bullish bounce on Dogecoin ($DOGE)',
   },
   {
     id: 2,
@@ -65,12 +65,12 @@ const NEWS_CATALYSTS: NewsCatalyst[] = [
     badge: 'BANK',
     accentColor: '#38BDF8',
     time: '11:00',
-    tagFr: 'WALL STREET · 11:00 UTC',
-    tagEn: 'WALL STREET · 11:00 UTC',
-    line1Fr: 'Morgan Stanley ouvre les ETF Bitcoin à sa clientèle privée',
-    line1En: 'Morgan Stanley greenlights Bitcoin ETFs for wealth clients',
-    line2Fr: '15 000 conseillers financiers autorisés à l\'achat',
-    line2En: '15,000 elite advisors begin active solicitation',
+    tagFr: 'WALL STREET · 11:00',
+    tagEn: 'WALL STREET · 11:00',
+    line1Fr: 'Morgan Stanley valide les ETF Bitcoin',
+    line1En: 'Morgan Stanley approves Bitcoin ETFs',
+    line2Fr: 'Accès ouvert à 15 000 conseillers',
+    line2En: 'Access opened to 15,000 advisors',
   },
 ];
 
@@ -377,8 +377,8 @@ export const CryptoWidgetSim: React.FC = () => {
               const candleTopY = getY(candle.high);
               const pinY = 22;
               const isHovered = hoveredNewsId === item.id;
-              const tooltipWidth = 295;
-              const tooltipHeight = 62;
+              const tooltipWidth = 240;
+              const tooltipHeight = 55;
               const tooltipX = Math.max(70, Math.min(svgWidth - tooltipWidth - 20, x - tooltipWidth / 2));
               const tooltipY = 38;
 
@@ -474,17 +474,17 @@ export const CryptoWidgetSim: React.FC = () => {
                       <rect x="0" y="0" width="3.5" height={tooltipHeight} fill={item.accentColor} />
 
                       {/* Header Tag */}
-                      <text x="12" y="16" fill={item.accentColor} fontSize="9" fontFamily="monospace" fontWeight="bold">
+                      <text x="12" y="15" fill={item.accentColor} fontSize="8.5" fontFamily="monospace" fontWeight="bold">
                         {item.symbol} · {isFrench ? item.tagFr : item.tagEn}
                       </text>
 
                       {/* Line 1 (Headline) */}
-                      <text x="12" y="33" fill="#F8FAFC" fontSize="10.5" fontFamily="sans-serif" fontWeight="600">
+                      <text x="12" y="30" fill="#F8FAFC" fontSize="10" fontFamily="sans-serif" fontWeight="600">
                         {isFrench ? item.line1Fr : item.line1En}
                       </text>
 
                       {/* Line 2 (Detail) */}
-                      <text x="12" y="49" fill="#94A3B8" fontSize="9.5" fontFamily="sans-serif">
+                      <text x="12" y="44" fill="#94A3B8" fontSize="9" fontFamily="sans-serif">
                         {isFrench ? item.line2Fr : item.line2En}
                       </text>
                     </g>
