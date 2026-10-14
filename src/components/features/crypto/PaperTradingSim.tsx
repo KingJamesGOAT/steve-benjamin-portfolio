@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Activity, Layers, Wallet, TrendingUp, Target, Search, X } from 'lucide-react';
+import { Layers, Wallet, TrendingUp, Target, Search, X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import CryptoIcon from './CryptoIcon';
 
 interface Position {
   asset: string;
@@ -155,8 +156,8 @@ export const PaperTradingSim: React.FC = () => {
             </div>
             <p className="text-[11px] font-mono text-slate-400">
               {isFrench
-                ? 'Système En Ligne | v.2.0.0 | Connecté au Réseau Neuronal'
-                : 'System Online | v.2.0.0 | Connected to Neural Net'}
+                ? 'Simulation Haute Fréquence · Architecture Event-Driven'
+                : 'High-Frequency Paper Simulation · Event-Driven Architecture'}
             </p>
           </div>
 
@@ -271,9 +272,12 @@ export const PaperTradingSim: React.FC = () => {
                   className="hover:bg-[#161C2C] transition-colors text-slate-200"
                 >
                   <td className="py-3 px-2">
-                    <span className="font-bold text-slate-100 bg-[#1A2234] border border-[#243048] px-2 py-0.5 rounded-none text-[11px]">
-                      {pos.asset}
-                    </span>
+                    <div className="flex items-center space-x-2">
+                      <CryptoIcon symbol={pos.asset} size={20} />
+                      <span className="font-bold text-slate-100 text-xs">
+                        {pos.asset}
+                      </span>
+                    </div>
                   </td>
                   <td className="py-3 px-2 text-right text-slate-300">{pos.size}</td>
                   <td className="py-3 px-2 text-right text-blue-300">{pos.invested}</td>
@@ -332,6 +336,7 @@ export const PaperTradingSim: React.FC = () => {
             >
               <div className="flex items-center justify-between text-xs font-mono">
                 <div className="flex items-center space-x-2">
+                  <CryptoIcon symbol={scout.symbol} size={20} />
                   <span className="font-bold text-slate-100 text-sm">{scout.symbol}</span>
                   <span className="bg-emerald-950/70 border border-emerald-800 text-emerald-400 text-[10px] px-1.5 py-0.2 rounded-none">
                     {scout.side}
@@ -382,7 +387,7 @@ export const PaperTradingSim: React.FC = () => {
           <div className="bg-[#111622] border border-[#1E2638] rounded-none max-w-lg w-full p-5 space-y-4 shadow-2xl font-mono">
             <div className="flex items-center justify-between border-b border-[#1E2638] pb-3">
               <div className="flex items-center space-x-2">
-                <Activity className="w-4 h-4 text-blue-400" />
+                <CryptoIcon symbol={selectedAudit.asset} size={18} />
                 <span className="text-xs font-bold text-slate-100 tracking-wider">
                   {isFrench
                     ? `AUDIT TÉLÉMÉTRIQUE : ${selectedAudit.asset}`

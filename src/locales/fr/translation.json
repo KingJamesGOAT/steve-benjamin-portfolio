@@ -204,9 +204,9 @@
         "p2": "Pour la télémétrie de portefeuille et le suivi de performance, le frontend exploite Recharts afin de tracer l'historique du solde virtuel, les courbes d'équité et l'allocation d'actifs sans saccade de rendu. Des adaptateurs d'API modulaires s'interfacent avec les spécifications télémétriques de l'API Trading 212 et les flux WebSocket Binance, garantissant des mises à jour sub-seconde sans fuite de mémoire."
       },
       "section4": {
-        "tag": "04 / RENSEIGNEMENT & SYNTHÈSE",
+        "tag": "03 / RENSEIGNEMENT & SYNTHÈSE",
         "badge": "LLAMA 3.3 70B VIA GROQ",
-        "title": "4. Renseignement de Marché Automatisé par IA & Note Quotidienne du Stratège",
+        "title": "3. Renseignement de Marché Automatisé par IA & Note Quotidienne du Stratège",
         "p1": "Afin d'éliminer les biais émotionnels et le dépouillement manuel des informations, la plateforme intègre un pipeline de renseignement automatisé géré par des tâches d'arrière-plan planifiées. Le flux rassemble les principales actualités macroéconomiques et les données globales de CoinGecko, incluant la dominance de Bitcoin, le volume d'échange mondial sur 24 heures et la vélocité des recherches de tendance.",
         "p2": "Ces données consolidées sont formatées selon un contexte institutionnel strict et traitées par le modèle LLaMA 3.3 70B Versatile via l'infrastructure Groq. Le modèle est contraint par des invites système de retourner un schéma JSON déterministe comprenant un score de sentiment numérique (-1,0 à +1,0), un résumé synthétique pour le tableau de bord, trois étiquettes narratives clés et un rapport quotidien au ton institutionnel type Bloomberg transmis directement aux canaux de communication."
       }

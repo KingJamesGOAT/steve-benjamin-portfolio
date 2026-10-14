@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { ArrowLeft, Activity, Terminal, Layers } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { PROJECTS_DATA } from '../data/projectsData';
 import MarketOverviewSim from '../components/features/crypto/MarketOverviewSim';
 import PaperTradingSim from '../components/features/crypto/PaperTradingSim';
@@ -107,159 +107,10 @@ export const ProjectDetail: React.FC = () => {
 
       {/* Crypto Trade Hub: Product Walkthrough */}
       {isCryptoHub && (
-        <div className="space-y-16 sm:space-y-24">
-          {/* Simulation Note */}
-          <div className="border border-slate-200 bg-slate-50 p-4 rounded-none">
-            <p className="text-xs sm:text-sm text-slate-600 font-mono leading-relaxed">
-              {isFrench
-                ? 'Note : Les flux de données et les ordres affichés ci-dessous sont exécutés dans un environnement de simulation temps réel.'
-                : 'Note: Market data streams and trade allocations shown below are executed in a simulated real-time environment.'}
-            </p>
-          </div>
-
-          {/* Section 1: Hero Overview & Architecture Summary */}
-          <section className="space-y-6">
-            <div className="space-y-1.5">
-              <span className="text-xs font-mono font-semibold uppercase tracking-wider text-electric">
-                {t('projects.cryptoDetail.architectureTitle')}
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-fintech-primary">
-                {t('projects.cryptoDetail.caseStudyTitle')}
-              </h2>
-              <p className="text-sm text-fintech-secondary max-w-3xl leading-relaxed">
-                {t('projects.cryptoDetail.caseStudySubtitle')}
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
-              <div className="p-5 border border-slate-200 bg-white shadow-sm rounded-none space-y-2">
-                <div className="flex items-center space-x-2 text-xs font-mono font-bold text-electric uppercase">
-                  <Activity className="w-3.5 h-3.5" />
-                  <span>{t('projects.cryptoDetail.card1Tag')}</span>
-                </div>
-                <div className="text-xs text-slate-600 leading-relaxed font-sans">
-                  {isFrench ? (
-                    <span>
-                      Le filtrage à deux niveaux interroge les flux{' '}
-                      <GlossaryTerm
-                        term="Binance WebSocket Stream"
-                        definition={getGlossaryDef('websocket-stream', currentLang)}
-                      />{', '}
-                      imposant des critères de{' '}
-                      <GlossaryTerm
-                        term="Liquidité de Marché"
-                        definition={getGlossaryDef('market-liquidity', currentLang)}
-                      />{' '}
-                      (volume &gt; 10M$) pour éliminer le bruit illiquide et suivre les actifs à fort momentum.
-                    </span>
-                  ) : (
-                    <span>
-                      Dual-tier filtering queries{' '}
-                      <GlossaryTerm
-                        term="Binance WebSocket Stream"
-                        definition={getGlossaryDef('websocket-stream', currentLang)}
-                      />{' '}
-                      endpoints, enforcing{' '}
-                      <GlossaryTerm
-                        term="Market Liquidity"
-                        definition={getGlossaryDef('market-liquidity', currentLang)}
-                      />{' '}
-                      criteria ($10M+ quote volume) to eliminate illiquid noise and track breakout gainers.
-                    </span>
-                  )}
-                </div>
-              </div>
-
-              <div className="p-5 border border-slate-200 bg-white shadow-sm rounded-none space-y-2">
-                <div className="flex items-center space-x-2 text-xs font-mono font-bold text-emerald-600 uppercase">
-                  <Layers className="w-3.5 h-3.5" />
-                  <span>{t('projects.cryptoDetail.card2Tag')}</span>
-                </div>
-                <div className="text-xs text-slate-600 leading-relaxed font-sans">
-                  {isFrench ? (
-                    <span>
-                      L'indicateur{' '}
-                      <GlossaryTerm term="ADX" definition={getGlossaryDef('adx', currentLang)} /> régule
-                      l'exécution : cassures directionnelles des{' '}
-                      <GlossaryTerm
-                        term="Canaux de Donchian"
-                        definition={getGlossaryDef('donchian-channel', currentLang)}
-                      />{' '}
-                      en tendance et échelons dynamiques de{' '}
-                      <GlossaryTerm
-                        term="Bandes de Bollinger"
-                        definition={getGlossaryDef('bollinger-bands', currentLang)}
-                      />{' '}
-                      en{' '}
-                      <GlossaryTerm
-                        term="Retour à la Moyenne"
-                        definition={getGlossaryDef('mean-reversion', currentLang)}
-                      />.
-                    </span>
-                  ) : (
-                    <span>
-                      <GlossaryTerm term="ADX" definition={getGlossaryDef('adx', currentLang)} /> indicator gates
-                      execution: directional{' '}
-                      <GlossaryTerm
-                        term="Donchian Channel"
-                        definition={getGlossaryDef('donchian-channel', currentLang)}
-                      />{' '}
-                      breakouts during trends and dynamic{' '}
-                      <GlossaryTerm
-                        term="Bollinger Bands"
-                        definition={getGlossaryDef('bollinger-bands', currentLang)}
-                      />{' '}
-                      laddering during{' '}
-                      <GlossaryTerm
-                        term="Mean Reversion"
-                        definition={getGlossaryDef('mean-reversion', currentLang)}
-                      />.
-                    </span>
-                  )}
-                </div>
-              </div>
-
-              <div className="p-5 border border-slate-200 bg-white shadow-sm rounded-none space-y-2">
-                <div className="flex items-center space-x-2 text-xs font-mono font-bold text-purple-600 uppercase">
-                  <Terminal className="w-3.5 h-3.5" />
-                  <span>{t('projects.cryptoDetail.card3Tag')}</span>
-                </div>
-                <div className="text-xs text-slate-600 leading-relaxed font-sans">
-                  {isFrench ? (
-                    <span>
-                      Des tâches planifiées ingèrent le sentiment social et la{' '}
-                      <GlossaryTerm
-                        term="Profondeur du Carnet d'Ordres"
-                        definition={getGlossaryDef('orderbook-depth', currentLang)}
-                      />{' '}
-                      dans{' '}
-                      <GlossaryTerm
-                        term="Groq LLaMA 3.3 70B"
-                        definition={getGlossaryDef('llama-groq', currentLang)}
-                      />, produisant des synthèses de marché quotidiennes structurées.
-                    </span>
-                  ) : (
-                    <span>
-                      Scheduled workers ingest social sentiment and{' '}
-                      <GlossaryTerm
-                        term="Orderbook Depth"
-                        definition={getGlossaryDef('orderbook-depth', currentLang)}
-                      />{' '}
-                      into{' '}
-                      <GlossaryTerm
-                        term="Groq LLaMA 3.3 70B"
-                        definition={getGlossaryDef('llama-groq', currentLang)}
-                      />, producing structured daily market briefings.
-                    </span>
-                  )}
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Section 2: Surveillance & Volume Pipeline Simulation */}
-          <section className="space-y-6">
-            <div className="space-y-1.5">
+        <div className="space-y-12 sm:space-y-16">
+          {/* Section 1: Surveillance & Volume Pipeline Simulation */}
+          <section className="space-y-4">
+            <div className="space-y-1">
               <div className="flex items-center justify-between border-b border-slate-200 pb-2">
                 <span className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-400">
                   {t('projects.cryptoDetail.section1.tag')}
@@ -279,72 +130,52 @@ export const ProjectDetail: React.FC = () => {
             </div>
 
             {/* Technical Explanation Card with Interactive Terms */}
-            <div className="p-6 rounded-none border border-slate-200 bg-white space-y-3 shadow-sm text-xs sm:text-sm text-slate-700 leading-relaxed font-sans">
+            <div className="p-4 sm:p-5 rounded-none border border-slate-200 bg-white shadow-sm text-xs sm:text-sm text-slate-700 leading-relaxed font-sans">
               {isFrench ? (
-                <>
-                  <p>
-                    Le sous-système de scan de marché met en place un pipeline de surveillance à deux niveaux. Le
-                    premier niveau analyse en continu un panier de 11 cryptomonnaies majeures (BTC, ETH, SOL, BNB,
-                    XRP, ADA, DOGE, AVAX, SUI, TRX et LINK) afin d'établir les métriques de{' '}
-                    <GlossaryTerm
-                      term="Liquidité de Marché"
-                      definition={getGlossaryDef('market-liquidity', currentLang)}
-                    />{' '}
-                    de référence. Simultanément, un scanner dynamique interroge l'API Binance 24h ticker en
-                    filtrant plus de 300 paires avec des règles de liquidité strictes : appairage USDT en{' '}
-                    <GlossaryTerm
-                      term="Contrat Perpétuel"
-                      definition={getGlossaryDef('perpetual-contract', currentLang)}
-                    />{' '}
-                    obligatoire, volume minimal de 10 000 000 $ et exclusion des jetons à effet de levier pour
-                    éliminer le bruit non volatil.
-                  </p>
-                  <p>
-                    Le scanner dynamique classe les actifs par volatilité absolue et retient le top 5 des devises à
-                    fort momentum pour capturer les cassures de marché en temps réel avec un{' '}
-                    <GlossaryTerm
-                      term="Glissement d'Exécution (Slippage)"
-                      definition={getGlossaryDef('slippage', currentLang)}
-                    />{' '}
-                    moyen inférieur à 0,005 %.
-                  </p>
-                </>
+                <p>
+                  Ce pipeline de surveillance interroge en continu l'API Binance WebSocket sur plus de 300 paires de devises. 
+                  Il filtre les actifs selon des critères stricts de{' '}
+                  <GlossaryTerm
+                    term="Liquidité de Marché"
+                    definition={getGlossaryDef('market-liquidity', currentLang)}
+                  />{' '}
+                  (volume minimal &gt; 10M$ en{' '}
+                  <GlossaryTerm
+                    term="Contrat Perpétuel"
+                    definition={getGlossaryDef('perpetual-contract', currentLang)}
+                  />) et retient les actifs à plus fort momentum pour capturer les cassures de volatilité avec un{' '}
+                  <GlossaryTerm
+                    term="Glissement d'Exécution (Slippage)"
+                    definition={getGlossaryDef('slippage', currentLang)}
+                  />{' '}
+                  moyen inférieur à 0,005 %.
+                </p>
               ) : (
-                <>
-                  <p>
-                    The market scanning subsystem establishes a dual-tier surveillance pipeline. The
-                    primary tier continuously tracks an eleven-token blue-chip basket (BTC, ETH, SOL,
-                    BNB, XRP, ADA, DOGE, AVAX, SUI, TRX, and LINK) to maintain baseline{' '}
-                    <GlossaryTerm
-                      term="Market Liquidity"
-                      definition={getGlossaryDef('market-liquidity', currentLang)}
-                    />{' '}
-                    metrics. Concurrently, a secondary dynamic scanner queries the Binance 24-hour ticker
-                    endpoint, filtering over 300 trading pairs with stringent liquidity criteria: enforcing
-                    strict USDT{' '}
-                    <GlossaryTerm
-                      term="Perpetual Contract"
-                      definition={getGlossaryDef('perpetual-contract', currentLang)}
-                    />{' '}
-                    pairing, requiring a minimum $10,000,000 quote volume threshold, and eliminating
-                    leveraged tokens to prevent non-volatile noise.
-                  </p>
-                  <p>
-                    The dynamic scanner ranks candidates by absolute volatility and selects the top 5
-                    momentum gainers to monitor real-time breakouts across market cycles with sub-0.005%{' '}
-                    <GlossaryTerm
-                      term="Execution Slippage"
-                      definition={getGlossaryDef('slippage', currentLang)}
-                    />.
-                  </p>
-                </>
+                <p>
+                  This surveillance pipeline continuously queries Binance WebSocket streams across 300+ trading pairs. 
+                  Assets are filtered against strict{' '}
+                  <GlossaryTerm
+                    term="Market Liquidity"
+                    definition={getGlossaryDef('market-liquidity', currentLang)}
+                  />{' '}
+                  thresholds ($10M+ quote volume in{' '}
+                  <GlossaryTerm
+                    term="Perpetual Contracts"
+                    definition={getGlossaryDef('perpetual-contract', currentLang)}
+                  />) to capture high-momentum volatility breakouts with average{' '}
+                  <GlossaryTerm
+                    term="Execution Slippage"
+                    definition={getGlossaryDef('slippage', currentLang)}
+                  />{' '}
+                  under 0.005%.
+                </p>
               )}
             </div>
           </section>
 
-          {/* Section 3: Dual-Regime Execution & Vector Allocations Simulation */}
-          <section className="space-y-6">
-            <div className="space-y-1.5">
+          {/* Section 2: Dual-Regime Execution & Vector Allocations Simulation */}
+          <section className="space-y-4">
+            <div className="space-y-1">
               <div className="flex items-center justify-between border-b border-slate-200 pb-2">
                 <span className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-400">
                   {t('projects.cryptoDetail.section2.tag')}
@@ -364,101 +195,84 @@ export const ProjectDetail: React.FC = () => {
             </div>
 
             {/* Technical Explanation Card with Interactive Terms */}
-            <div className="p-6 rounded-none border border-slate-200 bg-white space-y-3 shadow-sm text-xs sm:text-sm text-slate-700 leading-relaxed font-sans">
+            <div className="p-4 sm:p-5 rounded-none border border-slate-200 bg-white shadow-sm text-xs sm:text-sm text-slate-700 leading-relaxed font-sans">
               {isFrench ? (
-                <>
-                  <p>
-                    Le moteur stratégique repose sur un cadre autonome à double régime piloté par l'indicateur{' '}
-                    <GlossaryTerm term="ADX" definition={getGlossaryDef('adx', currentLang)} /> à 14 périodes. Quand
-                    l'ADX dépasse 25,0, le moteur active le{' '}
-                    <GlossaryTerm
-                      term="Module Smart Momentum"
-                      definition={getGlossaryDef('smart-momentum', currentLang)}
-                    />, détectant les cassures du{' '}
-                    <GlossaryTerm
-                      term="Canal de Donchian"
-                      definition={getGlossaryDef('donchian-channel', currentLang)}
-                    />{' '}
-                    à 20 bougies corroborées par une hausse de volume de 2,0x au-dessus de l'{' '}
-                    <GlossaryTerm term="EMA 20 Périodes" definition={getGlossaryDef('ema-20', currentLang)} />. Dans
-                    les régimes sans tendance marquée (ADX inférieur à 25,0), l'exécution bascule en grille
-                    dynamique de{' '}
-                    <GlossaryTerm
-                      term="Retour à la Moyenne"
-                      definition={getGlossaryDef('mean-reversion', currentLang)}
-                    />, disposant des échelons d'ordres limites dans l'enveloppe des{' '}
-                    <GlossaryTerm
-                      term="Bandes de Bollinger"
-                      definition={getGlossaryDef('bollinger-bands', currentLang)}
-                    />.
-                  </p>
-                  <p>
-                    Les allocations de capital respectent le dimensionnement fractionnaire du{' '}
-                    <GlossaryTerm
-                      term="Critère de Kelly"
-                      definition={getGlossaryDef('kelly-criterion', currentLang)}
-                    />{' '}
-                    plafonné à 2,0 % de risque maximum par vecteur. La machine d'état coordonne les ajustements
-                    continus du{' '}
-                    <GlossaryTerm
-                      term="Stop-Loss Suiveur"
-                      definition={getGlossaryDef('trailing-stop', currentLang)}
-                    />, le verrouillage des cibles de profit et la synchronisation en temps réel du{' '}
-                    <GlossaryTerm term="PnL" definition={getGlossaryDef('pnl', currentLang)} />.
-                  </p>
-                </>
+                <p>
+                  Le moteur d'exécution autonome est orchestré par un filtre à double régime basé sur l'indicateur{' '}
+                  <GlossaryTerm term="ADX" definition={getGlossaryDef('adx', currentLang)} /> (14 périodes). En régime directionnel (ADX &gt; 25), le{' '}
+                  <GlossaryTerm
+                    term="Module Smart Momentum"
+                    definition={getGlossaryDef('smart-momentum', currentLang)}
+                  />{' '}
+                  valide les cassures de{' '}
+                  <GlossaryTerm
+                    term="Canal de Donchian"
+                    definition={getGlossaryDef('donchian-channel', currentLang)}
+                  />{' '}
+                  avec confirmation par l'{' '}
+                  <GlossaryTerm term="EMA 20 Périodes" definition={getGlossaryDef('ema-20', currentLang)} />. En régime sans tendance, il bascule sur une grille de{' '}
+                  <GlossaryTerm
+                    term="Retour à la Moyenne"
+                    definition={getGlossaryDef('mean-reversion', currentLang)}
+                  />{' '}
+                  calibrée sur les{' '}
+                  <GlossaryTerm
+                    term="Bandes de Bollinger"
+                    definition={getGlossaryDef('bollinger-bands', currentLang)}
+                  />. Les positions sont protégées par un{' '}
+                  <GlossaryTerm
+                    term="Stop-Loss Suiveur"
+                    definition={getGlossaryDef('trailing-stop', currentLang)}
+                  />{' '}
+                  dynamique et dimensionnées selon le{' '}
+                  <GlossaryTerm
+                    term="Critère de Kelly"
+                    definition={getGlossaryDef('kelly-criterion', currentLang)}
+                  />{' '}
+                  (risque max 2,0 %).
+                </p>
               ) : (
-                <>
-                  <p>
-                    The core strategy engine operates on an autonomous dual-regime framework governed by
-                    the 14-period{' '}
-                    <GlossaryTerm term="ADX" definition={getGlossaryDef('adx', currentLang)} />. When ADX exceeds 25.0,
-                    the engine activates the{' '}
-                    <GlossaryTerm
-                      term="Smart Momentum Module"
-                      definition={getGlossaryDef('smart-momentum', currentLang)}
-                    />, identifying 20-candle{' '}
-                    <GlossaryTerm
-                      term="Donchian Channel"
-                      definition={getGlossaryDef('donchian-channel', currentLang)}
-                    />{' '}
-                    breakouts corroborated by a 2.0x volume surge above the{' '}
-                    <GlossaryTerm term="20-Period EMA" definition={getGlossaryDef('ema-20', currentLang)} />. In
-                    low-trend regimes (ADX below 25.0), execution transitions into Dynamic Grid{' '}
-                    <GlossaryTerm
-                      term="Mean Reversion"
-                      definition={getGlossaryDef('mean-reversion', currentLang)}
-                    />, placing limit ladders within calibrated{' '}
-                    <GlossaryTerm
-                      term="Bollinger Bands"
-                      definition={getGlossaryDef('bollinger-bands', currentLang)}
-                    />{' '}
-                    envelopes.
-                  </p>
-                  <p>
-                    Capital allocations adhere to fractional{' '}
-                    <GlossaryTerm
-                      term="Kelly Criterion"
-                      definition={getGlossaryDef('kelly-criterion', currentLang)}
-                    />{' '}
-                    sizing capped at 2.0% maximum portfolio risk per vector. The paper trading state
-                    machine coordinates continuous{' '}
-                    <GlossaryTerm
-                      term="Trailing Stop-Loss"
-                      definition={getGlossaryDef('trailing-stop', currentLang)}
-                    />{' '}
-                    adjustments, dynamic profit targets, and deterministic stop-loss executions with
-                    real-time{' '}
-                    <GlossaryTerm term="PnL" definition={getGlossaryDef('pnl', currentLang)} /> synchronization.
-                  </p>
-                </>
+                <p>
+                  The autonomous execution engine operates on a dual-regime framework governed by the 14-period{' '}
+                  <GlossaryTerm term="ADX" definition={getGlossaryDef('adx', currentLang)} />. In trending regimes (ADX &gt; 25), the{' '}
+                  <GlossaryTerm
+                    term="Smart Momentum Module"
+                    definition={getGlossaryDef('smart-momentum', currentLang)}
+                  />{' '}
+                  executes on 20-candle{' '}
+                  <GlossaryTerm
+                    term="Donchian Channel"
+                    definition={getGlossaryDef('donchian-channel', currentLang)}
+                  />{' '}
+                  breakouts corroborated by the{' '}
+                  <GlossaryTerm term="20-Period EMA" definition={getGlossaryDef('ema-20', currentLang)} />. In range-bound markets, it pivots to Dynamic Grid{' '}
+                  <GlossaryTerm
+                    term="Mean Reversion"
+                    definition={getGlossaryDef('mean-reversion', currentLang)}
+                  />{' '}
+                  envelopes via{' '}
+                  <GlossaryTerm
+                    term="Bollinger Bands"
+                    definition={getGlossaryDef('bollinger-bands', currentLang)}
+                  />. Risk is sized via fractional{' '}
+                  <GlossaryTerm
+                    term="Kelly Criterion"
+                    definition={getGlossaryDef('kelly-criterion', currentLang)}
+                  />{' '}
+                  capped at 2.0% with automated{' '}
+                  <GlossaryTerm
+                    term="Trailing Stop-Loss"
+                    definition={getGlossaryDef('trailing-stop', currentLang)}
+                  />{' '}
+                  protection.
+                </p>
               )}
             </div>
           </section>
 
-          {/* Section 4: Automated AI Market Intelligence Simulation */}
-          <section className="space-y-6">
-            <div className="space-y-1.5">
+          {/* Section 3: Automated AI Market Intelligence Simulation */}
+          <section className="space-y-4">
+            <div className="space-y-1">
               <div className="flex items-center justify-between border-b border-slate-200 pb-2">
                 <span className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-400">
                   {t('projects.cryptoDetail.section4.tag')}
@@ -478,56 +292,33 @@ export const ProjectDetail: React.FC = () => {
             </div>
 
             {/* Technical Explanation Card with Interactive Terms */}
-            <div className="p-6 rounded-none border border-slate-200 bg-white space-y-3 shadow-sm text-xs sm:text-sm text-slate-700 leading-relaxed font-sans">
+            <div className="p-4 sm:p-5 rounded-none border border-slate-200 bg-white shadow-sm text-xs sm:text-sm text-slate-700 leading-relaxed font-sans">
               {isFrench ? (
-                <>
-                  <p>
-                    Afin d'éliminer les biais émotionnels et le dépouillement manuel des informations, la
-                    plateforme intègre un pipeline de renseignement automatisé géré par des tâches d'arrière-plan
-                    planifiées. Le flux rassemble les principales actualités macroéconomiques et les données
-                    globales de CoinGecko, incluant la dominance de Bitcoin, le volume d'échange mondial sur 24
-                    heures et les déséquilibres de{' '}
-                    <GlossaryTerm
-                      term="Profondeur du Carnet d'Ordres"
-                      definition={getGlossaryDef('orderbook-depth', currentLang)}
-                    />.
-                  </p>
-                  <p>
-                    Ces données consolidées sont formatées selon un contexte institutionnel strict et traitées par{' '}
-                    <GlossaryTerm
-                      term="Groq LLaMA 3.3 70B"
-                      definition={getGlossaryDef('llama-groq', currentLang)}
-                    />. Le modèle est contraint par des invites système de retourner un schéma JSON déterministe
-                    comprenant un score de sentiment numérique (-1,0 à +1,0), un résumé synthétique pour le tableau
-                    de bord et une note quotidienne au ton institutionnel type Bloomberg transmise directement aux
-                    canaux de communication.
-                  </p>
-                </>
+                <p>
+                  Ce pipeline d'intelligence de marché ingère les flux d'actualités macroéconomiques et les déséquilibres de{' '}
+                  <GlossaryTerm
+                    term="Profondeur du Carnet d'Ordres"
+                    definition={getGlossaryDef('orderbook-depth', currentLang)}
+                  />{' '}
+                  vers{' '}
+                  <GlossaryTerm
+                    term="Groq LLaMA 3.3 70B"
+                    definition={getGlossaryDef('llama-groq', currentLang)}
+                  />. Les invites système contraignent le modèle à produire un schéma JSON déterministe avec score de sentiment numérique (-1,0 à +1,0) et un briefing institutionnel synthétisé sans délai.
+                </p>
               ) : (
-                <>
-                  <p>
-                    To eliminate emotional bias and manual disclosure analysis, the platform integrates an
-                    automated AI intelligence pipeline executed via scheduled background workers. The
-                    pipeline ingests top macroeconomic news headlines alongside CoinGecko global telemetry,
-                    including Bitcoin market dominance percentages, 24-hour global trading volume, and{' '}
-                    <GlossaryTerm
-                      term="Orderbook Depth"
-                      definition={getGlossaryDef('orderbook-depth', currentLang)}
-                    />{' '}
-                    imbalances.
-                  </p>
-                  <p>
-                    This consolidated dataset is formatted into a strict institutional context and processed
-                    through{' '}
-                    <GlossaryTerm
-                      term="Groq LLaMA 3.3 70B"
-                      definition={getGlossaryDef('llama-groq', currentLang)}
-                    />. The model is constrained via system prompts to return deterministic JSON schemas
-                    containing normalized numerical sentiment scores (-1.0 extreme bear to +1.0 extreme
-                    bull), concise dashboard summaries, and an institutional Bloomberg-style daily market
-                    digest dispatched directly to communication channels.
-                  </p>
-                </>
+                <p>
+                  This market intelligence pipeline streams macroeconomic news headlines and{' '}
+                  <GlossaryTerm
+                    term="Orderbook Depth"
+                    definition={getGlossaryDef('orderbook-depth', currentLang)}
+                  />{' '}
+                  imbalances into{' '}
+                  <GlossaryTerm
+                    term="Groq LLaMA 3.3 70B"
+                    definition={getGlossaryDef('llama-groq', currentLang)}
+                  />. System prompts constrain the model to output a deterministic JSON schema featuring normalized sentiment scores (-1.0 to +1.0) and instantaneous institutional briefs.
+                </p>
               )}
             </div>
           </section>

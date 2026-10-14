@@ -1,6 +1,7 @@
 import React from 'react';
 import { Activity, BarChart2, TrendingUp } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import CryptoIcon from './CryptoIcon';
 
 interface VolumeAsset {
   rank: number;
@@ -212,9 +213,7 @@ export const MarketOverviewSim: React.FC = () => {
               >
                 <div className="flex items-center space-x-3">
                   <span className="text-slate-500 text-[11px] w-4">#{item.rank}</span>
-                  <div className="w-6 h-6 bg-[#1A2234] border border-[#243048] flex items-center justify-center font-bold text-[10px] text-slate-200 rounded-none">
-                    {item.symbol.substring(0, 3)}
-                  </div>
+                  <CryptoIcon symbol={item.symbol} size={24} />
                   <div>
                     <span className="font-bold text-slate-100">{item.symbol}</span>
                     <span className="text-slate-400 text-[11px] ml-2">{item.price}</span>
@@ -258,9 +257,7 @@ export const MarketOverviewSim: React.FC = () => {
               >
                 <div className="flex items-center space-x-3">
                   <span className="text-slate-500 text-[11px] w-4">#{item.rank}</span>
-                  <div className="w-6 h-6 bg-[#1A2234] border border-[#243048] flex items-center justify-center font-bold text-[10px] text-slate-200 rounded-none">
-                    {item.symbol.substring(0, 3)}
-                  </div>
+                  <CryptoIcon symbol={item.symbol} size={24} />
                   <span className="font-bold text-slate-100">{item.symbol}</span>
                 </div>
 
@@ -314,9 +311,7 @@ export const MarketOverviewSim: React.FC = () => {
                   <td className="py-3 px-2 text-slate-500">{asset.rank}</td>
                   <td className="py-3 px-2">
                     <div className="flex items-center space-x-2.5">
-                      <div className="w-6 h-6 bg-[#1A2234] border border-[#243048] flex items-center justify-center font-bold text-[10px] text-slate-200 rounded-none shrink-0">
-                        {asset.symbol.substring(0, 3)}
-                      </div>
+                      <CryptoIcon symbol={asset.symbol} size={26} />
                       <div>
                         <div className="font-bold text-slate-100">{asset.name}</div>
                         <div className="text-[10px] text-slate-500 uppercase">{asset.symbol}</div>

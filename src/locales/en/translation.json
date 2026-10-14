@@ -204,9 +204,9 @@
         "p2": "For portfolio telemetry and equity performance, the frontend utilizes Recharts to render virtual balance history, equity curves, and asset allocation distributions without DOM frame stutter. Modular API adapters interface with Trading 212 API telemetry endpoints and Binance WebSocket streaming connections, ensuring price ticks and simulated fill events update reactively without memory leakage."
       },
       "section4": {
-        "tag": "04 / INTELLIGENCE & SYNTHESIS",
+        "tag": "03 / INTELLIGENCE & SYNTHESIS",
         "badge": "LLAMA 3.3 70B VIA GROQ",
-        "title": "4. Automated AI Market Intelligence & Daily Strategist Brief",
+        "title": "3. Automated AI Market Intelligence & Daily Strategist Brief",
         "p1": "To eliminate emotional bias and manual disclosure analysis, the platform integrates an automated AI intelligence pipeline executed via scheduled background workers. The pipeline ingests top macroeconomic news headlines alongside CoinGecko global telemetry, including Bitcoin market dominance percentages, 24-hour global trading volume, and trending search velocity.",
         "p2": "This consolidated dataset is formatted into a strict institutional context and processed through Groq's high-throughput LLaMA 3.3 70B Versatile model. The model is constrained via system prompts to return deterministic JSON schemas containing normalized numerical sentiment scores (-1.0 extreme bear to +1.0 extreme bull), concise single-sentence dashboard summaries, three key narrative metadata tags, and an institutional Bloomberg-style daily market digest dispatched directly to communication channels."
       }
