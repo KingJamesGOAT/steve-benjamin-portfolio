@@ -76,7 +76,7 @@ export const Home: React.FC = () => {
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                       <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                     </span>
-                    <span>{isFrench ? 'Dispo · Mandat Bachelor 2027' : 'Available · Bachelor Mandate 2027'}</span>
+                    <span>{isFrench ? 'Dispo · Bachelor HEIG-VD 2027' : 'Available · Bachelor HEIG-VD 2027'}</span>
                     <span className="text-emerald-500 group-hover:translate-x-0.5 transition-transform text-[10px]">→</span>
                   </Link>
                 </div>
@@ -505,7 +505,10 @@ export const Home: React.FC = () => {
               <span>{t('bachelorPitch.ctaGuide')}</span>
             </a>
 
-            <CopyEmailButton className="px-5 py-3 rounded-none border border-slate-200 bg-white hover:border-slate-300 text-slate-700 text-xs shadow-sm" />
+            <CopyEmailButton
+              subject="HEIG-VD Bachelor Project 2027"
+              className="px-5 py-3 rounded-none border border-slate-200 bg-white hover:border-slate-300 text-slate-700 text-xs shadow-sm"
+            />
           </div>
         </div>
       </section>

@@ -69,7 +69,10 @@ export const BachelorPitch: React.FC = () => {
             {t('bachelorPitch.ctaResume')} ↗
           </a>
 
-          <CopyEmailButton className="px-4 py-2.5 border border-slate-200 bg-white hover:border-slate-300 text-slate-600 text-xs shadow-sm" />
+          <CopyEmailButton
+            subject="HEIG-VD Bachelor Project 2027 - Mandate Discussion"
+            className="px-4 py-2.5 border border-slate-200 bg-white hover:border-slate-300 text-slate-600 text-xs shadow-sm"
+          />
         </div>
       </section>
 

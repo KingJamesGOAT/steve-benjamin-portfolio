@@ -4,14 +4,16 @@ import { Copy, Check } from 'lucide-react';
 
 interface CopyEmailButtonProps {
   email?: string;
+  subject?: string;
   className?: string;
-  showIcon?: boolean;
+  linkClassName?: string;
 }
 
 export const CopyEmailButton: React.FC<CopyEmailButtonProps> = ({
   email = 'sbstevebenjamin@gmail.com',
+  subject,
   className = '',
-  showIcon = true,
+  linkClassName = '',
 }) => {
   const { i18n } = useTranslation();
   const isFrench = Boolean(i18n.language?.startsWith('fr'));
@@ -19,6 +21,7 @@ export const CopyEmailButton: React.FC<CopyEmailButtonProps> = ({
 
   const handleCopy = async (e: React.MouseEvent) => {
     e.preventDefault();
+    e.stopPropagation();
     try {
       await navigator.clipboard.writeText(email);
       setCopied(true);
@@ -28,24 +31,39 @@ export const CopyEmailButton: React.FC<CopyEmailButtonProps> = ({
     }
   };
 
+  const mailtoUrl = subject
+    ? `mailto:${email}?subject=${encodeURIComponent(subject)}`
+    : `mailto:${email}`;
+
   return (
-    <button
-      type="button"
-      onClick={handleCopy}
-      title={isFrench ? 'Cliquer pour copier l\'e-mail' : 'Click to copy email'}
-      className={`inline-flex items-center space-x-1.5 transition-colors cursor-pointer select-none font-mono ${className}`}
-    >
-      {showIcon && (
-        copied ? (
-          <Check className="w-3.5 h-3.5 text-emerald-600 transition-transform scale-110" />
+    <div className={`inline-flex items-center gap-2 font-mono ${className}`}>
+      {/* 1. Click to open in default mail app */}
+      <a
+        href={mailtoUrl}
+        className={`hover:text-electric transition-colors ${linkClassName}`}
+        title={isFrench ? 'Ouvrir dans l\'application e-mail' : 'Open in mail app'}
+      >
+        {email}
+      </a>
+
+      {/* 2. Direct copy icon button right next to it */}
+      <button
+        type="button"
+        onClick={handleCopy}
+        title={isFrench ? 'Copier l\'e-mail' : 'Copy email address'}
+        className="inline-flex items-center gap-1 text-slate-400 hover:text-electric transition-colors p-1 -m-1 cursor-pointer select-none"
+        aria-label={isFrench ? 'Copier l\'e-mail' : 'Copy email'}
+      >
+        {copied ? (
+          <span className="inline-flex items-center gap-1 text-[11px] text-emerald-600 font-sans font-semibold animate-in fade-in duration-150">
+            <Check className="w-3.5 h-3.5" />
+            <span>{isFrench ? 'Copié !' : 'Copied!'}</span>
+          </span>
         ) : (
-          <Copy className="w-3.5 h-3.5 opacity-60 hover:opacity-100" />
-        )
-      )}
-      <span className={copied ? 'text-emerald-700 font-semibold' : ''}>
-        {copied ? (isFrench ? 'Copié !' : 'Copied!') : email}
-      </span>
-    </button>
+          <Copy className="w-3.5 h-3.5 hover:scale-110 transition-transform" />
+        )}
+      </button>
+    </div>
   );
 };
 
