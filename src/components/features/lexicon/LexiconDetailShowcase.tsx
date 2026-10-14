@@ -33,7 +33,7 @@ export const LexiconDetailShowcase: React.FC = () => {
   const [hoveredTerm, setHoveredTerm] = useState<LexiconTerm | null>(null);
 
   // 3. Timeline Active Event
-  const [selectedEventId, setSelectedEventId] = useState<string>('nicaea');
+  const [selectedEventId, setSelectedEventId] = useState<string>('porphyry');
 
   // Curated database: scientific, physical, philosophical, and epistemological terms (zero religious terms)
   const lexiconData: LexiconTerm[] = [
@@ -224,13 +224,13 @@ export const LexiconDetailShowcase: React.FC = () => {
   // Curated historical intellectual milestones
   const timelineEvents: TimelineItem[] = [
     {
-      id: 'nicaea',
-      year: 325,
+      id: 'porphyry',
+      year: 300,
       type: { en: 'Treatise', fr: 'Traité' },
-      title: { en: 'First Formal Consensus (325 AD)', fr: 'Premier Consensus Formel (325)' },
+      title: { en: 'Porphyry: Isagoge on Logic (300 AD)', fr: 'Porphyre : L\'Isagoge et la Logique (300)' },
       description: {
-        en: 'Foundational standardized codification establishing precise philosophical terminology (homoousios) to define substantial reality and semantic coherence.',
-        fr: 'Première codification normalisée établissant une terminologie philosophique précise (homoousios) pour unifier la sémantique et la doctrine.',
+        en: 'Foundational logical treatise introducing hierarchical classification and tree categories (Tree of Porphyry), establishing the core philosophical framework for genus, species, and universals.',
+        fr: 'Traité de logique fondamental introduisant la classification arborescente des catégories (Arbre de Porphyre), posant le cadre philosophique des genres, espèces et universaux.',
       },
     },
     {
