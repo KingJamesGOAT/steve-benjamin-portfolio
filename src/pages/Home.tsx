@@ -148,14 +148,14 @@ export const Home: React.FC = () => {
                 {isFrench ? 'Compétences' : 'Skills'}
               </span>
               <div className="w-8 h-8 rounded-full border border-slate-200 group-hover:border-slate-400 bg-white shadow-2xs flex items-center justify-center transition-all duration-200 group-hover:shadow-xs">
-                <ChevronDown className="w-4 h-4 text-slate-400 group-hover:text-slate-700 transition-transform duration-200 group-hover:translate-y-0.5 animate-bounce" />
+                <ChevronDown className="w-4 h-4 text-slate-400 group-hover:text-slate-700 transition-transform duration-200 group-hover:translate-y-1" />
               </div>
             </button>
           </div>
         </section>
 
         {/* SECTION 1.5: TECHNICAL SKILLS & SOFTWARE ECOSYSTEM */}
-        <section id="skills" className="scroll-mt-20 pt-2 space-y-4">
+        <section id="skills" className="scroll-mt-20 pt-2 space-y-8 sm:space-y-10">
           <TechBentoGrid />
           <AppCarousel />
         </section>
@@ -185,10 +185,10 @@ export const Home: React.FC = () => {
                     {isFrench ? '< 50ms Latence Ticks' : '< 50ms Tick Latency'}
                   </span>
                   <span className="px-2.5 py-1 text-[11px] font-mono font-semibold bg-slate-100 text-slate-700 border border-slate-200">
-                    {isFrench ? 'Modèle de Risque Kelly' : 'Kelly Risk Engine'}
+                    {isFrench ? 'Modèle Risque Kelly' : 'Kelly Risk Engine'}
                   </span>
                   <span className="px-2.5 py-1 text-[11px] font-mono font-semibold bg-slate-100 text-slate-700 border border-slate-200">
-                    LLaMA 3.3 AI
+                    {isFrench ? 'Flux Binance Direct' : 'Live Binance Stream'}
                   </span>
                 </div>
               </div>
@@ -238,12 +238,12 @@ export const Home: React.FC = () => {
                     {isFrench ? 'GESTION DU RISQUE' : 'QUANTITATIVE RISK'}
                   </span>
                   <span className="font-semibold text-slate-800 text-xs sm:text-sm block">
-                    {isFrench ? 'Critère de Kelly & ADX' : 'Kelly Criterion & ADX'}
+                    {isFrench ? 'Modèle de Risque Kelly' : 'Kelly Risk Model'}
                   </span>
                   <p className="text-slate-500 text-xs leading-relaxed">
                     {isFrench
-                      ? 'Détection de tendance automatique et plafonnement strict de la perte maximale à 2%.'
-                      : 'Automated regime detection with strict 2% downside capital protection formula.'}
+                      ? 'Dimensionnement optimal des positions et plafonnement strict de la perte maximale à 2% du capital.'
+                      : 'Optimal position sizing with strict 2% downside capital protection formula.'}
                   </p>
                 </div>
 
@@ -280,7 +280,7 @@ export const Home: React.FC = () => {
                     {isFrench ? '-30% Rejets sur Place' : '-30% On-Site Deferrals'}
                   </span>
                   <span className="px-2.5 py-1 text-[11px] font-mono font-semibold bg-slate-100 text-slate-700 border border-slate-200">
-                    Vue 3 · Laravel API
+                    {isFrench ? 'Qualification Anonyme' : 'Anonymous Screening'}
                   </span>
                 </div>
               </div>
@@ -379,8 +379,8 @@ export const Home: React.FC = () => {
 
               <p className="text-xs sm:text-sm text-fintech-secondary leading-relaxed">
                 {isFrench
-                  ? 'Moteur de recherche instantané (< 10ms) et frise chronologique pour explorer des définitions'
-                  : 'Instant search engine (< 10ms) and interactive timeline for exploring definitions'}
+                  ? 'Indexation de concepts historiques et exploration visuelle par graphe sémantique.'
+                  : 'Historical concept indexation and visual semantic exploration graph.'}
               </p>
 
               {/* Interactive Lexicon & Chronology Simulation Widget */}
