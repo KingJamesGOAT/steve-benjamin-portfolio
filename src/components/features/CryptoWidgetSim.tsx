@@ -44,12 +44,9 @@ export const CryptoWidgetSim: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // SVG Chart Bounds & Coordinate Math (~10% larger chart height)
+  // SVG Chart Bounds & Coordinate Math
   const minPrice = 67600;
   const maxPrice = 68700;
-  const breakoutPrice = 68340;
-  const trailingStopPrice = 68120;
-  const maxVolume = 700;
 
   const svgWidth = 840;
   const svgHeight = 230;
@@ -57,9 +54,6 @@ export const CryptoWidgetSim: React.FC = () => {
   const getY = (p: number) => {
     return svgHeight - ((p - minPrice) / (maxPrice - minPrice)) * (svgHeight - 65) - 38;
   };
-
-  const breakoutY = getY(breakoutPrice);
-  const trailingStopY = getY(trailingStopPrice);
 
   const pointsString = CANDLE_DATA.map((pt, i) => {
     const x = (i / (CANDLE_DATA.length - 1)) * (svgWidth - 90) + 70;
@@ -140,22 +134,14 @@ export const CryptoWidgetSim: React.FC = () => {
               {isFrench ? 'TÉLÉMÉTRIE D\'EXÉCUTION 15M' : '15M EXECUTION TELEMETRY'}
             </span>
           </div>
-          <div className="flex items-center gap-2.5 text-[10px] shrink-0">
-            <span className="flex items-center space-x-1">
-              <span className="w-2 h-0.5 bg-emerald-400 inline-block" />
-              <span>{isFrench ? 'COURS' : 'MARK'}</span>
+          <div className="flex items-center gap-3 text-[10px] shrink-0">
+            <span className="flex items-center space-x-1.5">
+              <span className="w-2.5 h-0.5 bg-emerald-400 inline-block" />
+              <span>{isFrench ? 'COURS (BTC)' : 'PRICE (BTC)'}</span>
             </span>
-            <span className="flex items-center space-x-1">
-              <span className="w-2 h-0.5 bg-[#0052FF] inline-block" />
+            <span className="flex items-center space-x-1.5">
+              <span className="w-2.5 h-0.5 bg-[#0052FF] inline-block" />
               <span>20-EMA</span>
-            </span>
-            <span className="flex items-center space-x-1">
-              <span className="w-2 h-0.5 bg-emerald-500 border-b border-dashed border-emerald-400 inline-block" />
-              <span>{isFrench ? 'CASSURE (68 340 $)' : 'BREAKOUT ($68,340)'}</span>
-            </span>
-            <span className="flex items-center space-x-1">
-              <span className="w-2 h-0.5 bg-amber-500 inline-block" />
-              <span>{isFrench ? 'TRAIL STOP (68 120 $)' : 'TRAIL STOP ($68,120)'}</span>
             </span>
           </div>
         </div>
@@ -179,10 +165,8 @@ export const CryptoWidgetSim: React.FC = () => {
             </defs>
 
             {/* Y-Axis Horizontal Grid Lines & Price Labels */}
-            {[68700, 68340, 68120, 67800, 67600].map((priceLevel) => {
+            {[68700, 68400, 68100, 67800, 67600].map((priceLevel) => {
               const y = getY(priceLevel);
-              const isBreakout = priceLevel === 68340;
-              const isTrailing = priceLevel === 68120;
 
               return (
                 <g key={`grid-${priceLevel}`}>
@@ -191,71 +175,20 @@ export const CryptoWidgetSim: React.FC = () => {
                     y1={y}
                     x2={svgWidth - 10}
                     y2={y}
-                    stroke={
-                      isBreakout
-                        ? '#10b981'
-                        : isTrailing
-                        ? '#f59e0b'
-                        : '#1E293B'
-                    }
-                    strokeWidth={isBreakout || isTrailing ? '1.2' : '0.8'}
-                    strokeDasharray={isBreakout ? '4 3' : isTrailing ? '3 3' : 'none'}
-                    opacity={isBreakout || isTrailing ? '0.75' : '0.35'}
+                    stroke="#1E293B"
+                    strokeWidth="0.8"
+                    opacity="0.4"
                   />
                   <text
                     x="10"
                     y={y + 3.5}
-                    fill={
-                      isBreakout
-                        ? '#34d399'
-                        : isTrailing
-                        ? '#fbbf24'
-                        : '#64748B'
-                    }
+                    fill="#64748B"
                     fontSize="9.5"
                     fontFamily="monospace"
-                    fontWeight={isBreakout || isTrailing ? 'bold' : 'normal'}
                   >
                     ${priceLevel.toLocaleString()}
                   </text>
                 </g>
-              );
-            })}
-
-            {/* Reference Line Badges inside Chart Canvas */}
-            <g transform={`translate(${svgWidth - 200}, ${breakoutY - 6})`}>
-              <rect x="0" y="-8" width="185" height="14" fill="#0B132B" stroke="#10b981" strokeWidth="0.8" />
-              <text x="6" y="2" fill="#34d399" fontSize="8" fontFamily="monospace" fontWeight="bold">
-                {isFrench ? 'SOMMET DONCHIAN (68 340 $)' : 'DONCHIAN HIGH ($68,340)'}
-              </text>
-            </g>
-
-            <g transform={`translate(${svgWidth - 200}, ${trailingStopY - 6})`}>
-              <rect x="0" y="-8" width="185" height="14" fill="#1C1408" stroke="#f59e0b" strokeWidth="0.8" />
-              <text x="6" y="2" fill="#fbbf24" fontSize="8" fontFamily="monospace" fontWeight="bold">
-                {isFrench ? 'TRAILING STOP (68 120 $)' : 'TRAILING STOP ($68,120)'}
-              </text>
-            </g>
-
-            {/* Volume Histogram Bars along the base */}
-            {CANDLE_DATA.map((pt, i) => {
-              const barWidth = 14;
-              const x = (i / (CANDLE_DATA.length - 1)) * (svgWidth - 90) + 70 - barWidth / 2;
-              const barHeight = (pt.volume / maxVolume) * 34;
-              const y = svgHeight - 20 - barHeight;
-              const isHovered = hoveredIndex === i;
-
-              return (
-                <rect
-                  key={`vol-${i}`}
-                  x={x}
-                  y={y}
-                  width={barWidth}
-                  height={barHeight}
-                  fill={isHovered ? '#38BDF8' : pt.volume > 450 ? '#10b981' : '#1E293B'}
-                  opacity={hoveredIndex === null ? (pt.volume > 450 ? '0.85' : '0.6') : isHovered ? '1' : '0.25'}
-                  className="transition-all duration-100"
-                />
               );
             })}
 
@@ -290,41 +223,18 @@ export const CryptoWidgetSim: React.FC = () => {
             {CANDLE_DATA.map((pt, i) => {
               const x = (i / (CANDLE_DATA.length - 1)) * (svgWidth - 90) + 70;
               const y = getY(pt.price);
-              const isBreakoutPoint = i === 6; // 10:30 candle
-              const isTrailingRatchetPoint = i === 10; // 11:30 candle
 
               return (
-                <g key={`node-${i}`}>
-                  <rect
-                    x={x - 3}
-                    y={y - 3}
-                    width={6}
-                    height={6}
-                    fill={isBreakoutPoint ? '#10b981' : '#0B0E14'}
-                    stroke={isBreakoutPoint ? '#34d399' : '#10b981'}
-                    strokeWidth="1.5"
-                  />
-
-                  {/* Marker Pin at Breakout Point */}
-                  {isBreakoutPoint && hoveredIndex !== i && (
-                    <g transform={`translate(${x - 30}, ${y - 16})`}>
-                      <rect x="0" y="0" width="60" height="11" fill="#064E3B" stroke="#10b981" strokeWidth="0.6" />
-                      <text x="4" y="8.5" fill="#A7F3D0" fontSize="7" fontFamily="monospace" fontWeight="bold">
-                        {isFrench ? 'ACHAT (LONG)' : 'LONG ENTRY'}
-                      </text>
-                    </g>
-                  )}
-
-                  {/* Marker Pin at Trailing Stop Ratchet */}
-                  {isTrailingRatchetPoint && hoveredIndex !== i && (
-                    <g transform={`translate(${x - 34}, ${y - 16})`}>
-                      <rect x="0" y="0" width="68" height="11" fill="#78350F" stroke="#f59e0b" strokeWidth="0.6" />
-                      <text x="4" y="8.5" fill="#FDE68A" fontSize="7" fontFamily="monospace" fontWeight="bold">
-                        {isFrench ? 'HAUSSE STOP' : 'STOP RATCHET'}
-                      </text>
-                    </g>
-                  )}
-                </g>
+                <rect
+                  key={`node-${i}`}
+                  x={x - 2.5}
+                  y={y - 2.5}
+                  width={5}
+                  height={5}
+                  fill="#0B0E14"
+                  stroke="#10b981"
+                  strokeWidth="1.2"
+                />
               );
             })}
 
