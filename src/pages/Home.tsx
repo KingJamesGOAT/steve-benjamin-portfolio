@@ -12,6 +12,7 @@ import About from './About';
 import DeveloperHeroCard from '../components/features/DeveloperHeroCard';
 import IntroAnimation from '../components/features/IntroAnimation';
 import AppCarousel from '../components/features/AppCarousel';
+import CopyEmailButton from '../components/core/CopyEmailButton';
 
 export const Home: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -65,6 +66,21 @@ export const Home: React.FC = () => {
             <div className="lg:col-span-7 space-y-8">
               {/* Hero Headline & Subtitle */}
               <div className="space-y-4">
+                {/* Availability Badge */}
+                <div>
+                  <Link
+                    to="/bachelor-pitch"
+                    className="group inline-flex items-center gap-2 px-2.5 py-1 text-[11px] font-mono border border-emerald-200 bg-emerald-50/70 text-emerald-800 hover:border-emerald-400 hover:bg-emerald-100/60 transition-colors shadow-2xs"
+                  >
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                    </span>
+                    <span>{isFrench ? 'Dispo · Mandat Bachelor 2027' : 'Available · Bachelor Mandate 2027'}</span>
+                    <span className="text-emerald-500 group-hover:translate-x-0.5 transition-transform text-[10px]">→</span>
+                  </Link>
+                </div>
+
                 <h1 className="text-5xl sm:text-6xl lg:text-[4.75rem] font-black tracking-tight text-fintech-primary leading-[0.95]">
                   <span className="block">Steve</span>
                   <span className="block">Benjamin</span>
@@ -489,12 +505,7 @@ export const Home: React.FC = () => {
               <span>{t('bachelorPitch.ctaGuide')}</span>
             </a>
 
-            <a
-              href="mailto:sbstevebenjamin@gmail.com?subject=HEIG-VD%20Bachelor%20Project%202027"
-              className="inline-flex items-center space-x-2 px-5 py-3 rounded-none border border-slate-200 bg-white hover:border-slate-300 text-slate-700 text-xs font-mono transition-colors shadow-sm"
-            >
-              <span>sbstevebenjamin@gmail.com</span>
-            </a>
+            <CopyEmailButton className="px-5 py-3 rounded-none border border-slate-200 bg-white hover:border-slate-300 text-slate-700 text-xs shadow-sm" />
           </div>
         </div>
       </section>

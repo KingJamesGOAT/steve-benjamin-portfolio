@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import CopyEmailButton from '../components/core/CopyEmailButton';
 
 interface AboutProps {
   id?: string;
@@ -93,12 +94,7 @@ export const About: React.FC<AboutProps> = ({ id = 'about' }) => {
                 <span>CV (PDF) ↗</span>
               </a>
               <span className="text-slate-300">·</span>
-              <a
-                href="mailto:sbstevebenjamin@gmail.com"
-                className="inline-flex items-center space-x-1.5 text-slate-700 hover:text-electric transition-colors"
-              >
-                <span>sbstevebenjamin@gmail.com</span>
-              </a>
+              <CopyEmailButton className="text-slate-700 hover:text-electric text-xs" />
             </div>
           </div>
 
