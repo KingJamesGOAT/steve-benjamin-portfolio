@@ -2,15 +2,14 @@ import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, X, BookOpen, ArrowLeft, ArrowUpRight, Compass, FileText, Info } from 'lucide-react';
-import { getGlossaryEntries, type LocalizedGlossaryEntry } from '../../data/cryptoGlossary';
+import { Search, X, ArrowUpRight, Compass, FileText, Info } from 'lucide-react';
 
 interface CommandPaletteProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-type PaletteItemType = 'nav' | 'project' | 'action' | 'glossary' | 'fact';
+type PaletteItemType = 'nav' | 'project' | 'action' | 'fact';
 
 interface PaletteItem {
   id: string;
@@ -20,21 +19,48 @@ interface PaletteItem {
   categoryLabel: string;
   keywords: string[];
   action: () => void;
-  glossaryEntry?: LocalizedGlossaryEntry;
 }
+
+// Unicode NFD normalization to strip accents and diacritics
+const normalize = (str: string): string =>
+  str
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .trim();
+
+// Stop words to filter out from multi-word questions (French & English)
+const STOP_WORDS = new Set([
+  'le', 'la', 'les', 'de', 'du', 'des', 'un', 'une', 'en', 'et', 'a', 'au', 'aux',
+  'est', 'il', 'son', 'sa', 'ses', 'ce', 'cet', 'cette', 'que', 'qui', 'quoi', 'quel', 'quelle', 'quels', 'quelles',
+  'the', 'a', 'an', 'in', 'on', 'at', 'and', 'or', 'is', 'it', 'he', 'his', 'her', 'what', 'where', 'how', 'who', 'does', 'did'
+]);
 
 export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose }) => {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const [query, setQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [selectedGlossary, setSelectedGlossary] = useState<LocalizedGlossaryEntry | null>(null);
   const [actionFeedback, setActionFeedback] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const currentLang = i18n.language?.startsWith('fr') ? 'fr' : 'en';
   const isFrench = currentLang === 'fr';
-  const glossaryEntries = useMemo(() => getGlossaryEntries(currentLang), [currentLang]);
+
+  // Lock background body scroll when the palette is open
+  useEffect(() => {
+    if (isOpen) {
+      const originalBodyOverflow = document.body.style.overflow;
+      const originalHtmlOverflow = document.documentElement.style.overflow;
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+
+      return () => {
+        document.body.style.overflow = originalBodyOverflow;
+        document.documentElement.style.overflow = originalHtmlOverflow;
+      };
+    }
+  }, [isOpen]);
 
   // Master catalog of all available actions, navigations, projects, and glossary terms
   const allItems = useMemo<PaletteItem[]>(() => {
@@ -294,7 +320,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
         keywords: [
           'ou habite', 'where live', 'where based', 'localisation', 'location',
           'ville', 'city', 'bussigny', 'vaud', 'suisse', 'switzerland', 'lausanne',
-          'remote', 'teletravail', 'adresse', 'residence'
+          'remote', 'teletravail', 'adresse', 'residence', 'live', 'habite'
         ],
         action: () => {
           navigate('/#about');
@@ -314,7 +340,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
         categoryLabel: isFrench ? 'Expérience' : 'Experience',
         keywords: [
           'travail', 'job', 'poste', 'role', 'entreprise', 'appapp', 'where work',
-          'ou travaille', 'experience actuelle', 'glgb', 'ficf', 'occupation'
+          'ou travaille', 'experience actuelle', 'glgb', 'ficf', 'occupation', 'work', 'working', 'travaille'
         ],
         action: () => {
           navigate('/#about');
@@ -326,75 +352,65 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
       },
     ];
 
-    // 5. Glossary items
-    glossaryEntries.forEach((entry) => {
-      items.push({
-        id: `glossary-${entry.id}`,
-        type: 'glossary',
-        title: entry.term,
-        subtitle: entry.shortDef,
-        categoryLabel: entry.category,
-        keywords: [entry.term.toLowerCase(), entry.category.toLowerCase(), ...entry.shortDef.toLowerCase().split(/\s+/)],
-        action: () => {
-          setSelectedGlossary(entry);
-        },
-        glossaryEntry: entry,
-      });
-    });
-
     return items;
-  }, [isFrench, navigate, onClose, i18n, glossaryEntries]);
+  }, [isFrench, navigate, onClose, i18n]);
 
-  // Filter items: 0 items when query is empty; EXACTLY TOP 3 closest matches when typing
+  // Robust search ranking: Accent-normalized, prefix-progressive, stop-word filtered, strictly capped at 3
   const filteredItems = useMemo(() => {
-    const q = query.trim().toLowerCase();
+    const rawQ = query.trim();
+    const q = normalize(rawQ);
     if (!q) return [];
 
-    const queryWords = q.split(/\s+/).filter((w) => w.length > 1);
+    const queryWords = q
+      .split(/[\s,.'’\-?]+/)
+      .filter((w) => w.length > 1 && !STOP_WORDS.has(w));
 
     const scoredItems = allItems
       .map((item) => {
         let score = 0;
-        const titleLower = item.title.toLowerCase();
-        const subLower = item.subtitle.toLowerCase();
-        const catLower = item.categoryLabel.toLowerCase();
+        const titleNorm = normalize(item.title);
+        const subNorm = normalize(item.subtitle);
+        const catNorm = normalize(item.categoryLabel);
+        const keywordsNorm = item.keywords.map(normalize);
 
-        // Exact query matches
-        if (titleLower === q) score += 100;
-        else if (titleLower.startsWith(q)) score += 50;
-        else if (titleLower.includes(q)) score += 30;
+        // 1. Direct whole-query match on Title, Category or Keywords
+        if (titleNorm === q) score += 120;
+        else if (titleNorm.startsWith(q)) score += 60;
+        else if (titleNorm.includes(q)) score += 35;
 
-        if (subLower.includes(q)) score += 15;
-        if (catLower.includes(q)) score += 10;
+        if (catNorm === q) score += 90;
+        else if (catNorm.startsWith(q)) score += 50;
+        else if (catNorm.includes(q)) score += 25;
 
-        // Keyword matches (bi-directional: keyword contains query OR natural question contains keyword)
-        for (const k of item.keywords) {
-          const kLower = k.toLowerCase();
-          if (kLower === q) {
-            score += 80;
-          } else if (kLower.startsWith(q)) {
-            score += 45;
-          } else if (kLower.includes(q)) {
-            score += 25;
-          } else if (q.includes(kLower) && kLower.length >= 3) {
-            // Natural language question matching (e.g. "how old is steve" contains "how old")
-            score += 35 + kLower.length;
+        if (subNorm.includes(q)) score += 15;
+
+        // Direct keyword match
+        for (const k of keywordsNorm) {
+          if (k === q) {
+            score += 100;
+          } else if (k.startsWith(q)) {
+            score += 55;
+          } else if (k.includes(q)) {
+            score += 30;
+          } else if (q.includes(k) && k.length >= 3) {
+            score += 70 + k.length;
           }
         }
 
-        // Multi-word question matching (e.g. "where" "he" "study")
-        let wordHits = 0;
-        for (const word of queryWords) {
-          if (
-            titleLower.includes(word) ||
-            subLower.includes(word) ||
-            item.keywords.some((k) => k.toLowerCase().includes(word) || word.includes(k.toLowerCase()))
-          ) {
-            wordHits++;
+        // 2. Query words match (meaningful words after stop words)
+        for (const qw of queryWords) {
+          if (titleNorm.includes(qw)) score += 25;
+          if (catNorm.includes(qw)) score += 20;
+          if (subNorm.includes(qw)) score += 10;
+          for (const k of keywordsNorm) {
+            if (k === qw || k.startsWith(qw)) {
+              score += 30;
+              break;
+            } else if (k.includes(qw)) {
+              score += 15;
+              break;
+            }
           }
-        }
-        if (wordHits > 0) {
-          score += wordHits * 8;
         }
 
         return { item, score };
@@ -421,7 +437,6 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
       }, 50);
       setQuery('');
       setSelectedIndex(0);
-      setSelectedGlossary(null);
       setActionFeedback(null);
     }
   }, [isOpen]);
@@ -431,14 +446,6 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
     if (!isOpen) return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (selectedGlossary) {
-        if (e.key === 'Escape' || e.key === 'Backspace') {
-          e.preventDefault();
-          setSelectedGlossary(null);
-        }
-        return;
-      }
-
       if (e.key === 'ArrowDown') {
         e.preventDefault();
         if (filteredItems.length > 0) {
@@ -462,7 +469,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, filteredItems, selectedIndex, selectedGlossary, onClose]);
+  }, [isOpen, filteredItems, selectedIndex, onClose]);
 
   const renderItemIcon = (type: PaletteItemType) => {
     switch (type) {
@@ -472,8 +479,6 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
         return <ArrowUpRight className="w-3.5 h-3.5 text-electric" />;
       case 'action':
         return <FileText className="w-3.5 h-3.5 text-emerald-600" />;
-      case 'glossary':
-        return <BookOpen className="w-3.5 h-3.5 text-blue-500" />;
       case 'fact':
         return <Info className="w-3.5 h-3.5 text-blue-600" />;
     }
@@ -482,7 +487,10 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4">
+        <div
+          className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4"
+          onWheel={(e) => e.stopPropagation()}
+        >
           {/* Backdrop Overlay */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -501,130 +509,97 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
             transition={{ duration: 0.16, ease: 'easeOut' }}
             className="relative w-full max-w-xl overflow-hidden rounded-none bg-white border border-slate-200 shadow-2xl z-10"
           >
-            {/* If a glossary term is selected, show concise explanation */}
-            {selectedGlossary ? (
-              <div className="p-6 space-y-4 font-sans text-left">
-                {/* Term Header with Back Icon Button on the left */}
-                <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-                  <div className="flex items-center space-x-2.5">
-                    <button
-                      type="button"
-                      onClick={() => setSelectedGlossary(null)}
-                      className="p-1 -ml-1 text-slate-400 hover:text-slate-800 transition-colors cursor-pointer"
-                      title={isFrench ? 'Retour à la recherche' : 'Back to search'}
-                      aria-label="Back"
-                    >
-                      <ArrowLeft className="w-4 h-4" />
-                    </button>
-                    <span className="w-2 h-2 bg-electric inline-block" />
-                    <h3 className="font-mono text-sm sm:text-base font-bold text-fintech-primary uppercase tracking-wider">
-                      {selectedGlossary.term}
-                    </h3>
-                  </div>
-                  <span className="text-[10px] font-mono font-semibold uppercase tracking-wider text-slate-500 bg-slate-100 px-2 py-0.5 border border-slate-200">
-                    {selectedGlossary.category}
-                  </span>
-                </div>
+            {/* Search Input Box */}
+            <div className="relative flex items-center border-b border-slate-100 px-4 py-3">
+              <Search className="w-4 h-4 text-slate-400 mr-3 flex-shrink-0" />
+              <input
+                ref={inputRef}
+                type="text"
+                value={query}
+                onChange={(e) => {
+                  setQuery(e.target.value);
+                  setSelectedIndex(0);
+                }}
+                placeholder={
+                  isFrench
+                    ? 'Rechercher un projet, poser une question ou un mot-clé...'
+                    : 'Search a project, ask a question, or a keyword...'
+                }
+                className="w-full bg-transparent text-sm text-fintech-primary placeholder-slate-400 outline-none focus:ring-1 focus:ring-electric rounded-none px-2 py-1.5 transition-shadow font-mono"
+              />
+              {query && (
+                <button
+                  type="button"
+                  onClick={() => setQuery('')}
+                  className="p-1 text-slate-400 hover:text-fintech-primary transition-colors cursor-pointer"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              )}
+            </div>
 
-                <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-sans pt-1">
-                  {selectedGlossary.shortDef} {selectedGlossary.line1}
-                </p>
+            {/* Optional Feedback Banner */}
+            {actionFeedback && (
+              <div className="bg-emerald-50 border-b border-emerald-200 px-4 py-2 text-xs font-mono text-emerald-700 text-center">
+                {actionFeedback}
               </div>
-            ) : (
-              <>
-                {/* Search Input Box */}
-                <div className="relative flex items-center border-b border-slate-100 px-4 py-3">
-                  <Search className="w-4 h-4 text-slate-400 mr-3 flex-shrink-0" />
-                  <input
-                    ref={inputRef}
-                    type="text"
-                    value={query}
-                    onChange={(e) => {
-                      setQuery(e.target.value);
-                      setSelectedIndex(0);
-                    }}
-                    placeholder={
-                      isFrench
-                        ? 'Rechercher un projet, poser une question ou un terme...'
-                        : 'Search a project, ask a question, or a term...'
-                    }
-                    className="w-full bg-transparent text-sm text-fintech-primary placeholder-slate-400 outline-none focus:ring-1 focus:ring-electric rounded-none px-2 py-1.5 transition-shadow font-mono"
-                  />
-                  {query && (
-                    <button
-                      type="button"
-                      onClick={() => setQuery('')}
-                      className="p-1 text-slate-400 hover:text-fintech-primary transition-colors cursor-pointer"
-                    >
-                      <X className="w-4 h-4" />
-                    </button>
-                  )}
-                </div>
-
-                {/* Optional Feedback Banner */}
-                {actionFeedback && (
-                  <div className="bg-emerald-50 border-b border-emerald-200 px-4 py-2 text-xs font-mono text-emerald-700 text-center">
-                    {actionFeedback}
-                  </div>
-                )}
-
-                {/* Content Area: Empty State or Max 3 Logical Results */}
-                <div className="p-2">
-                  {!query.trim() ? (
-                    <div className="py-8 text-center space-y-1 text-slate-400 font-mono text-xs">
-                      <p>
-                        {isFrench
-                          ? 'Tapez pour chercher ou poser une question (ex. Études, Âge, Projets, CV, ADX)...'
-                          : 'Type to search or ask a question (e.g. Studies, Age, Projects, CV, ADX)...'}
-                      </p>
-                    </div>
-                  ) : filteredItems.length === 0 ? (
-                    <div className="py-8 text-center text-xs text-slate-400 font-mono">
-                      {t('cmdPalette.noResults')} "{query}"
-                    </div>
-                  ) : (
-                    <ul className="space-y-1">
-                      {filteredItems.map((item, index) => {
-                        const isSelected = index === selectedIndex;
-
-                        return (
-                          <li key={item.id}>
-                            <button
-                              type="button"
-                              onClick={item.action}
-                              onMouseEnter={() => setSelectedIndex(index)}
-                              className={`w-full flex items-center justify-between px-3 py-2.5 rounded-none text-xs font-medium transition-all cursor-pointer ${
-                                isSelected
-                                  ? 'bg-electric-light text-electric'
-                                  : 'text-fintech-secondary hover:bg-slate-50 hover:text-fintech-primary'
-                              }`}
-                            >
-                              <div className="flex items-center space-x-3 text-left min-w-0 pr-2">
-                                <span className={isSelected ? 'text-electric' : 'text-slate-400'}>
-                                  {renderItemIcon(item.type)}
-                                </span>
-                                <div className="min-w-0">
-                                  <div className="text-sm font-semibold truncate text-fintech-primary">
-                                    {item.title}
-                                  </div>
-                                  <div className="text-[11px] text-slate-500 font-normal truncate">
-                                    {item.subtitle}
-                                  </div>
-                                </div>
-                              </div>
-
-                              <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 bg-slate-100 px-2 py-0.5 border border-slate-200 shrink-0">
-                                {item.categoryLabel}
-                              </span>
-                            </button>
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  )}
-                </div>
-              </>
             )}
+
+            {/* Content Area: Empty State or Max 3 Logical Results */}
+            <div className="p-2">
+              {!query.trim() ? (
+                <div className="py-8 text-center space-y-1 text-slate-400 font-mono text-xs">
+                  <p>
+                    {isFrench
+                      ? 'Tapez pour chercher (ex. Parcours, Études, Âge, Projets, CV)...'
+                      : 'Type to search (e.g. Background, Studies, Age, Projects, CV)...'}
+                  </p>
+                </div>
+              ) : filteredItems.length === 0 ? (
+                <div className="py-8 text-center text-xs text-slate-400 font-mono">
+                  {t('cmdPalette.noResults')} "{query}"
+                </div>
+              ) : (
+                <ul className="space-y-1">
+                  {filteredItems.map((item, index) => {
+                    const isSelected = index === selectedIndex;
+
+                    return (
+                      <li key={item.id}>
+                        <button
+                          type="button"
+                          onClick={item.action}
+                          onMouseEnter={() => setSelectedIndex(index)}
+                          className={`w-full flex items-center justify-between px-3 py-2.5 rounded-none text-xs font-medium transition-all cursor-pointer ${
+                            isSelected
+                              ? 'bg-electric-light text-electric'
+                              : 'text-fintech-secondary hover:bg-slate-50 hover:text-fintech-primary'
+                          }`}
+                        >
+                          <div className="flex items-center space-x-3 text-left min-w-0 pr-2">
+                            <span className={isSelected ? 'text-electric' : 'text-slate-400'}>
+                              {renderItemIcon(item.type)}
+                            </span>
+                            <div className="min-w-0">
+                              <div className="text-sm font-semibold truncate text-fintech-primary">
+                                {item.title}
+                              </div>
+                              <div className="text-[11px] text-slate-500 font-normal truncate">
+                                {item.subtitle}
+                              </div>
+                            </div>
+                          </div>
+
+                          <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 bg-slate-100 px-2 py-0.5 border border-slate-200 shrink-0">
+                            {item.categoryLabel}
+                          </span>
+                        </button>
+                      </li>
+                    );
+                  })}
+                </ul>
+              )}
+            </div>
           </motion.div>
         </div>
       )}
