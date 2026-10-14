@@ -283,7 +283,7 @@ export const BILINGUAL_GLOSSARY_DATA: BilingualGlossaryItem[] = [
       category: 'Market Infrastructure',
       shortDef: 'The ease with which a digital asset can be rapidly bought or sold without causing a significant price change.',
       line1: 'Determined by the aggregate depth of resting limit orders, 24-hour trading volume, and active market maker participation.',
-      line2: 'The platform enforces strict $10,000,000 minimum quote volume filters across 300+ trading pairs to exclude illiquid tokens.',
+      line2: 'The platform enforces strict $10,000,000 minimum quote volume filters across 200+ trading pairs to exclude illiquid tokens.',
       line3: 'High liquidity guarantees that simulated and live orders execute with minimal spread cost and deterministic slippage.',
     },
     fr: {
@@ -291,7 +291,7 @@ export const BILINGUAL_GLOSSARY_DATA: BilingualGlossaryItem[] = [
       category: 'Infrastructure de Marché',
       shortDef: 'Facilité avec laquelle un actif peut être acheté ou vendu rapidement sans provoquer de variation majeure de cours.',
       line1: 'Déterminée par la profondeur cumulée des ordres limites, le volume d\'échange sur 24 heures et la participation des teneurs de marché.',
-      line2: 'La plateforme applique des filtres stricts de volume minimal de 10 000 000 $ sur plus de 300 paires pour exclure les jetons illiquides.',
+      line2: 'La plateforme applique des filtres stricts de volume minimal de 10 000 000 $ sur plus de 200 paires pour exclure les jetons illiquides.',
       line3: 'Une liquidité élevée garantit l\'exécution des ordres avec un spread minimal et un glissement (slippage) parfaitement maîtrisé.',
     },
   },

@@ -162,7 +162,7 @@
       "architectureTitle": "SYSTEM ARCHITECTURE & PHILOSOPHY",
       "heigStandards": "HEIG-VD STANDARDS",
       "verified": "VERIFIED",
-      "card1Tag": "300+ PAIR INGESTION",
+      "card1Tag": "200+ PAIR INGESTION",
       "card2Tag": "DUAL-REGIME ENGINE",
       "card3Tag": "GROQ LLM SYNTHESIS",
       "disclaimerBadge": "Institutional Closed Beta",
@@ -186,7 +186,7 @@
         "tag": "01 / SURVEILLANCE & DISCOVERY",
         "badge": "11 BLUE CHIPS + TOP 5 GAINERS",
         "title": "1. Multi-Pair Surveillance Pipeline & 24h Volume Scanner",
-        "p1": "The market scanning subsystem establishes a dual-tier surveillance pipeline. The primary tier continuously tracks an eleven-token blue-chip basket (BTC, ETH, SOL, BNB, XRP, ADA, DOGE, AVAX, SUI, TRX, and LINK) to maintain baseline market liquidity metrics. Concurrently, a secondary dynamic scanner queries the Binance 24-hour ticker endpoint, filtering over 300 trading pairs with stringent liquidity criteria: enforcing strict USDT pairing, requiring a minimum $10,000,000 quote volume threshold, and eliminating leveraged and stablecoin tokens to prevent non-volatile noise.",
+        "p1": "The market scanning subsystem establishes a dual-tier surveillance pipeline. The primary tier continuously tracks an eleven-token blue-chip basket (BTC, ETH, SOL, BNB, XRP, ADA, DOGE, AVAX, SUI, TRX, and LINK) to maintain baseline market liquidity metrics. Concurrently, a secondary dynamic scanner queries the Binance 24-hour ticker endpoint, filtering over 200 trading pairs with stringent liquidity criteria: enforcing strict USDT pairing, requiring a minimum $10,000,000 quote volume threshold, and eliminating leveraged and stablecoin tokens to prevent non-volatile noise.",
         "p2": "The dynamic scanner ranks candidates by absolute volatility and selects the top 5 momentum gainers to monitor real-time breakouts across market cycles."
       },
       "section2": {

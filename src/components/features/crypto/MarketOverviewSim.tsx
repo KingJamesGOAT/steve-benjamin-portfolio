@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BarChart2, TrendingUp, X, Activity, ArrowUpRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import CryptoIcon from './CryptoIcon';
@@ -7,6 +7,9 @@ interface VolumeAsset {
   rank: number;
   symbol: string;
   price: string;
+  price1h: string;
+  price24h: string;
+  price7d: string;
   change: string;
   isPositive: boolean;
   volume: string;
@@ -16,6 +19,16 @@ interface TrendingAsset {
   rank: number;
   symbol: string;
   marketRank: number;
+  price: string;
+  price1h: string;
+  price24h: string;
+  price7d: string;
+  change1h: string;
+  is1hPositive: boolean;
+  change24h: string;
+  is24hPositive: boolean;
+  change7d: string;
+  is7dPositive: boolean;
 }
 
 interface TableAsset {
@@ -23,6 +36,9 @@ interface TableAsset {
   symbol: string;
   name: string;
   price: string;
+  price1h: string;
+  price24h: string;
+  price7d: string;
   change1h: string;
   is1hPositive: boolean;
   change24h: string;
@@ -36,19 +52,89 @@ interface TableAsset {
 }
 
 const TOP_VOLUME_DATA: VolumeAsset[] = [
-  { rank: 1, symbol: 'USDT', price: '$0.999', change: '-0.01%', isPositive: false, volume: '$28.24B' },
-  { rank: 2, symbol: 'BTC', price: '$83,020', change: '+0.32%', isPositive: true, volume: '$12.65B' },
-  { rank: 3, symbol: 'ETH', price: '$2,503.4', change: '+0.38%', isPositive: true, volume: '$7.05B' },
-  { rank: 4, symbol: 'USDC', price: '$1.00', change: '-0.01%', isPositive: false, volume: '$6.86B' },
-  { rank: 5, symbol: 'SOL', price: '$109.36', change: '-0.31%', isPositive: false, volume: '$1.51B' },
+  { rank: 1, symbol: 'USDT', price: '$0.9990', price1h: '$0.9991', price24h: '$0.9990', price7d: '$1.0001', change: '-0.01%', isPositive: false, volume: '$28.24B' },
+  { rank: 2, symbol: 'BTC', price: '$83,020', price1h: '$83,078', price24h: '$83,020', price7d: '$85,280', change: '+0.32%', isPositive: true, volume: '$12.65B' },
+  { rank: 3, symbol: 'ETH', price: '$2,503.4', price1h: '$2,505.4', price24h: '$2,503.4', price7d: '$2,700.5', change: '+0.38%', isPositive: true, volume: '$7.05B' },
+  { rank: 4, symbol: 'USDC', price: '$1.0000', price1h: '$1.0001', price24h: '$1.0000', price7d: '$1.0000', change: '-0.01%', isPositive: false, volume: '$6.86B' },
+  { rank: 5, symbol: 'SOL', price: '$109.36', price1h: '$109.51', price24h: '$109.36', price7d: '$121.15', change: '-0.31%', isPositive: false, volume: '$1.51B' },
 ];
 
 const TRENDING_SEARCH_DATA: TrendingAsset[] = [
-  { rank: 1, symbol: 'STRK', marketRank: 86 },
-  { rank: 2, symbol: 'SUI', marketRank: 14 },
-  { rank: 3, symbol: 'HYPE', marketRank: 11 },
-  { rank: 4, symbol: 'AERO', marketRank: 81 },
-  { rank: 5, symbol: 'TIA', marketRank: 111 },
+  {
+    rank: 1,
+    symbol: 'STRK',
+    marketRank: 86,
+    price: '$0.428',
+    price1h: '$0.425',
+    price24h: '$0.428',
+    price7d: '$0.380',
+    change1h: '+0.71%',
+    is1hPositive: true,
+    change24h: '+2.15%',
+    is24hPositive: true,
+    change7d: '+12.63%',
+    is7dPositive: true,
+  },
+  {
+    rank: 2,
+    symbol: 'SUI',
+    marketRank: 14,
+    price: '$2.18',
+    price1h: '$2.15',
+    price24h: '$2.18',
+    price7d: '$1.92',
+    change1h: '+1.40%',
+    is1hPositive: true,
+    change24h: '+4.81%',
+    is24hPositive: true,
+    change7d: '+13.54%',
+    is7dPositive: true,
+  },
+  {
+    rank: 3,
+    symbol: 'HYPE',
+    marketRank: 11,
+    price: '$24.60',
+    price1h: '$24.10',
+    price24h: '$24.60',
+    price7d: '$21.20',
+    change1h: '+2.07%',
+    is1hPositive: true,
+    change24h: '+6.96%',
+    is24hPositive: true,
+    change7d: '+16.04%',
+    is7dPositive: true,
+  },
+  {
+    rank: 4,
+    symbol: 'AERO',
+    marketRank: 81,
+    price: '$1.14',
+    price1h: '$1.12',
+    price24h: '$1.14',
+    price7d: '$1.02',
+    change1h: '+1.79%',
+    is1hPositive: true,
+    change24h: '+3.64%',
+    is24hPositive: true,
+    change7d: '+11.76%',
+    is7dPositive: true,
+  },
+  {
+    rank: 5,
+    symbol: 'TIA',
+    marketRank: 111,
+    price: '$4.85',
+    price1h: '$4.89',
+    price24h: '$4.85',
+    price7d: '$5.40',
+    change1h: '-0.82%',
+    is1hPositive: false,
+    change24h: '-1.02%',
+    is24hPositive: false,
+    change7d: '-10.19%',
+    is7dPositive: false,
+  },
 ];
 
 const TABLE_ASSETS_DATA: TableAsset[] = [
@@ -57,14 +143,17 @@ const TABLE_ASSETS_DATA: TableAsset[] = [
     symbol: 'BTC',
     name: 'Bitcoin',
     price: '$83,020',
+    price1h: '$83,078',
+    price24h: '$83,020',
+    price7d: '$85,280',
     change1h: '-0.07%',
     is1hPositive: false,
     change24h: '+0.32%',
     is24hPositive: true,
     change7d: '-2.65%',
     is7dPositive: false,
-    marketCap: '$1668.40B',
-    volume24h: '$12614M',
+    marketCap: '$1,668.4B',
+    volume24h: '$12.61B',
     circulatingSupply: '20.1M BTC',
     sparkline: [85200, 84900, 85600, 84300, 83900, 84100, 83400, 82800, 83020],
   },
@@ -73,14 +162,17 @@ const TABLE_ASSETS_DATA: TableAsset[] = [
     symbol: 'ETH',
     name: 'Ethereum',
     price: '$2,503.4',
+    price1h: '$2,505.4',
+    price24h: '$2,503.4',
+    price7d: '$2,700.5',
     change1h: '-0.08%',
     is1hPositive: false,
     change24h: '+0.38%',
     is24hPositive: true,
     change7d: '-7.30%',
     is7dPositive: false,
-    marketCap: '$305.71B',
-    volume24h: '$7056M',
+    marketCap: '$305.7B',
+    volume24h: '$7.05B',
     circulatingSupply: '122.1M ETH',
     sparkline: [2710, 2690, 2640, 2580, 2550, 2510, 2480, 2495, 2503.4],
   },
@@ -89,14 +181,17 @@ const TABLE_ASSETS_DATA: TableAsset[] = [
     symbol: 'SOL',
     name: 'Solana',
     price: '$109.36',
+    price1h: '$109.51',
+    price24h: '$109.36',
+    price7d: '$121.15',
     change1h: '-0.14%',
     is1hPositive: false,
     change24h: '-0.31%',
     is24hPositive: false,
     change7d: '-9.73%',
     is7dPositive: false,
-    marketCap: '$64.42B',
-    volume24h: '$1515M',
+    marketCap: '$64.4B',
+    volume24h: '$1.51B',
     circulatingSupply: '589.1M SOL',
     sparkline: [121.5, 119.8, 116.4, 113.2, 112.0, 110.5, 108.4, 109.1, 109.36],
   },
@@ -104,32 +199,38 @@ const TABLE_ASSETS_DATA: TableAsset[] = [
     rank: 4,
     symbol: 'XRP',
     name: 'XRP',
-    price: '$1.39',
+    price: '$1.390',
+    price1h: '$1.392',
+    price24h: '$1.390',
+    price7d: '$1.495',
     change1h: '-0.02%',
     is1hPositive: false,
     change24h: '-0.64%',
     is24hPositive: false,
     change7d: '-7.02%',
     is7dPositive: false,
-    marketCap: '$87.97B',
+    marketCap: '$87.9B',
     volume24h: '$694M',
-    circulatingSupply: '63129.7M XRP',
+    circulatingSupply: '63,129M XRP',
     sparkline: [1.51, 1.48, 1.46, 1.43, 1.41, 1.38, 1.36, 1.38, 1.39],
   },
   {
     rank: 5,
     symbol: 'TRX',
     name: 'TRON',
-    price: '$0.33',
+    price: '$0.3305',
+    price1h: '$0.3299',
+    price24h: '$0.3305',
+    price7d: '$0.3361',
     change1h: '+0.02%',
     is1hPositive: true,
     change24h: '-0.15%',
     is24hPositive: false,
     change7d: '-1.67%',
     is7dPositive: false,
-    marketCap: '$31.39B',
+    marketCap: '$31.4B',
     volume24h: '$231M',
-    circulatingSupply: '94991.3M TRX',
+    circulatingSupply: '94,991M TRX',
     sparkline: [0.338, 0.336, 0.334, 0.331, 0.332, 0.329, 0.328, 0.330, 0.3305],
   },
 ];
@@ -140,7 +241,17 @@ export const MarketOverviewSim: React.FC = () => {
 
   const [selectedAsset, setSelectedAsset] = useState<TableAsset | null>(null);
   const [selectedTimeframe, setSelectedTimeframe] = useState<'1h' | '24h' | '7d'>('24h');
-  const [orderSent, setOrderSent] = useState<boolean>(false);
+
+  // Prevent background scroll when modal is open
+  useEffect(() => {
+    if (selectedAsset) {
+      const originalOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = originalOverflow;
+      };
+    }
+  }, [selectedAsset]);
 
   const handleSelectSymbol = (symbol: string) => {
     const found = TABLE_ASSETS_DATA.find((a) => a.symbol === symbol);
@@ -154,7 +265,10 @@ export const MarketOverviewSim: React.FC = () => {
           symbol: vol.symbol,
           name: vol.symbol === 'USDT' ? 'Tether' : vol.symbol === 'USDC' ? 'USD Coin' : vol.symbol,
           price: vol.price,
-          change1h: '-0.02%',
+          price1h: vol.price1h,
+          price24h: vol.price24h,
+          price7d: vol.price7d,
+          change1h: '-0.01%',
           is1hPositive: false,
           change24h: vol.change,
           is24hPositive: vol.isPositive,
@@ -166,25 +280,50 @@ export const MarketOverviewSim: React.FC = () => {
           sparkline: [1, 1, 1, 1, 1, 1, 1, 1, 1],
         });
       } else {
-        setSelectedAsset({
-          rank: 99,
-          symbol,
-          name: symbol,
-          price: '$1.45',
-          change1h: '+0.12%',
-          is1hPositive: true,
-          change24h: '+3.45%',
-          is24hPositive: true,
-          change7d: '+12.50%',
-          is7dPositive: true,
-          marketCap: '$1.85B',
-          volume24h: '$312M',
-          circulatingSupply: '1,200M ' + symbol,
-          sparkline: [1.2, 1.25, 1.3, 1.28, 1.35, 1.4, 1.38, 1.42, 1.45],
-        });
+        const tr = TRENDING_SEARCH_DATA.find((t) => t.symbol === symbol);
+        if (tr) {
+          setSelectedAsset({
+            rank: tr.rank,
+            symbol: tr.symbol,
+            name: tr.symbol,
+            price: tr.price,
+            price1h: tr.price1h,
+            price24h: tr.price24h,
+            price7d: tr.price7d,
+            change1h: tr.change1h,
+            is1hPositive: tr.is1hPositive,
+            change24h: tr.change24h,
+            is24hPositive: tr.is24hPositive,
+            change7d: tr.change7d,
+            is7dPositive: tr.is7dPositive,
+            marketCap: '$1.85B',
+            volume24h: '$312M',
+            circulatingSupply: '1,200M ' + tr.symbol,
+            sparkline: [1.2, 1.25, 1.3, 1.28, 1.35, 1.4, 1.38, 1.42, 1.45],
+          });
+        } else {
+          setSelectedAsset({
+            rank: 99,
+            symbol,
+            name: symbol,
+            price: '$1.45',
+            price1h: '$1.44',
+            price24h: '$1.45',
+            price7d: '$1.28',
+            change1h: '+0.69%',
+            is1hPositive: true,
+            change24h: '+3.45%',
+            is24hPositive: true,
+            change7d: '+12.50%',
+            is7dPositive: true,
+            marketCap: '$1.85B',
+            volume24h: '$312M',
+            circulatingSupply: '1,200M ' + symbol,
+            sparkline: [1.2, 1.25, 1.3, 1.28, 1.35, 1.4, 1.38, 1.42, 1.45],
+          });
+        }
       }
     }
-    setOrderSent(false);
   };
 
   const renderSparkline = (data: number[], isUp: boolean) => {
@@ -218,6 +357,15 @@ export const MarketOverviewSim: React.FC = () => {
     );
   };
 
+  // Compute active price based on selected timeframe
+  const displayPrice = selectedAsset
+    ? selectedTimeframe === '1h'
+      ? selectedAsset.price1h
+      : selectedTimeframe === '7d'
+      ? selectedAsset.price7d
+      : selectedAsset.price24h
+    : '';
+
   return (
     <div className="bg-[#0B0E14] border border-[#1E2638] rounded-none p-4 sm:p-6 space-y-6 text-slate-200 font-sans shadow-2xl">
       {/* Simulation Header */}
@@ -230,10 +378,7 @@ export const MarketOverviewSim: React.FC = () => {
         </div>
         <div className="flex items-center space-x-3 text-xs font-mono text-slate-400">
           <span className="px-2 py-0.5 bg-[#111622] border border-[#1E2638] text-[11px] text-slate-300">
-            {isFrench ? 'SCANNER : 300+ PAIRES' : 'SCANNER: 300+ PAIRS'}
-          </span>
-          <span className="hidden sm:inline-block text-[11px] text-slate-500">
-            {isFrench ? 'INTERVALLE : TICKS TEMPS RÉEL' : 'INTERVAL: REALTIME TICK'}
+            {isFrench ? 'SCANNER : 200 PAIRES' : 'SCANNER: 200 PAIRS'}
           </span>
         </div>
       </div>
@@ -298,9 +443,6 @@ export const MarketOverviewSim: React.FC = () => {
                 {isFrench ? 'TENDANCES DE RECHERCHE' : 'TRENDING SEARCH'}
               </span>
             </div>
-            <span className="text-[10px] font-mono text-slate-500 uppercase">
-              {isFrench ? 'RÉGIME ALGORITHMIQUE' : 'ALGORITHM REGIME'}
-            </span>
           </div>
 
           <div className="divide-y divide-[#1E2638]/60">
@@ -331,16 +473,12 @@ export const MarketOverviewSim: React.FC = () => {
 
       {/* Bottom Section: Global Market Overview (Top Assets) */}
       <div className="bg-[#111622] border border-[#1E2638] rounded-none p-4 space-y-3">
-        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#1E2638] pb-2.5">
+        <div className="flex items-center justify-between border-b border-[#1E2638] pb-2.5">
           <div className="flex items-center space-x-2">
             <Activity className="w-3.5 h-3.5 text-blue-400" />
             <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-200">
               {isFrench ? 'APERÇU GLOBAL DU MARCHÉ (TOP ACTIFS)' : 'GLOBAL MARKET OVERVIEW (TOP ASSETS)'}
             </span>
-          </div>
-          <div className="flex items-center space-x-2 text-[10px] font-mono text-slate-400">
-            <span className="w-1.5 h-1.5 bg-emerald-400 rounded-none" />
-            <span>{isFrench ? 'AGRÉGATION DU CARNET D\'ORDRES : ACTIVE' : 'ORDERBOOK AGGREGATION: ACTIVE'}</span>
           </div>
         </div>
 
@@ -365,10 +503,7 @@ export const MarketOverviewSim: React.FC = () => {
               {TABLE_ASSETS_DATA.map((asset) => (
                 <tr
                   key={asset.symbol}
-                  onClick={() => {
-                    setSelectedAsset(asset);
-                    setOrderSent(false);
-                  }}
+                  onClick={() => setSelectedAsset(asset)}
                   className="hover:bg-[#1A253A] border-l-2 border-transparent hover:border-blue-400 cursor-pointer transition-colors text-slate-200 group"
                   title={isFrench ? `Cliquer pour inspecter ${asset.name}` : `Click to inspect ${asset.name}`}
                 >
@@ -425,46 +560,34 @@ export const MarketOverviewSim: React.FC = () => {
             </tbody>
           </table>
         </div>
-
-        {/* Click hint footer */}
-        <div className="flex items-center justify-between text-[11px] font-mono text-slate-500 pt-1 border-t border-[#1E2638]/60">
-          <span>
-            {isFrench
-              ? 'Astuce : Cliquez sur n\'importe quel actif pour inspecter la télémétrie en temps réel.'
-              : 'Tip: Click any asset row to inspect real-time orderbook telemetry.'}
-          </span>
-          <span className="text-blue-400 flex items-center space-x-1">
-            <Activity className="w-3 h-3 mr-1" />
-            {isFrench ? 'Télémétrie Interactive' : 'Interactive Telemetry'}
-          </span>
-        </div>
       </div>
 
       {/* Interactive Asset Inspection Modal */}
       {selectedAsset && (
-        <div className="fixed inset-0 z-50 bg-black/75 flex items-center justify-center p-4">
-          <div className="bg-[#111622] border border-[#1E2638] rounded-none max-w-xl w-full p-5 sm:p-6 space-y-4 shadow-2xl font-mono text-slate-200">
+        <div
+          className="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4"
+          onClick={() => setSelectedAsset(null)}
+        >
+          <div
+            className="bg-[#111622] border border-[#1E2638] rounded-none max-w-xl w-full p-5 sm:p-6 space-y-4 shadow-2xl font-mono text-slate-200"
+            onClick={(e) => e.stopPropagation()}
+          >
             {/* Modal Header */}
             <div className="flex items-center justify-between border-b border-[#1E2638] pb-3">
               <div className="flex items-center space-x-3">
                 <CryptoIcon symbol={selectedAsset.symbol} size={28} />
-                <div>
-                  <div className="flex items-center space-x-2">
-                    <span className="text-sm font-bold text-slate-100">{selectedAsset.name}</span>
-                    <span className="text-xs text-slate-400 uppercase">{selectedAsset.symbol}/USDT</span>
-                    <span className="text-[10px] bg-blue-950/70 border border-blue-800 text-blue-400 px-1.5 py-0.2">
-                      PERP
-                    </span>
-                  </div>
-                  <div className="text-[11px] text-slate-400 mt-0.5">
-                    {isFrench ? 'Flux Ticker Binance WebSocket 24h' : 'Binance WebSocket 24h Ticker Stream'}
-                  </div>
+                <div className="flex items-center space-x-2">
+                  <span className="text-sm font-bold text-slate-100">{selectedAsset.name}</span>
+                  <span className="text-xs text-slate-400 uppercase">{selectedAsset.symbol}/USDT</span>
+                  <span className="text-[10px] bg-blue-950/70 border border-blue-800 text-blue-400 px-1.5 py-0.2">
+                    PERP
+                  </span>
                 </div>
               </div>
               <button
                 type="button"
                 onClick={() => setSelectedAsset(null)}
-                className="text-slate-400 hover:text-white p-1"
+                className="text-slate-400 hover:text-white p-1 transition-colors"
                 aria-label="Close"
               >
                 <X className="w-5 h-5" />
@@ -478,7 +601,7 @@ export const MarketOverviewSim: React.FC = () => {
                   {isFrench ? 'Cours Indexé en Temps Réel' : 'Real-Time Benchmark Price'}
                 </div>
                 <div className="flex items-baseline space-x-2 mt-0.5">
-                  <span className="text-2xl font-bold text-slate-100">{selectedAsset.price}</span>
+                  <span className="text-2xl font-bold text-slate-100">{displayPrice}</span>
                   <span
                     className={`text-xs font-semibold ${
                       selectedTimeframe === '1h'
@@ -547,54 +670,6 @@ export const MarketOverviewSim: React.FC = () => {
                   {isFrench ? 'Slippage Estimé' : 'Est. Slippage'}
                 </span>
                 <div className="text-emerald-400 font-bold mt-0.5">&lt; 0.003%</div>
-              </div>
-            </div>
-
-            {/* Orderbook Depth Imbalance Bar */}
-            <div className="bg-[#0B0E14] border border-[#1E2638] p-3 space-y-2 text-xs">
-              <div className="flex items-center justify-between text-[11px]">
-                <span className="text-emerald-400 font-semibold">
-                  {isFrench ? 'Profondeur Achat (Bid) : 54.2%' : 'Bid Depth: 54.2%'}
-                </span>
-                <span className="text-slate-400 uppercase text-[10px]">
-                  {isFrench ? 'Ratio Carnet d\'Ordres' : 'Orderbook Depth Ratio'}
-                </span>
-                <span className="text-rose-400 font-semibold">
-                  {isFrench ? 'Profondeur Vente (Ask) : 45.8%' : 'Ask Depth: 45.8%'}
-                </span>
-              </div>
-              <div className="w-full h-1.5 bg-[#1E2638] flex overflow-hidden">
-                <div className="h-full bg-emerald-500" style={{ width: '54.2%' }} />
-                <div className="h-full bg-rose-500" style={{ width: '45.8%' }} />
-              </div>
-            </div>
-
-            {/* Action Bar */}
-            <div className="flex items-center justify-between pt-2">
-              <span className="text-[11px] text-slate-500">
-                {isFrench ? 'Contrat perpétuel USDT validé' : 'USDT Perpetual contract validated'}
-              </span>
-              <div className="flex items-center space-x-2">
-                {orderSent ? (
-                  <span className="text-xs text-emerald-400 font-semibold bg-emerald-950/60 border border-emerald-800/60 px-3 py-1.5">
-                    {isFrench ? '✓ Ordre Paper Trading simulé' : '✓ Simulated Paper Order Sent'}
-                  </span>
-                ) : (
-                  <button
-                    type="button"
-                    onClick={() => setOrderSent(true)}
-                    className="px-3 py-1.5 text-xs font-semibold bg-blue-600 hover:bg-blue-500 text-white rounded-none transition-colors"
-                  >
-                    {isFrench ? 'Simuler Allocation' : 'Simulate Order'}
-                  </button>
-                )}
-                <button
-                  type="button"
-                  onClick={() => setSelectedAsset(null)}
-                  className="px-3 py-1.5 text-xs border border-[#1E2638] text-slate-300 hover:text-white hover:bg-[#1A2234] transition-colors"
-                >
-                  {isFrench ? 'Fermer' : 'Close'}
-                </button>
               </div>
             </div>
           </div>

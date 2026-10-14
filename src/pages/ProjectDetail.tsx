@@ -133,7 +133,7 @@ export const ProjectDetail: React.FC = () => {
             <div className="p-4 sm:p-5 rounded-none border border-slate-200 bg-white shadow-sm text-xs sm:text-sm text-slate-700 leading-relaxed font-sans">
               {isFrench ? (
                 <p>
-                  Ce pipeline de surveillance interroge en continu l'API Binance WebSocket sur plus de 300 paires de devises. 
+                  Ce pipeline de surveillance interroge en continu l'API Binance WebSocket sur plus de 200 paires de devises. 
                   Il filtre les actifs selon des critères stricts de{' '}
                   <GlossaryTerm
                     term="Liquidité de Marché"
@@ -152,7 +152,7 @@ export const ProjectDetail: React.FC = () => {
                 </p>
               ) : (
                 <p>
-                  This surveillance pipeline continuously queries Binance WebSocket streams across 300+ trading pairs. 
+                  This surveillance pipeline continuously queries Binance WebSocket streams across 200+ trading pairs. 
                   Assets are filtered against strict{' '}
                   <GlossaryTerm
                     term="Market Liquidity"

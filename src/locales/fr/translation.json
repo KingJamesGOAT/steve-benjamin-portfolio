@@ -162,7 +162,7 @@
       "architectureTitle": "ARCHITECTURE SYSTÈME & PHILOSOPHIE",
       "heigStandards": "STANDARDS HEIG-VD",
       "verified": "VÉRIFIÉ",
-      "card1Tag": "INGESTION 300+ PAIRES",
+      "card1Tag": "INGESTION 200+ PAIRES",
       "card2Tag": "MOTEUR DOUBLE RÉGIME",
       "card3Tag": "SYNTHÈSE LLM GROQ",
       "disclaimerBadge": "Bêta Fermée",
@@ -186,7 +186,7 @@
         "tag": "01 / SURVEILLANCE & DÉCOUVERTE",
         "badge": "11 MAJEURES + TOP 5 GAINERS",
         "title": "1. Pipeline de Surveillance Multi-Paires & Scanner de Volume 24h",
-        "p1": "Le sous-système de scan de marché met en place un pipeline de surveillance à deux niveaux. Le premier niveau analyse en continu un panier de 11 cryptomonnaies majeures (BTC, ETH, SOL, BNB, XRP, ADA, DOGE, AVAX, SUI, TRX et LINK) afin d'établir les métriques de liquidité de référence. Simultanément, un scanner dynamique interroge l'API Binance 24h ticker en filtrant plus de 300 paires avec des règles de liquidité strictes : appairage USDT obligatoire, volume minimal de 10 000 000 $ et exclusion des jetons à effet de levier et stablecoins pour éliminer le bruit non volatil.",
+        "p1": "Le sous-système de scan de marché met en place un pipeline de surveillance à deux niveaux. Le premier niveau analyse en continu un panier de 11 cryptomonnaies majeures (BTC, ETH, SOL, BNB, XRP, ADA, DOGE, AVAX, SUI, TRX et LINK) afin d'établir les métriques de liquidité de référence. Simultanément, un scanner dynamique interroge l'API Binance 24h ticker en filtrant plus de 200 paires avec des règles de liquidité strictes : appairage USDT obligatoire, volume minimal de 10 000 000 $ et exclusion des jetons à effet de levier et stablecoins pour éliminer le bruit non volatil.",
         "p2": "Le scanner dynamique classe les actifs par volatilité absolue et retient le top 5 des devises à fort momentum pour capturer les cassures de marché en temps réel."
       },
       "section2": {

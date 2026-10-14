@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Layers, Wallet, TrendingUp, Target, Search, X, ArrowUpRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import CryptoIcon from './CryptoIcon';
@@ -36,8 +36,8 @@ const POSITIONS_DATA: Position[] = [
     asset: 'SOL',
     size: '22.5844',
     invested: '$2,451',
-    entry: '$108.5400',
-    mark: '$109.5100',
+    entry: '$108.54',
+    mark: '$109.51',
     pnl: '+$21.91',
     roi: '+0.89%',
     isPositive: true,
@@ -50,29 +50,29 @@ const POSITIONS_DATA: Position[] = [
     asset: 'TRUMP',
     size: '1134.5805',
     invested: '$2,031',
-    entry: '$1.7900',
-    mark: '$1.7900',
-    pnl: '$0.00',
-    roi: '0.00%',
+    entry: '$1.79',
+    mark: '$1.82',
+    pnl: '+$34.04',
+    roi: '+1.68%',
     isPositive: true,
-    auditTitleEn: 'BREAKOUT ENTRY: AWAITING VOLATILITY EXPANSION',
-    auditTitleFr: 'ENTRÉE SUR CASSURE : EN ATTENTE D\'EXPANSION DE VOLATILITÉ',
-    auditDetailsEn: 'Limit ladder fill completed. Bollinger Band width compressed. Stop-loss hard locked at -2.5% deviation.',
-    auditDetailsFr: 'Ordres limites exécutés. Compression de bande de Bollinger. Stop-loss verrouillé à -2.5% d\'écart.',
+    auditTitleEn: 'BREAKOUT ENTRY: VOLATILITY EXPANSION',
+    auditTitleFr: 'ENTRÉE SUR CASSURE : EXPANSION DE VOLATILITÉ',
+    auditDetailsEn: 'Limit ladder fill completed. Bollinger Band expansion active. Dynamic stop-loss locked at $1.74.',
+    auditDetailsFr: 'Ordres limites exécutés. Expansion de bande de Bollinger active. Stop-loss dynamique verrouillé à 1,74$.',
   },
   {
     asset: 'LINK',
     size: '193.2097',
     invested: '$2,483',
-    entry: '$12.8500',
-    mark: '$12.9740',
-    pnl: '+$23.96',
-    roi: '+0.96%',
+    entry: '$12.85',
+    mark: '$12.98',
+    pnl: '+$25.12',
+    roi: '+1.01%',
     isPositive: true,
     auditTitleEn: 'MOMENTUM CONTINUATION: DONCHIAN 20 HIGH',
     auditTitleFr: 'CONTINUATION DE MOMENTUM : SOMMET CANAL DONCHIAN 20',
-    auditDetailsEn: 'Volume breakout verified at 2.1x 20-period moving average. Dynamic profit target locked at $13.6210.',
-    auditDetailsFr: 'Cassure de volume validée à 2.1x la moyenne mobile à 20 périodes. Prise de bénéfice dynamique verrouillée à 13.6210$.',
+    auditDetailsEn: 'Volume breakout verified at 2.1x 20-period moving average. Dynamic profit target locked at $13.65.',
+    auditDetailsFr: 'Cassure de volume validée à 2.1x la moyenne mobile à 20 périodes. Prise de bénéfice dynamique verrouillée à 13,65$.',
   },
   {
     asset: 'TRX',
@@ -80,7 +80,7 @@ const POSITIONS_DATA: Position[] = [
     invested: '$3,372',
     entry: '$0.3316',
     mark: '$0.3305',
-    pnl: '-$11.19',
+    pnl: '-$11.18',
     roi: '-0.33%',
     isPositive: false,
     auditTitleEn: 'MEAN REVERSION GRID: SECONDARY RUNG BUFFER',
@@ -94,38 +94,38 @@ const SCOUT_MISSIONS: ScoutMission[] = [
   {
     symbol: 'SOL',
     side: 'LONG',
-    entry: '$108.5400',
-    mark: '$109.5100',
-    pnlPercent: '+0.86%',
-    pnlAmount: '$21.00',
+    entry: '$108.54',
+    mark: '$109.51',
+    pnlPercent: '+0.89%',
+    pnlAmount: '+$21.91',
     isPositive: true,
-    stopLoss: '$106.3692',
-    takeProfit: '$115.0524',
-    progressPercent: 62,
+    stopLoss: '$106.35',
+    takeProfit: '$115.00',
+    progressPercent: 37,
   },
   {
     symbol: 'TRUMP',
     side: 'LONG',
-    entry: '$1.7900',
-    mark: '$1.7900',
-    pnlPercent: '+0.00%',
-    pnlAmount: '$0.00',
+    entry: '$1.79',
+    mark: '$1.82',
+    pnlPercent: '+1.68%',
+    pnlAmount: '+$34.04',
     isPositive: true,
-    stopLoss: '$1.8649',
-    takeProfit: '$1.8974',
-    progressPercent: 50,
+    stopLoss: '$1.74',
+    takeProfit: '$1.95',
+    progressPercent: 38,
   },
   {
     symbol: 'LINK',
     side: 'LONG',
-    entry: '$12.8500',
-    mark: '$12.9740',
-    pnlPercent: '+0.84%',
-    pnlAmount: '$20.87',
+    entry: '$12.85',
+    mark: '$12.98',
+    pnlPercent: '+1.01%',
+    pnlAmount: '+$25.12',
     isPositive: true,
-    stopLoss: '$12.5930',
-    takeProfit: '$13.6210',
-    progressPercent: 58,
+    stopLoss: '$12.50',
+    takeProfit: '$13.65',
+    progressPercent: 42,
   },
 ];
 
@@ -136,6 +136,17 @@ export const PaperTradingSim: React.FC = () => {
   const [isEngineActive, setIsEngineActive] = useState<boolean>(true);
   const [selectedAudit, setSelectedAudit] = useState<Position | null>(null);
   const [selectedScout, setSelectedScout] = useState<ScoutMission | null>(null);
+
+  // Prevent background scroll when any modal is open
+  useEffect(() => {
+    if (selectedAudit || selectedScout) {
+      const originalOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = originalOverflow;
+      };
+    }
+  }, [selectedAudit, selectedScout]);
 
   return (
     <div className="bg-[#0B0E14] border border-[#1E2638] rounded-none p-4 sm:p-6 space-y-6 text-slate-200 font-sans shadow-2xl relative">
@@ -205,8 +216,8 @@ export const PaperTradingSim: React.FC = () => {
             <TrendingUp className="w-3.5 h-3.5 text-emerald-400" />
           </div>
           <div className="text-2xl font-mono font-bold text-emerald-400 tracking-tight flex items-center space-x-1">
-            <span>+$34.68</span>
-            <span className="text-xs text-emerald-500 font-normal">(+0.34%)</span>
+            <span>+$69.89</span>
+            <span className="text-xs text-emerald-500 font-normal">(+0.68%)</span>
           </div>
           <div className="text-[10px] font-mono text-slate-500">
             {isFrench ? 'Cumul de 4 positions actives' : '4 Active Positions Aggregate'}
@@ -380,9 +391,8 @@ export const PaperTradingSim: React.FC = () => {
                   />
                 </div>
 
-                <div className="flex items-center justify-between text-[10px] font-mono text-slate-500 pt-0.5">
-                  <span>{isFrench ? 'Cliquez pour inspecter' : 'Click to inspect briefing'}</span>
-                  <span className="text-emerald-400/80">{scout.progressPercent}% {isFrench ? 'complété' : 'to target'}</span>
+                <div className="flex items-center justify-end text-[10px] font-mono pt-0.5">
+                  <span className="text-emerald-400/90">{scout.progressPercent}% {isFrench ? 'vers l\'objectif' : 'to target'}</span>
                 </div>
               </div>
             </div>
@@ -392,11 +402,17 @@ export const PaperTradingSim: React.FC = () => {
 
       {/* Audit Modal / Floating Inspector */}
       {selectedAudit && (
-        <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4">
-          <div className="bg-[#111622] border border-[#1E2638] rounded-none max-w-lg w-full p-5 space-y-4 shadow-2xl font-mono">
+        <div
+          className="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4"
+          onClick={() => setSelectedAudit(null)}
+        >
+          <div
+            className="bg-[#111622] border border-[#1E2638] rounded-none max-w-lg w-full p-5 space-y-4 shadow-2xl font-mono text-slate-200"
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="flex items-center justify-between border-b border-[#1E2638] pb-3">
               <div className="flex items-center space-x-2">
-                <CryptoIcon symbol={selectedAudit.asset} size={18} />
+                <CryptoIcon symbol={selectedAudit.asset} size={20} />
                 <span className="text-xs font-bold text-slate-100 tracking-wider">
                   {isFrench
                     ? `AUDIT TÉLÉMÉTRIQUE : ${selectedAudit.asset}`
@@ -406,7 +422,8 @@ export const PaperTradingSim: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setSelectedAudit(null)}
-                className="text-slate-400 hover:text-white p-1"
+                className="text-slate-400 hover:text-white p-1 transition-colors"
+                aria-label="Close"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -423,47 +440,37 @@ export const PaperTradingSim: React.FC = () => {
               </div>
 
               <div className="grid grid-cols-2 gap-2 text-[11px]">
-                <div className="bg-[#0B0E14] p-2 border border-[#1E2638]">
-                  <span className="text-slate-500">
-                    {isFrench ? 'REPÈRE D\'ENTRÉE :' : 'ENTRY BENCHMARK:'}
+                <div className="bg-[#0B0E14] p-2.5 border border-[#1E2638]">
+                  <span className="text-slate-500 uppercase text-[10px]">
+                    {isFrench ? 'Repère d\'Entrée :' : 'Entry Benchmark:'}
                   </span>
-                  <div className="text-slate-200 font-bold">{selectedAudit.entry}</div>
+                  <div className="text-slate-200 font-bold mt-0.5">{selectedAudit.entry}</div>
                 </div>
-                <div className="bg-[#0B0E14] p-2 border border-[#1E2638]">
-                  <span className="text-slate-500">
-                    {isFrench ? 'COURS ACTUEL :' : 'CURRENT MARK:'}
+                <div className="bg-[#0B0E14] p-2.5 border border-[#1E2638]">
+                  <span className="text-slate-500 uppercase text-[10px]">
+                    {isFrench ? 'Cours Actuel :' : 'Current Mark:'}
                   </span>
-                  <div className="text-slate-200 font-bold">{selectedAudit.mark}</div>
+                  <div className="text-slate-200 font-bold mt-0.5">{selectedAudit.mark}</div>
                 </div>
-                <div className="bg-[#0B0E14] p-2 border border-[#1E2638]">
-                  <span className="text-slate-500">
-                    {isFrench ? 'P&L NON RÉALISÉ :' : 'UNREALIZED PNL:'}
+                <div className="bg-[#0B0E14] p-2.5 border border-[#1E2638]">
+                  <span className="text-slate-500 uppercase text-[10px]">
+                    {isFrench ? 'P&L Non Réalisé :' : 'Unrealized PnL:'}
                   </span>
                   <div
-                    className={`font-bold ${
+                    className={`font-bold mt-0.5 ${
                       selectedAudit.isPositive ? 'text-emerald-400' : 'text-rose-500'
                     }`}
                   >
                     {selectedAudit.pnl}
                   </div>
                 </div>
-                <div className="bg-[#0B0E14] p-2 border border-[#1E2638]">
-                  <span className="text-slate-500">
-                    {isFrench ? 'ALLOCATION DE KELLY :' : 'KELLY ALLOCATION:'}
+                <div className="bg-[#0B0E14] p-2.5 border border-[#1E2638]">
+                  <span className="text-slate-500 uppercase text-[10px]">
+                    {isFrench ? 'Capital Investi :' : 'Invested Capital:'}
                   </span>
-                  <div className="text-slate-200 font-bold">{selectedAudit.invested}</div>
+                  <div className="text-slate-200 font-bold mt-0.5">{selectedAudit.invested}</div>
                 </div>
               </div>
-            </div>
-
-            <div className="flex justify-end pt-2">
-              <button
-                type="button"
-                onClick={() => setSelectedAudit(null)}
-                className="px-4 py-1.5 bg-[#1E2638] hover:bg-[#28334C] text-xs text-slate-200 font-bold rounded-none"
-              >
-                {isFrench ? 'FERMER L\'AUDIT' : 'CLOSE AUDIT'}
-              </button>
             </div>
           </div>
         </div>
@@ -471,30 +478,31 @@ export const PaperTradingSim: React.FC = () => {
 
       {/* Scout Mission Tactical Briefing Modal */}
       {selectedScout && (
-        <div className="fixed inset-0 z-50 bg-black/75 flex items-center justify-center p-4">
-          <div className="bg-[#111622] border border-[#1E2638] rounded-none max-w-lg w-full p-5 space-y-4 shadow-2xl font-mono text-slate-200">
+        <div
+          className="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4"
+          onClick={() => setSelectedScout(null)}
+        >
+          <div
+            className="bg-[#111622] border border-[#1E2638] rounded-none max-w-lg w-full p-5 space-y-4 shadow-2xl font-mono text-slate-200"
+            onClick={(e) => e.stopPropagation()}
+          >
             {/* Modal Header */}
             <div className="flex items-center justify-between border-b border-[#1E2638] pb-3">
               <div className="flex items-center space-x-2.5">
                 <CryptoIcon symbol={selectedScout.symbol} size={22} />
-                <div>
-                  <div className="flex items-center space-x-2">
-                    <span className="text-sm font-bold text-slate-100">
-                      {isFrench ? `MISSION RADAR : ${selectedScout.symbol}` : `SCOUT MISSION: ${selectedScout.symbol}`}
-                    </span>
-                    <span className="bg-emerald-950/70 border border-emerald-800 text-emerald-400 text-[10px] px-1.5 py-0.2">
-                      {selectedScout.side}
-                    </span>
-                  </div>
-                  <div className="text-[11px] text-slate-400 mt-0.5">
-                    {isFrench ? 'Module Momentum Automatique Donchian' : 'Autonomous Donchian Momentum Engine'}
-                  </div>
+                <div className="flex items-center space-x-2">
+                  <span className="text-sm font-bold text-slate-100">
+                    {isFrench ? `MISSION : ${selectedScout.symbol}` : `MISSION: ${selectedScout.symbol}`}
+                  </span>
+                  <span className="bg-emerald-950/70 border border-emerald-800 text-emerald-400 text-[10px] px-1.5 py-0.2">
+                    {selectedScout.side}
+                  </span>
                 </div>
               </div>
               <button
                 type="button"
                 onClick={() => setSelectedScout(null)}
-                className="text-slate-400 hover:text-white p-1"
+                className="text-slate-400 hover:text-white p-1 transition-colors"
                 aria-label="Close"
               >
                 <X className="w-5 h-5" />
@@ -505,20 +513,20 @@ export const PaperTradingSim: React.FC = () => {
             <div className="bg-[#0B0E14] border border-[#1E2638] p-3 space-y-1.5 text-xs">
               <div className="text-[11px] text-emerald-400 font-bold uppercase flex items-center justify-between">
                 <span>{isFrench ? 'DÉCLENCHEUR ALGORITHMIQUE' : 'ALGORITHMIC TRIGGER'}</span>
-                <span className="text-[10px] text-slate-500">ADX &gt; 25.0 VALIDÉ</span>
+                <span className="text-[10px] text-slate-500">ADX &gt; 25.0</span>
               </div>
-              <p className="text-slate-300 leading-relaxed">
+              <p className="text-slate-300 leading-relaxed text-[11px] sm:text-xs">
                 {selectedScout.symbol === 'SOL'
                   ? isFrench
-                    ? 'Cassure confirmée du Canal de Donchian à 20 périodes corroborée par un volume 2,4x supérieur à l\'EMA-20. Le stop suiveur dynamique sécurise les gains par échelons.'
-                    : 'Confirmed 20-period Donchian Channel breakout corroborated by 2.4x volume surge above 20-EMA. Dynamic trailing stop locks gains incrementally.'
+                    ? 'Cassure confirmée du canal de Donchian corroborée par un volume 2,4x supérieur à l\'EMA-20. Le stop suiveur dynamique sécurise les gains par échelons.'
+                    : 'Confirmed Donchian Channel breakout corroborated by 2.4x volume surge above 20-EMA. Dynamic trailing stop locks gains incrementally.'
                   : selectedScout.symbol === 'LINK'
                   ? isFrench
-                    ? 'Continuation de momentum directionnel avec expansion de 18% de la profondeur acheteuse sur le carnet d\'ordres perpétuel. Objectif haussier dynamique à 13,62$.'
-                    : 'Trend continuation regime active. Chainlink perpetual bid depth expanded by 18%. Target profit ladder set at $13.62.'
+                    ? 'Continuation de momentum directionnel avec expansion de liquidité. Objectif haussier dynamique à 13,65$.'
+                    : 'Trend continuation regime active. Chainlink liquidity expansion confirmed. Target profit locked at $13.65.'
                   : isFrench
-                  ? 'Compression de volatilité sur bandes de Bollinger. Échelons limites en grille disposés pour absorber les fluctuations sans perte en capital.'
-                  : 'Bollinger Band volatility compression. Limit ladders deployed to capture impending volatility expansion without capital drawdown.'}
+                  ? 'Compression de volatilité sur bandes de Bollinger avec ordres limites disposés pour absorber les fluctuations.'
+                  : 'Bollinger Band volatility compression with limit ladders deployed to capture impending expansion.'}
               </p>
             </div>
 
@@ -529,15 +537,15 @@ export const PaperTradingSim: React.FC = () => {
                 <div className="text-slate-100 font-bold mt-0.5">{selectedScout.entry}</div>
               </div>
               <div className="bg-[#0B0E14] p-2.5 border border-[#1E2638]">
-                <span className="text-[10px] text-slate-500 uppercase">{isFrench ? 'Cours Actuel (Mark) :' : 'Current Mark:'}</span>
+                <span className="text-[10px] text-slate-500 uppercase">{isFrench ? 'Cours Actuel :' : 'Current Mark:'}</span>
                 <div className="text-slate-100 font-bold mt-0.5">{selectedScout.mark}</div>
               </div>
               <div className="bg-[#0B0E14] p-2.5 border border-[#1E2638]">
-                <span className="text-[10px] text-rose-400 uppercase">{isFrench ? 'Plancher Stop-Loss :' : 'Trailing Floor:'}</span>
+                <span className="text-[10px] text-rose-400 uppercase">{isFrench ? 'Stop-Loss :' : 'Stop Loss:'}</span>
                 <div className="text-rose-400 font-bold mt-0.5">{selectedScout.stopLoss}</div>
               </div>
               <div className="bg-[#0B0E14] p-2.5 border border-[#1E2638]">
-                <span className="text-[10px] text-emerald-400 uppercase">{isFrench ? 'Cible Take-Profit :' : 'Profit Target:'}</span>
+                <span className="text-[10px] text-emerald-400 uppercase">{isFrench ? 'Take-Profit :' : 'Take Profit:'}</span>
                 <div className="text-emerald-400 font-bold mt-0.5">{selectedScout.takeProfit}</div>
               </div>
             </div>
@@ -545,31 +553,16 @@ export const PaperTradingSim: React.FC = () => {
             {/* Trajectory Progress */}
             <div className="bg-[#0B0E14] p-3 border border-[#1E2638] space-y-1.5 text-xs">
               <div className="flex items-center justify-between text-[11px]">
-                <span className="text-slate-400">{isFrench ? 'Trajectoire vers Cible :' : 'Target Trajectory:'}</span>
+                <span className="text-slate-400">{isFrench ? 'Trajectoire vers Objectif :' : 'Target Trajectory:'}</span>
                 <span className="text-emerald-400 font-bold">{selectedScout.progressPercent}%</span>
               </div>
               <div className="w-full h-1.5 bg-[#1E2638] overflow-hidden">
                 <div className="h-full bg-emerald-400" style={{ width: `${selectedScout.progressPercent}%` }} />
               </div>
             </div>
-
-            {/* Modal Actions */}
-            <div className="flex items-center justify-between pt-2">
-              <span className="text-[11px] text-slate-500 font-mono">
-                {isFrench ? 'Allocation Kelly : 2,0% max' : 'Kelly Allocation: 2.0% max'}
-              </span>
-              <button
-                type="button"
-                onClick={() => setSelectedScout(null)}
-                className="px-4 py-1.5 bg-[#1E2638] hover:bg-[#28334C] text-xs text-slate-200 font-bold rounded-none transition-colors"
-              >
-                {isFrench ? 'Fermer le Briefing' : 'Close Briefing'}
-              </button>
-            </div>
           </div>
         </div>
       )}
-
     </div>
   );
 };
