@@ -1,7 +1,14 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import type { GlossaryTermProps } from '../../types';
+
+interface PopupPosition {
+  left: number;
+  width: number;
+  arrowLeft: number;
+  isFlippedBelow: boolean;
+}
 
 export const GlossaryTerm: React.FC<GlossaryTermProps> = ({ term, definition, className = '' }) => {
   const { t } = useTranslation();
@@ -9,7 +16,66 @@ export const GlossaryTerm: React.FC<GlossaryTermProps> = ({ term, definition, cl
   const [isPinned, setIsPinned] = useState(false);
   const containerRef = useRef<HTMLSpanElement>(null);
 
+  const [position, setPosition] = useState<PopupPosition>({
+    left: 0,
+    width: 320,
+    arrowLeft: 160,
+    isFlippedBelow: false,
+  });
+
   const isVisible = isHovered || isPinned;
+
+  // Dynamically calculate clamp so the popup NEVER touches the left or right edges of the page
+  const updatePosition = useCallback(() => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+
+    // Minimum safe distance from the screen edge (20px prevents touching the screen corner)
+    const safetyMargin = 20;
+    const maxAllowedWidth = Math.max(240, viewportWidth - safetyMargin * 2);
+    const targetWidth = 320;
+    const tooltipWidth = Math.min(targetWidth, maxAllowedWidth);
+
+    const wordCenter = rect.left + rect.width / 2;
+    const idealLeft = wordCenter - tooltipWidth / 2;
+
+    let clampedLeft = idealLeft;
+    if (clampedLeft < safetyMargin) {
+      clampedLeft = safetyMargin;
+    } else if (clampedLeft + tooltipWidth > viewportWidth - safetyMargin) {
+      clampedLeft = viewportWidth - safetyMargin - tooltipWidth;
+    }
+
+    // Convert clamped viewport left to local container offset
+    const localLeft = clampedLeft - rect.left;
+
+    // Arrow caret position relative to the tooltip box, clamped safely inside the box
+    const arrowX = Math.max(16, Math.min(tooltipWidth - 16, wordCenter - clampedLeft));
+
+    // If near the top of the viewport (less than 190px), flip below the word
+    const isFlippedBelow = rect.top < 190;
+
+    setPosition({
+      left: localLeft,
+      width: tooltipWidth,
+      arrowLeft: arrowX,
+      isFlippedBelow,
+    });
+  }, []);
+
+  useEffect(() => {
+    if (isVisible) {
+      updatePosition();
+      const handleScrollOrResize = () => updatePosition();
+      window.addEventListener('resize', handleScrollOrResize);
+      window.addEventListener('scroll', handleScrollOrResize, { passive: true });
+      return () => {
+        window.removeEventListener('resize', handleScrollOrResize);
+        window.removeEventListener('scroll', handleScrollOrResize);
+      };
+    }
+  }, [isVisible, updatePosition]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -36,19 +102,29 @@ export const GlossaryTerm: React.FC<GlossaryTermProps> = ({ term, definition, cl
     };
   }, [isPinned]);
 
+  const handleMouseEnter = () => {
+    updatePosition();
+    setIsHovered(true);
+  };
+
+  const handleTogglePin = () => {
+    updatePosition();
+    setIsPinned((prev) => !prev);
+  };
+
   return (
     <span
       ref={containerRef}
       className={`relative inline-block ${className}`}
-      onMouseEnter={() => setIsHovered(true)}
+      onMouseEnter={handleMouseEnter}
       onMouseLeave={() => setIsHovered(false)}
       tabIndex={0}
       role="button"
-      onClick={() => setIsPinned(!isPinned)}
+      onClick={handleTogglePin}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          setIsPinned(!isPinned);
+          handleTogglePin();
         }
       }}
       aria-label={`${term}: ${definition}`}
@@ -58,15 +134,22 @@ export const GlossaryTerm: React.FC<GlossaryTermProps> = ({ term, definition, cl
         {term}
       </span>
 
-      {/* Clinical FinTech Dashboard Tooltip with Crisp Rectangular Aesthetics */}
+      {/* Clinical FinTech Dashboard Tooltip with Viewport Edge Clamping */}
       <AnimatePresence>
         {isVisible && (
           <motion.div
-            initial={{ opacity: 0, y: 6, scale: 0.98 }}
+            initial={{ opacity: 0, y: position.isFlippedBelow ? -6 : 6, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 4, scale: 0.98 }}
+            exit={{ opacity: 0, y: position.isFlippedBelow ? -4 : 4, scale: 0.98 }}
             transition={{ duration: 0.15, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2.5 w-80 max-w-[90vw] p-3.5 bg-white border border-slate-200 rounded-none shadow-2xl shadow-slate-900/15 z-50 text-left pointer-events-auto normal-case tracking-normal"
+            style={{
+              left: `${position.left}px`,
+              width: `${position.width}px`,
+              bottom: !position.isFlippedBelow ? 'calc(100% + 8px)' : undefined,
+              top: position.isFlippedBelow ? 'calc(100% + 8px)' : undefined,
+              maxWidth: 'calc(100vw - 40px)',
+            }}
+            className="absolute p-3.5 bg-white border border-slate-200 rounded-none shadow-2xl shadow-slate-900/15 z-50 text-left pointer-events-auto normal-case tracking-normal"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header / Term Label */}
@@ -88,7 +171,17 @@ export const GlossaryTerm: React.FC<GlossaryTermProps> = ({ term, definition, cl
             </p>
 
             {/* Tooltip Arrow Caret */}
-            <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-[1px] w-0 h-0 border-x-4 border-x-transparent border-t-4 border-t-white filter drop-shadow-[0_1px_1px_rgba(0,0,0,0.08)]" />
+            {position.isFlippedBelow ? (
+              <div
+                style={{ left: `${position.arrowLeft}px` }}
+                className="absolute bottom-full -mb-[1px] -translate-x-1/2 w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-white filter drop-shadow-[0_-1px_1px_rgba(0,0,0,0.08)]"
+              />
+            ) : (
+              <div
+                style={{ left: `${position.arrowLeft}px` }}
+                className="absolute top-full -mt-[1px] -translate-x-1/2 w-0 h-0 border-x-4 border-x-transparent border-t-4 border-t-white filter drop-shadow-[0_1px_1px_rgba(0,0,0,0.08)]"
+              />
+            )}
           </motion.div>
         )}
       </AnimatePresence>
