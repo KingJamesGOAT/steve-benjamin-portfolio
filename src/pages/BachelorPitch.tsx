@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import CopyEmailButton from '../components/core/CopyEmailButton';
 
 export const BachelorPitch: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -68,11 +67,6 @@ export const BachelorPitch: React.FC = () => {
           >
             {t('bachelorPitch.ctaResume')} ↗
           </a>
-
-          <CopyEmailButton
-            subject="HEIG-VD Bachelor Project 2027 - Mandate Discussion"
-            className="px-4 py-2.5 border border-slate-200 bg-white hover:border-slate-300 text-slate-600 text-xs shadow-sm"
-          />
         </div>
       </section>
 
