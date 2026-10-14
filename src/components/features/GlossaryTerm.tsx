@@ -66,7 +66,7 @@ export const GlossaryTerm: React.FC<GlossaryTermProps> = ({ term, definition, cl
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 4, scale: 0.98 }}
             transition={{ duration: 0.15, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2.5 w-80 max-w-[90vw] p-3.5 bg-white border border-slate-200 rounded-none shadow-2xl shadow-slate-900/15 z-50 text-left pointer-events-auto"
+            className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2.5 w-80 max-w-[90vw] p-3.5 bg-white border border-slate-200 rounded-none shadow-2xl shadow-slate-900/15 z-50 text-left pointer-events-auto normal-case tracking-normal"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header / Term Label */}
@@ -83,7 +83,7 @@ export const GlossaryTerm: React.FC<GlossaryTermProps> = ({ term, definition, cl
             </div>
 
             {/* Definition Content (3-line structured explanation) */}
-            <p className="text-xs text-slate-600 leading-relaxed font-sans">
+            <p className="text-xs text-slate-600 leading-relaxed font-sans normal-case tracking-normal">
               {definition}
             </p>
 

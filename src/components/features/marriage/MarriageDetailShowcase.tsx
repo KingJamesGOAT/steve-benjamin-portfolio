@@ -64,8 +64,8 @@ export const MarriageDetailShowcase: React.FC = () => {
   const isFrench = Boolean(i18n.language?.startsWith('fr'));
 
   // Form Simulator State
-  const [guestName, setGuestName] = useState('Claire Vionnet');
-  const [guestEmail, setGuestEmail] = useState('claire.vionnet@unifr.ch');
+  const [guestName, setGuestName] = useState('John Doe');
+  const [guestEmail, setGuestEmail] = useState('john.doe@example.com');
   const [isAttending, setIsAttending] = useState(true);
   const [adultCount, setAdultCount] = useState(2);
   const [childCount, setChildCount] = useState(0);
@@ -75,7 +75,7 @@ export const MarriageDetailShowcase: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submittedNotice, setSubmittedNotice] = useState<string | null>(null);
 
-  // Simulated Persistent LocalStorage Session (wedding_user_data)
+  // Simulated Persistent Client Session
   const [savedSession, setSavedSession] = useState<{
     savedAt: string;
     name: string;
@@ -86,8 +86,8 @@ export const MarriageDetailShowcase: React.FC = () => {
     isDinner: boolean;
   }>({
     savedAt: '14:25',
-    name: 'Claire Vionnet',
-    email: 'claire.vionnet@unifr.ch',
+    name: 'John Doe',
+    email: 'john.doe@example.com',
     adults: 2,
     children: 0,
     dietary: 'Végétarien',
@@ -143,8 +143,8 @@ export const MarriageDetailShowcase: React.FC = () => {
 
       setSubmittedNotice(
         isFrench
-          ? 'Réponse synchronisée avec succès vers le tableur via Google Apps Script (200 OK).'
-          : 'RSVP committed and synced to spreadsheet via Google Apps Script (200 OK).'
+          ? 'Votre réponse a bien été enregistrée avec succès.'
+          : 'Your RSVP has been sent successfully.'
       );
 
       setTimeout(() => setSubmittedNotice(null), 4000);
@@ -256,7 +256,7 @@ export const MarriageDetailShowcase: React.FC = () => {
                     value={guestName}
                     onChange={(e) => setGuestName(e.target.value)}
                     className="w-full text-xs font-sans px-3 py-2 border border-stone-200 rounded-none bg-white focus:outline-none focus:border-stone-800"
-                    placeholder="ex. Claire Vionnet"
+                    placeholder="ex. John Doe"
                     required
                   />
                 </div>
@@ -269,7 +269,7 @@ export const MarriageDetailShowcase: React.FC = () => {
                     value={guestEmail}
                     onChange={(e) => setGuestEmail(e.target.value)}
                     className="w-full text-xs font-sans px-3 py-2 border border-stone-200 rounded-none bg-white focus:outline-none focus:border-stone-800"
-                    placeholder="claire@exemple.ch"
+                    placeholder="john.doe@example.com"
                     required
                   />
                 </div>
@@ -395,12 +395,9 @@ export const MarriageDetailShowcase: React.FC = () => {
           {/* Right: Persistent Client Session (LocalStorage Drawer Simulation) */}
           <div className="lg:col-span-5 space-y-4">
             <div className="bg-white border border-stone-200 p-5 shadow-sm space-y-4">
-              <div className="flex items-center justify-between border-b border-stone-200 pb-3">
+              <div className="border-b border-stone-200 pb-3">
                 <span className="font-serif italic text-lg text-stone-800">
                   {isFrench ? 'Récapitulatif Invité' : 'Guest Summary'}
-                </span>
-                <span className="text-[10px] font-mono text-stone-400">
-                  LocalStorage: wedding_user_data
                 </span>
               </div>
 
@@ -438,12 +435,6 @@ export const MarriageDetailShowcase: React.FC = () => {
                   </span>
                 </div>
               </div>
-
-              <div className="text-[11px] font-mono text-stone-500 pt-1">
-                {isFrench
-                  ? 'Événement émis : window.dispatchEvent(new Event("wedding-data-updated"))'
-                  : 'Event dispatched: window.dispatchEvent(new Event("wedding-data-updated"))'}
-              </div>
             </div>
           </div>
         </div>
@@ -452,25 +443,29 @@ export const MarriageDetailShowcase: React.FC = () => {
       {/* MODULE 2: SPREADSHEET SYNCHRONIZATION & SERVERLESS ARCHITECTURE */}
       <section className="space-y-6">
         <div className="space-y-1.5 border-b border-slate-200 pb-3">
-          <span className="text-xs font-mono uppercase tracking-wider text-slate-400">
+          <div className="text-xs font-mono uppercase tracking-wider text-slate-400">
             {isFrench ? (
               <>
                 Module 02 //{' '}
-                <GlossaryTerm
-                  term="Architecture Serverless"
-                  definition={getGlossaryDef('serverless-architecture', 'fr')}
-                />
+                <span className="normal-case font-sans">
+                  <GlossaryTerm
+                    term="Architecture Serverless"
+                    definition={getGlossaryDef('serverless-architecture', 'fr')}
+                  />
+                </span>
               </>
             ) : (
               <>
                 Module 02 //{' '}
-                <GlossaryTerm
-                  term="Serverless Architecture"
-                  definition={getGlossaryDef('serverless-architecture', 'en')}
-                />
+                <span className="normal-case font-sans">
+                  <GlossaryTerm
+                    term="Serverless Architecture"
+                    definition={getGlossaryDef('serverless-architecture', 'en')}
+                  />
+                </span>
               </>
             )}
-          </span>
+          </div>
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-fintech-primary">
             {isFrench ? 'Synchronisation Tableur (Google Apps Script → Excel)' : 'Spreadsheet Synchronization (Google Apps Script → Excel)'}
           </h2>

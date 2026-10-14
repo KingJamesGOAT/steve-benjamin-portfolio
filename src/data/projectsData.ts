@@ -119,8 +119,8 @@ export function RSVPWorkflow() {
 
     // 2. Client-Side Persistent Session Storage
     const sessionData = { rsvp: { ...formData } };
-    localStorage.setItem('wedding_user_data', JSON.stringify(sessionData));
-    window.dispatchEvent(new Event('wedding-data-updated'));
+    localStorage.setItem('rsvp_session_data', JSON.stringify(sessionData));
+    window.dispatchEvent(new Event('rsvp-data-updated'));
 
     // 3. Automated Bilingual Confirmation Dispatch
     await EmailService.sendRSVPConfirmation({
