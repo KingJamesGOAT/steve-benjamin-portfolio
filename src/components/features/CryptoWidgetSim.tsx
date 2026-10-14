@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Activity } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 interface CandlePoint {
@@ -110,13 +109,6 @@ export const CryptoWidgetSim: React.FC = () => {
         </div>
 
         <div className="flex items-center space-x-3 text-[11px] shrink-0">
-          <div className="hidden sm:flex items-center space-x-1.5 text-slate-400">
-            <span>{isFrench ? 'RÉGIME :' : 'REGIME:'}</span>
-            <span className="text-blue-400 font-bold">
-              {isFrench ? 'DIRECTIONNEL (ADX 28.4)' : 'TRENDING (ADX 28.4)'}
-            </span>
-          </div>
-
           <div className="flex items-center space-x-1.5 px-2 py-0.5 bg-emerald-950/70 border border-emerald-800 text-emerald-400 rounded-none text-[10px] font-bold">
             <span className="w-1.5 h-1.5 bg-emerald-400 rounded-none inline-block shadow-[0_0_6px_rgba(52,211,153,0.8)]" />
             <span>{isFrench ? 'EN LIGNE' : 'ONLINE'}</span>
@@ -127,23 +119,15 @@ export const CryptoWidgetSim: React.FC = () => {
       {/* 2. Streamlined Financial Graph Area */}
       <div className="p-3 sm:p-4 space-y-2 bg-[#0B0E14] flex-1 flex flex-col justify-between">
         {/* Fixed Height Minimal Graph Legend Bar */}
-        <div className="h-7 flex items-center justify-between gap-2 text-[10.5px] font-mono text-slate-400 border-b border-[#1E2638] pb-1.5 shrink-0 overflow-hidden whitespace-nowrap">
-          <div className="flex items-center space-x-2 text-slate-300 shrink-0">
-            <Activity className="w-3.5 h-3.5 text-blue-400" />
-            <span className="font-semibold uppercase tracking-wider text-[10px] sm:text-[11px]">
-              {isFrench ? 'TÉLÉMÉTRIE D\'EXÉCUTION 15M' : '15M EXECUTION TELEMETRY'}
-            </span>
-          </div>
-          <div className="flex items-center gap-3 text-[10px] shrink-0">
-            <span className="flex items-center space-x-1.5">
-              <span className="w-2.5 h-0.5 bg-emerald-400 inline-block" />
-              <span>{isFrench ? 'COURS (BTC)' : 'PRICE (BTC)'}</span>
-            </span>
-            <span className="flex items-center space-x-1.5">
-              <span className="w-2.5 h-0.5 bg-[#0052FF] inline-block" />
-              <span>20-EMA</span>
-            </span>
-          </div>
+        <div className="h-6 flex items-center justify-end gap-3 text-[10px] font-mono text-slate-400 border-b border-[#1E2638] pb-1.5 shrink-0 overflow-hidden whitespace-nowrap">
+          <span className="flex items-center space-x-1.5">
+            <span className="w-2.5 h-0.5 bg-emerald-400 inline-block" />
+            <span>{isFrench ? 'COURS (BTC)' : 'PRICE (BTC)'}</span>
+          </span>
+          <span className="flex items-center space-x-1.5">
+            <span className="w-2.5 h-0.5 bg-[#0052FF] inline-block" />
+            <span>20-EMA</span>
+          </span>
         </div>
 
         {/* Stable, Rock-Solid Fixed Height SVG Canvas */}

@@ -18,31 +18,23 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
 
   const isFrench = Boolean(i18n.language?.toLowerCase().startsWith('fr'));
 
-  // 4 Featured Projects with curiosity-inducing, clean titles
+  // 4 Featured Projects with clean, skill-oriented titles
   const projectsList = [
     {
       slug: 'crypto-trade-hub',
-      title: isFrench ? 'Trading Terminal (WebSockets)' : 'Crypto Terminal (WebSockets)',
-      subtitle: isFrench ? 'Temps réel · LLaMA 3.3 · Kelly' : 'Real-time · LLaMA 3.3 · Kelly',
-      badge: '< 50ms',
+      title: isFrench ? 'Terminal Quantitatif (WebSockets)' : 'Quantitative Trading Terminal',
     },
     {
       slug: 'donnons-ch',
-      title: isFrench ? 'Donnons.ch · Mandat HUG' : 'Donnons.ch · HUG Mandate',
-      subtitle: isFrench ? 'Vue.js 3 · Laravel · Note 6.0' : 'Vue.js 3 · Laravel · Grade 6.0',
-      badge: isFrench ? 'Note 6.0' : 'Grade 6.0',
+      title: isFrench ? 'Plateforme Web Full-Stack (HUG)' : 'Full-Stack Web Platform (HUG)',
     },
     {
       slug: 'catholic-route',
-      title: isFrench ? 'Moteur de Recherche Instantané' : 'Instant Search Engine',
-      subtitle: isFrench ? 'Index < 10ms · Frise SVG' : 'Index < 10ms · SVG Timeline',
-      badge: '< 10ms',
+      title: isFrench ? 'Moteur de Recherche Sémantique' : 'Semantic Search Engine',
     },
     {
       slug: 'marriage-platform',
-      title: isFrench ? 'Plateforme RSVP Serverless' : 'Serverless RSVP Platform',
-      subtitle: isFrench ? 'Sync Excel Webhook · Magic Link' : 'Excel Webhook Sync · Magic Link',
-      badge: 'Serverless',
+      title: isFrench ? 'Architecture Serverless & Webhooks' : 'Serverless & Webhook Architecture',
     },
   ];
 
@@ -67,9 +59,20 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
       setActiveSection('projects');
       return;
     }
+    if (location.hash === '#bachelor-pitch') {
+      setActiveSection('bachelor-pitch');
+    }
 
     const sectionIds = ['bachelor-pitch', 'about', 'projects'];
     const handleScrollSpy = () => {
+      // If near or at the bottom of the page, activate bachelor-pitch
+      const isAtBottom =
+        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 140;
+      if (isAtBottom) {
+        setActiveSection('bachelor-pitch');
+        return;
+      }
+
       const scrollPosition = window.scrollY + 220;
       for (const id of sectionIds) {
         const el = document.getElementById(id);
@@ -90,7 +93,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
     window.addEventListener('scroll', handleScrollSpy, { passive: true });
     handleScrollSpy();
     return () => window.removeEventListener('scroll', handleScrollSpy);
-  }, [location.pathname]);
+  }, [location.pathname, location.hash]);
 
   // Click outside listener to close dropdown
   useEffect(() => {
@@ -117,6 +120,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
 
   const handleNavClick = (targetId: string) => {
     setIsProjectsOpen(false);
+    setActiveSection(targetId);
     if (location.pathname === '/' || location.pathname === '') {
       const element = document.getElementById(targetId);
       if (element) {
@@ -217,46 +221,22 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
                     {/* Clean Dropdown Popover */}
                     {isProjectsOpen && (
                       <div
-                        className="absolute top-full left-0 mt-1 w-72 sm:w-80 bg-white/95 backdrop-blur-md border border-slate-200 shadow-xl p-2 z-50 space-y-1 animate-in fade-in zoom-in-95 duration-150"
+                        className="absolute top-full left-0 mt-1 w-64 sm:w-72 bg-white/95 backdrop-blur-md border border-slate-200 shadow-xl p-1.5 z-50 animate-in fade-in zoom-in-95 duration-150"
                         onMouseEnter={handleMouseEnterProjects}
                         onMouseLeave={handleMouseLeaveProjects}
                       >
-                        <div className="px-2.5 py-1 text-[10px] font-mono uppercase tracking-wider text-slate-400 border-b border-slate-100 flex items-center justify-between">
-                          <span>{isFrench ? 'Projets Majeurs' : 'Featured Case Studies'}</span>
-                          <span className="text-slate-400 font-mono">4</span>
-                        </div>
-
-                        <div className="space-y-0.5 pt-1">
+                        <div className="space-y-0.5">
                           {projectsList.map((p) => (
                             <button
                               key={p.slug}
                               type="button"
                               onClick={() => handleProjectSelect(p.slug)}
-                              className="w-full text-left p-2.5 hover:bg-slate-50/80 transition-colors group flex items-start justify-between gap-2 cursor-pointer border border-transparent hover:border-slate-200/60"
+                              className="w-full text-left px-3 py-2 text-xs font-mono font-medium text-slate-700 hover:text-electric hover:bg-slate-50 transition-colors flex items-center justify-between cursor-pointer group"
                             >
-                              <div className="space-y-0.5">
-                                <div className="text-xs font-semibold text-slate-800 group-hover:text-electric transition-colors">
-                                  {p.title}
-                                </div>
-                                <div className="text-[11px] text-slate-400 font-mono">
-                                  {p.subtitle}
-                                </div>
-                              </div>
-                              <span className="shrink-0 text-[10px] font-mono px-1.5 py-0.5 bg-slate-100 text-slate-600 border border-slate-200/80 group-hover:border-electric/30 group-hover:text-electric transition-colors">
-                                {p.badge}
-                              </span>
+                              <span>{p.title}</span>
+                              <span className="text-slate-300 group-hover:text-electric text-[10px] transition-colors">→</span>
                             </button>
                           ))}
-                        </div>
-
-                        <div className="pt-1.5 border-t border-slate-100 mt-1">
-                          <button
-                            type="button"
-                            onClick={() => handleNavClick('projects')}
-                            className="w-full text-center py-1.5 text-[11px] font-mono text-electric hover:underline cursor-pointer block"
-                          >
-                            {isFrench ? 'Voir la vue d\'ensemble (4 projets) →' : 'View all 4 case studies →'}
-                          </button>
                         </div>
                       </div>
                     )}
