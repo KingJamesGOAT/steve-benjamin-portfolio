@@ -275,6 +275,104 @@ export const CryptoIcon: React.FC<CryptoIconProps> = ({
         </svg>
       );
 
+    case 'STRK':
+    case 'STARKNET':
+      return (
+        <svg
+          width={size}
+          height={size}
+          viewBox="0 0 32 32"
+          fill="none"
+          className={`shrink-0 ${className}`}
+          aria-label="Starknet"
+        >
+          <circle cx="16" cy="16" r="16" fill="#0C0C4F" />
+          <path
+            d="M16 6L18.4 12.6L25 15L18.4 17.4L16 24L13.6 17.4L7 15L13.6 12.6L16 6Z"
+            fill="#EC796B"
+          />
+          <circle cx="16" cy="15" r="2.5" fill="#3366FF" />
+        </svg>
+      );
+
+    case 'TIA':
+    case 'CELESTIA':
+      return (
+        <svg
+          width={size}
+          height={size}
+          viewBox="0 0 32 32"
+          fill="none"
+          className={`shrink-0 ${className}`}
+          aria-label="Celestia"
+        >
+          <circle cx="16" cy="16" r="16" fill="#7B2BF9" />
+          <circle cx="16" cy="16" r="9" stroke="#FFF" strokeWidth="1.8" strokeDasharray="3 2" fill="none" />
+          <circle cx="16" cy="16" r="5" fill="#FFF" />
+          <circle cx="23" cy="9" r="2" fill="#F3528A" />
+        </svg>
+      );
+
+    case 'HYPE':
+    case 'HYPERLIQUID':
+      return (
+        <svg
+          width={size}
+          height={size}
+          viewBox="0 0 32 32"
+          fill="none"
+          className={`shrink-0 ${className}`}
+          aria-label="Hyperliquid"
+        >
+          <circle cx="16" cy="16" r="16" fill="#061814" />
+          <path
+            d="M16 7L23 11V21L16 25L9 21V11L16 7Z"
+            stroke="#00F0A0"
+            strokeWidth="1.8"
+            fill="none"
+          />
+          <path d="M16 11V21M11 13.5L21 18.5M11 18.5L21 13.5" stroke="#00F0A0" strokeWidth="1.2" opacity="0.7" />
+          <circle cx="16" cy="16" r="2.8" fill="#00F0A0" />
+        </svg>
+      );
+
+    case 'AERO':
+    case 'AERODROME':
+      return (
+        <svg
+          width={size}
+          height={size}
+          viewBox="0 0 32 32"
+          fill="none"
+          className={`shrink-0 ${className}`}
+          aria-label="Aerodrome"
+        >
+          <circle cx="16" cy="16" r="16" fill="#0052FF" />
+          <path d="M16 7L24 23L16 19L8 23L16 7Z" fill="#FFF" />
+          <line x1="16" y1="12" x2="16" y2="19" stroke="#0052FF" strokeWidth="1.5" />
+        </svg>
+      );
+
+    case 'NEAR':
+      return (
+        <svg
+          width={size}
+          height={size}
+          viewBox="0 0 32 32"
+          fill="none"
+          className={`shrink-0 ${className}`}
+          aria-label="NEAR"
+        >
+          <circle cx="16" cy="16" r="16" fill="#000000" />
+          <g transform="translate(4, 4) scale(1)">
+            <path
+              d="M21.443 0c-.89 0-1.714.46-2.18 1.218l-5.017 7.448a.533.533 0 0 0 .792.7l4.938-4.282a.2.2 0 0 1 .334.151v13.41a.2.2 0 0 1-.354.128L5.03.905A2.555 2.555 0 0 0 3.078 0h-.521A2.557 2.557 0 0 0 0 2.557v18.886a2.557 2.557 0 0 0 4.736 1.338l5.017-7.448a.533.533 0 0 0-.792-.7l-4.938 4.283a.2.2 0 0 1-.333-.152V5.352a.2.2 0 0 1 .354-.128l14.924 17.87c.486.574 1.2.905 1.952.906h.521A2.558 2.558 0 0 0 24 21.445V2.557A2.558 2.558 0 0 0 21.443 0Z"
+              fill="#FFF"
+            />
+          </g>
+        </svg>
+      );
+
     default:
       // Sleek fallback badge for novelty/meme tokens (e.g. TRUMP, STRK, HYPE, AERO, TIA)
       return (

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Layers, Wallet, TrendingUp, Target, Search, X } from 'lucide-react';
+import { Layers, Wallet, TrendingUp, Target, Search, X, ArrowUpRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import CryptoIcon from './CryptoIcon';
 
@@ -135,6 +135,7 @@ export const PaperTradingSim: React.FC = () => {
 
   const [isEngineActive, setIsEngineActive] = useState<boolean>(true);
   const [selectedAudit, setSelectedAudit] = useState<Position | null>(null);
+  const [selectedScout, setSelectedScout] = useState<ScoutMission | null>(null);
 
   return (
     <div className="bg-[#0B0E14] border border-[#1E2638] rounded-none p-4 sm:p-6 space-y-6 text-slate-200 font-sans shadow-2xl relative">
@@ -332,28 +333,35 @@ export const PaperTradingSim: React.FC = () => {
           {SCOUT_MISSIONS.map((scout) => (
             <div
               key={scout.symbol}
-              className="bg-[#0C101A] border border-[#1E2638] rounded-none p-3.5 space-y-2.5"
+              onClick={() => setSelectedScout(scout)}
+              className="bg-[#0C101A] border border-[#1E2638] hover:border-emerald-500/60 hover:bg-[#121B2A] rounded-none p-3.5 space-y-2.5 cursor-pointer transition-all group"
+              title={isFrench ? `Cliquer pour ouvrir le briefing ${scout.symbol}` : `Click to inspect ${scout.symbol} mission`}
             >
               <div className="flex items-center justify-between text-xs font-mono">
                 <div className="flex items-center space-x-2">
                   <CryptoIcon symbol={scout.symbol} size={20} />
-                  <span className="font-bold text-slate-100 text-sm">{scout.symbol}</span>
+                  <span className="font-bold text-slate-100 text-sm group-hover:text-emerald-400 transition-colors">
+                    {scout.symbol}
+                  </span>
                   <span className="bg-emerald-950/70 border border-emerald-800 text-emerald-400 text-[10px] px-1.5 py-0.2 rounded-none">
                     {scout.side}
                   </span>
                 </div>
 
-                <div className="text-right">
-                  <div className="text-slate-400 text-[11px]">
-                    {isFrench ? 'Entrée :' : 'Entry:'} {scout.entry}
+                <div className="text-right flex items-center space-x-2">
+                  <div>
+                    <div className="text-slate-400 text-[11px]">
+                      {isFrench ? 'Entrée :' : 'Entry:'} {scout.entry}
+                    </div>
+                    <div
+                      className={`font-semibold ${
+                        scout.isPositive ? 'text-emerald-400' : 'text-rose-500'
+                      }`}
+                    >
+                      {scout.pnlPercent} ({scout.pnlAmount})
+                    </div>
                   </div>
-                  <div
-                    className={`font-semibold ${
-                      scout.isPositive ? 'text-emerald-400' : 'text-rose-500'
-                    }`}
-                  >
-                    {scout.pnlPercent} ({scout.pnlAmount})
-                  </div>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-slate-500 group-hover:text-emerald-400 transition-colors" />
                 </div>
               </div>
 
@@ -372,8 +380,9 @@ export const PaperTradingSim: React.FC = () => {
                   />
                 </div>
 
-                <div className="text-center text-[10px] font-mono text-slate-500 pt-0.5">
-                  {isFrench ? 'Suivi en direct actif' : 'Live Tracking Active'}
+                <div className="flex items-center justify-between text-[10px] font-mono text-slate-500 pt-0.5">
+                  <span>{isFrench ? 'Cliquez pour inspecter' : 'Click to inspect briefing'}</span>
+                  <span className="text-emerald-400/80">{scout.progressPercent}% {isFrench ? 'complété' : 'to target'}</span>
                 </div>
               </div>
             </div>
@@ -459,6 +468,108 @@ export const PaperTradingSim: React.FC = () => {
           </div>
         </div>
       )}
+
+      {/* Scout Mission Tactical Briefing Modal */}
+      {selectedScout && (
+        <div className="fixed inset-0 z-50 bg-black/75 flex items-center justify-center p-4">
+          <div className="bg-[#111622] border border-[#1E2638] rounded-none max-w-lg w-full p-5 space-y-4 shadow-2xl font-mono text-slate-200">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between border-b border-[#1E2638] pb-3">
+              <div className="flex items-center space-x-2.5">
+                <CryptoIcon symbol={selectedScout.symbol} size={22} />
+                <div>
+                  <div className="flex items-center space-x-2">
+                    <span className="text-sm font-bold text-slate-100">
+                      {isFrench ? `MISSION RADAR : ${selectedScout.symbol}` : `SCOUT MISSION: ${selectedScout.symbol}`}
+                    </span>
+                    <span className="bg-emerald-950/70 border border-emerald-800 text-emerald-400 text-[10px] px-1.5 py-0.2">
+                      {selectedScout.side}
+                    </span>
+                  </div>
+                  <div className="text-[11px] text-slate-400 mt-0.5">
+                    {isFrench ? 'Module Momentum Automatique Donchian' : 'Autonomous Donchian Momentum Engine'}
+                  </div>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setSelectedScout(null)}
+                className="text-slate-400 hover:text-white p-1"
+                aria-label="Close"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Strategic Rationale */}
+            <div className="bg-[#0B0E14] border border-[#1E2638] p-3 space-y-1.5 text-xs">
+              <div className="text-[11px] text-emerald-400 font-bold uppercase flex items-center justify-between">
+                <span>{isFrench ? 'DÉCLENCHEUR ALGORITHMIQUE' : 'ALGORITHMIC TRIGGER'}</span>
+                <span className="text-[10px] text-slate-500">ADX &gt; 25.0 VALIDÉ</span>
+              </div>
+              <p className="text-slate-300 leading-relaxed">
+                {selectedScout.symbol === 'SOL'
+                  ? isFrench
+                    ? 'Cassure confirmée du Canal de Donchian à 20 périodes corroborée par un volume 2,4x supérieur à l\'EMA-20. Le stop suiveur dynamique sécurise les gains par échelons.'
+                    : 'Confirmed 20-period Donchian Channel breakout corroborated by 2.4x volume surge above 20-EMA. Dynamic trailing stop locks gains incrementally.'
+                  : selectedScout.symbol === 'LINK'
+                  ? isFrench
+                    ? 'Continuation de momentum directionnel avec expansion de 18% de la profondeur acheteuse sur le carnet d\'ordres perpétuel. Objectif haussier dynamique à 13,62$.'
+                    : 'Trend continuation regime active. Chainlink perpetual bid depth expanded by 18%. Target profit ladder set at $13.62.'
+                  : isFrench
+                  ? 'Compression de volatilité sur bandes de Bollinger. Échelons limites en grille disposés pour absorber les fluctuations sans perte en capital.'
+                  : 'Bollinger Band volatility compression. Limit ladders deployed to capture impending volatility expansion without capital drawdown.'}
+              </p>
+            </div>
+
+            {/* Target & Levels Grid */}
+            <div className="grid grid-cols-2 gap-2 text-xs">
+              <div className="bg-[#0B0E14] p-2.5 border border-[#1E2638]">
+                <span className="text-[10px] text-slate-500 uppercase">{isFrench ? 'Prix d\'Entrée :' : 'Entry Level:'}</span>
+                <div className="text-slate-100 font-bold mt-0.5">{selectedScout.entry}</div>
+              </div>
+              <div className="bg-[#0B0E14] p-2.5 border border-[#1E2638]">
+                <span className="text-[10px] text-slate-500 uppercase">{isFrench ? 'Cours Actuel (Mark) :' : 'Current Mark:'}</span>
+                <div className="text-slate-100 font-bold mt-0.5">{selectedScout.mark}</div>
+              </div>
+              <div className="bg-[#0B0E14] p-2.5 border border-[#1E2638]">
+                <span className="text-[10px] text-rose-400 uppercase">{isFrench ? 'Plancher Stop-Loss :' : 'Trailing Floor:'}</span>
+                <div className="text-rose-400 font-bold mt-0.5">{selectedScout.stopLoss}</div>
+              </div>
+              <div className="bg-[#0B0E14] p-2.5 border border-[#1E2638]">
+                <span className="text-[10px] text-emerald-400 uppercase">{isFrench ? 'Cible Take-Profit :' : 'Profit Target:'}</span>
+                <div className="text-emerald-400 font-bold mt-0.5">{selectedScout.takeProfit}</div>
+              </div>
+            </div>
+
+            {/* Trajectory Progress */}
+            <div className="bg-[#0B0E14] p-3 border border-[#1E2638] space-y-1.5 text-xs">
+              <div className="flex items-center justify-between text-[11px]">
+                <span className="text-slate-400">{isFrench ? 'Trajectoire vers Cible :' : 'Target Trajectory:'}</span>
+                <span className="text-emerald-400 font-bold">{selectedScout.progressPercent}%</span>
+              </div>
+              <div className="w-full h-1.5 bg-[#1E2638] overflow-hidden">
+                <div className="h-full bg-emerald-400" style={{ width: `${selectedScout.progressPercent}%` }} />
+              </div>
+            </div>
+
+            {/* Modal Actions */}
+            <div className="flex items-center justify-between pt-2">
+              <span className="text-[11px] text-slate-500 font-mono">
+                {isFrench ? 'Allocation Kelly : 2,0% max' : 'Kelly Allocation: 2.0% max'}
+              </span>
+              <button
+                type="button"
+                onClick={() => setSelectedScout(null)}
+                className="px-4 py-1.5 bg-[#1E2638] hover:bg-[#28334C] text-xs text-slate-200 font-bold rounded-none transition-colors"
+              >
+                {isFrench ? 'Fermer le Briefing' : 'Close Briefing'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 };

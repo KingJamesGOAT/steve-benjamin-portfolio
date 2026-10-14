@@ -1,5 +1,5 @@
-import React from 'react';
-import { Activity, BarChart2, TrendingUp } from 'lucide-react';
+import React, { useState } from 'react';
+import { BarChart2, TrendingUp, X, Activity, ArrowUpRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import CryptoIcon from './CryptoIcon';
 
@@ -45,7 +45,7 @@ const TOP_VOLUME_DATA: VolumeAsset[] = [
 
 const TRENDING_SEARCH_DATA: TrendingAsset[] = [
   { rank: 1, symbol: 'STRK', marketRank: 86 },
-  { rank: 2, symbol: 'QTC', marketRank: 600 },
+  { rank: 2, symbol: 'SUI', marketRank: 14 },
   { rank: 3, symbol: 'HYPE', marketRank: 11 },
   { rank: 4, symbol: 'AERO', marketRank: 81 },
   { rank: 5, symbol: 'TIA', marketRank: 111 },
@@ -138,6 +138,55 @@ export const MarketOverviewSim: React.FC = () => {
   const { i18n } = useTranslation();
   const isFrench = i18n.language?.startsWith('fr');
 
+  const [selectedAsset, setSelectedAsset] = useState<TableAsset | null>(null);
+  const [selectedTimeframe, setSelectedTimeframe] = useState<'1h' | '24h' | '7d'>('24h');
+  const [orderSent, setOrderSent] = useState<boolean>(false);
+
+  const handleSelectSymbol = (symbol: string) => {
+    const found = TABLE_ASSETS_DATA.find((a) => a.symbol === symbol);
+    if (found) {
+      setSelectedAsset(found);
+    } else {
+      const vol = TOP_VOLUME_DATA.find((v) => v.symbol === symbol);
+      if (vol) {
+        setSelectedAsset({
+          rank: vol.rank,
+          symbol: vol.symbol,
+          name: vol.symbol === 'USDT' ? 'Tether' : vol.symbol === 'USDC' ? 'USD Coin' : vol.symbol,
+          price: vol.price,
+          change1h: '-0.02%',
+          is1hPositive: false,
+          change24h: vol.change,
+          is24hPositive: vol.isPositive,
+          change7d: '+0.01%',
+          is7dPositive: true,
+          marketCap: '$120.4B',
+          volume24h: vol.volume,
+          circulatingSupply: '120,400M ' + vol.symbol,
+          sparkline: [1, 1, 1, 1, 1, 1, 1, 1, 1],
+        });
+      } else {
+        setSelectedAsset({
+          rank: 99,
+          symbol,
+          name: symbol,
+          price: '$1.45',
+          change1h: '+0.12%',
+          is1hPositive: true,
+          change24h: '+3.45%',
+          is24hPositive: true,
+          change7d: '+12.50%',
+          is7dPositive: true,
+          marketCap: '$1.85B',
+          volume24h: '$312M',
+          circulatingSupply: '1,200M ' + symbol,
+          sparkline: [1.2, 1.25, 1.3, 1.28, 1.35, 1.4, 1.38, 1.42, 1.45],
+        });
+      }
+    }
+    setOrderSent(false);
+  };
+
   const renderSparkline = (data: number[], isUp: boolean) => {
     const min = Math.min(...data);
     const max = Math.max(...data);
@@ -209,7 +258,9 @@ export const MarketOverviewSim: React.FC = () => {
             {TOP_VOLUME_DATA.map((item) => (
               <div
                 key={item.symbol}
-                className="py-2 flex items-center justify-between text-xs font-mono hover:bg-[#161C2C] px-1.5 transition-colors"
+                onClick={() => handleSelectSymbol(item.symbol)}
+                className="py-2 flex items-center justify-between text-xs font-mono hover:bg-[#1A253A] border-l-2 border-transparent hover:border-blue-400 px-2 cursor-pointer transition-colors"
+                title={isFrench ? `Inspecter ${item.symbol}` : `Inspect ${item.symbol}`}
               >
                 <div className="flex items-center space-x-3">
                   <span className="text-slate-500 text-[11px] w-4">#{item.rank}</span>
@@ -220,15 +271,18 @@ export const MarketOverviewSim: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="text-right">
-                  <div className="text-slate-200 font-semibold">{item.volume}</div>
-                  <div
-                    className={`text-[10px] ${
-                      item.isPositive ? 'text-emerald-400' : 'text-rose-500'
-                    }`}
-                  >
-                    {item.change}
+                <div className="text-right flex items-center space-x-2">
+                  <div>
+                    <div className="text-slate-200 font-semibold">{item.volume}</div>
+                    <div
+                      className={`text-[10px] ${
+                        item.isPositive ? 'text-emerald-400' : 'text-rose-500'
+                      }`}
+                    >
+                      {item.change}
+                    </div>
                   </div>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-slate-500" />
                 </div>
               </div>
             ))}
@@ -253,7 +307,9 @@ export const MarketOverviewSim: React.FC = () => {
             {TRENDING_SEARCH_DATA.map((item) => (
               <div
                 key={item.symbol}
-                className="py-2 flex items-center justify-between text-xs font-mono hover:bg-[#161C2C] px-1.5 transition-colors"
+                onClick={() => handleSelectSymbol(item.symbol)}
+                className="py-2 flex items-center justify-between text-xs font-mono hover:bg-[#1A253A] border-l-2 border-transparent hover:border-emerald-400 px-2 cursor-pointer transition-colors"
+                title={isFrench ? `Inspecter ${item.symbol}` : `Inspect ${item.symbol}`}
               >
                 <div className="flex items-center space-x-3">
                   <span className="text-slate-500 text-[11px] w-4">#{item.rank}</span>
@@ -261,8 +317,11 @@ export const MarketOverviewSim: React.FC = () => {
                   <span className="font-bold text-slate-100">{item.symbol}</span>
                 </div>
 
-                <div className="border border-[#243048] bg-[#0E131F] px-2 py-0.5 text-[11px] text-slate-400 rounded-none">
-                  {isFrench ? `Rang #${item.marketRank}` : `Rank #${item.marketRank}`}
+                <div className="flex items-center space-x-2">
+                  <div className="border border-[#243048] bg-[#0E131F] px-2 py-0.5 text-[11px] text-slate-400 rounded-none">
+                    {isFrench ? `Rang #${item.marketRank}` : `Rank #${item.marketRank}`}
+                  </div>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-slate-500" />
                 </div>
               </div>
             ))}
@@ -306,14 +365,21 @@ export const MarketOverviewSim: React.FC = () => {
               {TABLE_ASSETS_DATA.map((asset) => (
                 <tr
                   key={asset.symbol}
-                  className="hover:bg-[#161C2C] transition-colors text-slate-200"
+                  onClick={() => {
+                    setSelectedAsset(asset);
+                    setOrderSent(false);
+                  }}
+                  className="hover:bg-[#1A253A] border-l-2 border-transparent hover:border-blue-400 cursor-pointer transition-colors text-slate-200 group"
+                  title={isFrench ? `Cliquer pour inspecter ${asset.name}` : `Click to inspect ${asset.name}`}
                 >
                   <td className="py-3 px-2 text-slate-500">{asset.rank}</td>
                   <td className="py-3 px-2">
                     <div className="flex items-center space-x-2.5">
                       <CryptoIcon symbol={asset.symbol} size={26} />
                       <div>
-                        <div className="font-bold text-slate-100">{asset.name}</div>
+                        <div className="font-bold text-slate-100 group-hover:text-blue-400 transition-colors">
+                          {asset.name}
+                        </div>
                         <div className="text-[10px] text-slate-500 uppercase">{asset.symbol}</div>
                       </div>
                     </div>
@@ -359,7 +425,181 @@ export const MarketOverviewSim: React.FC = () => {
             </tbody>
           </table>
         </div>
+
+        {/* Click hint footer */}
+        <div className="flex items-center justify-between text-[11px] font-mono text-slate-500 pt-1 border-t border-[#1E2638]/60">
+          <span>
+            {isFrench
+              ? 'Astuce : Cliquez sur n\'importe quel actif pour inspecter la télémétrie en temps réel.'
+              : 'Tip: Click any asset row to inspect real-time orderbook telemetry.'}
+          </span>
+          <span className="text-blue-400 flex items-center space-x-1">
+            <Activity className="w-3 h-3 mr-1" />
+            {isFrench ? 'Télémétrie Interactive' : 'Interactive Telemetry'}
+          </span>
+        </div>
       </div>
+
+      {/* Interactive Asset Inspection Modal */}
+      {selectedAsset && (
+        <div className="fixed inset-0 z-50 bg-black/75 flex items-center justify-center p-4">
+          <div className="bg-[#111622] border border-[#1E2638] rounded-none max-w-xl w-full p-5 sm:p-6 space-y-4 shadow-2xl font-mono text-slate-200">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between border-b border-[#1E2638] pb-3">
+              <div className="flex items-center space-x-3">
+                <CryptoIcon symbol={selectedAsset.symbol} size={28} />
+                <div>
+                  <div className="flex items-center space-x-2">
+                    <span className="text-sm font-bold text-slate-100">{selectedAsset.name}</span>
+                    <span className="text-xs text-slate-400 uppercase">{selectedAsset.symbol}/USDT</span>
+                    <span className="text-[10px] bg-blue-950/70 border border-blue-800 text-blue-400 px-1.5 py-0.2">
+                      PERP
+                    </span>
+                  </div>
+                  <div className="text-[11px] text-slate-400 mt-0.5">
+                    {isFrench ? 'Flux Ticker Binance WebSocket 24h' : 'Binance WebSocket 24h Ticker Stream'}
+                  </div>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setSelectedAsset(null)}
+                className="text-slate-400 hover:text-white p-1"
+                aria-label="Close"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Price & Timeframe Row */}
+            <div className="flex flex-wrap items-center justify-between gap-3 bg-[#0B0E14] border border-[#1E2638] p-3.5">
+              <div>
+                <div className="text-[10px] text-slate-500 uppercase">
+                  {isFrench ? 'Cours Indexé en Temps Réel' : 'Real-Time Benchmark Price'}
+                </div>
+                <div className="flex items-baseline space-x-2 mt-0.5">
+                  <span className="text-2xl font-bold text-slate-100">{selectedAsset.price}</span>
+                  <span
+                    className={`text-xs font-semibold ${
+                      selectedTimeframe === '1h'
+                        ? selectedAsset.is1hPositive
+                          ? 'text-emerald-400'
+                          : 'text-rose-500'
+                        : selectedTimeframe === '7d'
+                        ? selectedAsset.is7dPositive
+                          ? 'text-emerald-400'
+                          : 'text-rose-500'
+                        : selectedAsset.is24hPositive
+                        ? 'text-emerald-400'
+                        : 'text-rose-500'
+                    }`}
+                  >
+                    {selectedTimeframe === '1h'
+                      ? selectedAsset.change1h
+                      : selectedTimeframe === '7d'
+                      ? selectedAsset.change7d
+                      : selectedAsset.change24h}
+                  </span>
+                </div>
+              </div>
+
+              {/* Timeframe Selector Pills */}
+              <div className="flex items-center space-x-1 border border-[#1E2638] p-1 bg-[#111622]">
+                {(['1h', '24h', '7d'] as const).map((tf) => (
+                  <button
+                    key={tf}
+                    type="button"
+                    onClick={() => setSelectedTimeframe(tf)}
+                    className={`px-2.5 py-1 text-[11px] font-bold uppercase transition-colors ${
+                      selectedTimeframe === tf
+                        ? 'bg-blue-600 text-white'
+                        : 'text-slate-400 hover:text-slate-200'
+                    }`}
+                  >
+                    {tf}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Telemetry Metrics Grid */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+              <div className="bg-[#0B0E14] border border-[#1E2638] p-2.5">
+                <span className="text-[10px] text-slate-500 uppercase">
+                  {isFrench ? 'Volume 24h' : '24h Volume'}
+                </span>
+                <div className="text-slate-200 font-bold mt-0.5">{selectedAsset.volume24h}</div>
+              </div>
+              <div className="bg-[#0B0E14] border border-[#1E2638] p-2.5">
+                <span className="text-[10px] text-slate-500 uppercase">
+                  {isFrench ? 'Capitalisation' : 'Market Cap'}
+                </span>
+                <div className="text-slate-200 font-bold mt-0.5">{selectedAsset.marketCap}</div>
+              </div>
+              <div className="bg-[#0B0E14] border border-[#1E2638] p-2.5">
+                <span className="text-[10px] text-slate-500 uppercase">
+                  {isFrench ? 'Offre Active' : 'Supply'}
+                </span>
+                <div className="text-slate-200 font-bold mt-0.5">{selectedAsset.circulatingSupply}</div>
+              </div>
+              <div className="bg-[#0B0E14] border border-[#1E2638] p-2.5">
+                <span className="text-[10px] text-slate-500 uppercase">
+                  {isFrench ? 'Slippage Estimé' : 'Est. Slippage'}
+                </span>
+                <div className="text-emerald-400 font-bold mt-0.5">&lt; 0.003%</div>
+              </div>
+            </div>
+
+            {/* Orderbook Depth Imbalance Bar */}
+            <div className="bg-[#0B0E14] border border-[#1E2638] p-3 space-y-2 text-xs">
+              <div className="flex items-center justify-between text-[11px]">
+                <span className="text-emerald-400 font-semibold">
+                  {isFrench ? 'Profondeur Achat (Bid) : 54.2%' : 'Bid Depth: 54.2%'}
+                </span>
+                <span className="text-slate-400 uppercase text-[10px]">
+                  {isFrench ? 'Ratio Carnet d\'Ordres' : 'Orderbook Depth Ratio'}
+                </span>
+                <span className="text-rose-400 font-semibold">
+                  {isFrench ? 'Profondeur Vente (Ask) : 45.8%' : 'Ask Depth: 45.8%'}
+                </span>
+              </div>
+              <div className="w-full h-1.5 bg-[#1E2638] flex overflow-hidden">
+                <div className="h-full bg-emerald-500" style={{ width: '54.2%' }} />
+                <div className="h-full bg-rose-500" style={{ width: '45.8%' }} />
+              </div>
+            </div>
+
+            {/* Action Bar */}
+            <div className="flex items-center justify-between pt-2">
+              <span className="text-[11px] text-slate-500">
+                {isFrench ? 'Contrat perpétuel USDT validé' : 'USDT Perpetual contract validated'}
+              </span>
+              <div className="flex items-center space-x-2">
+                {orderSent ? (
+                  <span className="text-xs text-emerald-400 font-semibold bg-emerald-950/60 border border-emerald-800/60 px-3 py-1.5">
+                    {isFrench ? '✓ Ordre Paper Trading simulé' : '✓ Simulated Paper Order Sent'}
+                  </span>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => setOrderSent(true)}
+                    className="px-3 py-1.5 text-xs font-semibold bg-blue-600 hover:bg-blue-500 text-white rounded-none transition-colors"
+                  >
+                    {isFrench ? 'Simuler Allocation' : 'Simulate Order'}
+                  </button>
+                )}
+                <button
+                  type="button"
+                  onClick={() => setSelectedAsset(null)}
+                  className="px-3 py-1.5 text-xs border border-[#1E2638] text-slate-300 hover:text-white hover:bg-[#1A2234] transition-colors"
+                >
+                  {isFrench ? 'Fermer' : 'Close'}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
