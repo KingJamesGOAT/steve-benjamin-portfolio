@@ -214,17 +214,6 @@ export const CryptoWidgetSim: React.FC = () => {
             <span className="w-2.5 h-0.5 bg-[#0052FF] inline-block" />
             <span>20-EMA</span>
           </span>
-          <span className="flex items-center space-x-2 text-slate-300">
-            <span className="flex items-center space-x-1 text-amber-400">
-              <span className="w-3.5 h-3.5 rounded-full border border-amber-400 bg-amber-950/50 inline-flex items-center justify-center text-[8.5px] font-bold leading-none">Ð</span>
-              <span className="font-bold">DOGE</span>
-            </span>
-            <span className="text-slate-600">·</span>
-            <span className="flex items-center space-x-1 text-sky-400">
-              <span className="w-3.5 h-3.5 rounded-full border border-sky-400 bg-sky-950/50 inline-flex items-center justify-center text-[8px] font-bold leading-none">🏛</span>
-              <span className="font-bold">{isFrench ? 'BANQUES' : 'BANKS'}</span>
-            </span>
-          </span>
         </div>
 
         {/* Stable, Rock-Solid Fixed Height SVG Canvas */}
