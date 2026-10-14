@@ -54,7 +54,7 @@ const INITIAL_RECORDS: GuestRecord[] = [
     attending: false,
     adults: 1,
     children: 0,
-    dietary: 'Standard',
+    dietary: 'Aucun',
     dinnerGuest: false,
   },
 ];
@@ -69,7 +69,7 @@ export const MarriageDetailShowcase: React.FC = () => {
   const [isAttending, setIsAttending] = useState(true);
   const [adultCount, setAdultCount] = useState(2);
   const [childCount, setChildCount] = useState(0);
-  const [dietaryType, setDietaryType] = useState('Végétarien');
+  const [dietaryType, setDietaryType] = useState('Aucun');
   const [hasMagicLink, setHasMagicLink] = useState(true);
   const [dinnerAttending, setDinnerAttending] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -90,20 +90,21 @@ export const MarriageDetailShowcase: React.FC = () => {
     email: 'john.doe@example.com',
     adults: 2,
     children: 0,
-    dietary: 'Végétarien',
+    dietary: 'Aucun',
     isDinner: true,
   });
 
   const [records, setRecords] = useState<GuestRecord[]>(INITIAL_RECORDS);
 
   const translateDietary = (d: string) => {
+    if (!d || d === '—') return '—';
+    if (d === 'Aucun' || d === 'None' || d === 'Standard' || d === 'Menu Standard' || d === 'Standard Menu') {
+      return isFrench ? 'Aucun' : 'None';
+    }
     if (d.includes('gluten')) return isFrench ? 'Sans gluten (1)' : 'Gluten-free (1)';
     if (d.includes('gétarien') || d.includes('getarian')) return isFrench ? 'Végétarien (2)' : 'Vegetarian (2)';
     if (d.includes('lactose')) return isFrench ? 'Sans lactose' : 'Lactose-free';
     if (d === 'Vegan') return 'Vegan';
-    if (d === 'Standard' || d === 'Menu Standard' || d === 'Standard Menu') {
-      return isFrench ? 'Menu standard' : 'Standard menu';
-    }
     return d;
   };
 
@@ -319,7 +320,7 @@ export const MarriageDetailShowcase: React.FC = () => {
                       onChange={(e) => setDietaryType(e.target.value)}
                       className="w-full text-xs font-sans px-3 py-2 border border-stone-200 rounded-none bg-white focus:outline-none focus:border-stone-800"
                     >
-                      <option value="Standard">{isFrench ? 'Menu Standard' : 'Standard Menu'}</option>
+                      <option value="Aucun">{isFrench ? 'Aucun' : 'None'}</option>
                       <option value="Végétarien">{isFrench ? 'Végétarien' : 'Vegetarian'}</option>
                       <option value="Vegan">{isFrench ? 'Vegan' : 'Vegan'}</option>
                       <option value="Sans gluten">{isFrench ? 'Sans gluten' : 'Gluten-free'}</option>
