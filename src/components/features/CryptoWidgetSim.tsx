@@ -16,6 +16,9 @@ interface CandlePoint {
 interface NewsCatalyst {
   id: number;
   index: number;
+  symbol: string;
+  badge: string;
+  accentColor: string;
   time: string;
   tagFr: string;
   tagEn: string;
@@ -44,24 +47,30 @@ const NEWS_CATALYSTS: NewsCatalyst[] = [
   {
     id: 1,
     index: 3, // 09:45
+    symbol: 'Ð',
+    badge: 'DOGE',
+    accentColor: '#F59E0B',
     time: '09:45',
-    tagFr: 'FLASH ACTU · 09:45 UTC',
-    tagEn: 'BREAKING · 09:45 UTC',
-    line1Fr: 'IPC US sous le consensus (+0.1%)',
-    line1En: 'US CPI cooler than expected (+0.1%)',
-    line2Fr: 'Détente des taux et impulsion haussière BTC',
-    line2En: 'Yields retreat, fueling bullish BTC momentum',
+    tagFr: 'INTÉGRATION X · 09:45 UTC',
+    tagEn: 'X INTEGRATION · 09:45 UTC',
+    line1Fr: 'Licence de paiements validée pour X (Twitter)',
+    line1En: 'Payments transmitter license approved for X',
+    line2Fr: 'Forte spéculation sur l\'intégration de Dogecoin ($DOGE)',
+    line2En: 'Heavy speculation on native Dogecoin ($DOGE) rollout',
   },
   {
     id: 2,
-    index: 6, // 10:30
-    time: '10:30',
-    tagFr: 'FLUX MARCHÉ · 10:30 UTC',
-    tagEn: 'MARKET FLOW · 10:30 UTC',
-    line1Fr: '+320M$ d\'entrées nettes sur ETF Spot',
-    line1En: '+$320M net inflow across Spot ETFs',
-    line2Fr: 'Forte accélération du carnet d\'ordres',
-    line2En: 'Institutional order book surge',
+    index: 8, // 11:00
+    symbol: '🏛',
+    badge: 'BANK',
+    accentColor: '#38BDF8',
+    time: '11:00',
+    tagFr: 'WALL STREET · 11:00 UTC',
+    tagEn: 'WALL STREET · 11:00 UTC',
+    line1Fr: 'Morgan Stanley ouvre les ETF Bitcoin à sa clientèle privée',
+    line1En: 'Morgan Stanley greenlights Bitcoin ETFs for wealth clients',
+    line2Fr: '15 000 conseillers financiers autorisés à l\'achat',
+    line2En: '15,000 elite advisors begin active solicitation',
   },
 ];
 
@@ -110,6 +119,7 @@ export const CryptoWidgetSim: React.FC = () => {
 
   // Horizontal mouse scrubbing calculation
   const handleChartMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (hoveredNewsId !== null) return;
     const rect = e.currentTarget.getBoundingClientRect();
     const clientX = e.clientX - rect.left;
     const svgX = (clientX / rect.width) * svgWidth;
@@ -204,9 +214,16 @@ export const CryptoWidgetSim: React.FC = () => {
             <span className="w-2.5 h-0.5 bg-[#0052FF] inline-block" />
             <span>20-EMA</span>
           </span>
-          <span className="flex items-center space-x-1.5 text-sky-400/90">
-            <span className="w-2 h-2 rounded-full border border-sky-400 inline-block text-[7px] leading-none text-center font-bold">●</span>
-            <span>{isFrench ? 'ACTUS MARCHÉ' : 'MARKET NEWS'}</span>
+          <span className="flex items-center space-x-2 text-slate-300">
+            <span className="flex items-center space-x-1 text-amber-400">
+              <span className="w-3.5 h-3.5 rounded-full border border-amber-400 bg-amber-950/50 inline-flex items-center justify-center text-[8.5px] font-bold leading-none">Ð</span>
+              <span className="font-bold">DOGE</span>
+            </span>
+            <span className="text-slate-600">·</span>
+            <span className="flex items-center space-x-1 text-sky-400">
+              <span className="w-3.5 h-3.5 rounded-full border border-sky-400 bg-sky-950/50 inline-flex items-center justify-center text-[8px] font-bold leading-none">🏛</span>
+              <span className="font-bold">{isFrench ? 'BANQUES' : 'BANKS'}</span>
+            </span>
           </span>
         </div>
 
@@ -353,13 +370,17 @@ export const CryptoWidgetSim: React.FC = () => {
               </g>
             )}
 
-            {/* 2 Subtle Round News Catalyst Markers anchored above key candles */}
+            {/* Distinct Event Pins on dedicated top rail (y = 22) with generous hover targets */}
             {NEWS_CATALYSTS.map((item) => {
               const candle = CANDLE_DATA[item.index];
               const x = (item.index / (CANDLE_DATA.length - 1)) * (svgWidth - 90) + 70;
               const candleTopY = getY(candle.high);
-              const markerY = Math.max(28, candleTopY - 24);
+              const pinY = 22;
               const isHovered = hoveredNewsId === item.id;
+              const tooltipWidth = 295;
+              const tooltipHeight = 62;
+              const tooltipX = Math.max(70, Math.min(svgWidth - tooltipWidth - 20, x - tooltipWidth / 2));
+              const tooltipY = 38;
 
               return (
                 <g
@@ -368,98 +389,109 @@ export const CryptoWidgetSim: React.FC = () => {
                   onMouseEnter={(e) => {
                     e.stopPropagation();
                     setHoveredNewsId(item.id);
+                    setHoveredIndex(null);
                   }}
-                  onMouseLeave={() => setHoveredNewsId(null)}
+                  onMouseMove={(e) => {
+                    e.stopPropagation();
+                  }}
+                  onMouseLeave={() => {
+                    setHoveredNewsId(null);
+                  }}
                 >
-                  {/* Subtle vertical dashed anchor line down to the candle top */}
+                  {/* Subtle vertical dashed anchor line down to candle top */}
                   <line
                     x1={x}
-                    y1={markerY + 7}
+                    y1={pinY + 10}
                     x2={x}
                     y2={candleTopY}
-                    stroke="#38BDF8"
-                    strokeWidth="1"
-                    strokeDasharray="2 2"
-                    opacity={isHovered ? '0.9' : '0.4'}
+                    stroke={item.accentColor}
+                    strokeWidth="1.2"
+                    strokeDasharray="2.5 2"
+                    opacity={isHovered ? 0.95 : 0.45}
                   />
 
-                  {/* Pulsing ring */}
+                  {/* Generous invisible hit target to prevent any mouse-out jitter (36px hitbox) */}
                   <circle
                     cx={x}
-                    cy={markerY}
-                    r="8.5"
+                    cy={pinY}
+                    r="18"
+                    fill="transparent"
+                  />
+
+                  {/* Pulsing subtle outer ring */}
+                  <circle
+                    cx={x}
+                    cy={pinY}
+                    r={isHovered ? 12 : 10.5}
                     fill="none"
-                    stroke="#38BDF8"
+                    stroke={item.accentColor}
                     strokeWidth="1"
-                    opacity={isHovered ? '0.7' : '0.25'}
+                    opacity={isHovered ? 0.9 : 0.4}
+                    className={isHovered ? '' : 'animate-ping'}
+                    style={{ transformOrigin: `${x}px ${pinY}px`, animationDuration: '3.5s' }}
                   />
 
-                  {/* Core interactive news circle */}
+                  {/* Core interactive round badge */}
                   <circle
                     cx={x}
-                    cy={markerY}
-                    r={isHovered ? '7' : '6'}
-                    fill={isHovered ? '#0F2647' : '#0B132B'}
-                    stroke={isHovered ? '#7DD3FC' : '#38BDF8'}
-                    strokeWidth="1.5"
+                    cy={pinY}
+                    r={isHovered ? 9.5 : 8.5}
+                    fill="#080D1A"
+                    stroke={item.accentColor}
+                    strokeWidth={isHovered ? 2 : 1.5}
                     className="transition-all duration-150"
                   />
 
-                  {/* Small subtle inner dot */}
-                  <circle
-                    cx={x}
-                    cy={markerY}
-                    r="2"
-                    fill={isHovered ? '#FFFFFF' : '#38BDF8'}
-                  />
+                  {/* Inner Icon / Symbol */}
+                  <text
+                    x={x}
+                    y={pinY + 3.5}
+                    textAnchor="middle"
+                    fill={item.accentColor}
+                    fontSize={item.symbol === 'Ð' ? 10.5 : 9}
+                    fontFamily="monospace"
+                    fontWeight="bold"
+                    className="select-none pointer-events-none"
+                  >
+                    {item.symbol}
+                  </text>
+
+                  {/* News Catalyst Floating Tooltip (seamlessly nested in the same group) */}
+                  {isHovered && (
+                    <g transform={`translate(${tooltipX}, ${tooltipY})`} className="pointer-events-none">
+                      {/* Drop shadow background */}
+                      <rect
+                        x="0"
+                        y="0"
+                        width={tooltipWidth}
+                        height={tooltipHeight}
+                        fill="#060911"
+                        stroke={item.accentColor}
+                        strokeWidth="1.4"
+                        className="filter drop-shadow-[0_12px_28px_rgba(0,0,0,0.95)]"
+                      />
+                      {/* Left colored accent bar */}
+                      <rect x="0" y="0" width="3.5" height={tooltipHeight} fill={item.accentColor} />
+
+                      {/* Header Tag */}
+                      <text x="12" y="16" fill={item.accentColor} fontSize="9" fontFamily="monospace" fontWeight="bold">
+                        {item.symbol} · {isFrench ? item.tagFr : item.tagEn}
+                      </text>
+
+                      {/* Line 1 (Headline) */}
+                      <text x="12" y="33" fill="#F8FAFC" fontSize="10.5" fontFamily="sans-serif" fontWeight="600">
+                        {isFrench ? item.line1Fr : item.line1En}
+                      </text>
+
+                      {/* Line 2 (Detail) */}
+                      <text x="12" y="49" fill="#94A3B8" fontSize="9.5" fontFamily="sans-serif">
+                        {isFrench ? item.line2Fr : item.line2En}
+                      </text>
+                    </g>
+                  )}
                 </g>
               );
             })}
-
-            {/* News Catalyst Floating Tooltip (shown on hover over a news circle) */}
-            {hoveredNewsId !== null && (() => {
-              const activeNews = NEWS_CATALYSTS.find((n) => n.id === hoveredNewsId);
-              if (!activeNews) return null;
-
-              const x = (activeNews.index / (CANDLE_DATA.length - 1)) * (svgWidth - 90) + 70;
-              const tooltipWidth = 265;
-              const tooltipHeight = 58;
-              const tooltipX = Math.max(70, Math.min(svgWidth - tooltipWidth - 20, x - tooltipWidth / 2));
-              const tooltipY = 22;
-
-              return (
-                <g className="pointer-events-none" transform={`translate(${tooltipX}, ${tooltipY})`}>
-                  {/* Background container */}
-                  <rect
-                    x="0"
-                    y="0"
-                    width={tooltipWidth}
-                    height={tooltipHeight}
-                    fill="#080C14"
-                    stroke="#38BDF8"
-                    strokeWidth="1.2"
-                    className="filter drop-shadow-[0_8px_24px_rgba(0,0,0,0.9)]"
-                  />
-                  {/* Left cyan accent bar */}
-                  <rect x="0" y="0" width="3" height={tooltipHeight} fill="#38BDF8" />
-                  
-                  {/* News tag & time */}
-                  <text x="12" y="15" fill="#38BDF8" fontSize="9" fontFamily="monospace" fontWeight="bold">
-                    {isFrench ? activeNews.tagFr : activeNews.tagEn}
-                  </text>
-                  
-                  {/* Line 1 */}
-                  <text x="12" y="31" fill="#F1F5F9" fontSize="10" fontFamily="sans-serif" fontWeight="600">
-                    {isFrench ? activeNews.line1Fr : activeNews.line1En}
-                  </text>
-                  
-                  {/* Line 2 */}
-                  <text x="12" y="46" fill="#94A3B8" fontSize="9.5" fontFamily="sans-serif">
-                    {isFrench ? activeNews.line2Fr : activeNews.line2En}
-                  </text>
-                </g>
-              );
-            })()}
 
             {/* Dynamic Interactive Crosshair and Price Tooltip (only when not hovering news marker) */}
             {hoveredIndex !== null && activePt && hoveredNewsId === null && (
