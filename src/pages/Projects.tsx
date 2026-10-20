@@ -102,17 +102,15 @@ export const Projects: React.FC = () => {
             <p className="text-[11px] font-mono text-slate-500">
               {isFrench ? (
                 <>
-                  Résorption du{' '}
                   <GlossaryTerm
-                    term="taux de rejet de 30%"
+                    term="Réduction des refus sur place"
                     definition={getGlossaryDef('donor-deferral', 'fr')}
                   />
                 </>
               ) : (
                 <>
-                  Eliminating the{' '}
                   <GlossaryTerm
-                    term="30% deferral rate"
+                    term="Reduce on-site donor rejections"
                     definition={getGlossaryDef('donor-deferral', 'en')}
                   />
                 </>

@@ -260,7 +260,6 @@ export const CryptoDashboardSim: React.FC = () => {
             <span className="text-xl sm:text-2xl font-bold font-mono text-fintech-primary tracking-tight">
               $10,248.50
             </span>
-            <span className="text-xs font-mono font-semibold text-emerald-600">+18.4%</span>
           </div>
           <span className="text-[10px] font-mono text-slate-400">Initial: $10,000.00 USDT</span>
         </div>

@@ -7,15 +7,6 @@ export interface NavItem {
   isAnchor?: boolean;
 }
 
-export interface ProjectSnippet {
-  id: string;
-  title: string;
-  context: string;
-  filename: string;
-  code: string;
-  language: string;
-}
-
 export interface ThesisProposal {
   id: number;
   title: string;
@@ -36,12 +27,6 @@ export interface GlossaryTermProps {
   className?: string;
 }
 
-export interface MockIDEProps {
-  filename: string;
-  code: string;
-  className?: string;
-}
-
 export interface ProjectData {
   id: string;
   slug: string;
@@ -49,8 +34,6 @@ export interface ProjectData {
   tagKey: string;
   descriptionKey: string;
   techStack: string[];
-  filename: string;
-  code: string;
   statusBadgeKey?: string;
   statsKey?: string;
   statsValueKey?: string;

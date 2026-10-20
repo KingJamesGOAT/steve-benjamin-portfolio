@@ -67,8 +67,8 @@
       "title": "Modalités pour l'Entreprise",
       "costTitle": "CHF 0 de Salaire Obligatoire",
       "costDesc": "Projet intégré au cursus académique ; aucun salaire requis. Défraiement (transport, repas) à discrétion de l'entreprise.",
-      "confidentialityTitle": "NDA & Cession Complète de Propriété Intellectuelle",
-      "confidentialityDesc": "Projet classé strictement confidentiel sous accord NDA sur demande. Propriété intellectuelle transférable directement à l'entreprise.",
+      "confidentialityTitle": "Confidentialité possible sur demande.",
+      "confidentialityDesc": "Propriété intellectuelle réglée au cas par cas avec la HEIG-VD.",
       "durationTitle": "14 Semaines Dédiées (Avril – Août 2027)",
       "durationDesc": "4 semaines de pré-étude (cadrage, état de l'art, architecture) suivies de 10 semaines de réalisation à plein temps."
     },
@@ -115,15 +115,14 @@
     "crypto": {
       "tag": "Application FinTech",
       "title": "Crypto Trade Hub",
-      "description": "Terminal de trading quantitatif conçu pour surveiller les paires de cryptomonnaies en temps réel, exécuter des allocations simulées et générer des synthèses de marché automatisées.",
-      "status": "Simulation Active",
-      "pnlLabel": "PnL Simulé",
-      "pnlValue": "+18.4%"
+      "description": "Projet personnel en bêta. Les données présentées dans cette démonstration sont simulées.",
+      "status": "Bêta",
+      "pnlLabel": "PnL Simulé"
     },
     "donnons": {
       "tag": "Mandat HUG Santé",
       "title": "Donnons.ch",
-      "description": "Plateforme de coordination pour le don de sang mandatée par les HUG pour gérer les collectes mobiles à Genève et résorber le taux d'incompatibilité de 30% grâce à une qualification ludique en amont.",
+      "description": "Plateforme de coordination pour le don de sang mandatée par les HUG pour gérer les collectes mobiles à Genève et réduire les refus de donneurs sur place grâce à une qualification ludique en amont.",
       "status": "Mandat HUG",
       "gradeLabel": "Évaluation Académique",
       "gradeValue": "Note 6.0 / 6.0"
@@ -165,9 +164,9 @@
       "card1Tag": "INGESTION 200+ PAIRES",
       "card2Tag": "MOTEUR DOUBLE RÉGIME",
       "card3Tag": "SYNTHÈSE LLM GROQ",
-      "disclaimerBadge": "Bêta Fermée",
-      "disclaimerLabel": "Avis de Confidentialité",
-      "disclaimer": "Avis de simulation : Cette plateforme a été conçue comme système propriétaire. Pour préserver la confidentialité et protéger les clés d'API privées, les flux de données et la télémétrie présentés ci-dessous sont des répliques simulées de l'interface.",
+      "disclaimerBadge": "Bêta",
+      "disclaimerLabel": "Avis",
+      "disclaimer": "Projet personnel en bêta. Les données présentées dans cette démonstration sont simulées.",
       "overviewTitle": "Présentation et Architecture Système",
       "overviewSubtitle": "Terminal de trading algorithmique conçu pour la surveillance multi-paires, la télémétrie du carnet d'ordres en temps réel et la synthèse macroéconomique automatisée.",
       "sim": {
@@ -194,13 +193,13 @@
         "badge": "DIMENSIONNEMENT KELLY & MACHINE D'ÉTAT",
         "title": "2. Moteur d'Exécution Double Régime & Allocations Vectorielles",
         "p1": "Le moteur stratégique repose sur un cadre autonome à double régime piloté par l'Average Directional Index (ADX) à 14 périodes. Quand l'ADX dépasse 25,0, le module Smart Momentum s'active pour détecter les cassures du canal Donchian à 20 bougies, corroborées par une hausse de volume de 2,0x au-dessus de la moyenne mobile à 20 périodes. Dans les régimes sans tendance marquée (ADX inférieur à 25,0), le moteur bascule sur une grille dynamique de retour à la moyenne (Dynamic Grid Mean Reversion) plaçant des échelons de limites dans les bandes de Bollinger.",
-        "p2": "Les allocations de capital respectent le critère fractionnaire de Kelly plafonné à 2,0 % de risque maximum par vecteur. La machine d'état de trading simulé coordonne les ajustements de stop suiveur, le verrouillage de cibles de profit dynamiques et l'exécution déterministe des ordres stop-loss sans latence de rendu DOM."
+        "p2": "Les allocations de capital respectent le critère fractionnaire de Kelly plafonné à 2,0 % de risque maximum par vecteur. La machine d'état de trading simulé coordonne les ajustements de stop suiveur, le verrouillage de cibles de profit dynamiques et l'exécution déterministe des ordres stop-loss."
       },
       "section3": {
         "tag": "03 / TÉLÉMÉTRIE & VISUALISATION",
-        "badge": "BOUCLE ÉVÉNEMENTIELLE SUB-MILLISECONDE",
+        "badge": "FLUX ÉVÉNEMENTIEL TEMPS RÉEL",
         "title": "3. Intégration API Trading212 & Télémétrie Hybride",
-        "p1": "La couche de visualisation de la plateforme repose sur une architecture hybride conçue pour offrir un retour télémétrique instantané tout en assurant un affichage graphique dense et multi-unités de temps. L'analyse détaillée en chandeliers japonais est prise en charge par l'intégration de graphiques accélérés TradingView avec personnalisation de barre d'outils et de styles institutionnels.",
+        "p1": "La couche de visualisation de la plateforme repose sur une architecture hybride conçue pour offrir un retour télémétrique en temps réel tout en assurant un affichage graphique dense et multi-unités de temps. L'analyse détaillée en chandeliers japonais est prise en charge par l'intégration de graphiques accélérés TradingView avec personnalisation de barre d'outils et de styles institutionnels.",
         "p2": "Pour la télémétrie de portefeuille et le suivi de performance, le frontend exploite Recharts afin de tracer l'historique du solde virtuel, les courbes d'équité et l'allocation d'actifs sans saccade de rendu. Des adaptateurs d'API modulaires s'interfacent avec les spécifications télémétriques de l'API Trading 212 et les flux WebSocket Binance, garantissant des mises à jour sub-seconde sans fuite de mémoire."
       },
       "section4": {
@@ -236,7 +235,9 @@
       "hobbyValue": "Basketball · Échecs · Lecture",
       "ageCaption": "24 ans"
     },
-    "summary": "9 ans de programmation, des systèmes embarqués en C (microcontrôleurs, drones, audio) au développement web moderne (React, TypeScript) et au design UX/UI sur Figma. Également 4 ans de leadership d'équipe et de prise de parole en public.",
+    "motherTongueLabel": "Langues maternelles",
+    "motherTongueValue": "Anglais & Français",
+    "summary": "9 ans de programmation, des systèmes embarqués en C (microcontrôleurs, drones, audio) au développement web moderne (React, TypeScript) et au design UX/UI sur Figma. Bilingue de langue maternelle : anglais et français. Également 4 ans de leadership d'équipe et de prise de parole en public.",
     "educationTitle": "Formation",
     "education": {
       "heig": {

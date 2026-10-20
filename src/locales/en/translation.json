@@ -67,8 +67,8 @@
       "title": "Terms for Host Companies",
       "costTitle": "CHF 0 Mandatory Salary",
       "costDesc": "Academic capstone project; zero mandatory payroll. Commute and meal allowance at host company discretion.",
-      "confidentialityTitle": "Strict NDA & Full IP Transfer",
-      "confidentialityDesc": "Project held strictly confidential under NDA upon request. Intellectual property transferable directly to the host company.",
+      "confidentialityTitle": "Confidentiality possible on request.",
+      "confidentialityDesc": "Intellectual property agreed case by case with HEIG-VD.",
       "durationTitle": "14 Dedicated Weeks (April – August 2027)",
       "durationDesc": "4 weeks pre-study (scoping, state of the art, architecture) followed by 10 weeks of full-time engineering."
     },
@@ -115,15 +115,14 @@
     "crypto": {
       "tag": "FinTech Application",
       "title": "Crypto Trade Hub",
-      "description": "Quantitative trading terminal engineered to monitor cryptocurrency pairs in real time, execute simulated allocations, and generate automated market summaries.",
-      "status": "Simulation Active",
-      "pnlLabel": "Simulated PnL",
-      "pnlValue": "+18.4%"
+      "description": "Personal project in beta. Data shown in this demo is simulated.",
+      "status": "Beta",
+      "pnlLabel": "Simulated PnL"
     },
     "donnons": {
       "tag": "HUG Healthcare Mandate",
       "title": "Donnons.ch",
-      "description": "Blood donation coordination platform commissioned by Geneva University Hospitals (HUG) to orchestrate corporate mobile drives and eliminate the 30% donor rejection rate through gamified pre-screening.",
+      "description": "Blood donation coordination platform commissioned by Geneva University Hospitals (HUG) to orchestrate corporate mobile drives and reduce on-site donor rejections through gamified pre-screening.",
       "status": "HUG Mandate",
       "gradeLabel": "Academic Evaluation",
       "gradeValue": "Grade 6.0 / 6.0"
@@ -165,10 +164,10 @@
       "card1Tag": "200+ PAIR INGESTION",
       "card2Tag": "DUAL-REGIME ENGINE",
       "card3Tag": "GROQ LLM SYNTHESIS",
-      "disclaimerBadge": "Institutional Closed Beta",
-      "disclaimerLabel": "Confidentiality Notice",
-      "disclaimer": "Closed Beta Notice: This platform was built as a proprietary system for an investment entity. To maintain institutional confidentiality and protect private API keys, the telemetry and data feeds demonstrated below are simulated frontend replicas of the production engine.",
-      "overviewTitle": "Institutional Overview & System Design",
+      "disclaimerBadge": "Beta",
+      "disclaimerLabel": "Notice",
+      "disclaimer": "Personal project in beta. Data shown in this demo is simulated.",
+      "overviewTitle": "Overview & System Design",
       "overviewSubtitle": "High-throughput autonomous algorithmic trading terminal engineered for multi-pair surveillance, real-time orderbook telemetry, and automated LLM macro synthesis.",
       "sim": {
         "botActive": "ENGINE ONLINE",
@@ -194,13 +193,13 @@
         "badge": "KELLY FRACTION SIZING & STATE MACHINE",
         "title": "2. Dual-Regime Execution Engine & Vector Allocations",
         "p1": "The core strategy engine operates on an autonomous dual-regime framework governed by the 14-period Average Directional Index (ADX). When ADX exceeds 25.0, the engine activates the Smart Momentum module, identifying 20-candle Donchian channel breakouts corroborated by a 2.0x surge above the 20-period volume moving average. In low-trend regimes (ADX below 25.0), execution transitions into Dynamic Grid Mean Reversion, placing limit ladders within calibrated Bollinger Band envelopes.",
-        "p2": "Capital allocations adhere to fractional Kelly Criterion sizing capped at 2.0% maximum portfolio risk per vector. The paper trading state machine coordinates continuous trailing stop adjustments, dynamic profit-target lock-ins, and deterministic stop-loss executions with zero DOM latency."
+        "p2": "Capital allocations adhere to fractional Kelly Criterion sizing capped at 2.0% maximum portfolio risk per vector. The paper trading state machine coordinates continuous trailing stop adjustments, dynamic profit-target lock-ins, and deterministic stop-loss executions."
       },
       "section3": {
         "tag": "03 / TELEMETRY & VISUALIZATION",
-        "badge": "SUB-MILLISECOND EVENT LOOP",
+        "badge": "REAL-TIME EVENT STREAM",
         "title": "3. Trading212 API Integration & Hybrid Telemetry",
-        "p1": "The platform's visualization layer employs a hybrid architecture designed to deliver sub-millisecond telemetry feedback alongside high-density multi-timeframe financial charts. Deep candlestick inspection is handled by embedding hardware-accelerated TradingView charts with custom toolbar and styling overrides, providing institutional indicators and interactive drawing tools.",
+        "p1": "The platform's visualization layer employs a hybrid architecture designed to deliver real-time telemetry feedback alongside high-density multi-timeframe financial charts. Deep candlestick inspection is handled by embedding hardware-accelerated TradingView charts with custom toolbar and styling overrides, providing institutional indicators and interactive drawing tools.",
         "p2": "For portfolio telemetry and equity performance, the frontend utilizes Recharts to render virtual balance history, equity curves, and asset allocation distributions without DOM frame stutter. Modular API adapters interface with Trading 212 API telemetry endpoints and Binance WebSocket streaming connections, ensuring price ticks and simulated fill events update reactively without memory leakage."
       },
       "section4": {
@@ -236,7 +235,9 @@
       "hobbyValue": "Basketball · Chess · Reading",
       "ageCaption": "24 y.o."
     },
-    "summary": "9 years of programming experience, spanning low-level C firmware (microcontrollers, drones, audio) to modern web applications (React, TypeScript) and UX/UI design in Figma. Plus 4 years of youth team leadership and public speaking.",
+    "motherTongueLabel": "Mother tongue",
+    "motherTongueValue": "English & French",
+    "summary": "9 years of programming experience, spanning low-level C firmware (microcontrollers, drones, audio) to modern web applications (React, TypeScript) and UX/UI design in Figma. Native bilingual in English and French (mother tongue). Plus 4 years of youth team leadership and public speaking.",
     "educationTitle": "Education",
     "education": {
       "heig": {

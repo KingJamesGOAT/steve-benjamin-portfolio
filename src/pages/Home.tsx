@@ -204,8 +204,8 @@ export const Home: React.FC = () => {
 
             <p className="text-xs sm:text-sm text-fintech-secondary leading-relaxed">
               {isFrench
-                ? 'Terminal de trading quantitatif temps réel connectant les flux Binance WebSockets, avec dimensionnement autonome des ordres selon le Critère de Kelly et synthèses LLaMA 3.3.'
-                : 'Real-time quantitative trading terminal streaming live Binance WebSockets with automated Kelly-sized risk management and automated LLaMA 3.3 summaries.'}
+                ? 'Projet personnel en bêta. Les données présentées dans cette démonstration sont simulées.'
+                : 'Personal project in beta. Data shown in this demo is simulated.'}
             </p>
           </div>
 
@@ -277,7 +277,7 @@ export const Home: React.FC = () => {
                     {isFrench ? 'Note 6.0 / 6.0' : 'Grade 6.0 / 6.0'}
                   </span>
                   <span className="px-2 py-0.5 sm:px-2.5 sm:py-1 text-[10px] sm:text-[11px] font-mono font-semibold bg-slate-100 text-slate-700 border border-slate-200">
-                    {isFrench ? '-30% Rejets' : '-30% Deferrals'}
+                    {isFrench ? 'Réduction des refus' : 'Reduced Deferrals'}
                   </span>
                   <span className="hidden sm:inline-block px-2.5 py-1 text-[11px] font-mono font-semibold bg-slate-100 text-slate-700 border border-slate-200">
                     {isFrench ? 'Qualification Anonyme' : 'Anonymous Screening'}
@@ -296,8 +296,8 @@ export const Home: React.FC = () => {
 
             <p className="text-xs sm:text-sm text-fintech-secondary leading-relaxed">
               {isFrench
-                ? 'Plateforme primée développée pour les Hôpitaux Universitaires de Genève (HUG) : qualification anonyme des donneurs en entreprise pour résorber le taux de rejet de 30%.'
-                : 'Award-winning blood donation platform engineered for Geneva University Hospitals (HUG) to pre-qualify corporate volunteers and eliminate the 30% on-site deferral bottleneck.'}
+                ? 'Plateforme primée développée pour les Hôpitaux Universitaires de Genève (HUG) : qualification anonyme des donneurs en entreprise pour réduire les refus de donneurs sur place.'
+                : 'Award-winning blood donation platform engineered for Geneva University Hospitals (HUG) to pre-qualify corporate volunteers and reduce on-site donor rejections.'}
             </p>
           </div>
 
@@ -319,8 +319,8 @@ export const Home: React.FC = () => {
                   </span>
                   <p className="text-slate-500 text-xs leading-relaxed">
                     {isFrench
-                      ? '30% des volontaires étaient refusés sur place par manque d\'information. Donnons.ch pré-qualifie l\'éligibilité en amont.'
-                      : '30% of willing corporate donors were deferred at collection points. Donnons.ch pre-screens eligibility playfully.'}
+                      ? 'De nombreux volontaires étaient refusés sur place. Donnons.ch pré-qualifie l\'éligibilité en amont pour réduire les refus de donneurs sur place.'
+                      : 'Many willing donors were deferred on-site. Donnons.ch pre-screens eligibility to reduce on-site donor rejections.'}
                   </p>
                 </div>
 
@@ -478,7 +478,7 @@ export const Home: React.FC = () => {
 
             <div className="p-3 sm:p-5 border border-slate-200 bg-slate-50/70 flex items-center justify-center text-center shadow-xs">
               <span className="text-xs sm:text-base font-bold text-fintech-primary tracking-tight">
-                {isFrench ? 'Confidentialité & NDA Garantis' : 'Strict NDA & IP Transfer'}
+                {isFrench ? 'Confidentialité possible sur demande' : 'Confidentiality possible on request'}
               </span>
             </div>
           </div>

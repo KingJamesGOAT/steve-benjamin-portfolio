@@ -85,8 +85,8 @@ export const ProjectDetail: React.FC = () => {
         <p className="text-base sm:text-lg text-fintech-secondary max-w-3xl leading-relaxed">
           {isCryptoHub ? (
             isFrench
-              ? 'Terminal de trading quantitatif conçu pour surveiller les paires de cryptomonnaies en temps réel, exécuter des allocations simulées et générer des synthèses de marché automatisées.'
-              : 'Quantitative trading terminal engineered to monitor cryptocurrency pairs in real time, execute simulated allocations, and generate automated market summaries.'
+              ? 'Projet personnel en bêta. Les données présentées dans cette démonstration sont simulées.'
+              : 'Personal project in beta. Data shown in this demo is simulated.'
           ) : (
             t(project.descriptionKey)
           )}
