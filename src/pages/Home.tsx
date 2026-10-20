@@ -296,8 +296,8 @@ export const Home: React.FC = () => {
 
             <p className="text-xs sm:text-sm text-fintech-secondary leading-relaxed">
               {isFrench
-                ? 'Plateforme primée développée pour les Hôpitaux Universitaires de Genève (HUG) : qualification anonyme des donneurs en entreprise pour réduire les refus de donneurs sur place.'
-                : 'Award-winning blood donation platform engineered for Geneva University Hospitals (HUG) to pre-qualify corporate volunteers and reduce on-site donor rejections.'}
+                ? 'Plateforme de don de sang réalisée pour les Hôpitaux Universitaires de Genève (HUG) à la HEIG-VD pour pré-qualifier les volontaires en entreprise et réduire les refus de donneurs sur place.'
+                : 'Blood donation platform engineered for Geneva University Hospitals (HUG) at HEIG-VD to pre-qualify corporate volunteers and reduce on-site donor rejections.'}
             </p>
           </div>
 
