@@ -74,9 +74,14 @@ export const About: React.FC<AboutProps> = ({ id = 'about' }) => {
             </p>
 
             {/* Mother Tongue Highlight */}
-            <div className="pt-1 font-mono text-xs sm:text-sm">
-              <span className="text-slate-800 font-semibold underline decoration-electric decoration-2 underline-offset-4">
-                {t('about.motherTongueLabel')}: {t('about.motherTongueValue')}
+            <div className="pt-0.5">
+              <span className="inline-flex items-center gap-2 px-2.5 py-1 border border-slate-200 bg-slate-50/70 font-mono text-xs">
+                <span className="text-[10px] uppercase tracking-wider text-slate-400 font-semibold">
+                  {t('about.motherTongueLabel')}:
+                </span>
+                <span className="font-semibold text-slate-900">
+                  {t('about.motherTongueValue')}
+                </span>
               </span>
             </div>
 
