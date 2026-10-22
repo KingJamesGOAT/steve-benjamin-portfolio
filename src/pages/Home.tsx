@@ -494,10 +494,10 @@ export const Home: React.FC = () => {
             </Link>
 
             <a
-              href={`${import.meta.env.BASE_URL}HEIG-VD-Guide_TB-filiere-IM-2026-27.pdf`}
+              href={`${import.meta.env.BASE_URL}${isFrench ? 'HEIG-VD-Guide_TB-filiere-IM-2026-27.pdf' : "HEIG-VD - IM - Bachelor's Thesis Guide for Companies - 2026-27.pdf"}`}
               target="_blank"
               rel="noopener noreferrer"
-              download
+              download={isFrench ? 'HEIG-VD-Guide_TB-filiere-IM-2026-27.pdf' : "HEIG-VD - IM - Bachelor's Thesis Guide for Companies - 2026-27.pdf"}
               className="inline-flex items-center justify-center space-x-2 px-4 py-3 rounded-none border border-slate-200 bg-white hover:border-electric hover:text-electric text-slate-700 text-xs font-semibold transition-colors shadow-sm text-center"
             >
               <FileDown className="w-4 h-4 text-electric" />
