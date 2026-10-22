@@ -97,10 +97,10 @@ export const About: React.FC<AboutProps> = ({ id = 'about' }) => {
               </a>
               <span className="text-slate-300">·</span>
               <a
-                href={`${import.meta.env.BASE_URL}CV_Steve_Benjamin.pdf`}
+                href={`${import.meta.env.BASE_URL}${isFrench ? 'CV_Steve_Benjamin.pdf' : 'EnglishSteveBenjaminCV.pdf'}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                download
+                download={isFrench ? 'CV_Steve_Benjamin.pdf' : 'EnglishSteveBenjaminCV.pdf'}
                 className="inline-flex items-center space-x-1.5 text-slate-700 hover:text-electric transition-colors"
               >
                 <span>CV (PDF) ↗</span>

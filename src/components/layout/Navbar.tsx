@@ -442,10 +442,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
             onClick={(e) => e.stopPropagation()}
           >
             <a
-              href={`${import.meta.env.BASE_URL}CV_Steve_Benjamin.pdf`}
+              href={`${import.meta.env.BASE_URL}${isFrench ? 'CV_Steve_Benjamin.pdf' : 'EnglishSteveBenjaminCV.pdf'}`}
               target="_blank"
               rel="noopener noreferrer"
-              download
+              download={isFrench ? 'CV_Steve_Benjamin.pdf' : 'EnglishSteveBenjaminCV.pdf'}
               className="px-3.5 py-2 border border-slate-200 bg-white text-slate-700 hover:border-electric hover:text-electric font-semibold transition-colors"
             >
               CV (PDF) ↗

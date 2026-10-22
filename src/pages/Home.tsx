@@ -113,10 +113,10 @@ export const Home: React.FC = () => {
                 </a>
 
                 <a
-                  href={`${import.meta.env.BASE_URL}CV_Steve_Benjamin.pdf`}
+                  href={`${import.meta.env.BASE_URL}${isFrench ? 'CV_Steve_Benjamin.pdf' : 'EnglishSteveBenjaminCV.pdf'}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  download
+                  download={isFrench ? 'CV_Steve_Benjamin.pdf' : 'EnglishSteveBenjaminCV.pdf'}
                   className="inline-flex items-center justify-center space-x-2 px-4 py-3 rounded-none border border-slate-200 bg-white hover:border-electric hover:text-electric text-slate-700 text-xs font-semibold transition-colors shadow-sm uppercase tracking-wider text-center"
                 >
                   <FileDown className="w-3.5 h-3.5 text-electric" />

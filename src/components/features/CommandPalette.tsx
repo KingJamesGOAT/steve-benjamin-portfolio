@@ -193,8 +193,9 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
         keywords: ['cv', 'resume', 'pdf', 'curriculum', 'telecharger', 'download'],
         action: () => {
           const link = document.createElement('a');
-          link.href = `${import.meta.env.BASE_URL}CV_Steve_Benjamin.pdf`;
-          link.download = 'CV_Steve_Benjamin.pdf';
+          const cvFile = isFrench ? 'CV_Steve_Benjamin.pdf' : 'EnglishSteveBenjaminCV.pdf';
+          link.href = `${import.meta.env.BASE_URL}${cvFile}`;
+          link.download = cvFile;
           link.target = '_blank';
           document.body.appendChild(link);
           link.click();

@@ -59,10 +59,10 @@ export const BachelorPitch: React.FC = () => {
           </a>
 
           <a
-            href={`${import.meta.env.BASE_URL}CV_Steve_Benjamin.pdf`}
+            href={`${import.meta.env.BASE_URL}${isFrench ? 'CV_Steve_Benjamin.pdf' : 'EnglishSteveBenjaminCV.pdf'}`}
             target="_blank"
             rel="noopener noreferrer"
-            download
+            download={isFrench ? 'CV_Steve_Benjamin.pdf' : 'EnglishSteveBenjaminCV.pdf'}
             className="px-4 py-2.5 border border-slate-200 bg-white hover:border-slate-300 text-slate-600 text-xs font-mono transition-colors shadow-sm"
           >
             {t('bachelorPitch.ctaResume')} ↗
