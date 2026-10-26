@@ -76,10 +76,11 @@ export const BachelorPitch: React.FC = () => {
           {t('bachelorPitch.conditions.tag')}
         </h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {/* 01 / Rémunération */}
           <div className="p-4 border border-slate-200 bg-white shadow-sm space-y-1.5">
             <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 block">
-              {isFrench ? '01 / Rémunération' : '01 / Remuneration'}
+              {t('bachelorPitch.conditions.costLabel')}
             </span>
             <h3 className="text-xs sm:text-sm font-bold text-fintech-primary">
               {t('bachelorPitch.conditions.costTitle')}
@@ -89,9 +90,23 @@ export const BachelorPitch: React.FC = () => {
             </p>
           </div>
 
+          {/* 02 / Encadrement */}
           <div className="p-4 border border-slate-200 bg-white shadow-sm space-y-1.5">
             <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 block">
-              {isFrench ? '02 / Cadre Juridique' : '02 / Legal & IP'}
+              {t('bachelorPitch.conditions.supervisionLabel')}
+            </span>
+            <h3 className="text-xs sm:text-sm font-bold text-fintech-primary">
+              {t('bachelorPitch.conditions.supervisionTitle')}
+            </h3>
+            <p className="text-xs text-slate-600 leading-relaxed">
+              {t('bachelorPitch.conditions.supervisionDesc')}
+            </p>
+          </div>
+
+          {/* 03 / Confidentialité */}
+          <div className="p-4 border border-slate-200 bg-white shadow-sm space-y-1.5">
+            <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 block">
+              {t('bachelorPitch.conditions.confidentialityLabel')}
             </span>
             <h3 className="text-xs sm:text-sm font-bold text-fintech-primary">
               {t('bachelorPitch.conditions.confidentialityTitle')}
@@ -101,9 +116,10 @@ export const BachelorPitch: React.FC = () => {
             </p>
           </div>
 
+          {/* 04 / Durée */}
           <div className="p-4 border border-slate-200 bg-white shadow-sm space-y-1.5">
             <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 block">
-              {isFrench ? '03 / Calendrier' : '03 / Schedule'}
+              {t('bachelorPitch.conditions.durationLabel')}
             </span>
             <h3 className="text-xs sm:text-sm font-bold text-fintech-primary">
               {t('bachelorPitch.conditions.durationTitle')}

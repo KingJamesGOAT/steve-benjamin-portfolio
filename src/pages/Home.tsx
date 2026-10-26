@@ -535,19 +535,19 @@ export const Home: React.FC = () => {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 py-1">
             <div className="p-3 sm:p-5 border border-slate-200 bg-slate-50/70 flex items-center justify-center text-center shadow-xs">
               <span className="text-xs sm:text-base font-bold text-fintech-primary tracking-tight">
-                {isFrench ? '14 Semaines Dédiées' : '14 Dedicated Weeks'}
+                {t('bachelorPitch.conditions.durationTitle')}
               </span>
             </div>
 
             <div className="p-3 sm:p-5 border border-slate-200 bg-slate-50/70 flex items-center justify-center text-center shadow-xs">
               <span className="text-xs sm:text-base font-bold text-fintech-primary tracking-tight">
-                {isFrench ? 'CHF 0 de Salaire Obligatoire' : 'CHF 0 Mandatory Salary'}
+                {t('bachelorPitch.conditions.costTitle')}
               </span>
             </div>
 
             <div className="p-3 sm:p-5 border border-slate-200 bg-slate-50/70 flex items-center justify-center text-center shadow-xs">
               <span className="text-xs sm:text-base font-bold text-fintech-primary tracking-tight">
-                {isFrench ? 'Confidentialité possible sur demande' : 'Confidentiality possible on request'}
+                {t('bachelorPitch.conditions.confidentialityTitle')}
               </span>
             </div>
           </div>
