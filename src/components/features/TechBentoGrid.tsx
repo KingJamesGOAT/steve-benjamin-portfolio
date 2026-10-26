@@ -79,7 +79,7 @@ export const TechBentoGrid: React.FC = () => {
       titleFr: 'Architecture Frontend',
       descEn: 'Modular, type-safe web applications with ultra-responsive rendering.',
       descFr: 'Applications web modulaires, typées et ultra-réactives.',
-      tools: ['React 18', 'TypeScript', 'Tailwind', 'Vite'],
+      tools: ['React 18', 'TypeScript', 'Tailwind CSS'],
       codeSnippet: (
         <div className="space-y-1 whitespace-nowrap">
           <div>
@@ -121,7 +121,7 @@ export const TechBentoGrid: React.FC = () => {
       titleFr: 'Design UI/UX & Produit',
       descEn: 'Interactive prototypes, user ergonomics, and WCAG design systems.',
       descFr: 'Prototypes interactifs, ergonomie et design systems conformes WCAG.',
-      tools: ['Figma', 'Ergonomie', 'Design Systems', 'WCAG'],
+      tools: ['Figma', 'Design Systems', 'UX Research'],
       codeSnippet: (
         <div className="space-y-0.5">
           <div><span className="text-[#38BDF8]">const</span> <span className="text-[#F59E0B]">DesignTokenSystem</span> = {'{'}</div>
@@ -141,7 +141,7 @@ export const TechBentoGrid: React.FC = () => {
       titleFr: 'Marketing Digital & Analytics',
       descEn: 'Search engine optimization, Google Analytics 4, and user acquisition funnels.',
       descFr: 'Optimisation SEO/SEA, Google Analytics 4 et tunnels d\'acquisition.',
-      tools: ['SEO / Core Web Vitals', 'GA4 & Funnels', 'Stratégie & CRO'],
+      tools: ['SEO', 'Google Analytics 4', 'Growth Marketing'],
       codeSnippet: (
         <div className="space-y-0.5">
           <div><span className="text-[#38BDF8]">window</span>.<span className="text-[#60A5FA]">gtag</span>(<span className="text-[#34D399]">'event'</span>, <span className="text-[#34D399]">'conversion'</span>, {'{'}</div>
@@ -161,7 +161,7 @@ export const TechBentoGrid: React.FC = () => {
       titleFr: 'Visualisation de Données & Flux',
       descEn: 'High-density financial charts, real-time WebSocket feeds, and dashboards.',
       descFr: 'Graphiques haute densité, flux WebSockets temps réel et dashboards.',
-      tools: ['D3.js', 'WebSockets', 'Recharts', 'Live Feeds'],
+      tools: ['D3.js', 'Recharts', 'WebSockets'],
       codeSnippet: (
         <div className="space-y-0.5">
           <div><span className="text-[#38BDF8]">const</span> ws = <span className="text-[#38BDF8]">new</span> <span className="text-[#60A5FA]">WebSocket</span>(streamUrl);</div>
@@ -180,7 +180,7 @@ export const TechBentoGrid: React.FC = () => {
       titleFr: 'Architecture API & Services',
       descEn: 'Typed API contracts, resilient HTTP pipelines, and database modeling.',
       descFr: 'Contrats d\'API typés, requêtes résilientes et modélisation de bases de données.',
-      tools: ['REST APIs', 'OpenAPI', 'MySQL / Laravel'],
+      tools: ['REST APIs', 'OpenAPI', 'PostgreSQL'],
       codeSnippet: (
         <div className="space-y-0.5">
           <div><span className="text-[#38BDF8]">async function</span> <span className="text-[#F59E0B]">queryApi</span>&lt;<span className="text-[#A78BFA]">T</span>&gt;(url: <span className="text-[#A78BFA]">string</span>) {'{'}</div>
@@ -200,7 +200,7 @@ export const TechBentoGrid: React.FC = () => {
       titleFr: 'Systèmes Embarqués & C',
       descEn: 'Low-level firmware, DMA registers, and SPI/UART communication protocols.',
       descFr: 'Firmware bas niveau, registres DMA et protocoles de communication SPI/UART.',
-      tools: ['C99', 'ARM Cortex', 'DMA', 'SPI / UART'],
+      tools: ['C99', 'ARM Cortex', 'SPI / UART'],
       codeSnippet: (
         <div className="space-y-1 font-mono text-[10.5px] whitespace-nowrap leading-relaxed overflow-hidden">
           <div>
