@@ -76,12 +76,9 @@ export const BachelorPitch: React.FC = () => {
           {t('bachelorPitch.conditions.tag')}
         </h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           {/* 01 / Rémunération */}
           <div className="p-4 border border-slate-200 bg-white shadow-sm space-y-1.5">
-            <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 block">
-              {t('bachelorPitch.conditions.costLabel')}
-            </span>
             <h3 className="text-xs sm:text-sm font-bold text-fintech-primary">
               {t('bachelorPitch.conditions.costTitle')}
             </h3>
@@ -92,9 +89,6 @@ export const BachelorPitch: React.FC = () => {
 
           {/* 02 / Encadrement */}
           <div className="p-4 border border-slate-200 bg-white shadow-sm space-y-1.5">
-            <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 block">
-              {t('bachelorPitch.conditions.supervisionLabel')}
-            </span>
             <h3 className="text-xs sm:text-sm font-bold text-fintech-primary">
               {t('bachelorPitch.conditions.supervisionTitle')}
             </h3>
@@ -105,27 +99,11 @@ export const BachelorPitch: React.FC = () => {
 
           {/* 03 / Confidentialité */}
           <div className="p-4 border border-slate-200 bg-white shadow-sm space-y-1.5">
-            <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 block">
-              {t('bachelorPitch.conditions.confidentialityLabel')}
-            </span>
             <h3 className="text-xs sm:text-sm font-bold text-fintech-primary">
               {t('bachelorPitch.conditions.confidentialityTitle')}
             </h3>
             <p className="text-xs text-slate-600 leading-relaxed">
               {t('bachelorPitch.conditions.confidentialityDesc')}
-            </p>
-          </div>
-
-          {/* 04 / Durée */}
-          <div className="p-4 border border-slate-200 bg-white shadow-sm space-y-1.5">
-            <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 block">
-              {t('bachelorPitch.conditions.durationLabel')}
-            </span>
-            <h3 className="text-xs sm:text-sm font-bold text-fintech-primary">
-              {t('bachelorPitch.conditions.durationTitle')}
-            </h3>
-            <p className="text-xs text-slate-600 leading-relaxed">
-              {t('bachelorPitch.conditions.durationDesc')}
             </p>
           </div>
         </div>
@@ -139,9 +117,6 @@ export const BachelorPitch: React.FC = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <div className="p-4 border border-slate-200 bg-white shadow-sm space-y-1.5">
-            <span className="text-[10px] font-mono font-semibold uppercase tracking-wider text-electric block">
-              {isFrench ? 'Axe 01' : 'Track 01'}
-            </span>
             <h3 className="text-xs sm:text-sm font-bold text-fintech-primary">
               {t('bachelorPitch.scope.track1Title')}
             </h3>
@@ -151,9 +126,6 @@ export const BachelorPitch: React.FC = () => {
           </div>
 
           <div className="p-4 border border-slate-200 bg-white shadow-sm space-y-1.5">
-            <span className="text-[10px] font-mono font-semibold uppercase tracking-wider text-electric block">
-              {isFrench ? 'Axe 02' : 'Track 02'}
-            </span>
             <h3 className="text-xs sm:text-sm font-bold text-fintech-primary">
               {t('bachelorPitch.scope.track2Title')}
             </h3>
@@ -163,9 +135,6 @@ export const BachelorPitch: React.FC = () => {
           </div>
 
           <div className="p-4 border border-slate-200 bg-white shadow-sm space-y-1.5">
-            <span className="text-[10px] font-mono font-semibold uppercase tracking-wider text-electric block">
-              {isFrench ? 'Axe 03' : 'Track 03'}
-            </span>
             <h3 className="text-xs sm:text-sm font-bold text-fintech-primary">
               {t('bachelorPitch.scope.track3Title')}
             </h3>
