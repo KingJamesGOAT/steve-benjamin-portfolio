@@ -159,99 +159,74 @@ export const Home: React.FC = () => {
           <TechBentoGrid />
           <AppCarousel />
 
-          {/* Verified Credentials Strip */}
-          <div className="space-y-2 pt-1 border-t border-slate-100">
-            <div className="flex items-center justify-between pb-0.5">
-              <span className="text-[11px] font-mono uppercase tracking-wider text-slate-400 font-semibold">
-                {isFrench ? 'Certifications & Accréditations' : 'Verified Certifications & Accreditations'}
-              </span>
-              <a
-                href="#certifications"
-                onClick={(e) => {
-                  e.preventDefault();
-                  const el = document.getElementById('certifications');
-                  if (el) el.scrollIntoView({ behavior: 'smooth' });
-                }}
-                className="text-[11px] font-mono text-slate-500 hover:text-electric transition-colors"
-              >
-                {isFrench ? 'Détails dans À propos →' : 'View in About →'}
-              </a>
-            </div>
+          {/* Minimalist Certifications Strip */}
+          <div className="space-y-2.5">
+            <span className="text-[11px] font-mono uppercase tracking-wider text-slate-400 font-semibold">
+              {isFrench ? 'Certifications' : 'Certifications'}
+            </span>
 
-            <div className="border border-slate-200 bg-white grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-slate-100 shadow-2xs">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5">
               {/* Item 1: Claude API */}
-              <div className="p-3 sm:p-4 flex flex-col justify-between space-y-2">
-                <div className="space-y-1">
-                  <div className="flex items-center justify-between gap-1">
-                    <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider font-medium">
-                      {isFrench ? 'Oct. 2026' : 'Oct 2026'}
-                    </span>
-                    <a
-                      href="https://academy.claude.com/verify/7b1fc8d9d4a19f6bb8e7d4b1a2ffa71b"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 font-mono text-xs text-slate-700 hover:text-electric transition-colors"
-                    >
-                      <span>{t('about.certifications.verify')}</span>
-                      <ArrowUpRight className="w-3 h-3 text-electric" />
-                    </a>
-                  </div>
-                  <h4 className="text-xs sm:text-sm font-semibold text-fintech-primary">
+              <div className="border border-slate-200 bg-white p-3 flex items-center justify-between gap-2 shadow-2xs hover:border-slate-300 transition-colors">
+                <div className="min-w-0 pr-1">
+                  <h4 className="text-xs sm:text-[13px] font-semibold text-fintech-primary truncate">
                     Building with the Claude API
                   </h4>
-                  <p className="text-[11px] text-slate-500 font-mono">
-                    Anthropic · Claude Academy
+                  <p className="text-[10px] sm:text-[11px] text-slate-500 font-mono">
+                    Anthropic
                   </p>
                 </div>
+                <a
+                  href="https://academy.claude.com/verify/7b1fc8d9d4a19f6bb8e7d4b1a2ffa71b"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="shrink-0 inline-flex items-center gap-0.5 font-mono text-[11px] text-electric hover:underline font-medium"
+                >
+                  <span>{t('about.certifications.verify')}</span>
+                  <ArrowUpRight className="w-3 h-3" />
+                </a>
               </div>
 
               {/* Item 2: Claude Code */}
-              <div className="p-3 sm:p-4 flex flex-col justify-between space-y-2">
-                <div className="space-y-1">
-                  <div className="flex items-center justify-between gap-1">
-                    <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider font-medium">
-                      {isFrench ? 'Oct. 2026' : 'Oct 2026'}
-                    </span>
-                    <a
-                      href="https://academy.claude.com/verify/b22cbb90ce16cac2143dde13da2749bd"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 font-mono text-xs text-slate-700 hover:text-electric transition-colors"
-                    >
-                      <span>{t('about.certifications.verify')}</span>
-                      <ArrowUpRight className="w-3 h-3 text-electric" />
-                    </a>
-                  </div>
-                  <h4 className="text-xs sm:text-sm font-semibold text-fintech-primary">
+              <div className="border border-slate-200 bg-white p-3 flex items-center justify-between gap-2 shadow-2xs hover:border-slate-300 transition-colors">
+                <div className="min-w-0 pr-1">
+                  <h4 className="text-xs sm:text-[13px] font-semibold text-fintech-primary truncate">
                     Claude Code 101
                   </h4>
-                  <p className="text-[11px] text-slate-500 font-mono">
-                    Anthropic · Claude Academy
+                  <p className="text-[10px] sm:text-[11px] text-slate-500 font-mono">
+                    Anthropic
                   </p>
                 </div>
+                <a
+                  href="https://academy.claude.com/verify/b22cbb90ce16cac2143dde13da2749bd"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="shrink-0 inline-flex items-center gap-0.5 font-mono text-[11px] text-electric hover:underline font-medium"
+                >
+                  <span>{t('about.certifications.verify')}</span>
+                  <ArrowUpRight className="w-3 h-3" />
+                </a>
               </div>
 
               {/* Item 3: Leadership */}
-              <div className="p-3 sm:p-4 flex flex-col justify-between space-y-2">
-                <div className="space-y-1">
-                  <div className="flex items-center justify-between gap-1">
-                    <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider font-medium">
-                      {isFrench ? 'Juil. 2024' : 'Jul 2024'}
-                    </span>
-                    <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider">
-                      {isFrench ? 'Certifié' : 'Accredited'}
-                    </span>
-                  </div>
-                  <h4 className="text-xs sm:text-sm font-semibold text-fintech-primary">
+              <div className="border border-slate-200 bg-white p-3 flex items-center justify-between gap-2 shadow-2xs hover:border-slate-300 transition-colors">
+                <div className="min-w-0 pr-1">
+                  <h4 className="text-xs sm:text-[13px] font-semibold text-fintech-primary truncate">
                     Leadership Excellence
                   </h4>
-                  <p className="text-[11px] text-slate-500 font-mono">
-                    Global Leadership Geneva – Bern
+                  <p className="text-[10px] sm:text-[11px] text-slate-500 font-mono">
+                    GLGB Geneva – Bern
                   </p>
                 </div>
+                <span className="shrink-0 font-mono text-[10px] text-slate-400 uppercase tracking-wider font-medium">
+                  {isFrench ? 'Certifié' : 'Accredited'}
+                </span>
               </div>
             </div>
           </div>
+
+          {/* Section dividing line under the badges/skills */}
+          <div className="border-b border-slate-200/80 pt-2" />
         </section>
 
       {/* SECTION 2: PROJECTS */}
