@@ -280,6 +280,30 @@
         "description": "Field visits in India, medical camps, administrative support, and French-English translations."
       }
     },
+    "certificationsTitle": "Certifications",
+    "certifications": {
+      "verify": "Verify",
+      "groupAiDev": "AI & Development",
+      "groupLeadership": "Leadership",
+      "claudeApi": {
+        "title": "Building with the Claude API",
+        "issuer": "Anthropic · Claude Academy",
+        "period": "Oct 2026",
+        "description": "Integrating Claude models into a product through the API."
+      },
+      "claudeCode": {
+        "title": "Claude Code 101",
+        "issuer": "Anthropic · Claude Academy",
+        "period": "Oct 2026",
+        "description": "AI-agent-assisted software development."
+      },
+      "nationBuilding": {
+        "title": "Nation Building through Leadership Excellence",
+        "issuer": "Global Leadership Geneva – Bern",
+        "period": "Jul 2024",
+        "description": "Leadership lecture programme with business leaders, members of parliament and ambassadors."
+      }
+    },
     "linksTitle": "Links",
     "links": {
       "linkedinLabel": "LinkedIn",

@@ -280,6 +280,30 @@
         "description": "Visites de projets en Inde, camps médicaux, aide administrative et traductions."
       }
     },
+    "certificationsTitle": "Certifications",
+    "certifications": {
+      "verify": "Vérifier",
+      "groupAiDev": "IA & Développement",
+      "groupLeadership": "Leadership",
+      "claudeApi": {
+        "title": "Building with the Claude API",
+        "issuer": "Anthropic · Claude Academy",
+        "period": "Oct. 2026",
+        "description": "Intégrer les modèles Claude dans un produit via l'API."
+      },
+      "claudeCode": {
+        "title": "Claude Code 101",
+        "issuer": "Anthropic · Claude Academy",
+        "period": "Oct. 2026",
+        "description": "Développement logiciel assisté par un agent IA."
+      },
+      "nationBuilding": {
+        "title": "Nation Building through Leadership Excellence",
+        "issuer": "Global Leadership Geneva – Bern",
+        "period": "Juil. 2024",
+        "description": "Programme de conférences sur le leadership avec des dirigeants d'entreprise, des parlementaires et des ambassadeurs."
+      }
+    },
     "linksTitle": "Liens",
     "links": {
       "linkedinLabel": "LinkedIn",

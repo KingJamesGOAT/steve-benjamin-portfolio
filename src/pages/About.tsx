@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { ArrowUpRight } from 'lucide-react';
 import CopyEmailButton from '../components/core/CopyEmailButton';
 
 interface AboutProps {
@@ -55,6 +56,40 @@ export const About: React.FC<AboutProps> = ({ id = 'about' }) => {
       role: t('about.experience.ficf.role'),
       org: t('about.experience.ficf.org'),
       description: t('about.experience.ficf.description'),
+    },
+  ];
+
+  const certifications = [
+    {
+      group: t('about.certifications.groupAiDev'),
+      items: [
+        {
+          period: t('about.certifications.claudeApi.period'),
+          title: t('about.certifications.claudeApi.title'),
+          issuer: t('about.certifications.claudeApi.issuer'),
+          description: t('about.certifications.claudeApi.description'),
+          link: 'https://academy.claude.com/verify/7b1fc8d9d4a19f6bb8e7d4b1a2ffa71b',
+        },
+        {
+          period: t('about.certifications.claudeCode.period'),
+          title: t('about.certifications.claudeCode.title'),
+          issuer: t('about.certifications.claudeCode.issuer'),
+          description: t('about.certifications.claudeCode.description'),
+          link: 'https://academy.claude.com/verify/b22cbb90ce16cac2143dde13da2749bd',
+        },
+      ],
+    },
+    {
+      group: t('about.certifications.groupLeadership'),
+      items: [
+        {
+          period: t('about.certifications.nationBuilding.period'),
+          title: t('about.certifications.nationBuilding.title'),
+          issuer: t('about.certifications.nationBuilding.issuer'),
+          description: t('about.certifications.nationBuilding.description'),
+          link: null,
+        },
+      ],
     },
   ];
 
@@ -193,6 +228,57 @@ export const About: React.FC<AboutProps> = ({ id = 'about' }) => {
                   <span className="mx-1.5 text-slate-300">·</span>
                   {item.description}
                 </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Certifications Grid */}
+      <div id="certifications" className="space-y-4 sm:space-y-6 scroll-mt-24">
+        <h3 className="text-xs font-mono uppercase tracking-widest text-slate-500 font-semibold">
+          {t('about.certificationsTitle')}
+        </h3>
+
+        <div className="space-y-4 sm:space-y-6">
+          {certifications.map((group, groupIndex) => (
+            <div key={groupIndex} className="space-y-2 sm:space-y-3">
+              <h4 className="text-[11px] font-mono uppercase tracking-wider text-slate-400 font-semibold">
+                {group.group}
+              </h4>
+
+              <div className="border-t border-b border-slate-200 divide-y divide-slate-100">
+                {group.items.map((item, index) => (
+                  <div
+                    key={index}
+                    className="py-2.5 sm:py-4 grid grid-cols-1 md:grid-cols-12 gap-1 md:gap-6 items-baseline"
+                  >
+                    <div className="md:col-span-3 font-mono text-[11px] sm:text-sm text-slate-400 sm:text-slate-500 tabular-nums">
+                      {item.period}
+                    </div>
+                    <div className="md:col-span-9 space-y-0.5">
+                      <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+                        <h4 className="text-xs sm:text-base font-semibold text-fintech-primary">
+                          {item.title} <span className="font-normal text-slate-500">({item.issuer})</span>
+                        </h4>
+                        {item.link && (
+                          <a
+                            href={item.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 font-mono text-xs text-slate-700 hover:text-electric transition-colors shrink-0"
+                          >
+                            <span>{t('about.certifications.verify')}</span>
+                            <ArrowUpRight className="w-3 h-3" />
+                          </a>
+                        )}
+                      </div>
+                      <p className="text-[11px] sm:text-sm text-slate-600 leading-relaxed">
+                        {item.description}
+                      </p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           ))}
