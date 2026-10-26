@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { ArrowRight, FileDown, ExternalLink, ChevronDown } from 'lucide-react';
+import { ArrowRight, FileDown, ExternalLink, ChevronDown, ArrowUpRight } from 'lucide-react';
 import TechBentoGrid from '../components/features/TechBentoGrid';
 import CryptoWidgetSim from '../components/features/CryptoWidgetSim';
 import DonnonsWidgetSim from '../components/features/DonnonsWidgetSim';
@@ -155,9 +155,103 @@ export const Home: React.FC = () => {
         </section>
 
         {/* SECTION 1.5: TECHNICAL SKILLS & SOFTWARE ECOSYSTEM */}
-        <section id="skills" className="scroll-mt-20 pt-2 space-y-8 sm:space-y-10">
+        <section id="skills" className="scroll-mt-20 pt-2 space-y-6 sm:space-y-8">
           <TechBentoGrid />
           <AppCarousel />
+
+          {/* Verified Credentials Strip */}
+          <div className="space-y-2 pt-1 border-t border-slate-100">
+            <div className="flex items-center justify-between pb-0.5">
+              <span className="text-[11px] font-mono uppercase tracking-wider text-slate-400 font-semibold">
+                {isFrench ? 'Certifications & Accréditations' : 'Verified Certifications & Accreditations'}
+              </span>
+              <a
+                href="#certifications"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const el = document.getElementById('certifications');
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="text-[11px] font-mono text-slate-500 hover:text-electric transition-colors"
+              >
+                {isFrench ? 'Détails dans À propos →' : 'View in About →'}
+              </a>
+            </div>
+
+            <div className="border border-slate-200 bg-white grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-slate-100 shadow-2xs">
+              {/* Item 1: Claude API */}
+              <div className="p-3 sm:p-4 flex flex-col justify-between space-y-2">
+                <div className="space-y-1">
+                  <div className="flex items-center justify-between gap-1">
+                    <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider font-medium">
+                      {isFrench ? 'Oct. 2026' : 'Oct 2026'}
+                    </span>
+                    <a
+                      href="https://academy.claude.com/verify/7b1fc8d9d4a19f6bb8e7d4b1a2ffa71b"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 font-mono text-xs text-slate-700 hover:text-electric transition-colors"
+                    >
+                      <span>{t('about.certifications.verify')}</span>
+                      <ArrowUpRight className="w-3 h-3 text-electric" />
+                    </a>
+                  </div>
+                  <h4 className="text-xs sm:text-sm font-semibold text-fintech-primary">
+                    Building with the Claude API
+                  </h4>
+                  <p className="text-[11px] text-slate-500 font-mono">
+                    Anthropic · Claude Academy
+                  </p>
+                </div>
+              </div>
+
+              {/* Item 2: Claude Code */}
+              <div className="p-3 sm:p-4 flex flex-col justify-between space-y-2">
+                <div className="space-y-1">
+                  <div className="flex items-center justify-between gap-1">
+                    <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider font-medium">
+                      {isFrench ? 'Oct. 2026' : 'Oct 2026'}
+                    </span>
+                    <a
+                      href="https://academy.claude.com/verify/b22cbb90ce16cac2143dde13da2749bd"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 font-mono text-xs text-slate-700 hover:text-electric transition-colors"
+                    >
+                      <span>{t('about.certifications.verify')}</span>
+                      <ArrowUpRight className="w-3 h-3 text-electric" />
+                    </a>
+                  </div>
+                  <h4 className="text-xs sm:text-sm font-semibold text-fintech-primary">
+                    Claude Code 101
+                  </h4>
+                  <p className="text-[11px] text-slate-500 font-mono">
+                    Anthropic · Claude Academy
+                  </p>
+                </div>
+              </div>
+
+              {/* Item 3: Leadership */}
+              <div className="p-3 sm:p-4 flex flex-col justify-between space-y-2">
+                <div className="space-y-1">
+                  <div className="flex items-center justify-between gap-1">
+                    <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider font-medium">
+                      {isFrench ? 'Juil. 2024' : 'Jul 2024'}
+                    </span>
+                    <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider">
+                      {isFrench ? 'Certifié' : 'Accredited'}
+                    </span>
+                  </div>
+                  <h4 className="text-xs sm:text-sm font-semibold text-fintech-primary">
+                    Leadership Excellence
+                  </h4>
+                  <p className="text-[11px] text-slate-500 font-mono">
+                    Global Leadership Geneva – Bern
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
 
       {/* SECTION 2: PROJECTS */}
