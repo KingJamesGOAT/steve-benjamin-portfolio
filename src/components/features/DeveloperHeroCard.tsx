@@ -134,8 +134,8 @@ export const DeveloperHeroCard: React.FC = () => {
                   <p className="text-emerald-400">
                     [OK]{' '}
                     {isFrench
-                      ? 'Bachelor Mandate: Prêt (Avril - Août 2027)'
-                      : 'Bachelor Mandate: Ready (Apr - Aug 2027)'}
+                      ? 'Bachelor Mandate: Prêt (3 mai – 13 août 2027)'
+                      : 'Bachelor Mandate: Ready (3 May – 13 Aug 2027)'}
                   </p>
                 </div>
               </div>
@@ -181,8 +181,8 @@ export const DeveloperHeroCard: React.FC = () => {
                     <span className="text-slate-500">mandateScope:</span>{' '}
                     <span className="text-emerald-700">
                       {isFrench
-                        ? '"Mandat 14 semaines (0 CHF / NDA)"'
-                        : '"14-Week Capstone (CHF 0 / NDA)"'}
+                        ? '"Mandat 14 semaines (sans rémunération requise · confidentialité possible)"'
+                        : '"14-week mandate (no salary required · confidentiality possible)"'}
                     </span>
                   </div>
                   <div>&#125;;</div>
