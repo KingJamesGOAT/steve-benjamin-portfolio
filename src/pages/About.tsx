@@ -110,55 +110,77 @@ export const About: React.FC<AboutProps> = ({ id = 'about' }) => {
       {/* Header with Profile Photo */}
       <div className="border-b border-slate-200 pb-6 sm:pb-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-start">
-          {/* Left Column: Title, Bio & Quick Highlights */}
+          {/* Left Column: Title + Circular Mobile Avatar, Bio & Quick Highlights */}
           <div className="lg:col-span-8 space-y-4 sm:space-y-6">
-            <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-fintech-primary">
-              {t('about.title')}
-            </h2>
+            {/* Title Row with Circular Avatar on Mobile */}
+            <div className="flex items-center justify-between gap-4">
+              <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-fintech-primary">
+                {t('about.title')}
+              </h2>
+
+              {/* Small Circular Face Avatar on Mobile/Tablet (Right of About) */}
+              <div className="lg:hidden shrink-0 flex items-center gap-2.5">
+                <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-slate-200 bg-slate-100 shadow-xs">
+                  <img
+                    src={`${import.meta.env.BASE_URL}profile.jpg`}
+                    alt="Steve Benjamin"
+                    onError={(e) => {
+                      const target = e.currentTarget;
+                      if (!target.src.endsWith('/profile.jpg')) {
+                        target.src = '/profile.jpg';
+                      }
+                    }}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+            </div>
 
             <p className="text-sm sm:text-lg text-fintech-secondary leading-relaxed text-justify">
               {t('about.summary')}
             </p>
 
-            {/* Minimalist Native Language Badges */}
-            <div className="flex flex-wrap items-center gap-2 pt-0.5 font-mono text-xs">
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 border border-slate-200 bg-slate-50/70 text-slate-700 shadow-2xs">
-                <span className="text-[10px] font-semibold text-electric uppercase tracking-wider">EN</span>
-                <span className="text-slate-700 font-medium">{t('about.languages.native')}</span>
+            {/* Minimalist Native Language Badges (Slightly larger & balanced) */}
+            <div className="grid grid-cols-2 sm:inline-flex items-center gap-2.5 pt-0.5 font-mono text-xs sm:text-sm">
+              <span className="inline-flex items-center justify-center gap-2 px-3.5 py-2 border border-slate-200 bg-slate-50/80 text-slate-800 shadow-2xs">
+                <span className="text-xs font-bold text-electric uppercase tracking-wider">EN</span>
+                <span className="text-slate-700 font-semibold">{t('about.languages.native')}</span>
               </span>
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 border border-slate-200 bg-slate-50/70 text-slate-700 shadow-2xs">
-                <span className="text-[10px] font-semibold text-electric uppercase tracking-wider">FR</span>
-                <span className="text-slate-700 font-medium">{t('about.languages.native')}</span>
+              <span className="inline-flex items-center justify-center gap-2 px-3.5 py-2 border border-slate-200 bg-slate-50/80 text-slate-800 shadow-2xs">
+                <span className="text-xs font-bold text-electric uppercase tracking-wider">FR</span>
+                <span className="text-slate-700 font-semibold">{t('about.languages.native')}</span>
               </span>
             </div>
 
-            {/* Clean Direct Links Row */}
-            <div className="flex flex-wrap items-center gap-3 pt-1 font-mono text-xs">
+            {/* Clean Direct Links Row (Structured grid on mobile, inline row on desktop) */}
+            <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2 sm:gap-3 pt-1 font-mono text-xs">
               <a
                 href="https://www.linkedin.com/in/sb-steve-benjamin/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center space-x-1.5 text-slate-700 hover:text-electric transition-colors"
+                className="inline-flex items-center justify-center sm:justify-start space-x-1.5 py-2 px-3 sm:p-0 border sm:border-0 border-slate-200 bg-white sm:bg-transparent text-slate-700 hover:text-electric hover:border-electric transition-colors font-semibold sm:font-normal"
               >
                 <span>LinkedIn ↗</span>
               </a>
-              <span className="text-slate-300">·</span>
+              <span className="hidden sm:inline text-slate-300">·</span>
               <a
                 href={`${import.meta.env.BASE_URL}${isFrench ? 'CV_Steve_Benjamin.pdf' : 'EnglishSteveBenjaminCV.pdf'}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 download={isFrench ? 'CV_Steve_Benjamin.pdf' : 'EnglishSteveBenjaminCV.pdf'}
-                className="inline-flex items-center space-x-1.5 text-slate-700 hover:text-electric transition-colors"
+                className="inline-flex items-center justify-center sm:justify-start space-x-1.5 py-2 px-3 sm:p-0 border sm:border-0 border-slate-200 bg-white sm:bg-transparent text-slate-700 hover:text-electric hover:border-electric transition-colors font-semibold sm:font-normal"
               >
                 <span>CV (PDF) ↗</span>
               </a>
-              <span className="text-slate-300">·</span>
-              <CopyEmailButton className="text-slate-700 hover:text-electric text-xs" />
+              <span className="hidden sm:inline text-slate-300">·</span>
+              <div className="col-span-2 sm:col-span-1">
+                <CopyEmailButton className="w-full sm:w-auto justify-center sm:justify-start py-2 px-3 sm:p-0 border sm:border-0 border-slate-200 bg-white sm:bg-transparent text-slate-700 hover:text-electric text-xs" />
+              </div>
             </div>
           </div>
 
-          {/* Right Column: Clean, Structured Profile Picture Frame */}
-          <div className="lg:col-span-4 flex justify-center lg:justify-end pt-2 lg:pt-0">
+          {/* Right Column: Clean, Structured Profile Picture Frame (Desktop Only) */}
+          <div className="hidden lg:flex lg:col-span-4 justify-end pt-0">
             <div className="w-full max-w-[200px] sm:max-w-[260px] border border-slate-200 bg-white p-2 sm:p-3 shadow-sm">
               <div className="overflow-hidden bg-slate-100 aspect-square relative">
                 <img

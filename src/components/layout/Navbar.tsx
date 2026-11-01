@@ -169,17 +169,17 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
 
   return (
     <header
-      className={`sticky z-40 w-full transition-all duration-300 ease-in-out ${
+      className={`sticky top-0 z-40 w-full transition-all duration-300 ease-in-out bg-white border-b border-slate-200 ${
         isScrolled
-          ? 'top-2 sm:top-3 px-3 sm:px-6 pointer-events-none'
-          : 'top-0 px-0 bg-white border-b border-slate-200/80 pointer-events-auto'
+          ? 'md:top-3 md:px-6 md:bg-transparent md:border-b-0 md:pointer-events-none'
+          : 'px-0 pointer-events-auto'
       }`}
     >
       <div
-        className={`max-w-6xl mx-auto flex items-center justify-between transition-all duration-300 ease-in-out ${
+        className={`max-w-6xl mx-auto flex items-center justify-between transition-all duration-300 ease-in-out h-16 px-4 sm:px-6 ${
           isScrolled
-            ? 'pointer-events-auto h-12 sm:h-14 px-3 sm:px-6 border border-slate-200/80 bg-white/90 backdrop-blur-md shadow-xs'
-            : 'h-14 sm:h-16 px-4 sm:px-6 bg-transparent'
+            ? 'md:pointer-events-auto md:h-14 md:border md:border-slate-200/80 md:bg-white/95 md:backdrop-blur-md md:shadow-xs'
+            : 'bg-white md:bg-transparent'
         }`}
       >
         {/* Brand Logo (Home link) */}
@@ -192,8 +192,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
           <img
             src={`${import.meta.env.BASE_URL}Logo.png`}
             alt="Steve Benjamin"
-            className={`w-auto object-contain transition-all duration-300 ${
-              isScrolled ? 'h-7 sm:h-8.5 max-h-8.5' : 'h-8 sm:h-10 max-h-10'
+            className={`w-auto object-contain transition-all duration-300 h-9 ${
+              isScrolled ? 'md:h-8.5 md:max-h-8.5' : 'md:h-10 md:max-h-10'
             }`}
             onError={(e) => {
               const target = e.currentTarget;
@@ -331,7 +331,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
         </div>
 
         {/* Mobile Header Controls: ONLY Language Switch + Hamburger (Strict Minimalist) */}
-        <div className="flex md:hidden items-center space-x-2">
+        <div className="flex md:hidden items-center space-x-2.5">
           {/* Mobile Language Switch */}
           <div
             onClick={toggleLanguage}
@@ -343,24 +343,24 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
                 toggleLanguage();
               }
             }}
-            className="inline-flex items-center p-0.5 border border-slate-200 bg-slate-100/90 rounded-none cursor-pointer select-none text-[10px] font-mono transition-colors"
+            className="inline-flex items-center p-0.5 border border-slate-200 bg-slate-100 rounded-none cursor-pointer select-none text-xs font-mono transition-colors"
             title={isFrench ? 'Switch to English' : 'Passer en français'}
             aria-label="Toggle language"
           >
             <span
-              className={`px-1.5 py-0.5 transition-all font-semibold ${
+              className={`px-2 py-1 transition-all font-bold ${
                 isFrench
                   ? 'bg-white text-electric shadow-xs'
-                  : 'text-slate-400'
+                  : 'text-slate-500'
               }`}
             >
               FR
             </span>
             <span
-              className={`px-1.5 py-0.5 transition-all font-semibold ${
+              className={`px-2 py-1 transition-all font-bold ${
                 !isFrench
                   ? 'bg-white text-electric shadow-xs'
-                  : 'text-slate-400'
+                  : 'text-slate-500'
               }`}
             >
               EN
@@ -371,29 +371,30 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
           <button
             type="button"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="p-1.5 border border-slate-200 bg-white text-slate-700 hover:text-electric transition-colors focus:outline-none"
+            className="w-10 h-10 flex items-center justify-center border border-slate-200 bg-white text-slate-900 hover:text-electric transition-colors focus:outline-none"
             aria-label={isMobileMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
           >
             {isMobileMenuOpen ? (
-              <X className="w-5 h-5 text-slate-800" />
+              <X className="w-5 h-5 text-slate-900" />
             ) : (
-              <Menu className="w-5 h-5 text-slate-800" />
+              <Menu className="w-5 h-5 text-slate-900" />
             )}
           </button>
         </div>
       </div>
 
-      {/* Mobile Drawer / Overlay Menu */}
+      {/* Mobile Solid Opaque Menu (Zero glass/blur, 4 core links only) */}
       {isMobileMenuOpen && (
         <div
-          className="fixed inset-x-0 top-14 bottom-0 z-50 bg-white/98 backdrop-blur-md md:hidden flex flex-col justify-between p-6 border-t border-slate-200 overflow-y-auto pointer-events-auto"
+          className="fixed inset-x-0 top-16 bottom-0 z-50 bg-white md:hidden flex flex-col p-6 border-t border-slate-200 overflow-y-auto pointer-events-auto"
+          style={{ backgroundColor: '#ffffff' }}
           onClick={() => {
             setIsMobileMenuOpen(false);
             setIsMobileProjectsOpen(false);
           }}
         >
-          <div className="space-y-2 pt-1" onClick={(e) => e.stopPropagation()}>
-            <div className="divide-y divide-slate-100 border-b border-slate-100 font-sans">
+          <div className="space-y-1" onClick={(e) => e.stopPropagation()}>
+            <div className="divide-y divide-slate-200 border-b border-slate-200 font-sans">
               {/* 1. Compétences */}
               <button
                 type="button"
@@ -401,28 +402,28 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
                   handleNavClick('skills');
                   setIsMobileProjectsOpen(false);
                 }}
-                className="w-full text-left py-3.5 text-base font-semibold text-slate-900 hover:text-electric transition-colors flex items-center justify-between"
+                className="w-full text-left py-4 text-lg font-bold text-slate-900 hover:text-electric transition-colors flex items-center justify-between"
               >
                 <span>{t('nav.skills')}</span>
               </button>
 
               {/* 2. Projets (with collapsible list of 4 projects) */}
               <div>
-                <div className="flex items-center justify-between py-3.5">
+                <div className="flex items-center justify-between py-4">
                   <button
                     type="button"
                     onClick={() => {
                       handleNavClick('projects');
                       setIsMobileProjectsOpen(false);
                     }}
-                    className="text-base font-semibold text-slate-900 hover:text-electric transition-colors"
+                    className="text-lg font-bold text-slate-900 hover:text-electric transition-colors"
                   >
                     {t('nav.projects')}
                   </button>
                   <button
                     type="button"
                     onClick={() => setIsMobileProjectsOpen((prev) => !prev)}
-                    className="flex items-center space-x-1 px-2.5 py-1 text-xs font-mono text-slate-500 hover:text-electric transition-colors"
+                    className="flex items-center space-x-1.5 px-3 py-1.5 border border-slate-200 bg-slate-50 text-xs font-mono font-semibold text-slate-700 hover:text-electric transition-colors"
                     aria-label="Toggle projects list"
                   >
                     <span>{projectsList.length}</span>
@@ -435,7 +436,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
                 </div>
 
                 {isMobileProjectsOpen && (
-                  <div className="mb-3 pl-3 space-y-1 border-l border-slate-200">
+                  <div className="mb-4 pl-3 space-y-1.5 border-l-2 border-electric bg-slate-50/70 p-2">
                     {projectsList.map((p) => (
                       <button
                         key={p.slug}
@@ -444,10 +445,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
                           handleProjectSelect(p.slug);
                           setIsMobileProjectsOpen(false);
                         }}
-                        className="w-full text-left py-2 px-2 text-xs font-mono text-slate-600 hover:text-electric transition-colors flex items-center justify-between"
+                        className="w-full text-left py-2.5 px-2 text-xs font-mono font-semibold text-slate-800 hover:text-electric transition-colors flex items-center justify-between"
                       >
                         <span className="truncate pr-2">{p.title}</span>
-                        <span className="text-slate-400 text-[10px] shrink-0">→</span>
+                        <span className="text-electric text-xs shrink-0">→</span>
                       </button>
                     ))}
                   </div>
@@ -461,7 +462,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
                   handleNavClick('about');
                   setIsMobileProjectsOpen(false);
                 }}
-                className="w-full text-left py-3.5 text-base font-semibold text-slate-900 hover:text-electric transition-colors flex items-center justify-between"
+                className="w-full text-left py-4 text-lg font-bold text-slate-900 hover:text-electric transition-colors flex items-center justify-between"
               >
                 <span>{t('nav.about')}</span>
               </button>
@@ -473,38 +474,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
                   handleNavClick('bachelor-pitch');
                   setIsMobileProjectsOpen(false);
                 }}
-                className="w-full text-left py-3.5 text-base font-semibold text-slate-900 hover:text-electric transition-colors flex items-center justify-between"
+                className="w-full text-left py-4 text-lg font-bold text-slate-900 hover:text-electric transition-colors flex items-center justify-between"
               >
                 <span>{t('nav.bachelorPitch')}</span>
-                <span className="text-[10px] font-mono text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5">
+                <span className="text-xs font-mono font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5">
                   2027
                 </span>
               </button>
             </div>
-          </div>
-
-          {/* Bottom Direct Document / Profile Links */}
-          <div
-            className="pt-4 border-t border-slate-100 flex items-center gap-3 text-xs font-mono"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <a
-              href={`${import.meta.env.BASE_URL}${isFrench ? 'CV_Steve_Benjamin.pdf' : 'EnglishSteveBenjaminCV.pdf'}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              download={isFrench ? 'CV_Steve_Benjamin.pdf' : 'EnglishSteveBenjaminCV.pdf'}
-              className="flex-1 text-center py-2.5 border border-slate-200 bg-white text-slate-700 hover:border-electric hover:text-electric font-semibold transition-colors"
-            >
-              CV (PDF) ↗
-            </a>
-            <a
-              href="https://www.linkedin.com/in/sb-steve-benjamin/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex-1 text-center py-2.5 border border-slate-200 bg-white text-slate-700 hover:border-electric hover:text-electric font-semibold transition-colors"
-            >
-              LinkedIn ↗
-            </a>
           </div>
         </div>
       )}

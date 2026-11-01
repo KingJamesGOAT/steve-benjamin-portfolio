@@ -54,16 +54,16 @@ export const Home: React.FC = () => {
       {/* Cinematic Intro Reveal Animation */}
       <IntroAnimation />
 
-      <div className="space-y-16 sm:space-y-28 lg:space-y-40">
+      <div className="space-y-12 sm:space-y-28 lg:space-y-40">
         {/* SECTION 1: HERO VIEWPORT */}
         <section
           id="home"
-          className="min-h-[calc(100vh-6rem)] sm:min-h-[calc(100vh-9.5rem)] flex flex-col justify-between scroll-mt-20 sm:scroll-mt-24"
+          className="min-h-0 sm:min-h-[calc(100vh-9.5rem)] flex flex-col justify-between scroll-mt-20 sm:scroll-mt-24"
         >
           {/* Two-Column FinTech Hero Grid */}
-          <div className="my-auto py-2 sm:py-8 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
+          <div className="my-0 sm:my-auto pt-1 pb-2 sm:py-8 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-16 items-center">
             {/* Left Column: Oversized Typography & CTAs */}
-            <div className="lg:col-span-7 space-y-6 sm:space-y-8">
+            <div className="lg:col-span-7 space-y-5 sm:space-y-8">
               {/* Hero Headline & Subtitle */}
               <div className="space-y-3 sm:space-y-4">
                 {/* Availability Badge */}
@@ -117,7 +117,7 @@ export const Home: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   download={isFrench ? 'CV_Steve_Benjamin.pdf' : 'EnglishSteveBenjaminCV.pdf'}
-                  className="inline-flex items-center justify-center space-x-2 px-4 py-3 rounded-none border border-slate-200 bg-white hover:border-electric hover:text-electric text-slate-700 text-xs font-semibold transition-colors shadow-sm uppercase tracking-wider text-center"
+                  className="hidden sm:inline-flex items-center justify-center space-x-2 px-4 py-3 rounded-none border border-slate-200 bg-white hover:border-electric hover:text-electric text-slate-700 text-xs font-semibold transition-colors shadow-sm uppercase tracking-wider text-center"
                 >
                   <FileDown className="w-3.5 h-3.5 text-electric" />
                   <span>CV (PDF)</span>
@@ -125,8 +125,8 @@ export const Home: React.FC = () => {
               </div>
             </div>
 
-            {/* Right Column: Interactive Developer Telemetry Terminal */}
-            <div className="lg:col-span-5 flex justify-center lg:justify-end">
+            {/* Right Column: Interactive Developer Telemetry Terminal (Desktop only) */}
+            <div className="hidden lg:flex lg:col-span-5 justify-center lg:justify-end">
               <DeveloperHeroCard />
             </div>
           </div>
@@ -273,7 +273,7 @@ export const Home: React.FC = () => {
 
               <Link
                 to="/projects/crypto-trade-hub"
-                className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-none bg-electric hover:bg-electric-hover text-white text-xs font-semibold shadow-sm transition-colors"
+                className="hidden sm:inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-none bg-electric hover:bg-electric-hover text-white text-xs font-semibold shadow-sm transition-colors"
               >
                 <span>{t('projects.viewDeepDive')}</span>
                 <ExternalLink className="w-3.5 h-3.5" />
@@ -338,6 +338,20 @@ export const Home: React.FC = () => {
                 </div>
               </div>
             </div>
+
+            {/* Mobile Consistent Bottom-Right Case Study Footer */}
+            <div className="sm:hidden pt-3 border-t border-slate-100 flex items-center justify-between">
+              <span className="text-[11px] font-mono text-slate-400">
+                React 18 · WebSockets
+              </span>
+              <Link
+                to="/projects/crypto-trade-hub"
+                className="inline-flex items-center space-x-1.5 text-xs font-mono font-semibold text-electric hover:underline"
+              >
+                <span>{t('projects.viewDeepDive')}</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
           </div>
         </div>
 
@@ -365,7 +379,7 @@ export const Home: React.FC = () => {
 
               <Link
                 to="/projects/donnons-ch"
-                className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-none bg-electric hover:bg-electric-hover text-white text-xs font-semibold shadow-sm transition-colors"
+                className="hidden sm:inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-none bg-electric hover:bg-electric-hover text-white text-xs font-semibold shadow-sm transition-colors"
               >
                 <span>{t('projects.viewDeepDive')}</span>
                 <ExternalLink className="w-3.5 h-3.5" />
@@ -428,6 +442,20 @@ export const Home: React.FC = () => {
                   </div>
                 </div>
               </div>
+            </div>
+
+            {/* Mobile Consistent Bottom-Right Case Study Footer */}
+            <div className="sm:hidden pt-3 border-t border-slate-100 flex items-center justify-between">
+              <span className="text-[11px] font-mono text-slate-400">
+                Vue.js 3 · Laravel REST
+              </span>
+              <Link
+                to="/projects/donnons-ch"
+                className="inline-flex items-center space-x-1.5 text-xs font-mono font-semibold text-electric hover:underline"
+              >
+                <span>{t('projects.viewDeepDive')}</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
             </div>
           </div>
         </div>
@@ -540,34 +568,22 @@ export const Home: React.FC = () => {
             </p>
           </div>
 
-          {/* 3 Key Institutional Highlights (Compact pills on mobile, 3 boxes on desktop) */}
-          <div className="flex flex-wrap gap-1.5 sm:hidden font-mono text-[11px]">
-            <span className="px-2.5 py-1 border border-slate-200 bg-slate-50 text-fintech-primary font-semibold">
-              {t('bachelorPitch.conditions.durationTitle')}
-            </span>
-            <span className="px-2.5 py-1 border border-slate-200 bg-slate-50 text-fintech-primary font-semibold">
-              {t('bachelorPitch.conditions.costTitle')}
-            </span>
-            <span className="px-2.5 py-1 border border-slate-200 bg-slate-50 text-fintech-primary font-semibold">
-              {t('bachelorPitch.conditions.confidentialityTitle')}
-            </span>
-          </div>
-
-          <div className="hidden sm:grid sm:grid-cols-3 gap-3 py-1">
-            <div className="p-5 border border-slate-200 bg-slate-50/70 flex items-center justify-center text-center shadow-xs">
-              <span className="text-base font-bold text-fintech-primary tracking-tight">
+          {/* 3 Key Institutional Highlights (3 uniform, aligned blocks on mobile & desktop) */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 py-0.5 sm:py-1">
+            <div className="py-2.5 px-3 sm:p-5 border border-slate-200 bg-slate-50/70 flex items-center justify-center text-center shadow-2xs sm:shadow-xs">
+              <span className="text-xs sm:text-base font-bold font-mono sm:font-sans text-fintech-primary tracking-tight">
                 {t('bachelorPitch.conditions.durationTitle')}
               </span>
             </div>
 
-            <div className="p-5 border border-slate-200 bg-slate-50/70 flex items-center justify-center text-center shadow-xs">
-              <span className="text-base font-bold text-fintech-primary tracking-tight">
+            <div className="py-2.5 px-3 sm:p-5 border border-slate-200 bg-slate-50/70 flex items-center justify-center text-center shadow-2xs sm:shadow-xs">
+              <span className="text-xs sm:text-base font-bold font-mono sm:font-sans text-fintech-primary tracking-tight">
                 {t('bachelorPitch.conditions.costTitle')}
               </span>
             </div>
 
-            <div className="p-5 border border-slate-200 bg-slate-50/70 flex items-center justify-center text-center shadow-xs">
-              <span className="text-base font-bold text-fintech-primary tracking-tight">
+            <div className="py-2.5 px-3 sm:p-5 border border-slate-200 bg-slate-50/70 flex items-center justify-center text-center shadow-2xs sm:shadow-xs">
+              <span className="text-xs sm:text-base font-bold font-mono sm:font-sans text-fintech-primary tracking-tight">
                 {t('bachelorPitch.conditions.confidentialityTitle')}
               </span>
             </div>

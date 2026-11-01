@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
@@ -6,6 +6,7 @@ export const BachelorPitch: React.FC = () => {
   const { t, i18n } = useTranslation();
   const currentLang = i18n.language?.startsWith('fr') ? 'fr' : 'en';
   const isFrench = currentLang === 'fr';
+  const [activeTab, setActiveTab] = useState<0 | 1 | 2>(0);
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
@@ -70,15 +71,37 @@ export const BachelorPitch: React.FC = () => {
         </div>
       </section>
 
+      {/* Mobile Interactive 3-Tab Switcher (keeps mobile clean & interactive) */}
+      <div className="sm:hidden grid grid-cols-3 gap-1.5 font-mono text-[11px]">
+        {[
+          { idx: 0 as const, label: isFrench ? '01 · Cadre' : '01 · Terms' },
+          { idx: 1 as const, label: isFrench ? '02 · Domaines' : '02 · Scope' },
+          { idx: 2 as const, label: isFrench ? '03 · Planning' : '03 · Timeline' },
+        ].map((tab) => (
+          <button
+            key={tab.idx}
+            type="button"
+            onClick={() => setActiveTab(tab.idx)}
+            className={`py-2 px-2 border text-center font-bold transition-colors ${
+              activeTab === tab.idx
+                ? 'bg-slate-900 text-white border-slate-900'
+                : 'bg-white text-slate-600 border-slate-200'
+            }`}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
+
       {/* 01 / Conditions */}
-      <section className="space-y-2 sm:space-y-3">
-        <h2 className="text-sm sm:text-lg font-bold tracking-tight text-fintech-primary">
+      <section className={`space-y-2 sm:space-y-3 ${activeTab === 0 ? 'block' : 'hidden sm:block'}`}>
+        <h2 className="hidden sm:block text-sm sm:text-lg font-bold tracking-tight text-fintech-primary">
           {t('bachelorPitch.conditions.tag')}
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3">
           {/* 01 / Rémunération */}
-          <div className="p-3 sm:p-4 border border-slate-200 bg-white shadow-sm space-y-1 sm:space-y-1.5">
+          <div className="p-3.5 sm:p-4 border border-slate-200 bg-white shadow-sm space-y-1 sm:space-y-1.5">
             <h3 className="text-xs sm:text-sm font-bold text-fintech-primary">
               {t('bachelorPitch.conditions.costTitle')}
             </h3>
@@ -88,7 +111,7 @@ export const BachelorPitch: React.FC = () => {
           </div>
 
           {/* 02 / Encadrement */}
-          <div className="p-3 sm:p-4 border border-slate-200 bg-white shadow-sm space-y-1 sm:space-y-1.5">
+          <div className="p-3.5 sm:p-4 border border-slate-200 bg-white shadow-sm space-y-1 sm:space-y-1.5">
             <h3 className="text-xs sm:text-sm font-bold text-fintech-primary">
               {t('bachelorPitch.conditions.supervisionTitle')}
             </h3>
@@ -98,7 +121,7 @@ export const BachelorPitch: React.FC = () => {
           </div>
 
           {/* 03 / Confidentialité */}
-          <div className="p-3 sm:p-4 border border-slate-200 bg-white shadow-sm space-y-1 sm:space-y-1.5">
+          <div className="p-3.5 sm:p-4 border border-slate-200 bg-white shadow-sm space-y-1 sm:space-y-1.5">
             <h3 className="text-xs sm:text-sm font-bold text-fintech-primary">
               {t('bachelorPitch.conditions.confidentialityTitle')}
             </h3>
@@ -110,13 +133,13 @@ export const BachelorPitch: React.FC = () => {
       </section>
 
       {/* 02 / Deliverables */}
-      <section className="space-y-2 sm:space-y-3">
-        <h2 className="text-sm sm:text-lg font-bold tracking-tight text-fintech-primary">
+      <section className={`space-y-2 sm:space-y-3 ${activeTab === 1 ? 'block' : 'hidden sm:block'}`}>
+        <h2 className="hidden sm:block text-sm sm:text-lg font-bold tracking-tight text-fintech-primary">
           {t('bachelorPitch.scope.tag')}
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3">
-          <div className="p-3 sm:p-4 border border-slate-200 bg-white shadow-sm space-y-1 sm:space-y-1.5">
+          <div className="p-3.5 sm:p-4 border border-slate-200 bg-white shadow-sm space-y-1 sm:space-y-1.5">
             <h3 className="text-xs sm:text-sm font-bold text-fintech-primary">
               {t('bachelorPitch.scope.track1Title')}
             </h3>
@@ -125,7 +148,7 @@ export const BachelorPitch: React.FC = () => {
             </p>
           </div>
 
-          <div className="p-3 sm:p-4 border border-slate-200 bg-white shadow-sm space-y-1 sm:space-y-1.5">
+          <div className="p-3.5 sm:p-4 border border-slate-200 bg-white shadow-sm space-y-1 sm:space-y-1.5">
             <h3 className="text-xs sm:text-sm font-bold text-fintech-primary">
               {t('bachelorPitch.scope.track2Title')}
             </h3>
@@ -134,7 +157,7 @@ export const BachelorPitch: React.FC = () => {
             </p>
           </div>
 
-          <div className="p-3 sm:p-4 border border-slate-200 bg-white shadow-sm space-y-1 sm:space-y-1.5">
+          <div className="p-3.5 sm:p-4 border border-slate-200 bg-white shadow-sm space-y-1 sm:space-y-1.5">
             <h3 className="text-xs sm:text-sm font-bold text-fintech-primary">
               {t('bachelorPitch.scope.track3Title')}
             </h3>
@@ -146,8 +169,8 @@ export const BachelorPitch: React.FC = () => {
       </section>
 
       {/* 03 / Timeline Roadmap */}
-      <section className="space-y-2 sm:space-y-3">
-        <h2 className="text-sm sm:text-lg font-bold tracking-tight text-fintech-primary">
+      <section className={`space-y-2 sm:space-y-3 ${activeTab === 2 ? 'block' : 'hidden sm:block'}`}>
+        <h2 className="hidden sm:block text-sm sm:text-lg font-bold tracking-tight text-fintech-primary">
           {t('bachelorPitch.timeline.tag')}
         </h2>
 

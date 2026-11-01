@@ -5,6 +5,8 @@ interface BentoTile {
   id: string;
   tagEn?: string;
   tagFr?: string;
+  shortEn: string;
+  shortFr: string;
   titleEn: string;
   titleFr: string;
   descEn: string;
@@ -71,6 +73,7 @@ const BentoTileCard: React.FC<{ tile: BentoTile; isFrench: boolean }> = ({ tile,
 export const TechBentoGrid: React.FC = () => {
   const { i18n } = useTranslation();
   const isFrench = Boolean(i18n.language?.startsWith('fr'));
+  const [selectedMobileId, setSelectedMobileId] = useState<string>('frontend');
 
   const tiles: BentoTile[] = [
     // PILLAR 1: FRONTEND
@@ -78,6 +81,8 @@ export const TechBentoGrid: React.FC = () => {
       id: 'frontend',
       tagEn: 'React 18 // TypeScript',
       tagFr: 'React 18 // TypeScript',
+      shortEn: 'Frontend',
+      shortFr: 'Frontend',
       titleEn: 'Frontend Architecture',
       titleFr: 'Architecture Frontend',
       descEn: 'Modular, type-safe web applications with ultra-responsive rendering.',
@@ -120,6 +125,8 @@ export const TechBentoGrid: React.FC = () => {
       id: 'ui-ux',
       tagEn: 'Figma // Design Systems',
       tagFr: 'Figma // Design Systems',
+      shortEn: 'UI/UX Design',
+      shortFr: 'Design UI/UX',
       titleEn: 'UI/UX & Product Design',
       titleFr: 'Design UI/UX & Produit',
       descEn: 'Interactive prototypes, user ergonomics, and WCAG design systems.',
@@ -140,6 +147,8 @@ export const TechBentoGrid: React.FC = () => {
       id: 'marketing-analytics',
       tagEn: 'SEO // Growth Analytics',
       tagFr: 'SEO // Analyse de Données',
+      shortEn: 'Marketing & SEO',
+      shortFr: 'Marketing & SEO',
       titleEn: 'Digital Marketing & Analytics',
       titleFr: 'Marketing Digital & Analytics',
       descEn: 'Search engine optimization, Google Analytics 4, and user acquisition funnels.',
@@ -160,6 +169,8 @@ export const TechBentoGrid: React.FC = () => {
       id: 'dataviz-telemetry',
       tagEn: 'D3.js // WebSockets',
       tagFr: 'D3.js // WebSockets',
+      shortEn: 'Data & Streams',
+      shortFr: 'Données & Flux',
       titleEn: 'Data Visualization & Telemetry',
       titleFr: 'Visualisation de Données & Flux',
       descEn: 'High-density financial charts, real-time WebSocket feeds, and dashboards.',
@@ -179,6 +190,8 @@ export const TechBentoGrid: React.FC = () => {
       id: 'api-architecture',
       tagEn: 'REST // OpenAPI',
       tagFr: 'REST // OpenAPI',
+      shortEn: 'API & Backend',
+      shortFr: 'API & Backend',
       titleEn: 'API Architecture & Services',
       titleFr: 'Architecture API & Services',
       descEn: 'Typed API contracts, resilient HTTP pipelines, and database modeling.',
@@ -199,6 +212,8 @@ export const TechBentoGrid: React.FC = () => {
       id: 'embedded-c',
       tagEn: 'C99 // ARM Cortex',
       tagFr: 'C99 // ARM Cortex',
+      shortEn: 'Embedded & C',
+      shortFr: 'Embarqué & C',
       titleEn: 'Embedded Systems & C',
       titleFr: 'Systèmes Embarqués & C',
       descEn: 'Low-level firmware, DMA registers, and SPI/UART communication protocols.',
@@ -227,22 +242,80 @@ export const TechBentoGrid: React.FC = () => {
     },
   ];
 
+  const activeMobileTile = tiles.find((t) => t.id === selectedMobileId) || tiles[0];
+
   return (
-    <div className="space-y-2 pt-3 border-t border-slate-100">
+    <div className="space-y-2.5 pt-3 border-t border-slate-100">
       {/* Clean Skills Header */}
-      <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 pb-0.5">
+      <div className="flex items-baseline justify-between gap-1 pb-0.5">
         <h2 className="text-lg sm:text-xl font-bold tracking-tight text-fintech-primary">
           {isFrench ? 'Compétences Techniques' : 'Technical Skills'}
         </h2>
-        <span className="text-[11px] font-mono text-slate-500">
-          {isFrench
-            ? 'Survolez pour en savoir plus'
-            : 'Hover to view details'}
+        <span className="hidden sm:inline text-[11px] font-mono text-slate-500">
+          {isFrench ? 'Survolez pour en savoir plus' : 'Hover to view details'}
+        </span>
+        <span className="sm:hidden text-[10px] font-mono text-slate-400">
+          {isFrench ? 'Touchez un domaine' : 'Tap a domain'}
         </span>
       </div>
 
-      {/* Balanced 6-Pillar Grid (3 cols desktop, 2 cols tablet, 1 col mobile) */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-3 select-none">
+      {/* MOBILE ONLY: Option A — Compact 2x3 Grid + Live Inspector Box */}
+      <div className="sm:hidden space-y-2 select-none">
+        <div className="grid grid-cols-2 gap-1.5">
+          {tiles.map((tile) => {
+            const isActive = tile.id === activeMobileTile.id;
+            return (
+              <button
+                key={tile.id}
+                type="button"
+                onClick={() => setSelectedMobileId(tile.id)}
+                className={`px-3 py-2.5 text-left font-mono text-xs font-bold border transition-all flex items-center justify-between ${
+                  isActive
+                    ? 'bg-electric text-white border-electric shadow-xs'
+                    : 'bg-[#0A0D14] text-slate-200 border-slate-800'
+                }`}
+              >
+                <span className="truncate">{isFrench ? tile.shortFr : tile.shortEn}</span>
+                <span
+                  className={`w-1.5 h-1.5 rounded-full shrink-0 ml-1.5 ${
+                    isActive ? 'bg-white' : 'bg-slate-600'
+                  }`}
+                />
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Live Inspector Box for the Selected Skill */}
+        <div className="bg-[#0A0D14] border border-slate-800 p-3.5 space-y-2 text-white">
+          <div className="flex items-center justify-between gap-2 border-b border-slate-800/80 pb-2">
+            <h3 className="text-xs font-bold font-mono text-white">
+              {isFrench ? activeMobileTile.titleFr : activeMobileTile.titleEn}
+            </h3>
+            <span className="text-[10px] font-mono text-blue-400 shrink-0">
+              {activeMobileTile.tools[0]}
+            </span>
+          </div>
+
+          <p className="text-xs text-slate-300 font-sans leading-relaxed">
+            {isFrench ? activeMobileTile.descFr : activeMobileTile.descEn}
+          </p>
+
+          <div className="flex flex-wrap gap-1.5 pt-0.5">
+            {activeMobileTile.tools.map((tool) => (
+              <span
+                key={tool}
+                className="px-2 py-0.5 text-[10px] font-mono bg-slate-900 text-blue-200 border border-slate-800"
+              >
+                {tool}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* TABLET & DESKTOP: Balanced 6-Pillar 3D Flip Grid */}
+      <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-3 select-none">
         {tiles.map((tile) => (
           <BentoTileCard key={tile.id} tile={tile} isFrench={isFrench} />
         ))}
