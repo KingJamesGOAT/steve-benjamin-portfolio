@@ -80,6 +80,18 @@ export const About: React.FC<AboutProps> = ({ id = 'about' }) => {
       ],
     },
     {
+      group: t('about.certifications.groupFintech'),
+      items: [
+        {
+          period: t('about.certifications.dukeDefi.period'),
+          title: t('about.certifications.dukeDefi.title'),
+          issuer: t('about.certifications.dukeDefi.issuer'),
+          description: t('about.certifications.dukeDefi.description'),
+          link: 'https://www.coursera.org/account/accomplishments/specialization/certificate/Z0YWQ005UI0C',
+        },
+      ],
+    },
+    {
       group: t('about.certifications.groupLeadership'),
       items: [
         {

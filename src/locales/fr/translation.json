@@ -286,6 +286,7 @@
     "certifications": {
       "verify": "Vérifier",
       "groupAiDev": "IA & Développement",
+      "groupFintech": "FinTech & Blockchain",
       "groupLeadership": "Leadership",
       "claudeApi": {
         "title": "Building with the Claude API",
@@ -298,6 +299,12 @@
         "issuer": "Anthropic · Claude Academy",
         "period": "Oct. 2026",
         "description": "Développement logiciel assisté par un agent IA."
+      },
+      "dukeDefi": {
+        "title": "Decentralized Finance (DeFi): The Future of Finance",
+        "issuer": "Duke University",
+        "period": "Nov. 2026",
+        "description": "Spécialisation couvrant l'infrastructure DeFi, la tokenisation d'actifs, les protocoles de liquidité et la conformité réglementaire."
       },
       "nationBuilding": {
         "title": "Nation Building through Leadership Excellence",
