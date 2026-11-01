@@ -57,7 +57,7 @@ export const DonnonsDetailShowcase: React.FC = () => {
         </div>
 
         {/* Playable Cosmic Quiz Screen */}
-        <div className="border-2 border-black shadow-[6px_6px_0px_0px_#000] bg-[#241838] text-white p-6 sm:p-10 relative overflow-hidden">
+        <div className="border-2 border-black shadow-[3px_3px_0px_0px_#000] sm:shadow-[6px_6px_0px_0px_#000] bg-[#241838] text-white p-3.5 sm:p-8 relative overflow-hidden">
           {/* Authentic Space Background from sixieme_sens-main */}
           <div className="absolute inset-0 opacity-50 pointer-events-none">
             <img
@@ -70,9 +70,9 @@ export const DonnonsDetailShowcase: React.FC = () => {
             />
           </div>
 
-          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
             {/* Left: The Authentic QuizzCobrand Question Box (#463b78) */}
-            <div className="lg:col-span-7 bg-[#463b78] border-2 border-black p-6 sm:p-8 shadow-[6px_6px_0px_0px_#000] text-[#fffbf1] space-y-5">
+            <div className="lg:col-span-7 bg-[#463b78] border-2 border-black p-4 sm:p-8 shadow-[3px_3px_0px_0px_#000] sm:shadow-[6px_6px_0px_0px_#000] text-[#fffbf1] space-y-4 sm:space-y-5">
               <div className="flex items-center justify-between text-xs font-mono border-b border-black/30 pb-3">
                 <span className="px-3 py-1 bg-[#322947] border-2 border-black text-white font-bold shadow-[2px_2px_0px_0px_#000]">
                   QUESTION 06 / 12
@@ -204,7 +204,7 @@ export const DonnonsDetailShowcase: React.FC = () => {
         </div>
 
         {/* Real Admin Dashboard UI from DashboardAdmin.vue */}
-        <div className="border-2 border-black shadow-[4px_4px_0px_0px_#000] bg-white text-slate-900 p-6 sm:p-8 space-y-6">
+        <div className="border-2 border-black shadow-[3px_3px_0px_0px_#000] sm:shadow-[4px_4px_0px_0px_#000] bg-white text-slate-900 p-3.5 sm:p-8 space-y-5 sm:space-y-6">
           {/* Warning Banner: Collectes à clore */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-[#ff9166] border-2 border-black p-3.5 shadow-[3px_3px_0px_0px_#000]">
             <div className="flex items-center space-x-2 font-mono font-bold text-xs sm:text-sm text-slate-950">
@@ -384,7 +384,7 @@ export const DonnonsDetailShowcase: React.FC = () => {
         </div>
 
         {/* Real Trophies Grid UI from TropheesVitrine.vue */}
-        <div className="border-2 border-black shadow-[4px_4px_0px_0px_#000] bg-[#fffbf1] p-6 sm:p-8 space-y-6">
+        <div className="border-2 border-black shadow-[3px_3px_0px_0px_#000] sm:shadow-[4px_4px_0px_0px_#000] bg-[#fffbf1] p-3.5 sm:p-8 space-y-5 sm:space-y-6">
           {/* Top Filter Buttons */}
           <div className="flex flex-wrap items-center justify-between gap-3 border-b-2 border-black pb-4">
             <div className="flex items-center space-x-2 text-xs font-mono">

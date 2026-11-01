@@ -177,7 +177,7 @@ export const MarriageDetailShowcase: React.FC = () => {
         {/* Two-Column Wedding Interface Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
           {/* Left: Authentic Wedding Card Form */}
-          <div className="lg:col-span-7 bg-[#FAF8F5] border border-stone-200 p-6 sm:p-7 shadow-sm space-y-6">
+          <div className="lg:col-span-7 bg-[#FAF8F5] border border-stone-200 p-3.5 sm:p-7 shadow-sm space-y-5 sm:space-y-6">
             {/* Wedding Stationery Card Header */}
             <div className="text-center space-y-1 pb-4 border-b border-stone-200/80">
               <span className="text-[10px] font-mono tracking-widest text-stone-500 uppercase">

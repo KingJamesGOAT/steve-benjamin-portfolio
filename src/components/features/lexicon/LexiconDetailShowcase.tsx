@@ -322,7 +322,7 @@ export const LexiconDetailShowcase: React.FC = () => {
         </div>
 
         {/* The Obsidian Search Terminal Card */}
-        <div className="bg-[#05050a] border border-white/10 shadow-2xl p-6 sm:p-8 space-y-6 relative overflow-hidden">
+        <div className="bg-[#05050a] border border-white/10 shadow-2xl p-3.5 sm:p-8 space-y-4 sm:space-y-6 relative overflow-hidden">
           {/* Ambient Subtle Glow */}
           <div className="absolute top-0 right-1/4 w-96 h-48 bg-blue-600/5 blur-3xl pointer-events-none" />
 

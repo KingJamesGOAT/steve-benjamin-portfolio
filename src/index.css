@@ -88,8 +88,10 @@
     transform: rotateX(0deg);
   }
 
-  .group:hover .group-hover-rotate-x-180 {
-    transform: rotateX(180deg);
+  @media (hover: hover) and (pointer: fine) {
+    .group:hover .group-hover-rotate-x-180 {
+      transform: rotateX(180deg);
+    }
   }
 
   /* Infinite Marquee with hover slowdown */

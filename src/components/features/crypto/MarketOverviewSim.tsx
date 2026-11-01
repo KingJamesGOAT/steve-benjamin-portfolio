@@ -367,7 +367,7 @@ export const MarketOverviewSim: React.FC = () => {
     : '';
 
   return (
-    <div className="bg-[#0B0E14] border border-[#1E2638] rounded-none p-4 sm:p-6 space-y-6 text-slate-200 font-sans shadow-2xl">
+    <div className="bg-[#0B0E14] border border-[#1E2638] rounded-none p-3 sm:p-6 space-y-4 sm:space-y-6 text-slate-200 font-sans shadow-2xl">
       {/* Simulation Header */}
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#1E2638] pb-4">
         <div className="flex items-center space-x-2.5">

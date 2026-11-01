@@ -20,7 +20,7 @@ const BentoTileCard: React.FC<{ tile: BentoTile; isFrench: boolean }> = ({ tile,
     <div
       onClick={() => setFlipped((prev) => !prev)}
       onMouseLeave={() => setFlipped(false)}
-      className="group h-32 sm:h-36 md:h-40 perspective-1000 select-none cursor-pointer"
+      className="group h-32 sm:h-36 md:h-40 perspective-1000 select-none cursor-pointer touch-manipulation"
     >
       <div
         className={`relative w-full h-full transition-transform duration-500 ease-in-out preserve-3d will-change-transform group-hover-rotate-x-180 ${
@@ -29,8 +29,8 @@ const BentoTileCard: React.FC<{ tile: BentoTile; isFrench: boolean }> = ({ tile,
       >
         {/* 1. FRONT FACE (DEFAULT) */}
         <div className="absolute inset-0 w-full h-full backface-hidden border border-slate-800 bg-[#0A0D14] overflow-hidden select-none transition-all duration-300 group-hover:border-blue-500/50 group-hover:shadow-[0_0_20px_rgba(0,82,255,0.18)]">
-          {/* FAINT BACKGROUND WATERMARK CODE */}
-          <div className="absolute inset-0 p-2 sm:p-3 font-mono text-[9px] sm:text-[10px] leading-relaxed text-slate-300 opacity-10 pointer-events-none overflow-hidden select-none">
+          {/* FAINT BACKGROUND WATERMARK CODE (Desktop only) */}
+          <div className="hidden sm:block absolute inset-0 p-2 sm:p-3 font-mono text-[9px] sm:text-[10px] leading-relaxed text-slate-300 opacity-10 pointer-events-none overflow-hidden select-none">
             {tile.codeSnippet}
           </div>
 
@@ -59,6 +59,9 @@ const BentoTileCard: React.FC<{ tile: BentoTile; isFrench: boolean }> = ({ tile,
           <p className="text-xs sm:text-sm text-white font-mono font-medium leading-relaxed max-w-[95%] select-text">
             {isFrench ? tile.descFr : tile.descEn}
           </p>
+          <span className="text-[10px] text-blue-200/80 font-mono mt-1 sm:hidden">
+            ({isFrench ? 'toucher pour refermer' : 'tap to flip back'})
+          </span>
         </div>
       </div>
     </div>

@@ -149,7 +149,7 @@ export const PaperTradingSim: React.FC = () => {
   }, [selectedAudit, selectedScout]);
 
   return (
-    <div className="bg-[#0B0E14] border border-[#1E2638] rounded-none p-4 sm:p-6 space-y-6 text-slate-200 font-sans shadow-2xl relative">
+    <div className="bg-[#0B0E14] border border-[#1E2638] rounded-none p-3 sm:p-6 space-y-4 sm:space-y-6 text-slate-200 font-sans shadow-2xl relative">
       {/* 1. System Status Header Bar */}
       <div className="border-b border-[#1E2638] pb-4">
         <div className="flex flex-wrap items-center justify-between gap-3">

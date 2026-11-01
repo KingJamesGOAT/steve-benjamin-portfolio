@@ -359,128 +359,130 @@ export const CryptoWidgetSim: React.FC = () => {
               </g>
             )}
 
-            {/* Distinct Event Pins on dedicated top rail (y = 22) with generous hover targets */}
-            {NEWS_CATALYSTS.map((item) => {
-              const candle = CANDLE_DATA[item.index];
-              const x = (item.index / (CANDLE_DATA.length - 1)) * (svgWidth - 90) + 70;
-              const candleTopY = getY(candle.high);
-              const pinY = 22;
-              const isHovered = hoveredNewsId === item.id;
-              const tooltipWidth = 240;
-              const tooltipHeight = 55;
-              const tooltipX = Math.max(70, Math.min(svgWidth - tooltipWidth - 20, x - tooltipWidth / 2));
-              const tooltipY = 38;
+            {/* Distinct Event Pins on dedicated top rail (y = 22) - Desktop only to prevent squished SVG icons on mobile */}
+            <g className="hidden sm:block">
+              {NEWS_CATALYSTS.map((item) => {
+                const candle = CANDLE_DATA[item.index];
+                const x = (item.index / (CANDLE_DATA.length - 1)) * (svgWidth - 90) + 70;
+                const candleTopY = getY(candle.high);
+                const pinY = 22;
+                const isHovered = hoveredNewsId === item.id;
+                const tooltipWidth = 240;
+                const tooltipHeight = 55;
+                const tooltipX = Math.max(70, Math.min(svgWidth - tooltipWidth - 20, x - tooltipWidth / 2));
+                const tooltipY = 38;
 
-              return (
-                <g
-                  key={`news-marker-${item.id}`}
-                  className="cursor-pointer"
-                  onMouseEnter={(e) => {
-                    e.stopPropagation();
-                    setHoveredNewsId(item.id);
-                    setHoveredIndex(null);
-                  }}
-                  onMouseMove={(e) => {
-                    e.stopPropagation();
-                  }}
-                  onMouseLeave={() => {
-                    setHoveredNewsId(null);
-                  }}
-                >
-                  {/* Subtle vertical dashed anchor line down to candle top */}
-                  <line
-                    x1={x}
-                    y1={pinY + 10}
-                    x2={x}
-                    y2={candleTopY}
-                    stroke={item.accentColor}
-                    strokeWidth="1.2"
-                    strokeDasharray="2.5 2"
-                    opacity={isHovered ? 0.95 : 0.45}
-                  />
-
-                  {/* Generous invisible hit target to prevent any mouse-out jitter (36px hitbox) */}
-                  <circle
-                    cx={x}
-                    cy={pinY}
-                    r="18"
-                    fill="transparent"
-                  />
-
-                  {/* Pulsing subtle outer ring */}
-                  <circle
-                    cx={x}
-                    cy={pinY}
-                    r={isHovered ? 12 : 10.5}
-                    fill="none"
-                    stroke={item.accentColor}
-                    strokeWidth="1"
-                    opacity={isHovered ? 0.9 : 0.4}
-                    className={isHovered ? '' : 'animate-ping'}
-                    style={{ transformOrigin: `${x}px ${pinY}px`, animationDuration: '3.5s' }}
-                  />
-
-                  {/* Core interactive round badge */}
-                  <circle
-                    cx={x}
-                    cy={pinY}
-                    r={isHovered ? 9.5 : 8.5}
-                    fill="#080D1A"
-                    stroke={item.accentColor}
-                    strokeWidth={isHovered ? 2 : 1.5}
-                    className="transition-all duration-150"
-                  />
-
-                  {/* Inner Icon / Symbol */}
-                  <text
-                    x={x}
-                    y={pinY + 3.5}
-                    textAnchor="middle"
-                    fill={item.accentColor}
-                    fontSize={item.symbol === 'Ð' ? 10.5 : 9}
-                    fontFamily="monospace"
-                    fontWeight="bold"
-                    className="select-none pointer-events-none"
+                return (
+                  <g
+                    key={`news-marker-${item.id}`}
+                    className="cursor-pointer"
+                    onMouseEnter={(e) => {
+                      e.stopPropagation();
+                      setHoveredNewsId(item.id);
+                      setHoveredIndex(null);
+                    }}
+                    onMouseMove={(e) => {
+                      e.stopPropagation();
+                    }}
+                    onMouseLeave={() => {
+                      setHoveredNewsId(null);
+                    }}
                   >
-                    {item.symbol}
-                  </text>
+                    {/* Subtle vertical dashed anchor line down to candle top */}
+                    <line
+                      x1={x}
+                      y1={pinY + 10}
+                      x2={x}
+                      y2={candleTopY}
+                      stroke={item.accentColor}
+                      strokeWidth="1.2"
+                      strokeDasharray="2.5 2"
+                      opacity={isHovered ? 0.95 : 0.45}
+                    />
 
-                  {/* News Catalyst Floating Tooltip (seamlessly nested in the same group) */}
-                  {isHovered && (
-                    <g transform={`translate(${tooltipX}, ${tooltipY})`} className="pointer-events-none">
-                      {/* Drop shadow background */}
-                      <rect
-                        x="0"
-                        y="0"
-                        width={tooltipWidth}
-                        height={tooltipHeight}
-                        fill="#060911"
-                        stroke={item.accentColor}
-                        strokeWidth="1.4"
-                        className="filter drop-shadow-[0_12px_28px_rgba(0,0,0,0.95)]"
-                      />
-                      {/* Left colored accent bar */}
-                      <rect x="0" y="0" width="3.5" height={tooltipHeight} fill={item.accentColor} />
+                    {/* Generous invisible hit target to prevent any mouse-out jitter (36px hitbox) */}
+                    <circle
+                      cx={x}
+                      cy={pinY}
+                      r="18"
+                      fill="transparent"
+                    />
 
-                      {/* Header Tag */}
-                      <text x="12" y="15" fill={item.accentColor} fontSize="8.5" fontFamily="monospace" fontWeight="bold">
-                        {item.symbol} · {isFrench ? item.tagFr : item.tagEn}
-                      </text>
+                    {/* Pulsing subtle outer ring */}
+                    <circle
+                      cx={x}
+                      cy={pinY}
+                      r={isHovered ? 12 : 10.5}
+                      fill="none"
+                      stroke={item.accentColor}
+                      strokeWidth="1"
+                      opacity={isHovered ? 0.9 : 0.4}
+                      className={isHovered ? '' : 'animate-ping'}
+                      style={{ transformOrigin: `${x}px ${pinY}px`, animationDuration: '3.5s' }}
+                    />
 
-                      {/* Line 1 (Headline) */}
-                      <text x="12" y="30" fill="#F8FAFC" fontSize="10" fontFamily="sans-serif" fontWeight="600">
-                        {isFrench ? item.line1Fr : item.line1En}
-                      </text>
+                    {/* Core interactive round badge */}
+                    <circle
+                      cx={x}
+                      cy={pinY}
+                      r={isHovered ? 9.5 : 8.5}
+                      fill="#080D1A"
+                      stroke={item.accentColor}
+                      strokeWidth={isHovered ? 2 : 1.5}
+                      className="transition-all duration-150"
+                    />
 
-                      {/* Line 2 (Detail) */}
-                      <text x="12" y="44" fill="#94A3B8" fontSize="9" fontFamily="sans-serif">
-                        {isFrench ? item.line2Fr : item.line2En}
-                      </text>
-                    </g>
-                  )}
-                </g>
-              );
-            })}
+                    {/* Inner Icon / Symbol */}
+                    <text
+                      x={x}
+                      y={pinY + 3.5}
+                      textAnchor="middle"
+                      fill={item.accentColor}
+                      fontSize={item.symbol === 'Ð' ? 10.5 : 9}
+                      fontFamily="monospace"
+                      fontWeight="bold"
+                      className="select-none pointer-events-none"
+                    >
+                      {item.symbol}
+                    </text>
+
+                    {/* News Catalyst Floating Tooltip (seamlessly nested in the same group) */}
+                    {isHovered && (
+                      <g transform={`translate(${tooltipX}, ${tooltipY})`} className="pointer-events-none">
+                        {/* Drop shadow background */}
+                        <rect
+                          x="0"
+                          y="0"
+                          width={tooltipWidth}
+                          height={tooltipHeight}
+                          fill="#060911"
+                          stroke={item.accentColor}
+                          strokeWidth="1.4"
+                          className="filter drop-shadow-[0_12px_28px_rgba(0,0,0,0.95)]"
+                        />
+                        {/* Left colored accent bar */}
+                        <rect x="0" y="0" width="3.5" height={tooltipHeight} fill={item.accentColor} />
+
+                        {/* Header Tag */}
+                        <text x="12" y="15" fill={item.accentColor} fontSize="8.5" fontFamily="monospace" fontWeight="bold">
+                          {item.symbol} · {isFrench ? item.tagFr : item.tagEn}
+                        </text>
+
+                        {/* Line 1 (Headline) */}
+                        <text x="12" y="30" fill="#F8FAFC" fontSize="10" fontFamily="sans-serif" fontWeight="600">
+                          {isFrench ? item.line1Fr : item.line1En}
+                        </text>
+
+                        {/* Line 2 (Detail) */}
+                        <text x="12" y="44" fill="#94A3B8" fontSize="9" fontFamily="sans-serif">
+                          {isFrench ? item.line2Fr : item.line2En}
+                        </text>
+                      </g>
+                    )}
+                  </g>
+                );
+              })}
+            </g>
 
             {/* Dynamic Interactive Crosshair and Price Tooltip (only when not hovering news marker) */}
             {hoveredIndex !== null && activePt && hoveredNewsId === null && (
@@ -602,6 +604,27 @@ export const CryptoWidgetSim: React.FC = () => {
               );
             })}
           </svg>
+        </div>
+      </div>
+
+      {/* 2b. Clean Mobile News Catalysts (Replaces squished SVG markers on mobile) */}
+      <div className="sm:hidden px-3 py-2 bg-[#0C101A] border-t border-[#1E2638] space-y-1.5 text-[11px] font-mono">
+        <div className="flex items-center justify-between text-[10px] text-slate-400 font-bold uppercase tracking-wider">
+          <span>{isFrench ? 'Événements Clés' : 'Key Catalysts'}</span>
+          <span className="text-sky-400 text-[9px]">// 15m Feed</span>
+        </div>
+        <div className="space-y-1">
+          {NEWS_CATALYSTS.map((cat) => (
+            <div key={cat.id} className="flex items-center justify-between text-slate-300 py-0.5">
+              <span className="flex items-center gap-1.5 truncate">
+                <span className="font-bold text-[9px] px-1 py-0.5 bg-[#161F30] border border-[#273756]" style={{ color: cat.accentColor }}>
+                  {cat.badge}
+                </span>
+                <span className="text-slate-300 truncate text-[11px] font-sans">{isFrench ? cat.line1Fr : cat.line1En}</span>
+              </span>
+              <span className="text-slate-500 text-[10px] shrink-0 ml-2 font-mono">{cat.time}</span>
+            </div>
+          ))}
         </div>
       </div>
 

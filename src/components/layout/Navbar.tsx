@@ -15,6 +15,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
   const [activeSection, setActiveSection] = useState<string>('');
   const [isProjectsOpen, setIsProjectsOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileProjectsOpen, setIsMobileProjectsOpen] = useState(false);
   const dropdownTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const isFrench = Boolean(i18n.language?.toLowerCase().startsWith('fr'));
@@ -386,54 +387,127 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
       {isMobileMenuOpen && (
         <div
           className="fixed inset-x-0 top-14 bottom-0 z-50 bg-white/95 backdrop-blur-md md:hidden flex flex-col justify-between p-5 border-t border-slate-200 overflow-y-auto pointer-events-auto"
-          onClick={() => setIsMobileMenuOpen(false)}
+          onClick={() => {
+            setIsMobileMenuOpen(false);
+            setIsMobileProjectsOpen(false);
+          }}
         >
-          <div className="space-y-6 pt-1" onClick={(e) => e.stopPropagation()}>
-            {/* Direct Projects Quick Access */}
-            <div className="space-y-2">
-              <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400 font-bold block">
-                {isFrench ? 'PROJETS SÉLECTIONNÉS' : 'FEATURED PROJECTS'}
-              </span>
-              <div className="space-y-1">
-                {projectsList.map((p) => (
+          <div className="space-y-4 pt-1" onClick={(e) => e.stopPropagation()}>
+            <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400 font-bold block">
+              {isFrench ? 'NAVIGATION' : 'NAVIGATION'}
+            </span>
+
+            <div className="divide-y divide-slate-100 border-t border-b border-slate-100 font-sans">
+              {/* 1. Compétences Techniques */}
+              <button
+                type="button"
+                onClick={() => {
+                  handleNavClick('skills');
+                  setIsMobileProjectsOpen(false);
+                }}
+                className="w-full text-left py-3 px-1 text-sm font-semibold text-slate-800 hover:text-electric transition-colors flex items-center justify-between"
+              >
+                <span>{t('nav.skills')}</span>
+                <span className="text-[10px] font-mono text-slate-400">#skills</span>
+              </button>
+
+              {/* 2. Projets (with collapsible list of 4 projects) */}
+              <div className="py-1">
+                <div className="flex items-center justify-between py-2 px-1">
                   <button
-                    key={p.slug}
                     type="button"
-                    onClick={() => handleProjectSelect(p.slug)}
-                    className="w-full text-left py-2.5 px-3 border border-slate-200 bg-white hover:border-electric text-xs font-mono font-medium text-slate-800 hover:text-electric transition-colors flex items-center justify-between"
+                    onClick={() => {
+                      handleNavClick('projects');
+                      setIsMobileProjectsOpen(false);
+                    }}
+                    className="text-sm font-semibold text-slate-800 hover:text-electric transition-colors"
                   >
-                    <span>{p.title}</span>
-                    <span className="text-electric text-xs">→</span>
+                    {t('nav.projects')}
                   </button>
-                ))}
+                  <button
+                    type="button"
+                    onClick={() => setIsMobileProjectsOpen((prev) => !prev)}
+                    className="flex items-center space-x-1.5 px-2 py-1 text-xs font-mono text-slate-600 hover:text-electric border border-slate-200 bg-slate-50 transition-colors"
+                    aria-label="Toggle projects list"
+                  >
+                    <span>{projectsList.length} {isFrench ? 'projets' : 'projects'}</span>
+                    <ChevronDown
+                      className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                        isMobileProjectsOpen ? 'rotate-180 text-electric' : ''
+                      }`}
+                    />
+                  </button>
+                </div>
+
+                {isMobileProjectsOpen && (
+                  <div className="mt-1 mb-2 pl-2 space-y-1 animate-in fade-in duration-150 border-l-2 border-electric/40">
+                    {projectsList.map((p) => (
+                      <button
+                        key={p.slug}
+                        type="button"
+                        onClick={() => {
+                          handleProjectSelect(p.slug);
+                          setIsMobileProjectsOpen(false);
+                        }}
+                        className="w-full text-left py-2 px-2.5 text-xs font-mono font-medium text-slate-700 hover:text-electric hover:bg-slate-50 transition-colors flex items-center justify-between"
+                      >
+                        <span className="truncate pr-2">{p.title}</span>
+                        <span className="text-electric text-[10px] shrink-0">→</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
+
+              {/* 3. À Propos */}
+              <button
+                type="button"
+                onClick={() => {
+                  handleNavClick('about');
+                  setIsMobileProjectsOpen(false);
+                }}
+                className="w-full text-left py-3 px-1 text-sm font-semibold text-slate-800 hover:text-electric transition-colors flex items-center justify-between"
+              >
+                <span>{t('nav.about')}</span>
+                <span className="text-[10px] font-mono text-slate-400">#about</span>
+              </button>
+
+              {/* 4. Pitch Bachelor */}
+              <button
+                type="button"
+                onClick={() => {
+                  handleNavClick('bachelor-pitch');
+                  setIsMobileProjectsOpen(false);
+                }}
+                className="w-full text-left py-3 px-1 text-sm font-semibold text-slate-800 hover:text-electric transition-colors flex items-center justify-between"
+              >
+                <span>{t('nav.bachelorPitch')}</span>
+                <span className="text-[10px] font-mono text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5">
+                  2027
+                </span>
+              </button>
             </div>
 
-            {/* Core Section Links */}
-            <div className="space-y-2 pt-2 border-t border-slate-100">
-              <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400 font-bold block">
-                {isFrench ? 'SECTIONS' : 'NAVIGATION'}
-              </span>
-              <div className="space-y-1 font-sans">
-                <button
-                  type="button"
-                  onClick={() => handleNavClick('about')}
-                  className="w-full text-left py-2 px-2 text-sm font-semibold text-slate-800 hover:text-electric transition-colors"
-                >
-                  {t('nav.about')}
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleNavClick('bachelor-pitch')}
-                  className="w-full text-left py-2 px-2 text-sm font-semibold text-slate-800 hover:text-electric transition-colors flex items-center justify-between"
-                >
-                  <span>{t('nav.bachelorPitch')}</span>
-                  <span className="text-[10px] font-mono text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5">
-                    2027
-                  </span>
-                </button>
-              </div>
-            </div>
+            {/* Quick Command Palette Trigger on mobile */}
+            {onOpenCommandPalette && (
+              <button
+                type="button"
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  setIsMobileProjectsOpen(false);
+                  onOpenCommandPalette();
+                }}
+                className="w-full py-2.5 px-3 border border-slate-200 bg-slate-50 text-slate-600 hover:text-electric hover:border-electric transition-colors text-xs font-mono flex items-center justify-between"
+              >
+                <div className="flex items-center space-x-2">
+                  <Search className="w-3.5 h-3.5 text-slate-400" />
+                  <span>{isFrench ? 'Rechercher un terme' : 'Search Glossary'}</span>
+                </div>
+                <span className="text-[10px] px-1.5 py-0.5 bg-white border border-slate-200 text-slate-500 font-semibold">
+                  Ctrl K
+                </span>
+              </button>
+            )}
           </div>
 
           {/* Bottom Direct Document / Profile Links */}
