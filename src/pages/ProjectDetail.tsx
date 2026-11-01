@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ArrowLeft } from 'lucide-react';
@@ -25,8 +25,10 @@ export const ProjectDetail: React.FC = () => {
   const isDonnons = projectId === 'donnons-ch';
   const isLexicon = projectId === 'catholic-route';
   const isMarriage = projectId === 'marriage-platform';
+  const [activeCryptoTab, setActiveCryptoTab] = useState<0 | 1 | 2>(0);
 
   useEffect(() => {
+    setActiveCryptoTab(0);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [projectId]);
 
@@ -56,7 +58,7 @@ export const ProjectDetail: React.FC = () => {
   const currentFeatures = isFrench && project.featuresFr ? project.featuresFr : project.features;
 
   return (
-    <div className="space-y-12 sm:space-y-16 max-w-5xl mx-auto py-4">
+    <div className="space-y-8 sm:space-y-16 max-w-5xl mx-auto py-2 sm:py-4">
       {/* Back Navigation Bar */}
       <div>
         <button
@@ -77,12 +79,12 @@ export const ProjectDetail: React.FC = () => {
       </div>
 
       {/* Hero Header */}
-      <section className="space-y-4 border-b border-slate-200 pb-8">
-        <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-fintech-primary">
+      <section className="space-y-3 sm:space-y-4 border-b border-slate-200 pb-5 sm:pb-8">
+        <h1 className="text-2xl sm:text-5xl font-bold tracking-tight text-fintech-primary">
           {t(project.titleKey)}
         </h1>
 
-        <p className="text-base sm:text-lg text-fintech-secondary max-w-3xl leading-relaxed">
+        <p className="text-xs sm:text-lg text-fintech-secondary max-w-3xl leading-relaxed line-clamp-2 sm:line-clamp-none">
           {isCryptoHub ? (
             isFrench
               ? 'Projet personnel en bêta. Les données présentées dans cette démonstration sont simulées.'
@@ -93,11 +95,11 @@ export const ProjectDetail: React.FC = () => {
         </p>
 
         {/* Tech Badges */}
-        <div className="flex flex-wrap gap-2 pt-2">
+        <div className="flex flex-wrap gap-1.5 sm:gap-2 pt-1 sm:pt-2">
           {project.techStack.map((tech) => (
             <span
               key={tech}
-              className="px-2.5 py-1 text-xs font-mono font-medium rounded-none bg-white border border-slate-200 text-slate-700 shadow-sm"
+              className="px-2 sm:px-2.5 py-0.5 sm:py-1 text-[10px] sm:text-xs font-mono font-medium rounded-none bg-white border border-slate-200 text-slate-700 shadow-sm"
             >
               {tech}
             </span>
@@ -107,11 +109,33 @@ export const ProjectDetail: React.FC = () => {
 
       {/* Crypto Trade Hub: Product Walkthrough */}
       {isCryptoHub && (
-        <div className="space-y-12 sm:space-y-16">
+        <div className="space-y-6 sm:space-y-16">
+          {/* Mobile Module Tab Switcher (Prevents huge vertical scroll on mobile) */}
+          <div className="sm:hidden grid grid-cols-3 gap-1.5 font-mono text-[11px]">
+            {[
+              { idx: 0 as const, label: isFrench ? '01 · Scanner' : '01 · Scanner' },
+              { idx: 1 as const, label: isFrench ? '02 · Exécution' : '02 · Execution' },
+              { idx: 2 as const, label: isFrench ? '03 · Flux IA' : '03 · AI Feed' },
+            ].map((tab) => (
+              <button
+                key={tab.idx}
+                type="button"
+                onClick={() => setActiveCryptoTab(tab.idx)}
+                className={`py-2 px-2 border text-center font-semibold transition-colors ${
+                  activeCryptoTab === tab.idx
+                    ? 'bg-electric border-electric text-white'
+                    : 'bg-white border-slate-200 text-slate-600'
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+
           {/* Section 1: Surveillance & Volume Pipeline Simulation */}
-          <section className="space-y-4">
+          <section className={`${activeCryptoTab === 0 ? 'block' : 'hidden sm:block'} space-y-3 sm:space-y-4`}>
             <div className="space-y-1">
-              <div className="flex items-center justify-between border-b border-slate-200 pb-2">
+              <div className="hidden sm:flex items-center justify-between border-b border-slate-200 pb-2">
                 <span className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-400">
                   {t('projects.cryptoDetail.section1.tag')}
                 </span>
@@ -119,7 +143,7 @@ export const ProjectDetail: React.FC = () => {
                   {t('projects.cryptoDetail.section1.badge')}
                 </span>
               </div>
-              <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-fintech-primary pt-1">
+              <h2 className="text-base sm:text-2xl font-bold tracking-tight text-fintech-primary pt-1">
                 {t('projects.cryptoDetail.section1.title')}
               </h2>
             </div>
@@ -129,8 +153,8 @@ export const ProjectDetail: React.FC = () => {
               <MarketOverviewSim />
             </div>
 
-            {/* Technical Explanation Card with Interactive Terms */}
-            <div className="p-4 sm:p-5 rounded-none border border-slate-200 bg-white shadow-sm text-xs sm:text-sm text-slate-700 leading-relaxed font-sans">
+            {/* Technical Explanation Card with Interactive Terms (Desktop only) */}
+            <div className="hidden sm:block p-4 sm:p-5 rounded-none border border-slate-200 bg-white shadow-sm text-xs sm:text-sm text-slate-700 leading-relaxed font-sans">
               {isFrench ? (
                 <p>
                   Ce pipeline de surveillance interroge en continu l'API Binance WebSocket sur plus de 200 paires de devises. 
@@ -174,9 +198,9 @@ export const ProjectDetail: React.FC = () => {
           </section>
 
           {/* Section 2: Dual-Regime Execution & Vector Allocations Simulation */}
-          <section className="space-y-4">
+          <section className={`${activeCryptoTab === 1 ? 'block' : 'hidden sm:block'} space-y-3 sm:space-y-4`}>
             <div className="space-y-1">
-              <div className="flex items-center justify-between border-b border-slate-200 pb-2">
+              <div className="hidden sm:flex items-center justify-between border-b border-slate-200 pb-2">
                 <span className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-400">
                   {t('projects.cryptoDetail.section2.tag')}
                 </span>
@@ -184,7 +208,7 @@ export const ProjectDetail: React.FC = () => {
                   {t('projects.cryptoDetail.section2.badge')}
                 </span>
               </div>
-              <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-fintech-primary pt-1">
+              <h2 className="text-base sm:text-2xl font-bold tracking-tight text-fintech-primary pt-1">
                 {t('projects.cryptoDetail.section2.title')}
               </h2>
             </div>
@@ -194,8 +218,8 @@ export const ProjectDetail: React.FC = () => {
               <PaperTradingSim />
             </div>
 
-            {/* Technical Explanation Card with Interactive Terms */}
-            <div className="p-4 sm:p-5 rounded-none border border-slate-200 bg-white shadow-sm text-xs sm:text-sm text-slate-700 leading-relaxed font-sans">
+            {/* Technical Explanation Card with Interactive Terms (Desktop only) */}
+            <div className="hidden sm:block p-4 sm:p-5 rounded-none border border-slate-200 bg-white shadow-sm text-xs sm:text-sm text-slate-700 leading-relaxed font-sans">
               {isFrench ? (
                 <p>
                   Le moteur d'exécution autonome est orchestré par un filtre à double régime basé sur l'indicateur{' '}
@@ -271,9 +295,9 @@ export const ProjectDetail: React.FC = () => {
           </section>
 
           {/* Section 3: Automated AI Market Intelligence Simulation */}
-          <section className="space-y-4">
+          <section className={`${activeCryptoTab === 2 ? 'block' : 'hidden sm:block'} space-y-3 sm:space-y-4`}>
             <div className="space-y-1">
-              <div className="flex items-center justify-between border-b border-slate-200 pb-2">
+              <div className="hidden sm:flex items-center justify-between border-b border-slate-200 pb-2">
                 <span className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-400">
                   {t('projects.cryptoDetail.section4.tag')}
                 </span>
@@ -281,7 +305,7 @@ export const ProjectDetail: React.FC = () => {
                   {t('projects.cryptoDetail.section4.badge')}
                 </span>
               </div>
-              <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-fintech-primary pt-1">
+              <h2 className="text-base sm:text-2xl font-bold tracking-tight text-fintech-primary pt-1">
                 {t('projects.cryptoDetail.section4.title')}
               </h2>
             </div>
@@ -291,8 +315,8 @@ export const ProjectDetail: React.FC = () => {
               <MarketIntelligenceSim />
             </div>
 
-            {/* Technical Explanation Card with Interactive Terms */}
-            <div className="p-4 sm:p-5 rounded-none border border-slate-200 bg-white shadow-sm text-xs sm:text-sm text-slate-700 leading-relaxed font-sans">
+            {/* Technical Explanation Card with Interactive Terms (Desktop only) */}
+            <div className="hidden sm:block p-4 sm:p-5 rounded-none border border-slate-200 bg-white shadow-sm text-xs sm:text-sm text-slate-700 leading-relaxed font-sans">
               {isFrench ? (
                 <p>
                   Ce pipeline d'intelligence de marché ingère les flux d'actualités macroéconomiques et les déséquilibres de{' '}
@@ -371,8 +395,8 @@ export const ProjectDetail: React.FC = () => {
           </dl>
         </div>
 
-        {/* Right: Key Highlights */}
-        <div className="md:col-span-5 rounded-none border border-slate-200 bg-slate-50 p-4 sm:p-5 shadow-sm space-y-3">
+        {/* Right: Key Highlights (Desktop/Tablet only for clean mobile) */}
+        <div className="hidden md:block md:col-span-5 rounded-none border border-slate-200 bg-slate-50 p-4 sm:p-5 shadow-sm space-y-3">
           <div className="flex items-center justify-between text-xs font-mono font-semibold uppercase tracking-wider text-slate-500 border-b border-slate-200/80 pb-2">
             <span>{t('projectDetail.keyHighlights')}</span>
             <span className="text-emerald-600 font-semibold">{t('projects.cryptoDetail.verified')}</span>

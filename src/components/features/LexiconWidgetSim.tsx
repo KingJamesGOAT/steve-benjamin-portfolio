@@ -116,8 +116,8 @@ export const LexiconWidgetSim: React.FC = () => {
 
   return (
     <div className="bg-[#05050a] border border-white/10 p-3 sm:p-4 space-y-3 font-mono text-xs rounded-none select-none text-slate-300">
-      {/* Top Header without icon or extra terms count */}
-      <div className="flex items-center justify-between pb-2 border-b border-white/10">
+      {/* Top Header without icon or extra terms count (Desktop only) */}
+      <div className="hidden sm:flex items-center justify-between pb-2 border-b border-white/10">
         <div className="text-[11px] text-blue-400 font-semibold tracking-wider uppercase">
           {isFrench ? 'Moteur Lexique' : 'Lexicon Engine'}
         </div>
@@ -178,8 +178,29 @@ export const LexiconWidgetSim: React.FC = () => {
         )}
       </div>
 
-      {/* SmartText Sample Context with Clickable/Hoverable Blue Words */}
-      <div className="text-[11px] text-slate-300 font-sans leading-relaxed bg-black/40 p-2.5 border border-white/5">
+      {/* Mobile Quick-Select Term Pills (Replaces verbose paragraph on mobile) */}
+      <div className="flex sm:hidden flex-wrap gap-1.5">
+        {SAMPLE_TERMS.slice(0, 4).map((term) => {
+          const isSelected = currentTermId === term.id;
+          return (
+            <button
+              key={term.id}
+              type="button"
+              onClick={() => setActiveTermId(term.id)}
+              className={`px-2 py-1 text-[10px] font-mono border transition-colors ${
+                isSelected
+                  ? 'bg-blue-600/30 border-blue-500 text-blue-200 font-bold'
+                  : 'bg-black/60 border-white/10 text-slate-400 hover:text-white'
+              }`}
+            >
+              {isFrench ? term.name.fr : term.name.en}
+            </button>
+          );
+        })}
+      </div>
+
+      {/* SmartText Sample Context with Clickable/Hoverable Blue Words (Desktop only) */}
+      <div className="hidden sm:block text-[11px] text-slate-300 font-sans leading-relaxed bg-black/40 p-2.5 border border-white/5">
         <span className="text-slate-400 font-mono text-[10px] block pb-1">
           {isFrench ? 'SURVOLEZ OU CLIQUEZ SUR LES TERMES BLEUS :' : 'HOVER OR CLICK ON BLUE WORDS :'}
         </span>
@@ -295,12 +316,12 @@ export const LexiconWidgetSim: React.FC = () => {
           </div>
         </div>
 
-        <p className="text-[11px] text-slate-300 font-sans leading-relaxed">
+        <p className="text-[11px] text-slate-300 font-sans leading-relaxed line-clamp-2 sm:line-clamp-none">
           {isFrench ? currentTerm.definition.fr : currentTerm.definition.en}
         </p>
 
-        {/* Clickable Related Concepts Tags */}
-        <div className="pt-1.5 border-t border-white/10 flex flex-wrap items-center gap-1.5 text-[10px]">
+        {/* Clickable Related Concepts Tags (Desktop only) */}
+        <div className="hidden sm:flex pt-1.5 border-t border-white/10 flex-wrap items-center gap-1.5 text-[10px]">
           <span className="text-slate-500 font-mono text-[9px] uppercase tracking-wider">
             {isFrench ? 'Notions liées :' : 'Related :'}
           </span>

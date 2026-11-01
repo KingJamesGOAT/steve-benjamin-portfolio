@@ -224,18 +224,18 @@ export const About: React.FC<AboutProps> = ({ id = 'about' }) => {
           {experience.map((item, index) => (
             <div
               key={index}
-              className="py-2.5 sm:py-4 grid grid-cols-1 md:grid-cols-12 gap-1 md:gap-6 items-baseline"
+              className="py-2.5 sm:py-4 grid grid-cols-1 md:grid-cols-12 gap-0.5 md:gap-6 items-baseline"
             >
               <div className="md:col-span-3 font-mono text-[11px] sm:text-sm text-slate-400 sm:text-slate-500 tabular-nums">
                 {item.period}
               </div>
               <div className="md:col-span-9 space-y-0.5">
-                <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+                <div className="flex flex-wrap items-baseline justify-between gap-1">
                   <h4 className="text-xs sm:text-base font-semibold text-fintech-primary">
-                    {item.role}
+                    {item.role} <span className="sm:hidden font-normal text-slate-500">· {item.org}</span>
                   </h4>
                 </div>
-                <p className="text-[11px] sm:text-sm text-slate-600 leading-relaxed">
+                <p className="hidden sm:block text-sm text-slate-600 leading-relaxed">
                   <span className="font-semibold text-slate-800">{item.org}</span>
                   <span className="mx-1.5 text-slate-300">·</span>
                   {item.description}
@@ -247,29 +247,29 @@ export const About: React.FC<AboutProps> = ({ id = 'about' }) => {
       </div>
 
       {/* Certifications Grid */}
-      <div id="certifications" className="space-y-4 sm:space-y-6 scroll-mt-24">
+      <div id="certifications" className="space-y-3 sm:space-y-6 scroll-mt-24">
         <h3 className="text-xs font-mono uppercase tracking-widest text-slate-500 font-semibold">
           {t('about.certificationsTitle')}
         </h3>
 
-        <div className="space-y-4 sm:space-y-6">
+        <div className="border-t sm:border-t-0 border-slate-200 divide-y divide-slate-100 sm:divide-y-0 sm:space-y-6">
           {certifications.map((group, groupIndex) => (
-            <div key={groupIndex} className="space-y-2 sm:space-y-3">
-              <h4 className="text-[11px] font-mono uppercase tracking-wider text-slate-400 font-semibold">
+            <div key={groupIndex} className="sm:space-y-3">
+              <h4 className="hidden sm:block text-[11px] font-mono uppercase tracking-wider text-slate-400 font-semibold">
                 {group.group}
               </h4>
 
-              <div className="border-t border-b border-slate-200 divide-y divide-slate-100">
+              <div className="sm:border-t sm:border-b sm:border-slate-200 divide-y divide-slate-100">
                 {group.items.map((item, index) => (
                   <div
                     key={index}
-                    className="py-2.5 sm:py-4 grid grid-cols-1 md:grid-cols-12 gap-1 md:gap-6 items-baseline"
+                    className="py-2.5 sm:py-4 grid grid-cols-1 md:grid-cols-12 gap-0.5 md:gap-6 items-baseline"
                   >
                     <div className="md:col-span-3 font-mono text-[11px] sm:text-sm text-slate-400 sm:text-slate-500 tabular-nums">
                       {item.period}
                     </div>
                     <div className="md:col-span-9 space-y-0.5">
-                      <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+                      <div className="flex items-baseline justify-between gap-2">
                         <h4 className="text-xs sm:text-base font-semibold text-fintech-primary">
                           {item.title} <span className="font-normal text-slate-500">({item.issuer})</span>
                         </h4>
@@ -278,14 +278,14 @@ export const About: React.FC<AboutProps> = ({ id = 'about' }) => {
                             href={item.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1 font-mono text-xs text-slate-700 hover:text-electric transition-colors shrink-0"
+                            className="inline-flex items-center gap-0.5 font-mono text-[11px] sm:text-xs text-electric sm:text-slate-700 hover:text-electric transition-colors shrink-0"
                           >
                             <span>{t('about.certifications.verify')}</span>
                             <ArrowUpRight className="w-3 h-3" />
                           </a>
                         )}
                       </div>
-                      <p className="text-[11px] sm:text-sm text-slate-600 leading-relaxed">
+                      <p className="hidden sm:block text-sm text-slate-600 leading-relaxed">
                         {item.description}
                       </p>
                     </div>

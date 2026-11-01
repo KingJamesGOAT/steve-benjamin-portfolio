@@ -386,53 +386,48 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
       {/* Mobile Drawer / Overlay Menu */}
       {isMobileMenuOpen && (
         <div
-          className="fixed inset-x-0 top-14 bottom-0 z-50 bg-white/95 backdrop-blur-md md:hidden flex flex-col justify-between p-5 border-t border-slate-200 overflow-y-auto pointer-events-auto"
+          className="fixed inset-x-0 top-14 bottom-0 z-50 bg-white/98 backdrop-blur-md md:hidden flex flex-col justify-between p-6 border-t border-slate-200 overflow-y-auto pointer-events-auto"
           onClick={() => {
             setIsMobileMenuOpen(false);
             setIsMobileProjectsOpen(false);
           }}
         >
-          <div className="space-y-4 pt-1" onClick={(e) => e.stopPropagation()}>
-            <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400 font-bold block">
-              {isFrench ? 'NAVIGATION' : 'NAVIGATION'}
-            </span>
-
-            <div className="divide-y divide-slate-100 border-t border-b border-slate-100 font-sans">
-              {/* 1. Compétences Techniques */}
+          <div className="space-y-2 pt-1" onClick={(e) => e.stopPropagation()}>
+            <div className="divide-y divide-slate-100 border-b border-slate-100 font-sans">
+              {/* 1. Compétences */}
               <button
                 type="button"
                 onClick={() => {
                   handleNavClick('skills');
                   setIsMobileProjectsOpen(false);
                 }}
-                className="w-full text-left py-3 px-1 text-sm font-semibold text-slate-800 hover:text-electric transition-colors flex items-center justify-between"
+                className="w-full text-left py-3.5 text-base font-semibold text-slate-900 hover:text-electric transition-colors flex items-center justify-between"
               >
                 <span>{t('nav.skills')}</span>
-                <span className="text-[10px] font-mono text-slate-400">#skills</span>
               </button>
 
               {/* 2. Projets (with collapsible list of 4 projects) */}
-              <div className="py-1">
-                <div className="flex items-center justify-between py-2 px-1">
+              <div>
+                <div className="flex items-center justify-between py-3.5">
                   <button
                     type="button"
                     onClick={() => {
                       handleNavClick('projects');
                       setIsMobileProjectsOpen(false);
                     }}
-                    className="text-sm font-semibold text-slate-800 hover:text-electric transition-colors"
+                    className="text-base font-semibold text-slate-900 hover:text-electric transition-colors"
                   >
                     {t('nav.projects')}
                   </button>
                   <button
                     type="button"
                     onClick={() => setIsMobileProjectsOpen((prev) => !prev)}
-                    className="flex items-center space-x-1.5 px-2 py-1 text-xs font-mono text-slate-600 hover:text-electric border border-slate-200 bg-slate-50 transition-colors"
+                    className="flex items-center space-x-1 px-2.5 py-1 text-xs font-mono text-slate-500 hover:text-electric transition-colors"
                     aria-label="Toggle projects list"
                   >
-                    <span>{projectsList.length} {isFrench ? 'projets' : 'projects'}</span>
+                    <span>{projectsList.length}</span>
                     <ChevronDown
-                      className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                      className={`w-4 h-4 transition-transform duration-200 ${
                         isMobileProjectsOpen ? 'rotate-180 text-electric' : ''
                       }`}
                     />
@@ -440,7 +435,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
                 </div>
 
                 {isMobileProjectsOpen && (
-                  <div className="mt-1 mb-2 pl-2 space-y-1 animate-in fade-in duration-150 border-l-2 border-electric/40">
+                  <div className="mb-3 pl-3 space-y-1 border-l border-slate-200">
                     {projectsList.map((p) => (
                       <button
                         key={p.slug}
@@ -449,10 +444,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
                           handleProjectSelect(p.slug);
                           setIsMobileProjectsOpen(false);
                         }}
-                        className="w-full text-left py-2 px-2.5 text-xs font-mono font-medium text-slate-700 hover:text-electric hover:bg-slate-50 transition-colors flex items-center justify-between"
+                        className="w-full text-left py-2 px-2 text-xs font-mono text-slate-600 hover:text-electric transition-colors flex items-center justify-between"
                       >
                         <span className="truncate pr-2">{p.title}</span>
-                        <span className="text-electric text-[10px] shrink-0">→</span>
+                        <span className="text-slate-400 text-[10px] shrink-0">→</span>
                       </button>
                     ))}
                   </div>
@@ -466,10 +461,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
                   handleNavClick('about');
                   setIsMobileProjectsOpen(false);
                 }}
-                className="w-full text-left py-3 px-1 text-sm font-semibold text-slate-800 hover:text-electric transition-colors flex items-center justify-between"
+                className="w-full text-left py-3.5 text-base font-semibold text-slate-900 hover:text-electric transition-colors flex items-center justify-between"
               >
                 <span>{t('nav.about')}</span>
-                <span className="text-[10px] font-mono text-slate-400">#about</span>
               </button>
 
               {/* 4. Pitch Bachelor */}
@@ -479,7 +473,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
                   handleNavClick('bachelor-pitch');
                   setIsMobileProjectsOpen(false);
                 }}
-                className="w-full text-left py-3 px-1 text-sm font-semibold text-slate-800 hover:text-electric transition-colors flex items-center justify-between"
+                className="w-full text-left py-3.5 text-base font-semibold text-slate-900 hover:text-electric transition-colors flex items-center justify-between"
               >
                 <span>{t('nav.bachelorPitch')}</span>
                 <span className="text-[10px] font-mono text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5">
@@ -487,32 +481,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
                 </span>
               </button>
             </div>
-
-            {/* Quick Command Palette Trigger on mobile */}
-            {onOpenCommandPalette && (
-              <button
-                type="button"
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  setIsMobileProjectsOpen(false);
-                  onOpenCommandPalette();
-                }}
-                className="w-full py-2.5 px-3 border border-slate-200 bg-slate-50 text-slate-600 hover:text-electric hover:border-electric transition-colors text-xs font-mono flex items-center justify-between"
-              >
-                <div className="flex items-center space-x-2">
-                  <Search className="w-3.5 h-3.5 text-slate-400" />
-                  <span>{isFrench ? 'Rechercher un terme' : 'Search Glossary'}</span>
-                </div>
-                <span className="text-[10px] px-1.5 py-0.5 bg-white border border-slate-200 text-slate-500 font-semibold">
-                  Ctrl K
-                </span>
-              </button>
-            )}
           </div>
 
           {/* Bottom Direct Document / Profile Links */}
           <div
-            className="pt-4 border-t border-slate-200 flex items-center justify-between text-xs font-mono"
+            className="pt-4 border-t border-slate-100 flex items-center gap-3 text-xs font-mono"
             onClick={(e) => e.stopPropagation()}
           >
             <a
@@ -520,7 +493,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
               target="_blank"
               rel="noopener noreferrer"
               download={isFrench ? 'CV_Steve_Benjamin.pdf' : 'EnglishSteveBenjaminCV.pdf'}
-              className="px-3.5 py-2 border border-slate-200 bg-white text-slate-700 hover:border-electric hover:text-electric font-semibold transition-colors"
+              className="flex-1 text-center py-2.5 border border-slate-200 bg-white text-slate-700 hover:border-electric hover:text-electric font-semibold transition-colors"
             >
               CV (PDF) ↗
             </a>
@@ -528,7 +501,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
               href="https://www.linkedin.com/in/sb-steve-benjamin/"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-3.5 py-2 border border-slate-200 bg-white text-slate-700 hover:border-electric hover:text-electric font-semibold transition-colors"
+              className="flex-1 text-center py-2.5 border border-slate-200 bg-white text-slate-700 hover:border-electric hover:text-electric font-semibold transition-colors"
             >
               LinkedIn ↗
             </a>

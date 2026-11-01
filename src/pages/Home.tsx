@@ -280,7 +280,7 @@ export const Home: React.FC = () => {
               </Link>
             </div>
 
-            <p className="text-xs sm:text-sm text-fintech-secondary leading-relaxed">
+            <p className="hidden sm:block text-xs sm:text-sm text-fintech-secondary leading-relaxed">
               {isFrench
                 ? 'Projet personnel en bêta. Les données présentées dans cette démonstration sont simulées.'
                 : 'Personal project in beta. Data shown in this demo is simulated.'}
@@ -372,7 +372,7 @@ export const Home: React.FC = () => {
               </Link>
             </div>
 
-            <p className="text-xs sm:text-sm text-fintech-secondary leading-relaxed">
+            <p className="hidden sm:block text-xs sm:text-sm text-fintech-secondary leading-relaxed">
               {isFrench
                 ? 'Plateforme de don de sang réalisée pour les Hôpitaux Universitaires de Genève (HUG) à la HEIG-VD pour pré-qualifier les volontaires en entreprise et réduire les refus de donneurs sur place.'
                 : 'Blood donation platform engineered for Geneva University Hospitals (HUG) at HEIG-VD to pre-qualify corporate volunteers and reduce on-site donor rejections.'}
@@ -454,7 +454,7 @@ export const Home: React.FC = () => {
                 </div>
               </div>
 
-              <p className="text-xs sm:text-sm text-fintech-secondary leading-relaxed">
+              <p className="hidden sm:block text-xs sm:text-sm text-fintech-secondary leading-relaxed">
                 {isFrench
                   ? 'Indexation de concepts historiques et exploration visuelle par graphe sémantique.'
                   : 'Historical concept indexation and visual semantic exploration graph.'}
@@ -498,7 +498,7 @@ export const Home: React.FC = () => {
                 </div>
               </div>
 
-              <p className="text-xs sm:text-sm text-fintech-secondary leading-relaxed">
+              <p className="hidden sm:block text-xs sm:text-sm text-fintech-secondary leading-relaxed">
                 {isFrench
                   ? 'Plateforme événementielle mobile-first intégrant un flux de RSVP interactif avec synchronisation temps réel vers tableur Excel.'
                   : 'Mobile-first event platform engineered with interactive RSVP guest intake and real-time webhook spreadsheet synchronization.'}
@@ -529,43 +529,55 @@ export const Home: React.FC = () => {
 
       {/* SECTION 4: BACHELOR PITCH */}
       <section id="bachelor-pitch" className="scroll-mt-20 sm:scroll-mt-24">
-        <div className="rounded-none border border-slate-200 bg-white p-5 sm:p-10 shadow-sm space-y-4 sm:space-y-6">
-          <div className="space-y-2 sm:space-y-3">
+        <div className="rounded-none border border-slate-200 bg-white p-4 sm:p-10 shadow-sm space-y-3.5 sm:space-y-6">
+          <div className="space-y-1.5 sm:space-y-3">
             <h2 className="text-xl sm:text-4xl font-bold tracking-tight text-fintech-primary">
               {t('bachelorPitch.title')}
             </h2>
 
-            <p className="text-xs sm:text-base text-fintech-secondary max-w-2xl leading-relaxed">
+            <p className="hidden sm:block text-xs sm:text-base text-fintech-secondary max-w-2xl leading-relaxed">
               {t('bachelorPitch.subtitle')}
             </p>
           </div>
 
-          {/* 3 Key Institutional Highlights */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 py-1">
-            <div className="p-3 sm:p-5 border border-slate-200 bg-slate-50/70 flex items-center justify-center text-center shadow-xs">
-              <span className="text-xs sm:text-base font-bold text-fintech-primary tracking-tight">
+          {/* 3 Key Institutional Highlights (Compact pills on mobile, 3 boxes on desktop) */}
+          <div className="flex flex-wrap gap-1.5 sm:hidden font-mono text-[11px]">
+            <span className="px-2.5 py-1 border border-slate-200 bg-slate-50 text-fintech-primary font-semibold">
+              {t('bachelorPitch.conditions.durationTitle')}
+            </span>
+            <span className="px-2.5 py-1 border border-slate-200 bg-slate-50 text-fintech-primary font-semibold">
+              {t('bachelorPitch.conditions.costTitle')}
+            </span>
+            <span className="px-2.5 py-1 border border-slate-200 bg-slate-50 text-fintech-primary font-semibold">
+              {t('bachelorPitch.conditions.confidentialityTitle')}
+            </span>
+          </div>
+
+          <div className="hidden sm:grid sm:grid-cols-3 gap-3 py-1">
+            <div className="p-5 border border-slate-200 bg-slate-50/70 flex items-center justify-center text-center shadow-xs">
+              <span className="text-base font-bold text-fintech-primary tracking-tight">
                 {t('bachelorPitch.conditions.durationTitle')}
               </span>
             </div>
 
-            <div className="p-3 sm:p-5 border border-slate-200 bg-slate-50/70 flex items-center justify-center text-center shadow-xs">
-              <span className="text-xs sm:text-base font-bold text-fintech-primary tracking-tight">
+            <div className="p-5 border border-slate-200 bg-slate-50/70 flex items-center justify-center text-center shadow-xs">
+              <span className="text-base font-bold text-fintech-primary tracking-tight">
                 {t('bachelorPitch.conditions.costTitle')}
               </span>
             </div>
 
-            <div className="p-3 sm:p-5 border border-slate-200 bg-slate-50/70 flex items-center justify-center text-center shadow-xs">
-              <span className="text-xs sm:text-base font-bold text-fintech-primary tracking-tight">
+            <div className="p-5 border border-slate-200 bg-slate-50/70 flex items-center justify-center text-center shadow-xs">
+              <span className="text-base font-bold text-fintech-primary tracking-tight">
                 {t('bachelorPitch.conditions.confidentialityTitle')}
               </span>
             </div>
           </div>
 
           {/* Actions & Document Access */}
-          <div className="pt-2 sm:pt-3 border-t border-slate-100 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-4">
+          <div className="pt-2 sm:pt-3 border-t border-slate-100 flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-4">
             <Link
               to="/bachelor-pitch"
-              className="inline-flex items-center justify-center space-x-2 px-5 py-3 rounded-none bg-electric hover:bg-electric-hover text-white text-xs font-semibold shadow-sm transition-colors uppercase tracking-wider text-center"
+              className="inline-flex items-center justify-center space-x-2 px-5 py-2.5 sm:py-3 rounded-none bg-electric hover:bg-electric-hover text-white text-xs font-semibold shadow-sm transition-colors uppercase tracking-wider text-center"
             >
               <span>{t('bachelorPitch.ctaExplore')}</span>
               <ArrowRight className="w-4 h-4" />
@@ -576,16 +588,18 @@ export const Home: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               download={isFrench ? 'HEIG-VD-Guide_TB-filiere-IM-2026-27.pdf' : "HEIG-VD - IM - Bachelor's Thesis Guide for Companies - 2026-27.pdf"}
-              className="inline-flex items-center justify-center space-x-2 px-4 py-3 rounded-none border border-slate-200 bg-white hover:border-electric hover:text-electric text-slate-700 text-xs font-semibold transition-colors shadow-sm text-center"
+              className="inline-flex items-center justify-center space-x-2 px-4 py-2.5 sm:py-3 rounded-none border border-slate-200 bg-white hover:border-electric hover:text-electric text-slate-700 text-xs font-semibold transition-colors shadow-sm text-center"
             >
               <FileDown className="w-4 h-4 text-electric" />
               <span>{t('bachelorPitch.ctaGuide')}</span>
             </a>
 
-            <CopyEmailButton
-              subject="HEIG-VD Bachelor Project 2027"
-              className="px-4 py-3 rounded-none border border-slate-200 bg-white hover:border-slate-300 text-slate-700 text-xs shadow-sm justify-center"
-            />
+            <div className="hidden sm:block">
+              <CopyEmailButton
+                subject="HEIG-VD Bachelor Project 2027"
+                className="px-4 py-3 rounded-none border border-slate-200 bg-white hover:border-slate-300 text-slate-700 text-xs shadow-sm justify-center"
+              />
+            </div>
           </div>
         </div>
       </section>

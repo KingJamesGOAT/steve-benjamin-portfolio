@@ -282,6 +282,7 @@ export const LexiconDetailShowcase: React.FC = () => {
   const activeTerm = lexiconData.find((t) => t.id === selectedTermId) || lexiconData[0];
 
   const activeEvent = timelineEvents.find((e) => e.id === selectedEventId) || timelineEvents[0];
+  const [activeTab, setActiveTab] = useState<0 | 1 | 2>(0);
 
   // Keyboard shortcut listener for Ctrl+K
   useEffect(() => {
@@ -299,11 +300,33 @@ export const LexiconDetailShowcase: React.FC = () => {
   }, []);
 
   return (
-    <div className="space-y-16 text-slate-900 font-sans">
+    <div className="space-y-6 sm:space-y-16 text-slate-900 font-sans">
+      {/* Mobile Module Tab Switcher (shows 1 module at a time on mobile) */}
+      <div className="sm:hidden grid grid-cols-3 gap-1.5 font-mono text-[11px]">
+        {[
+          { idx: 0 as const, label: isFrench ? '01 · Lexique' : '01 · Lexicon' },
+          { idx: 1 as const, label: isFrench ? '02 · SmartText' : '02 · SmartText' },
+          { idx: 2 as const, label: isFrench ? '03 · Frise' : '03 · Timeline' },
+        ].map((tab) => (
+          <button
+            key={tab.idx}
+            type="button"
+            onClick={() => setActiveTab(tab.idx)}
+            className={`py-2 px-2 border text-center font-bold transition-colors ${
+              activeTab === tab.idx
+                ? 'bg-slate-900 text-white border-slate-900'
+                : 'bg-white text-slate-600 border-slate-200'
+            }`}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
+
       {/* ----------------------------------------------------------------- */}
       {/* SECTION 1: CTRL+K COMMAND LEXICON EXPLORER (5,000+ Words)         */}
       {/* ----------------------------------------------------------------- */}
-      <section className="space-y-6">
+      <section className={`space-y-4 sm:space-y-6 ${activeTab === 0 ? 'block' : 'hidden sm:block'}`}>
         <div className="space-y-1.5 border-b border-slate-200 pb-3">
           <div className="flex items-center justify-between text-xs font-mono font-bold uppercase tracking-wider text-blue-600">
             <span>{isFrench ? 'Module 01 // Indexation' : 'Module 01 // Indexation'}</span>
@@ -311,10 +334,10 @@ export const LexiconDetailShowcase: React.FC = () => {
               {isFrench ? 'INDEXATION 5 000+ ENTRÉES' : '5,000+ INDEXED TERMS'}
             </span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 font-mono">
+          <h2 className="text-xl sm:text-3xl font-bold tracking-tight text-slate-900 font-mono">
             {isFrench ? 'Moteur Lexical (Ctrl+K)' : 'Lexicon Engine (Ctrl+K)'}
           </h2>
-          <p className="text-sm text-slate-600 font-sans leading-relaxed max-w-3xl">
+          <p className="hidden sm:block text-sm text-slate-600 font-sans leading-relaxed max-w-3xl">
             {isFrench
               ? 'Conçu pour indexer plus de 5 000 termes philosophiques, épistémologiques et scientifiques. Recherche instantanée avec raccourci global Ctrl+K, sélection sur Entrée et graphe sémantique.'
               : 'Engineered to index over 5,000 philosophical, epistemological, and scientific terms. Features instant fuzzy search with global Ctrl+K, Enter-to-select, and semantic linkages.'}
@@ -348,9 +371,27 @@ export const LexiconDetailShowcase: React.FC = () => {
           </div>
 
           {/* Interactive Two-Column Result Explorer */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 pt-2">
-            {/* Left: Term List */}
-            <div className="lg:col-span-5 bg-black/40 border border-white/10 p-2 max-h-[380px] overflow-y-auto divide-y divide-white/5 space-y-1">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 pt-1 sm:pt-2">
+            {/* Mobile Compact Pill Selector */}
+            <div className="sm:hidden flex flex-wrap gap-1.5">
+              {filteredLexicon.map((term) => (
+                <button
+                  key={term.id}
+                  type="button"
+                  onClick={() => setSelectedTermId(term.id)}
+                  className={`px-2.5 py-1 text-xs font-mono border transition-colors ${
+                    selectedTermId === term.id
+                      ? 'bg-blue-600/30 border-blue-400 text-blue-200 font-bold'
+                      : 'bg-black/40 border-white/10 text-slate-400'
+                  }`}
+                >
+                  {isFrench ? term.term.fr : term.term.en}
+                </button>
+              ))}
+            </div>
+
+            {/* Desktop Left: Term List */}
+            <div className="hidden sm:block lg:col-span-5 bg-black/40 border border-white/10 p-2 max-h-[380px] overflow-y-auto divide-y divide-white/5 space-y-1">
               {filteredLexicon.length > 0 ? (
                 filteredLexicon.map((term) => (
                   <button
@@ -376,21 +417,21 @@ export const LexiconDetailShowcase: React.FC = () => {
             </div>
 
             {/* Right: Detailed Definition Inspector Card */}
-            <div className="lg:col-span-7 bg-white/[0.03] border border-white/10 p-5 sm:p-7 space-y-4 flex flex-col justify-between">
-              <div className="space-y-3">
-                <div className="border-b border-white/10 pb-3">
-                  <h3 className="text-2xl font-bold font-mono text-white">
+            <div className="lg:col-span-7 bg-white/[0.03] border border-white/10 p-4 sm:p-7 space-y-3 sm:space-y-4 flex flex-col justify-between">
+              <div className="space-y-2 sm:space-y-3">
+                <div className="border-b border-white/10 pb-2 sm:pb-3">
+                  <h3 className="text-lg sm:text-2xl font-bold font-mono text-white">
                     {isFrench ? activeTerm.term.fr : activeTerm.term.en}
                   </h3>
                 </div>
 
-                <p className="text-sm text-slate-200 leading-relaxed font-sans pt-1">
+                <p className="text-xs sm:text-sm text-slate-200 leading-relaxed font-sans pt-1">
                   {isFrench ? activeTerm.definition.fr : activeTerm.definition.en}
                 </p>
               </div>
 
-              {/* Related Terms Graph Linkages - 100% Translated in French & English */}
-              <div className="border-t border-white/10 pt-3 space-y-2">
+              {/* Related Terms Graph Linkages - Desktop only */}
+              <div className="hidden sm:block border-t border-white/10 pt-3 space-y-2">
                 <span className="text-[11px] font-mono text-slate-400 block uppercase tracking-wider">
                   {isFrench ? 'Termes & Références Associés :' : 'Related Scholarly References:'}
                 </span>
@@ -413,7 +454,7 @@ export const LexiconDetailShowcase: React.FC = () => {
       {/* ----------------------------------------------------------------- */}
       {/* SECTION 2: SMARTTEXT READER & BLUE HOVER TOOLTIPS                 */}
       {/* ----------------------------------------------------------------- */}
-      <section className="space-y-6">
+      <section className={`space-y-4 sm:space-y-6 ${activeTab === 1 ? 'block' : 'hidden sm:block'}`}>
         <div className="space-y-1.5 border-b border-slate-200 pb-3">
           <div className="flex items-center justify-between text-xs font-mono font-bold uppercase tracking-wider text-blue-600">
             <span>{isFrench ? 'Module 02 // Navigation' : 'Module 02 // Navigation'}</span>
@@ -421,10 +462,10 @@ export const LexiconDetailShowcase: React.FC = () => {
               {isFrench ? 'INFOBULLES STYLE APPLE GLASS' : 'APPLE-GLASS HOVER TOOLTIPS'}
             </span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 font-mono">
+          <h2 className="text-xl sm:text-3xl font-bold tracking-tight text-slate-900 font-mono">
             {isFrench ? 'Lecture Enrichie & Infobulles' : 'SmartText & Live Tooltips'}
           </h2>
-          <p className="text-sm text-slate-600 font-sans leading-relaxed max-w-3xl">
+          <p className="hidden sm:block text-sm text-slate-600 font-sans leading-relaxed max-w-3xl">
             {isFrench
               ? 'Permet à l\'utilisateur de lire des traités savants sans friction : chaque terme bleu pointillé ouvre un panneau en verre dépoli (Apple-glass) avec sa définition formelle sans quitter la page.'
               : 'Empowers readers through uninterrupted scholarly flow: every dotted blue term triggers a frosted glass (Apple-glass) popover with immediate formal definitions without disruptive page hops.'}
@@ -432,20 +473,21 @@ export const LexiconDetailShowcase: React.FC = () => {
         </div>
 
         {/* Interactive Reading Panel */}
-        <div className="bg-[#05050a] border border-white/10 shadow-2xl p-6 sm:p-10 relative">
-          <div className="max-w-4xl space-y-6">
+        <div className="bg-[#05050a] border border-white/10 shadow-2xl p-4 sm:p-10 relative">
+          <div className="max-w-4xl space-y-4 sm:space-y-6">
             <div className="text-xs font-mono text-slate-400 uppercase tracking-wider flex items-center gap-2">
               <BookOpen className="w-3.5 h-3.5 text-blue-400" />
-              <span>{isFrench ? 'Traité Épistémologique & Physique // Survolez les termes en bleu :' : 'Epistemological & Physics Treatise // Hover over the blue terms:'}</span>
+              <span>{isFrench ? 'Touchez ou survolez les termes en bleu :' : 'Tap or hover over the blue terms:'}</span>
             </div>
 
             {/* SmartText Paragraph with Live Interactive Blue Terms (100% Scientific & Physical) */}
-            <div className="text-base sm:text-lg leading-relaxed text-slate-200 font-sans bg-black/40 p-6 sm:p-8 border border-white/15 relative">
+            <div className="text-sm sm:text-lg leading-relaxed text-slate-200 font-sans bg-black/40 p-4 sm:p-8 border border-white/15 relative">
               {isFrench ? (
                 <p>
                   La formulation des théories scientifiques modernes repose sur des principes fondamentaux d'
                   <span
-                    className="inline text-blue-400 underline decoration-blue-500/60 decoration-dotted decoration-2 underline-offset-4 hover:text-blue-300 hover:decoration-blue-400 cursor-help transition-colors font-medium relative group"
+                    className="inline text-blue-400 underline decoration-blue-500/60 decoration-dotted decoration-2 underline-offset-4 hover:text-blue-300 hover:decoration-blue-400 cursor-pointer transition-colors font-medium relative group"
+                    onClick={() => setHoveredTerm(lexiconData.find((t) => t.id === 'ontology') || null)}
                     onMouseEnter={() => setHoveredTerm(lexiconData.find((t) => t.id === 'ontology') || null)}
                     onMouseLeave={() => setHoveredTerm(null)}
                   >
@@ -453,7 +495,8 @@ export const LexiconDetailShowcase: React.FC = () => {
                   </span>{' '}
                   et d'
                   <span
-                    className="inline text-blue-400 underline decoration-blue-500/60 decoration-dotted decoration-2 underline-offset-4 hover:text-blue-300 hover:decoration-blue-400 cursor-help transition-colors font-medium relative group"
+                    className="inline text-blue-400 underline decoration-blue-500/60 decoration-dotted decoration-2 underline-offset-4 hover:text-blue-300 hover:decoration-blue-400 cursor-pointer transition-colors font-medium relative group"
+                    onClick={() => setHoveredTerm(lexiconData.find((t) => t.id === 'epistemology') || null)}
                     onMouseEnter={() => setHoveredTerm(lexiconData.find((t) => t.id === 'epistemology') || null)}
                     onMouseLeave={() => setHoveredTerm(null)}
                   >
@@ -461,7 +504,8 @@ export const LexiconDetailShowcase: React.FC = () => {
                   </span>
                   . Afin de modéliser l'évolution thermodynamique des systèmes physiques, l'analyse de l'
                   <span
-                    className="inline text-blue-400 underline decoration-blue-500/60 decoration-dotted decoration-2 underline-offset-4 hover:text-blue-300 hover:decoration-blue-400 cursor-help transition-colors font-medium relative group"
+                    className="inline text-blue-400 underline decoration-blue-500/60 decoration-dotted decoration-2 underline-offset-4 hover:text-blue-300 hover:decoration-blue-400 cursor-pointer transition-colors font-medium relative group"
+                    onClick={() => setHoveredTerm(lexiconData.find((t) => t.id === 'entropy') || null)}
                     onMouseEnter={() => setHoveredTerm(lexiconData.find((t) => t.id === 'entropy') || null)}
                     onMouseLeave={() => setHoveredTerm(null)}
                   >
@@ -469,7 +513,8 @@ export const LexiconDetailShowcase: React.FC = () => {
                   </span>{' '}
                   et la loi invariante de{' '}
                   <span
-                    className="inline text-blue-400 underline decoration-blue-500/60 decoration-dotted decoration-2 underline-offset-4 hover:text-blue-300 hover:decoration-blue-400 cursor-help transition-colors font-medium relative group"
+                    className="inline text-blue-400 underline decoration-blue-500/60 decoration-dotted decoration-2 underline-offset-4 hover:text-blue-300 hover:decoration-blue-400 cursor-pointer transition-colors font-medium relative group"
+                    onClick={() => setHoveredTerm(lexiconData.find((t) => t.id === 'causality') || null)}
                     onMouseEnter={() => setHoveredTerm(lexiconData.find((t) => t.id === 'causality') || null)}
                     onMouseLeave={() => setHoveredTerm(null)}
                   >
@@ -477,7 +522,8 @@ export const LexiconDetailShowcase: React.FC = () => {
                   </span>{' '}
                   s'articulent avec la déduction rigoureuse issue de chaque{' '}
                   <span
-                    className="inline text-blue-400 underline decoration-blue-500/60 decoration-dotted decoration-2 underline-offset-4 hover:text-blue-300 hover:decoration-blue-400 cursor-help transition-colors font-medium relative group"
+                    className="inline text-blue-400 underline decoration-blue-500/60 decoration-dotted decoration-2 underline-offset-4 hover:text-blue-300 hover:decoration-blue-400 cursor-pointer transition-colors font-medium relative group"
+                    onClick={() => setHoveredTerm(lexiconData.find((t) => t.id === 'axiom') || null)}
                     onMouseEnter={() => setHoveredTerm(lexiconData.find((t) => t.id === 'axiom') || null)}
                     onMouseLeave={() => setHoveredTerm(null)}
                   >
@@ -485,7 +531,8 @@ export const LexiconDetailShowcase: React.FC = () => {
                   </span>
                   , tandis que l'
                   <span
-                    className="inline text-blue-400 underline decoration-blue-500/60 decoration-dotted decoration-2 underline-offset-4 hover:text-blue-300 hover:decoration-blue-400 cursor-help transition-colors font-medium relative group"
+                    className="inline text-blue-400 underline decoration-blue-500/60 decoration-dotted decoration-2 underline-offset-4 hover:text-blue-300 hover:decoration-blue-400 cursor-pointer transition-colors font-medium relative group"
+                    onClick={() => setHoveredTerm(lexiconData.find((t) => t.id === 'empiricism') || null)}
                     onMouseEnter={() => setHoveredTerm(lexiconData.find((t) => t.id === 'empiricism') || null)}
                     onMouseLeave={() => setHoveredTerm(null)}
                   >
@@ -497,7 +544,8 @@ export const LexiconDetailShowcase: React.FC = () => {
                 <p>
                   The formulation of modern scientific theories rests upon foundational principles of{' '}
                   <span
-                    className="inline text-blue-400 underline decoration-blue-500/60 decoration-dotted decoration-2 underline-offset-4 hover:text-blue-300 hover:decoration-blue-400 cursor-help transition-colors font-medium relative group"
+                    className="inline text-blue-400 underline decoration-blue-500/60 decoration-dotted decoration-2 underline-offset-4 hover:text-blue-300 hover:decoration-blue-400 cursor-pointer transition-colors font-medium relative group"
+                    onClick={() => setHoveredTerm(lexiconData.find((t) => t.id === 'ontology') || null)}
                     onMouseEnter={() => setHoveredTerm(lexiconData.find((t) => t.id === 'ontology') || null)}
                     onMouseLeave={() => setHoveredTerm(null)}
                   >
@@ -505,7 +553,8 @@ export const LexiconDetailShowcase: React.FC = () => {
                   </span>{' '}
                   and{' '}
                   <span
-                    className="inline text-blue-400 underline decoration-blue-500/60 decoration-dotted decoration-2 underline-offset-4 hover:text-blue-300 hover:decoration-blue-400 cursor-help transition-colors font-medium relative group"
+                    className="inline text-blue-400 underline decoration-blue-500/60 decoration-dotted decoration-2 underline-offset-4 hover:text-blue-300 hover:decoration-blue-400 cursor-pointer transition-colors font-medium relative group"
+                    onClick={() => setHoveredTerm(lexiconData.find((t) => t.id === 'epistemology') || null)}
                     onMouseEnter={() => setHoveredTerm(lexiconData.find((t) => t.id === 'epistemology') || null)}
                     onMouseLeave={() => setHoveredTerm(null)}
                   >
@@ -513,7 +562,8 @@ export const LexiconDetailShowcase: React.FC = () => {
                   </span>
                   . To model the thermodynamic evolution of physical systems, the analysis of{' '}
                   <span
-                    className="inline text-blue-400 underline decoration-blue-500/60 decoration-dotted decoration-2 underline-offset-4 hover:text-blue-300 hover:decoration-blue-400 cursor-help transition-colors font-medium relative group"
+                    className="inline text-blue-400 underline decoration-blue-500/60 decoration-dotted decoration-2 underline-offset-4 hover:text-blue-300 hover:decoration-blue-400 cursor-pointer transition-colors font-medium relative group"
+                    onClick={() => setHoveredTerm(lexiconData.find((t) => t.id === 'entropy') || null)}
                     onMouseEnter={() => setHoveredTerm(lexiconData.find((t) => t.id === 'entropy') || null)}
                     onMouseLeave={() => setHoveredTerm(null)}
                   >
@@ -521,7 +571,8 @@ export const LexiconDetailShowcase: React.FC = () => {
                   </span>{' '}
                   and the invariant law of{' '}
                   <span
-                    className="inline text-blue-400 underline decoration-blue-500/60 decoration-dotted decoration-2 underline-offset-4 hover:text-blue-300 hover:decoration-blue-400 cursor-help transition-colors font-medium relative group"
+                    className="inline text-blue-400 underline decoration-blue-500/60 decoration-dotted decoration-2 underline-offset-4 hover:text-blue-300 hover:decoration-blue-400 cursor-pointer transition-colors font-medium relative group"
+                    onClick={() => setHoveredTerm(lexiconData.find((t) => t.id === 'causality') || null)}
                     onMouseEnter={() => setHoveredTerm(lexiconData.find((t) => t.id === 'causality') || null)}
                     onMouseLeave={() => setHoveredTerm(null)}
                   >
@@ -529,7 +580,8 @@ export const LexiconDetailShowcase: React.FC = () => {
                   </span>{' '}
                   operate alongside rigorous deduction from each fundamental{' '}
                   <span
-                    className="inline text-blue-400 underline decoration-blue-500/60 decoration-dotted decoration-2 underline-offset-4 hover:text-blue-300 hover:decoration-blue-400 cursor-help transition-colors font-medium relative group"
+                    className="inline text-blue-400 underline decoration-blue-500/60 decoration-dotted decoration-2 underline-offset-4 hover:text-blue-300 hover:decoration-blue-400 cursor-pointer transition-colors font-medium relative group"
+                    onClick={() => setHoveredTerm(lexiconData.find((t) => t.id === 'axiom') || null)}
                     onMouseEnter={() => setHoveredTerm(lexiconData.find((t) => t.id === 'axiom') || null)}
                     onMouseLeave={() => setHoveredTerm(null)}
                   >
@@ -537,7 +589,8 @@ export const LexiconDetailShowcase: React.FC = () => {
                   </span>
                   , while methodical{' '}
                   <span
-                    className="inline text-blue-400 underline decoration-blue-500/60 decoration-dotted decoration-2 underline-offset-4 hover:text-blue-300 hover:decoration-blue-400 cursor-help transition-colors font-medium relative group"
+                    className="inline text-blue-400 underline decoration-blue-500/60 decoration-dotted decoration-2 underline-offset-4 hover:text-blue-300 hover:decoration-blue-400 cursor-pointer transition-colors font-medium relative group"
+                    onClick={() => setHoveredTerm(lexiconData.find((t) => t.id === 'empiricism') || null)}
                     onMouseEnter={() => setHoveredTerm(lexiconData.find((t) => t.id === 'empiricism') || null)}
                     onMouseLeave={() => setHoveredTerm(null)}
                   >
@@ -554,13 +607,13 @@ export const LexiconDetailShowcase: React.FC = () => {
                 {isFrench ? 'Aperçu de l\'infobulle active :' : 'Active Apple-glass tooltip preview:'}
               </div>
               {hoveredTerm ? (
-                <div className="w-full max-w-3xl rounded-2xl bg-gray-950/95 backdrop-blur-xl border border-white/15 shadow-2xl p-6 space-y-3 animate-in fade-in zoom-in-95 duration-150">
-                  <div className="flex items-center gap-3 border-b border-white/10 pb-3">
+                <div className="w-full max-w-3xl rounded-2xl bg-gray-950/95 backdrop-blur-xl border border-white/15 shadow-2xl p-4 sm:p-6 space-y-2.5 sm:space-y-3 animate-in fade-in zoom-in-95 duration-150">
+                  <div className="flex items-center gap-3 border-b border-white/10 pb-2.5 sm:pb-3">
                     <div className="p-1.5 bg-blue-500/20 rounded-lg border border-blue-500/30">
                       <BookOpen className="w-4 h-4 text-blue-300" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-white text-base font-mono">
+                      <h4 className="font-bold text-white text-sm sm:text-base font-mono">
                         {isFrench ? hoveredTerm.term.fr : hoveredTerm.term.en}
                       </h4>
                       <span className="text-[11px] text-blue-400 font-mono">
@@ -568,15 +621,15 @@ export const LexiconDetailShowcase: React.FC = () => {
                       </span>
                     </div>
                   </div>
-                  <p className="text-sm text-slate-200 leading-relaxed font-sans">
+                  <p className="text-xs sm:text-sm text-slate-200 leading-relaxed font-sans">
                     {isFrench ? hoveredTerm.definition.fr : hoveredTerm.definition.en}
                   </p>
                 </div>
               ) : (
                 <div className="p-4 bg-white/[0.02] border border-dashed border-white/10 text-xs font-mono text-slate-500 text-center">
                   {isFrench
-                    ? 'Passez votre curseur sur un mot souligné en bleu ci-dessus pour déclencher l\'infobulle.'
-                    : 'Hover over any blue dotted term above to reveal the live Apple-glass definition tooltip.'}
+                    ? 'Touchez ou survolez un mot bleu ci-dessus pour afficher sa définition.'
+                    : 'Tap or hover over any blue term above to reveal its definition.'}
                 </div>
               )}
             </div>
@@ -587,7 +640,7 @@ export const LexiconDetailShowcase: React.FC = () => {
       {/* ----------------------------------------------------------------- */}
       {/* SECTION 3: MULTI-CENTURY CHRONOLOGY TIMELINE                      */}
       {/* ----------------------------------------------------------------- */}
-      <section className="space-y-6">
+      <section className={`space-y-4 sm:space-y-6 ${activeTab === 2 ? 'block' : 'hidden sm:block'}`}>
         <div className="space-y-1.5 border-b border-slate-200 pb-3">
           <div className="flex items-center justify-between text-xs font-mono font-bold uppercase tracking-wider text-blue-600">
             <span>{isFrench ? 'Module 03 // Cartographie' : 'Module 03 // Cartographie'}</span>
@@ -595,10 +648,10 @@ export const LexiconDetailShowcase: React.FC = () => {
               {isFrench ? 'FRISE MULTI-SÉCULAIRE' : 'MULTI-CENTURY CHRONOLOGY'}
             </span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 font-mono">
+          <h2 className="text-xl sm:text-3xl font-bold tracking-tight text-slate-900 font-mono">
             {isFrench ? 'Frise Chronologique' : 'Chronology Timeline'}
           </h2>
-          <p className="text-sm text-slate-600 font-sans leading-relaxed max-w-3xl">
+          <p className="hidden sm:block text-sm text-slate-600 font-sans leading-relaxed max-w-3xl">
             {isFrench
               ? 'Visualisation interactive retraçant les traités majeurs, les figures savantes et les tournants épistémologiques depuis l\'antiquité tardive jusqu\'à la méthode moderne.'
               : 'Interactive chronological visualization charting landmark intellectual assemblies, scholastic scholars, and foundational treatises from late antiquity to modern epistemology.'}

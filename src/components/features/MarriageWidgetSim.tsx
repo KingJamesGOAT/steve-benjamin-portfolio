@@ -9,13 +9,13 @@ export const MarriageWidgetSim: React.FC = () => {
   const [guestCount, setGuestCount] = useState<number>(2);
 
   return (
-    <div className="bg-[#FAF8F5] border border-stone-200/90 p-4 space-y-3.5 text-xs font-sans rounded-none select-none transition-all">
+    <div className="bg-[#FAF8F5] border border-stone-200/90 p-3 sm:p-4 space-y-2.5 sm:space-y-3.5 text-xs font-sans rounded-none select-none transition-all">
       {/* Wedding Stationery Card Header */}
-      <div className="border-b border-stone-200/80 pb-2.5">
+      <div className="border-b border-stone-200/80 pb-2 sm:pb-2.5">
         <div className="font-serif italic font-medium text-stone-900 text-sm sm:text-base tracking-wide">
           R.S.V.P. · {isFrench ? 'Célébration & Réception' : 'Celebration & Reception'}
         </div>
-        <div className="text-[11px] font-sans text-stone-500 pt-0.5">
+        <div className="hidden sm:block text-[11px] font-sans text-stone-500 pt-0.5">
           {isFrench
             ? 'Veuillez confirmer votre présence et le nombre de convives'
             : 'Please confirm your attendance and number of guests'}
@@ -24,7 +24,7 @@ export const MarriageWidgetSim: React.FC = () => {
 
       {/* Accept or Decline Toggle */}
       <div className="space-y-1.5">
-        <label className="text-[10px] font-mono uppercase tracking-wider text-stone-500 block">
+        <label className="hidden sm:block text-[10px] font-mono uppercase tracking-wider text-stone-500">
           {isFrench ? 'Réponse' : 'Response'}
         </label>
         <div className="grid grid-cols-2 gap-2">

@@ -117,17 +117,26 @@ export const CryptoWidgetSim: React.FC = () => {
   const areaString = `70,${svgHeight - 20} ${pointsString} ${svgWidth - 20},${svgHeight - 20}`;
   const displayedPrice = hoveredIndex !== null ? CANDLE_DATA[hoveredIndex].price : livePrice;
 
-  // Horizontal mouse scrubbing calculation
-  const handleChartMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (hoveredNewsId !== null) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const clientX = e.clientX - rect.left;
-    const svgX = (clientX / rect.width) * svgWidth;
+  // Horizontal mouse & touch scrubbing calculation
+  const updateScrubFromClientX = (clientX: number, rect: DOMRect) => {
+    const xPos = clientX - rect.left;
+    const svgX = (xPos / rect.width) * svgWidth;
     const minX = 70;
     const maxX = svgWidth - 20; // 820
     const ratio = Math.max(0, Math.min(1, (svgX - minX) / (maxX - minX)));
     const nearestIndex = Math.round(ratio * (CANDLE_DATA.length - 1));
     setHoveredIndex(nearestIndex);
+  };
+
+  const handleChartMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (hoveredNewsId !== null) return;
+    updateScrubFromClientX(e.clientX, e.currentTarget.getBoundingClientRect());
+  };
+
+  const handleChartTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (e.touches.length > 0) {
+      updateScrubFromClientX(e.touches[0].clientX, e.currentTarget.getBoundingClientRect());
+    }
   };
 
   const activePt = hoveredIndex !== null ? CANDLE_DATA[hoveredIndex] : null;
@@ -197,34 +206,54 @@ export const CryptoWidgetSim: React.FC = () => {
       {/* 2. Streamlined Financial Graph Area */}
       <div className="p-2.5 sm:p-4 space-y-2 bg-[#0B0E14] flex-1 flex flex-col justify-between">
         {/* Fixed Height Minimal Graph Legend Bar */}
-        <div className="h-6 flex items-center justify-end gap-3 text-[10px] font-mono text-slate-400 border-b border-[#1E2638] pb-1.5 shrink-0 overflow-hidden whitespace-nowrap">
-          {chartMode === 'line' ? (
-            <span className="flex items-center space-x-1.5">
-              <span className="w-2.5 h-0.5 bg-emerald-400 inline-block" />
-              <span>{isFrench ? 'COURS (BTC)' : 'PRICE (BTC)'}</span>
+        <div className="h-6 flex items-center justify-between gap-2 text-[10px] font-mono text-slate-400 border-b border-[#1E2638] pb-1.5 shrink-0 overflow-hidden whitespace-nowrap">
+          <div className="text-sky-400 font-semibold">
+            {activePt
+              ? `${activePt.time} UTC · ${activePt.volume} BTC`
+              : isFrench
+              ? '15M · TEMPS RÉEL'
+              : '15M · LIVE'}
+          </div>
+          <div className="flex items-center gap-3">
+            {chartMode === 'line' ? (
+              <span className="flex items-center space-x-1.5">
+                <span className="w-2.5 h-0.5 bg-emerald-400 inline-block" />
+                <span>{isFrench ? 'COURS (BTC)' : 'PRICE (BTC)'}</span>
+              </span>
+            ) : (
+              <span className="flex items-center space-x-1.5">
+                <span className="w-1.5 h-2.5 bg-emerald-400 inline-block" />
+                <span className="w-1.5 h-2.5 bg-rose-500 inline-block" />
+                <span>{isFrench ? 'BOUGIES' : 'CANDLES'}</span>
+              </span>
+            )}
+            <span className="hidden sm:flex items-center space-x-1.5">
+              <span className="w-2.5 h-0.5 bg-[#0052FF] inline-block" />
+              <span>20-EMA</span>
             </span>
-          ) : (
-            <span className="flex items-center space-x-1.5">
-              <span className="w-1.5 h-2.5 bg-emerald-400 inline-block" />
-              <span className="w-1.5 h-2.5 bg-rose-500 inline-block" />
-              <span>{isFrench ? 'CHANDELIERS (15M)' : 'CANDLES (15M)'}</span>
-            </span>
-          )}
-          <span className="flex items-center space-x-1.5">
-            <span className="w-2.5 h-0.5 bg-[#0052FF] inline-block" />
-            <span>20-EMA</span>
-          </span>
+          </div>
         </div>
 
         {/* Stable, Rock-Solid Responsive Height SVG Canvas */}
         <div
-          className="relative w-full h-44 sm:h-64 md:h-72 bg-[#0E131E]/80 border border-[#1E2638] rounded-none overflow-hidden p-2 flex items-center justify-center cursor-crosshair shrink-0"
+          className="relative w-full h-40 sm:h-64 md:h-72 bg-[#0E131E]/80 border border-[#1E2638] rounded-none overflow-hidden p-1.5 sm:p-2 flex items-center justify-center cursor-crosshair shrink-0 touch-pan-y"
           onMouseMove={handleChartMouseMove}
+          onTouchStart={handleChartTouchMove}
+          onTouchMove={handleChartTouchMove}
           onMouseLeave={() => {
             setHoveredIndex(null);
             setHoveredNewsId(null);
           }}
         >
+          {/* Crisp HTML High/Low Watermarks for Mobile (Zero SVG text distortion) */}
+          <div className="sm:hidden pointer-events-none absolute inset-x-2.5 top-2 flex justify-between text-[9px] font-mono text-slate-500">
+            <span>H: $68,580</span>
+            <span>09:00 — 11:45 UTC</span>
+          </div>
+          <div className="sm:hidden pointer-events-none absolute left-2.5 bottom-2 text-[9px] font-mono text-slate-500">
+            <span>L: $67,770</span>
+          </div>
+
           <svg
             viewBox={`0 0 ${svgWidth} ${svgHeight}`}
             className="w-full h-full block overflow-hidden"
@@ -244,7 +273,7 @@ export const CryptoWidgetSim: React.FC = () => {
               return (
                 <g key={`grid-${priceLevel}`}>
                   <line
-                    x1="65"
+                    x1="15"
                     y1={y}
                     x2={svgWidth - 10}
                     y2={y}
@@ -258,6 +287,7 @@ export const CryptoWidgetSim: React.FC = () => {
                     fill="#64748B"
                     fontSize="9.5"
                     fontFamily="monospace"
+                    className="hidden sm:block"
                   >
                     ${priceLevel.toLocaleString()}
                   </text>
@@ -487,7 +517,7 @@ export const CryptoWidgetSim: React.FC = () => {
             {/* Dynamic Interactive Crosshair and Price Tooltip (only when not hovering news marker) */}
             {hoveredIndex !== null && activePt && hoveredNewsId === null && (
               <g className="pointer-events-none">
-                {/* 1. Full Vertical Crosshair Guide Line */}
+                {/* 1. Full Vertical Crosshair Guide Line (Shown on both mobile and desktop) */}
                 <line
                   x1={activeX}
                   y1={15}
@@ -501,7 +531,7 @@ export const CryptoWidgetSim: React.FC = () => {
 
                 {/* 2. Horizontal Axis Guide Line */}
                 <line
-                  x1={65}
+                  x1={15}
                   y1={activeY}
                   x2={activeX}
                   y2={activeY}
@@ -511,120 +541,101 @@ export const CryptoWidgetSim: React.FC = () => {
                   opacity="0.5"
                 />
 
-                {/* 3. Pulsing Active Node Rings */}
-                <circle
-                  cx={activeX}
-                  cy={activeY}
-                  r="8.5"
-                  fill="#0052FF"
-                  fillOpacity="0.3"
-                  stroke="#38BDF8"
-                  strokeWidth="1.5"
-                />
-                <circle
-                  cx={activeX}
-                  cy={activeY}
-                  r="4"
-                  fill="#FFFFFF"
-                  stroke="#0052FF"
-                  strokeWidth="2"
-                />
+                {/* 3 & 4. Pulsing Node Rings and Floating HUD Tooltip Badge (Desktop only to prevent SVG text distortion on mobile) */}
+                <g className="hidden sm:block">
+                  <circle
+                    cx={activeX}
+                    cy={activeY}
+                    r="8.5"
+                    fill="#0052FF"
+                    fillOpacity="0.3"
+                    stroke="#38BDF8"
+                    strokeWidth="1.5"
+                  />
+                  <circle
+                    cx={activeX}
+                    cy={activeY}
+                    r="4"
+                    fill="#FFFFFF"
+                    stroke="#0052FF"
+                    strokeWidth="2"
+                  />
 
-                {/* 4. Enhanced Floating HUD Tooltip Badge */}
-                {(() => {
-                  const tooltipWidth = 152;
-                  const tooltipHeight = 52;
-                  const isFarRight = activeX > svgWidth - 190;
-                  const isFarLeft = activeX < 200;
-                  const tooltipX = isFarRight ? activeX - tooltipWidth - 12 : isFarLeft ? activeX + 14 : activeX - tooltipWidth / 2;
-                  const tooltipY = activeY > 65 ? activeY - tooltipHeight - 12 : activeY + 14;
+                  {(() => {
+                    const tooltipWidth = 152;
+                    const tooltipHeight = 52;
+                    const isFarRight = activeX > svgWidth - 190;
+                    const isFarLeft = activeX < 200;
+                    const tooltipX = isFarRight ? activeX - tooltipWidth - 12 : isFarLeft ? activeX + 14 : activeX - tooltipWidth / 2;
+                    const tooltipY = activeY > 65 ? activeY - tooltipHeight - 12 : activeY + 14;
 
-                  return (
-                    <g transform={`translate(${tooltipX}, ${tooltipY})`}>
-                      <rect
-                        x="0"
-                        y="0"
-                        width={tooltipWidth}
-                        height={tooltipHeight}
-                        fill="#070A10"
-                        stroke="#273756"
-                        strokeWidth="1.2"
-                        className="filter drop-shadow-[0_6px_20px_rgba(0,0,0,0.8)]"
-                      />
-                      <rect
-                        x="0"
-                        y="0"
-                        width="3.5"
-                        height={tooltipHeight}
-                        fill={activePt.isPositive ? '#10B981' : '#F43F5E'}
-                      />
-                      <text x="12" y="15" fill="#94A3B8" fontSize="9.5" fontFamily="monospace" fontWeight="bold">
-                        {activePt.time} UTC · {activePt.volume} BTC
-                      </text>
-                      <text x="12" y="32" fill="#F8FAFC" fontSize="13" fontFamily="monospace" fontWeight="bold">
-                        ${activePt.price.toLocaleString('en-US', { minimumFractionDigits: 2 })}
-                      </text>
-                      <text
-                        x="12"
-                        y="45"
-                        fill={activePt.isPositive ? '#34D399' : '#FB7185'}
-                        fontSize="9.5"
-                        fontFamily="monospace"
-                        fontWeight="semibold"
-                      >
-                        {activePt.delta}
-                      </text>
-                    </g>
-                  );
-                })()}
+                    return (
+                      <g transform={`translate(${tooltipX}, ${tooltipY})`}>
+                        <rect
+                          x="0"
+                          y="0"
+                          width={tooltipWidth}
+                          height={tooltipHeight}
+                          fill="#070A10"
+                          stroke="#273756"
+                          strokeWidth="1.2"
+                          className="filter drop-shadow-[0_6px_20px_rgba(0,0,0,0.8)]"
+                        />
+                        <rect
+                          x="0"
+                          y="0"
+                          width="3.5"
+                          height={tooltipHeight}
+                          fill={activePt.isPositive ? '#10B981' : '#F43F5E'}
+                        />
+                        <text x="12" y="15" fill="#94A3B8" fontSize="9.5" fontFamily="monospace" fontWeight="bold">
+                          {activePt.time} UTC · {activePt.volume} BTC
+                        </text>
+                        <text x="12" y="32" fill="#F8FAFC" fontSize="13" fontFamily="monospace" fontWeight="bold">
+                          ${activePt.price.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                        </text>
+                        <text
+                          x="12"
+                          y="45"
+                          fill={activePt.isPositive ? '#34D399' : '#FB7185'}
+                          fontSize="9.5"
+                          fontFamily="monospace"
+                          fontWeight="semibold"
+                        >
+                          {activePt.delta}
+                        </text>
+                      </g>
+                    );
+                  })()}
+                </g>
               </g>
             )}
 
-            {/* X-Axis Time Labels */}
-            {CANDLE_DATA.map((pt, i) => {
-              const x = (i / (CANDLE_DATA.length - 1)) * (svgWidth - 90) + 70;
-              const isHovered = hoveredIndex === i;
+            {/* X-Axis Time Labels (Desktop only to prevent SVG text distortion on mobile) */}
+            <g className="hidden sm:block">
+              {CANDLE_DATA.map((pt, i) => {
+                const x = (i / (CANDLE_DATA.length - 1)) * (svgWidth - 90) + 70;
+                const isHovered = hoveredIndex === i;
 
-              // Render labels every other point or when hovered
-              if (i % 2 !== 0 && !isHovered) return null;
+                if (i % 2 !== 0 && !isHovered) return null;
 
-              return (
-                <text
-                  key={`time-${i}`}
-                  x={x}
-                  y={svgHeight - 5}
-                  textAnchor="middle"
-                  fill={isHovered ? '#60a5fa' : '#64748B'}
-                  fontSize="8.5"
-                  fontFamily="monospace"
-                  fontWeight={isHovered ? 'bold' : 'normal'}
-                >
-                  {pt.time}
-                </text>
-              );
-            })}
+                return (
+                  <text
+                    key={`time-${i}`}
+                    x={x}
+                    y={svgHeight - 5}
+                    textAnchor="middle"
+                    fill={isHovered ? '#60a5fa' : '#64748B'}
+                    fontSize="8.5"
+                    fontFamily="monospace"
+                    fontWeight={isHovered ? 'bold' : 'normal'}
+                  >
+                    {pt.time}
+                  </text>
+                );
+              })}
+            </g>
           </svg>
-        </div>
-      </div>
-
-      {/* 2b. Clean Mobile News Catalysts (Replaces squished SVG markers on mobile) */}
-      <div className="sm:hidden px-3 py-2 bg-[#0C101A] border-t border-[#1E2638] space-y-1.5 text-[11px] font-mono">
-        <div className="flex items-center justify-between text-[10px] text-slate-400 font-bold uppercase tracking-wider">
-          <span>{isFrench ? 'Événements Clés' : 'Key Catalysts'}</span>
-          <span className="text-sky-400 text-[9px]">// 15m Feed</span>
-        </div>
-        <div className="space-y-1">
-          {NEWS_CATALYSTS.map((cat) => (
-            <div key={cat.id} className="flex items-center justify-between text-slate-300 py-0.5">
-              <span className="flex items-center gap-1.5 truncate">
-                <span className="font-bold text-[9px] px-1 py-0.5 bg-[#161F30] border border-[#273756]" style={{ color: cat.accentColor }}>
-                  {cat.badge}
-                </span>
-                <span className="text-slate-300 truncate text-[11px] font-sans">{isFrench ? cat.line1Fr : cat.line1En}</span>
-              </span>
-              <span className="text-slate-500 text-[10px] shrink-0 ml-2 font-mono">{cat.time}</span>
-            </div>
-          ))}
         </div>
       </div>
 

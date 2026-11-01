@@ -12,6 +12,7 @@ export const DonnonsDetailShowcase: React.FC = () => {
 
   // Quiz interactive state
   const [quizAnswer, setQuizAnswer] = useState<'none' | 'no' | 'yes'>('no');
+  const [activeTab, setActiveTab] = useState<0 | 1 | 2>(0);
 
   // Partner Trophy filter state
   const [selectedYear, setSelectedYear] = useState<string>('2025');
@@ -34,11 +35,33 @@ export const DonnonsDetailShowcase: React.FC = () => {
   });
 
   return (
-    <div className="space-y-16">
+    <div className="space-y-6 sm:space-y-16">
+      {/* Mobile Module Tab Switcher (shows 1 module at a time on mobile) */}
+      <div className="sm:hidden grid grid-cols-3 gap-1.5 font-mono text-[11px]">
+        {[
+          { idx: 0 as const, label: isFrench ? '01 · Quiz' : '01 · Quiz' },
+          { idx: 1 as const, label: isFrench ? '02 · Admin HUG' : '02 · HUG Admin' },
+          { idx: 2 as const, label: isFrench ? '03 · Trophées' : '03 · Trophies' },
+        ].map((tab) => (
+          <button
+            key={tab.idx}
+            type="button"
+            onClick={() => setActiveTab(tab.idx)}
+            className={`py-2 px-2 border text-center font-bold transition-colors ${
+              activeTab === tab.idx
+                ? 'bg-slate-900 text-white border-slate-900'
+                : 'bg-white text-slate-600 border-slate-200'
+            }`}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
+
       {/* ----------------------------------------------------------------- */}
       {/* SECTION 1: THE GAMIFIED COSMIC QUIZ (/quizz / QuizzCobrand.vue)    */}
       {/* ----------------------------------------------------------------- */}
-      <section className="space-y-6">
+      <section className={`space-y-4 sm:space-y-6 ${activeTab === 0 ? 'block' : 'hidden sm:block'}`}>
         <div className="space-y-1.5 border-b border-slate-200 pb-3">
           <div className="flex items-center justify-between text-xs font-mono font-bold uppercase tracking-wider text-purple-700">
             <span>{isFrench ? 'Module 01 // Expérience Utilisateur' : 'Module 01 // User Experience'}</span>
@@ -46,10 +69,10 @@ export const DonnonsDetailShowcase: React.FC = () => {
               {isFrench ? 'QUIZ D\'ÉLIGIBILITÉ SPATIAL' : 'COSMIC ELIGIBILITY QUIZ'}
             </span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 font-mono">
+          <h2 className="text-xl sm:text-3xl font-bold tracking-tight text-slate-900 font-mono">
             {isFrench ? 'Démystification Médicale par la Gamification' : 'Medical De-stigmatization via Gamification'}
           </h2>
-          <p className="text-sm text-slate-600 font-sans leading-relaxed max-w-3xl">
+          <p className="hidden sm:block text-sm text-slate-600 font-sans leading-relaxed max-w-3xl">
             {isFrench
               ? 'Conçu pour remplacer les questionnaires papier austères par un voyage narratif dans l\'espace avec Roby la mascotte. Chaque critère d\'exclusion médicale est expliqué de manière bienveillante sans culpabilisation.'
               : 'Engineered to replace dry paper screening forms with an interactive narrative cosmic journey. Every medical deferral condition is explained with supportive clarity without donor frustration.'}
@@ -165,8 +188,8 @@ export const DonnonsDetailShowcase: React.FC = () => {
               </div>
             </div>
 
-            {/* Right: Authentic Tick Quiz Illustration from 06_tick/ */}
-            <div className="lg:col-span-5 flex flex-col items-center justify-center p-2 relative min-h-[260px] sm:min-h-[340px]">
+            {/* Right: Authentic Tick Quiz Illustration from 06_tick/ (Desktop only) */}
+            <div className="hidden lg:flex lg:col-span-5 flex-col items-center justify-center p-2 relative min-h-[340px]">
               <img
                 src={`${baseUrl}images/donnons/quiz/06_tick/tick_${
                   quizAnswer === 'yes' ? 'yes' : quizAnswer === 'no' ? 'no' : 'base'
@@ -185,7 +208,7 @@ export const DonnonsDetailShowcase: React.FC = () => {
       {/* ----------------------------------------------------------------- */}
       {/* SECTION 2: HUG ADMIN DASHBOARD (DashboardAdmin.vue)               */}
       {/* ----------------------------------------------------------------- */}
-      <section className="space-y-6">
+      <section className={`space-y-4 sm:space-y-6 ${activeTab === 1 ? 'block' : 'hidden sm:block'}`}>
         <div className="space-y-1.5 border-b border-slate-200 pb-3">
           <div className="flex items-center justify-between text-xs font-mono font-bold uppercase tracking-wider text-blue-700">
             <span>{isFrench ? 'Module 02 // Espace Professionnel' : 'Module 02 // Administration Portal'}</span>
@@ -193,10 +216,10 @@ export const DonnonsDetailShowcase: React.FC = () => {
               {isFrench ? 'SUPERVISION DES COLLECTES HUG' : 'HUG DRIVES SUPERVISION'}
             </span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 font-mono">
+          <h2 className="text-xl sm:text-3xl font-bold tracking-tight text-slate-900 font-mono">
             {isFrench ? 'Tableau de Bord & Gestion des Collectes' : 'Dashboard & Blood Drive Operations'}
           </h2>
-          <p className="text-sm text-slate-600 font-sans leading-relaxed max-w-3xl">
+          <p className="hidden sm:block text-sm text-slate-600 font-sans leading-relaxed max-w-3xl">
             {isFrench
               ? 'Portail dédié pour l\'équipe du Centre de Transfusion Sanguine des HUG pour suivre les promesses en temps réel, clore les collectes terminées et synchroniser les plannings OneDoc.'
               : 'Dedicated management portal for Geneva University Hospital transfusion coordinators to track real-time pledges, close completed drives, and dispatch OneDoc slots.'}
@@ -271,8 +294,8 @@ export const DonnonsDetailShowcase: React.FC = () => {
             </div>
           </div>
 
-          {/* Table 2: Collectes à venir */}
-          <div className="space-y-2 pt-2">
+          {/* Table 2: Collectes à venir (Desktop only to keep mobile clean) */}
+          <div className="hidden sm:block space-y-2 pt-2">
             <div className="flex items-center justify-between">
               <h4 className="text-base font-bold font-mono text-slate-900">
                 {isFrench ? 'Collectes à venir (Planification HUG)' : 'Upcoming Scheduled Drives'}
@@ -349,7 +372,7 @@ export const DonnonsDetailShowcase: React.FC = () => {
       {/* ----------------------------------------------------------------- */}
       {/* SECTION 3: CORPORATE TROPHIES & PARTNER GRID (TropheesVitrine.vue) */}
       {/* ----------------------------------------------------------------- */}
-      <section className="space-y-6">
+      <section className={`space-y-4 sm:space-y-6 ${activeTab === 2 ? 'block' : 'hidden sm:block'}`}>
         <div className="space-y-1.5 border-b border-slate-200 pb-3">
           <div className="flex items-center justify-between text-xs font-mono font-bold uppercase tracking-wider text-amber-700">
             <span>{isFrench ? 'Module 03 // Reconnaissance Institutionnelle' : 'Module 03 // Partner Recognition'}</span>
@@ -357,10 +380,10 @@ export const DonnonsDetailShowcase: React.FC = () => {
               {isFrench ? 'LABEL PARTENAIRE DU DON' : 'CORPORATE RECOGNITION'}
             </span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 font-mono">
+          <h2 className="text-xl sm:text-3xl font-bold tracking-tight text-slate-900 font-mono">
             {isFrench ? 'Système de Trophées & Leaderboard des Entreprises' : 'Trophy System & Corporate Leaderboard'}
           </h2>
-          <p className="text-sm text-slate-600 font-sans leading-relaxed max-w-3xl">
+          <p className="hidden sm:block text-sm text-slate-600 font-sans leading-relaxed max-w-3xl">
             {isFrench ? (
               <>
                 Le{' '}

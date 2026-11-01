@@ -95,6 +95,7 @@ export const MarriageDetailShowcase: React.FC = () => {
   });
 
   const [records, setRecords] = useState<GuestRecord[]>(INITIAL_RECORDS);
+  const [activeTab, setActiveTab] = useState<0 | 1>(0);
 
   const translateDietary = (d: string) => {
     if (!d || d === '—') return '—';
@@ -157,9 +158,30 @@ export const MarriageDetailShowcase: React.FC = () => {
   };
 
   return (
-    <div className="space-y-12 sm:space-y-16">
+    <div className="space-y-6 sm:space-y-16">
+      {/* Mobile Module Tab Switcher (shows 1 module at a time on mobile) */}
+      <div className="sm:hidden grid grid-cols-2 gap-1.5 font-mono text-[11px]">
+        {[
+          { idx: 0 as const, label: isFrench ? '01 · Formulaire RSVP' : '01 · RSVP Form' },
+          { idx: 1 as const, label: isFrench ? '02 · Synchro Excel' : '02 · Excel Sync' },
+        ].map((tab) => (
+          <button
+            key={tab.idx}
+            type="button"
+            onClick={() => setActiveTab(tab.idx)}
+            className={`py-2 px-2 border text-center font-bold transition-colors ${
+              activeTab === tab.idx
+                ? 'bg-slate-900 text-white border-slate-900'
+                : 'bg-white text-slate-600 border-slate-200'
+            }`}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
+
       {/* MODULE 1: AUTHENTIC WEDDING RSVP INTERFACE */}
-      <section className="space-y-6">
+      <section className={`space-y-4 sm:space-y-6 ${activeTab === 0 ? 'block' : 'hidden sm:block'}`}>
         <div className="space-y-1.5 border-b border-slate-200 pb-3">
           <span className="text-xs font-mono uppercase tracking-wider text-slate-400">
             {isFrench ? 'Module 01 // Interface Invité' : 'Module 01 // Guest Interface'}
@@ -167,7 +189,7 @@ export const MarriageDetailShowcase: React.FC = () => {
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-fintech-primary">
             {isFrench ? 'Moteur de RSVP & Contrôle Magic Link' : 'RSVP Engine & Magic Link Control'}
           </h2>
-          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-sans">
+          <p className="hidden sm:block text-xs sm:text-sm text-slate-600 leading-relaxed font-sans">
             {isFrench
               ? 'Interface invité minimaliste : gestion des présences, répartition des adultes et enfants, régimes alimentaires et déverrouillage conditionnel du dîner sans création de compte.'
               : 'Minimalist guest interface: attendance intake, adults and children headcount split, dietary preferences, and URL-based conditional dinner access without account creation friction.'}
@@ -393,8 +415,8 @@ export const MarriageDetailShowcase: React.FC = () => {
             )}
           </div>
 
-          {/* Right: Persistent Client Session (LocalStorage Drawer Simulation) */}
-          <div className="lg:col-span-5 space-y-4">
+          {/* Right: Persistent Client Session (Desktop only to keep mobile minimalist) */}
+          <div className="hidden lg:block lg:col-span-5 space-y-4">
             <div className="bg-white border border-stone-200 p-5 shadow-sm space-y-4">
               <div className="border-b border-stone-200 pb-3">
                 <span className="font-serif italic text-lg text-stone-800">
@@ -442,7 +464,7 @@ export const MarriageDetailShowcase: React.FC = () => {
       </section>
 
       {/* MODULE 2: SPREADSHEET SYNCHRONIZATION & SERVERLESS ARCHITECTURE */}
-      <section className="space-y-6">
+      <section className={`space-y-4 sm:space-y-6 ${activeTab === 1 ? 'block' : 'hidden sm:block'}`}>
         <div className="space-y-1.5 border-b border-slate-200 pb-3">
           <div className="text-xs font-mono uppercase tracking-wider text-slate-400">
             {isFrench ? (
@@ -470,7 +492,7 @@ export const MarriageDetailShowcase: React.FC = () => {
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-fintech-primary">
             {isFrench ? 'Synchronisation Tableur (Google Apps Script → Excel)' : 'Spreadsheet Synchronization (Google Apps Script → Excel)'}
           </h2>
-          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-sans">
+          <p className="hidden sm:block text-xs sm:text-sm text-slate-600 leading-relaxed font-sans">
             {isFrench ? (
               <>
                 Chaque soumission déclenche une requête POST vers un endpoint Google Apps Script en{' '}
@@ -579,8 +601,8 @@ export const MarriageDetailShowcase: React.FC = () => {
           </div>
         </div>
 
-        {/* Concise Architecture Summary */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 font-sans text-xs">
+        {/* Concise Architecture Summary (Desktop only) */}
+        <div className="hidden sm:grid grid-cols-1 md:grid-cols-3 gap-4 font-sans text-xs">
           <div className="bg-white border border-slate-200 p-4 space-y-1 shadow-sm">
             <span className="font-mono text-[11px] text-slate-400 font-semibold uppercase block">
               {isFrench ? 'Coût d\'Infrastructure' : 'Infrastructure Cost'}

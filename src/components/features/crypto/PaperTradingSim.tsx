@@ -194,38 +194,38 @@ export const PaperTradingSim: React.FC = () => {
       </div>
 
       {/* Metric Cards Row */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-4">
         {/* Available Balance */}
-        <div className="bg-[#111622] border border-[#1E2638] rounded-none p-4 space-y-2">
-          <div className="flex items-center justify-between text-[11px] font-mono text-slate-400 uppercase tracking-wider">
-            <span>{isFrench ? 'Solde Disponible' : 'Available Balance'}</span>
+        <div className="bg-[#111622] border border-[#1E2638] rounded-none p-3 sm:p-4 space-y-1 sm:space-y-2">
+          <div className="flex items-center justify-between text-[10px] sm:text-[11px] font-mono text-slate-400 uppercase tracking-wider">
+            <span>{isFrench ? 'Solde' : 'Balance'}</span>
             <Wallet className="w-3.5 h-3.5 text-slate-500" />
           </div>
-          <div className="text-2xl font-mono font-bold text-slate-100 tracking-tight">
-            $27,321 <span className="text-xs font-normal text-slate-400">USDT</span>
+          <div className="text-lg sm:text-2xl font-mono font-bold text-slate-100 tracking-tight">
+            $27,321 <span className="text-[10px] sm:text-xs font-normal text-slate-400">USDT</span>
           </div>
-          <div className="text-[10px] font-mono text-slate-500">
+          <div className="hidden sm:block text-[10px] font-mono text-slate-500">
             {isFrench ? 'Capital de Simulation Paper' : 'Paper Execution Capital'}
           </div>
         </div>
 
         {/* Global Open PnL */}
-        <div className="bg-[#111622] border border-[#1E2638] rounded-none p-4 space-y-2">
-          <div className="flex items-center justify-between text-[11px] font-mono text-slate-400 uppercase tracking-wider">
-            <span>{isFrench ? 'P&L Latent Global' : 'Global Open PnL'}</span>
+        <div className="bg-[#111622] border border-[#1E2638] rounded-none p-3 sm:p-4 space-y-1 sm:space-y-2">
+          <div className="flex items-center justify-between text-[10px] sm:text-[11px] font-mono text-slate-400 uppercase tracking-wider">
+            <span>{isFrench ? 'P&L Latent' : 'Open PnL'}</span>
             <TrendingUp className="w-3.5 h-3.5 text-emerald-400" />
           </div>
-          <div className="text-2xl font-mono font-bold text-emerald-400 tracking-tight flex items-center space-x-1">
+          <div className="text-lg sm:text-2xl font-mono font-bold text-emerald-400 tracking-tight flex items-center space-x-1">
             <span>+$69.89</span>
-            <span className="text-xs text-emerald-500 font-normal">(+0.68%)</span>
+            <span className="text-[10px] sm:text-xs text-emerald-500 font-normal">(+0.68%)</span>
           </div>
-          <div className="text-[10px] font-mono text-slate-500">
+          <div className="hidden sm:block text-[10px] font-mono text-slate-500">
             {isFrench ? 'Cumul de 4 positions actives' : '4 Active Positions Aggregate'}
           </div>
         </div>
 
         {/* Engine Toggle Control */}
-        <div className="bg-[#111622] border border-[#1E2638] rounded-none p-4 flex flex-col justify-between space-y-2">
+        <div className="col-span-2 sm:col-span-1 bg-[#111622] border border-[#1E2638] rounded-none p-3 sm:p-4 flex flex-col justify-between space-y-2">
           <div className="text-[11px] font-mono text-slate-400 uppercase tracking-wider">
             {isFrench ? 'État d\'Exécution' : 'Execution State'}
           </div>
@@ -326,8 +326,8 @@ export const PaperTradingSim: React.FC = () => {
         </div>
       </div>
 
-      {/* 3. Live Scout Missions Cards */}
-      <div className="bg-[#111622] border border-[#1E2638] rounded-none p-4 space-y-4">
+      {/* 3. Live Scout Missions Cards (Desktop/Tablet only for minimalist mobile) */}
+      <div className="hidden sm:block bg-[#111622] border border-[#1E2638] rounded-none p-4 space-y-4">
         <div className="flex items-center justify-between border-b border-[#1E2638] pb-2.5">
           <div className="flex items-center space-x-2">
             <Target className="w-3.5 h-3.5 text-emerald-400" />

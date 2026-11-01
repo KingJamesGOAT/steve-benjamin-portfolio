@@ -74,11 +74,11 @@ export const DonnonsWidgetSim: React.FC = () => {
       </div>
 
       <div className="p-4 sm:p-8 lg:p-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
           {/* Left Column: Heading, Stats & Slider */}
-          <div className="lg:col-span-6 space-y-6">
-            {/* Real Yellow Squares Image from sixieme_sens-main */}
-            <div>
+          <div className="lg:col-span-6 space-y-4 sm:space-y-6">
+            {/* Real Yellow Squares Image from sixieme_sens-main (Desktop only) */}
+            <div className="hidden sm:block">
               <img
                 src={`${baseUrl}images/donnons/YellowSquares.png`}
                 alt="Squares"
@@ -89,40 +89,57 @@ export const DonnonsWidgetSim: React.FC = () => {
               />
             </div>
 
-            {/* Main Campaign Headline */}
-            <h3 className="text-2xl sm:text-4xl font-black text-black tracking-tight leading-[1.1] font-mono">
+            {/* Main Campaign Headline (Desktop only for minimalist mobile) */}
+            <h3 className="hidden sm:block text-2xl sm:text-4xl font-black text-black tracking-tight leading-[1.1] font-mono">
               {isFrench
                 ? 'Mobilisez votre équipe pour sauver des vies !'
                 : 'Engage your team to save lives!'}
             </h3>
 
             {/* Main Stats Display */}
-            <div className="flex flex-row items-center gap-3">
-              <div className="text-4xl sm:text-6xl font-black text-[#0073e6] font-mono leading-none">
-                {participationPct}%
-              </div>
-              <div className="flex flex-col justify-center text-left">
-                <span className="text-sm sm:text-lg font-bold text-black font-mono leading-tight">
-                  {isFrench ? 'de participation,' : 'participation,'}
-                </span>
-                <span className="text-sm sm:text-lg font-bold text-black font-mono leading-tight flex items-center gap-1.5">
-                  <span className="text-[#0073e6]">{livesSaved}</span>{' '}
-                  <span>{isFrench ? 'vies sauvées.' : 'lives saved.'}</span>
-                  <div className="relative group inline-flex items-center">
-                    <button
-                      type="button"
-                      className="p-0.5 text-slate-500 hover:text-[#0073e6] cursor-help transition-colors"
-                      aria-label="Info"
-                    >
-                      <Info className="w-3.5 h-3.5" />
-                    </button>
-                    {/* Tooltip Popup */}
-                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block z-50 w-64 sm:w-72 p-2.5 bg-white text-black text-[11px] font-mono shadow-[3px_3px_0px_0px_#000] leading-relaxed pointer-events-none border-2 border-black text-center">
-                      {isFrench
-                        ? `Les ${livesSaved} vies sauvées sont une estimation basée sur le fait qu'un don de sang peut sauver jusqu'à 3 vies.`
-                        : `The ${livesSaved} lives saved are an estimate based on the fact that one blood donation can save up to 3 lives.`}
+            <div className="flex flex-row items-center justify-between sm:justify-start gap-3">
+              <div className="flex items-center gap-3">
+                <div className="text-4xl sm:text-6xl font-black text-[#0073e6] font-mono leading-none">
+                  {participationPct}%
+                </div>
+                <div className="flex flex-col justify-center text-left">
+                  <span className="text-xs sm:text-lg font-bold text-black font-mono leading-tight">
+                    {isFrench ? 'de participation,' : 'participation,'}
+                  </span>
+                  <span className="text-xs sm:text-lg font-bold text-black font-mono leading-tight flex items-center gap-1.5">
+                    <span className="text-[#0073e6]">{livesSaved}</span>{' '}
+                    <span>{isFrench ? 'vies sauvées.' : 'lives saved.'}</span>
+                    <div className="relative group hidden sm:inline-flex items-center">
+                      <button
+                        type="button"
+                        className="p-0.5 text-slate-500 hover:text-[#0073e6] cursor-help transition-colors"
+                        aria-label="Info"
+                      >
+                        <Info className="w-3.5 h-3.5" />
+                      </button>
+                      {/* Tooltip Popup */}
+                      <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block z-50 w-64 sm:w-72 p-2.5 bg-white text-black text-[11px] font-mono shadow-[3px_3px_0px_0px_#000] leading-relaxed pointer-events-none border-2 border-black text-center">
+                        {isFrench
+                          ? `Les ${livesSaved} vies sauvées sont une estimation basée sur le fait qu'un don de sang peut sauver jusqu'à 3 vies.`
+                          : `The ${livesSaved} lives saved are an estimate based on the fact that one blood donation can save up to 3 lives.`}
+                      </div>
                     </div>
-                  </div>
+                  </span>
+                </div>
+              </div>
+
+              {/* Compact Mobile Roby Mascot Badge */}
+              <div className="sm:hidden flex items-center gap-1.5 bg-white border border-black px-2 py-1 shadow-[2px_2px_0px_0px_#000]">
+                <img
+                  src={`${baseUrl}images/donnons/dono_default.png`}
+                  alt="Roby"
+                  className="w-5 h-5 object-contain"
+                  onError={(e) => {
+                    (e.target as HTMLElement).style.display = 'none';
+                  }}
+                />
+                <span className="font-mono text-[10px] font-bold text-[#0073e6]">
+                  {blueCount}/{totalGrid}
                 </span>
               </div>
             </div>
@@ -197,8 +214,8 @@ export const DonnonsWidgetSim: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: Resized LittleMen Grid & Roby Mascot */}
-          <div className="lg:col-span-6 flex flex-col items-center justify-center">
+          {/* Right Column: Resized LittleMen Grid & Roby Mascot (Desktop/Tablet only for clean mobile) */}
+          <div className="hidden sm:flex lg:col-span-6 flex-col items-center justify-center">
             <div className="relative w-full max-w-[460px] bg-white border-2 border-black p-2.5 sm:p-5 shadow-[4px_4px_0px_0px_#000]">
               {/* Background Grid: 60 avatars scaled for mobile */}
               <div className="grid grid-cols-10 gap-0.5 sm:gap-2.5 justify-items-center">

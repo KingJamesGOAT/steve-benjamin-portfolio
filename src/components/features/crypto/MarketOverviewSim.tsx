@@ -434,8 +434,8 @@ export const MarketOverviewSim: React.FC = () => {
           </div>
         </div>
 
-        {/* Right Column: TRENDING SEARCH */}
-        <div className="bg-[#111622] border border-[#1E2638] rounded-none p-4 space-y-3">
+        {/* Right Column: TRENDING SEARCH (Desktop/Tablet only) */}
+        <div className="hidden md:block bg-[#111622] border border-[#1E2638] rounded-none p-4 space-y-3">
           <div className="flex items-center justify-between border-b border-[#1E2638] pb-2.5">
             <div className="flex items-center space-x-2">
               <TrendingUp className="w-3.5 h-3.5 text-emerald-400" />
@@ -471,8 +471,8 @@ export const MarketOverviewSim: React.FC = () => {
         </div>
       </div>
 
-      {/* Bottom Section: Global Market Overview (Top Assets) */}
-      <div className="bg-[#111622] border border-[#1E2638] rounded-none p-4 space-y-3">
+      {/* Bottom Section: Global Market Overview (Top Assets - Desktop/Tablet only) */}
+      <div className="hidden sm:block bg-[#111622] border border-[#1E2638] rounded-none p-4 space-y-3">
         <div className="flex items-center justify-between border-b border-[#1E2638] pb-2.5">
           <div className="flex items-center space-x-2">
             <Activity className="w-3.5 h-3.5 text-blue-400" />
