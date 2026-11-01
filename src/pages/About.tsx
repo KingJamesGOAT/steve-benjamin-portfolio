@@ -124,11 +124,11 @@ export const About: React.FC<AboutProps> = ({ id = 'about' }) => {
             <div className="flex flex-wrap items-center gap-2 pt-0.5 font-mono text-xs">
               <span className="inline-flex items-center gap-1.5 px-2.5 py-1 border border-slate-200 bg-slate-50/70 text-slate-700 shadow-2xs">
                 <span className="text-[10px] font-semibold text-electric uppercase tracking-wider">EN</span>
-                <span className="text-slate-700 font-medium">{t('about.languages.en')}</span>
+                <span className="text-slate-700 font-medium">{t('about.languages.native')}</span>
               </span>
               <span className="inline-flex items-center gap-1.5 px-2.5 py-1 border border-slate-200 bg-slate-50/70 text-slate-700 shadow-2xs">
                 <span className="text-[10px] font-semibold text-electric uppercase tracking-wider">FR</span>
-                <span className="text-slate-700 font-medium">{t('about.languages.fr')}</span>
+                <span className="text-slate-700 font-medium">{t('about.languages.native')}</span>
               </span>
             </div>
 

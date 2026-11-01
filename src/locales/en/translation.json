@@ -238,8 +238,7 @@
       "ageCaption": "24 y.o."
     },
     "languages": {
-      "en": "English (Native)",
-      "fr": "French (Native)"
+      "native": "Native"
     },
     "summary": "9 years of programming experience, spanning low-level C firmware to modern web architecture (React, TypeScript) and UX/UI design in Figma. Specialized in resilient API integrations, AI-assisted software development (Claude API), and Decentralized Finance (DeFi) protocols, alongside 4 years of youth team leadership and public speaking.",
     "educationTitle": "Education",
