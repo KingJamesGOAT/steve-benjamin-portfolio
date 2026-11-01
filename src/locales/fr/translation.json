@@ -237,9 +237,11 @@
       "hobbyValue": "Basketball · Échecs · Lecture",
       "ageCaption": "24 ans"
     },
-    "motherTongueLabel": "Langues maternelles",
-    "motherTongueValue": "Anglais & Français",
-    "summary": "9 ans de programmation, des systèmes embarqués en C (microcontrôleurs, drones, audio) au développement web moderne (React, TypeScript) et au design UX/UI sur Figma. Bilingue de langue maternelle : anglais et français. Également 4 ans de leadership d'équipe et de prise de parole en public.",
+    "languages": {
+      "en": "Anglais (Langue maternelle)",
+      "fr": "Français (Langue maternelle)"
+    },
+    "summary": "9 ans de programmation, des systèmes embarqués en C au développement web moderne (React, TypeScript) et au design UX/UI sur Figma. Spécialisé dans l'intégration d'APIs résilientes, le développement assisté par IA (Claude API) et les protocoles de finance décentralisée (DeFi), avec 4 ans de leadership d'équipe et de prise de parole en public.",
     "educationTitle": "Formation",
     "education": {
       "heig": {
