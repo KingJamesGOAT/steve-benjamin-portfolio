@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Info, ExternalLink, Gamepad2, HelpCircle, Globe } from 'lucide-react';
 
@@ -11,6 +11,16 @@ export const DonnonsWidgetSim: React.FC = () => {
   const [isRobyHovered, setIsRobyHovered] = useState<boolean>(false);
   const [isRobyClicked, setIsRobyClicked] = useState<boolean>(false);
   const [showNotice, setShowNotice] = useState<boolean>(false);
+  const noticeRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (showNotice) {
+      const timer = setTimeout(() => {
+        noticeRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 60);
+      return () => clearTimeout(timer);
+    }
+  }, [showNotice]);
 
   // 60 total people in the visualizer for generous size matching Roby
   const totalGrid = 60; // 10 columns x 6 rows
@@ -178,7 +188,10 @@ export const DonnonsWidgetSim: React.FC = () => {
 
               {/* Interactive Prototype Feedback Notice */}
               {showNotice && (
-                <div className="mt-3.5 p-3 sm:p-4 bg-white border-2 border-black shadow-[3px_3px_0px_0px_#000] text-xs font-mono space-y-2 animate-in fade-in duration-200">
+                <div
+                  ref={noticeRef}
+                  className="mt-3.5 p-3 sm:p-4 bg-white border-2 border-black shadow-[3px_3px_0px_0px_#000] text-xs font-mono space-y-2 animate-in fade-in duration-200"
+                >
                   <div className="flex items-center justify-between font-bold text-black border-b border-slate-200 pb-1.5">
                     <span className="flex items-center gap-1.5 text-amber-800">
                       <span className="inline-block w-2 h-2 rounded-full bg-amber-500 animate-pulse" />

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Search, X } from 'lucide-react';
 
@@ -85,12 +85,21 @@ export const LexiconWidgetSim: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [activeTermId, setActiveTermId] = useState<string>('ontology');
   const [hoveredTermId, setHoveredTermId] = useState<string | null>(null);
+  const searchContainerRef = useRef<HTMLDivElement>(null);
+
+  const scrollSearchAboveKeyboard = () => {
+    if (typeof window !== 'undefined' && window.innerWidth < 768) {
+      setTimeout(() => {
+        searchContainerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 150);
+    }
+  };
 
   // Currently displayed term (hover takes transient priority over selected)
   const currentTermId = hoveredTermId || activeTermId;
   const currentTerm = SAMPLE_TERMS.find((t) => t.id === currentTermId) || SAMPLE_TERMS[0];
 
-  // Filtered terms when user types in search
+  // Filtered terms when user types in search (strictly capped at top 3 options)
   const filteredTerms = searchQuery.trim()
     ? SAMPLE_TERMS.filter((t) => {
         const q = searchQuery.toLowerCase();
@@ -99,7 +108,7 @@ export const LexiconWidgetSim: React.FC = () => {
         const catMatch =
           t.category.fr.toLowerCase().includes(q) || t.category.en.toLowerCase().includes(q);
         return nameMatch || catMatch;
-      })
+      }).slice(0, 3)
     : [];
 
   const handleSelectRelated = (relatedName: string) => {
@@ -124,13 +133,17 @@ export const LexiconWidgetSim: React.FC = () => {
       </div>
 
       {/* Interactive Search Bar (clean placeholder without e.g.) */}
-      <div className="relative">
+      <div ref={searchContainerRef} className="relative scroll-mt-20">
         <div className="flex items-center bg-black/70 border border-white/15 px-2.5 py-1.5 focus-within:border-blue-500/80 transition-colors">
           <Search className="w-3.5 h-3.5 text-blue-400 shrink-0 mr-2" />
           <input
             type="text"
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onFocus={scrollSearchAboveKeyboard}
+            onChange={(e) => {
+              setSearchQuery(e.target.value);
+              scrollSearchAboveKeyboard();
+            }}
             placeholder={isFrench ? 'Rechercher un terme...' : 'Search term...'}
             className="w-full bg-transparent text-[11px] text-white placeholder-slate-500 focus:outline-none font-mono"
           />
@@ -178,9 +191,9 @@ export const LexiconWidgetSim: React.FC = () => {
         )}
       </div>
 
-      {/* Mobile Quick-Select Term Pills (Replaces verbose paragraph on mobile) */}
+      {/* Mobile Quick-Select Term Pills (Replaces verbose paragraph on mobile, max 3 options) */}
       <div className="flex sm:hidden flex-wrap gap-1.5">
-        {SAMPLE_TERMS.slice(0, 4).map((term) => {
+        {SAMPLE_TERMS.slice(0, 3).map((term) => {
           const isSelected = currentTermId === term.id;
           return (
             <button

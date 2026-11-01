@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { 
   Search, 
-  BookOpen 
+  BookOpen,
+  X
 } from 'lucide-react';
 
 interface LexiconTerm {
@@ -265,24 +266,35 @@ export const LexiconDetailShowcase: React.FC = () => {
     },
   ];
 
-  // Filtering lexicon
-  const filteredLexicon = lexiconData.filter((item) => {
-    const query = searchQuery.trim().toLowerCase();
-    if (!query) return true;
-    return (
-      item.term.en.toLowerCase().includes(query) ||
-      item.term.fr.toLowerCase().includes(query) ||
-      item.definition.en.toLowerCase().includes(query) ||
-      item.definition.fr.toLowerCase().includes(query) ||
-      item.category.en.toLowerCase().includes(query) ||
-      item.category.fr.toLowerCase().includes(query)
-    );
-  });
+  // Filtering lexicon (strictly capped at top 3 options)
+  const filteredLexicon = lexiconData
+    .filter((item) => {
+      const query = searchQuery.trim().toLowerCase();
+      if (!query) return true;
+      return (
+        item.term.en.toLowerCase().includes(query) ||
+        item.term.fr.toLowerCase().includes(query) ||
+        item.definition.en.toLowerCase().includes(query) ||
+        item.definition.fr.toLowerCase().includes(query) ||
+        item.category.en.toLowerCase().includes(query) ||
+        item.category.fr.toLowerCase().includes(query)
+      );
+    })
+    .slice(0, 3);
 
   const activeTerm = lexiconData.find((t) => t.id === selectedTermId) || lexiconData[0];
 
   const activeEvent = timelineEvents.find((e) => e.id === selectedEventId) || timelineEvents[0];
   const [activeTab, setActiveTab] = useState<0 | 1 | 2>(0);
+  const searchContainerRef = useRef<HTMLDivElement>(null);
+
+  const scrollSearchAboveKeyboard = () => {
+    if (typeof window !== 'undefined' && window.innerWidth < 768) {
+      setTimeout(() => {
+        searchContainerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 150);
+    }
+  };
 
   // Keyboard shortcut listener for Ctrl+K
   useEffect(() => {
@@ -350,14 +362,18 @@ export const LexiconDetailShowcase: React.FC = () => {
           <div className="absolute top-0 right-1/4 w-96 h-48 bg-blue-600/5 blur-3xl pointer-events-none" />
 
           {/* Search Trigger Bar */}
-          <div className="relative">
-            <div className="relative flex items-center bg-black/60 border border-white/15 px-4 py-3 shadow-inner group focus-within:border-blue-500 transition-colors">
+          <div ref={searchContainerRef} className="relative scroll-mt-20">
+            <div className="relative flex items-center bg-black/60 border border-white/15 px-3.5 py-2.5 sm:px-4 sm:py-3 shadow-inner group focus-within:border-blue-500 transition-colors">
               <Search className="w-4 h-4 text-slate-400 mr-3 shrink-0 group-focus-within:text-blue-400 transition-colors" />
               <input
                 id="lexicon-search-input"
                 type="text"
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onFocus={scrollSearchAboveKeyboard}
+                onChange={(e) => {
+                  setSearchQuery(e.target.value);
+                  scrollSearchAboveKeyboard();
+                }}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' && filteredLexicon.length > 0) {
                     e.preventDefault();
@@ -367,27 +383,43 @@ export const LexiconDetailShowcase: React.FC = () => {
                 placeholder={isFrench ? 'Rechercher un terme' : 'Search a term'}
                 className="w-full bg-transparent text-sm text-white placeholder-slate-500 font-mono focus:outline-none"
               />
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery('')}
+                  className="text-slate-400 hover:text-white p-1 transition-colors"
+                  aria-label="Clear search"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              )}
             </div>
           </div>
 
           {/* Interactive Two-Column Result Explorer */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 pt-1 sm:pt-2">
-            {/* Mobile Compact Pill Selector */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-6 pt-1 sm:pt-2">
+            {/* Mobile Compact Pill Selector (Top 3 Max) */}
             <div className="sm:hidden flex flex-wrap gap-1.5">
-              {filteredLexicon.map((term) => (
-                <button
-                  key={term.id}
-                  type="button"
-                  onClick={() => setSelectedTermId(term.id)}
-                  className={`px-2.5 py-1 text-xs font-mono border transition-colors ${
-                    selectedTermId === term.id
-                      ? 'bg-blue-600/30 border-blue-400 text-blue-200 font-bold'
-                      : 'bg-black/40 border-white/10 text-slate-400'
-                  }`}
-                >
-                  {isFrench ? term.term.fr : term.term.en}
-                </button>
-              ))}
+              {filteredLexicon.length > 0 ? (
+                filteredLexicon.map((term) => (
+                  <button
+                    key={term.id}
+                    type="button"
+                    onClick={() => setSelectedTermId(term.id)}
+                    className={`px-2.5 py-1 text-xs font-mono border transition-colors ${
+                      selectedTermId === term.id
+                        ? 'bg-blue-600/30 border-blue-400 text-blue-200 font-bold'
+                        : 'bg-black/40 border-white/10 text-slate-400'
+                    }`}
+                  >
+                    {isFrench ? term.term.fr : term.term.en}
+                  </button>
+                ))
+              ) : (
+                <div className="px-2 py-1 text-[11px] font-mono text-slate-500 italic">
+                  {isFrench ? 'Aucun terme trouvé' : 'No matching terms found'}
+                </div>
+              )}
             </div>
 
             {/* Desktop Left: Term List */}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   FileSpreadsheet,
@@ -96,6 +96,17 @@ export const MarriageDetailShowcase: React.FC = () => {
 
   const [records, setRecords] = useState<GuestRecord[]>(INITIAL_RECORDS);
   const [activeTab, setActiveTab] = useState<0 | 1>(0);
+  const noticeRef = useRef<HTMLDivElement>(null);
+  const nameFieldRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (submittedNotice) {
+      const timer = setTimeout(() => {
+        noticeRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 60);
+      return () => clearTimeout(timer);
+    }
+  }, [submittedNotice]);
 
   const translateDietary = (d: string) => {
     if (!d || d === '—') return '—';
@@ -269,7 +280,7 @@ export const MarriageDetailShowcase: React.FC = () => {
               </div>
 
               {/* Guest Details */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div ref={nameFieldRef} className="grid grid-cols-1 sm:grid-cols-2 gap-3 scroll-mt-20">
                 <div className="space-y-1">
                   <label className="text-[11px] font-mono text-stone-600">
                     {isFrench ? 'Nom & Prénom' : 'Full Name'}
@@ -277,6 +288,13 @@ export const MarriageDetailShowcase: React.FC = () => {
                   <input
                     type="text"
                     value={guestName}
+                    onFocus={() => {
+                      if (typeof window !== 'undefined' && window.innerWidth < 768) {
+                        setTimeout(() => {
+                          nameFieldRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }, 150);
+                      }
+                    }}
                     onChange={(e) => setGuestName(e.target.value)}
                     className="w-full text-xs font-sans px-3 py-2 border border-stone-200 rounded-none bg-white focus:outline-none focus:border-stone-800"
                     placeholder="ex. John Doe"
@@ -407,7 +425,10 @@ export const MarriageDetailShowcase: React.FC = () => {
 
             {/* Notification alert */}
             {submittedNotice && (
-              <div className="p-3 bg-emerald-50 border border-emerald-300 text-emerald-800 text-xs font-mono flex items-center space-x-2">
+              <div
+                ref={noticeRef}
+                className="p-3 bg-emerald-50 border border-emerald-300 text-emerald-800 text-xs font-mono flex items-center space-x-2"
+              >
                 <Check className="w-4 h-4 text-emerald-600 flex-shrink-0" />
                 <span>{submittedNotice}</span>
               </div>
