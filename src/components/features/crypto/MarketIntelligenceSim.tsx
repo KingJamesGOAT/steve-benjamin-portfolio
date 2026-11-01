@@ -96,26 +96,26 @@ export const MarketIntelligenceSim: React.FC = () => {
         </div>
 
         {/* AI Synthesis & Market Impact Card */}
-        <div className="bg-[#0B0E14] border-l-2 border-emerald-400 border-t border-r border-b border-[#1E2638] p-3.5 space-y-2.5 text-xs">
+        <div className="bg-[#0B0E14] border-l-2 border-emerald-400 border-t border-r border-b border-[#1E2638] p-3 sm:p-3.5 space-y-2 sm:space-y-2.5 text-xs">
           <div className="flex items-center justify-between text-[11px]">
             <span className="text-emerald-400 font-bold uppercase tracking-wider">
               {isFrench
                 ? 'IMPACT : FORTEMENT HAUSSIER'
                 : 'IMPACT: HIGHLY BULLISH'}
             </span>
-            <span className="text-[10px] text-slate-400">
+            <span className="hidden sm:inline text-[10px] text-slate-400">
               {isFrench ? 'ANALYSE TEMPS RÉEL' : 'REAL-TIME TELEMETRY'}
             </span>
           </div>
 
-          <p className="text-slate-300 leading-relaxed text-[11px] sm:text-xs">
+          <p className="hidden sm:block text-slate-300 leading-relaxed text-[11px] sm:text-xs">
             {isFrench
               ? 'Afflux net de capitaux institutionnels détecté sur les carnets d\'ordres perpétuels. Volumes acheteurs 2,2x supérieurs à l\'EMA-20 sur BTC, ETH et SOL, confirmant un régime de continuation de tendance.'
               : 'Net institutional capital inflow detected across perpetual orderbooks. Buy volume 2.2x above 20-EMA across BTC, ETH, and SOL, confirming active trend continuation.'}
           </p>
 
           {/* Impacted Assets */}
-          <div className="pt-2 border-t border-[#1E2638] flex flex-wrap items-center gap-2">
+          <div className="pt-1.5 sm:pt-2 border-t border-[#1E2638] flex flex-wrap items-center gap-1.5 sm:gap-2">
             <span className="text-[10px] text-slate-400 uppercase">
               {isFrench ? 'Actifs Impactés :' : 'Impacted Assets:'}
             </span>

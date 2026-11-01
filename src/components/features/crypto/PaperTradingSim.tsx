@@ -136,6 +136,7 @@ export const PaperTradingSim: React.FC = () => {
   const [isEngineActive, setIsEngineActive] = useState<boolean>(true);
   const [selectedAudit, setSelectedAudit] = useState<Position | null>(null);
   const [selectedScout, setSelectedScout] = useState<ScoutMission | null>(null);
+  const [mobileSelectedAsset, setMobileSelectedAsset] = useState<string>('BTC');
 
   // Prevent background scroll when any modal is open
   useEffect(() => {
@@ -148,25 +149,27 @@ export const PaperTradingSim: React.FC = () => {
     }
   }, [selectedAudit, selectedScout]);
 
+  const activeMobilePos = POSITIONS_DATA.find((p) => p.asset === mobileSelectedAsset) || POSITIONS_DATA[0];
+
   return (
-    <div className="bg-[#0B0E14] border border-[#1E2638] rounded-none p-3 sm:p-6 space-y-4 sm:space-y-6 text-slate-200 font-sans shadow-2xl relative">
+    <div className="bg-[#0B0E14] border border-[#1E2638] rounded-none p-3 sm:p-6 space-y-3.5 sm:space-y-6 text-slate-200 font-sans shadow-2xl relative">
       {/* 1. System Status Header Bar */}
-      <div className="border-b border-[#1E2638] pb-4">
-        <div className="flex flex-wrap items-center justify-between gap-3">
+      <div className="border-b border-[#1E2638] pb-3 sm:pb-4">
+        <div className="flex items-center justify-between gap-2">
           <div className="space-y-1">
-            <div className="flex items-center space-x-2.5">
+            <div className="flex items-center space-x-2">
               <div
-                className={`w-2.5 h-2.5 rounded-none ${
+                className={`w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-none ${
                   isEngineActive
                     ? 'bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)]'
                     : 'bg-rose-500'
                 }`}
               />
-              <h3 className="text-sm sm:text-base font-mono font-bold uppercase tracking-wider text-slate-100">
-                {isFrench ? 'CENTRE DE COMMANDE VIRTUEL' : 'GHOST COMMAND CENTER'}
+              <h3 className="text-xs sm:text-base font-mono font-bold uppercase tracking-wider text-slate-100">
+                {isFrench ? 'EXÉCUTION PAPER' : 'PAPER EXECUTION'}
               </h3>
             </div>
-            <p className="text-[11px] font-mono text-slate-400">
+            <p className="hidden sm:block text-[11px] font-mono text-slate-400">
               {isFrench
                 ? 'Simulation Haute Fréquence · Architecture Event-Driven'
                 : 'High-Frequency Paper Simulation · Event-Driven Architecture'}
@@ -174,8 +177,27 @@ export const PaperTradingSim: React.FC = () => {
           </div>
 
           <div className="flex items-center space-x-2">
+            {/* Mobile Compact Engine Toggle */}
+            <button
+              type="button"
+              onClick={() => setIsEngineActive(!isEngineActive)}
+              className={`sm:hidden px-2.5 py-1 text-[10px] font-mono font-bold uppercase tracking-wider border transition-colors ${
+                isEngineActive
+                  ? 'bg-emerald-950/70 text-emerald-400 border-emerald-700'
+                  : 'bg-rose-950/70 text-rose-400 border-rose-700'
+              }`}
+            >
+              {isEngineActive
+                ? isFrench
+                  ? '● ACTIF (STOP)'
+                  : '● ACTIVE (STOP)'
+                : isFrench
+                ? '○ PAUSE (START)'
+                : '○ PAUSED (START)'}
+            </button>
+
             <span
-              className={`px-2.5 py-1 text-xs font-mono font-bold tracking-wider rounded-none border ${
+              className={`hidden sm:inline-block px-2.5 py-1 text-xs font-mono font-bold tracking-wider rounded-none border ${
                 isEngineActive
                   ? 'bg-emerald-950/60 text-emerald-400 border-emerald-800/60'
                   : 'bg-rose-950/60 text-rose-400 border-rose-800/60'
@@ -194,14 +216,14 @@ export const PaperTradingSim: React.FC = () => {
       </div>
 
       {/* Metric Cards Row */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-4">
         {/* Available Balance */}
-        <div className="bg-[#111622] border border-[#1E2638] rounded-none p-3 sm:p-4 space-y-1 sm:space-y-2">
+        <div className="bg-[#111622] border border-[#1E2638] rounded-none p-2.5 sm:p-4 space-y-0.5 sm:space-y-2">
           <div className="flex items-center justify-between text-[10px] sm:text-[11px] font-mono text-slate-400 uppercase tracking-wider">
             <span>{isFrench ? 'Solde' : 'Balance'}</span>
-            <Wallet className="w-3.5 h-3.5 text-slate-500" />
+            <Wallet className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-slate-500" />
           </div>
-          <div className="text-lg sm:text-2xl font-mono font-bold text-slate-100 tracking-tight">
+          <div className="text-base sm:text-2xl font-mono font-bold text-slate-100 tracking-tight">
             $27,321 <span className="text-[10px] sm:text-xs font-normal text-slate-400">USDT</span>
           </div>
           <div className="hidden sm:block text-[10px] font-mono text-slate-500">
@@ -210,12 +232,12 @@ export const PaperTradingSim: React.FC = () => {
         </div>
 
         {/* Global Open PnL */}
-        <div className="bg-[#111622] border border-[#1E2638] rounded-none p-3 sm:p-4 space-y-1 sm:space-y-2">
+        <div className="bg-[#111622] border border-[#1E2638] rounded-none p-2.5 sm:p-4 space-y-0.5 sm:space-y-2">
           <div className="flex items-center justify-between text-[10px] sm:text-[11px] font-mono text-slate-400 uppercase tracking-wider">
             <span>{isFrench ? 'P&L Latent' : 'Open PnL'}</span>
-            <TrendingUp className="w-3.5 h-3.5 text-emerald-400" />
+            <TrendingUp className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-emerald-400" />
           </div>
-          <div className="text-lg sm:text-2xl font-mono font-bold text-emerald-400 tracking-tight flex items-center space-x-1">
+          <div className="text-base sm:text-2xl font-mono font-bold text-emerald-400 tracking-tight flex items-center space-x-1">
             <span>+$69.89</span>
             <span className="text-[10px] sm:text-xs text-emerald-500 font-normal">(+0.68%)</span>
           </div>
@@ -224,8 +246,8 @@ export const PaperTradingSim: React.FC = () => {
           </div>
         </div>
 
-        {/* Engine Toggle Control */}
-        <div className="col-span-2 sm:col-span-1 bg-[#111622] border border-[#1E2638] rounded-none p-3 sm:p-4 flex flex-col justify-between space-y-2">
+        {/* Engine Toggle Control (Desktop/Tablet only) */}
+        <div className="hidden sm:flex bg-[#111622] border border-[#1E2638] rounded-none p-3 sm:p-4 flex-col justify-between space-y-2">
           <div className="text-[11px] font-mono text-slate-400 uppercase tracking-wider">
             {isFrench ? 'État d\'Exécution' : 'Execution State'}
           </div>
@@ -249,8 +271,54 @@ export const PaperTradingSim: React.FC = () => {
         </div>
       </div>
 
-      {/* 2. Active Vector Allocations Table */}
-      <div className="bg-[#111622] border border-[#1E2638] rounded-none p-4 space-y-3">
+      {/* 2A. MOBILE ONLY: Zero-Scroll 2x2 Position Grid + 1-Line Strategy Bar */}
+      <div className="sm:hidden space-y-2 font-mono">
+        <div className="grid grid-cols-2 gap-1.5">
+          {POSITIONS_DATA.map((pos) => {
+            const isSelected = pos.asset === activeMobilePos.asset;
+            return (
+              <button
+                key={pos.asset}
+                type="button"
+                onClick={() => setMobileSelectedAsset(pos.asset)}
+                className={`p-2.5 border text-left transition-colors flex items-center justify-between ${
+                  isSelected
+                    ? 'bg-[#162033] border-blue-500'
+                    : 'bg-[#111622] border-[#1E2638]'
+                }`}
+              >
+                <div className="flex items-center space-x-2">
+                  <CryptoIcon symbol={pos.asset} size={18} />
+                  <div>
+                    <div className="text-xs font-bold text-white">{pos.asset}</div>
+                    <div className="text-[10px] text-slate-400">{pos.mark}</div>
+                  </div>
+                </div>
+                <span
+                  className={`text-xs font-bold ${
+                    pos.isPositive ? 'text-emerald-400' : 'text-rose-500'
+                  }`}
+                >
+                  {pos.roi}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Concise 1-Line Strategy Summary for Selected Asset */}
+        <div className="bg-[#111622] border border-[#1E2638] p-2.5 text-[11px] flex items-center justify-between gap-2">
+          <span className="text-blue-300 font-bold truncate">
+            {activeMobilePos.asset} · {isFrench ? activeMobilePos.auditTitleFr.split(':')[0] : activeMobilePos.auditTitleEn.split(':')[0]}
+          </span>
+          <span className="text-slate-400 shrink-0">
+            {isFrench ? 'Entrée' : 'Entry'} {activeMobilePos.entry}
+          </span>
+        </div>
+      </div>
+
+      {/* 2B. DESKTOP/TABLET: Active Vector Allocations Table */}
+      <div className="hidden sm:block bg-[#111622] border border-[#1E2638] rounded-none p-4 space-y-3">
         <div className="flex items-center justify-between border-b border-[#1E2638] pb-2.5">
           <div className="flex items-center space-x-2">
             <Layers className="w-3.5 h-3.5 text-blue-400" />

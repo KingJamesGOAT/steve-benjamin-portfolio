@@ -445,18 +445,18 @@ export const ProjectDetail: React.FC = () => {
         return (
           <nav
             aria-label="Project Pagination"
-            className="pt-10 sm:pt-12 border-t border-slate-200 grid grid-cols-3 items-center gap-2 sm:gap-4 font-mono select-none"
+            className="pt-6 sm:pt-12 border-t border-slate-200 grid grid-cols-3 items-center gap-2 sm:gap-4 font-mono select-none"
           >
             {/* Left: Previous Project */}
             {prevProject && (
               <Link
                 to={`/projects/${prevProject.slug}`}
-                className="group flex flex-col items-start text-left justify-self-start max-w-full"
+                className="group flex flex-col items-center sm:items-start text-center sm:text-left justify-self-stretch sm:justify-self-start py-2 px-2 sm:p-0 border sm:border-0 border-slate-200 bg-white sm:bg-transparent hover:border-electric transition-colors"
               >
-                <span className="text-[11px] sm:text-xs text-slate-400 group-hover:text-electric transition-colors">
+                <span className="text-xs font-semibold sm:font-normal text-slate-700 sm:text-slate-400 group-hover:text-electric transition-colors">
                   {isFrench ? '← Précédent' : '← Previous'}
                 </span>
-                <span className="text-xs sm:text-sm md:text-base font-bold text-fintech-primary group-hover:text-electric transition-colors line-clamp-2">
+                <span className="hidden sm:block text-sm md:text-base font-bold text-fintech-primary group-hover:text-electric transition-colors line-clamp-2">
                   {renderTitle(prevProject)}
                 </span>
               </Link>
@@ -472,21 +472,21 @@ export const ProjectDetail: React.FC = () => {
                   if (el) el.scrollIntoView({ behavior: 'smooth' });
                 }, 50);
               }}
-              className="justify-self-center text-center text-xs sm:text-sm font-medium text-slate-500 hover:text-electric transition-colors cursor-pointer py-1"
+              className="justify-self-stretch sm:justify-self-center text-center text-xs sm:text-sm font-semibold sm:font-medium text-slate-700 sm:text-slate-500 hover:text-electric transition-colors cursor-pointer py-2 px-2 sm:py-1 border sm:border-0 border-slate-200 bg-slate-50 sm:bg-transparent"
             >
-              {isFrench ? 'Tous les Projets' : 'All Projects'}
+              {isFrench ? 'Tous' : 'All Projects'}
             </button>
 
             {/* Right: Next Project */}
             {nextProject && (
               <Link
                 to={`/projects/${nextProject.slug}`}
-                className="group flex flex-col items-end text-right justify-self-end max-w-full"
+                className="group flex flex-col items-center sm:items-end text-center sm:text-right justify-self-stretch sm:justify-self-end py-2 px-2 sm:p-0 border sm:border-0 border-slate-200 bg-white sm:bg-transparent hover:border-electric transition-colors"
               >
-                <span className="text-[11px] sm:text-xs text-slate-400 group-hover:text-electric transition-colors">
+                <span className="text-xs font-semibold sm:font-normal text-slate-700 sm:text-slate-400 group-hover:text-electric transition-colors">
                   {isFrench ? 'Suivant →' : 'Next →'}
                 </span>
-                <span className="text-xs sm:text-sm md:text-base font-bold text-fintech-primary group-hover:text-electric transition-colors line-clamp-2">
+                <span className="hidden sm:block text-sm md:text-base font-bold text-fintech-primary group-hover:text-electric transition-colors line-clamp-2">
                   {renderTitle(nextProject)}
                 </span>
               </Link>

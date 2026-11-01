@@ -61,7 +61,7 @@ export const Home: React.FC = () => {
           className="min-h-0 sm:min-h-[calc(100vh-9.5rem)] flex flex-col justify-between scroll-mt-20 sm:scroll-mt-24"
         >
           {/* Two-Column FinTech Hero Grid */}
-          <div className="my-0 sm:my-auto pt-1 pb-2 sm:py-8 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-16 items-center">
+          <div className="my-0 sm:my-auto pt-2 pb-2 sm:py-8 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-16 items-center">
             {/* Left Column: Oversized Typography & CTAs */}
             <div className="lg:col-span-7 space-y-5 sm:space-y-8">
               {/* Hero Headline & Subtitle */}

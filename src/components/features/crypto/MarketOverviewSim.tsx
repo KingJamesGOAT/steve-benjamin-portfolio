@@ -645,8 +645,8 @@ export const MarketOverviewSim: React.FC = () => {
               </div>
             </div>
 
-            {/* Telemetry Metrics Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+            {/* Telemetry Metrics Grid (Hidden on mobile to keep popup ultra-compact) */}
+            <div className="hidden sm:grid sm:grid-cols-4 gap-2 text-xs">
               <div className="bg-[#0B0E14] border border-[#1E2638] p-2.5">
                 <span className="text-[10px] text-slate-500 uppercase">
                   {isFrench ? 'Volume 24h' : '24h Volume'}

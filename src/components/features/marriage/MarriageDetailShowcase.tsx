@@ -199,9 +199,9 @@ export const MarriageDetailShowcase: React.FC = () => {
         {/* Two-Column Wedding Interface Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
           {/* Left: Authentic Wedding Card Form */}
-          <div className="lg:col-span-7 bg-[#FAF8F5] border border-stone-200 p-3.5 sm:p-7 shadow-sm space-y-5 sm:space-y-6">
-            {/* Wedding Stationery Card Header */}
-            <div className="text-center space-y-1 pb-4 border-b border-stone-200/80">
+          <div className="lg:col-span-7 bg-[#FAF8F5] border border-stone-200 p-3.5 sm:p-7 shadow-sm space-y-4 sm:space-y-6">
+            {/* Wedding Stationery Card Header (Desktop only to keep mobile form concise) */}
+            <div className="hidden sm:block text-center space-y-1 pb-4 border-b border-stone-200/80">
               <span className="text-[10px] font-mono tracking-widest text-stone-500 uppercase">
                 {isFrench ? 'Invitation Personnelle' : 'Personal Invitation'}
               </span>
@@ -283,7 +283,7 @@ export const MarriageDetailShowcase: React.FC = () => {
                     required
                   />
                 </div>
-                <div className="space-y-1">
+                <div className="hidden sm:block space-y-1">
                   <label className="text-[11px] font-mono text-stone-600">
                     {isFrench ? 'Courriel' : 'Email'}
                   </label>
@@ -293,7 +293,6 @@ export const MarriageDetailShowcase: React.FC = () => {
                     onChange={(e) => setGuestEmail(e.target.value)}
                     className="w-full text-xs font-sans px-3 py-2 border border-stone-200 rounded-none bg-white focus:outline-none focus:border-stone-800"
                     placeholder="john.doe@example.com"
-                    required
                   />
                 </div>
               </div>
@@ -547,8 +546,37 @@ export const MarriageDetailShowcase: React.FC = () => {
             </div>
           </div>
 
-          {/* Table Body */}
-          <div className="overflow-x-auto">
+          {/* MOBILE ONLY: Zero-Scroll Compact Guest Rows */}
+          <div className="sm:hidden divide-y divide-slate-100 font-mono text-xs">
+            {records.map((rec) => (
+              <div key={rec.id} className="p-3 flex items-center justify-between gap-2">
+                <div className="min-w-0">
+                  <div className="font-bold text-slate-800 truncate">{rec.name}</div>
+                  <div className="text-[10px] text-slate-500">
+                    {rec.attending
+                      ? `${rec.adults} ${isFrench ? 'ad.' : 'ad.'}${rec.children > 0 ? ` + ${rec.children} ${isFrench ? 'enf.' : 'kid'}` : ''} · ${translateDietary(rec.dietary)}`
+                      : isFrench
+                      ? 'Absence confirmée'
+                      : 'Not attending'}
+                  </div>
+                </div>
+                <div className="shrink-0">
+                  {rec.attending ? (
+                    <span className="px-2 py-0.5 bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-bold">
+                      {isFrench ? 'Présent' : 'Accepted'}
+                    </span>
+                  ) : (
+                    <span className="px-2 py-0.5 bg-stone-100 text-stone-600 border border-stone-200 text-[10px] font-bold">
+                      {isFrench ? 'Absent' : 'Declined'}
+                    </span>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* DESKTOP/TABLET: Full Spreadsheet Table */}
+          <div className="hidden sm:block overflow-x-auto">
             <table className="w-full text-left text-xs font-mono border-collapse">
               <thead>
                 <tr className="bg-slate-100/80 border-b border-slate-200 text-slate-700">

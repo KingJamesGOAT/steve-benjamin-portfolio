@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface BentoTile {
@@ -74,6 +74,21 @@ export const TechBentoGrid: React.FC = () => {
   const { i18n } = useTranslation();
   const isFrench = Boolean(i18n.language?.startsWith('fr'));
   const [selectedMobileId, setSelectedMobileId] = useState<string>('frontend');
+  const inspectorRef = useRef<HTMLDivElement>(null);
+
+  const handleMobileSelect = (id: string) => {
+    setSelectedMobileId(id);
+    setTimeout(() => {
+      if (inspectorRef.current) {
+        const rect = inspectorRef.current.getBoundingClientRect();
+        const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+        // If the inspector box is near or below the bottom of the screen, scroll smoothly so it's clearly visible
+        if (rect.bottom > viewportHeight - 24 || rect.top < 80) {
+          inspectorRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+    }, 40);
+  };
 
   const tiles: BentoTile[] = [
     // PILLAR 1: FRONTEND
@@ -259,7 +274,7 @@ export const TechBentoGrid: React.FC = () => {
         </span>
       </div>
 
-      {/* MOBILE ONLY: Option A — Compact 2x3 Grid + Live Inspector Box */}
+      {/* MOBILE ONLY: Option A — Compact 2x3 Grid + Minimalist Live Inspector Box */}
       <div className="sm:hidden space-y-2 select-none">
         <div className="grid grid-cols-2 gap-1.5">
           {tiles.map((tile) => {
@@ -268,7 +283,7 @@ export const TechBentoGrid: React.FC = () => {
               <button
                 key={tile.id}
                 type="button"
-                onClick={() => setSelectedMobileId(tile.id)}
+                onClick={() => handleMobileSelect(tile.id)}
                 className={`px-3 py-2.5 text-left font-mono text-xs font-bold border transition-all flex items-center justify-between ${
                   isActive
                     ? 'bg-electric text-white border-electric shadow-xs'
@@ -286,31 +301,25 @@ export const TechBentoGrid: React.FC = () => {
           })}
         </div>
 
-        {/* Live Inspector Box for the Selected Skill */}
-        <div className="bg-[#0A0D14] border border-slate-800 p-3.5 space-y-2 text-white">
-          <div className="flex items-center justify-between gap-2 border-b border-slate-800/80 pb-2">
-            <h3 className="text-xs font-bold font-mono text-white">
-              {isFrench ? activeMobileTile.titleFr : activeMobileTile.titleEn}
-            </h3>
-            <span className="text-[10px] font-mono text-blue-400 shrink-0">
-              {activeMobileTile.tools[0]}
-            </span>
-          </div>
-
-          <p className="text-xs text-slate-300 font-sans leading-relaxed">
-            {isFrench ? activeMobileTile.descFr : activeMobileTile.descEn}
-          </p>
-
-          <div className="flex flex-wrap gap-1.5 pt-0.5">
+        {/* Ultra-Concise Live Inspector Box (No redundant title header, ~30% less text) */}
+        <div
+          ref={inspectorRef}
+          className="bg-[#0A0D14] border border-slate-800 p-3 space-y-2 text-white scroll-mt-24"
+        >
+          <div className="flex flex-wrap gap-1.5">
             {activeMobileTile.tools.map((tool) => (
               <span
                 key={tool}
-                className="px-2 py-0.5 text-[10px] font-mono bg-slate-900 text-blue-200 border border-slate-800"
+                className="px-2 py-0.5 text-[10px] font-mono font-semibold bg-electric/20 text-blue-300 border border-blue-500/30"
               >
                 {tool}
               </span>
             ))}
           </div>
+
+          <p className="text-[11px] text-slate-300 font-sans leading-snug">
+            {isFrench ? activeMobileTile.descFr : activeMobileTile.descEn}
+          </p>
         </div>
       </div>
 

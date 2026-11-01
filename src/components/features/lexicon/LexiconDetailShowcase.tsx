@@ -659,11 +659,29 @@ export const LexiconDetailShowcase: React.FC = () => {
         </div>
 
         {/* Timeline Interactive Component */}
-        <div className="bg-[#05050a] border border-white/10 shadow-2xl p-6 sm:p-8 space-y-6">
+        <div className="bg-[#05050a] border border-white/10 shadow-2xl p-4 sm:p-8 space-y-4 sm:space-y-6">
+          {/* MOBILE ONLY: Compact 5-Year Pill Selector (Zero vertical bloat) */}
+          <div className="sm:hidden flex flex-wrap gap-1.5">
+            {timelineEvents.map((evt) => (
+              <button
+                key={evt.id}
+                type="button"
+                onClick={() => setSelectedEventId(evt.id)}
+                className={`px-2.5 py-1.5 font-mono text-xs font-bold border transition-colors ${
+                  selectedEventId === evt.id
+                    ? 'bg-blue-600 text-white border-blue-400'
+                    : 'bg-black/50 text-slate-400 border-white/10'
+                }`}
+              >
+                {evt.year} AD
+              </button>
+            ))}
+          </div>
+
           {/* Timeline Grid: Event Buttons & Inspector */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-            {/* Left: Interactive Chronological Scrubber */}
-            <div className="lg:col-span-5 space-y-2">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 items-start">
+            {/* Desktop Left: Interactive Chronological Scrubber */}
+            <div className="hidden sm:block lg:col-span-5 space-y-2">
               <span className="text-[11px] font-mono text-slate-500 uppercase tracking-wider block">
                 {isFrench ? 'Sélectionner un jalon historique :' : 'Select historical milestone:'}
               </span>

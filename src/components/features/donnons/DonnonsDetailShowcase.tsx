@@ -13,6 +13,7 @@ export const DonnonsDetailShowcase: React.FC = () => {
   // Quiz interactive state
   const [quizAnswer, setQuizAnswer] = useState<'none' | 'no' | 'yes'>('no');
   const [activeTab, setActiveTab] = useState<0 | 1 | 2>(0);
+  const [closedDrives, setClosedDrives] = useState<string[]>([]);
 
   // Partner Trophy filter state
   const [selectedYear, setSelectedYear] = useState<string>('2025');
@@ -103,12 +104,12 @@ export const DonnonsDetailShowcase: React.FC = () => {
               </div>
 
               <div className="space-y-2">
-                <h3 className="text-xl sm:text-2xl font-bold font-mono text-white leading-tight">
+                <h3 className="text-lg sm:text-2xl font-bold font-mono text-white leading-tight">
                   {isFrench
                     ? 'As-tu été piqué par une tique dans les 4 dernières semaines ?'
                     : 'Have you been bitten by a tick in the last 4 weeks?'}
                 </h3>
-                <p className="text-xs sm:text-sm text-[#D5D9ED] leading-relaxed font-sans">
+                <p className="hidden sm:block text-xs sm:text-sm text-[#D5D9ED] leading-relaxed font-sans">
                   {isFrench
                     ? 'Ce critère prévient la transmission potentielle de bactéries ou virus transmissibles par les tiques.'
                     : 'This safety criterion prevents the potential transmission of tick-borne bacteria or viruses.'}
@@ -116,69 +117,69 @@ export const DonnonsDetailShowcase: React.FC = () => {
               </div>
 
               {/* Action Buttons styled as QuizzCobrand */}
-              <div className="flex flex-wrap gap-3 font-mono text-xs sm:text-sm pt-1">
+              <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 sm:gap-3 font-mono text-xs sm:text-sm pt-1">
                 <button
                   type="button"
                   onClick={() => setQuizAnswer('no')}
-                  className={`px-4 sm:px-5 py-2.5 sm:py-3 border-2 border-black font-bold transition-all flex items-center space-x-2 ${
+                  className={`px-3 sm:px-5 py-2.5 sm:py-3 border-2 border-black font-bold transition-all flex items-center justify-center space-x-1.5 sm:space-x-2 ${
                     quizAnswer === 'no'
-                      ? 'bg-[#4ade80] text-black shadow-[4px_4px_0px_0px_#000]'
+                      ? 'bg-[#4ade80] text-black shadow-[3px_3px_0px_0px_#000] sm:shadow-[4px_4px_0px_0px_#000]'
                       : 'bg-white text-black shadow-[2px_2px_0px_0px_#000] hover:shadow-[1px_1px_0px_0px_#000] hover:translate-y-[1px]'
                   }`}
                 >
-                  <CheckCircle2 className="w-4 h-4 text-emerald-800" />
-                  <span>{isFrench ? 'Non, aucune piqûre' : 'No, no bites.'}</span>
+                  <CheckCircle2 className="w-4 h-4 text-emerald-800 shrink-0" />
+                  <span>{isFrench ? 'Non' : 'No'}</span>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => setQuizAnswer('yes')}
-                  className={`px-4 sm:px-5 py-2.5 sm:py-3 border-2 border-black font-bold transition-all flex items-center space-x-2 ${
+                  className={`px-3 sm:px-5 py-2.5 sm:py-3 border-2 border-black font-bold transition-all flex items-center justify-center space-x-1.5 sm:space-x-2 ${
                     quizAnswer === 'yes'
-                      ? 'bg-[#ff9166] text-black shadow-[4px_4px_0px_0px_#000]'
+                      ? 'bg-[#ff9166] text-black shadow-[3px_3px_0px_0px_#000] sm:shadow-[4px_4px_0px_0px_#000]'
                       : 'bg-white text-black shadow-[2px_2px_0px_0px_#000] hover:shadow-[1px_1px_0px_0px_#000] hover:translate-y-[1px]'
                   }`}
                 >
-                  <AlertCircle className="w-4 h-4 text-amber-900" />
-                  <span>{isFrench ? 'Oui, récemment' : 'Yes, recently'}</span>
+                  <AlertCircle className="w-4 h-4 text-amber-900 shrink-0" />
+                  <span>{isFrench ? 'Oui' : 'Yes'}</span>
                 </button>
               </div>
 
               {/* Feedback Display */}
-              <div className="pt-2">
+              <div className="pt-1 sm:pt-2">
                 {quizAnswer === 'no' ? (
-                  <div className="p-4 bg-[#1f3f2d] border-2 border-black text-emerald-100 shadow-[3px_3px_0px_0px_#000] space-y-1">
+                  <div className="p-3 sm:p-4 bg-[#1f3f2d] border-2 border-black text-emerald-100 shadow-[3px_3px_0px_0px_#000] space-y-1">
                     <div className="flex items-center justify-between text-xs font-mono font-bold">
                       <span className="px-2 py-0.5 bg-[#4ade80] text-black border border-black uppercase text-[10px]">
                         Tick: No
                       </span>
                       <span className="text-emerald-400 font-bold">
-                        {isFrench ? 'Éligible au don' : 'Eligible'}
+                        {isFrench ? 'Éligible au don ✓' : 'Eligible ✓'}
                       </span>
                     </div>
-                    <span className="font-bold text-white block text-sm sm:text-base font-mono pt-1">
+                    <span className="font-bold text-white block text-xs sm:text-base font-mono pt-1">
                       {isFrench ? 'La tique a raté sa cible, zéro souci !' : 'Target missed, all clear!'}
                     </span>
-                    <p className="text-xs text-emerald-200/90 font-sans leading-relaxed">
+                    <p className="hidden sm:block text-xs text-emerald-200/90 font-sans leading-relaxed">
                       {isFrench
                         ? 'Tu es pleinement éligible pour donner ton sang lors de la prochaine collecte en entreprise.'
                         : 'You are fully eligible to donate blood at the upcoming corporate mobile drive.'}
                     </p>
                   </div>
                 ) : (
-                  <div className="p-4 bg-[#3d2319] border-2 border-black text-amber-100 shadow-[3px_3px_0px_0px_#000] space-y-1">
+                  <div className="p-3 sm:p-4 bg-[#3d2319] border-2 border-black text-amber-100 shadow-[3px_3px_0px_0px_#000] space-y-1">
                     <div className="flex items-center justify-between text-xs font-mono font-bold">
                       <span className="px-2 py-0.5 bg-[#ff9166] text-black border border-black uppercase text-[10px]">
                         Tick: Yes
                       </span>
                       <span className="text-amber-400 font-bold">
-                        {isFrench ? 'Report temporaire' : 'Temporary buffer'}
+                        {isFrench ? 'Report 4 semaines' : '4-week buffer'}
                       </span>
                     </div>
-                    <span className="font-bold text-white block text-sm sm:text-base font-mono pt-1">
+                    <span className="font-bold text-white block text-xs sm:text-base font-mono pt-1">
                       {isFrench ? 'Délai de précaution de 4 semaines' : '4-week precaution buffer'}
                     </span>
-                    <p className="text-xs text-amber-200/90 font-sans leading-relaxed">
+                    <p className="hidden sm:block text-xs text-amber-200/90 font-sans leading-relaxed">
                       {isFrench
                         ? 'Simple report temporaire par précaution. Tu pourras participer dès la fin de ce délai sans aucune démarche compliquée !'
                         : 'Simple temporary deferral for peace of mind. You will be able to donate as soon as this period elapses!'}
@@ -227,28 +228,100 @@ export const DonnonsDetailShowcase: React.FC = () => {
         </div>
 
         {/* Real Admin Dashboard UI from DashboardAdmin.vue */}
-        <div className="border-2 border-black shadow-[3px_3px_0px_0px_#000] sm:shadow-[4px_4px_0px_0px_#000] bg-white text-slate-900 p-3.5 sm:p-8 space-y-5 sm:space-y-6">
+        <div className="border-2 border-black shadow-[3px_3px_0px_0px_#000] sm:shadow-[4px_4px_0px_0px_#000] bg-white text-slate-900 p-3.5 sm:p-8 space-y-4 sm:space-y-6">
           {/* Warning Banner: Collectes à clore */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-[#ff9166] border-2 border-black p-3.5 shadow-[3px_3px_0px_0px_#000]">
+          <div
+            className={`flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 sm:gap-3 border-2 border-black p-3 sm:p-3.5 shadow-[3px_3px_0px_0px_#000] transition-colors ${
+              closedDrives.length >= 2 ? 'bg-[#4ade80]' : 'bg-[#ff9166]'
+            }`}
+          >
             <div className="flex items-center space-x-2 font-mono font-bold text-xs sm:text-sm text-slate-950">
-              <span className="px-1.5 py-0.5 bg-black text-white text-[10px]">URGENT</span>
-              <span>{isFrench ? 'Vous avez 2 collectes mobiles à clore aujourd\'hui.' : 'You have 2 mobile blood drives awaiting closure.'}</span>
+              <span className="px-1.5 py-0.5 bg-black text-white text-[10px]">
+                {closedDrives.length >= 2 ? 'OK' : 'URGENT'}
+              </span>
+              <span>
+                {closedDrives.length >= 2
+                  ? isFrench
+                    ? 'Toutes les collectes ont été clôturées ✓'
+                    : 'All mobile blood drives closed ✓'
+                  : isFrench
+                  ? `${2 - closedDrives.length} collecte(s) à clore aujourd'hui.`
+                  : `${2 - closedDrives.length} mobile drive(s) awaiting closure.`}
+              </span>
             </div>
             <button
               type="button"
-              className="bg-black text-white px-3 py-1 font-mono text-xs font-bold hover:bg-slate-800 transition-colors"
+              onClick={() =>
+                closedDrives.length >= 2
+                  ? setClosedDrives([])
+                  : setClosedDrives(['bcge', 'swisscom'])
+              }
+              className="bg-black text-white px-3 py-1 font-mono text-xs font-bold hover:bg-slate-800 transition-colors cursor-pointer"
             >
-              {isFrench ? 'Traiter tout' : 'Batch process'}
+              {closedDrives.length >= 2
+                ? isFrench
+                  ? 'Réinitialiser'
+                  : 'Reset'
+                : isFrench
+                ? 'Traiter tout'
+                : 'Batch process'}
             </button>
           </div>
 
           {/* Table 1: Collectes à clore */}
           <div className="space-y-2">
-            <h4 className="text-base font-bold font-mono text-slate-900">
+            <h4 className="text-sm sm:text-base font-bold font-mono text-slate-900">
               {isFrench ? 'Collectes à clore (Fin de mission)' : 'Drives pending closure'}
             </h4>
 
-            <div className="border-2 border-black overflow-x-auto shadow-[3px_3px_0px_0px_#000]">
+            {/* MOBILE ONLY: Zero-Scroll Stacked Cards */}
+            <div className="sm:hidden space-y-2 font-mono text-xs">
+              {[
+                { id: 'bcge', name: 'BCGE Genève', date: '02.07.2026', staff: isFrench ? '280 inscrits' : '280 staff' },
+                { id: 'swisscom', name: 'Swisscom Genève', date: '15.08.2026', staff: isFrench ? '140 inscrits' : '140 staff' },
+              ].map((drive) => {
+                const isClosed = closedDrives.includes(drive.id);
+                return (
+                  <div
+                    key={drive.id}
+                    className="border-2 border-black bg-[#fffbf1] p-3 shadow-[2px_2px_0px_0px_#000] flex items-center justify-between gap-2"
+                  >
+                    <div>
+                      <div className="font-bold text-slate-900">{drive.name}</div>
+                      <div className="text-[11px] text-blue-700 font-bold">
+                        {drive.staff} <span className="text-slate-500 font-normal">· {drive.date}</span>
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setClosedDrives((prev) =>
+                          prev.includes(drive.id)
+                            ? prev.filter((x) => x !== drive.id)
+                            : [...prev, drive.id]
+                        )
+                      }
+                      className={`px-3 py-1.5 font-bold border border-black shadow-[2px_2px_0px_0px_#000] transition-colors ${
+                        isClosed
+                          ? 'bg-slate-200 text-slate-700'
+                          : 'bg-[#5bb124] text-white'
+                      }`}
+                    >
+                      {isClosed
+                        ? isFrench
+                          ? 'Clôturé ✓'
+                          : 'Closed ✓'
+                        : isFrench
+                        ? 'Clore'
+                        : 'Close'}
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* DESKTOP/TABLET: Full Table */}
+            <div className="hidden sm:block border-2 border-black overflow-x-auto shadow-[3px_3px_0px_0px_#000]">
               <table className="w-full text-left text-xs font-mono">
                 <thead className="bg-[#ffeeab] border-b-2 border-black text-slate-900 font-bold uppercase text-[10px]">
                   <tr>
@@ -269,8 +342,24 @@ export const DonnonsDetailShowcase: React.FC = () => {
                       {isFrench ? '280 employés' : '280 employees'}
                     </td>
                     <td className="p-3 text-right space-x-2">
-                      <button type="button" className="px-3 py-1 bg-[#5bb124] text-white font-bold border border-black shadow-[2px_2px_0px_0px_#000]">
-                        {isFrench ? 'Clore' : 'Close'}
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setClosedDrives((prev) =>
+                            prev.includes('bcge') ? prev.filter((x) => x !== 'bcge') : [...prev, 'bcge']
+                          )
+                        }
+                        className={`px-3 py-1 font-bold border border-black shadow-[2px_2px_0px_0px_#000] cursor-pointer ${
+                          closedDrives.includes('bcge') ? 'bg-slate-200 text-slate-700' : 'bg-[#5bb124] text-white'
+                        }`}
+                      >
+                        {closedDrives.includes('bcge')
+                          ? isFrench
+                            ? 'Clôturé ✓'
+                            : 'Closed ✓'
+                          : isFrench
+                          ? 'Clore'
+                          : 'Close'}
                       </button>
                     </td>
                   </tr>
@@ -284,8 +373,24 @@ export const DonnonsDetailShowcase: React.FC = () => {
                       {isFrench ? '140 employés' : '140 employees'}
                     </td>
                     <td className="p-3 text-right space-x-2">
-                      <button type="button" className="px-3 py-1 bg-[#5bb124] text-white font-bold border border-black shadow-[2px_2px_0px_0px_#000]">
-                        {isFrench ? 'Clore' : 'Close'}
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setClosedDrives((prev) =>
+                            prev.includes('swisscom') ? prev.filter((x) => x !== 'swisscom') : [...prev, 'swisscom']
+                          )
+                        }
+                        className={`px-3 py-1 font-bold border border-black shadow-[2px_2px_0px_0px_#000] cursor-pointer ${
+                          closedDrives.includes('swisscom') ? 'bg-slate-200 text-slate-700' : 'bg-[#5bb124] text-white'
+                        }`}
+                      >
+                        {closedDrives.includes('swisscom')
+                          ? isFrench
+                            ? 'Clôturé ✓'
+                            : 'Closed ✓'
+                          : isFrench
+                          ? 'Clore'
+                          : 'Close'}
                       </button>
                     </td>
                   </tr>
@@ -407,10 +512,10 @@ export const DonnonsDetailShowcase: React.FC = () => {
         </div>
 
         {/* Real Trophies Grid UI from TropheesVitrine.vue */}
-        <div className="border-2 border-black shadow-[3px_3px_0px_0px_#000] sm:shadow-[4px_4px_0px_0px_#000] bg-[#fffbf1] p-3.5 sm:p-8 space-y-5 sm:space-y-6">
+        <div className="border-2 border-black shadow-[3px_3px_0px_0px_#000] sm:shadow-[4px_4px_0px_0px_#000] bg-[#fffbf1] p-3.5 sm:p-8 space-y-4 sm:space-y-6">
           {/* Top Filter Buttons */}
-          <div className="flex flex-wrap items-center justify-between gap-3 border-b-2 border-black pb-4">
-            <div className="flex items-center space-x-2 text-xs font-mono">
+          <div className="flex flex-wrap items-center justify-between gap-2.5 sm:gap-3 border-b-2 border-black pb-3 sm:pb-4">
+            <div className="hidden sm:flex items-center space-x-2 text-xs font-mono">
               <span className="font-bold text-slate-700">{isFrench ? 'Année :' : 'Year:'}</span>
               {['2026', '2025', '2024'].map((year) => (
                 <button
@@ -428,12 +533,12 @@ export const DonnonsDetailShowcase: React.FC = () => {
               ))}
             </div>
 
-            <div className="flex items-center space-x-2 text-xs font-mono">
-              <span className="font-bold text-slate-700">{isFrench ? 'Catégorie :' : 'Award:'}</span>
+            <div className="flex items-center space-x-1.5 sm:space-x-2 text-xs font-mono">
+              <span className="font-bold text-slate-700">{isFrench ? 'Prix :' : 'Award:'}</span>
               {[
                 { id: 'all', label: isFrench ? 'Tous' : 'All' },
-                { id: 'gold', label: isFrench ? 'Prix Or' : 'Gold Award' },
-                { id: 'silver', label: isFrench ? 'Prix Argent' : 'Silver Award' },
+                { id: 'gold', label: isFrench ? 'Or' : 'Gold' },
+                { id: 'silver', label: isFrench ? 'Argent' : 'Silver' },
               ].map((cat) => (
                 <button
                   key={cat.id}
@@ -452,8 +557,8 @@ export const DonnonsDetailShowcase: React.FC = () => {
           </div>
 
           {/* Partner Cards Grid using real logos from companies_logo/ */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            {filteredPartners.map((company) => {
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+            {filteredPartners.map((company, idx) => {
               const localizedAward =
                 company.award === 'Or 2025'
                   ? (isFrench ? 'Or 2025' : 'Gold 2025')
@@ -464,27 +569,29 @@ export const DonnonsDetailShowcase: React.FC = () => {
               return (
                 <div
                   key={company.name}
-                  className="bg-white border-2 border-black p-4 shadow-[3px_3px_0px_0px_#000] flex flex-col items-center justify-between text-center space-y-3 hover:translate-y-[-2px] transition-transform"
+                  className={`bg-white border-2 border-black p-3 sm:p-4 shadow-[2px_2px_0px_0px_#000] sm:shadow-[3px_3px_0px_0px_#000] flex-col items-center justify-between text-center space-y-2 sm:space-y-3 hover:translate-y-[-2px] transition-transform ${
+                    idx >= 4 ? 'hidden sm:flex' : 'flex'
+                  }`}
                 >
-                  <div className="h-12 flex items-center justify-center w-full">
+                  <div className="h-10 sm:h-12 flex items-center justify-center w-full">
                     <img
                       src={`${baseUrl}images/donnons/companies_logo/${company.logo}`}
                       alt={company.name}
-                      className="max-h-10 max-w-[80%] object-contain"
+                      className="max-h-8 sm:max-h-10 max-w-[80%] object-contain"
                       onError={(e) => {
                         (e.target as HTMLElement).style.display = 'none';
                       }}
                     />
                   </div>
 
-                  <div className="w-full border-t border-slate-200 pt-2 font-mono">
+                  <div className="w-full border-t border-slate-200 pt-1.5 sm:pt-2 font-mono">
                     <span className="font-bold text-xs text-slate-900 block truncate">
                       {company.name}
                     </span>
                     <span className="text-[10px] text-[#0073e6] font-bold block">
                       {localizedAward}
                     </span>
-                    <span className="text-[9px] text-slate-500 block">
+                    <span className="hidden sm:block text-[9px] text-slate-500">
                       {isFrench
                         ? `Partenaire du Don · ${company.years} ans`
                         : `Blood Drive Partner · ${company.years} yrs`}
