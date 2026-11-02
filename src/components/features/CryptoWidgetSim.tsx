@@ -193,6 +193,20 @@ export const CryptoWidgetSim: React.FC = () => {
   const [selectedAsset, setSelectedAsset] = useState<'BTC' | 'ETH' | 'SOL'>('BTC');
   const [chartMode, setChartMode] = useState<'line' | 'candles'>('line');
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [isMobile, setIsMobile] = useState<boolean>(() =>
+    typeof window !== 'undefined' ? window.innerWidth < 640 : false
+  );
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const mq = window.matchMedia('(max-width: 639px)');
+    const update = (e: MediaQueryListEvent | MediaQueryList) => setIsMobile(e.matches);
+    update(mq);
+    mq.addEventListener('change', update);
+    return () => mq.removeEventListener('change', update);
+  }, []);
+
+  const effectiveChartMode = isMobile ? 'line' : chartMode;
 
   const asset = ASSETS[selectedAsset];
   const candles = asset.candles;
@@ -218,10 +232,10 @@ export const CryptoWidgetSim: React.FC = () => {
   // Normalized SVG coordinate space (0..1000 x 0..240) for pure vector geometry only
   const svgWidth = 1000;
   const svgHeight = 240;
-  const padLeft = 16;
-  const padRight = 68; // Reserve clean right gutter for Y-axis price labels
-  const padTop = 22;
-  const padBottom = 26;
+  const padLeft = isMobile ? 6 : 16;
+  const padRight = isMobile ? 6 : 68; // Edge-to-edge on mobile; right gutter for Y-axis on desktop
+  const padTop = isMobile ? 28 : 22;
+  const padBottom = isMobile ? 14 : 26;
 
   const plotWidth = svgWidth - padLeft - padRight;
   const plotHeight = svgHeight - padTop - padBottom;
@@ -272,10 +286,10 @@ export const CryptoWidgetSim: React.FC = () => {
 
   return (
     <div className="bg-[#0B0E14] border border-[#1E2638] text-slate-200 rounded-none font-sans shadow-2xl overflow-hidden select-none flex flex-col">
-      {/* 1. Header Bar: Pair Switcher + Live Price + Line/Candles Toggle */}
-      <div className="bg-[#111622] border-b border-[#1E2638] px-2.5 sm:px-5 h-12 flex items-center justify-between gap-1.5 sm:gap-3 font-mono text-xs overflow-hidden shrink-0 whitespace-nowrap">
+      {/* 1. Header Bar: Clean Mobile Coin Ticker & Asset Pills / Desktop Full Controls */}
+      <div className="bg-[#111622] border-b border-[#1E2638] px-3 sm:px-5 h-12 flex items-center justify-between gap-2 sm:gap-3 font-mono text-xs overflow-hidden shrink-0 whitespace-nowrap">
         <div className="flex items-center gap-2 sm:gap-4 overflow-hidden">
-          {/* Desktop 3-Asset Switcher / Mobile Compact Label */}
+          {/* Desktop 3-Asset Switcher */}
           <div className="hidden sm:flex items-center border border-[#1E2638] bg-[#0A0E17] p-0.5 text-[11px]">
             {(['BTC', 'ETH', 'SOL'] as const).map((sym) => {
               const isSelected = selectedAsset === sym;
@@ -295,20 +309,17 @@ export const CryptoWidgetSim: React.FC = () => {
               );
             })}
           </div>
-          <span className="sm:hidden font-bold text-slate-100 tracking-wider text-xs shrink-0">
-            {asset.pair}
-          </span>
 
           {/* Live / Scrubbed Price & Delta */}
           <div className="flex items-baseline space-x-1.5 sm:space-x-2 shrink-0">
-            <span className="text-xs sm:text-lg font-bold text-slate-100 tracking-tight tabular-nums">
+            <span className="text-sm sm:text-lg font-bold text-slate-100 tracking-tight tabular-nums">
               ${displayedPrice.toLocaleString('en-US', {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
               })}
             </span>
             <span
-              className={`text-[10px] sm:text-xs font-semibold tabular-nums ${
+              className={`text-[11px] sm:text-xs font-semibold tabular-nums ${
                 (activePt ? activePt.isPositive : asset.baseChange >= 0)
                   ? 'text-emerald-400'
                   : 'text-rose-500'
@@ -324,13 +335,35 @@ export const CryptoWidgetSim: React.FC = () => {
           </div>
         </div>
 
-        {/* Minimalist Line / Candles Switcher */}
-        <div className="flex items-center space-x-2 shrink-0">
-          <div className="flex items-center border border-[#1E2638] bg-[#0A0E17] p-0.5 font-mono text-[10px]">
+        {/* Right Side: Touch-Friendly Asset Pills on Mobile / Line-Candles Toggle on Desktop */}
+        <div className="flex items-center shrink-0">
+          {/* Mobile Only: Minimalist Touch Asset Selector (BTC / ETH / SOL) */}
+          <div className="flex sm:hidden items-center border border-[#1E2638] bg-[#0A0E17] p-0.5 text-[10px]">
+            {(['BTC', 'ETH', 'SOL'] as const).map((sym) => {
+              const isSelected = selectedAsset === sym;
+              return (
+                <button
+                  key={sym}
+                  type="button"
+                  onClick={() => setSelectedAsset(sym)}
+                  className={`px-2.5 py-1 transition-colors ${
+                    isSelected
+                      ? 'bg-[#1D283A] text-white font-bold border border-[#38BDF8]/40'
+                      : 'text-slate-400'
+                  }`}
+                >
+                  {sym}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Desktop Only: Line / Candles Switcher (Removed on mobile per user request) */}
+          <div className="hidden sm:flex items-center border border-[#1E2638] bg-[#0A0E17] p-0.5 font-mono text-[10px]">
             <button
               type="button"
               onClick={() => setChartMode('line')}
-              className={`px-2 py-0.5 sm:px-2.5 transition-all cursor-pointer ${
+              className={`px-2.5 py-0.5 transition-all cursor-pointer ${
                 chartMode === 'line'
                   ? 'bg-[#1D283A] text-sky-400 font-bold border border-[#38BDF8]/40 shadow-sm'
                   : 'text-slate-400 hover:text-slate-200'
@@ -341,7 +374,7 @@ export const CryptoWidgetSim: React.FC = () => {
             <button
               type="button"
               onClick={() => setChartMode('candles')}
-              className={`px-2 py-0.5 sm:px-2.5 transition-all cursor-pointer ${
+              className={`px-2.5 py-0.5 transition-all cursor-pointer ${
                 chartMode === 'candles'
                   ? 'bg-[#1D283A] text-sky-400 font-bold border border-[#38BDF8]/40 shadow-sm'
                   : 'text-slate-400 hover:text-slate-200'
@@ -354,9 +387,9 @@ export const CryptoWidgetSim: React.FC = () => {
       </div>
 
       {/* 2. Streamlined Financial Graph Area */}
-      <div className="p-2.5 sm:p-4 space-y-2 bg-[#0B0E14] flex-1 flex flex-col justify-between">
-        {/* Single-Line Telemetry / Catalyst Sub-Bar (Zero floating clutter over chart) */}
-        <div className="h-6 flex items-center justify-between gap-2 text-[10px] font-mono text-slate-400 border-b border-[#1E2638] pb-1.5 shrink-0 overflow-hidden whitespace-nowrap">
+      <div className="p-2 sm:p-4 sm:space-y-2 bg-[#0B0E14] flex-1 flex flex-col justify-between">
+        {/* Desktop-Only Telemetry / Catalyst Sub-Bar (Hidden on mobile for a clean Robinhood/Coinbase look) */}
+        <div className="hidden sm:flex h-6 items-center justify-between gap-2 text-[10px] font-mono text-slate-400 border-b border-[#1E2638] pb-1.5 shrink-0 overflow-hidden whitespace-nowrap">
           <div className="flex items-center gap-2 min-w-0 truncate">
             {activePt ? (
               <>
@@ -364,7 +397,7 @@ export const CryptoWidgetSim: React.FC = () => {
                   {activePt.time} UTC · {activePt.volume}
                 </span>
                 {(isFrench ? activePt.catalystFr : activePt.catalystEn) && (
-                  <span className="hidden sm:inline-flex items-center gap-1.5 text-amber-300 font-sans font-medium truncate">
+                  <span className="inline-flex items-center gap-1.5 text-amber-300 font-sans font-medium truncate">
                     <span className="text-slate-600 font-mono">|</span>
                     <span className="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0" />
                     <span className="truncate">
@@ -395,16 +428,16 @@ export const CryptoWidgetSim: React.FC = () => {
                 <span>{isFrench ? 'BOUGIES' : 'CANDLES'}</span>
               </span>
             )}
-            <span className="hidden sm:flex items-center space-x-1.5">
+            <span className="flex items-center space-x-1.5">
               <span className="w-2.5 h-0.5 bg-[#0052FF] inline-block" />
               <span>20-EMA</span>
             </span>
           </div>
         </div>
 
-        {/* Responsive Chart Canvas: Pure Vector SVG + Crisp HTML Overlays */}
+        {/* Responsive Chart Canvas: Minimalist Mobile Touch Graph / Full Desktop Terminal */}
         <div
-          className="relative w-full h-40 sm:h-60 md:h-64 bg-[#0E131E]/80 border border-[#1E2638] rounded-none overflow-hidden flex items-center justify-center cursor-crosshair shrink-0 touch-pan-y"
+          className="relative w-full h-44 sm:h-60 md:h-64 bg-[#0E131E]/80 border border-[#1E2638] rounded-none overflow-hidden flex items-center justify-center cursor-crosshair shrink-0 touch-pan-y"
           onMouseMove={(e) =>
             updateScrubFromClientX(e.clientX, e.currentTarget.getBoundingClientRect())
           }
@@ -426,14 +459,21 @@ export const CryptoWidgetSim: React.FC = () => {
           }}
           onMouseLeave={() => setHoveredIndex(null)}
         >
-          {/* Mobile High/Low Watermarks */}
-          <div className="sm:hidden pointer-events-none absolute inset-x-2.5 top-2 flex justify-between text-[9px] font-mono text-slate-500">
-            <span>H: {asset.highLabel}</span>
-            <span>09:00 - 11:45 UTC</span>
-          </div>
-          <div className="sm:hidden pointer-events-none absolute left-2.5 bottom-2 text-[9px] font-mono text-slate-500">
-            <span>L: {asset.lowLabel}</span>
-          </div>
+          {/* Mobile Minimalist Touch Pill (Only visible while touching/inspecting a point) */}
+          {activePt && (
+            <div className="sm:hidden pointer-events-none absolute inset-x-2 top-2 z-10 flex items-center justify-center">
+              <div className="inline-flex items-center gap-2 bg-[#111622]/95 border border-[#1E2638] px-2.5 py-0.5 text-[10px] font-mono shadow-md max-w-full">
+                <span className="text-sky-400 font-bold shrink-0">{activePt.time} UTC</span>
+                {(isFrench ? activePt.catalystFr : activePt.catalystEn) ? (
+                  <span className="text-amber-300 font-sans truncate">
+                    · {isFrench ? activePt.catalystFr : activePt.catalystEn}
+                  </span>
+                ) : (
+                  <span className="text-slate-400 shrink-0">· {activePt.volume}</span>
+                )}
+              </div>
+            </div>
+          )}
 
           {/* Crisp HTML Right-Axis Price Labels (Desktop/Tablet) */}
           <div className="hidden sm:block pointer-events-none absolute inset-0">
@@ -492,46 +532,50 @@ export const CryptoWidgetSim: React.FC = () => {
           >
             <defs>
               <linearGradient id="mainAreaGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#10b981" stopOpacity="0.20" />
+                <stop offset="0%" stopColor="#10b981" stopOpacity="0.22" />
                 <stop offset="100%" stopColor="#10b981" stopOpacity="0.0" />
               </linearGradient>
             </defs>
 
-            {/* Horizontal Grid Lines */}
-            {yLevels.map((priceLevel) => {
-              const y = getY(priceLevel);
-              return (
-                <line
-                  key={`grid-${priceLevel}`}
-                  x1={padLeft}
-                  y1={y}
-                  x2={svgWidth - padRight}
-                  y2={y}
-                  stroke="#1E293B"
-                  strokeWidth="1"
-                  opacity="0.45"
-                />
-              );
-            })}
+            {/* Horizontal Grid Lines (Subtle on mobile, 4 levels on desktop) */}
+            {yLevels
+              .filter((_, idx) => !isMobile || idx === 1 || idx === 2)
+              .map((priceLevel) => {
+                const y = getY(priceLevel);
+                return (
+                  <line
+                    key={`grid-${priceLevel}`}
+                    x1={padLeft}
+                    y1={y}
+                    x2={svgWidth - padRight}
+                    y2={y}
+                    stroke="#1E293B"
+                    strokeWidth="1"
+                    opacity={isMobile ? '0.3' : '0.45'}
+                  />
+                );
+              })}
 
-            {/* 20-EMA Trendline */}
-            <polyline
-              fill="none"
-              stroke="#0052FF"
-              strokeWidth="1.5"
-              strokeDasharray="4 3"
-              opacity="0.85"
-              points={emaPointsString}
-            />
+            {/* 20-EMA Trendline (Desktop only to keep mobile curve completely uncluttered) */}
+            {!isMobile && (
+              <polyline
+                fill="none"
+                stroke="#0052FF"
+                strokeWidth="1.5"
+                strokeDasharray="4 3"
+                opacity="0.85"
+                points={emaPointsString}
+              />
+            )}
 
-            {/* MODE 1: Line Chart */}
-            {chartMode === 'line' && (
+            {/* MODE 1: Line Chart (Always active on mobile) */}
+            {effectiveChartMode === 'line' && (
               <g>
                 <polygon points={areaString} fill="url(#mainAreaGrad)" />
                 <polyline
                   fill="none"
                   stroke="#10b981"
-                  strokeWidth="2"
+                  strokeWidth={isMobile ? '2.4' : '2'}
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   points={pointsString}
@@ -539,8 +583,8 @@ export const CryptoWidgetSim: React.FC = () => {
               </g>
             )}
 
-            {/* MODE 2: Candlestick Chart */}
-            {chartMode === 'candles' && (
+            {/* MODE 2: Candlestick Chart (Desktop only) */}
+            {effectiveChartMode === 'candles' && (
               <g>
                 {candles.map((pt, i) => {
                   const x = getX(i);
@@ -584,7 +628,7 @@ export const CryptoWidgetSim: React.FC = () => {
               {/* Vertical Hairline */}
               <div
                 style={{ left: `${getXPct(hoveredIndex)}%` }}
-                className="absolute top-0 bottom-5 w-px border-l border-dashed border-sky-400/75"
+                className="absolute top-0 bottom-0 sm:bottom-5 w-px border-l border-dashed border-sky-400/75"
               />
 
               {/* Horizontal Hairline (Desktop/Tablet) */}
@@ -602,7 +646,7 @@ export const CryptoWidgetSim: React.FC = () => {
                   left: `${getXPct(hoveredIndex)}%`,
                   top: `${getYPct(activePt.price)}%`,
                 }}
-                className="absolute -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-white border-2 border-[#0052FF] shadow-[0_0_10px_rgba(56,189,248,0.9)]"
+                className="absolute -translate-x-1/2 -translate-y-1/2 w-3.5 h-3.5 sm:w-3 sm:h-3 rounded-full bg-white border-2 border-emerald-400 sm:border-[#0052FF] shadow-[0_0_10px_rgba(16,185,129,0.9)] sm:shadow-[0_0_10px_rgba(56,189,248,0.9)]"
               />
 
               {/* Right-Axis Active Price Tag Pill (Desktop/Tablet) */}
@@ -621,7 +665,7 @@ export const CryptoWidgetSim: React.FC = () => {
         </div>
       </div>
 
-      {/* 3. Fixed Height Monospace Telemetry Footer Strip */}
+      {/* 3. Minimalist Footer Strip */}
       <div className="bg-[#0C101A] px-3 sm:px-5 h-8 border-t border-[#1E2638] flex items-center justify-between gap-2.5 text-[10px] font-mono text-slate-500 overflow-hidden shrink-0 whitespace-nowrap">
         <div className="flex items-center space-x-3 sm:space-x-4">
           <span>
@@ -630,7 +674,20 @@ export const CryptoWidgetSim: React.FC = () => {
           <span className="hidden sm:inline">{isFrench ? 'ÉCART : 0.01%' : 'SPREAD: 0.01%'}</span>
           <span className="hidden sm:inline">{isFrench ? 'RISQUE KELLY : MAX 2%' : 'KELLY RISK: 2% MAX'}</span>
         </div>
-        <div className="flex items-center space-x-1.5 text-slate-400">
+        <div className="sm:hidden text-slate-400">
+          {activePt ? (
+            <button
+              type="button"
+              onClick={() => setHoveredIndex(null)}
+              className="text-sky-400 font-semibold"
+            >
+              {isFrench ? 'Réinitialiser ↺' : 'Reset live ↺'}
+            </button>
+          ) : (
+            <span>{isFrench ? 'Glisser pour inspecter' : 'Touch & drag chart'}</span>
+          )}
+        </div>
+        <div className="hidden sm:flex items-center space-x-1.5 text-slate-400">
           <span className="w-1.5 h-1.5 bg-emerald-400 rounded-none inline-block shadow-[0_0_6px_rgba(52,211,153,0.8)]" />
           <span>{isFrench ? 'FLUX BINANCE WS' : 'BINANCE WS LIVE'}</span>
         </div>
