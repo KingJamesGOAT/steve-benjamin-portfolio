@@ -205,8 +205,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
         </Link>
 
         {/* Desktop Navigation & Controls (Visible on md and above) */}
-        <div className="hidden md:flex items-center space-x-4">
-          <nav className="flex items-center space-x-2">
+        <div className="hidden md:flex items-center space-x-2.5 lg:space-x-4">
+          <nav className="flex items-center space-x-0.5 lg:space-x-2">
             {navLinks.map((link) => {
               const isActive = activeSection === link.targetId;
 
@@ -222,7 +222,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
                     <button
                       type="button"
                       onClick={() => handleNavClick('projects')}
-                      className={`px-3 py-1.5 text-xs sm:text-sm transition-colors cursor-pointer inline-flex items-center gap-1 select-none ${
+                      className={`px-2 lg:px-3 py-1.5 text-xs lg:text-sm whitespace-nowrap transition-colors cursor-pointer inline-flex items-center gap-1 select-none ${
                         isActive
                           ? 'text-electric font-semibold'
                           : 'text-fintech-secondary hover:text-electric font-medium'
@@ -267,7 +267,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
                   key={link.targetId}
                   type="button"
                   onClick={() => handleNavClick(link.targetId)}
-                  className={`px-3 py-1.5 text-xs sm:text-sm transition-colors cursor-pointer select-none ${
+                  className={`px-2 lg:px-3 py-1.5 text-xs lg:text-sm whitespace-nowrap transition-colors cursor-pointer select-none ${
                     isActive
                       ? 'text-electric font-semibold'
                       : 'text-fintech-secondary hover:text-electric font-medium'

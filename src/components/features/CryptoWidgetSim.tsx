@@ -146,8 +146,8 @@ export const CryptoWidgetSim: React.FC = () => {
   return (
     <div className="bg-[#0B0E14] border border-[#1E2638] text-slate-200 rounded-none font-sans shadow-2xl overflow-hidden select-none flex flex-col">
       {/* 1. Header Bar: Fixed 48px height, whitespace-nowrap to prevent vertical expansion */}
-      <div className="bg-[#111622] border-b border-[#1E2638] px-4 sm:px-5 h-12 flex items-center justify-between gap-3 font-mono text-xs overflow-hidden shrink-0 whitespace-nowrap">
-        <div className="flex items-center gap-3 sm:gap-4 overflow-hidden">
+      <div className="bg-[#111622] border-b border-[#1E2638] px-2.5 sm:px-5 h-12 flex items-center justify-between gap-1.5 sm:gap-3 font-mono text-xs overflow-hidden shrink-0 whitespace-nowrap">
+        <div className="flex items-center gap-2 sm:gap-4 overflow-hidden">
           <div className="flex items-center space-x-2 shrink-0">
             <span className="font-bold text-slate-100 tracking-wider text-xs sm:text-sm">BTC/USDT</span>
             <span className="hidden sm:inline-block text-[10px] bg-[#161F30] border border-[#273756] px-1.5 py-0.5 text-slate-300 font-semibold rounded-none">
@@ -155,19 +155,28 @@ export const CryptoWidgetSim: React.FC = () => {
             </span>
           </div>
 
-          <div className="flex items-baseline space-x-2 shrink-0">
-            <span className="text-sm sm:text-lg font-bold text-slate-100 tracking-tight tabular-nums">
+          <div className="flex items-baseline space-x-1.5 sm:space-x-2 shrink-0">
+            <span className="text-xs sm:text-lg font-bold text-slate-100 tracking-tight tabular-nums">
               ${displayedPrice.toLocaleString('en-US', {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
               })}
             </span>
             <span
-              className={`text-[11px] sm:text-xs font-semibold tabular-nums ${
+              className={`text-[10px] sm:text-xs font-semibold tabular-nums ${
                 (activePt ? activePt.isPositive : priceChange >= 0) ? 'text-emerald-400' : 'text-rose-500'
               }`}
             >
-              {activePt ? activePt.delta : (priceChange >= 0 ? `+${priceChange}%` : `${priceChange}%`)}
+              <span className="sm:hidden">
+                {activePt
+                  ? activePt.delta.match(/\(([^)]+)\)/)?.[1] || activePt.delta
+                  : priceChange >= 0
+                  ? `+${priceChange}%`
+                  : `${priceChange}%`}
+              </span>
+              <span className="hidden sm:inline">
+                {activePt ? activePt.delta : (priceChange >= 0 ? `+${priceChange}%` : `${priceChange}%`)}
+              </span>
             </span>
           </div>
         </div>

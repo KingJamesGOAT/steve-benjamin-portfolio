@@ -58,10 +58,10 @@ export const Home: React.FC = () => {
         {/* SECTION 1: HERO VIEWPORT */}
         <section
           id="home"
-          className="min-h-0 sm:min-h-[calc(100vh-9.5rem)] flex flex-col justify-between scroll-mt-20 sm:scroll-mt-24"
+          className="min-h-0 lg:min-h-[calc(100vh-9.5rem)] flex flex-col justify-between scroll-mt-20 sm:scroll-mt-24"
         >
           {/* Two-Column FinTech Hero Grid */}
-          <div className="my-0 sm:my-auto pt-2 pb-2 sm:py-8 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-16 items-center">
+          <div className="my-0 lg:my-auto pt-2 pb-2 sm:py-6 lg:py-8 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-16 items-center">
             {/* Left Column: Oversized Typography & CTAs */}
             <div className="lg:col-span-7 space-y-5 sm:space-y-8">
               {/* Hero Headline & Subtitle */}
@@ -70,18 +70,18 @@ export const Home: React.FC = () => {
                 <div>
                   <Link
                     to="/bachelor-pitch"
-                    className="group inline-flex items-center gap-2 px-2.5 py-1 text-[11px] font-mono border border-emerald-200 bg-emerald-50/70 text-emerald-800 hover:border-emerald-400 hover:bg-emerald-100/60 transition-colors shadow-2xs"
+                    className="group max-w-full inline-flex items-center gap-1.5 sm:gap-2 px-2.5 py-1 text-[10px] sm:text-[11px] font-mono border border-emerald-200 bg-emerald-50/70 text-emerald-800 hover:border-emerald-400 hover:bg-emerald-100/60 transition-colors shadow-2xs"
                   >
-                    <span className="relative flex h-2 w-2">
+                    <span className="relative flex h-2 w-2 shrink-0">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                       <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                     </span>
-                    <span>{isFrench ? 'Dispo · Mandat de Bachelor HEIG-VD 2027' : 'Available · Bachelor Mandate HEIG-VD 2027'}</span>
-                    <span className="text-emerald-500 group-hover:translate-x-0.5 transition-transform text-[10px]">→</span>
+                    <span className="truncate">{isFrench ? 'Dispo · Mandat de Bachelor HEIG-VD 2027' : 'Available · Bachelor Mandate HEIG-VD 2027'}</span>
+                    <span className="text-emerald-500 group-hover:translate-x-0.5 transition-transform text-[10px] shrink-0">→</span>
                   </Link>
                 </div>
 
-                <h1 className="text-4xl sm:text-6xl lg:text-[4.75rem] font-black tracking-tight text-fintech-primary leading-[1.0] sm:leading-[0.95]">
+                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] font-black tracking-tight text-fintech-primary leading-[1.0] sm:leading-[0.95]">
                   <span className="block">Steve</span>
                   <span className="block">Benjamin</span>
                 </h1>

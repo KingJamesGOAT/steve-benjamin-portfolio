@@ -33,21 +33,21 @@ export const DonnonsWidgetSim: React.FC = () => {
   return (
     <div className="bg-[#fffbf1] border-2 border-black shadow-[4px_4px_0px_0px_#000] text-black rounded-none overflow-hidden select-none font-sans">
       {/* Top Bar with Live Project Links */}
-      <div className="bg-white border-b-2 border-black px-3.5 sm:px-6 py-2 flex items-center justify-between gap-2">
-        <div className="flex items-center space-x-2">
-          <span className="font-mono font-black text-xs sm:text-sm tracking-tight text-black">
+      <div className="bg-white border-b-2 border-black px-2.5 sm:px-6 py-2 flex items-center justify-between gap-1.5 sm:gap-2">
+        <div className="flex items-center space-x-1.5 sm:space-x-2 min-w-0">
+          <span className="font-mono font-black text-xs sm:text-sm tracking-tight text-black shrink-0">
             DONNONS.CH
           </span>
-          <span className="px-1.5 py-0.5 text-[9px] font-mono font-bold bg-amber-100 text-amber-900 border border-black uppercase">
+          <span className="px-1.5 py-0.5 text-[8.5px] sm:text-[9px] font-mono font-bold bg-amber-100 text-amber-900 border border-black uppercase truncate">
             {isFrench ? 'Maquette interactive' : 'Interactive Prototype'}
           </span>
-          <span className="text-[10px] font-mono text-slate-500 hidden sm:inline">
+          <span className="text-[10px] font-mono text-slate-500 hidden sm:inline shrink-0">
             // HUG & HEIG-VD
           </span>
         </div>
 
         {/* Real Live Links - Only primary on mobile */}
-        <div className="flex items-center gap-1.5 sm:gap-2 text-[11px] font-mono font-bold">
+        <div className="flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-[11px] font-mono font-bold shrink-0">
           <a
             href="https://donnons.ch"
             target="_blank"
