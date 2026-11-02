@@ -169,7 +169,7 @@
       "card3Tag": "GROQ LLM SYNTHESIS",
       "disclaimerBadge": "Beta",
       "disclaimerLabel": "Notice",
-      "disclaimer": "Personal project in beta. Data shown in this demo is simulated.",
+      "disclaimer": "Personal project in beta. Live market data is provided via Binance public streams.",
       "overviewTitle": "Overview & System Design",
       "overviewSubtitle": "High-throughput autonomous algorithmic trading terminal engineered for multi-pair surveillance, real-time orderbook telemetry, and automated LLM macro synthesis.",
       "sim": {

@@ -169,7 +169,7 @@
       "card3Tag": "SYNTHÈSE LLM GROQ",
       "disclaimerBadge": "Bêta",
       "disclaimerLabel": "Avis",
-      "disclaimer": "Projet personnel en bêta. Les données présentées dans cette démonstration sont simulées.",
+      "disclaimer": "Projet personnel en bêta. Les données de marché en direct proviennent des flux publics Binance.",
       "overviewTitle": "Présentation et Architecture Système",
       "overviewSubtitle": "Terminal de trading algorithmique conçu pour la surveillance multi-paires, la télémétrie du carnet d'ordres en temps réel et la synthèse macroéconomique automatisée.",
       "sim": {

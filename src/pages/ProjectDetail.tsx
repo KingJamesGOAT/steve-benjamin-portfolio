@@ -94,8 +94,8 @@ export const ProjectDetail: React.FC = () => {
               </span>
               <span className="hidden sm:inline">
                 {isFrench
-                  ? "Une application web personnelle que j'ai conçue et développée de A à Z pour suivre les prix crypto en direct, tester des stratégies de trading avec un capital virtuel et observer l'impact de l'actualité sur le marché. Actuellement en bêta (cette démo interactive utilise des données simulées)."
-                  : 'A personal web application I designed and built from scratch to track live crypto prices, test trading strategies with virtual capital, and see how market news impacts price movements. Currently in beta (this interactive demo runs on simulated data).'}
+                  ? "Une application web personnelle que j'ai conçue et développée de A à Z pour suivre les prix crypto en direct, tester des stratégies de trading avec un capital virtuel et observer l'impact de l'actualité sur le marché. Actuellement en bêta (connectée aux flux Binance en direct)."
+                  : 'A personal web application I designed and built from scratch to track live crypto prices, test trading strategies with virtual capital, and see how market news impacts price movements. Currently in beta (connected to live Binance market data).'}
               </span>
             </>
           ) : isDonnons ? (

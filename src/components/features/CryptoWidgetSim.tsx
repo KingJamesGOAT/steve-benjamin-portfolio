@@ -107,6 +107,16 @@ function formatVolumeBase(vol: number, asset: AssetId): string {
   return `${vol.toFixed(0)} ${asset}`;
 }
 
+function formatCompactPrice(price: number, asset: AssetId): string {
+  if (asset === 'BTC') {
+    return `$${(price / 1000).toFixed(1)}K`;
+  }
+  if (asset === 'ETH') {
+    return `$${(price / 1000).toFixed(2)}K`;
+  }
+  return `$${price.toFixed(1)}`;
+}
+
 function computeEma20(closes: number[]): number[] {
   const k = 2 / (20 + 1);
   const ema: number[] = [];
@@ -183,6 +193,9 @@ function buildFallbackCandles(asset: AssetId, tf: TimeframeId): CandlePoint[] {
   });
 }
 
+// Client-side in-memory cache to prevent any double-render jump when switching coins or timeframes
+const liveMarketCache: Record<string, { candles: CandlePoint[]; stats: TickerStats }> = {};
+
 export const CryptoWidgetSim: React.FC = () => {
   const { i18n } = useTranslation();
   const isFrench = Boolean(i18n.language?.startsWith('fr'));
@@ -225,17 +238,14 @@ export const CryptoWidgetSim: React.FC = () => {
     let isCancelled = false;
     setHoveredIndex(null);
 
-    // 1. Immediately set fallback for snappy UI transition
-    const fallback = buildFallbackCandles(selectedAsset, timeframe);
-    setCandles(fallback);
-    setStats({
-      lastPrice: ASSET_META[selectedAsset].basePrice,
-      change24h: ASSET_META[selectedAsset].change24h,
-      high24h: ASSET_META[selectedAsset].high24h,
-      low24h: ASSET_META[selectedAsset].low24h,
-      vol24hUsd: ASSET_META[selectedAsset].vol24hUsd,
-      isLiveApi: false,
-    });
+    const cacheKey = `${selectedAsset}_${timeframe}`;
+    const cached = liveMarketCache[cacheKey];
+
+    if (cached) {
+      // Instant switch from cache, zero jump, zero flicker
+      setCandles(cached.candles);
+      setStats(cached.stats);
+    }
 
     const symbol = ASSET_META[selectedAsset].symbol;
     const decimals = ASSET_META[selectedAsset].decimals;
@@ -288,17 +298,24 @@ export const CryptoWidgetSim: React.FC = () => {
           }
         );
 
-        setCandles(parsedCandles);
-        setStats({
+        const newStats: TickerStats = {
           lastPrice: Number(Number(rawTicker.lastPrice).toFixed(decimals)),
           change24h: Number(Number(rawTicker.priceChangePercent).toFixed(2)),
           high24h: Number(Number(rawTicker.highPrice).toFixed(decimals)),
           low24h: Number(Number(rawTicker.lowPrice).toFixed(decimals)),
           vol24hUsd: Number(rawTicker.quoteVolume),
           isLiveApi: true,
-        });
+        };
+
+        liveMarketCache[cacheKey] = {
+          candles: parsedCandles,
+          stats: newStats,
+        };
+
+        setCandles(parsedCandles);
+        setStats(newStats);
       } catch {
-        // Silently retain fallback dataset if offline or blocked by corporate proxy
+        // Silently retain current dataset if offline or blocked by corporate proxy
       }
     }
 
@@ -321,14 +338,16 @@ export const CryptoWidgetSim: React.FC = () => {
           const liveLow = Number(Number(msg.l).toFixed(decimals));
           const liveQuoteVol = Number(msg.q);
 
-          setStats({
+          const updatedStats: TickerStats = {
             lastPrice: liveClose,
             change24h: livePct,
             high24h: liveHigh,
             low24h: liveLow,
             vol24hUsd: liveQuoteVol,
             isLiveApi: true,
-          });
+          };
+
+          setStats(updatedStats);
 
           setCandles((prev) => {
             if (prev.length === 0) return prev;
@@ -342,6 +361,13 @@ export const CryptoWidgetSim: React.FC = () => {
               last.open > 0 ? ((liveClose - last.open) / last.open) * 100 : 0;
             last.pctChange = `${deltaPct >= 0 ? '+' : ''}${deltaPct.toFixed(2)}%`;
             updated[updated.length - 1] = last;
+
+            // Also update the cached entry
+            liveMarketCache[cacheKey] = {
+              candles: updated,
+              stats: updatedStats,
+            };
+
             return updated;
           });
         } catch {
@@ -629,10 +655,10 @@ export const CryptoWidgetSim: React.FC = () => {
       {/* 2. Chart Area + Sub-Header */}
       <div className="p-2.5 sm:p-4 space-y-2 bg-[#0B0E14] flex-1 flex flex-col justify-between">
         {/* Sub-Bar: Mobile Timeframe & H/L Strip | Desktop Live OHLCV Readout */}
-        <div className="h-6 flex items-center justify-between gap-2 text-[10px] font-mono text-slate-400 border-b border-[#1E2638] pb-1.5 shrink-0 overflow-hidden whitespace-nowrap">
+        <div className="min-h-[28px] sm:h-6 py-1 sm:py-0 flex items-center justify-between gap-2 text-[10px] font-mono text-slate-400 border-b border-[#1E2638] shrink-0 whitespace-nowrap">
           {/* Mobile Sub-Bar: Timeframe Pills + Compact H/L or Scrubbed Info */}
           <div className="flex sm:hidden items-center justify-between w-full gap-2">
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1 shrink-0">
               {(['15m', '1h', '4h', '1d'] as const).map((tf) => {
                 const isSelected = timeframe === tf;
                 return (
@@ -642,8 +668,8 @@ export const CryptoWidgetSim: React.FC = () => {
                     onClick={() => setTimeframe(tf)}
                     className={`px-1.5 py-0.5 uppercase text-[9.5px] transition-colors ${
                       isSelected
-                        ? 'bg-[#1D283A] text-sky-400 font-bold border border-[#38BDF8]/30'
-                        : 'text-slate-500'
+                        ? 'bg-[#1D283A] text-sky-400 font-bold border border-[#38BDF8]/40'
+                        : 'text-slate-500 hover:text-slate-300'
                     }`}
                   >
                     {tf}
@@ -651,15 +677,15 @@ export const CryptoWidgetSim: React.FC = () => {
                 );
               })}
             </div>
-            <div className="text-[9.5px] text-slate-400 tabular-nums truncate">
+            <div className="text-[9.5px] text-slate-400 tabular-nums truncate text-right">
               {activePt ? (
                 <span className="text-sky-400 font-semibold">
                   {activePt.timeLabel} · Vol {formatVolumeBase(activePt.volume, selectedAsset)}
                 </span>
               ) : (
                 <span>
-                  H ${stats.high24h.toLocaleString('en-US')} · L $
-                  {stats.low24h.toLocaleString('en-US')}
+                  H {formatCompactPrice(stats.high24h, selectedAsset)} · L{' '}
+                  {formatCompactPrice(stats.low24h, selectedAsset)}
                 </span>
               )}
             </div>
@@ -1009,13 +1035,9 @@ export const CryptoWidgetSim: React.FC = () => {
             <div className="flex items-center space-x-1.5">
               <span className="w-1.5 h-1.5 bg-emerald-400 rounded-none inline-block shadow-[0_0_6px_rgba(52,211,153,0.8)]" />
               <span>
-                {stats.isLiveApi
-                  ? isFrench
-                    ? 'FLUX BINANCE EN DIRECT'
-                    : 'BINANCE LIVE FEED'
-                  : isFrench
-                  ? 'FLUX BINANCE WS'
-                  : 'BINANCE WS LIVE'}
+                {isFrench
+                  ? 'FLUX BINANCE EN DIRECT'
+                  : 'BINANCE LIVE FEED'}
               </span>
             </div>
           )}
