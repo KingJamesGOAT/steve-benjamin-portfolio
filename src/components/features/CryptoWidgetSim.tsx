@@ -9,152 +9,297 @@ interface CandlePoint {
   close: number;
   price: number;
   delta: string;
+  pct: string;
   isPositive: boolean;
-  volume: number;
+  volume: string;
+  catalystEn?: string;
+  catalystFr?: string;
 }
 
-interface NewsCatalyst {
-  id: number;
-  index: number;
-  symbol: string;
-  badge: string;
-  accentColor: string;
-  time: string;
-  tagFr: string;
-  tagEn: string;
-  line1Fr: string;
-  line1En: string;
-  line2Fr: string;
-  line2En: string;
+interface AssetConfig {
+  id: 'BTC' | 'ETH' | 'SOL';
+  pair: string;
+  basePrice: number;
+  baseChange: number;
+  minPrice: number;
+  maxPrice: number;
+  vol24h: string;
+  highLabel: string;
+  lowLabel: string;
+  candles: CandlePoint[];
 }
 
-const CANDLE_DATA: CandlePoint[] = [
-  { time: '09:00', open: 67960, high: 68020, low: 67790, close: 67840, price: 67840, delta: '-$120 (-0.18%)', isPositive: false, volume: 180 },
-  { time: '09:15', open: 67840, high: 67980, low: 67810, close: 67920, price: 67920, delta: '+$80 (+0.12%)', isPositive: true, volume: 240 },
-  { time: '09:30', open: 67920, high: 67960, low: 67770, close: 67810, price: 67810, delta: '-$110 (-0.16%)', isPositive: false, volume: 160 },
-  { time: '09:45', open: 67810, high: 68130, low: 67790, close: 68050, price: 68050, delta: '+$240 (+0.35%)', isPositive: true, volume: 310 },
-  { time: '10:00', open: 68050, high: 68240, low: 68020, close: 68180, price: 68180, delta: '+$130 (+0.19%)', isPositive: true, volume: 420 },
-  { time: '10:15', open: 68180, high: 68230, low: 68080, close: 68120, price: 68120, delta: '-$60 (-0.09%)', isPositive: false, volume: 280 },
-  { time: '10:30', open: 68120, high: 68410, low: 68100, close: 68340, price: 68340, delta: '+$220 (+0.32%)', isPositive: true, volume: 510 },
-  { time: '10:45', open: 68340, high: 68380, low: 68240, close: 68290, price: 68290, delta: '-$50 (-0.07%)', isPositive: false, volume: 390 },
-  { time: '11:00', open: 68290, high: 68510, low: 68260, close: 68450, price: 68450, delta: '+$160 (+0.23%)', isPositive: true, volume: 580 },
-  { time: '11:15', open: 68450, high: 68490, low: 68360, close: 68410, price: 68410, delta: '-$40 (-0.06%)', isPositive: false, volume: 460 },
-  { time: '11:30', open: 68410, high: 68580, low: 68380, close: 68520, price: 68520, delta: '+$110 (+0.16%)', isPositive: true, volume: 620 },
-  { time: '11:45', open: 68520, high: 68560, low: 68440, close: 68492.30, price: 68492.30, delta: '-$27.70 (-0.04%)', isPositive: false, volume: 540 },
-];
-
-const NEWS_CATALYSTS: NewsCatalyst[] = [
-  {
-    id: 1,
-    index: 3, // 09:45
-    symbol: 'Ð',
-    badge: 'DOGE',
-    accentColor: '#F59E0B',
-    time: '09:45',
-    tagFr: 'PAIEMENTS X · 09:45',
-    tagEn: 'X PAYMENTS · 09:45',
-    line1Fr: 'Licence paiements crypto validée pour X',
-    line1En: 'Crypto payments license approved for X',
-    line2Fr: 'Rebond haussier sur Dogecoin ($DOGE)',
-    line2En: 'Bullish bounce on Dogecoin ($DOGE)',
+const ASSETS: Record<'BTC' | 'ETH' | 'SOL', AssetConfig> = {
+  BTC: {
+    id: 'BTC',
+    pair: 'BTC/USDT',
+    basePrice: 68492.3,
+    baseChange: 2.84,
+    minPrice: 67600,
+    maxPrice: 68700,
+    vol24h: '$12.65B',
+    highLabel: '$68,580',
+    lowLabel: '$67,770',
+    candles: [
+      { time: '09:00', open: 67960, high: 68020, low: 67790, close: 67840, price: 67840, delta: '-$120 (-0.18%)', pct: '-0.18%', isPositive: false, volume: '180 BTC' },
+      { time: '09:15', open: 67840, high: 67980, low: 67810, close: 67920, price: 67920, delta: '+$80 (+0.12%)', pct: '+0.12%', isPositive: true, volume: '240 BTC' },
+      { time: '09:30', open: 67920, high: 67960, low: 67770, close: 67810, price: 67810, delta: '-$110 (-0.16%)', pct: '-0.16%', isPositive: false, volume: '160 BTC' },
+      {
+        time: '09:45',
+        open: 67810,
+        high: 68130,
+        low: 67790,
+        close: 68050,
+        price: 68050,
+        delta: '+$240 (+0.35%)',
+        pct: '+0.35%',
+        isPositive: true,
+        volume: '310 BTC',
+        catalystEn: 'X Payments crypto license approved',
+        catalystFr: 'Licence paiements crypto validée pour X',
+      },
+      { time: '10:00', open: 68050, high: 68240, low: 68020, close: 68180, price: 68180, delta: '+$130 (+0.19%)', pct: '+0.19%', isPositive: true, volume: '420 BTC' },
+      { time: '10:15', open: 68180, high: 68230, low: 68080, close: 68120, price: 68120, delta: '-$60 (-0.09%)', pct: '-0.09%', isPositive: false, volume: '280 BTC' },
+      { time: '10:30', open: 68120, high: 68410, low: 68100, close: 68340, price: 68340, delta: '+$220 (+0.32%)', pct: '+0.32%', isPositive: true, volume: '510 BTC' },
+      { time: '10:45', open: 68340, high: 68380, low: 68240, close: 68290, price: 68290, delta: '-$50 (-0.07%)', pct: '-0.07%', isPositive: false, volume: '390 BTC' },
+      {
+        time: '11:00',
+        open: 68290,
+        high: 68510,
+        low: 68260,
+        close: 68450,
+        price: 68450,
+        delta: '+$160 (+0.23%)',
+        pct: '+0.23%',
+        isPositive: true,
+        volume: '580 BTC',
+        catalystEn: 'Morgan Stanley approves spot Bitcoin ETFs',
+        catalystFr: 'Morgan Stanley valide les ETF Bitcoin spot',
+      },
+      { time: '11:15', open: 68450, high: 68490, low: 68360, close: 68410, price: 68410, delta: '-$40 (-0.06%)', pct: '-0.06%', isPositive: false, volume: '460 BTC' },
+      { time: '11:30', open: 68410, high: 68580, low: 68380, close: 68520, price: 68520, delta: '+$110 (+0.16%)', pct: '+0.16%', isPositive: true, volume: '620 BTC' },
+      { time: '11:45', open: 68520, high: 68560, low: 68440, close: 68492.3, price: 68492.3, delta: '-$27.70 (-0.04%)', pct: '-0.04%', isPositive: false, volume: '540 BTC' },
+    ],
   },
-  {
-    id: 2,
-    index: 8, // 11:00
-    symbol: '🏛',
-    badge: 'BANK',
-    accentColor: '#38BDF8',
-    time: '11:00',
-    tagFr: 'WALL STREET · 11:00',
-    tagEn: 'WALL STREET · 11:00',
-    line1Fr: 'Morgan Stanley valide les ETF Bitcoin',
-    line1En: 'Morgan Stanley approves Bitcoin ETFs',
-    line2Fr: 'Accès ouvert à 15 000 conseillers',
-    line2En: 'Access opened to 15,000 advisors',
+  ETH: {
+    id: 'ETH',
+    pair: 'ETH/USDT',
+    basePrice: 3482.5,
+    baseChange: 1.92,
+    minPrice: 3410,
+    maxPrice: 3500,
+    vol24h: '$6.40B',
+    highLabel: '$3,494',
+    lowLabel: '$3,422',
+    candles: [
+      { time: '09:00', open: 3432, high: 3440, low: 3422, close: 3436, price: 3436, delta: '+$4.00 (+0.12%)', pct: '+0.12%', isPositive: true, volume: '1.2K ETH' },
+      { time: '09:15', open: 3436, high: 3445, low: 3430, close: 3441, price: 3441, delta: '+$5.00 (+0.15%)', pct: '+0.15%', isPositive: true, volume: '1.5K ETH' },
+      { time: '09:30', open: 3441, high: 3444, low: 3428, close: 3433, price: 3433, delta: '-$8.00 (-0.23%)', pct: '-0.23%', isPositive: false, volume: '1.1K ETH' },
+      {
+        time: '09:45',
+        open: 3433,
+        high: 3460,
+        low: 3431,
+        close: 3454,
+        price: 3454,
+        delta: '+$21.00 (+0.61%)',
+        pct: '+0.61%',
+        isPositive: true,
+        volume: '2.4K ETH',
+        catalystEn: 'L2 blob throughput hits new daily record',
+        catalystFr: 'Débit L2 record sur le réseau Ethereum',
+      },
+      { time: '10:00', open: 3454, high: 3468, low: 3450, close: 3462, price: 3462, delta: '+$8.00 (+0.23%)', pct: '+0.23%', isPositive: true, volume: '2.1K ETH' },
+      { time: '10:15', open: 3462, high: 3465, low: 3448, close: 3453, price: 3453, delta: '-$9.00 (-0.26%)', pct: '-0.26%', isPositive: false, volume: '1.7K ETH' },
+      { time: '10:30', open: 3453, high: 3476, low: 3451, close: 3471, price: 3471, delta: '+$18.00 (+0.52%)', pct: '+0.52%', isPositive: true, volume: '2.9K ETH' },
+      { time: '10:45', open: 3471, high: 3475, low: 3463, close: 3467, price: 3467, delta: '-$4.00 (-0.12%)', pct: '-0.12%', isPositive: false, volume: '1.9K ETH' },
+      {
+        time: '11:00',
+        open: 3467,
+        high: 3488,
+        low: 3466,
+        close: 3484,
+        price: 3484,
+        delta: '+$17.00 (+0.49%)',
+        pct: '+0.49%',
+        isPositive: true,
+        volume: '3.3K ETH',
+        catalystEn: 'Institutional staking inflows surge +4.2%',
+        catalystFr: 'Hausse de +4,2 % des flux de staking institutionnel',
+      },
+      { time: '11:15', open: 3484, high: 3489, low: 3476, close: 3479, price: 3479, delta: '-$5.00 (-0.14%)', pct: '-0.14%', isPositive: false, volume: '2.2K ETH' },
+      { time: '11:30', open: 3479, high: 3494, low: 3478, close: 3487, price: 3487, delta: '+$8.00 (+0.23%)', pct: '+0.23%', isPositive: true, volume: '2.7K ETH' },
+      { time: '11:45', open: 3487, high: 3491, low: 3479, close: 3482.5, price: 3482.5, delta: '-$4.50 (-0.13%)', pct: '-0.13%', isPositive: false, volume: '2.4K ETH' },
+    ],
   },
-];
+  SOL: {
+    id: 'SOL',
+    pair: 'SOL/USDT',
+    basePrice: 184.65,
+    baseChange: 4.15,
+    minPrice: 176,
+    maxPrice: 187,
+    vol24h: '$3.85B',
+    highLabel: '$185.80',
+    lowLabel: '$177.40',
+    candles: [
+      { time: '09:00', open: 178.2, high: 179.1, low: 177.4, close: 178.6, price: 178.6, delta: '+$0.40 (+0.22%)', pct: '+0.22%', isPositive: true, volume: '42K SOL' },
+      { time: '09:15', open: 178.6, high: 179.8, low: 178.3, close: 179.4, price: 179.4, delta: '+$0.80 (+0.45%)', pct: '+0.45%', isPositive: true, volume: '51K SOL' },
+      { time: '09:30', open: 179.4, high: 179.7, low: 178.5, close: 178.9, price: 178.9, delta: '-$0.50 (-0.28%)', pct: '-0.28%', isPositive: false, volume: '38K SOL' },
+      {
+        time: '09:45',
+        open: 178.9,
+        high: 181.6,
+        low: 178.8,
+        close: 181.2,
+        price: 181.2,
+        delta: '+$2.30 (+1.29%)',
+        pct: '+1.29%',
+        isPositive: true,
+        volume: '84K SOL',
+        catalystEn: 'Firedancer validator client benchmark: 100k+ TPS',
+        catalystFr: 'Benchmark validateur Firedancer : 100k+ TPS',
+      },
+      { time: '10:00', open: 181.2, high: 182.5, low: 180.9, close: 182.1, price: 182.1, delta: '+$0.90 (+0.50%)', pct: '+0.50%', isPositive: true, volume: '67K SOL' },
+      { time: '10:15', open: 182.1, high: 182.4, low: 181.3, close: 181.6, price: 181.6, delta: '-$0.50 (-0.27%)', pct: '-0.27%', isPositive: false, volume: '49K SOL' },
+      { time: '10:30', open: 181.6, high: 183.7, low: 181.5, close: 183.3, price: 183.3, delta: '+$1.70 (+0.94%)', pct: '+0.94%', isPositive: true, volume: '76K SOL' },
+      { time: '10:45', open: 183.3, high: 183.6, low: 182.6, close: 182.9, price: 182.9, delta: '-$0.40 (-0.22%)', pct: '-0.22%', isPositive: false, volume: '55K SOL' },
+      {
+        time: '11:00',
+        open: 182.9,
+        high: 185.1,
+        low: 182.8,
+        close: 184.7,
+        price: 184.7,
+        delta: '+$1.80 (+0.98%)',
+        pct: '+0.98%',
+        isPositive: true,
+        volume: '92K SOL',
+        catalystEn: 'DEX 24h settlement volume leads all chains',
+        catalystFr: 'Volume DEX 24h en tête de toutes les blockchains',
+      },
+      { time: '11:15', open: 184.7, high: 185.0, low: 183.9, close: 184.2, price: 184.2, delta: '-$0.50 (-0.27%)', pct: '-0.27%', isPositive: false, volume: '61K SOL' },
+      { time: '11:30', open: 184.2, high: 185.8, low: 184.0, close: 185.1, price: 185.1, delta: '+$0.90 (+0.49%)', pct: '+0.49%', isPositive: true, volume: '79K SOL' },
+      { time: '11:45', open: 185.1, high: 185.4, low: 184.3, close: 184.65, price: 184.65, delta: '-$0.45 (-0.24%)', pct: '-0.24%', isPositive: false, volume: '68K SOL' },
+    ],
+  },
+};
 
 export const CryptoWidgetSim: React.FC = () => {
   const { i18n } = useTranslation();
   const isFrench = Boolean(i18n.language?.startsWith('fr'));
 
-  // Chart Mode: Line vs Candlesticks
+  // Active Asset Pair & Chart Mode
+  const [selectedAsset, setSelectedAsset] = useState<'BTC' | 'ETH' | 'SOL'>('BTC');
   const [chartMode, setChartMode] = useState<'line' | 'candles'>('line');
-
-  // Live Price Simulation State
-  const [livePrice, setLivePrice] = useState<number>(68492.30);
-  const [priceChange, setPriceChange] = useState<number>(2.84);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [hoveredNewsId, setHoveredNewsId] = useState<number | null>(null);
+
+  const asset = ASSETS[selectedAsset];
+  const candles = asset.candles;
+
+  // Subtle live tick on current asset
+  const [tickOffset, setTickOffset] = useState<number>(0);
+
+  useEffect(() => {
+    setTickOffset(0);
+    setHoveredIndex(null);
+  }, [selectedAsset]);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const delta = (Math.random() - 0.47) * 28;
-      setLivePrice((prev) => Number((prev + delta).toFixed(2)));
-      setPriceChange((prev) => Number((prev + delta * 0.0003).toFixed(2)));
-    }, 2400);
+      const step = selectedAsset === 'BTC' ? 18 : selectedAsset === 'ETH' ? 1.8 : 0.18;
+      const delta = (Math.random() - 0.48) * step;
+      setTickOffset((prev) => Number((prev + delta).toFixed(2)));
+    }, 2600);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [selectedAsset]);
 
-  // SVG Chart Bounds & Coordinate Math
-  const minPrice = 67600;
-  const maxPrice = 68700;
+  // Normalized SVG coordinate space (0..1000 x 0..240) for pure vector geometry only
+  const svgWidth = 1000;
+  const svgHeight = 240;
+  const padLeft = 16;
+  const padRight = 68; // Reserve clean right gutter for Y-axis price labels
+  const padTop = 22;
+  const padBottom = 26;
 
-  const svgWidth = 840;
-  const svgHeight = 230;
+  const plotWidth = svgWidth - padLeft - padRight;
+  const plotHeight = svgHeight - padTop - padBottom;
 
-  const getY = (p: number) => {
-    return svgHeight - ((p - minPrice) / (maxPrice - minPrice)) * (svgHeight - 65) - 38;
-  };
+  const getX = (index: number) =>
+    padLeft + (index / (candles.length - 1)) * plotWidth;
 
-  const pointsString = CANDLE_DATA.map((pt, i) => {
-    const x = (i / (CANDLE_DATA.length - 1)) * (svgWidth - 90) + 70;
-    const y = getY(pt.price);
-    return `${x.toFixed(1)},${y.toFixed(1)}`;
-  }).join(' ');
+  const getY = (price: number) =>
+    padTop +
+    (1 - (price - asset.minPrice) / (asset.maxPrice - asset.minPrice)) *
+      plotHeight;
 
-  const areaString = `70,${svgHeight - 20} ${pointsString} ${svgWidth - 20},${svgHeight - 20}`;
-  const displayedPrice = hoveredIndex !== null ? CANDLE_DATA[hoveredIndex].price : livePrice;
+  // Percentage coordinates (0..100%) for crisp HTML overlays (zero SVG distortion)
+  const getXPct = (index: number) => (getX(index) / svgWidth) * 100;
+  const getYPct = (price: number) => (getY(price) / svgHeight) * 100;
 
-  // Horizontal mouse & touch scrubbing calculation
+  const pointsString = candles
+    .map((pt, i) => `${getX(i).toFixed(1)},${getY(pt.price).toFixed(1)}`)
+    .join(' ');
+
+  const areaString = `${getX(0).toFixed(1)},${svgHeight - padBottom} ${pointsString} ${getX(
+    candles.length - 1
+  ).toFixed(1)},${svgHeight - padBottom}`;
+
+  const emaPointsString = candles
+    .map((pt, i) => `${getX(i).toFixed(1)},${getY(pt.price * 0.9972).toFixed(1)}`)
+    .join(' ');
+
+  const activePt = hoveredIndex !== null ? candles[hoveredIndex] : null;
+  const livePrice = Number((asset.basePrice + tickOffset).toFixed(2));
+  const displayedPrice = activePt ? activePt.price : livePrice;
+
+  // Horizontal mouse & touch scrubbing
   const updateScrubFromClientX = (clientX: number, rect: DOMRect) => {
-    const xPos = clientX - rect.left;
-    const svgX = (xPos / rect.width) * svgWidth;
-    const minX = 70;
-    const maxX = svgWidth - 20; // 820
-    const ratio = Math.max(0, Math.min(1, (svgX - minX) / (maxX - minX)));
-    const nearestIndex = Math.round(ratio * (CANDLE_DATA.length - 1));
+    const xRatio = (clientX - rect.left) / rect.width;
+    const minRatio = padLeft / svgWidth;
+    const maxRatio = (svgWidth - padRight) / svgWidth;
+    const normalized = Math.max(0, Math.min(1, (xRatio - minRatio) / (maxRatio - minRatio)));
+    const nearestIndex = Math.round(normalized * (candles.length - 1));
     setHoveredIndex(nearestIndex);
   };
 
-  const handleChartMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (hoveredNewsId !== null) return;
-    updateScrubFromClientX(e.clientX, e.currentTarget.getBoundingClientRect());
-  };
-
-  const handleChartTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
-    if (e.touches.length > 0) {
-      updateScrubFromClientX(e.touches[0].clientX, e.currentTarget.getBoundingClientRect());
-    }
-  };
-
-  const activePt = hoveredIndex !== null ? CANDLE_DATA[hoveredIndex] : null;
-  const activeX = hoveredIndex !== null ? (hoveredIndex / (CANDLE_DATA.length - 1)) * (svgWidth - 90) + 70 : 0;
-  const activeY = activePt ? getY(activePt.price) : 0;
+  // 4 clean Y-axis price levels
+  const yLevels = [0.15, 0.42, 0.69, 0.92].map((r) => {
+    const val = asset.maxPrice - r * (asset.maxPrice - asset.minPrice);
+    return selectedAsset === 'SOL' ? Number(val.toFixed(1)) : Math.round(val);
+  });
 
   return (
     <div className="bg-[#0B0E14] border border-[#1E2638] text-slate-200 rounded-none font-sans shadow-2xl overflow-hidden select-none flex flex-col">
-      {/* 1. Header Bar: Fixed 48px height, whitespace-nowrap to prevent vertical expansion */}
+      {/* 1. Header Bar: Pair Switcher + Live Price + Line/Candles Toggle */}
       <div className="bg-[#111622] border-b border-[#1E2638] px-2.5 sm:px-5 h-12 flex items-center justify-between gap-1.5 sm:gap-3 font-mono text-xs overflow-hidden shrink-0 whitespace-nowrap">
         <div className="flex items-center gap-2 sm:gap-4 overflow-hidden">
-          <div className="flex items-center space-x-2 shrink-0">
-            <span className="font-bold text-slate-100 tracking-wider text-xs sm:text-sm">BTC/USDT</span>
-            <span className="hidden sm:inline-block text-[10px] bg-[#161F30] border border-[#273756] px-1.5 py-0.5 text-slate-300 font-semibold rounded-none">
-              {isFrench ? 'PERPÉTUEL' : 'PERPETUAL'}
-            </span>
+          {/* Desktop 3-Asset Switcher / Mobile Compact Label */}
+          <div className="hidden sm:flex items-center border border-[#1E2638] bg-[#0A0E17] p-0.5 text-[11px]">
+            {(['BTC', 'ETH', 'SOL'] as const).map((sym) => {
+              const isSelected = selectedAsset === sym;
+              return (
+                <button
+                  key={sym}
+                  type="button"
+                  onClick={() => setSelectedAsset(sym)}
+                  className={`px-2 py-0.5 transition-colors cursor-pointer ${
+                    isSelected
+                      ? 'bg-[#1D283A] text-white font-bold border border-[#38BDF8]/40'
+                      : 'text-slate-400 hover:text-slate-200'
+                  }`}
+                >
+                  {sym}
+                </button>
+              );
+            })}
           </div>
+          <span className="sm:hidden font-bold text-slate-100 tracking-wider text-xs shrink-0">
+            {asset.pair}
+          </span>
 
+          {/* Live / Scrubbed Price & Delta */}
           <div className="flex items-baseline space-x-1.5 sm:space-x-2 shrink-0">
             <span className="text-xs sm:text-lg font-bold text-slate-100 tracking-tight tabular-nums">
               ${displayedPrice.toLocaleString('en-US', {
@@ -164,18 +309,16 @@ export const CryptoWidgetSim: React.FC = () => {
             </span>
             <span
               className={`text-[10px] sm:text-xs font-semibold tabular-nums ${
-                (activePt ? activePt.isPositive : priceChange >= 0) ? 'text-emerald-400' : 'text-rose-500'
+                (activePt ? activePt.isPositive : asset.baseChange >= 0)
+                  ? 'text-emerald-400'
+                  : 'text-rose-500'
               }`}
             >
               <span className="sm:hidden">
-                {activePt
-                  ? activePt.delta.match(/\(([^)]+)\)/)?.[1] || activePt.delta
-                  : priceChange >= 0
-                  ? `+${priceChange}%`
-                  : `${priceChange}%`}
+                {activePt ? activePt.pct : `+${asset.baseChange}%`}
               </span>
               <span className="hidden sm:inline">
-                {activePt ? activePt.delta : (priceChange >= 0 ? `+${priceChange}%` : `${priceChange}%`)}
+                {activePt ? activePt.delta : `+${asset.baseChange}%`}
               </span>
             </span>
           </div>
@@ -192,7 +335,6 @@ export const CryptoWidgetSim: React.FC = () => {
                   ? 'bg-[#1D283A] text-sky-400 font-bold border border-[#38BDF8]/40 shadow-sm'
                   : 'text-slate-400 hover:text-slate-200'
               }`}
-              title={isFrench ? 'Afficher graphique linéaire' : 'Show line chart'}
             >
               {isFrench ? 'Ligne' : 'Line'}
             </button>
@@ -204,7 +346,6 @@ export const CryptoWidgetSim: React.FC = () => {
                   ? 'bg-[#1D283A] text-sky-400 font-bold border border-[#38BDF8]/40 shadow-sm'
                   : 'text-slate-400 hover:text-slate-200'
               }`}
-              title={isFrench ? 'Afficher chandeliers japonais' : 'Show candlestick chart'}
             >
               {isFrench ? 'Bougies' : 'Candles'}
             </button>
@@ -214,20 +355,38 @@ export const CryptoWidgetSim: React.FC = () => {
 
       {/* 2. Streamlined Financial Graph Area */}
       <div className="p-2.5 sm:p-4 space-y-2 bg-[#0B0E14] flex-1 flex flex-col justify-between">
-        {/* Fixed Height Minimal Graph Legend Bar */}
+        {/* Single-Line Telemetry / Catalyst Sub-Bar (Zero floating clutter over chart) */}
         <div className="h-6 flex items-center justify-between gap-2 text-[10px] font-mono text-slate-400 border-b border-[#1E2638] pb-1.5 shrink-0 overflow-hidden whitespace-nowrap">
-          <div className="text-sky-400 font-semibold">
-            {activePt
-              ? `${activePt.time} UTC · ${activePt.volume} BTC`
-              : isFrench
-              ? '15M · TEMPS RÉEL'
-              : '15M · LIVE'}
+          <div className="flex items-center gap-2 min-w-0 truncate">
+            {activePt ? (
+              <>
+                <span className="text-sky-400 font-semibold shrink-0">
+                  {activePt.time} UTC · {activePt.volume}
+                </span>
+                {(isFrench ? activePt.catalystFr : activePt.catalystEn) && (
+                  <span className="hidden sm:inline-flex items-center gap-1.5 text-amber-300 font-sans font-medium truncate">
+                    <span className="text-slate-600 font-mono">|</span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0" />
+                    <span className="truncate">
+                      {isFrench ? activePt.catalystFr : activePt.catalystEn}
+                    </span>
+                  </span>
+                )}
+              </>
+            ) : (
+              <span className="text-slate-400 font-medium">
+                {isFrench
+                  ? '15M · TEMPS RÉEL (SURVOLEZ LE GRAPHIQUE)'
+                  : '15M · LIVE STREAM (HOVER CHART TO INSPECT)'}
+              </span>
+            )}
           </div>
-          <div className="flex items-center gap-3">
+
+          <div className="flex items-center gap-3 shrink-0">
             {chartMode === 'line' ? (
               <span className="flex items-center space-x-1.5">
                 <span className="w-2.5 h-0.5 bg-emerald-400 inline-block" />
-                <span>{isFrench ? 'COURS (BTC)' : 'PRICE (BTC)'}</span>
+                <span>{isFrench ? `COURS (${selectedAsset})` : `PRICE (${selectedAsset})`}</span>
               </span>
             ) : (
               <span className="flex items-center space-x-1.5">
@@ -243,26 +402,89 @@ export const CryptoWidgetSim: React.FC = () => {
           </div>
         </div>
 
-        {/* Stable, Rock-Solid Responsive Height SVG Canvas */}
+        {/* Responsive Chart Canvas: Pure Vector SVG + Crisp HTML Overlays */}
         <div
-          className="relative w-full h-40 sm:h-64 md:h-72 bg-[#0E131E]/80 border border-[#1E2638] rounded-none overflow-hidden p-1.5 sm:p-2 flex items-center justify-center cursor-crosshair shrink-0 touch-pan-y"
-          onMouseMove={handleChartMouseMove}
-          onTouchStart={handleChartTouchMove}
-          onTouchMove={handleChartTouchMove}
-          onMouseLeave={() => {
-            setHoveredIndex(null);
-            setHoveredNewsId(null);
+          className="relative w-full h-40 sm:h-60 md:h-64 bg-[#0E131E]/80 border border-[#1E2638] rounded-none overflow-hidden flex items-center justify-center cursor-crosshair shrink-0 touch-pan-y"
+          onMouseMove={(e) =>
+            updateScrubFromClientX(e.clientX, e.currentTarget.getBoundingClientRect())
+          }
+          onTouchStart={(e) => {
+            if (e.touches.length > 0) {
+              updateScrubFromClientX(
+                e.touches[0].clientX,
+                e.currentTarget.getBoundingClientRect()
+              );
+            }
           }}
+          onTouchMove={(e) => {
+            if (e.touches.length > 0) {
+              updateScrubFromClientX(
+                e.touches[0].clientX,
+                e.currentTarget.getBoundingClientRect()
+              );
+            }
+          }}
+          onMouseLeave={() => setHoveredIndex(null)}
         >
-          {/* Crisp HTML High/Low Watermarks for Mobile (Zero SVG text distortion) */}
+          {/* Mobile High/Low Watermarks */}
           <div className="sm:hidden pointer-events-none absolute inset-x-2.5 top-2 flex justify-between text-[9px] font-mono text-slate-500">
-            <span>H: $68,580</span>
+            <span>H: {asset.highLabel}</span>
             <span>09:00 — 11:45 UTC</span>
           </div>
           <div className="sm:hidden pointer-events-none absolute left-2.5 bottom-2 text-[9px] font-mono text-slate-500">
-            <span>L: $67,770</span>
+            <span>L: {asset.lowLabel}</span>
           </div>
 
+          {/* Crisp HTML Right-Axis Price Labels (Desktop/Tablet) */}
+          <div className="hidden sm:block pointer-events-none absolute inset-0">
+            {yLevels.map((priceLevel) => (
+              <span
+                key={priceLevel}
+                style={{ top: `${getYPct(priceLevel)}%` }}
+                className="absolute right-2 -translate-y-1/2 text-[10px] font-mono text-slate-500 tabular-nums"
+              >
+                ${priceLevel.toLocaleString('en-US')}
+              </span>
+            ))}
+          </div>
+
+          {/* Crisp HTML Bottom X-Axis Timestamps + Subtle Catalyst Dots (Desktop/Tablet) */}
+          <div className="hidden sm:block pointer-events-none absolute inset-x-0 bottom-1.5 h-4">
+            {candles.map((pt, i) => {
+              const hasCatalyst = Boolean(pt.catalystEn);
+              const isHovered = hoveredIndex === i;
+              if (i % 2 !== 0 && !hasCatalyst && !isHovered) return null;
+
+              return (
+                <div
+                  key={pt.time}
+                  style={{ left: `${getXPct(i)}%` }}
+                  className="absolute bottom-0 -translate-x-1/2 flex flex-col items-center"
+                >
+                  {hasCatalyst && (
+                    <span
+                      className={`w-1.5 h-1.5 rounded-full mb-0.5 transition-transform ${
+                        isHovered ? 'bg-amber-300 scale-125' : 'bg-amber-400/80'
+                      }`}
+                    />
+                  )}
+                  <span
+                    className={`text-[9.5px] font-mono tabular-nums transition-colors ${
+                      isHovered
+                        ? 'text-sky-400 font-bold'
+                        : hasCatalyst
+                        ? 'text-amber-300/90 font-semibold'
+                        : 'text-slate-500'
+                    }`}
+                  >
+                    {pt.time}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Pure Vector Geometry SVG (No text or circles to stretch) */}
           <svg
             viewBox={`0 0 ${svgWidth} ${svgHeight}`}
             className="w-full h-full block overflow-hidden"
@@ -270,96 +492,58 @@ export const CryptoWidgetSim: React.FC = () => {
           >
             <defs>
               <linearGradient id="mainAreaGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#10b981" stopOpacity="0.22" />
+                <stop offset="0%" stopColor="#10b981" stopOpacity="0.20" />
                 <stop offset="100%" stopColor="#10b981" stopOpacity="0.0" />
               </linearGradient>
             </defs>
 
-            {/* Y-Axis Horizontal Grid Lines & Price Labels */}
-            {[68700, 68400, 68100, 67800, 67600].map((priceLevel) => {
+            {/* Horizontal Grid Lines */}
+            {yLevels.map((priceLevel) => {
               const y = getY(priceLevel);
-
               return (
-                <g key={`grid-${priceLevel}`}>
-                  <line
-                    x1="15"
-                    y1={y}
-                    x2={svgWidth - 10}
-                    y2={y}
-                    stroke="#1E293B"
-                    strokeWidth="0.8"
-                    opacity="0.4"
-                  />
-                  <text
-                    x="10"
-                    y={y + 3.5}
-                    fill="#64748B"
-                    fontSize="9.5"
-                    fontFamily="monospace"
-                    className="hidden sm:block"
-                  >
-                    ${priceLevel.toLocaleString()}
-                  </text>
-                </g>
+                <line
+                  key={`grid-${priceLevel}`}
+                  x1={padLeft}
+                  y1={y}
+                  x2={svgWidth - padRight}
+                  y2={y}
+                  stroke="#1E293B"
+                  strokeWidth="1"
+                  opacity="0.45"
+                />
               );
             })}
 
-            {/* 20-EMA Secondary Trendline (Shown in both Line and Candlestick modes) */}
+            {/* 20-EMA Trendline */}
             <polyline
               fill="none"
               stroke="#0052FF"
               strokeWidth="1.5"
               strokeDasharray="4 3"
               opacity="0.85"
-              points={CANDLE_DATA.map((pt, i) => {
-                const x = (i / (CANDLE_DATA.length - 1)) * (svgWidth - 90) + 70;
-                const emaY = getY(pt.price * 0.9968);
-                return `${x.toFixed(1)},${emaY.toFixed(1)}`;
-              }).join(' ')}
+              points={emaPointsString}
             />
 
-            {/* MODE 1: Line Chart View */}
+            {/* MODE 1: Line Chart */}
             {chartMode === 'line' && (
               <g>
-                {/* Area Fill */}
                 <polygon points={areaString} fill="url(#mainAreaGrad)" />
-
-                {/* Main Price Line */}
                 <polyline
                   fill="none"
                   stroke="#10b981"
-                  strokeWidth="2.2"
-                  strokeLinecap="square"
-                  strokeLinejoin="miter"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   points={pointsString}
                 />
-
-                {/* Static Data Nodes along the Price Line */}
-                {CANDLE_DATA.map((pt, i) => {
-                  const x = (i / (CANDLE_DATA.length - 1)) * (svgWidth - 90) + 70;
-                  const y = getY(pt.price);
-
-                  return (
-                    <rect
-                      key={`node-${i}`}
-                      x={x - 2.5}
-                      y={y - 2.5}
-                      width={5}
-                      height={5}
-                      fill="#0B0E14"
-                      stroke="#10b981"
-                      strokeWidth="1.2"
-                    />
-                  );
-                })}
               </g>
             )}
 
-            {/* MODE 2: Candlestick Chart View */}
+            {/* MODE 2: Candlestick Chart */}
             {chartMode === 'candles' && (
               <g>
-                {CANDLE_DATA.map((pt, i) => {
-                  const x = (i / (CANDLE_DATA.length - 1)) * (svgWidth - 90) + 70;
+                {candles.map((pt, i) => {
+                  const x = getX(i);
                   const highY = getY(pt.high);
                   const lowY = getY(pt.low);
                   const openY = getY(pt.open);
@@ -372,7 +556,6 @@ export const CryptoWidgetSim: React.FC = () => {
 
                   return (
                     <g key={`candle-${i}`}>
-                      {/* Upper & Lower Wick */}
                       <line
                         x1={x}
                         y1={highY}
@@ -380,285 +563,76 @@ export const CryptoWidgetSim: React.FC = () => {
                         y2={lowY}
                         stroke={color}
                         strokeWidth="1.4"
-                        strokeLinecap="round"
                       />
-                      {/* Real Body */}
                       <rect
                         x={x - candleWidth / 2}
                         y={bodyTop}
                         width={candleWidth}
                         height={bodyHeight}
                         fill={color}
-                        stroke={color}
-                        strokeWidth="0.8"
                       />
                     </g>
                   );
                 })}
               </g>
             )}
-
-            {/* Distinct Event Pins on dedicated top rail (y = 22) - Desktop only to prevent squished SVG icons on mobile */}
-            <g className="hidden sm:block">
-              {NEWS_CATALYSTS.map((item) => {
-                const candle = CANDLE_DATA[item.index];
-                const x = (item.index / (CANDLE_DATA.length - 1)) * (svgWidth - 90) + 70;
-                const candleTopY = getY(candle.high);
-                const pinY = 22;
-                const isHovered = hoveredNewsId === item.id;
-                const tooltipWidth = 240;
-                const tooltipHeight = 55;
-                const tooltipX = Math.max(70, Math.min(svgWidth - tooltipWidth - 20, x - tooltipWidth / 2));
-                const tooltipY = 38;
-
-                return (
-                  <g
-                    key={`news-marker-${item.id}`}
-                    className="cursor-pointer"
-                    onMouseEnter={(e) => {
-                      e.stopPropagation();
-                      setHoveredNewsId(item.id);
-                      setHoveredIndex(null);
-                    }}
-                    onMouseMove={(e) => {
-                      e.stopPropagation();
-                    }}
-                    onMouseLeave={() => {
-                      setHoveredNewsId(null);
-                    }}
-                  >
-                    {/* Subtle vertical dashed anchor line down to candle top */}
-                    <line
-                      x1={x}
-                      y1={pinY + 10}
-                      x2={x}
-                      y2={candleTopY}
-                      stroke={item.accentColor}
-                      strokeWidth="1.2"
-                      strokeDasharray="2.5 2"
-                      opacity={isHovered ? 0.95 : 0.45}
-                    />
-
-                    {/* Generous invisible hit target to prevent any mouse-out jitter (36px hitbox) */}
-                    <circle
-                      cx={x}
-                      cy={pinY}
-                      r="18"
-                      fill="transparent"
-                    />
-
-                    {/* Pulsing subtle outer ring */}
-                    <circle
-                      cx={x}
-                      cy={pinY}
-                      r={isHovered ? 12 : 10.5}
-                      fill="none"
-                      stroke={item.accentColor}
-                      strokeWidth="1"
-                      opacity={isHovered ? 0.9 : 0.4}
-                      className={isHovered ? '' : 'animate-ping'}
-                      style={{ transformOrigin: `${x}px ${pinY}px`, animationDuration: '3.5s' }}
-                    />
-
-                    {/* Core interactive round badge */}
-                    <circle
-                      cx={x}
-                      cy={pinY}
-                      r={isHovered ? 9.5 : 8.5}
-                      fill="#080D1A"
-                      stroke={item.accentColor}
-                      strokeWidth={isHovered ? 2 : 1.5}
-                      className="transition-all duration-150"
-                    />
-
-                    {/* Inner Icon / Symbol */}
-                    <text
-                      x={x}
-                      y={pinY + 3.5}
-                      textAnchor="middle"
-                      fill={item.accentColor}
-                      fontSize={item.symbol === 'Ð' ? 10.5 : 9}
-                      fontFamily="monospace"
-                      fontWeight="bold"
-                      className="select-none pointer-events-none"
-                    >
-                      {item.symbol}
-                    </text>
-
-                    {/* News Catalyst Floating Tooltip (seamlessly nested in the same group) */}
-                    {isHovered && (
-                      <g transform={`translate(${tooltipX}, ${tooltipY})`} className="pointer-events-none">
-                        {/* Drop shadow background */}
-                        <rect
-                          x="0"
-                          y="0"
-                          width={tooltipWidth}
-                          height={tooltipHeight}
-                          fill="#060911"
-                          stroke={item.accentColor}
-                          strokeWidth="1.4"
-                          className="filter drop-shadow-[0_12px_28px_rgba(0,0,0,0.95)]"
-                        />
-                        {/* Left colored accent bar */}
-                        <rect x="0" y="0" width="3.5" height={tooltipHeight} fill={item.accentColor} />
-
-                        {/* Header Tag */}
-                        <text x="12" y="15" fill={item.accentColor} fontSize="8.5" fontFamily="monospace" fontWeight="bold">
-                          {item.symbol} · {isFrench ? item.tagFr : item.tagEn}
-                        </text>
-
-                        {/* Line 1 (Headline) */}
-                        <text x="12" y="30" fill="#F8FAFC" fontSize="10" fontFamily="sans-serif" fontWeight="600">
-                          {isFrench ? item.line1Fr : item.line1En}
-                        </text>
-
-                        {/* Line 2 (Detail) */}
-                        <text x="12" y="44" fill="#94A3B8" fontSize="9" fontFamily="sans-serif">
-                          {isFrench ? item.line2Fr : item.line2En}
-                        </text>
-                      </g>
-                    )}
-                  </g>
-                );
-              })}
-            </g>
-
-            {/* Dynamic Interactive Crosshair and Price Tooltip (only when not hovering news marker) */}
-            {hoveredIndex !== null && activePt && hoveredNewsId === null && (
-              <g className="pointer-events-none">
-                {/* 1. Full Vertical Crosshair Guide Line (Shown on both mobile and desktop) */}
-                <line
-                  x1={activeX}
-                  y1={15}
-                  x2={activeX}
-                  y2={svgHeight - 20}
-                  stroke="#38BDF8"
-                  strokeWidth="1.5"
-                  strokeDasharray="3 3"
-                  opacity="0.85"
-                />
-
-                {/* 2. Horizontal Axis Guide Line */}
-                <line
-                  x1={15}
-                  y1={activeY}
-                  x2={activeX}
-                  y2={activeY}
-                  stroke="#60A5FA"
-                  strokeWidth="1"
-                  strokeDasharray="2 2"
-                  opacity="0.5"
-                />
-
-                {/* 3 & 4. Pulsing Node Rings and Floating HUD Tooltip Badge (Desktop only to prevent SVG text distortion on mobile) */}
-                <g className="hidden sm:block">
-                  <circle
-                    cx={activeX}
-                    cy={activeY}
-                    r="8.5"
-                    fill="#0052FF"
-                    fillOpacity="0.3"
-                    stroke="#38BDF8"
-                    strokeWidth="1.5"
-                  />
-                  <circle
-                    cx={activeX}
-                    cy={activeY}
-                    r="4"
-                    fill="#FFFFFF"
-                    stroke="#0052FF"
-                    strokeWidth="2"
-                  />
-
-                  {(() => {
-                    const tooltipWidth = 152;
-                    const tooltipHeight = 52;
-                    const isFarRight = activeX > svgWidth - 190;
-                    const isFarLeft = activeX < 200;
-                    const tooltipX = isFarRight ? activeX - tooltipWidth - 12 : isFarLeft ? activeX + 14 : activeX - tooltipWidth / 2;
-                    const tooltipY = activeY > 65 ? activeY - tooltipHeight - 12 : activeY + 14;
-
-                    return (
-                      <g transform={`translate(${tooltipX}, ${tooltipY})`}>
-                        <rect
-                          x="0"
-                          y="0"
-                          width={tooltipWidth}
-                          height={tooltipHeight}
-                          fill="#070A10"
-                          stroke="#273756"
-                          strokeWidth="1.2"
-                          className="filter drop-shadow-[0_6px_20px_rgba(0,0,0,0.8)]"
-                        />
-                        <rect
-                          x="0"
-                          y="0"
-                          width="3.5"
-                          height={tooltipHeight}
-                          fill={activePt.isPositive ? '#10B981' : '#F43F5E'}
-                        />
-                        <text x="12" y="15" fill="#94A3B8" fontSize="9.5" fontFamily="monospace" fontWeight="bold">
-                          {activePt.time} UTC · {activePt.volume} BTC
-                        </text>
-                        <text x="12" y="32" fill="#F8FAFC" fontSize="13" fontFamily="monospace" fontWeight="bold">
-                          ${activePt.price.toLocaleString('en-US', { minimumFractionDigits: 2 })}
-                        </text>
-                        <text
-                          x="12"
-                          y="45"
-                          fill={activePt.isPositive ? '#34D399' : '#FB7185'}
-                          fontSize="9.5"
-                          fontFamily="monospace"
-                          fontWeight="semibold"
-                        >
-                          {activePt.delta}
-                        </text>
-                      </g>
-                    );
-                  })()}
-                </g>
-              </g>
-            )}
-
-            {/* X-Axis Time Labels (Desktop only to prevent SVG text distortion on mobile) */}
-            <g className="hidden sm:block">
-              {CANDLE_DATA.map((pt, i) => {
-                const x = (i / (CANDLE_DATA.length - 1)) * (svgWidth - 90) + 70;
-                const isHovered = hoveredIndex === i;
-
-                if (i % 2 !== 0 && !isHovered) return null;
-
-                return (
-                  <text
-                    key={`time-${i}`}
-                    x={x}
-                    y={svgHeight - 5}
-                    textAnchor="middle"
-                    fill={isHovered ? '#60a5fa' : '#64748B'}
-                    fontSize="8.5"
-                    fontFamily="monospace"
-                    fontWeight={isHovered ? 'bold' : 'normal'}
-                  >
-                    {pt.time}
-                  </text>
-                );
-              })}
-            </g>
           </svg>
+
+          {/* Crisp HTML Crosshair & Perfectly Round Snap-Dot Overlay */}
+          {hoveredIndex !== null && activePt && (
+            <div className="pointer-events-none absolute inset-0">
+              {/* Vertical Hairline */}
+              <div
+                style={{ left: `${getXPct(hoveredIndex)}%` }}
+                className="absolute top-0 bottom-5 w-px border-l border-dashed border-sky-400/75"
+              />
+
+              {/* Horizontal Hairline (Desktop/Tablet) */}
+              <div
+                style={{
+                  top: `${getYPct(activePt.price)}%`,
+                  right: `${(padRight / svgWidth) * 100}%`,
+                }}
+                className="hidden sm:block absolute left-0 h-px border-t border-dashed border-sky-400/45"
+              />
+
+              {/* Perfectly Round Snap-Dot on Price Curve */}
+              <div
+                style={{
+                  left: `${getXPct(hoveredIndex)}%`,
+                  top: `${getYPct(activePt.price)}%`,
+                }}
+                className="absolute -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-white border-2 border-[#0052FF] shadow-[0_0_10px_rgba(56,189,248,0.9)]"
+              />
+
+              {/* Right-Axis Active Price Tag Pill (Desktop/Tablet) */}
+              <div
+                style={{ top: `${getYPct(activePt.price)}%` }}
+                className={`hidden sm:flex absolute right-1 -translate-y-1/2 px-1.5 py-0.5 text-[10px] font-mono font-bold tabular-nums border ${
+                  activePt.isPositive
+                    ? 'bg-emerald-950/95 text-emerald-300 border-emerald-500/50'
+                    : 'bg-rose-950/95 text-rose-300 border-rose-500/50'
+                }`}
+              >
+                ${activePt.price.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
       {/* 3. Fixed Height Monospace Telemetry Footer Strip */}
-      <div className="bg-[#0C101A] px-4 sm:px-5 h-8 border-t border-[#1E2638] flex items-center justify-between gap-2.5 text-[10px] font-mono text-slate-500 overflow-hidden shrink-0 whitespace-nowrap">
+      <div className="bg-[#0C101A] px-3 sm:px-5 h-8 border-t border-[#1E2638] flex items-center justify-between gap-2.5 text-[10px] font-mono text-slate-500 overflow-hidden shrink-0 whitespace-nowrap">
         <div className="flex items-center space-x-3 sm:space-x-4">
-          <span>{isFrench ? 'VOL 24H : 12.65B $' : '24H VOL: $12.65B'}</span>
+          <span>
+            {isFrench ? `VOL 24H : ${asset.vol24h}` : `24H VOL: ${asset.vol24h}`}
+          </span>
           <span className="hidden sm:inline">{isFrench ? 'ÉCART : 0.01%' : 'SPREAD: 0.01%'}</span>
-          <span className="hidden sm:inline">{isFrench ? 'GLISSEMENT : 0.002%' : 'SLIPPAGE: 0.002%'}</span>
-          <span className="hidden sm:inline">{isFrench ? 'INTERVALLE : 15M' : 'INTERVAL: 15M'}</span>
+          <span className="hidden sm:inline">{isFrench ? 'RISQUE KELLY : MAX 2%' : 'KELLY RISK: 2% MAX'}</span>
         </div>
         <div className="flex items-center space-x-1.5 text-slate-400">
           <span className="w-1.5 h-1.5 bg-emerald-400 rounded-none inline-block shadow-[0_0_6px_rgba(52,211,153,0.8)]" />
-          <span>{isFrench ? 'FLUX WEBSOCKET BINANCE' : 'BINANCE WEBSOCKET FEED'}</span>
+          <span>{isFrench ? 'FLUX BINANCE WS' : 'BINANCE WS LIVE'}</span>
         </div>
       </div>
     </div>
@@ -666,4 +640,3 @@ export const CryptoWidgetSim: React.FC = () => {
 };
 
 export default CryptoWidgetSim;
-

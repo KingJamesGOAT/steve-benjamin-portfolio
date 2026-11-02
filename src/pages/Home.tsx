@@ -294,48 +294,33 @@ export const Home: React.FC = () => {
               <CryptoWidgetSim />
             </div>
 
-            {/* Architectural Highlights: 3 Crisp Data Points (Desktop only for minimalist mobile) */}
-            <div className="hidden md:block rounded-none border border-slate-200 bg-slate-50/80 p-4 sm:p-5 font-sans">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 text-xs text-slate-600">
-                <div className="space-y-1">
-                  <span className="font-mono text-[10px] tracking-wider uppercase text-slate-400 font-bold block">
-                    {isFrench ? 'FLUX TEMPS RÉEL' : 'REAL-TIME DATA'}
-                  </span>
-                  <span className="font-semibold text-slate-800 text-xs sm:text-sm block">
-                    Binance WebSockets
-                  </span>
-                  <p className="text-slate-500 text-xs leading-relaxed">
-                    {isFrench
-                      ? 'Streaming bidirectionnel full-duplex de ticks crypto sans rechargement de page.'
-                      : 'Full-duplex tick streaming delivering live price movements with zero page reload.'}
-                  </p>
-                </div>
+            {/* Architectural Highlights: Minimalist 3-Column Strip (Desktop only) */}
+            <div className="hidden md:grid md:grid-cols-3 divide-x divide-slate-200 border border-slate-200 bg-slate-50/60 font-sans">
+              <div className="px-4 py-3 space-y-0.5">
+                <span className="font-mono text-[10px] tracking-wider uppercase text-slate-400 font-bold block">
+                  {isFrench ? '01 · FLUX TEMPS RÉEL' : '01 · REAL-TIME STREAM'}
+                </span>
+                <span className="font-semibold text-slate-800 text-xs block">
+                  {isFrench ? 'Binance WebSockets (< 50ms)' : 'Binance WebSockets (< 50ms)'}
+                </span>
+              </div>
 
-                <div className="space-y-1">
-                  <span className="font-mono text-[10px] tracking-wider uppercase text-slate-400 font-bold block">
-                    {isFrench ? 'GESTION DU RISQUE' : 'QUANTITATIVE RISK'}
-                  </span>
-                  <span className="font-semibold text-slate-800 text-xs sm:text-sm block">
-                    {isFrench ? 'Modèle de Risque Kelly' : 'Kelly Risk Model'}
-                  </span>
-                  <p className="text-slate-500 text-xs leading-relaxed">
-                    {isFrench
-                      ? 'Dimensionnement optimal des positions et plafonnement strict de la perte maximale à 2% du capital.'
-                      : 'Optimal position sizing with strict 2% downside capital protection formula.'}
-                  </p>
-                </div>
+              <div className="px-4 py-3 space-y-0.5">
+                <span className="font-mono text-[10px] tracking-wider uppercase text-slate-400 font-bold block">
+                  {isFrench ? '02 · GESTION DU RISQUE' : '02 · RISK ENGINE'}
+                </span>
+                <span className="font-semibold text-slate-800 text-xs block">
+                  {isFrench ? 'Critère de Kelly (Max 2% / Trade)' : 'Fractional Kelly (2% Max Risk)'}
+                </span>
+              </div>
 
-                <div className="space-y-1 border-t md:border-t-0 md:border-l md:pl-6 border-slate-200">
-                  <span className="font-mono text-[10px] tracking-wider uppercase text-slate-400 font-bold block">
-                    {isFrench ? 'STACK PRODUCTION' : 'PRODUCTION STACK'}
-                  </span>
-                  <div className="flex flex-wrap gap-1.5 pt-1 text-[11px] font-mono text-slate-700">
-                    <span className="px-2 py-0.5 bg-white border border-slate-200">React 18</span>
-                    <span className="px-2 py-0.5 bg-white border border-slate-200">TypeScript</span>
-                    <span className="px-2 py-0.5 bg-white border border-slate-200">WebSockets</span>
-                    <span className="px-2 py-0.5 bg-white border border-slate-200">LLaMA 3.3</span>
-                  </div>
-                </div>
+              <div className="px-4 py-3 space-y-0.5">
+                <span className="font-mono text-[10px] tracking-wider uppercase text-slate-400 font-bold block">
+                  {isFrench ? '03 · INTELLIGENCE IA' : '03 · AI SENTIMENT'}
+                </span>
+                <span className="font-semibold text-slate-800 text-xs block">
+                  {isFrench ? 'Groq LLaMA 3.3 · React 18 · TS' : 'Groq LLaMA 3.3 · React 18 · TS'}
+                </span>
               </div>
             </div>
 
