@@ -87,8 +87,8 @@ export const ProjectDetail: React.FC = () => {
         <p className="text-xs sm:text-lg text-fintech-secondary max-w-3xl leading-relaxed line-clamp-2 sm:line-clamp-none">
           {isCryptoHub ? (
             isFrench
-              ? 'Projet personnel en bêta. Les données présentées dans cette démonstration sont simulées.'
-              : 'Personal project in beta. Data shown in this demo is simulated.'
+              ? "Terminal de trading quantitatif et de surveillance de marché conçu pour diffuser les flux Binance en temps réel, automatiser le dimensionnement des positions selon le critère de Kelly et synthétiser l'actualité macro par IA. (Projet personnel en bêta — démo sur données simulées)."
+              : 'Quantitative trading and market surveillance terminal engineered to stream live Binance order flow, automate position sizing via the Kelly Criterion, and synthesize macro catalysts with AI. (Personal project in beta — demo uses simulated data).'
           ) : (
             t(project.descriptionKey)
           )}

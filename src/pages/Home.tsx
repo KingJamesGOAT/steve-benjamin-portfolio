@@ -282,8 +282,8 @@ export const Home: React.FC = () => {
 
             <p className="hidden sm:block text-xs sm:text-sm text-fintech-secondary leading-relaxed">
               {isFrench
-                ? 'Projet personnel en bêta. Les données présentées dans cette démonstration sont simulées.'
-                : 'Personal project in beta. Data shown in this demo is simulated.'}
+                ? "Terminal de trading quantitatif et de surveillance de marché conçu pour diffuser les flux Binance en temps réel, automatiser le dimensionnement des positions selon le critère de Kelly et synthétiser l'actualité macro par IA. (Projet personnel en bêta — démo sur données simulées)."
+                : 'Quantitative trading and market surveillance terminal engineered to stream live Binance order flow, automate position sizing via the Kelly Criterion, and synthesize macro catalysts with AI. (Personal project in beta — demo uses simulated data).'}
             </p>
           </div>
 
@@ -294,33 +294,48 @@ export const Home: React.FC = () => {
               <CryptoWidgetSim />
             </div>
 
-            {/* Architectural Highlights: Minimalist 3-Column Strip (Desktop only) */}
-            <div className="hidden md:grid md:grid-cols-3 divide-x divide-slate-200 border border-slate-200 bg-slate-50/60 font-sans">
-              <div className="px-4 py-3 space-y-0.5">
+            {/* Architectural Highlights: Balanced 3-Column Strip with Concise Explanation (Desktop only) */}
+            <div className="hidden md:grid md:grid-cols-3 divide-x divide-slate-200 border border-slate-200 bg-slate-50/70 font-sans">
+              <div className="p-4 space-y-1">
                 <span className="font-mono text-[10px] tracking-wider uppercase text-slate-400 font-bold block">
                   {isFrench ? '01 · FLUX TEMPS RÉEL' : '01 · REAL-TIME STREAM'}
                 </span>
-                <span className="font-semibold text-slate-800 text-xs block">
-                  {isFrench ? 'Binance WebSockets (< 50ms)' : 'Binance WebSockets (< 50ms)'}
+                <span className="font-semibold text-slate-800 text-xs sm:text-sm block">
+                  Binance WebSockets (&lt; 50ms)
                 </span>
+                <p className="text-slate-500 text-xs leading-relaxed">
+                  {isFrench
+                    ? "Pipeline WebSocket bidirectionnel diffusant en direct les cours multi-actifs, l'EMA 20 et les cassures de volatilité."
+                    : 'Full-duplex WebSocket pipeline streaming live multi-asset prices, 20-EMA trends, and volatility breakouts.'}
+                </p>
               </div>
 
-              <div className="px-4 py-3 space-y-0.5">
+              <div className="p-4 space-y-1">
                 <span className="font-mono text-[10px] tracking-wider uppercase text-slate-400 font-bold block">
-                  {isFrench ? '02 · GESTION DU RISQUE' : '02 · RISK ENGINE'}
+                  {isFrench ? '02 · MOTEUR DE RISQUE' : '02 · RISK ENGINE'}
                 </span>
-                <span className="font-semibold text-slate-800 text-xs block">
+                <span className="font-semibold text-slate-800 text-xs sm:text-sm block">
                   {isFrench ? 'Critère de Kelly (Max 2% / Trade)' : 'Fractional Kelly (2% Max Risk)'}
                 </span>
+                <p className="text-slate-500 text-xs leading-relaxed">
+                  {isFrench
+                    ? 'Calculateur automatique de taille de position ajustant les stop-loss et plafonnant la perte maximale à 2 % du capital.'
+                    : 'Automated position-sizing engine that calculates stop-loss distances and caps downside risk at 2% of equity.'}
+                </p>
               </div>
 
-              <div className="px-4 py-3 space-y-0.5">
+              <div className="p-4 space-y-1">
                 <span className="font-mono text-[10px] tracking-wider uppercase text-slate-400 font-bold block">
-                  {isFrench ? '03 · INTELLIGENCE IA' : '03 · AI SENTIMENT'}
+                  {isFrench ? '03 · SENTIMENT IA & STACK' : '03 · AI SENTIMENT & STACK'}
                 </span>
-                <span className="font-semibold text-slate-800 text-xs block">
-                  {isFrench ? 'Groq LLaMA 3.3 · React 18 · TS' : 'Groq LLaMA 3.3 · React 18 · TS'}
+                <span className="font-semibold text-slate-800 text-xs sm:text-sm block">
+                  Groq LLaMA 3.3 · React 18 · TS
                 </span>
+                <p className="text-slate-500 text-xs leading-relaxed">
+                  {isFrench
+                    ? "Analyse l'impact des catalyseurs macro en temps réel (-1,0 à +1,0) au sein d'une architecture React 18 typée."
+                    : 'Scores breaking macro catalysts in real time (-1.0 to +1.0) inside a modular, type-safe React 18 architecture.'}
+                </p>
               </div>
             </div>
 
