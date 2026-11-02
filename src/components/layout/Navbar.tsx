@@ -81,7 +81,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
       setActiveSection('bachelor-pitch');
     }
 
-    const sectionIds = ['bachelor-pitch', 'about', 'projects'];
+    const sectionIds = ['bachelor-pitch', 'about', 'projects', 'skills'];
     const handleScrollSpy = () => {
       const isAtBottom =
         window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 140;
@@ -130,6 +130,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
   };
 
   const navLinks = [
+    { targetId: 'skills', label: t('nav.skills'), isDropdown: false },
     { targetId: 'projects', label: t('nav.projects'), isDropdown: true },
     { targetId: 'about', label: t('nav.about'), isDropdown: false },
     { targetId: 'bachelor-pitch', label: t('nav.bachelorPitch'), isDropdown: false },

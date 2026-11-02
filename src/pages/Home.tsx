@@ -166,7 +166,31 @@ export const Home: React.FC = () => {
             </span>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5">
-              {/* Item 1: Claude API */}
+              {/* Item 1: Duke DeFi (Nov 2026) */}
+              <div className="border border-slate-200 bg-white p-3 flex items-center justify-between gap-2 shadow-2xs hover:border-slate-300 transition-colors">
+                <div className="min-w-0 pr-1">
+                  <h4
+                    className="text-xs sm:text-[13px] font-semibold text-fintech-primary truncate"
+                    title="Decentralized Finance (DeFi): The Future of Finance"
+                  >
+                    Decentralized Finance (DeFi)
+                  </h4>
+                  <p className="text-[10px] sm:text-[11px] text-slate-500 font-mono">
+                    Duke University
+                  </p>
+                </div>
+                <a
+                  href="https://www.coursera.org/account/accomplishments/specialization/certificate/Z0YWQ005UI0C"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="shrink-0 inline-flex items-center gap-0.5 font-mono text-[11px] text-electric hover:underline font-medium"
+                >
+                  <span>{t('about.certifications.verify')}</span>
+                  <ArrowUpRight className="w-3 h-3" />
+                </a>
+              </div>
+
+              {/* Item 2: Claude API (Oct 2026) */}
               <div className="border border-slate-200 bg-white p-3 flex items-center justify-between gap-2 shadow-2xs hover:border-slate-300 transition-colors">
                 <div className="min-w-0 pr-1">
                   <h4 className="text-xs sm:text-[13px] font-semibold text-fintech-primary truncate">
@@ -187,7 +211,7 @@ export const Home: React.FC = () => {
                 </a>
               </div>
 
-              {/* Item 2: Claude Code */}
+              {/* Item 3: Claude Code (Oct 2026) */}
               <div className="border border-slate-200 bg-white p-3 flex items-center justify-between gap-2 shadow-2xs hover:border-slate-300 transition-colors">
                 <div className="min-w-0 pr-1">
                   <h4 className="text-xs sm:text-[13px] font-semibold text-fintech-primary truncate">
@@ -199,30 +223,6 @@ export const Home: React.FC = () => {
                 </div>
                 <a
                   href="https://academy.claude.com/verify/b22cbb90ce16cac2143dde13da2749bd"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="shrink-0 inline-flex items-center gap-0.5 font-mono text-[11px] text-electric hover:underline font-medium"
-                >
-                  <span>{t('about.certifications.verify')}</span>
-                  <ArrowUpRight className="w-3 h-3" />
-                </a>
-              </div>
-
-              {/* Item 3: Duke DeFi */}
-              <div className="border border-slate-200 bg-white p-3 flex items-center justify-between gap-2 shadow-2xs hover:border-slate-300 transition-colors">
-                <div className="min-w-0 pr-1">
-                  <h4
-                    className="text-xs sm:text-[13px] font-semibold text-fintech-primary truncate"
-                    title="Decentralized Finance (DeFi): The Future of Finance"
-                  >
-                    Decentralized Finance (DeFi)
-                  </h4>
-                  <p className="text-[10px] sm:text-[11px] text-slate-500 font-mono">
-                    Duke University
-                  </p>
-                </div>
-                <a
-                  href="https://www.coursera.org/account/accomplishments/specialization/certificate/Z0YWQ005UI0C"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="shrink-0 inline-flex items-center gap-0.5 font-mono text-[11px] text-electric hover:underline font-medium"

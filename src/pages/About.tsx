@@ -61,6 +61,18 @@ export const About: React.FC<AboutProps> = ({ id = 'about' }) => {
 
   const certifications = [
     {
+      group: t('about.certifications.groupFintech'),
+      items: [
+        {
+          period: t('about.certifications.dukeDefi.period'),
+          title: t('about.certifications.dukeDefi.title'),
+          issuer: t('about.certifications.dukeDefi.issuer'),
+          description: t('about.certifications.dukeDefi.description'),
+          link: 'https://www.coursera.org/account/accomplishments/specialization/certificate/Z0YWQ005UI0C',
+        },
+      ],
+    },
+    {
       group: t('about.certifications.groupAiDev'),
       items: [
         {
@@ -76,18 +88,6 @@ export const About: React.FC<AboutProps> = ({ id = 'about' }) => {
           issuer: t('about.certifications.claudeCode.issuer'),
           description: t('about.certifications.claudeCode.description'),
           link: 'https://academy.claude.com/verify/b22cbb90ce16cac2143dde13da2749bd',
-        },
-      ],
-    },
-    {
-      group: t('about.certifications.groupFintech'),
-      items: [
-        {
-          period: t('about.certifications.dukeDefi.period'),
-          title: t('about.certifications.dukeDefi.title'),
-          issuer: t('about.certifications.dukeDefi.issuer'),
-          description: t('about.certifications.dukeDefi.description'),
-          link: 'https://www.coursera.org/account/accomplishments/specialization/certificate/Z0YWQ005UI0C',
         },
       ],
     },
@@ -140,15 +140,19 @@ export const About: React.FC<AboutProps> = ({ id = 'about' }) => {
               {t('about.summary')}
             </p>
 
-            {/* Minimalist Native Language Badges (Slightly larger & balanced) */}
-            <div className="grid grid-cols-2 sm:inline-flex items-center gap-2.5 pt-0.5 font-mono text-xs sm:text-sm">
-              <span className="inline-flex items-center justify-center gap-2 px-3.5 py-2 border border-slate-200 bg-slate-50/80 text-slate-800 shadow-2xs">
-                <span className="text-xs font-bold text-electric uppercase tracking-wider">EN</span>
-                <span className="text-slate-700 font-semibold">{t('about.languages.native')}</span>
+            {/* Non-clickable Editorial Language Metadata Line */}
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1 border-l-2 border-electric pl-3 py-0.5 font-mono text-xs sm:text-sm select-none">
+              <span className="text-[11px] uppercase tracking-wider text-slate-400 font-semibold">
+                {isFrench ? 'Langues :' : 'Languages:'}
               </span>
-              <span className="inline-flex items-center justify-center gap-2 px-3.5 py-2 border border-slate-200 bg-slate-50/80 text-slate-800 shadow-2xs">
-                <span className="text-xs font-bold text-electric uppercase tracking-wider">FR</span>
-                <span className="text-slate-700 font-semibold">{t('about.languages.native')}</span>
+              <span className="inline-flex items-center gap-1.5 text-slate-700">
+                <span className="font-bold text-slate-900">EN</span>
+                <span className="text-slate-500">({t('about.languages.native')})</span>
+              </span>
+              <span className="text-slate-300">·</span>
+              <span className="inline-flex items-center gap-1.5 text-slate-700">
+                <span className="font-bold text-slate-900">FR</span>
+                <span className="text-slate-500">({t('about.languages.native')})</span>
               </span>
             </div>
 
