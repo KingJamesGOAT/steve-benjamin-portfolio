@@ -38,9 +38,6 @@ export const DonnonsWidgetSim: React.FC = () => {
           <span className="font-mono font-black text-xs sm:text-sm tracking-tight text-black shrink-0">
             DONNONS.CH
           </span>
-          <span className="px-1.5 py-0.5 text-[8.5px] sm:text-[9px] font-mono font-bold bg-amber-100 text-amber-900 border border-black uppercase truncate">
-            {isFrench ? 'Maquette interactive' : 'Interactive Prototype'}
-          </span>
           <span className="text-[10px] font-mono text-slate-500 hidden sm:inline shrink-0">
             // HUG & HEIG-VD
           </span>
