@@ -198,12 +198,12 @@ export const MarriageDetailShowcase: React.FC = () => {
             {isFrench ? 'Module 01 // Interface Invité' : 'Module 01 // Guest Interface'}
           </span>
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-fintech-primary">
-            {isFrench ? 'Moteur de RSVP & Contrôle Magic Link' : 'RSVP Engine & Magic Link Control'}
+            {isFrench ? '1. Formulaire Invité & Lien Privé Dîner' : '1. Simple Guest RSVP & Private Dinner Link'}
           </h2>
           <p className="hidden sm:block text-xs sm:text-sm text-slate-600 leading-relaxed font-sans">
             {isFrench
-              ? 'Interface invité minimaliste : gestion des présences, répartition des adultes et enfants, régimes alimentaires et déverrouillage conditionnel du dîner sans création de compte.'
-              : 'Minimalist guest interface: attendance intake, adults and children headcount split, dietary preferences, and URL-based conditional dinner access without account creation friction.'}
+              ? 'J\'ai conçu un formulaire simple où les invités confirment leur présence, le nombre d\'adultes et d\'enfants ainsi que leur régime alimentaire sans créer de compte. Un paramètre dans le lien (?invite=dinner) débloque l\'option du dîner uniquement pour les invités concernés, et le navigateur mémorise leur réponse.'
+              : 'I designed a clean form where guests can confirm their attendance, select the number of adults and children, and note dietary needs without creating an account. A special URL parameter (?invite=dinner) unlocks the private dinner option only for invited guests, and the browser remembers their answer if they return later.'}
           </p>
         </div>
 
@@ -474,7 +474,7 @@ export const MarriageDetailShowcase: React.FC = () => {
                 <div className="flex justify-between py-1">
                   <span className="text-stone-500">{isFrench ? 'Dîner' : 'Dinner Access'}</span>
                   <span className="font-mono font-semibold text-stone-800">
-                    {savedSession.isDinner ? (isFrench ? 'Confirmé' : 'Confirmed') : '—'}
+                    {savedSession.isDinner ? (isFrench ? 'Confirmé' : 'Confirmed') : '-'}
                   </span>
                 </div>
               </div>
@@ -510,34 +510,34 @@ export const MarriageDetailShowcase: React.FC = () => {
             )}
           </div>
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-fintech-primary">
-            {isFrench ? 'Synchronisation Tableur (Google Apps Script → Excel)' : 'Spreadsheet Synchronization (Google Apps Script → Excel)'}
+            {isFrench ? '2. Synchronisation Automatique vers Excel' : '2. Automatic Excel & Google Sheets Sync'}
           </h2>
           <p className="hidden sm:block text-xs sm:text-sm text-slate-600 leading-relaxed font-sans">
             {isFrench ? (
               <>
-                Chaque soumission déclenche une requête POST vers un endpoint Google Apps Script en{' '}
+                Plutôt que de payer un serveur de base de données mensuel ou d'imposer un panneau d'administration complexe, j'ai relié le formulaire à un script Google Apps en{' '}
                 <GlossaryTerm
                   term="mode no-cors"
                   definition={getGlossaryDef('no-cors-mode', 'fr')}
-                />. Les réponses sont{' '}
+                />. Chaque réponse d'invité est{' '}
                 <GlossaryTerm
-                  term="insérées directement"
+                  term="ajoutée directement"
                   definition={getGlossaryDef('atomic-insert', 'fr')}
                 />{' '}
-                dans la feuille de calcul des organisateurs sans base de données SQL coûteuse.
+                dans le tableau Excel des organisateurs pour 0 CHF/mois.
               </>
             ) : (
               <>
-                Each submission dispatches an asynchronous POST to a Google Apps Script web endpoint in{' '}
+                Instead of paying for a monthly database server or making the organizers use a complicated admin panel, I connected the form to a Google Apps Script webhook in{' '}
                 <GlossaryTerm
                   term="no-cors mode"
                   definition={getGlossaryDef('no-cors-mode', 'en')}
-                />. Responses are{' '}
+                />. Every time a guest replies, a new row is{' '}
                 <GlossaryTerm
-                  term="atomically appended"
+                  term="added directly"
                   definition={getGlossaryDef('atomic-insert', 'en')}
                 />{' '}
-                to the organizers' spreadsheet with zero managed SQL database overhead.
+                into the organizers' spreadsheet at 0 CHF/month.
               </>
             )}
           </p>
@@ -640,7 +640,7 @@ export const MarriageDetailShowcase: React.FC = () => {
                           <span className="text-slate-400">{isFrench ? 'Non' : 'No'}</span>
                         )
                       ) : (
-                        <span className="text-slate-300">—</span>
+                        <span className="text-slate-300">-</span>
                       )}
                     </td>
                   </tr>

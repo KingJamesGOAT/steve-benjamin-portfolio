@@ -84,13 +84,22 @@ export const ProjectDetail: React.FC = () => {
           {t(project.titleKey)}
         </h1>
 
-        <p className="text-xs sm:text-lg text-fintech-secondary max-w-3xl leading-relaxed line-clamp-2 sm:line-clamp-none">
+        <p className="text-xs sm:text-lg text-fintech-secondary max-w-3xl leading-relaxed">
           {isCryptoHub ? (
-            isFrench
-              ? "Terminal de trading quantitatif et de surveillance de marché conçu pour diffuser les flux Binance en temps réel, automatiser le dimensionnement des positions selon le critère de Kelly et synthétiser l'actualité macro par IA. (Projet personnel en bêta — démo sur données simulées)."
-              : 'Quantitative trading and market surveillance terminal engineered to stream live Binance order flow, automate position sizing via the Kelly Criterion, and synthesize macro catalysts with AI. (Personal project in beta — demo uses simulated data).'
+            <>
+              <span className="sm:hidden">
+                {isFrench
+                  ? 'Application web personnelle de suivi crypto, simulateur de trading sans risque et résumé d\'actualité par IA (bêta).'
+                  : 'Personal web app to track live crypto prices, test strategies with virtual capital, and summarize market news with AI (beta).'}
+              </span>
+              <span className="hidden sm:inline">
+                {isFrench
+                  ? "Une application web personnelle que j'ai conçue et développée de A à Z pour suivre les prix crypto en direct, tester des stratégies de trading avec un capital virtuel et observer l'impact de l'actualité sur le marché. Actuellement en bêta (cette démo interactive utilise des données simulées)."
+                  : 'A personal web application I designed and built from scratch to track live crypto prices, test trading strategies with virtual capital, and see how market news impacts price movements. Currently in beta (this interactive demo runs on simulated data).'}
+              </span>
+            </>
           ) : (
-            t(project.descriptionKey)
+            <span className="line-clamp-2 sm:line-clamp-none">{t(project.descriptionKey)}</span>
           )}
         </p>
 
@@ -157,41 +166,38 @@ export const ProjectDetail: React.FC = () => {
             <div className="hidden sm:block p-4 sm:p-5 rounded-none border border-slate-200 bg-white shadow-sm text-xs sm:text-sm text-slate-700 leading-relaxed font-sans">
               {isFrench ? (
                 <p>
-                  Ce pipeline de surveillance interroge en continu l'API Binance WebSocket sur plus de 200 paires de devises. 
-                  Il filtre les actifs selon des critères stricts de{' '}
+                  J'ai créé ce scanner pour surveiller plus de 200 paires crypto sur Binance en même temps. Au lieu d'afficher des actifs peu liquides, il filtre selon la{' '}
                   <GlossaryTerm
                     term="Liquidité de Marché"
                     definition={getGlossaryDef('market-liquidity', currentLang)}
                   />{' '}
-                  (volume minimal &gt; 10M$ en{' '}
+                  (au moins 10 M$ de volume quotidien en{' '}
                   <GlossaryTerm
                     term="Contrat Perpétuel"
                     definition={getGlossaryDef('perpetual-contract', currentLang)}
-                  />) et retient les actifs à plus fort momentum pour capturer les cassures de volatilité avec un{' '}
+                  />) et met en avant les plus fortes variations pour repérer immédiatement les tendances actives avec un{' '}
                   <GlossaryTerm
                     term="Glissement d'Exécution (Slippage)"
                     definition={getGlossaryDef('slippage', currentLang)}
                   />{' '}
-                  moyen inférieur à 0,005 %.
+                  minimal.
                 </p>
               ) : (
                 <p>
-                  This surveillance pipeline continuously queries Binance WebSocket streams across 200+ trading pairs. 
-                  Assets are filtered against strict{' '}
+                  I built this scanner to watch over 200 crypto pairs on Binance at once. Instead of showing noisy coins, it filters for strong{' '}
                   <GlossaryTerm
                     term="Market Liquidity"
                     definition={getGlossaryDef('market-liquidity', currentLang)}
                   />{' '}
-                  thresholds ($10M+ quote volume in{' '}
+                  (at least $10M in daily volume across{' '}
                   <GlossaryTerm
                     term="Perpetual Contracts"
                     definition={getGlossaryDef('perpetual-contract', currentLang)}
-                  />) to capture high-momentum volatility breakouts with average{' '}
+                  />) and highlights the top movers so you can spot active trends immediately with minimal{' '}
                   <GlossaryTerm
                     term="Execution Slippage"
                     definition={getGlossaryDef('slippage', currentLang)}
-                  />{' '}
-                  under 0.005%.
+                  />.
                 </p>
               )}
             </div>
@@ -222,73 +228,43 @@ export const ProjectDetail: React.FC = () => {
             <div className="hidden sm:block p-4 sm:p-5 rounded-none border border-slate-200 bg-white shadow-sm text-xs sm:text-sm text-slate-700 leading-relaxed font-sans">
               {isFrench ? (
                 <p>
-                  Le moteur d'exécution autonome est orchestré par un filtre à double régime basé sur l'indicateur{' '}
-                  <GlossaryTerm term="ADX" definition={getGlossaryDef('adx', currentLang)} /> (14 périodes). En régime directionnel (ADX &gt; 25), le{' '}
-                  <GlossaryTerm
-                    term="Module Smart Momentum"
-                    definition={getGlossaryDef('smart-momentum', currentLang)}
-                  />{' '}
-                  valide les cassures de{' '}
-                  <GlossaryTerm
-                    term="Canal de Donchian"
-                    definition={getGlossaryDef('donchian-channel', currentLang)}
-                  />{' '}
-                  avec confirmation par l'{' '}
-                  <GlossaryTerm term="EMA 20 Périodes" definition={getGlossaryDef('ema-20', currentLang)} />. En régime sans tendance, il bascule sur une grille de{' '}
-                  <GlossaryTerm
-                    term="Retour à la Moyenne"
-                    definition={getGlossaryDef('mean-reversion', currentLang)}
-                  />{' '}
-                  calibrée sur les{' '}
+                  Pour tester des stratégies sans risquer d'argent réel, j'ai développé ce simulateur de trading virtuel. Il détecte si le marché est en tendance via l'indicateur{' '}
+                  <GlossaryTerm term="ADX" definition={getGlossaryDef('adx', currentLang)} /> pour suivre l'élan avec l'{' '}
+                  <GlossaryTerm term="EMA 20 Périodes" definition={getGlossaryDef('ema-20', currentLang)} />, ou s'il est calme pour acheter et vendre dans les{' '}
                   <GlossaryTerm
                     term="Bandes de Bollinger"
                     definition={getGlossaryDef('bollinger-bands', currentLang)}
-                  />. Les positions sont protégées par un{' '}
-                  <GlossaryTerm
-                    term="Stop-Loss Suiveur"
-                    definition={getGlossaryDef('trailing-stop', currentLang)}
-                  />{' '}
-                  dynamique et dimensionnées selon le{' '}
+                  />. J'ai aussi codé le{' '}
                   <GlossaryTerm
                     term="Critère de Kelly"
                     definition={getGlossaryDef('kelly-criterion', currentLang)}
                   />{' '}
-                  (risque max 2,0 %).
+                  et un{' '}
+                  <GlossaryTerm
+                    term="Stop-Loss Suiveur"
+                    definition={getGlossaryDef('trailing-stop', currentLang)}
+                  />{' '}
+                  pour calculer automatiquement la taille des positions et ne jamais risquer plus de 2 % du portefeuille sur un trade.
                 </p>
               ) : (
                 <p>
-                  The autonomous execution engine operates on a dual-regime framework governed by the 14-period{' '}
-                  <GlossaryTerm term="ADX" definition={getGlossaryDef('adx', currentLang)} />. In trending regimes (ADX &gt; 25), the{' '}
-                  <GlossaryTerm
-                    term="Smart Momentum Module"
-                    definition={getGlossaryDef('smart-momentum', currentLang)}
-                  />{' '}
-                  executes on 20-candle{' '}
-                  <GlossaryTerm
-                    term="Donchian Channel"
-                    definition={getGlossaryDef('donchian-channel', currentLang)}
-                  />{' '}
-                  breakouts corroborated by the{' '}
-                  <GlossaryTerm term="20-Period EMA" definition={getGlossaryDef('ema-20', currentLang)} />. In range-bound markets, it pivots to Dynamic Grid{' '}
-                  <GlossaryTerm
-                    term="Mean Reversion"
-                    definition={getGlossaryDef('mean-reversion', currentLang)}
-                  />{' '}
-                  envelopes via{' '}
+                  To test trading ideas without risking real money, I built this virtual trading engine. It checks whether the market is trending using the{' '}
+                  <GlossaryTerm term="ADX" definition={getGlossaryDef('adx', currentLang)} /> indicator and the{' '}
+                  <GlossaryTerm term="20-Period EMA" definition={getGlossaryDef('ema-20', currentLang)} />, or flat using{' '}
                   <GlossaryTerm
                     term="Bollinger Bands"
                     definition={getGlossaryDef('bollinger-bands', currentLang)}
-                  />. Risk is sized via fractional{' '}
+                  />. I also coded the{' '}
                   <GlossaryTerm
                     term="Kelly Criterion"
                     definition={getGlossaryDef('kelly-criterion', currentLang)}
                   />{' '}
-                  capped at 2.0% with automated{' '}
+                  formula and a{' '}
                   <GlossaryTerm
                     term="Trailing Stop-Loss"
                     definition={getGlossaryDef('trailing-stop', currentLang)}
                   />{' '}
-                  protection.
+                  to automatically size positions so a single trade never risks more than 2% of the portfolio.
                 </p>
               )}
             </div>
@@ -319,29 +295,31 @@ export const ProjectDetail: React.FC = () => {
             <div className="hidden sm:block p-4 sm:p-5 rounded-none border border-slate-200 bg-white shadow-sm text-xs sm:text-sm text-slate-700 leading-relaxed font-sans">
               {isFrench ? (
                 <p>
-                  Ce pipeline d'intelligence de marché ingère les flux d'actualités macroéconomiques et les déséquilibres de{' '}
+                  Plutôt que de lire des dizaines d'articles chaque matin, j'ai connecté le modèle{' '}
+                  <GlossaryTerm
+                    term="Groq LLaMA 3.3 70B"
+                    definition={getGlossaryDef('llama-groq', currentLang)}
+                  />{' '}
+                  et les données de{' '}
                   <GlossaryTerm
                     term="Profondeur du Carnet d'Ordres"
                     definition={getGlossaryDef('orderbook-depth', currentLang)}
                   />{' '}
-                  vers{' '}
-                  <GlossaryTerm
-                    term="Groq LLaMA 3.3 70B"
-                    definition={getGlossaryDef('llama-groq', currentLang)}
-                  />. Les invites système contraignent le modèle à produire un schéma JSON déterministe avec score de sentiment numérique (-1,0 à +1,0) et un briefing institutionnel synthétisé sans délai.
+                  pour analyser les derniers titres financiers, noter l'humeur du marché de -1,0 (baissier) à +1,0 (haussier) et rédiger un court résumé quotidien.
                 </p>
               ) : (
                 <p>
-                  This market intelligence pipeline streams macroeconomic news headlines and{' '}
+                  Instead of reading dozens of articles every morning, I connected the{' '}
+                  <GlossaryTerm
+                    term="Groq LLaMA 3.3 70B"
+                    definition={getGlossaryDef('llama-groq', currentLang)}
+                  />{' '}
+                  model alongside{' '}
                   <GlossaryTerm
                     term="Orderbook Depth"
                     definition={getGlossaryDef('orderbook-depth', currentLang)}
                   />{' '}
-                  imbalances into{' '}
-                  <GlossaryTerm
-                    term="Groq LLaMA 3.3 70B"
-                    definition={getGlossaryDef('llama-groq', currentLang)}
-                  />. System prompts constrain the model to output a deterministic JSON schema featuring normalized sentiment scores (-1.0 to +1.0) and instantaneous institutional briefs.
+                  data to read the latest financial headlines, score the overall market mood from -1.0 (bearish) to +1.0 (bullish), and write a short daily summary.
                 </p>
               )}
             </div>

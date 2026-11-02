@@ -347,12 +347,12 @@ export const LexiconDetailShowcase: React.FC = () => {
             </span>
           </div>
           <h2 className="text-xl sm:text-3xl font-bold tracking-tight text-slate-900 font-mono">
-            {isFrench ? 'Moteur Lexical (Ctrl+K)' : 'Lexicon Engine (Ctrl+K)'}
+            {isFrench ? '1. Recherche Instantanée dans le Lexique (Ctrl+K)' : '1. Instant Dictionary Search (Ctrl+K)'}
           </h2>
           <p className="hidden sm:block text-sm text-slate-600 font-sans leading-relaxed max-w-3xl">
             {isFrench
-              ? 'Conçu pour indexer plus de 5 000 termes philosophiques, épistémologiques et scientifiques. Recherche instantanée avec raccourci global Ctrl+K, sélection sur Entrée et graphe sémantique.'
-              : 'Engineered to index over 5,000 philosophical, epistemological, and scientific terms. Features instant fuzzy search with global Ctrl+K, Enter-to-select, and semantic linkages.'}
+              ? 'J\'ai développé une barre de recherche rapide qui filtre plus de 5 000 termes philosophiques et scientifiques au fil de la frappe, en affichant clairement la définition et les notions associées.'
+              : 'I built a fast search bar that filters through more than 5,000 philosophical and scientific terms as you type, showing clear definitions and related concepts side by side.'}
           </p>
         </div>
 
@@ -495,12 +495,12 @@ export const LexiconDetailShowcase: React.FC = () => {
             </span>
           </div>
           <h2 className="text-xl sm:text-3xl font-bold tracking-tight text-slate-900 font-mono">
-            {isFrench ? 'Lecture Enrichie & Infobulles' : 'SmartText & Live Tooltips'}
+            {isFrench ? '2. Définitions au Survol dans le Texte' : '2. Hover Definitions Inside the Text'}
           </h2>
           <p className="hidden sm:block text-sm text-slate-600 font-sans leading-relaxed max-w-3xl">
             {isFrench
-              ? 'Permet à l\'utilisateur de lire des traités savants sans friction : chaque terme bleu pointillé ouvre un panneau en verre dépoli (Apple-glass) avec sa définition formelle sans quitter la page.'
-              : 'Empowers readers through uninterrupted scholarly flow: every dotted blue term triggers a frosted glass (Apple-glass) popover with immediate formal definitions without disruptive page hops.'}
+              ? 'Lors de la lecture d\'un texte complexe, chercher un mot dans un autre onglet coupe la concentration. J\'ai intégré des termes bleus interactifs qui affichent la définition directement sur la page au survol ou au toucher.'
+              : 'When reading complex texts, looking up words in another tab breaks concentration. I created interactive blue terms that display the definition right on the page when you hover or tap them.'}
           </p>
         </div>
 
@@ -681,12 +681,12 @@ export const LexiconDetailShowcase: React.FC = () => {
             </span>
           </div>
           <h2 className="text-xl sm:text-3xl font-bold tracking-tight text-slate-900 font-mono">
-            {isFrench ? 'Frise Chronologique' : 'Chronology Timeline'}
+            {isFrench ? '3. Frise Chronologique Interactive' : '3. Interactive Historical Timeline'}
           </h2>
           <p className="hidden sm:block text-sm text-slate-600 font-sans leading-relaxed max-w-3xl">
             {isFrench
-              ? 'Visualisation interactive retraçant les traités majeurs, les figures savantes et les tournants épistémologiques depuis l\'antiquité tardive jusqu\'à la méthode moderne.'
-              : 'Interactive chronological visualization charting landmark intellectual assemblies, scholastic scholars, and foundational treatises from late antiquity to modern epistemology.'}
+              ? 'Une frise chronologique interactive que j\'ai conçue pour situer les grands auteurs, ouvrages et méthodes scientifiques dans le temps afin de visualiser l\'évolution des idées.'
+              : 'An interactive timeline I designed to place major authors, books, and scientific methods in chronological order so readers can see how ideas evolved over time.'}
           </p>
         </div>
 

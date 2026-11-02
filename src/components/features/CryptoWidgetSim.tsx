@@ -429,7 +429,7 @@ export const CryptoWidgetSim: React.FC = () => {
           {/* Mobile High/Low Watermarks */}
           <div className="sm:hidden pointer-events-none absolute inset-x-2.5 top-2 flex justify-between text-[9px] font-mono text-slate-500">
             <span>H: {asset.highLabel}</span>
-            <span>09:00 — 11:45 UTC</span>
+            <span>09:00 - 11:45 UTC</span>
           </div>
           <div className="sm:hidden pointer-events-none absolute left-2.5 bottom-2 text-[9px] font-mono text-slate-500">
             <span>L: {asset.lowLabel}</span>

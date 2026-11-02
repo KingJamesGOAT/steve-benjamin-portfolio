@@ -282,8 +282,8 @@ export const Home: React.FC = () => {
 
             <p className="hidden sm:block text-xs sm:text-sm text-fintech-secondary leading-relaxed">
               {isFrench
-                ? "Terminal de trading quantitatif et de surveillance de marché conçu pour diffuser les flux Binance en temps réel, automatiser le dimensionnement des positions selon le critère de Kelly et synthétiser l'actualité macro par IA. (Projet personnel en bêta — démo sur données simulées)."
-                : 'Quantitative trading and market surveillance terminal engineered to stream live Binance order flow, automate position sizing via the Kelly Criterion, and synthesize macro catalysts with AI. (Personal project in beta — demo uses simulated data).'}
+                ? "Une application web personnelle que j'ai conçue et développée de A à Z pour suivre les prix crypto en direct, tester des stratégies de trading avec un capital virtuel et observer l'impact de l'actualité sur le marché. Actuellement en bêta (cette démo interactive utilise des données simulées)."
+                : 'A personal web application I designed and built from scratch to track live crypto prices, test trading strategies with virtual capital, and see how market news impacts price movements. Currently in beta (this interactive demo runs on simulated data).'}
             </p>
           </div>
 
@@ -294,48 +294,49 @@ export const Home: React.FC = () => {
               <CryptoWidgetSim />
             </div>
 
-            {/* Architectural Highlights: Balanced 3-Column Strip with Concise Explanation (Desktop only) */}
-            <div className="hidden md:grid md:grid-cols-3 divide-x divide-slate-200 border border-slate-200 bg-slate-50/70 font-sans">
-              <div className="p-4 space-y-1">
-                <span className="font-mono text-[10px] tracking-wider uppercase text-slate-400 font-bold block">
-                  {isFrench ? '01 · FLUX TEMPS RÉEL' : '01 · REAL-TIME STREAM'}
-                </span>
-                <span className="font-semibold text-slate-800 text-xs sm:text-sm block">
-                  Binance WebSockets (&lt; 50ms)
-                </span>
-                <p className="text-slate-500 text-xs leading-relaxed">
-                  {isFrench
-                    ? "Pipeline WebSocket bidirectionnel diffusant en direct les cours multi-actifs, l'EMA 20 et les cassures de volatilité."
-                    : 'Full-duplex WebSocket pipeline streaming live multi-asset prices, 20-EMA trends, and volatility breakouts.'}
-                </p>
-              </div>
+            {/* Architectural Highlights: 3 Crisp Data Points (Desktop only for minimalist mobile) */}
+            <div className="hidden md:block rounded-none border border-slate-200 bg-slate-50/80 p-4 sm:p-5 font-sans">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 text-xs text-slate-600">
+                <div className="space-y-1">
+                  <span className="font-mono text-[10px] tracking-wider uppercase text-slate-400 font-bold block">
+                    {isFrench ? 'LE PROJET' : 'THE PROJECT'}
+                  </span>
+                  <span className="font-semibold text-slate-800 text-xs sm:text-sm block">
+                    {isFrench ? 'Dashboard de Trading Complet' : 'All-in-One Trading Dashboard'}
+                  </span>
+                  <p className="text-slate-500 text-xs leading-relaxed">
+                    {isFrench
+                      ? "Réunit sur un seul écran des graphiques en direct, un simulateur de trading sans risque et un résumé de l'actualité par IA."
+                      : 'Brings live price charts, a paper-trading simulator, and an AI news summary together on a single screen.'}
+                  </p>
+                </div>
 
-              <div className="p-4 space-y-1">
-                <span className="font-mono text-[10px] tracking-wider uppercase text-slate-400 font-bold block">
-                  {isFrench ? '02 · MOTEUR DE RISQUE' : '02 · RISK ENGINE'}
-                </span>
-                <span className="font-semibold text-slate-800 text-xs sm:text-sm block">
-                  {isFrench ? 'Critère de Kelly (Max 2% / Trade)' : 'Fractional Kelly (2% Max Risk)'}
-                </span>
-                <p className="text-slate-500 text-xs leading-relaxed">
-                  {isFrench
-                    ? 'Calculateur automatique de taille de position ajustant les stop-loss et plafonnant la perte maximale à 2 % du capital.'
-                    : 'Automated position-sizing engine that calculates stop-loss distances and caps downside risk at 2% of equity.'}
-                </p>
-              </div>
+                <div className="space-y-1">
+                  <span className="font-mono text-[10px] tracking-wider uppercase text-slate-400 font-bold block">
+                    {isFrench ? 'MON RÔLE & TRAVAIL' : 'MY ROLE & WORK'}
+                  </span>
+                  <span className="font-semibold text-slate-800 text-xs sm:text-sm block">
+                    {isFrench ? 'Design UI/UX & Développement' : 'UI/UX Design & Full Frontend'}
+                  </span>
+                  <p className="text-slate-500 text-xs leading-relaxed">
+                    {isFrench
+                      ? "J'ai conçu l'interface sombre, codé les graphiques interactifs, connecté les flux de données Binance et créé le calculateur de risque."
+                      : 'I designed the dark interface, coded the interactive charts, connected the live Binance data streams, and built the risk calculator.'}
+                  </p>
+                </div>
 
-              <div className="p-4 space-y-1">
-                <span className="font-mono text-[10px] tracking-wider uppercase text-slate-400 font-bold block">
-                  {isFrench ? '03 · SENTIMENT IA & STACK' : '03 · AI SENTIMENT & STACK'}
-                </span>
-                <span className="font-semibold text-slate-800 text-xs sm:text-sm block">
-                  Groq LLaMA 3.3 · React 18 · TS
-                </span>
-                <p className="text-slate-500 text-xs leading-relaxed">
-                  {isFrench
-                    ? "Analyse l'impact des catalyseurs macro en temps réel (-1,0 à +1,0) au sein d'une architecture React 18 typée."
-                    : 'Scores breaking macro catalysts in real time (-1.0 to +1.0) inside a modular, type-safe React 18 architecture.'}
-                </p>
+                <div className="space-y-1 border-t md:border-t-0 md:border-l md:pl-6 border-slate-200">
+                  <span className="font-mono text-[10px] tracking-wider uppercase text-slate-400 font-bold block">
+                    {isFrench ? 'TECHNOLOGIES UTILISÉES' : 'PRODUCTION STACK'}
+                  </span>
+                  <div className="flex flex-wrap gap-1.5 pt-1 text-[11px] font-mono text-slate-700">
+                    <span className="px-2 py-0.5 bg-white border border-slate-200">React 18</span>
+                    <span className="px-2 py-0.5 bg-white border border-slate-200">TypeScript</span>
+                    <span className="px-2 py-0.5 bg-white border border-slate-200">Tailwind CSS</span>
+                    <span className="px-2 py-0.5 bg-white border border-slate-200">Binance API</span>
+                    <span className="px-2 py-0.5 bg-white border border-slate-200">LLaMA 3.3</span>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -388,8 +389,8 @@ export const Home: React.FC = () => {
 
             <p className="hidden sm:block text-xs sm:text-sm text-fintech-secondary leading-relaxed">
               {isFrench
-                ? 'Plateforme de don de sang réalisée pour les Hôpitaux Universitaires de Genève (HUG) à la HEIG-VD pour pré-qualifier les volontaires en entreprise et réduire les refus de donneurs sur place.'
-                : 'Blood donation platform engineered for Geneva University Hospitals (HUG) at HEIG-VD to pre-qualify corporate volunteers and reduce on-site donor rejections.'}
+                ? "Plateforme web réalisée pour les Hôpitaux Universitaires de Genève (HUG) lors d'un projet d'équipe à la HEIG-VD. Elle permet aux entreprises d'organiser des collectes de sang dans leurs locaux et aux employés de vérifier leur éligibilité avant de prendre rendez-vous."
+                : 'Web platform built for the Geneva University Hospitals (HUG) during a team project at HEIG-VD. It helps companies organize blood drives at their offices and lets employees check if they are eligible to donate before booking an appointment.'}
             </p>
           </div>
 
@@ -404,35 +405,35 @@ export const Home: React.FC = () => {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 text-xs text-slate-600">
                 <div className="space-y-1">
                   <span className="font-mono text-[10px] tracking-wider uppercase text-slate-400 font-bold block">
-                    {isFrench ? 'DÉFI INSTITUTIONNEL' : 'INSTITUTIONAL CHALLENGE'}
+                    {isFrench ? 'LE PROJET' : 'THE PROJECT'}
                   </span>
                   <span className="font-semibold text-slate-800 text-xs sm:text-sm block">
-                    {isFrench ? 'Mandat HUG & HEIG-VD' : 'HUG & HEIG-VD Mandate'}
+                    {isFrench ? 'Collectes en Entreprise (HUG)' : 'Corporate Blood Drives (HUG)'}
                   </span>
                   <p className="text-slate-500 text-xs leading-relaxed">
                     {isFrench
-                      ? 'De nombreux volontaires étaient refusés sur place. Donnons.ch pré-qualifie l\'éligibilité en amont pour réduire les refus de donneurs sur place.'
-                      : 'Many willing donors were deferred on-site. Donnons.ch pre-screens eligibility to reduce on-site donor rejections.'}
+                      ? "Beaucoup de volontaires étaient refusés le jour du don. Le site vérifie l'éligibilité à l'avance grâce à un court quiz interactif."
+                      : 'Many volunteers used to be turned away on the day of the blood drive. The site checks eligibility in advance through a short interactive quiz.'}
                   </p>
                 </div>
 
                 <div className="space-y-1">
                   <span className="font-mono text-[10px] tracking-wider uppercase text-slate-400 font-bold block">
-                    {isFrench ? 'ENGAGEMENT & IMPACT' : 'GAMIFICATION & CSR'}
+                    {isFrench ? 'MON RÔLE & TRAVAIL' : 'MY ROLE & WORK'}
                   </span>
                   <span className="font-semibold text-slate-800 text-xs sm:text-sm block">
-                    {isFrench ? 'Roby Mascotte & Label CTS' : 'Roby Mascot & CTS Label'}
+                    {isFrench ? 'Développement Full-Stack & UX' : 'Full-Stack & UX Design'}
                   </span>
                   <p className="text-slate-500 text-xs leading-relaxed">
                     {isFrench
-                      ? 'Quiz médical interactif, projection de vies sauvées en direct et reconnaissance RSE d\'entreprise.'
-                      : 'Interactive quiz, real-time lives-saved impact calculation, and corporate employer CSR engagement.'}
+                      ? "J'ai travaillé sur l'interface utilisateur, le calculateur de vies sauvées, le quiz d'éligibilité spatial et le tableau de bord d'administration HUG."
+                      : 'I worked on the user interface, the impact calculator showing lives saved, the space-themed eligibility quiz, and the HUG admin dashboard.'}
                   </p>
                 </div>
 
                 <div className="space-y-1 border-t md:border-t-0 md:border-l md:pl-6 border-slate-200">
                   <span className="font-mono text-[10px] tracking-wider uppercase text-slate-400 font-bold block">
-                    {isFrench ? 'STACK PRODUCTION' : 'PRODUCTION STACK'}
+                    {isFrench ? 'TECHNOLOGIES UTILISÉES' : 'PRODUCTION STACK'}
                   </span>
                   <div className="flex flex-wrap gap-1.5 pt-1 text-[11px] font-mono text-slate-700">
                     <span className="px-2 py-0.5 bg-white border border-slate-200">Vue.js 3</span>
@@ -484,8 +485,8 @@ export const Home: React.FC = () => {
 
               <p className="hidden sm:block text-xs sm:text-sm text-fintech-secondary leading-relaxed">
                 {isFrench
-                  ? 'Indexation de concepts historiques et exploration visuelle par graphe sémantique.'
-                  : 'Historical concept indexation and visual semantic exploration graph.'}
+                  ? 'Un dictionnaire interactif et une frise chronologique que j\'ai développés pour rechercher plus de 5 000 termes philosophiques et scientifiques, lire les définitions au survol sans quitter sa lecture et explorer les grandes dates historiques.'
+                  : 'An interactive dictionary and historical timeline I built to search over 5,000 philosophical and scientific terms, read definitions on hover without leaving the text, and explore key historical milestones.'}
               </p>
 
               {/* Interactive Lexicon & Chronology Simulation Widget */}
@@ -528,8 +529,8 @@ export const Home: React.FC = () => {
 
               <p className="hidden sm:block text-xs sm:text-sm text-fintech-secondary leading-relaxed">
                 {isFrench
-                  ? 'Plateforme événementielle mobile-first intégrant un flux de RSVP interactif avec synchronisation temps réel vers tableur Excel.'
-                  : 'Mobile-first event platform engineered with interactive RSVP guest intake and real-time webhook spreadsheet synchronization.'}
+                  ? 'Un site événementiel sur mesure que j\'ai conçu et développé pour permettre aux invités de confirmer leur présence sur téléphone en quelques secondes, tout en envoyant automatiquement chaque réponse dans le fichier Excel des organisateurs.'
+                  : 'A custom event website I designed and built so guests can confirm their attendance on their phone in seconds, while automatically sending every response straight into the organizers\' Excel spreadsheet.'}
               </p>
 
               {/* Interactive Wedding Preview Widget */}

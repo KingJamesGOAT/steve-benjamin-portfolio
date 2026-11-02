@@ -118,22 +118,22 @@
     "crypto": {
       "tag": "FinTech Application",
       "title": "Crypto Trade Hub",
-      "description": "Personal project in beta. Data shown in this demo is simulated.",
+      "description": "Personal web app to track live crypto prices, test strategies with virtual capital, and summarize market news with AI (beta).",
       "status": "Beta",
       "pnlLabel": "Simulated PnL"
     },
     "donnons": {
       "tag": "HUG Healthcare Mandate",
       "title": "Donnons.ch",
-      "description": "Blood donation platform engineered for Geneva University Hospitals (HUG) at HEIG-VD to orchestrate corporate mobile drives and reduce on-site donor rejections through gamified pre-screening.",
+      "description": "Web platform built for the Geneva University Hospitals (HUG) at HEIG-VD to help companies organize office blood drives and check employee eligibility in advance.",
       "status": "HUG Mandate",
       "gradeLabel": "Academic Evaluation",
       "gradeValue": "Grade 6.0 / 6.0"
     },
     "catholicRoute": {
-      "tag": "Scholarly Digital Humanities Platform",
+      "tag": "Digital Humanities Platform",
       "title": "Lexicon & Chronology Engine",
-      "description": "Instant search engine (< 10ms) and interactive timeline for exploring definitions",
+      "description": "Interactive dictionary and historical timeline built to search 5,000+ terms, read definitions on hover, and explore key historical dates.",
       "feature1": "5,000+ Word Lexicon Search",
       "feature2": "Contextual Hover Definitions",
       "feature3": "Multi-Century Chronology Timeline"
@@ -141,7 +141,7 @@
     "marriage": {
       "tag": "Private Web Application",
       "title": "Private Event & RSVP Platform",
-      "description": "Private event web platform engineered with a dynamic RSVP intake engine, real-time Excel spreadsheet webhook sync, and persistent browser session state.",
+      "description": "Custom event website built so guests can confirm their attendance on their phone in seconds, with automatic sync into the organizers' Excel spreadsheet.",
       "feature1": "Live RSVP Intake Engine",
       "feature2": "Real-Time Excel Webhook Sync",
       "feature3": "Browser Session & Magic Link"
@@ -185,18 +185,18 @@
       "caseStudyTitle": "Technical Architecture & System Design",
       "caseStudySubtitle": "In-depth engineering breakdown of the quantitative indicators, real-time data streaming, AI sentiment ingestion, and multi-broker telemetry pipeline.",
       "section1": {
-        "tag": "01 / SURVEILLANCE & DISCOVERY",
+        "tag": "01 / MARKET SCANNER",
         "badge": "11 BLUE CHIPS + TOP 5 GAINERS",
-        "title": "1. Multi-Pair Surveillance Pipeline & 24h Volume Scanner",
-        "p1": "The market scanning subsystem establishes a dual-tier surveillance pipeline. The primary tier continuously tracks an eleven-token blue-chip basket (BTC, ETH, SOL, BNB, XRP, ADA, DOGE, AVAX, SUI, TRX, and LINK) to maintain baseline market liquidity metrics. Concurrently, a secondary dynamic scanner queries the Binance 24-hour ticker endpoint, filtering over 200 trading pairs with stringent liquidity criteria: enforcing strict USDT pairing, requiring a minimum $10,000,000 quote volume threshold, and eliminating leveraged and stablecoin tokens to prevent non-volatile noise.",
-        "p2": "The dynamic scanner ranks candidates by absolute volatility and selects the top 5 momentum gainers to monitor real-time breakouts across market cycles."
+        "title": "1. Live Market Scanner & Volume Filter",
+        "p1": "I built this scanner to watch over 200 crypto pairs on Binance at once. Instead of showing noisy coins, it filters for pairs with at least $10M in daily volume and highlights the top movers.",
+        "p2": "The scanner ranks coins by volatility and selects the top 5 momentum gainers to spot active trends immediately."
       },
       "section2": {
-        "tag": "02 / EXECUTION & RISK MANAGEMENT",
-        "badge": "KELLY FRACTION SIZING & STATE MACHINE",
-        "title": "2. Dual-Regime Execution Engine & Vector Allocations",
-        "p1": "The core strategy engine operates on an autonomous dual-regime framework governed by the 14-period Average Directional Index (ADX). When ADX exceeds 25.0, the engine activates the Smart Momentum module, identifying 20-candle Donchian channel breakouts corroborated by a 2.0x surge above the 20-period volume moving average. In low-trend regimes (ADX below 25.0), execution transitions into Dynamic Grid Mean Reversion, placing limit ladders within calibrated Bollinger Band envelopes.",
-        "p2": "Capital allocations adhere to fractional Kelly Criterion sizing capped at 2.0% maximum portfolio risk per vector. The paper trading state machine coordinates continuous trailing stop adjustments, dynamic profit-target lock-ins, and deterministic stop-loss executions."
+        "tag": "02 / PAPER TRADING & RISK",
+        "badge": "KELLY RISK CALCULATOR (MAX 2%)",
+        "title": "2. Paper Trading Simulator & Risk Calculator",
+        "p1": "To test trading ideas without risking real money, I built a virtual trading engine that adapts to whether the market is trending or flat.",
+        "p2": "It uses the Kelly Criterion formula to automatically size positions so a single trade never risks more than 2% of the portfolio."
       },
       "section3": {
         "tag": "03 / TELEMETRY & VISUALIZATION",
@@ -206,11 +206,11 @@
         "p2": "For portfolio telemetry and equity performance, the frontend utilizes Recharts to render virtual balance history, equity curves, and asset allocation distributions without DOM frame stutter. Modular API adapters interface with Trading 212 API telemetry endpoints and Binance WebSocket streaming connections, ensuring price ticks and simulated fill events update reactively without memory leakage."
       },
       "section4": {
-        "tag": "03 / INTELLIGENCE & SYNTHESIS",
+        "tag": "03 / AI NEWS SUMMARY",
         "badge": "LLAMA 3.3 70B VIA GROQ",
-        "title": "3. Automated AI Market Intelligence & Daily Strategist Brief",
-        "p1": "To eliminate emotional bias and manual disclosure analysis, the platform integrates an automated AI intelligence pipeline executed via scheduled background workers. The pipeline ingests top macroeconomic news headlines alongside CoinGecko global telemetry, including Bitcoin market dominance percentages, 24-hour global trading volume, and trending search velocity.",
-        "p2": "This consolidated dataset is formatted into a strict institutional context and processed through Groq's high-throughput LLaMA 3.3 70B Versatile model. The model is constrained via system prompts to return deterministic JSON schemas containing normalized numerical sentiment scores (-1.0 extreme bear to +1.0 extreme bull), concise single-sentence dashboard summaries, three key narrative metadata tags, and an institutional Bloomberg-style daily market digest dispatched directly to communication channels."
+        "title": "3. AI Market News Summary",
+        "p1": "Instead of reading dozens of articles every morning, I connected the Groq LLaMA 3.3 model to read the latest financial headlines and market data.",
+        "p2": "It scores the overall market mood from -1.0 (bearish) to +1.0 (bullish) and writes a short daily summary."
       }
     }
   },

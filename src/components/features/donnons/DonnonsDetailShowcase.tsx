@@ -71,12 +71,12 @@ export const DonnonsDetailShowcase: React.FC = () => {
             </span>
           </div>
           <h2 className="text-xl sm:text-3xl font-bold tracking-tight text-slate-900 font-mono">
-            {isFrench ? 'Démystification Médicale par la Gamification' : 'Medical De-stigmatization via Gamification'}
+            {isFrench ? '1. Quiz d\'Éligibilité Interactif' : '1. Interactive Eligibility Quiz'}
           </h2>
           <p className="hidden sm:block text-sm text-slate-600 font-sans leading-relaxed max-w-3xl">
             {isFrench
-              ? 'Conçu pour remplacer les questionnaires papier austères par un voyage narratif dans l\'espace avec Roby la mascotte. Chaque critère d\'exclusion médicale est expliqué de manière bienveillante sans culpabilisation.'
-              : 'Engineered to replace dry paper screening forms with an interactive narrative cosmic journey. Every medical deferral condition is explained with supportive clarity without donor frustration.'}
+              ? 'Nous avons remplacé le long questionnaire médical papier par un voyage illustré dans l\'espace avec la mascotte Roby. Si un employé ne peut pas donner son sang temporairement, le quiz lui explique pourquoi de manière bienveillante avant la prise de rendez-vous.'
+              : 'We replaced the long medical paper form with an illustrated space journey featuring Roby the mascot. If an employee cannot donate temporarily, the quiz explains why in a friendly way before they book a slot.'}
           </p>
         </div>
 
@@ -218,12 +218,12 @@ export const DonnonsDetailShowcase: React.FC = () => {
             </span>
           </div>
           <h2 className="text-xl sm:text-3xl font-bold tracking-tight text-slate-900 font-mono">
-            {isFrench ? 'Tableau de Bord & Gestion des Collectes' : 'Dashboard & Blood Drive Operations'}
+            {isFrench ? '2. Tableau de Bord Administrateur HUG' : '2. HUG Staff Admin Dashboard'}
           </h2>
           <p className="hidden sm:block text-sm text-slate-600 font-sans leading-relaxed max-w-3xl">
             {isFrench
-              ? 'Portail dédié pour l\'équipe du Centre de Transfusion Sanguine des HUG pour suivre les promesses en temps réel, clore les collectes terminées et synchroniser les plannings OneDoc.'
-              : 'Dedicated management portal for Geneva University Hospital transfusion coordinators to track real-time pledges, close completed drives, and dispatch OneDoc slots.'}
+              ? 'Nous avons conçu un panneau d\'administration pour l\'équipe des HUG afin de planifier les collectes en entreprise, générer des liens personnalisés par société et clôturer les collectes terminées en un clic.'
+              : 'We built an administration panel for the HUG medical team so they can plan upcoming corporate blood drives, generate custom links for each company, and close completed drives in one click.'}
           </p>
         </div>
 
@@ -486,26 +486,26 @@ export const DonnonsDetailShowcase: React.FC = () => {
             </span>
           </div>
           <h2 className="text-xl sm:text-3xl font-bold tracking-tight text-slate-900 font-mono">
-            {isFrench ? 'Système de Trophées & Leaderboard des Entreprises' : 'Trophy System & Corporate Leaderboard'}
+            {isFrench ? '3. Vitrine des Entreprises Partenaires & Trophées' : '3. Partner Companies & Trophy Showcase'}
           </h2>
           <p className="hidden sm:block text-sm text-slate-600 font-sans leading-relaxed max-w-3xl">
             {isFrench ? (
               <>
-                Le{' '}
+                Pour encourager les entreprises genevoises à participer chaque année, nous avons créé une vitrine partenaires attribuant le{' '}
                 <GlossaryTerm
                   term="Label Partenaire du Don"
                   definition={getGlossaryDef('label-cts', 'fr')}
                 />{' '}
-                valorise la marque employeur et la responsabilité sociétale des entreprises genevoises participantes, avec distinction Or, Argent et Bronze selon les promesses recueillies.
+                (Or, Argent et Bronze) selon la mobilisation des employés.
               </>
             ) : (
               <>
-                The{' '}
+                To motivate Geneva companies to participate every year, we designed a partner showcase awarding the{' '}
                 <GlossaryTerm
                   term="Corporate Donor Label"
                   definition={getGlossaryDef('label-cts', 'en')}
                 />{' '}
-                enhances employer brand and CSR commitments for participating Geneva institutions, granting Gold, Silver, and Bronze awards based on donation targets.
+                (Gold, Silver, and Bronze) based on employee participation.
               </>
             )}
           </p>
