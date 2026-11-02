@@ -200,6 +200,11 @@ export const MarriageDetailShowcase: React.FC = () => {
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-fintech-primary">
             {isFrench ? '1. Formulaire Invité & Lien Privé Dîner' : '1. Simple Guest RSVP & Private Dinner Link'}
           </h2>
+          <p className="sm:hidden text-xs text-slate-600 leading-snug font-sans">
+            {isFrench
+              ? "J'ai conçu ce formulaire sans compte requis, avec un lien privé (?invite=dinner) qui débloque l'option du dîner."
+              : 'I designed this form with no account needed, using a private URL link (?invite=dinner) to unlock the dinner option.'}
+          </p>
           <p className="hidden sm:block text-xs sm:text-sm text-slate-600 leading-relaxed font-sans">
             {isFrench
               ? 'J\'ai conçu un formulaire simple où les invités confirment leur présence, le nombre d\'adultes et d\'enfants ainsi que leur régime alimentaire sans créer de compte. Un paramètre dans le lien (?invite=dinner) débloque l\'option du dîner uniquement pour les invités concernés, et le navigateur mémorise leur réponse.'
@@ -512,6 +517,11 @@ export const MarriageDetailShowcase: React.FC = () => {
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-fintech-primary">
             {isFrench ? '2. Synchronisation Automatique vers Excel' : '2. Automatic Excel & Google Sheets Sync'}
           </h2>
+          <p className="sm:hidden text-xs text-slate-600 leading-snug font-sans">
+            {isFrench
+              ? "J'ai relié le formulaire à un script Google Apps pour ajouter chaque réponse directement dans l'Excel des organisateurs (0 CHF/mois)."
+              : "I connected the form to a Google Apps Script webhook so every guest reply adds a row into the organizers' Excel sheet (0 CHF/month)."}
+          </p>
           <p className="hidden sm:block text-xs sm:text-sm text-slate-600 leading-relaxed font-sans">
             {isFrench ? (
               <>

@@ -280,6 +280,11 @@ export const Home: React.FC = () => {
               </Link>
             </div>
 
+            <p className="sm:hidden text-xs text-fintech-secondary leading-snug">
+              {isFrench
+                ? "Application web personnelle que j'ai conçue et codée pour suivre les prix crypto en direct, simuler des trades sans risque et résumer l'actualité par IA (bêta)."
+                : 'Personal web app I designed and built to track live crypto prices, test strategies with virtual capital, and summarize market news with AI (beta).'}
+            </p>
             <p className="hidden sm:block text-xs sm:text-sm text-fintech-secondary leading-relaxed">
               {isFrench
                 ? "Une application web personnelle que j'ai conçue et développée de A à Z pour suivre les prix crypto en direct, tester des stratégies de trading avec un capital virtuel et observer l'impact de l'actualité sur le marché. Actuellement en bêta (cette démo interactive utilise des données simulées)."
@@ -387,6 +392,11 @@ export const Home: React.FC = () => {
               </Link>
             </div>
 
+            <p className="sm:hidden text-xs text-fintech-secondary leading-snug">
+              {isFrench
+                ? "Plateforme réalisée pour les HUG à la HEIG-VD. J'ai travaillé sur l'interface, le calculateur de vies sauvées, le quiz spatial et le panneau d'administration."
+                : 'Platform built for the HUG at HEIG-VD. I worked on the UI, the lives-saved calculator, the space eligibility quiz, and the admin panel.'}
+            </p>
             <p className="hidden sm:block text-xs sm:text-sm text-fintech-secondary leading-relaxed">
               {isFrench
                 ? "Plateforme web réalisée pour les Hôpitaux Universitaires de Genève (HUG) lors d'un projet d'équipe à la HEIG-VD. Elle permet aux entreprises d'organiser des collectes de sang dans leurs locaux et aux employés de vérifier leur éligibilité avant de prendre rendez-vous."
@@ -483,6 +493,11 @@ export const Home: React.FC = () => {
                 </div>
               </div>
 
+              <p className="sm:hidden text-xs text-fintech-secondary leading-snug">
+                {isFrench
+                  ? "Dictionnaire et frise chronologique que j'ai développés pour rechercher plus de 5 000 termes et lire leurs définitions au toucher."
+                  : 'Interactive dictionary and timeline I built to search 5,000+ scientific and philosophical terms and read definitions on tap.'}
+              </p>
               <p className="hidden sm:block text-xs sm:text-sm text-fintech-secondary leading-relaxed">
                 {isFrench
                   ? 'Un dictionnaire interactif et une frise chronologique que j\'ai développés pour rechercher plus de 5 000 termes philosophiques et scientifiques, lire les définitions au survol sans quitter sa lecture et explorer les grandes dates historiques.'
@@ -527,6 +542,11 @@ export const Home: React.FC = () => {
                 </div>
               </div>
 
+              <p className="sm:hidden text-xs text-fintech-secondary leading-snug">
+                {isFrench
+                  ? "Site événementiel sur mesure que j'ai conçu et codé pour confirmer sa présence sur mobile en quelques secondes, synchronisé vers Excel."
+                  : "Custom event site I designed and built so guests can RSVP on their phone in seconds, with automatic sync to the organizers' Excel sheet."}
+              </p>
               <p className="hidden sm:block text-xs sm:text-sm text-fintech-secondary leading-relaxed">
                 {isFrench
                   ? 'Un site événementiel sur mesure que j\'ai conçu et développé pour permettre aux invités de confirmer leur présence sur téléphone en quelques secondes, tout en envoyant automatiquement chaque réponse dans le fichier Excel des organisateurs.'

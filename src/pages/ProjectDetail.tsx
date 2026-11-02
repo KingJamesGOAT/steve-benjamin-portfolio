@@ -84,13 +84,13 @@ export const ProjectDetail: React.FC = () => {
           {t(project.titleKey)}
         </h1>
 
-        <p className="text-xs sm:text-lg text-fintech-secondary max-w-3xl leading-relaxed">
+        <p className="text-xs sm:text-lg text-fintech-secondary max-w-3xl leading-snug sm:leading-relaxed">
           {isCryptoHub ? (
             <>
               <span className="sm:hidden">
                 {isFrench
-                  ? 'Application web personnelle de suivi crypto, simulateur de trading sans risque et résumé d\'actualité par IA (bêta).'
-                  : 'Personal web app to track live crypto prices, test strategies with virtual capital, and summarize market news with AI (beta).'}
+                  ? "Application web personnelle que j'ai conçue et codée pour suivre les prix crypto en direct, simuler des trades sans risque et résumer l'actualité par IA (bêta)."
+                  : 'Personal web app I designed and built to track live crypto prices, test strategies with virtual capital, and summarize market news with AI (beta).'}
               </span>
               <span className="hidden sm:inline">
                 {isFrench
@@ -98,8 +98,35 @@ export const ProjectDetail: React.FC = () => {
                   : 'A personal web application I designed and built from scratch to track live crypto prices, test trading strategies with virtual capital, and see how market news impacts price movements. Currently in beta (this interactive demo runs on simulated data).'}
               </span>
             </>
+          ) : isDonnons ? (
+            <>
+              <span className="sm:hidden">
+                {isFrench
+                  ? "Plateforme réalisée pour les HUG à la HEIG-VD. J'ai travaillé sur l'interface, le calculateur de vies sauvées, le quiz spatial et le panneau d'administration."
+                  : 'Platform built for the HUG at HEIG-VD. I worked on the UI, the lives-saved calculator, the space eligibility quiz, and the admin panel.'}
+              </span>
+              <span className="hidden sm:inline">{t(project.descriptionKey)}</span>
+            </>
+          ) : isLexicon ? (
+            <>
+              <span className="sm:hidden">
+                {isFrench
+                  ? "Dictionnaire et frise chronologique que j'ai développés pour rechercher plus de 5 000 termes et lire leurs définitions au toucher."
+                  : 'Interactive dictionary and timeline I built to search 5,000+ scientific and philosophical terms and read definitions on tap.'}
+              </span>
+              <span className="hidden sm:inline">{t(project.descriptionKey)}</span>
+            </>
+          ) : isMarriage ? (
+            <>
+              <span className="sm:hidden">
+                {isFrench
+                  ? "Site événementiel sur mesure que j'ai conçu et codé pour confirmer sa présence sur mobile en quelques secondes, synchronisé vers Excel."
+                  : "Custom event site I designed and built so guests can RSVP on their phone in seconds, with automatic sync to the organizers' Excel sheet."}
+              </span>
+              <span className="hidden sm:inline">{t(project.descriptionKey)}</span>
+            </>
           ) : (
-            <span className="line-clamp-2 sm:line-clamp-none">{t(project.descriptionKey)}</span>
+            <span>{t(project.descriptionKey)}</span>
           )}
         </p>
 
@@ -155,6 +182,11 @@ export const ProjectDetail: React.FC = () => {
               <h2 className="text-base sm:text-2xl font-bold tracking-tight text-fintech-primary pt-1">
                 {t('projects.cryptoDetail.section1.title')}
               </h2>
+              <p className="sm:hidden text-xs text-slate-600 leading-snug pt-0.5">
+                {isFrench
+                  ? "J'ai créé ce scanner pour filtrer plus de 200 paires Binance (volume > 10 M$) et afficher les plus fortes variations en direct."
+                  : 'I built this scanner to filter 200+ Binance pairs ($10M+ daily volume) and highlight the top movers in real time.'}
+              </p>
             </div>
 
             {/* Embedded Live Dark Simulation Component */}
@@ -217,6 +249,11 @@ export const ProjectDetail: React.FC = () => {
               <h2 className="text-base sm:text-2xl font-bold tracking-tight text-fintech-primary pt-1">
                 {t('projects.cryptoDetail.section2.title')}
               </h2>
+              <p className="sm:hidden text-xs text-slate-600 leading-snug pt-0.5">
+                {isFrench
+                  ? "J'ai développé ce simulateur de trading virtuel avec calcul de Kelly pour ne jamais risquer plus de 2 % du portefeuille par trade."
+                  : 'I built this virtual trading engine with a Kelly risk calculator so no single trade ever risks more than 2% of the portfolio.'}
+              </p>
             </div>
 
             {/* Embedded Live Dark Simulation Component */}
@@ -284,6 +321,11 @@ export const ProjectDetail: React.FC = () => {
               <h2 className="text-base sm:text-2xl font-bold tracking-tight text-fintech-primary pt-1">
                 {t('projects.cryptoDetail.section4.title')}
               </h2>
+              <p className="sm:hidden text-xs text-slate-600 leading-snug pt-0.5">
+                {isFrench
+                  ? "J'ai connecté le modèle LLaMA 3.3 pour lire les titres financiers, noter l'humeur du marché (-1,0 à +1,0) et rédiger un résumé."
+                  : 'I connected Groq LLaMA 3.3 to read financial headlines, score market mood (-1.0 to +1.0), and write a short daily summary.'}
+              </p>
             </div>
 
             {/* Embedded Live Dark Simulation Component */}

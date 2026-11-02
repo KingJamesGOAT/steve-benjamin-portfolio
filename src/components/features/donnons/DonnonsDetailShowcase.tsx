@@ -73,6 +73,11 @@ export const DonnonsDetailShowcase: React.FC = () => {
           <h2 className="text-xl sm:text-3xl font-bold tracking-tight text-slate-900 font-mono">
             {isFrench ? '1. Quiz d\'Éligibilité Interactif' : '1. Interactive Eligibility Quiz'}
           </h2>
+          <p className="sm:hidden text-xs text-slate-600 font-sans leading-snug">
+            {isFrench
+              ? "J'ai travaillé sur ce quiz spatial illustré qui remplace le formulaire papier et explique les critères médicaux de façon bienveillante."
+              : 'I worked on this illustrated space quiz that replaces the paper form and explains medical deferral rules in a friendly way.'}
+          </p>
           <p className="hidden sm:block text-sm text-slate-600 font-sans leading-relaxed max-w-3xl">
             {isFrench
               ? 'Nous avons remplacé le long questionnaire médical papier par un voyage illustré dans l\'espace avec la mascotte Roby. Si un employé ne peut pas donner son sang temporairement, le quiz lui explique pourquoi de manière bienveillante avant la prise de rendez-vous.'
@@ -220,6 +225,11 @@ export const DonnonsDetailShowcase: React.FC = () => {
           <h2 className="text-xl sm:text-3xl font-bold tracking-tight text-slate-900 font-mono">
             {isFrench ? '2. Tableau de Bord Administrateur HUG' : '2. HUG Staff Admin Dashboard'}
           </h2>
+          <p className="sm:hidden text-xs text-slate-600 font-sans leading-snug">
+            {isFrench
+              ? "J'ai contribué à ce panneau permettant à l'équipe des HUG de planifier les collectes en entreprise et de les clôturer en un clic."
+              : 'I helped build this admin panel so the HUG team can schedule corporate blood drives and close completed drives in one click.'}
+          </p>
           <p className="hidden sm:block text-sm text-slate-600 font-sans leading-relaxed max-w-3xl">
             {isFrench
               ? 'Nous avons conçu un panneau d\'administration pour l\'équipe des HUG afin de planifier les collectes en entreprise, générer des liens personnalisés par société et clôturer les collectes terminées en un clic.'
@@ -488,6 +498,11 @@ export const DonnonsDetailShowcase: React.FC = () => {
           <h2 className="text-xl sm:text-3xl font-bold tracking-tight text-slate-900 font-mono">
             {isFrench ? '3. Vitrine des Entreprises Partenaires & Trophées' : '3. Partner Companies & Trophy Showcase'}
           </h2>
+          <p className="sm:hidden text-xs text-slate-600 font-sans leading-snug">
+            {isFrench
+              ? 'Nous avons créé cette vitrine attribuant les labels Or, Argent et Bronze aux entreprises selon la participation des employés.'
+              : 'We created this partner showcase awarding Gold, Silver, and Bronze labels to companies based on employee participation.'}
+          </p>
           <p className="hidden sm:block text-sm text-slate-600 font-sans leading-relaxed max-w-3xl">
             {isFrench ? (
               <>

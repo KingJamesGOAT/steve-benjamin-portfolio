@@ -349,6 +349,11 @@ export const LexiconDetailShowcase: React.FC = () => {
           <h2 className="text-xl sm:text-3xl font-bold tracking-tight text-slate-900 font-mono">
             {isFrench ? '1. Recherche Instantanée dans le Lexique (Ctrl+K)' : '1. Instant Dictionary Search (Ctrl+K)'}
           </h2>
+          <p className="sm:hidden text-xs text-slate-600 font-sans leading-snug">
+            {isFrench
+              ? "J'ai développé cette barre de recherche rapide pour filtrer plus de 5 000 termes philosophiques et scientifiques."
+              : 'I built this fast search bar to filter over 5,000 philosophical and scientific terms with clear definitions.'}
+          </p>
           <p className="hidden sm:block text-sm text-slate-600 font-sans leading-relaxed max-w-3xl">
             {isFrench
               ? 'J\'ai développé une barre de recherche rapide qui filtre plus de 5 000 termes philosophiques et scientifiques au fil de la frappe, en affichant clairement la définition et les notions associées.'
@@ -497,6 +502,11 @@ export const LexiconDetailShowcase: React.FC = () => {
           <h2 className="text-xl sm:text-3xl font-bold tracking-tight text-slate-900 font-mono">
             {isFrench ? '2. Définitions au Survol dans le Texte' : '2. Hover Definitions Inside the Text'}
           </h2>
+          <p className="sm:hidden text-xs text-slate-600 font-sans leading-snug">
+            {isFrench
+              ? "J'ai intégré des mots bleus interactifs qui affichent leur définition directement sur la page au toucher sans couper la lecture."
+              : 'I created interactive blue words that show their definition right on the page when tapped without losing your place.'}
+          </p>
           <p className="hidden sm:block text-sm text-slate-600 font-sans leading-relaxed max-w-3xl">
             {isFrench
               ? 'Lors de la lecture d\'un texte complexe, chercher un mot dans un autre onglet coupe la concentration. J\'ai intégré des termes bleus interactifs qui affichent la définition directement sur la page au survol ou au toucher.'
@@ -683,6 +693,11 @@ export const LexiconDetailShowcase: React.FC = () => {
           <h2 className="text-xl sm:text-3xl font-bold tracking-tight text-slate-900 font-mono">
             {isFrench ? '3. Frise Chronologique Interactive' : '3. Interactive Historical Timeline'}
           </h2>
+          <p className="sm:hidden text-xs text-slate-600 font-sans leading-snug">
+            {isFrench
+              ? "J'ai conçu cette frise interactive pour situer les grands auteurs, ouvrages et méthodes scientifiques par ordre chronologique."
+              : 'I designed this interactive timeline to place major authors, books, and scientific methods in chronological order.'}
+          </p>
           <p className="hidden sm:block text-sm text-slate-600 font-sans leading-relaxed max-w-3xl">
             {isFrench
               ? 'Une frise chronologique interactive que j\'ai conçue pour situer les grands auteurs, ouvrages et méthodes scientifiques dans le temps afin de visualiser l\'évolution des idées.'
