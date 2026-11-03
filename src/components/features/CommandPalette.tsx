@@ -17,6 +17,7 @@ interface PaletteItem {
   title: string;
   subtitle: string;
   categoryLabel: string;
+  badge?: string;
   keywords: string[];
   action: () => void;
 }
@@ -35,6 +36,57 @@ const STOP_WORDS = new Set([
   'est', 'il', 'son', 'sa', 'ses', 'ce', 'cet', 'cette', 'que', 'qui', 'quoi', 'quel', 'quelle', 'quels', 'quelles',
   'the', 'a', 'an', 'in', 'on', 'at', 'and', 'or', 'is', 'it', 'he', 'his', 'her', 'what', 'where', 'how', 'who', 'does', 'did'
 ]);
+
+// Subtle substring highlight helper tolerant to case and French diacritics
+const renderHighlightedText = (text: string, searchQuery: string): React.ReactNode => {
+  const trimmed = searchQuery.trim();
+  if (!trimmed) return text;
+
+  const terms = trimmed
+    .split(/[\s,.'’\-?]+/)
+    .filter((t) => t.length > 0)
+    .sort((a, b) => b.length - a.length);
+
+  if (terms.length === 0) return text;
+
+  const pattern = terms
+    .map((t) => {
+      const escaped = t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      return escaped
+        .replace(/[aàâä]/gi, '[aàâä]')
+        .replace(/[eéèêë]/gi, '[eéèêë]')
+        .replace(/[iîï]/gi, '[iîï]')
+        .replace(/[oôö]/gi, '[oôö]')
+        .replace(/[uùûü]/gi, '[uùûü]')
+        .replace(/[cç]/gi, '[cç]');
+    })
+    .join('|');
+
+  try {
+    const regex = new RegExp(`(${pattern})`, 'i');
+    const parts = text.split(regex);
+    if (parts.length <= 1) return text;
+
+    return (
+      <>
+        {parts.map((part, i) =>
+          regex.test(part) ? (
+            <span
+              key={i}
+              className="text-electric font-semibold underline decoration-electric/40 underline-offset-2"
+            >
+              {part}
+            </span>
+          ) : (
+            part
+          )
+        )}
+      </>
+    );
+  } catch {
+    return text;
+  }
+};
 
 export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose }) => {
   const { t, i18n } = useTranslation();
@@ -72,6 +124,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
         title: isFrench ? 'Explorer les Projets' : 'Explore Projects',
         subtitle: isFrench ? 'Accéder à la section projets & études de cas' : 'Jump to projects & case studies section',
         categoryLabel: isFrench ? 'Navigation' : 'Navigation',
+        badge: isFrench ? '[PROJETS ↗]' : '[PROJECTS ↗]',
         keywords: ['projets', 'projects', 'cases', 'portfolio', 'travaux', 'work'],
         action: () => {
           navigate('/#projects');
@@ -87,6 +140,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
         title: isFrench ? 'Compétences & Stack' : 'Skills & Tech Stack',
         subtitle: isFrench ? 'Bento grid technique & écosystème logiciel' : 'Technical bento grid & software ecosystem',
         categoryLabel: isFrench ? 'Navigation' : 'Navigation',
+        badge: '[STACK ↗]',
         keywords: [
           'competences', 'skills', 'stack', 'technique', 'react', 'typescript', 'figma',
           'technologies', 'outils', 'tools', 'quelle stack', 'what stack'
@@ -105,6 +159,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
         title: isFrench ? 'À Propos & Biographie' : 'About & Biography',
         subtitle: isFrench ? 'Profil personnel, vision & philosophie d\'ingénierie' : 'Personal profile, engineering vision & philosophy',
         categoryLabel: isFrench ? 'Navigation' : 'Navigation',
+        badge: isFrench ? '[PROFIL ↗]' : '[ABOUT ↗]',
         keywords: ['about', 'propos', 'bio', 'biographie', 'presentation', 'profil', 'profile'],
         action: () => {
           navigate('/#about');
@@ -119,9 +174,10 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
         type: 'nav',
         title: isFrench ? 'Mandat de Bachelor (Printemps 2027)' : 'Bachelor Mandate (Spring 2027)',
         subtitle: isFrench
-          ? 'Étudiant HEIG-VD en fin de cursus · Recherche mandat entreprise de 14 sem. (Avr – Août 2027)'
-          : 'Final-year HEIG-VD student · Seeking 14-week corporate thesis mandate (Apr – Aug 2027)',
+          ? 'Étudiant HEIG-VD en fin de cursus · Recherche mandat entreprise de 14 sem. (Avr - Août 2027)'
+          : 'Final-year HEIG-VD student · Seeking 14-week corporate thesis mandate (Apr - Aug 2027)',
         categoryLabel: isFrench ? 'Mandat' : 'Mandate',
+        badge: isFrench ? '[MANDAT ↗]' : '[MANDATE ↗]',
         keywords: [
           'bachelor', 'mandat', 'pitch', 'heig', 'heig-vd', 'stage', 'thesis', '2027',
           'disponible', 'disponibilite', 'available', 'availability', 'when available',
@@ -140,6 +196,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
         title: 'Crypto Trade Hub',
         subtitle: isFrench ? 'Terminal quantitatif temps réel & Critère de Kelly' : 'Real-time quantitative terminal & Kelly risk engine',
         categoryLabel: isFrench ? 'Étude de cas' : 'Case Study',
+        badge: '[TERMINAL ↗]',
         keywords: ['crypto', 'trading', 'terminal', 'binance', 'websocket', 'kelly', 'llama'],
         action: () => {
           navigate('/projects/crypto-trade-hub');
@@ -152,6 +209,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
         title: 'Donnons.ch // HUG & HEIG-VD',
         subtitle: isFrench ? 'Plateforme don du sang, qualification & gamification' : 'HUG blood donation qualification & gamification platform',
         categoryLabel: isFrench ? 'Étude de cas' : 'Case Study',
+        badge: '[HUG ↗]',
         keywords: ['donnons', 'hug', 'sang', 'blood', 'don', 'vue', 'laravel', 'geneve'],
         action: () => {
           navigate('/projects/donnons-ch');
@@ -164,6 +222,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
         title: isFrench ? 'Moteur Lexical & Frise' : 'Lexicon Engine & Timeline',
         subtitle: isFrench ? 'Recherche indexée < 10ms & chronologie réactive' : 'Sub-10ms indexed search & reactive chronology',
         categoryLabel: isFrench ? 'Étude de cas' : 'Case Study',
+        badge: isFrench ? '[MOTEUR ↗]' : '[ENGINE ↗]',
         keywords: ['lexique', 'lexicon', 'catholic', 'moteur', 'recherche', 'search', 'ontologie', 'frise'],
         action: () => {
           navigate('/projects/catholic-route');
@@ -176,6 +235,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
         title: isFrench ? 'Plateforme Événementielle' : 'Event Platform',
         subtitle: isFrench ? 'Flux RSVP mobile-first & synchronisation tableur' : 'Mobile-first RSVP flow & spreadsheet webhook sync',
         categoryLabel: isFrench ? 'Étude de cas' : 'Case Study',
+        badge: '[RSVP ↗]',
         keywords: ['marriage', 'mariage', 'wedding', 'event', 'evenement', 'rsvp', 'excel'],
         action: () => {
           navigate('/projects/marriage-platform');
@@ -188,9 +248,12 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
         id: 'action-cv',
         type: 'action',
         title: isFrench ? 'Télécharger le CV (PDF)' : 'Download Resume (PDF)',
-        subtitle: isFrench ? 'Curriculum Vitae Steve Benjamin' : 'Steve Benjamin Curriculum Vitae',
+        subtitle: isFrench
+          ? 'Curriculum Vitae Steve Benjamin · Édition Oct. 2026 (FR)'
+          : 'Steve Benjamin Curriculum Vitae · Oct. 2026 Edition (EN)',
         categoryLabel: isFrench ? 'Action' : 'Action',
-        keywords: ['cv', 'resume', 'pdf', 'curriculum', 'telecharger', 'download'],
+        badge: '[PDF ↓]',
+        keywords: ['cv', 'resume', 'pdf', 'curriculum', 'telecharger', 'download', 'octobre', 'october', '2026'],
         action: () => {
           const link = document.createElement('a');
           const cvFile = isFrench ? 'CV_Steve_Benjamin.pdf' : 'EnglishSteveBenjaminCV.pdf';
@@ -209,6 +272,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
         title: isFrench ? 'Copier l\'adresse Email' : 'Copy Email Address',
         subtitle: 'sbstevebenjamin@gmail.com',
         categoryLabel: isFrench ? 'Action' : 'Action',
+        badge: '[COPY ⎘]',
         keywords: [
           'email', 'mail', 'contact', 'copier', 'copy', 'adresse',
           'how to contact', 'comment contacter', 'ecrire', 'write', 'joindre', 'reach'
@@ -228,6 +292,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
         title: isFrench ? 'Ouvrir LinkedIn' : 'Open LinkedIn Profile',
         subtitle: 'linkedin.com/in/sb-steve-benjamin',
         categoryLabel: isFrench ? 'Action' : 'Action',
+        badge: '[LINK ↗]',
         keywords: ['linkedin', 'reseau', 'profil', 'profile', 'social'],
         action: () => {
           window.open('https://www.linkedin.com/in/sb-steve-benjamin/', '_blank');
@@ -240,6 +305,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
         title: isFrench ? 'Switch to English' : 'Passer en Français',
         subtitle: isFrench ? 'Changer la langue du portfolio en anglais' : 'Toggle portfolio language to French',
         categoryLabel: isFrench ? 'Action' : 'Action',
+        badge: '[TOGGLE ⇄]',
         keywords: ['langue', 'language', 'anglais', 'english', 'francais', 'french', 'fr', 'en'],
         action: () => {
           const nextLang = isFrench ? 'en' : 'fr';
@@ -257,6 +323,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
           ? '24 ans (né en 2002) · Basé à Bussigny (Vaud, Suisse)'
           : '24 years old (born 2002) · Based in Bussigny (Vaud, Switzerland)',
         categoryLabel: 'Info',
+        badge: '[INFO]',
         keywords: [
           'age', 'old', 'how old', 'quel age', 'naissance', 'birthday', '24 ans',
           'qui est', 'who is', 'steve'
@@ -277,6 +344,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
           ? 'Cursus d\'ingénieur 2023–2027 · Yverdon-les-Bains (Vaud)'
           : 'Engineering degree 2023–2027 · Yverdon-les-Bains (Vaud)',
         categoryLabel: isFrench ? 'Formation' : 'Education',
+        badge: '[INFO]',
         keywords: [
           'etudes', 'formation', 'ecole', 'school', 'study', 'studies', 'where study',
           'ou etudie', 'quelles etudes', 'what did he study', 'diplome', 'degree',
@@ -298,6 +366,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
           ? '9 ans de pratique du code · CPNV Yverdon, ETML Lausanne & 6 mois à Oxford'
           : '9 yrs coding experience · CPNV Yverdon, ETML Lausanne & 6 months at Oxford',
         categoryLabel: isFrench ? 'Parcours' : 'Background',
+        badge: '[INFO]',
         keywords: [
           'parcours', 'background', 'code', '9 ans', 'cpnv', 'etml', 'cfc',
           'electronicien', 'electronics', 'tasv', 'oxford', 'maturite', 'histoire', 'electronique'
@@ -318,6 +387,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
           ? 'Basé à Bussigny · Mobile sur l\'arc lémanique / Suisse romande et en télétravail'
           : 'Based in Bussigny · Mobile across Western Switzerland & remote',
         categoryLabel: 'Info',
+        badge: '[INFO]',
         keywords: [
           'ou habite', 'where live', 'where based', 'localisation', 'location',
           'ville', 'city', 'bussigny', 'vaud', 'suisse', 'switzerland', 'lausanne',
@@ -339,6 +409,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
           ? 'En poste depuis 2023 · Responsable technique GLGB & engagement FICF'
           : 'Employed since 2023 · Technical lead at GLGB & volunteer at FICF',
         categoryLabel: isFrench ? 'Expérience' : 'Experience',
+        badge: '[INFO]',
         keywords: [
           'travail', 'job', 'poste', 'role', 'entreprise', 'appapp', 'where work',
           'ou travaille', 'experience actuelle', 'glgb', 'ficf', 'occupation', 'work', 'working', 'travaille'
@@ -356,11 +427,21 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
     return items;
   }, [isFrench, navigate, onClose, i18n]);
 
+  // Curated 3 Quick Actions for empty state (Ordered: 1. Bachelor Mandate, 2. Projects, 3. CV with correct language & date)
+  const defaultItems = useMemo<PaletteItem[]>(() => {
+    const bachelor = allItems.find((i) => i.id === 'nav-bachelor');
+    const projects = allItems.find((i) => i.id === 'nav-projects');
+    const cv = allItems.find((i) => i.id === 'action-cv');
+    return [bachelor, projects, cv].filter((item): item is PaletteItem => Boolean(item));
+  }, [allItems]);
+
   // Robust search ranking: Accent-normalized, prefix-progressive, stop-word filtered, strictly capped at 3
   const filteredItems = useMemo(() => {
     const rawQ = query.trim();
+    if (!rawQ) {
+      return defaultItems;
+    }
     const q = normalize(rawQ);
-    if (!q) return [];
 
     const queryWords = q
       .split(/[\s,.'’\-?]+/)
@@ -423,7 +504,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
 
     // Strict constraint: at most 3 items to preserve minimalist Swiss aesthetic
     return scoredItems.slice(0, 3).map(({ item }) => item);
-  }, [allItems, query]);
+  }, [allItems, query, defaultItems]);
 
   // Reset selected index when query changes
   useEffect(() => {
@@ -489,7 +570,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
     <AnimatePresence>
       {isOpen && (
         <div
-          className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4"
+          className="fixed inset-0 z-50 flex items-start justify-center pt-2 sm:pt-20 px-2 sm:px-4"
           onWheel={(e) => e.stopPropagation()}
         >
           {/* Backdrop Overlay */}
@@ -508,11 +589,11 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.98, y: -8 }}
             transition={{ duration: 0.16, ease: 'easeOut' }}
-            className="relative w-full max-w-xl overflow-hidden rounded-none bg-white border border-slate-200 shadow-2xl z-10"
+            className="relative w-full max-w-xl overflow-hidden rounded-none bg-white border border-slate-300 shadow-2xl z-10 max-h-[calc(100dvh-16px)] sm:max-h-none flex flex-col"
           >
             {/* Search Input Box */}
-            <div className="relative flex items-center border-b border-slate-100 px-4 py-3">
-              <Search className="w-4 h-4 text-slate-400 mr-3 flex-shrink-0" />
+            <div className="relative flex items-center border-b border-slate-100 px-3 sm:px-4 py-2.5 sm:py-3 shrink-0">
+              <Search className="w-4 h-4 text-slate-400 mr-2.5 sm:mr-3 flex-shrink-0" />
               <input
                 ref={inputRef}
                 type="text"
@@ -526,13 +607,14 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
                     ? 'Rechercher un projet, poser une question ou un mot-clé...'
                     : 'Search a project, ask a question, or a keyword...'
                 }
-                className="w-full bg-transparent text-sm text-fintech-primary placeholder-slate-400 outline-none focus:ring-1 focus:ring-electric rounded-none px-2 py-1.5 transition-shadow font-mono"
+                className="w-full bg-transparent text-base sm:text-sm text-fintech-primary placeholder-slate-400 outline-none focus:ring-1 focus:ring-electric rounded-none px-2 py-1 transition-shadow font-mono"
               />
               {query && (
                 <button
                   type="button"
                   onClick={() => setQuery('')}
                   className="p-1 text-slate-400 hover:text-fintech-primary transition-colors cursor-pointer"
+                  aria-label="Effacer"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -541,22 +623,20 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
 
             {/* Optional Feedback Banner */}
             {actionFeedback && (
-              <div className="bg-emerald-50 border-b border-emerald-200 px-4 py-2 text-xs font-mono text-emerald-700 text-center">
+              <div className="bg-emerald-50 border-b border-emerald-200 px-4 py-2 text-xs font-mono text-emerald-700 text-center shrink-0">
                 {actionFeedback}
               </div>
             )}
 
-            {/* Content Area: Empty State or Max 3 Logical Results */}
-            <div className="p-2">
-              {!query.trim() ? (
-                <div className="py-8 text-center space-y-1 text-slate-400 font-mono text-xs">
-                  <p>
-                    {isFrench
-                      ? 'Tapez pour chercher (ex. Parcours, Études, Âge, Projets, CV)...'
-                      : 'Type to search (e.g. Background, Studies, Age, Projects, CV)...'}
-                  </p>
+            {/* Content Area: Empty State Quick Actions or Top 3 Results */}
+            <div className="p-1.5 sm:p-2 overflow-y-auto max-h-[50vh] sm:max-h-none overscroll-contain">
+              {!query.trim() && (
+                <div className="px-3 pt-1 pb-1.5 text-[10px] font-mono uppercase tracking-wider text-slate-400 select-none">
+                  {isFrench ? 'Actions Recommandées' : 'Suggested Quick Actions'}
                 </div>
-              ) : filteredItems.length === 0 ? (
+              )}
+
+              {filteredItems.length === 0 ? (
                 <div className="py-8 text-center text-xs text-slate-400 font-mono">
                   {t('cmdPalette.noResults')} "{query}"
                 </div>
@@ -571,7 +651,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
                           type="button"
                           onClick={item.action}
                           onMouseEnter={() => setSelectedIndex(index)}
-                          className={`w-full flex items-center justify-between px-3 py-2.5 rounded-none text-xs font-medium transition-all cursor-pointer ${
+                          className={`w-full flex items-center justify-between px-3 py-2 sm:py-2.5 rounded-none text-xs font-medium transition-all cursor-pointer ${
                             isSelected
                               ? 'bg-electric-light text-electric'
                               : 'text-fintech-secondary hover:bg-slate-50 hover:text-fintech-primary'
@@ -583,16 +663,16 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
                             </span>
                             <div className="min-w-0">
                               <div className="text-sm font-semibold truncate text-fintech-primary">
-                                {item.title}
+                                {renderHighlightedText(item.title, query)}
                               </div>
                               <div className="text-[11px] text-slate-500 font-normal truncate">
-                                {item.subtitle}
+                                {renderHighlightedText(item.subtitle, query)}
                               </div>
                             </div>
                           </div>
 
-                          <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 bg-slate-100 px-2 py-0.5 border border-slate-200 shrink-0">
-                            {item.categoryLabel}
+                          <span className="text-[10px] font-mono tracking-wider text-slate-500 bg-slate-100 px-2 py-0.5 border border-slate-200 shrink-0">
+                            {item.badge || item.categoryLabel}
                           </span>
                         </button>
                       </li>
@@ -600,6 +680,27 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
                   })}
                 </ul>
               )}
+            </div>
+
+            {/* Minimalist Desktop-Only Keyboard Hints Footer */}
+            <div className="hidden sm:flex items-center justify-between border-t border-slate-100 px-4 py-2 bg-slate-50/70 text-[10px] font-mono text-slate-400 select-none shrink-0">
+              <div className="flex items-center space-x-3">
+                <span className="flex items-center space-x-1">
+                  <kbd className="px-1.5 py-0.5 border border-slate-200 bg-white text-slate-600 rounded-none font-bold">↑↓</kbd>
+                  <span>{isFrench ? 'Naviguer' : 'Navigate'}</span>
+                </span>
+                <span className="flex items-center space-x-1">
+                  <kbd className="px-1.5 py-0.5 border border-slate-200 bg-white text-slate-600 rounded-none font-bold">↵</kbd>
+                  <span>{isFrench ? 'Ouvrir' : 'Select'}</span>
+                </span>
+                <span className="flex items-center space-x-1">
+                  <kbd className="px-1.5 py-0.5 border border-slate-200 bg-white text-slate-600 rounded-none font-bold">ESC</kbd>
+                  <span>{isFrench ? 'Fermer' : 'Close'}</span>
+                </span>
+              </div>
+              <span className="text-[9px] tracking-widest uppercase text-slate-400">
+                {isFrench ? 'INDEX RAPIDE' : 'QUICK INDEX'}
+              </span>
             </div>
           </motion.div>
         </div>

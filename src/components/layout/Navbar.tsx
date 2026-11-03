@@ -331,8 +331,20 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
           </div>
         </div>
 
-        {/* Mobile Header Controls: ONLY Language Switch + Hamburger (Strict Minimalist) */}
-        <div className="flex md:hidden items-center space-x-2.5">
+        {/* Mobile Header Controls: Search + Language Switch + Hamburger (Strict Minimalist) */}
+        <div className="flex md:hidden items-center space-x-2">
+          {onOpenCommandPalette && (
+            <button
+              type="button"
+              onClick={onOpenCommandPalette}
+              className="w-10 h-10 flex items-center justify-center border border-slate-200 bg-white text-slate-700 hover:text-electric hover:border-electric transition-colors cursor-pointer"
+              aria-label={isFrench ? 'Rechercher (Ctrl K)' : 'Search (Ctrl K)'}
+              title={isFrench ? 'Rechercher (Ctrl K)' : 'Search (Ctrl K)'}
+            >
+              <Search className="w-4 h-4 text-slate-600" />
+            </button>
+          )}
+
           {/* Mobile Language Switch */}
           <div
             onClick={toggleLanguage}
@@ -395,6 +407,24 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
           }}
         >
           <div className="space-y-1" onClick={(e) => e.stopPropagation()}>
+            {onOpenCommandPalette && (
+              <button
+                type="button"
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  onOpenCommandPalette();
+                }}
+                className="w-full text-left py-2.5 px-3 mb-2 border border-slate-200 bg-slate-50 text-slate-700 hover:text-electric hover:border-electric transition-colors flex items-center justify-between font-mono text-xs cursor-pointer"
+              >
+                <span className="flex items-center space-x-2">
+                  <Search className="w-3.5 h-3.5 text-slate-500" />
+                  <span>{isFrench ? 'Recherche rapide...' : 'Quick search...'}</span>
+                </span>
+                <span className="text-[10px] uppercase font-bold text-slate-400 bg-white px-1.5 py-0.5 border border-slate-200">
+                  Ctrl K
+                </span>
+              </button>
+            )}
             <div className="divide-y divide-slate-200 border-b border-slate-200 font-sans">
               {/* 1. Compétences */}
               <button
