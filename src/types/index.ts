@@ -25,6 +25,7 @@ export interface GlossaryTermProps {
   term: string;
   definition: string;
   className?: string;
+  forceBelow?: boolean;
 }
 
 export interface ProjectData {

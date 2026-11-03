@@ -24,7 +24,7 @@ export const DonnonsDetailShowcase: React.FC = () => {
     { name: 'Swisscom', logo: 'swisscom.png', award: 'Or 2025', years: 5, category: 'gold' },
     { name: 'UBS', logo: 'ubs.png', award: 'Or 2025', years: 6, category: 'gold' },
     { name: 'EPFL', logo: 'epfl.png', award: 'Argent 2025', years: 4, category: 'silver' },
-    { name: 'HEIG-VD', logo: 'heig.png', award: 'Argent 2025', years: 4, category: 'silver' },
+    { name: 'HEIG-VD', logo: 'heig-vd.png', award: 'Argent 2025', years: 4, category: 'silver' },
     { name: 'Nestlé', logo: 'nestle.png', award: 'Partenaire', years: 5, category: 'partner' },
     { name: 'Migros', logo: 'migros.png', award: 'Partenaire', years: 4, category: 'partner' },
     { name: 'Coop', logo: 'coop.png', award: 'Partenaire', years: 5, category: 'partner' },
@@ -423,7 +423,7 @@ export const DonnonsDetailShowcase: React.FC = () => {
               </button>
             </div>
 
-            <div className="border-2 border-black overflow-x-auto shadow-[3px_3px_0px_0px_#000]">
+            <div className="border-2 border-black overflow-visible shadow-[3px_3px_0px_0px_#000]">
               <table className="w-full text-left text-xs font-mono">
                 <thead className="bg-[#ffeeab] border-b-2 border-black text-slate-900 font-bold uppercase text-[10px]">
                   <tr>
@@ -431,16 +431,18 @@ export const DonnonsDetailShowcase: React.FC = () => {
                     <th className="p-3">{isFrench ? 'Dates' : 'Dates'}</th>
                     <th className="p-3">{isFrench ? 'Effectif total' : 'Headcount'}</th>
                     <th className="p-3">{isFrench ? 'Plateforme Co-brandée' : 'Co-branded URL'}</th>
-                    <th className="p-3 text-right">
+                    <th className="p-3 text-right relative z-30">
                       {isFrench ? (
                         <GlossaryTerm
                           term="OneDoc HUG"
                           definition={getGlossaryDef('onedoc-sync', 'fr')}
+                          forceBelow
                         />
                       ) : (
                         <GlossaryTerm
                           term="OneDoc Sync"
                           definition={getGlossaryDef('onedoc-sync', 'en')}
+                          forceBelow
                         />
                       )}
                     </th>

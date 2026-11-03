@@ -10,7 +10,7 @@ interface PopupPosition {
   isFlippedBelow: boolean;
 }
 
-export const GlossaryTerm: React.FC<GlossaryTermProps> = ({ term, definition, className = '' }) => {
+export const GlossaryTerm: React.FC<GlossaryTermProps> = ({ term, definition, className = '', forceBelow = false }) => {
   const { t } = useTranslation();
   const [isHovered, setIsHovered] = useState(false);
   const [isPinned, setIsPinned] = useState(false);
@@ -53,8 +53,8 @@ export const GlossaryTerm: React.FC<GlossaryTermProps> = ({ term, definition, cl
     // Arrow caret position relative to the tooltip box, clamped safely inside the box
     const arrowX = Math.max(16, Math.min(tooltipWidth - 16, wordCenter - clampedLeft));
 
-    // If near the top of the viewport (less than 190px), flip below the word
-    const isFlippedBelow = rect.top < 190;
+    // If near the top of the viewport (less than 190px), or forceBelow is requested, flip below the word
+    const isFlippedBelow = forceBelow || rect.top < 190;
 
     setPosition({
       left: localLeft,
