@@ -28,7 +28,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
     },
     {
       slug: 'donnons-ch',
-      title: isFrench ? 'Plateforme Web Full-Stack (HUG)' : 'Full-Stack Web Platform (HUG)',
+      title: 'Donnons.ch // HUG & HEIG-VD',
     },
     {
       slug: 'catholic-route',

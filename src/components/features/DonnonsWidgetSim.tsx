@@ -38,7 +38,7 @@ export const DonnonsWidgetSim: React.FC = () => {
           <span className="font-mono font-black text-xs sm:text-sm tracking-tight text-black shrink-0">
             DONNONS.CH
           </span>
-          <span className="text-[10px] font-mono text-slate-500 hidden sm:inline shrink-0">
+          <span className="text-[9.5px] sm:text-[10px] font-mono text-slate-500 shrink-0">
             // HUG & HEIG-VD
           </span>
         </div>

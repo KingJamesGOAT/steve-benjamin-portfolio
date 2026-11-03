@@ -149,7 +149,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
       {
         id: 'project-donnons',
         type: 'project',
-        title: 'Donnons.ch (HUG)',
+        title: 'Donnons.ch // HUG & HEIG-VD',
         subtitle: isFrench ? 'Plateforme don du sang, qualification & gamification' : 'HUG blood donation qualification & gamification platform',
         categoryLabel: isFrench ? 'Étude de cas' : 'Case Study',
         keywords: ['donnons', 'hug', 'sang', 'blood', 'don', 'vue', 'laravel', 'geneve'],
