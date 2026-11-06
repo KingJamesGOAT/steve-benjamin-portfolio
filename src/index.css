@@ -17,6 +17,14 @@
     text-rendering: optimizeLegibility;
   }
 
+  /* Proportional fluid root scaling on wide/high-DPI screens (Tab S9 Ultra, MacBooks, 2K/4K)
+     while keeping 16px untouched on phones and standard 1280px laptops */
+  @media (min-width: 1360px) {
+    html {
+      font-size: clamp(16px, 1.08vw, 18.5px);
+    }
+  }
+
   body {
     background-color: #FFFFFF;
     color: #090D16;

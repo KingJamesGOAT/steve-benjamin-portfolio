@@ -46,7 +46,7 @@ export const DeveloperHeroCard: React.FC = () => {
   }
 
   return (
-    <div className="w-full max-w-lg border border-slate-200 bg-white shadow-xl shadow-slate-900/5 rounded-none font-mono text-xs transition-all">
+    <div className="w-full max-w-lg lg:max-w-none border border-slate-200 bg-white shadow-xl shadow-slate-900/5 rounded-none font-mono text-xs transition-all">
       {/* Terminal Title Bar */}
       <div
         onClick={() => {

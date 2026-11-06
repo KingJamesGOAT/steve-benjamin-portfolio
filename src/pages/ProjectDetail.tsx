@@ -58,7 +58,7 @@ export const ProjectDetail: React.FC = () => {
   const currentFeatures = isFrench && project.featuresFr ? project.featuresFr : project.features;
 
   return (
-    <div className="space-y-8 sm:space-y-16 max-w-5xl mx-auto py-2 sm:py-4">
+    <div className="space-y-8 sm:space-y-16 w-full py-2 sm:py-4">
       {/* Back Navigation Bar */}
       <div>
         <button

@@ -13,7 +13,7 @@ export const BachelorPitch: React.FC = () => {
   }, []);
 
   return (
-    <div className="space-y-6 sm:space-y-12 max-w-4xl mx-auto">
+    <div className="space-y-6 sm:space-y-12 w-full">
       {/* Back link */}
       <div>
         <Link

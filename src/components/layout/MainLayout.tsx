@@ -22,13 +22,13 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
       <CommandPalette isOpen={isOpen} onClose={close} />
 
       {/* Main Content Viewport */}
-      <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 pt-6 pb-8 sm:py-12">
+      <main className="flex-1 w-full sm:max-w-[92vw] lg:max-w-[90vw] 2xl:max-w-[90rem] mx-auto px-4 sm:px-6 pt-6 pb-8 sm:py-12">
         {children}
       </main>
 
       {/* Minimalist Footer with Back to Top */}
       <footer className="border-t border-slate-200/80 bg-white py-8 text-xs text-slate-500 font-mono">
-        <div className="max-w-6xl w-full mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+        <div className="w-full sm:max-w-[92vw] lg:max-w-[90vw] 2xl:max-w-[90rem] mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
           <p>© 2026 Steve Benjamin</p>
           <button
             type="button"

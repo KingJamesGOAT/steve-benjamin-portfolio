@@ -172,12 +172,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
     <header
       className={`sticky top-0 z-40 w-full transition-all duration-300 ease-in-out bg-white border-b border-slate-200 ${
         isScrolled
-          ? 'md:top-3 md:px-6 md:bg-transparent md:border-b-0 md:pointer-events-none'
+          ? 'md:top-3 md:bg-transparent md:border-b-0 md:pointer-events-none'
           : 'px-0 pointer-events-auto'
       }`}
     >
       <div
-        className={`max-w-6xl mx-auto flex items-center justify-between transition-all duration-300 ease-in-out h-16 px-4 sm:px-6 ${
+        className={`w-full sm:max-w-[92vw] lg:max-w-[90vw] 2xl:max-w-[90rem] mx-auto flex items-center justify-between transition-all duration-300 ease-in-out h-16 px-4 sm:px-6 ${
           isScrolled
             ? 'md:pointer-events-auto md:h-14 md:border md:border-slate-200/80 md:bg-white/95 md:backdrop-blur-md md:shadow-xs'
             : 'bg-white md:bg-transparent'
